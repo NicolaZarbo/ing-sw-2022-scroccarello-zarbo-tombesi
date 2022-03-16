@@ -1,0 +1,15 @@
+**/.idea
+**/gradle
+**/test
+/build-spring-boot.gradle
+/build.gradle
+/gradlew
+/gradlew.bat
+/pom-spring-boot.xml
+/settings.gradle
+/src/main/resources
+/src/main/webapp
+/src/main/java/org/example/pages
+/src/main/java/org/example/services
+/src/main/java/org/example/spring
+
