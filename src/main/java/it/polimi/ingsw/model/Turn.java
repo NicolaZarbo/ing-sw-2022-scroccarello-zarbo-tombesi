@@ -1,30 +1,31 @@
 package it.polimi.ingsw.model;
 
+
 import java.util.List;
 
 public class Turn {
 
     public void moveInHall(Board board,int pos){
-           Student [] temp=board.getEntrance();
-           Student[][] dining=board.getDiningRoom();
-           if(temp[pos]!=null) {
-               Student stud = temp[pos];
-               int i=stud.getCol().ordinal();
-               if(dining[i][dining[i].length-1]!=null) {
-                   board.moveToDiningRoom(stud);
-                    temp[pos]=null;
-                    board.setEntrance(temp);
-               }
-           }
+        Student [] temp=board.getEntrance();
+        Student[][] dining=board.getDiningRoom();
+        if(temp[pos]!=null) {
+            Student stud = temp[pos];
+            int i=stud.getCol().ordinal();
+            if(dining[i][dining[i].length-1]!=null) {
+                board.moveToDiningRoom(stud);
+                temp[pos]=null;
+                board.setEntrance(temp);
+            }
+        }
     }
 
 
     public void moveMotherNature(int num,Game game){
-      List<Island> tempis=game.getIslands();
-      MotherNature tempm=game.getMotherNature();
-       int j=tempis.size();
-       tempm.changePosition(Math.floorMod(tempm.getPosition()+num,j));
-       game.setMotherNature(tempm);
+        List<Island> tempis=game.getIslands();
+        MotherNature tempm=game.getMotherNature();
+        int j=tempis.size();
+        tempm.changePosition(Math.floorMod(tempm.getPosition()+num,j));
+        game.setMotherNature(tempm);
 
     }
     public void moveFromCloudToEntrance(Game game,int pos,Board board){
@@ -41,14 +42,52 @@ public class Turn {
 
     }
 
-    public boolean isUnificabile(Game game,int pos){
+    public boolean isUnifiable(Game game,int pos){
         boolean b=false;
         List<Island> tempis=game.getIslands();
         Island central=tempis.get(pos);
         Island before=tempis.get(Math.floorMod(pos-1,tempis.size()));
         Island after=tempis.get(Math.floorMod(pos+1,tempis.size()));
-        if(central.getTower().getCol().equals(before.getTower().getCol()) && before.getTower().getCol().equals(after.getTower().getCol()))
-            b=true;
+        if(central.getTower().get(0)!=null && before.getTower().get(0)!=null && after.getTower().get(0)!=null)
+            //se non va prova a controllare l'output di getTower().get(0) su un array list vuota!
+            if(central.getTower().get(0).getCol().equals(before.getTower().get(0).getCol()) && before.getTower().get(0).getCol().equals(after.getTower().get(0).getCol()))
+                b=true;
         return b;
     }
+    //vedi se va gestita la posizione di madre natura
+    public void unify(Game game, int pos){
+        if(isUnifiable(game,pos)){
+            List<Island> tempis=game.getIslands();
+            int bigId=tempis.get(0).getID();
+            for(int i=0;i<tempis.size();i++) {
+                if (bigId < tempis.get(i).getID())
+                    bigId = tempis.get(0).getID();
+            }
+            Island central=tempis.get(pos);
+            Island before=tempis.get(Math.floorMod(pos-1,tempis.size()));
+            Island after=tempis.get(Math.floorMod(pos+1,tempis.size()));
+            if(tempis.size()>2){
+                Island bigIsland=new Island(bigId+1);
+                bigIsland.addAllTowers(central.getTower());
+                bigIsland.addAllTowers(before.getTower());
+                bigIsland.addAllTowers(after.getTower());
+                bigIsland.addAllStudents(central.getStudents());
+                bigIsland.addAllStudents(before.getStudents());
+                bigIsland.addAllStudents(after.getStudents());
+            }else if(tempis.size()==2){
+                Island bigIsland=new Island(bigId+1);
+                bigIsland.addAllTowers(central.getTower());
+                bigIsland.addAllTowers(before.getTower());
+                bigIsland.addAllStudents(central.getStudents());
+                bigIsland.addAllStudents(before.getStudents());
+            }
+        }
+
+    }
+    public void putTowerFromBoardToIsland(Island island,Board board){
+        island.setTower(board.getTower());
+    }
+
+
 }
+
