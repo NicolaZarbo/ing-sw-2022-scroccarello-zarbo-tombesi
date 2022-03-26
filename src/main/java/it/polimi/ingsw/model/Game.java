@@ -11,12 +11,14 @@ public class Game {
     private Cloud[] clouds;
     private MotherNature motherNature;
 
-    public Game(boolean easy, int nplayer){
+    public Game(boolean easy, int nPlayer,int nIsole){
         this.easy=easy;
-        this.nPlayers =nplayer;
-        this.players =Setup.createPlayer(easy, nplayer,0);//genera giocatori con le lore rispettive board e mani
-        this.clouds= Setup.createClouds(nplayer,0);
-        //createislands
+        this.nPlayers =nPlayer;
+        this.players =Setup.createPlayer(easy, nPlayer);//genera giocatori con le lore rispettive board e mani
+        this.clouds= Setup.createClouds(nPlayer);
+        this.islands=Setup.createIslands(nIsole);
+        this.motherNature=new MotherNature(islands.get(0).getID());
+
     }
     public List<Island> getIslands(){return islands;}
 

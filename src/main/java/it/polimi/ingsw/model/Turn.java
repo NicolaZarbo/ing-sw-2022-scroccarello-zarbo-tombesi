@@ -4,7 +4,6 @@ package it.polimi.ingsw.model;
 import java.util.List;
 
 public class Turn {
-
     public void moveInHall(Board board,int pos){
         Student [] temp=board.getEntrance();
         Student[][] dining=board.getDiningRoom();
@@ -50,7 +49,7 @@ public class Turn {
         Island after=tempis.get(Math.floorMod(pos+1,tempis.size()));
         if(central.getTower().get(0)!=null && before.getTower().get(0)!=null && after.getTower().get(0)!=null)
             //se non va prova a controllare l'output di getTower().get(0) su un array list vuota!
-            if(central.getTower().get(0).getCol().equals(before.getTower().get(0).getCol()) && before.getTower().get(0).getCol().equals(after.getTower().get(0).getCol()))
+            if(central.getTower().get(0).getColor().equals(before.getTower().get(0).getColor()) && before.getTower().get(0).getColor().equals(after.getTower().get(0).getColor()))
                 b=true;
         return b;
     }

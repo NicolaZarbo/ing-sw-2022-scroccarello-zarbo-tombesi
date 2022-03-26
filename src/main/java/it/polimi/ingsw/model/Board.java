@@ -1,36 +1,32 @@
 package it.polimi.ingsw.model;
 public class Board {
-// check commit new base
     private Student[][] diningRoom;
     private Professor[] table;
     private Student[] entrance;
     private Tower[] towers;//usare arraylist?
     private boolean[][] coinDN;
-    final int playerID; //associazione a giocatore? in alternativa idplancia
+    final int playerID;
 
-    public Board(int ntower, int dimEntrance, TowerColor color, int playerID){
+    public Board(int nTower, int dimEntrance, TowerColor color, int playerID){
         int nColors = TokenColor.listGetLastIndex()+1;
         this.coinDN = new boolean[nColors][3];
+        this.setCoinDN(nColors);
+        this.towers = new Tower[nTower];
+        for (int i=0;i<nTower;i++) {
+            towers[i]=new Tower(color,i);
+        }
+        this.playerID=playerID;
+        this.diningRoom = new Student[nColors][10];
+        this.entrance =new Student[dimEntrance];
+        this.table = new Professor[nColors];
+    }
+    private void setCoinDN(int nColors){
         for (int i=0;i<nColors;i++){
-        for (int j=0;j<3;j++) {
-            if(true) {
-                coinDN[i][j] = true;
+            for (int j=0;j<3;j++) {
+                    coinDN[i][j] = true;
             }
-            //else{ coinDN[i][j] = false;
-            //}
-
         }
     }
-          this.towers = new Tower[ntower];
-          for (int i=0;i<ntower;i++) {
-                towers[i]=new Tower(color,i);
-          }
-          this.playerID=playerID;
-          this.diningRoom = new Student[nColors][10];
-          this.entrance =new Student[dimEntrance];
-          this.table = new Professor[nColors];
-}
-
     public Professor getProfessor(int idProfessor){
         Professor prof;
         for  (int i=0 ; i< table.length;i++) {

@@ -7,9 +7,9 @@ public class Player {
     Board board;
     private final int id;
 
-    public Player(int id, Mage mag, Hand man, Board board){
+    public Player(int id, Mage mag, Hand man, Board board,TowerColor color){
         this.id=id;
-        colorT= TowerColor.getColor(id);
+        colorT= color;
         mage =mag;
         hand =man;
         this.board = board;
