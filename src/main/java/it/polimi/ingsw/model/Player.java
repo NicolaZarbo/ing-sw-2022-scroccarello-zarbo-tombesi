@@ -27,4 +27,8 @@ public class Player {
     public TowerColor getColorT() {
         return colorT;
     }
+
+    public Board getBoard(){
+        return this.board;
+    }
 }

@@ -41,4 +41,8 @@ public class Game {
     public void setClouds(Cloud[] cloud){
         this.clouds=cloud;
     }
+
+    public Player[] getPlayers(){
+        return this.players;
+    }
 }

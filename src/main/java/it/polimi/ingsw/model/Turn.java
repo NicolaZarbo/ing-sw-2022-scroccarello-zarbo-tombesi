@@ -87,7 +87,33 @@ public class Turn {
     public void putTowerFromBoardToIsland(Island island,Board board){
         island.setTower(board.getTower());
     }
+/*
+    //controllo se una board ha il diritto ad avere il prof del colore scelto
+    public void isTeacher(TokenColor color,Game game,int playerId){
+        Player[] players=game.getPlayers();
+        boolean b=false;
+        Player playercheck;
+        Board playerBoard;
+        for(int i=0;i<players.length;i++)
+            if(players[i].getId()==playerId) {
+                playercheck = players[i];
+                playerBoard=players[i].getBoard();
+            }
+        if(playercheck!=null) {
+            int tokenplayer = 0;
+            int tempcount=0;
+            for (int i = 0; i < playerBoard[TokenColor.getIndex(color)].length; i++)
+                    if(playerBoard[TokenColor.getIndex(color)][i]!=null)
+                        tokenplayer++;
+            for(int j=0;j<players.length;j++)
+                if(!players[j].equals(playercheck)){
+                    for (int i = 0; i < players[j].getBoard()[TokenColor.getIndex(color)].length; i++)
+                        if(players[j].getBoard()[TokenColor.getIndex(color)][i]!=null)
+                            tempcount++;
 
+                }
+        }
+    } */
 
 }
 
