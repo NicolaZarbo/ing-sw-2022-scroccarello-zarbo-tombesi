@@ -1,9 +1,13 @@
 package it.polimi.ingsw.model;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class Island {
     private int ID;
     private ArrayList<Student> students;
     private ArrayList<Tower> tower;
+    private int islandSize;
 
     public Island(int id) {
         this.ID = id;
@@ -42,5 +46,20 @@ public class Island {
     //metodo per mergiare le torri di due isole
     public void addAllTowers(ArrayList<Tower> t) {
         this.tower.addAll(t);
+    }
+    private void mergeIslands(Island island, List<Island> isl) {
+        this.islandSize++;
+        for (int i=0;i<isl.size();) {
+            if(isl.get(i).getID()==island.getID()) {
+                isl.remove(i);
+                break;
+            }
+        }
+        for (int i=0;i<island.students.size();i++){
+            this.students.add(island.students.get(i));
+        }
+        for (int i=0;i<island.tower.size();i++){
+            this.tower.add(island.tower.get(i));
+        }
     }
 }
