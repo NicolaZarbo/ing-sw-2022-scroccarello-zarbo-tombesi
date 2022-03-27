@@ -1,11 +1,11 @@
 package it.polimi.ingsw.model;
 
 public class Tower {
-    TowerColor col;
-    int id;
+    private final TowerColor color;
+    private final int id;
 
     public Tower(TowerColor color, int idTower){
-        this.col=color;
+        this.color=color;
         this.id= idTower ;
     }
 
@@ -13,7 +13,7 @@ public class Tower {
         return id;
     }
 
-    public TowerColor getCol() {
-        return col;
+    public TowerColor getColor() {
+        return color;
     }
 }
