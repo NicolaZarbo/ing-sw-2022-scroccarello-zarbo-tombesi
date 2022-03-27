@@ -30,7 +30,7 @@ public class Turn {
     }
     public void moveFromCloudToEntrance(Game game,int pos,Board board){
         Cloud[] temp=game.getClouds();
-        if(pos>=0 && pos<temp.length && temp[pos].stud[0]!=null){
+        if(pos>=0 && pos<temp.length && temp[pos].getStud()[0]!=null){
             Student[] tempstud=temp[pos].getStud();
             for(int i=0;i<tempstud.length;i++) {
                 board.putStudent(tempstud[i]);

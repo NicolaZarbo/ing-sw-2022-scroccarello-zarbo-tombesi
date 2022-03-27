@@ -45,4 +45,5 @@ public class Game {
     public Player[] getPlayers(){
         return this.players;
     }
+    public List<Island> getIslandList() {return this.islands;}
 }
