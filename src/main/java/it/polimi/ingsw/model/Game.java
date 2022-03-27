@@ -10,8 +10,10 @@ public class Game {
     private Player[] players;
     private Cloud[] clouds;
     private MotherNature motherNature;
+    private Bag bag;
     private Professor[] teachers;
-    //manca array dei professori non ancora assegnati, che vanno inizializzati nel setup!
+    private List<CharacterCard> characters;
+    private Integer cardEffect=null;
 
     public Game(boolean easy, int nPlayer,int nIsole){
         this.easy=easy;
@@ -19,8 +21,22 @@ public class Game {
         this.players =Setup.createPlayer(easy, nPlayer);//genera giocatori con le lore rispettive board e mani
         this.clouds= Setup.createClouds(nPlayer);
         this.islands=Setup.createIslands(nIsole);
+        this.teachers= Setup.createProfessor(5);
         this.motherNature=new MotherNature(islands.get(0).getID());
+        this.bag=new Bag(10,5);
+        this.characters= Setup.createCharacterCards(bag);
+    }
 
+    public Integer getCardEffect() {
+        return cardEffect;
+    }
+
+    public void setCardEffect(Integer cardEffect) {
+        this.cardEffect = cardEffect;
+    }
+
+    public Bag getBag(){
+        return bag;
     }
     public List<Island> getIslands(){return islands;}
 

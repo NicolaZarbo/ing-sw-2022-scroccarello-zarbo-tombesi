@@ -128,9 +128,15 @@ public class Turn {
                     }
             }
 
+        }
     }
-            }
+    public void useCharacter(CharacterCard card, Game game){
+        //  call to the right method with right parameters TODO
+        // card.effect(genericParameter type, Game game );
     }
+
+
+}
 
 
 

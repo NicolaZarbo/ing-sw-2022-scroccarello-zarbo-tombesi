@@ -13,7 +13,21 @@ public class Setup {
         }
         return  islands;
     }
+    public static ArrayList<CharacterCard> createCharacterCards(Bag bag){
+        ArrayList<CharacterCard> cards = new ArrayList<>();
+        for (int i=0; i<12; i++){
+            cards.add(  FactoryCharacter.createCharacter(i, bag)) ;
+        }
+        return cards;
+    }
 
+    public static Professor[] createProfessor(int nColors){
+        Professor[] profs = new Professor[nColors];
+        for (int i=0; i<nColors;i++){
+            profs[i]= new Professor(i,TokenColor.getColor(i));
+        }
+        return profs;
+    }
     public static Player[] createPlayer(boolean easy , int nPlayer){
 
         Player players[] =new Player[nPlayer];
