@@ -86,33 +86,52 @@ public class Turn {
     public void putTowerFromBoardToIsland(Island island,Board board){
         island.setTower(board.getTower());
     }
-/*
+
     //controllo se una board ha il diritto ad avere il prof del colore scelto
-    public void isTeacher(TokenColor color,Game game,int playerId){
+    public boolean isTeacher(TokenColor color,Game game,int playerId){
         Player[] players=game.getPlayers();
-        boolean b=false;
-        Player playercheck;
-        Board playerBoard;
-        for(int i=0;i<players.length;i++)
-            if(players[i].getId()==playerId) {
-                playercheck = players[i];
-                playerBoard=players[i].getBoard();
-            }
-        if(playercheck!=null) {
-            int tokenplayer = 0;
-            int tempcount=0;
-            for (int i = 0; i < playerBoard[TokenColor.getIndex(color)].length; i++)
-                    if(playerBoard[TokenColor.getIndex(color)][i]!=null)
+        boolean b=true;
+        Player playercheck=game.getPlayer(playerId);
+        Board playerBoard=playercheck.getBoard();
+
+            int tokenplayer = 0; //count dei token del player
+            int tempcount=0; //count dei token degli altri players
+            for (int i = 0; i < playerBoard.getDiningRoom()[color.ordinal()].length; i++)
+                    if(playerBoard.getDiningRoom()[TokenColor.getIndex(color)][i]!=null)
                         tokenplayer++;
             for(int j=0;j<players.length;j++)
                 if(!players[j].equals(playercheck)){
-                    for (int i = 0; i < players[j].getBoard()[TokenColor.getIndex(color)].length; i++)
-                        if(players[j].getBoard()[TokenColor.getIndex(color)][i]!=null)
+                    for (int i = 0; i < players[j].getBoard().getDiningRoom()[color.ordinal()].length; i++) {
+                        if (players[j].getBoard().getDiningRoom()[TokenColor.getIndex(color)][i] != null)
                             tempcount++;
+                    }
+                    if(tempcount>=tokenplayer)
+                            b=false;
 
                 }
-        }
-    } */
+        return b;
+    }
+    public void getTeacher(TokenColor color,Game game,int playerId){
+        Player[] players=game.getPlayers();
+        Player playercheck=game.getPlayer(playerId);
+        if(isTeacher(color, game, playerId)){
+                if(game.isProfessorOnGame(color)){
+                Professor temp=game.getFromGame(color);
+                game.getPlayer(playerId).getBoard().putProfessore(temp);
+            }else{
+                for(int i=0;i<players.length;i++)
+                    if(players[i]!=playercheck && players[i].getBoard().getProfessor(color)!=null){
+                        Professor temp=players[i].getBoard().getProfessor(color);
+                        game.getPlayer(playerId).getBoard().putProfessore(temp);
+                        int playerTemp=players[i].getId();
+                        game.getPlayer(playerTemp).getBoard().removeProfessor(color);
+                    }
+            }
 
-}
+    }
+            }
+    }
+
+
+
 

@@ -10,6 +10,8 @@ public class Game {
     private Player[] players;
     private Cloud[] clouds;
     private MotherNature motherNature;
+    private Professor[] teachers;
+    //manca array dei professori non ancora assegnati, che vanno inizializzati nel setup!
 
     public Game(boolean easy, int nPlayer,int nIsole){
         this.easy=easy;
@@ -46,5 +48,30 @@ public class Game {
 
     public Player[] getPlayers(){
         return this.players;
+    }
+
+    public Player getPlayer(int playerId){
+        Player temp=null;
+        for(int j=0;j<this.players.length;j++)
+            if(this.players[j].getId()==playerId)
+                temp=this.players[j];
+        return temp;
+    }
+
+
+    public Professor getFromGame(TokenColor color){
+        Professor temp=null;
+        if(isProfessorOnGame(color)){
+            temp=teachers[color.ordinal()];
+            teachers[color.ordinal()]=null;
+        }
+        return temp;
+    }
+    public boolean isProfessorOnGame(TokenColor color){
+        boolean b=false;
+        if(teachers[color.ordinal()]!=null)
+            b=true;
+
+        return b;
     }
 }

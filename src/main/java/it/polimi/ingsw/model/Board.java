@@ -27,16 +27,11 @@ public class Board {
             }
         }
     }
-    public Professor getProfessor(int idProfessor){
-        Professor prof;
-        for  (int i=0 ; i< table.length;i++) {
-            prof=table[i];
-            if(prof!= null && prof.getId()==idProfessor){
-               table[i]= null;
-               return prof;
-            }
-        }
-        return null;   //<--- anche in questo metodo uso null come assenza
+    public Professor getProfessor(TokenColor color){
+        Professor prof=null;
+        if(table[color.ordinal()]!=null)
+            prof=table[color.ordinal()];
+        return prof;
     }
 
     public void putProfessore(Professor prof){
@@ -110,6 +105,10 @@ public class Board {
     }
     public void setDiningRoom(Student[][] dining){
          this.diningRoom=dining;
+    }
+
+    public void removeProfessor(TokenColor color){
+        table[color.ordinal()]=null;
     }
 
 }
