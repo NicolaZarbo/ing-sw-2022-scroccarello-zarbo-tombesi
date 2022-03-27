@@ -74,4 +74,5 @@ public class Game {
 
         return b;
     }
+    public List<Island> getIslandList() {return this.islands;}
 }

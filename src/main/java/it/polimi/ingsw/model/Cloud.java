@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model;
-
+import java.util.LinkedList;
 public class Cloud {
     private final int id;//per identificare la nuvola
-    Student[] stud;
+    private Student[] stud;
 
     public Cloud(Student[] arr, int id){
         this.stud=new Student[arr.length];
