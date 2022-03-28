@@ -47,12 +47,14 @@ public class Island {
     public void addAllTowers(ArrayList<Tower> t) {
         this.tower.addAll(t);
     }
-    private void mergeIslands(Island island, List<Island> isl) {
+    public void mergeIslands(Island island, List<Island> isl) {
         this.islandSize++;
-        for (int i=0;i<isl.size();) {
-            if(isl.get(i).getID()==island.getID()) {
-                isl.remove(i);
-                break;
+        if(isl!=null) {
+            for (int i = 0; i < isl.size(); i++) {
+                if (isl.get(i).getID() == island.getID()) {
+                    isl.remove(i);
+                    break;
+                }
             }
         }
         for (int i=0;i<island.students.size();i++){
