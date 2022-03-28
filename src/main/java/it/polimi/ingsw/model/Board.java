@@ -51,8 +51,9 @@ public class Board {
         //gestire 'eccezione' riga piena e controllo moneta (oppure controllo isCoin chiamato in controller)  TODO
     }
 
+
     //estrae studente da ingresso
-    public Token getStudent(int tokenId){
+    public Student getStudent(int tokenId){
         Student stud;
         for (int i=0;i<entrance.length;i++) {
             stud=entrance[i];

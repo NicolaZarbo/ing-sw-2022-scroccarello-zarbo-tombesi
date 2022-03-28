@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FactoryCharacter {
     private static ArrayList<Student> drawX(int x, Bag bag){
@@ -15,9 +16,7 @@ public class FactoryCharacter {
         if(id==0){
             return new CharacterOne(id, drawX(4, bag));
         }
-        if(id==1) {
-            //    return new Character2(id);
-        }
+
         if(id == 6){
             return new Character7(id, drawX(6,bag) );
         }

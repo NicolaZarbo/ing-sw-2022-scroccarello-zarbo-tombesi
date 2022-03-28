@@ -16,7 +16,7 @@ public class Bag {
         int k=0;
         for(int i=0;i<numColor;i++)
             for(int j=0;j<pedForColor;j++){
-                Student temp=new Student(k, TokenColor.getColor(i+3));
+                Student temp=new Student(k, TokenColor.getColor(i));
                 temparr[k]=temp;
                 k++;
             }

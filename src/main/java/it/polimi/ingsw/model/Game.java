@@ -10,12 +10,22 @@ public class Game {
     private Player[] players;
     private Cloud[] clouds;
     private MotherNature motherNature;
-    private Bag bag;
+    private final Bag bag;
     private Professor[] teachers;
-    private List<CharacterCard> characters;
-    private Integer cardEffect=null;
+    private final List<CharacterCard> characters;
+    private Integer cardBonus =null;
 
-    public Game(boolean easy, int nPlayer,int nIsole){
+    public Professor[] getTeachers() {
+        return teachers;
+    }
+
+    public CharacterCard getCharacters(int id) {
+        if(characters.get(id)!= null)
+            return characters.get(id);
+        return null;
+    }
+
+    public Game(boolean easy, int nPlayer, int nIsole){
         this.easy=easy;
         this.nPlayers =nPlayer;
         this.players =Setup.createPlayer(easy, nPlayer);//genera giocatori con le lore rispettive board e mani
@@ -27,14 +37,21 @@ public class Game {
         this.characters= Setup.createCharacterCards(bag);
     }
 
-    public Integer getCardEffect() {
-        return cardEffect;
+    public Integer getCardBonus() {
+        return cardBonus;
     }
 
-    public void setCardEffect(Integer cardEffect) {
-        this.cardEffect = cardEffect;
+    public void setCardBonus(Integer cardBonus) {
+        this.cardBonus = cardBonus;
     }
-
+    //finds island based on id
+    public Island getIsland(int id){
+        for (Island island: this.islands) {
+            if(island.getID()==id)
+                return island;
+        }
+        return null;
+    }
     public Bag getBag(){
         return bag;
     }

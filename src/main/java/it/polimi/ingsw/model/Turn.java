@@ -1,10 +1,11 @@
 package it.polimi.ingsw.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Turn {
-    public void moveInHall(Board board,int pos){
+    public void moveInHall(Board board,int pos){//esistono già metodi di board per estrarre da entrance e per inserire in sala
         Student [] temp=board.getEntrance();
         Student[][] dining=board.getDiningRoom();
         if(temp[pos]!=null) {
@@ -130,9 +131,9 @@ public class Turn {
 
         }
     }
-    public void useCharacter(CharacterCard card, Game game){
-        //  call to the right method with right parameters TODO
-        // card.effect(genericParameter type, Game game );
+    public static void useCharacter(CharacterCard card, ArrayList<Integer> parameters, Game game){
+        //  call to the right method with right parameters(int list) Arraylist used like a ParameterObject from omonimous pattern
+        card.cardEffect( parameters,  game );
     }
 
 
