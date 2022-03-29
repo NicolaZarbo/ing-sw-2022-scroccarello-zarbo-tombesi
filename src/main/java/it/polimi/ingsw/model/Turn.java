@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Turn {
     public void moveInHall(Board board,int pos){//esistono già metodi di board per estrarre da entrance e per inserire in sala
-        Student [] temp=board.getEntrance();
+        Student [] temp=board.getEntrance();//questo metodo è diverso serve per spostare uno studente specifico presente in sala d'attesa
         Student[][] dining=board.getDiningRoom();
         if(temp[pos]!=null) {
             Student stud = temp[pos];
@@ -131,9 +131,28 @@ public class Turn {
 
         }
     }
+    //manca tutta la questione delle monete
     public static void useCharacter(CharacterCard card, ArrayList<Integer> parameters, Game game){
         //  call to the right method with right parameters(int list) Arraylist used like a ParameterObject from omonimous pattern
         card.cardEffect( parameters,  game );
+    }
+    public int calculateInfluence(Game game,int playerId){
+        int influence=0;
+        MotherNature theOne=game.getMotherNature();
+        Island where=game.getIsland(theOne.getPosition());
+        ArrayList<Student> students=where.getStudents();
+        TowerColor color=game.getPlayer(playerId).getColorT();
+        for(int i=0;i<students.size();i++){
+            if(isTeacher(students.get(i).getCol(),game,playerId))
+                influence++;
+
+        }
+        ArrayList<Tower> towers=where.getTower();
+        for(int j=0;j<towers.size();j++){
+            if(color.equals(towers.get(j).getColor()))
+                influence++;
+        }
+        return influence;
     }
 
 

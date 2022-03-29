@@ -44,10 +44,15 @@ public class Board {
     /** @param stud :sposta studente in dining room*/
     public void moveToDiningRoom(Student stud ){
         int i = stud.getCol().ordinal();
+        boolean b=false;
         if(stud!= null) {
             for (int j = 0; j < diningRoom[i].length; j++) {
-                if (diningRoom[i][j] == null)
+                if (diningRoom[i][j] == null && !b){
                     diningRoom[i][j] = stud;
+                    b=true;
+
+                }
+
             }
         }
         //gestire 'eccezione' riga piena e controllo moneta (oppure controllo isCoin chiamato in controller)  TODO
