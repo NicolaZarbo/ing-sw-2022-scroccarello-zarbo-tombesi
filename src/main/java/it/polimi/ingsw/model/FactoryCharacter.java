@@ -20,6 +20,8 @@ public class FactoryCharacter {
         if(id == 6){
             return new Character7(id, drawX(6,bag) );
         }
+        if(id==9)
+            return new Character10();
         if(id == 10){
             return new Character11(id, drawX(4,bag) );
         }

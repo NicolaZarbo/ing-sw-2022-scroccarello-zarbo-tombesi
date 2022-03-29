@@ -41,26 +41,43 @@ public class Board {
        table[prof.getColor().ordinal()] = prof;
     }
 
-    //sposta studente in dining room
+    /** @param stud :sposta studente in dining room*/
     public void moveToDiningRoom(Student stud ){
         int i = stud.getCol().ordinal();
-            for(int j = 0; j< diningRoom[i].length; j++){
-                if(diningRoom[i][j]==null)
-                    diningRoom[i][j]=stud;
+        if(stud!= null) {
+            for (int j = 0; j < diningRoom[i].length; j++) {
+                if (diningRoom[i][j] == null)
+                    diningRoom[i][j] = stud;
             }
+        }
         //gestire 'eccezione' riga piena e controllo moneta (oppure controllo isCoin chiamato in controller)  TODO
     }
+    public Student getFromDiningRoom(int id){
+        Student stud;
+        for(int i=0; i<diningRoom.length;i++){
+            for (int j=0; j<diningRoom[0].length;j++){
+                if(diningRoom[i][j]!= null)
+                    if( diningRoom[i][j].getId()==id){
+                        stud=diningRoom[i][j];
+                        diningRoom[i][j]=null;
+                        return stud;
+                }
 
+            }
+        }
+        return null;
+    }
 
     //estrae studente da ingresso
-    public Student getStudent(int tokenId){
+    public Student getStudent(int id){
         Student stud;
         for (int i=0;i<entrance.length;i++) {
             stud=entrance[i];
-            if(stud != null && stud.getId()==tokenId){
-                entrance[i]=null;
-                return stud;
-            }
+            if(stud != null)
+                if( stud.getId()==id){
+                    entrance[i]=null;
+                    return stud;
+                }
         }
         return null; // <---- null se non presente
     }
