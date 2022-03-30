@@ -15,7 +15,7 @@ public class Setup {
     }
     public static ArrayList<CharacterCard> createCharacterCards(Bag bag){
         ArrayList<CharacterCard> cards = new ArrayList<>();
-        for (int i=0; i<12; i++){
+        for (int i=1; i<=12; i++){
             cards.add(  FactoryCharacter.createCharacter(i, bag)) ;
         }
         return cards;

@@ -3,8 +3,8 @@ package it.polimi.ingsw.model;
 public class Player {
     private final TowerColor colorT;
     private final Mage mage;
-    Hand hand;
-    Board board;
+    private Hand hand;
+    private Board board;
     private final int id;
 
     public Player(int id, Mage mag, Hand man, Board board,TowerColor color){
@@ -15,6 +15,8 @@ public class Player {
         this.board = board;
         
     }
+
+
 
     public int getId() {
         return id;
@@ -30,5 +32,9 @@ public class Player {
 
     public Board getBoard(){
         return this.board;
+    }
+
+    public Hand getHand() {
+        return hand;
     }
 }

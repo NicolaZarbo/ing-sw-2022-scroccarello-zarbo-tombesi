@@ -7,6 +7,10 @@ public abstract class CharacterCard extends Card {
     private int id;
     private int cost;
 
+    public CharacterCard(int id){
+        this.id=id;
+        this.cost=(id%3)+1;
+    }
     public int getCost() {
         return cost;
     }

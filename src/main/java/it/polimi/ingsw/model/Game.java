@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -13,7 +14,7 @@ public class Game {
     private final Bag bag;
     private Professor[] teachers;
     private final List<CharacterCard> characters;
-    private Integer cardBonus =null;
+    private ArrayList<Integer> cardBonusActive;
 
     public Professor[] getTeachers() {
         return teachers;
@@ -35,15 +36,18 @@ public class Game {
         this.motherNature=new MotherNature(islands.get(0).getID());
         this.bag=new Bag(10,5);
         this.characters= Setup.createCharacterCards(bag);
+        this.cardBonusActive= new ArrayList<>();
     }
 
-    public Integer getCardBonus() {
-        return cardBonus;
+    public boolean isBonusActive(int bonus) {
+        return cardBonusActive.contains(bonus);
     }
 
-    public void setCardBonus(Integer cardBonus) {
-        this.cardBonus = cardBonus;
+    public void setCardBonusActive(Integer cardBonus) {
+        this.cardBonusActive.add(cardBonus) ;
     }
+    public void resetBonus(){this.cardBonusActive.clear();}
+
     //finds island based on id
     public Island getIsland(int id){
         for (Island island: this.islands) {

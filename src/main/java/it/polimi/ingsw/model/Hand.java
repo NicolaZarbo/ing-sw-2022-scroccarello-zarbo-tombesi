@@ -15,4 +15,10 @@ public class Hand {
     public void addCoin(){
         coin++;
     }
+    public void payCoin(int cost){
+        this.coin=this.coin-cost;
+    }
+    public boolean enoughCoin(int cost){
+        return (this.coin-cost>=0);
+    }
 }

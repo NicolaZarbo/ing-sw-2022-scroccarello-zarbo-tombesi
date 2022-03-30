@@ -1,13 +1,12 @@
 package it.polimi.ingsw.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class CharacterOne extends TokensCharacter{
+public class Character1 extends TokensCharacter{
 
 
-    public CharacterOne(int id, ArrayList<Student> studs) {
-        super(id, studs);
+    public Character1(int id) {
+        super(id);
     }
 
 

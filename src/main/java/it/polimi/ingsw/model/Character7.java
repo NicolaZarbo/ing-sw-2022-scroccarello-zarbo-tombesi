@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Character7 extends TokensCharacter{
 
-    public  Character7(int id,ArrayList<Student> studs){
-        super(id, studs);
+    public  Character7(int id){
+        super(id);
 
     }
     @Override /**@param parameters : first playerId, then students in entrance then on studs cards*/

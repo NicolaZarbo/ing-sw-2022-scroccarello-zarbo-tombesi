@@ -100,16 +100,17 @@ public class Turn {
             for (int i = 0; i < playerBoard.getDiningRoom()[color.ordinal()].length; i++)
                     if(playerBoard.getDiningRoom()[TokenColor.getIndex(color)][i]!=null)
                         tokenplayer++;
-            for(int j=0;j<players.length;j++)
-                if(!players[j].equals(playercheck)){
+            for(int j=0;j<players.length;j++){
+                tempcount=0;
+                if(!players[j].equals(playercheck)) {
                     for (int i = 0; i < players[j].getBoard().getDiningRoom()[color.ordinal()].length; i++) {
                         if (players[j].getBoard().getDiningRoom()[TokenColor.getIndex(color)][i] != null)
                             tempcount++;
-                    }
-                    if(tempcount>=tokenplayer)
-                            b=false;
-
+                    }//card 2 effect
+                    if (tempcount >= tokenplayer || (game.isBonusActive(2)&&tempcount==tokenplayer))
+                        b = false;
                 }
+            }
         return b;
     }
     public void getTeacher(TokenColor color,Game game,int playerId){
@@ -135,6 +136,7 @@ public class Turn {
     public static void useCharacter(CharacterCard card, ArrayList<Integer> parameters, Game game){
         //  call to the right method with right parameters(int list) Arraylist used like a ParameterObject from omonimous pattern
         card.cardEffect( parameters,  game );
+        //controlli enoughCoin, isUsed e payCoin in controller(?)
     }
     public int calculateInfluence(Game game,int playerId){
         int influence=0;

@@ -1,12 +1,11 @@
 package it.polimi.ingsw.model;
 import java.util.ArrayList;
 public abstract class TokensCharacter extends CharacterCard{
-    private int id;
-    private int cost;
+
     private ArrayList<Student> students;
-    public TokensCharacter (int id,ArrayList<Student> studs){
-        this.id=id;
-        this.students= studs;
+    public TokensCharacter (int id){
+        super(id);
+        this.students= new ArrayList<>();
     }
     public void addStudents(ArrayList<Student> studs){
         this.students.addAll(studs);

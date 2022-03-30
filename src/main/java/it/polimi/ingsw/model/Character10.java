@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Character10 extends CharacterCard{
+    public Character10(int id) {
+        super(id);
+    }
+
     @Override /** @param parameters : first playerId, then students in dining room, then students in entrance*/
     public void cardEffect(List<Integer> parameters, Game game) {
         int size = parameters.size();
