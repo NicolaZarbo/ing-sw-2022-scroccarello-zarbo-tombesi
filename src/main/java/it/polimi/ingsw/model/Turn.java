@@ -146,9 +146,12 @@ public class Turn {
         MotherNature theOne=game.getMotherNature();
         Island where=game.getIsland(theOne.getPosition());
         ArrayList<Student> students=where.getStudents();
-        TowerColor color=game.getPlayer(playerId).getColorT();
+        Player player = game.getPlayer(playerId);
+        TowerColor color=player.getColorT();
+        Student stud;
         for(int i=0;i<students.size();i++){
-            if(isTeacher(students.get(i).getCol(),game,playerId) && !(students.get(i).getCol()==game.getTargetColor() && game.isBonusActive(9)))//card 9 effect
+            stud = students.get(i);
+            if(player.getBoard().hasProfessor(stud.getCol()) && !(stud.getCol()==game.getTargetColor() && game.isBonusActive(9)))//card 9 effect
                 influence++;
 
         }//card 6 effect

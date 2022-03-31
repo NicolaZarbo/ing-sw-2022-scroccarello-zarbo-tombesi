@@ -36,7 +36,9 @@ public class Board {
             prof=table[color.ordinal()];
         return prof;
     }
-
+    public boolean hasProfessor(TokenColor color){
+        return getProfessor(color)!= null;
+    }
     public void putProfessore(Professor prof){
        table[prof.getColor().ordinal()] = prof;
     }

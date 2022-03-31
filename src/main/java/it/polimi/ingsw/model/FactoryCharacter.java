@@ -13,27 +13,27 @@ public class FactoryCharacter {
     public static CharacterCard createCharacter(int id, Bag bag)
     {
         CharacterCard card=null;
-        if(id==0){
+        if(id==1){
             TokensCharacter c= new Character1(id);
             c.addStudents(drowStudents(4, bag));
             card=c;
         }
-        if(id==1||id==3||id==5||id==7)
+        if(id==2||id==4||id==6||id==8)
             card= new TurnEffectCharacter(id);
-        if(id==2)
+        if(id==3)
             card= new Character3(id);
-        if(id==4)
+        if(id==5)
             card=new Character5(id);
-        if(id == 6){
+        if(id == 7){
             TokensCharacter c= new Character7(id);
             c.addStudents( drowStudents(6,bag));
             card=c;
         }
-        if(id==8)
-            card=new Character9(id);
         if(id==9)
+            card=new Character9(id);
+        if(id==10)
             card= new Character10(id);
-        if(id == 10){
+        if(id == 11){
             TokensCharacter c= new Character11(id);
             c.addStudents(drowStudents(4,bag));
             card=c;

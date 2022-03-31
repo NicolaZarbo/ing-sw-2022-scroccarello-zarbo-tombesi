@@ -25,7 +25,7 @@ public class Game {
 
     public CharacterCard getCharacters(int id) {
         if(characters.get(id)!= null)
-            return characters.get(id);
+            return characters.get(id-1);
         return null;
     }
 
