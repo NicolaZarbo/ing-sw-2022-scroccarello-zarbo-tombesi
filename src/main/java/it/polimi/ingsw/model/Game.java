@@ -14,7 +14,10 @@ public class Game {
     private final Bag bag;
     private Professor[] teachers;
     private final List<CharacterCard> characters;
-    private ArrayList<Integer> cardBonusActive;
+    private int cardBonusActive;
+    private TokenColor targetColor;
+
+
 
     public Professor[] getTeachers() {
         return teachers;
@@ -36,17 +39,26 @@ public class Game {
         this.motherNature=new MotherNature(islands.get(0).getID());
         this.bag=new Bag(10,5);
         this.characters= Setup.createCharacterCards(bag);
-        this.cardBonusActive= new ArrayList<>();
+        this.cardBonusActive=0;
     }
 
     public boolean isBonusActive(int bonus) {
-        return cardBonusActive.contains(bonus);
+        return cardBonusActive==bonus;
+    }
+    public TokenColor getTargetColor() {
+        return targetColor;
     }
 
-    public void setCardBonusActive(Integer cardBonus) {
-        this.cardBonusActive.add(cardBonus) ;
+    public void setTargetColor(TokenColor targetColor) {
+        this.targetColor = targetColor;
     }
-    public void resetBonus(){this.cardBonusActive.clear();}
+    public void setCardBonusActive(Integer cardBonus) {
+        this.cardBonusActive=(cardBonus) ;
+    }
+    public void resetBonus(){
+        this.cardBonusActive=0;
+        this.targetColor=null;
+    }
 
     //finds island based on id
     public Island getIsland(int id){
