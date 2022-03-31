@@ -28,6 +28,8 @@ public class AssistantCard extends Card {
     public Mage getMage() {
         return mage;
     }
+
+
 }
 
 
