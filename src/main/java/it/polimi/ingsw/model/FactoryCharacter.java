@@ -18,7 +18,7 @@ public class FactoryCharacter {
             c.addStudents(drowStudents(4, bag));
             card=c;
         }
-        if(id==1||id==3||id==5||id==7||id==8)
+        if(id==1||id==3||id==5||id==7)
             card= new TurnEffectCharacter(id);
         if(id==2)
             card= new Character3(id);
@@ -29,6 +29,8 @@ public class FactoryCharacter {
             c.addStudents( drowStudents(6,bag));
             card=c;
         }
+        if(id==8)
+            card=new Character9(id);
         if(id==9)
             card= new Character10(id);
         if(id == 10){

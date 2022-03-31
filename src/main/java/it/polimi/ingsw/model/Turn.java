@@ -28,6 +28,7 @@ public class Turn {
         game.setMotherNature(tempm);
 
     }
+    //last action of the turn
     public void moveFromCloudToEntrance(Game game,int pos,Board board){
         Cloud[] temp=game.getClouds();
         if(pos>=0 && pos<temp.length && temp[pos].getStud()[0]!=null){
@@ -39,7 +40,7 @@ public class Turn {
             temp[pos].setStud(tempstud);
             game.setClouds(temp);
         }
-
+        game.resetBonus();
     }
 
     public boolean isUnifiable(Game game,int pos){
@@ -107,7 +108,7 @@ public class Turn {
                         if (players[j].getBoard().getDiningRoom()[TokenColor.getIndex(color)][i] != null)
                             tempcount++;
                     }//card 2 effect
-                    if (tempcount >= tokenplayer || (game.isBonusActive(2)&&tempcount==tokenplayer))
+                    if (tempcount >= tokenplayer && !(game.isBonusActive(2) && tempcount<=tokenplayer))
                         b = false;
                 }
             }
@@ -140,19 +141,23 @@ public class Turn {
     }
     public int calculateInfluence(Game game,int playerId){
         int influence=0;
+        if(game.isBonusActive(8))  //card 8 effect
+            influence=influence+2;
         MotherNature theOne=game.getMotherNature();
         Island where=game.getIsland(theOne.getPosition());
         ArrayList<Student> students=where.getStudents();
         TowerColor color=game.getPlayer(playerId).getColorT();
         for(int i=0;i<students.size();i++){
-            if(isTeacher(students.get(i).getCol(),game,playerId))
+            if(isTeacher(students.get(i).getCol(),game,playerId) && !(students.get(i).getCol()==game.getTargetColor() && game.isBonusActive(9)))//card 9 effect
                 influence++;
 
-        }
-        ArrayList<Tower> towers=where.getTower();
-        for(int j=0;j<towers.size();j++){
-            if(color.equals(towers.get(j).getColor()))
-                influence++;
+        }//card 6 effect
+        if(!game.isBonusActive(6)){
+            ArrayList<Tower> towers=where.getTower();
+            for(int j=0;j<towers.size();j++){
+                if(color.equals(towers.get(j).getColor()))
+                    influence++;
+             }
         }
         return influence;
     }
