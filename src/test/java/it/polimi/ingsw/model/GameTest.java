@@ -46,7 +46,7 @@ Game testG = new Game(true, n, numeroIsole);
             System.out.println();
             assertNotNull("a player is null",player);
             Board board=player.getBoard();
-            Hand hand = player.hand;
+            Hand hand = player.getHand();
             assertNotNull(board);
             assertNotNull("mano null", hand);
             assertNotNull("missin coins", hand.coin);
