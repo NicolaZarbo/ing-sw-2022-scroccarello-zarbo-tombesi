@@ -13,7 +13,7 @@ public class Game {
     private MotherNature motherNature;
     private final Bag bag;
     private Professor[] teachers;
-    private final List<CharacterCard> characters;
+   // private final List<CharacterCard> characters;
     private int cardBonusActive;
     private TokenColor targetColor;
 
@@ -23,11 +23,11 @@ public class Game {
         return teachers;
     }
 
-    public CharacterCard getCharacters(int id) {
+   /* public CharacterCard getCharacters(int id) {
         if(characters.get(id)!= null)
             return characters.get(id-1);
         return null;
-    }
+    } */
 
     public Game(boolean easy, int nPlayer, int nIsole){
         this.easy=easy;
@@ -38,7 +38,7 @@ public class Game {
         this.teachers= Setup.createProfessor(5);
         this.motherNature=new MotherNature(islands.get(0).getID());
         this.bag=new Bag(10,5);
-        this.characters= Setup.createCharacterCards(bag);
+       // this.characters= Setup.createCharacterCards(bag);
         this.cardBonusActive=0;
     }
 

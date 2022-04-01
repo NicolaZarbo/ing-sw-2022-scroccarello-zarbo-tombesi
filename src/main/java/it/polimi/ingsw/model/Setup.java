@@ -13,13 +13,13 @@ public class Setup {
         }
         return  islands;
     }
-    public static ArrayList<CharacterCard> createCharacterCards(Bag bag){
+    /*public static ArrayList<CharacterCard> createCharacterCards(Bag bag){
         ArrayList<CharacterCard> cards = new ArrayList<>();
         for (int i=1; i<=12; i++){
             cards.add(  FactoryCharacter.createCharacter(i, bag)) ;
         }
         return cards;
-    }
+    } */
 
     public static Professor[] createProfessor(int nColors){
         Professor[] profs = new Professor[nColors];

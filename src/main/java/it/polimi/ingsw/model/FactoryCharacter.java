@@ -10,7 +10,7 @@ public class FactoryCharacter {
         return drawn;
     }
     //I still need to implement most of it, ecxept cards 1,7,11 and 5, the implementetion of the others will be strightfoward TODO
-    public static CharacterCard createCharacter(int id, Bag bag)
+   /* public static CharacterCard createCharacter(int id, Bag bag)
     {
         CharacterCard card=null;
         if(id==1){
@@ -40,5 +40,5 @@ public class FactoryCharacter {
         }
 
         return card;
-    }
+    } */
 }
