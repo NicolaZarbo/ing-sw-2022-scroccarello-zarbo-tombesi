@@ -20,16 +20,23 @@ public class ControllerTurn {
         Turn.moveToIsland(this.idPlayerNow,idStudent,idIsland,this.game);
     }
 
-    public int moveMotherNature(int steps ){
+    public int moveMotherNature(int steps){
         Turn.moveMotherNature(steps, game);
         int position=game.getMotherNature().getPosition();
         Turn.islandConquest(position,game);
-        if(Turn.isUnifiable(game,position)){
-            Turn.unify(game, position);
+        if(Turn.isUnifiableNext(game,position)){
+            Turn.unifyNext(game, position);
+            Main.islands.remove(position+1);
             
+        }
+        if(Turn.isUnifiableBefore(game,position)){
+            Turn.unifyBefore(game, position);
+            Main.islands.remove(position-1);
+
         }
         return position;
     }
+
     public void chooseCloud(int cloudId){
         Turn.moveFromCloudToEntrance(this.game,cloudId,this.idPlayerNow);
     }

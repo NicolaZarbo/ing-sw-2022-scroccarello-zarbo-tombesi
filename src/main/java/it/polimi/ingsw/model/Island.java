@@ -47,6 +47,8 @@ public class Island {
     public void addAllTowers(ArrayList<Tower> t) {
         this.tower.addAll(t);
     }
+
+    /*
     public void mergeIslands(Island island, List<Island> isl) {
         this.islandSize++;
         if(isl!=null) {
@@ -64,4 +66,6 @@ public class Island {
             this.tower.add(island.tower.get(i));
         }
     }
+
+     */
 }

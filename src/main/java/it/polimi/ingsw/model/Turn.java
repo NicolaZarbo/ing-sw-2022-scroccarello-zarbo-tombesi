@@ -50,48 +50,53 @@ public class Turn {
         game.resetBonus();
     }
 
-    public static boolean isUnifiable(Game game,int pos){
+    public static boolean isUnifiableNext(Game game,int pos){
         boolean b=false;
-        List<Island> tempis=game.getIslands();
-        Island central=tempis.get(pos);
-        Island before=tempis.get(Math.floorMod(pos-1,tempis.size()));
-        Island after=tempis.get(Math.floorMod(pos+1,tempis.size()));
-        if(central.getTower().get(0)!=null && before.getTower().get(0)!=null && after.getTower().get(0)!=null)
-            //se non va prova a controllare l'output di getTower().get(0) su un array list vuota!
-            if(central.getTower().get(0).getColor().equals(before.getTower().get(0).getColor()) && before.getTower().get(0).getColor().equals(after.getTower().get(0).getColor()))
+        int size = game.getIslands().size();
+        Island central=game.getIslands().get(pos);
+        Island next=game.getIslands().get(Math.floorMod(pos+1,size));
+        if(central.getTower().get(0)!=null && next.getTower().get(0)!=null)
+            if(central.getTower().get(0).getColor()==next.getTower().get(0).getColor())
                 b=true;
         return b;
     }
-    //vedi se va gestita la posizione di madre natura
-    public static void unify(Game game, int pos){
-        if(isUnifiable(game,pos)){
-            List<Island> tempis=game.getIslands();
-            int bigId=tempis.get(0).getID();
-            for(int i=0;i<tempis.size();i++) {
-                if (bigId < tempis.get(i).getID())
-                    bigId = tempis.get(0).getID();
+    public static boolean isUnifiableBefore(Game game,int pos){
+        boolean b=false;
+        int size = game.getIslands().size();
+        Island central=game.getIslands().get(pos);
+        Island before=game.getIslands().get(Math.floorMod(pos-1,size));
+        if(central.getTower().get(0)!=null && before.getTower().get(0)!=null)
+            if(central.getTower().get(0).getColor()==before.getTower().get(0).getColor())
+                b=true;
+        return b;
+    }
+
+    public static void unifyNext(Game game, int pos) {
+        int islandNumber = game.getIslands().size();
+        Island central = game.getIsland(pos);
+        Island next = game.getIsland(Math.floorMod(pos + 1, islandNumber));
+        if (central.getTower().get(0).getColor() == next.getTower().get(0).getColor()) {
+            central.addAllStudents(next.getStudents());
+            central.addAllTowers(next.getTower());
+            game.getIslands().remove(next);
+            if (game.getMotherNature().getPosition() == pos + 1)
+                game.getMotherNature().changePosition(pos);
             }
-            Island central=tempis.get(pos);
-            Island before=tempis.get(Math.floorMod(pos-1,tempis.size()));
-            Island after=tempis.get(Math.floorMod(pos+1,tempis.size()));
-            if(tempis.size()>2){
-                Island bigIsland=new Island(bigId+1);
-                bigIsland.addAllTowers(central.getTower());
-                bigIsland.addAllTowers(before.getTower());
-                bigIsland.addAllTowers(after.getTower());
-                bigIsland.addAllStudents(central.getStudents());
-                bigIsland.addAllStudents(before.getStudents());
-                bigIsland.addAllStudents(after.getStudents());
-            }else if(tempis.size()==2){
-                Island bigIsland=new Island(bigId+1);
-                bigIsland.addAllTowers(central.getTower());
-                bigIsland.addAllTowers(before.getTower());
-                bigIsland.addAllStudents(central.getStudents());
-                bigIsland.addAllStudents(before.getStudents());
+    }
+    public static void unifyBefore(Game game, int pos) {
+        int islandNumber = game.getIslands().size();
+        Island central = game.getIsland(pos);
+        Island before = game.getIsland(Math.floorMod(pos - 1, islandNumber));
+        if (central.getTower().get(0).getColor() == before.getTower().get(0).getColor()) {
+            central.addAllStudents(before.getStudents());
+            central.addAllTowers(before.getTower());
+            game.getIslands().remove(before);
+            if (game.getMotherNature().getPosition() == pos - 1)
+                game.getMotherNature().changePosition(pos);
             }
-        }
 
     }
+
     private static void putTowerFromBoardToIsland(Island island,Player player){
         if(player!= null){
             Board board=player.getBoard();

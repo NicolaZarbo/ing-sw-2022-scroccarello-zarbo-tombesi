@@ -38,7 +38,9 @@ public class Game {
         this.islands=Setup.createIslands(nIsole,bag);
         this.teachers= Setup.createProfessor(5);
         this.motherNature=new MotherNature(islands.get(0).getID());
+        if(!easy){
        // this.characters= Setup.createCharacterCards(bag);
+        }
         this.cardBonusActive=0;
     }
 
