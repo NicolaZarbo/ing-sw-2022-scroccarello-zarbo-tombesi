@@ -27,9 +27,9 @@ public class Round {
     public void setClouds(ArrayList<int[]> clouds,int numTokens){
         for(int i=0;i< clouds.size();i++){
             Student[] tmp=new Student[3];
-            for(int j=0;i<3;i++){
-                tmp[i]=game.getBag().getToken();
-                clouds.get(i)[j]=tmp[i].getId();
+            for(int j=0;j<3;j++){
+                tmp[j]=game.getBag().getToken();
+                clouds.get(i)[j]=tmp[j].getId();
             }
             game.getClouds()[i].setStud(tmp);
             numTokens-=3;

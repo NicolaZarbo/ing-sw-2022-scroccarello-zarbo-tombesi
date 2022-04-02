@@ -17,8 +17,8 @@ public class Cloud {
         return stud;
     }
 
-    public void setStud(Student[] temps){
-        stud=temps;
+    public void setStud(Student[] newStudents){
+        stud=newStudents;
     }
 
     public void putStudent(Student stunew){
