@@ -6,7 +6,7 @@ import static it.polimi.ingsw.model.Mage.*;
 import static it.polimi.ingsw.model.TowerColor.*;
 
 public class ControllerRoundTest extends TestCase {
-    int [] cardTest={1,2,3,4};
+    int [] cardTest={9,9,1,4};
     ControllerRound cTest=new ControllerRound(cardTest,4);
 
     public void testControllerCreation(){
