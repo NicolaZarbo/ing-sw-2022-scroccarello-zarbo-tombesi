@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Bag {
     int left;
@@ -30,11 +27,21 @@ public class Bag {
         return present;
     }
 
-public Student getToken(){
-    Random rand = new Random();
-    int i=rand.nextInt(tokenLeft.size());
-    Student temp= tokenLeft.get(i);
-    tokenLeft.remove(i);
-    return temp;
-}
+    public Student getToken(){
+         Random rand = new Random();
+         int i=rand.nextInt(tokenLeft.size());
+         Student temp= tokenLeft.get(i);
+         tokenLeft.remove(i);
+         return temp;
+    }
+
+    public ArrayList<Student> setupStudents(int nIslands){
+        ArrayList<Student> students = new ArrayList<>();
+        for (int i = 0; i < nIslands; i++) {
+            students.add(this.tokenLeft.get(i));
+            students.add(this.tokenLeft.get(i+5));
+        }
+        Collections.shuffle(students);
+        return students;
+    }
 }

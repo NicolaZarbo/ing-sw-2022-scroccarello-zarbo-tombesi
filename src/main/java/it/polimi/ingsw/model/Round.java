@@ -22,7 +22,7 @@ public class Round {
         orderForController[numPlayer]=played.getValTurn();
         motherMovements[numPlayer]=played.getMoveMother();
     }
-
+    //codice da modificare,specializzato solo per il gioco a due
     public void setClouds(Cloud[]clouds,Bag b){
         Student[] tmp1=new Student[3];
         Student[] tmp2=new Student[3];
