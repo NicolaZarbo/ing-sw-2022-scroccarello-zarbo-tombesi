@@ -6,7 +6,7 @@ public class Board {
     private Student[][] diningRoom;
     private Professor[] table;
     private Student[] entrance;
-    private Tower[] towers;//usare arraylist?
+    private ArrayList<Tower> towers;
     private boolean[][] coinDN;
     final int playerID;
 
@@ -14,9 +14,9 @@ public class Board {
         int nColors = TokenColor.listGetLastIndex()+1;
         this.coinDN = new boolean[nColors][3];
         this.setCoinDN(nColors);
-        this.towers = new Tower[nTower];
+        this.towers = new ArrayList<Tower>(nTower);
         for (int i=0;i<nTower;i++) {
-            towers[i]=new Tower(color,i);
+            towers.add(new Tower(color,i));
         }
         this.playerID=playerID;
         this.diningRoom = new Student[nColors][10];
@@ -45,9 +45,9 @@ public class Board {
 
     /** @param stud :sposta studente in dining room*/
     public void moveToDiningRoom(Student stud ){
-        int i = stud.getCol().ordinal();
         boolean b=false;
         if(stud!= null) {
+            int i = stud.getCol().ordinal();
             for (int j = 0; j < diningRoom[i].length; j++) {
                 if (diningRoom[i][j] == null && !b){
                     diningRoom[i][j] = stud;
@@ -88,18 +88,27 @@ public class Board {
         }
         return null; // <---- null se non presente
     }
-
+    public void addTower(ArrayList<Tower> towers){
+        this.towers.addAll(towers);
+    }
     public Tower getTower(){
         Tower tower;
+        if(towers.isEmpty())
+            return null;
+        else {
+            tower = towers.get(towers.size()-1);
+            towers.remove(towers.size()-1);
+            return tower;
+        }
        // if(towers[towers.length-1]!=null)
-        for (int i=0; i< towers.length;i++) {
-            tower=towers[i];
+       /* for (int i=0; i< towers.size();i++) {
+            tower=towers.get(i);
             if (tower != null) {
-                towers[i]=null;
+                towers.remove(i);
                 return tower;
             }
-        }
-        return null;
+        }*/
+
     }
 
     //piazza uno studente in ingresso

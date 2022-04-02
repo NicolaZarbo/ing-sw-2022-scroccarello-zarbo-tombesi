@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Turn {
-    public void moveInHall(Board board,int pos){//esistono già metodi di board per estrarre da entrance e per inserire in sala
+    public static void moveInHall(int idPlayer,int idStud, Game game){
+        Board board= game.getPlayer(idPlayer).getBoard();
+        Student stud = board.getStudent(idStud);
+        board.moveToDiningRoom(stud);
+       /* Board board=game.getPlayer(idPlayer).getBoard();
         Student [] temp=board.getEntrance();//questo metodo è diverso serve per spostare uno studente specifico presente in sala d'attesa
         Student[][] dining=board.getDiningRoom();
         if(temp[pos]!=null) {
@@ -16,20 +20,23 @@ public class Turn {
                 temp[pos]=null;
                 board.setEntrance(temp);
             }
-        }
+        }*/
     }
-
-
-    public void moveMotherNature(int num,Game game){
-        List<Island> tempis=game.getIslands();
-        MotherNature tempm=game.getMotherNature();
-        int j=tempis.size();
-        tempm.changePosition(Math.floorMod(tempm.getPosition()+num,j));
-        game.setMotherNature(tempm);
-
+    public static void moveToIsland(int idPlayer,int idStud, int idIsland, Game game){
+        Student stud = game.getPlayer(idPlayer).getBoard().getStudent(idStud);
+        Island island = game.getIsland(idIsland);
+        island.addStudent(stud);
+    }
+    //moves mother nature and checks island
+    public static void moveMotherNature(int steps,Game game){
+        List<Island> islands=game.getIslands();
+        MotherNature mother=game.getMotherNature();
+        int j=islands.size();
+        mother.changePosition(Math.floorMod(mother.getPosition()+steps,j));
     }
     //last action of the turn
-    public void moveFromCloudToEntrance(Game game,int pos,Board board){
+    public static void moveFromCloudToEntrance(Game game,int pos,int playerId){
+        Board board= game.getPlayer(playerId).getBoard();
         Cloud[] temp=game.getClouds();
         if(pos>=0 && pos<temp.length && temp[pos].getStud()[0]!=null){
             Student[] tempstud=temp[pos].getStud();
@@ -43,7 +50,7 @@ public class Turn {
         game.resetBonus();
     }
 
-    public boolean isUnifiable(Game game,int pos){
+    public static boolean isUnifiable(Game game,int pos){
         boolean b=false;
         List<Island> tempis=game.getIslands();
         Island central=tempis.get(pos);
@@ -56,7 +63,7 @@ public class Turn {
         return b;
     }
     //vedi se va gestita la posizione di madre natura
-    public void unify(Game game, int pos){
+    public static void unify(Game game, int pos){
         if(isUnifiable(game,pos)){
             List<Island> tempis=game.getIslands();
             int bigId=tempis.get(0).getID();
@@ -85,12 +92,25 @@ public class Turn {
         }
 
     }
-    public void putTowerFromBoardToIsland(Island island,Board board){
-        island.setTower(board.getTower());
+    private static void putTowerFromBoardToIsland(Island island,Player player){
+        if(player!= null){
+            Board board=player.getBoard();
+            island.setTower(board.getTower());
+        }
+    }
+    private static void changeTower(Island island , Player newOwner, Game game){
+        ArrayList<Tower> removedT= island.getTower();
+        island.getTower().clear();
+        Turn.putTowerFromBoardToIsland(island,newOwner);
+        for (Player player: game.getPlayers()) {
+            if(player.getColorT()==removedT.get(0).getColor()){
+                player.getBoard().addTower(removedT);
+            }
+        }
     }
 
     //controllo se una board ha il diritto ad avere il prof del colore scelto
-    public boolean isTeacher(TokenColor color,Game game,int playerId){
+    public static boolean isTeacher(TokenColor color,Game game,int playerId){
         Player[] players=game.getPlayers();
         boolean b=true;
         Player playercheck=game.getPlayer(playerId);
@@ -114,7 +134,7 @@ public class Turn {
             }
         return b;
     }
-    public void getTeacher(TokenColor color,Game game,int playerId){
+    public static void getTeacher(TokenColor color,Game game,int playerId){
         Player[] players=game.getPlayers();
         Player playercheck=game.getPlayer(playerId);
         if(isTeacher(color, game, playerId)){
@@ -134,12 +154,16 @@ public class Turn {
         }
     }
     //manca tutta la questione delle monete
-    public static void useCharacter(CharacterCard card, ArrayList<Integer> parameters, Game game){
+    /*
+    public static void useCharacter(int cardId, ArrayList<Integer> parameters, Game game){
         //  call to the right method with right parameters(int list) Arraylist used like a ParameterObject from omonimous pattern
+        CharacterCard card = game.getCharacter(cardId);
         card.cardEffect( parameters,  game );
         //controlli enoughCoin, isUsed e payCoin in controller(?)
     }
-    public int calculateInfluence(Game game,int playerId){
+
+     */
+    public static int calculateInfluence(Game game,int playerId){
         int influence=0;
         if(game.isBonusActive(8))  //card 8 effect
             influence=influence+2;
@@ -163,6 +187,24 @@ public class Turn {
              }
         }
         return influence;
+    }
+    //call checks for influence and changes or inserts a tower
+    public static void islandConquest(int islandId, Game game){
+        int influence, maxInf=0;
+        Island island=game.getIsland(islandId);
+        Player conqueror=null;
+        Player players[]= game.getPlayers();
+        for (Player player: players) {
+            influence=Turn.calculateInfluence(game,player.getId());
+            if(influence > maxInf){
+                maxInf=influence;
+                conqueror=player;
+            }
+        }
+        if(island.getTower().get(0).getColor()==conqueror.getColorT() || island.getTower().isEmpty())
+            Turn.putTowerFromBoardToIsland(island,conqueror);
+        else
+            Turn.changeTower(island, conqueror, game);
     }
 
 
