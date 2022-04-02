@@ -9,9 +9,9 @@ public class Round {
     private int[] orderForController;//l'ordine verrà ricostruito e rimandato al controller
     private int[] motherMovements; //movimento di madre natura dell'iesimo giocatore
 
-    public Round(int n,int numPlayer){
+    public Round(int n,int numPlayer, Player[] players){
         this.numRound=n;
-        this.players=new Player[numPlayer];
+        this.players=players;
         this.orderForController=new int[numPlayer];
         this.motherMovements=new int[numPlayer];
     }

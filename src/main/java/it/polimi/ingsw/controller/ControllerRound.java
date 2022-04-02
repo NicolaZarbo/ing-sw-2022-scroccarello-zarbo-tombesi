@@ -6,22 +6,25 @@ public class ControllerRound {
     private int[] actualOrder;
     private int[] playerWantsToPlay; //all'i-esimo giocatore corrisponderà l'ID della carta che vuole giocare
     private int[] motherMovements;
-    static Game game;
+    Game game;
 
-    public ControllerRound(int[]cards){
+    public ControllerRound(int[]cards, int numPlayers){
         this.playerWantsToPlay=cards;
+        this.actualOrder=new int[numPlayers];
+        this.motherMovements=new int[numPlayers];
     }
+
     public void controlPianification(Round currRound){
         currRound.setClouds(game.getClouds(),game.getBag());
-        for(int i=0;i<actualOrder.length-1;i++){
+        for(int i=0;i<actualOrder.length;i++){
             currRound.pianification(i,playerWantsToPlay[i]);
         }
         motherMovements=currRound.getMotherMovements();
         int []tmp=currRound.getOrderForController();
-        for(int i=0;i<tmp.length-1;i++){
+        for(int i=0;i<tmp.length;i++){
             int minTemp=tmp[i];
-            int k=0;
-            for(int j=i;j<tmp.length-1;j++) {
+            int k=i;
+            for(int j=i;j<tmp.length;j++) {
                 if(tmp[j]<minTemp){
                     minTemp=tmp[j];
                     k=j;
@@ -29,5 +32,9 @@ public class ControllerRound {
             }
             actualOrder[i]=k;
         }
+    }
+
+    public int[] getActualOrder() {
+        return actualOrder;
     }
 }
