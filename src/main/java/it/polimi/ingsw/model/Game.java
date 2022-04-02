@@ -126,6 +126,6 @@ public class Game {
     public List<Island> getIslandList() {return this.islands;}
 
     public Round nextRound(Round currRound){
-        return new Round(currRound.getNumRound()+1,this.nPlayers,this.players);
+        return new Round(currRound.getNumRound()+1,this.nPlayers,this.players,this);
     }
 }

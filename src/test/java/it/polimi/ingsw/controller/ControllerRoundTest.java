@@ -7,6 +7,7 @@ import static it.polimi.ingsw.model.TowerColor.*;
 
 public class ControllerRoundTest extends TestCase {
     int [] cardTest={9,9,1,4};
+    Game game=new Game(false,4,10);
     ControllerRound cTest=new ControllerRound(cardTest,4);
 
     public void testControllerCreation(){
@@ -37,8 +38,7 @@ public class ControllerRoundTest extends TestCase {
         Player p3=new Player(3,mage3,h3,b3,black);
         Player p4=new Player(4,mage4,h4,b4,white);
         Player [] testSet={p1,p2,p3,p4};
-        Round roundTest=new Round(1,4,testSet);
-        cTest.game=new Game(false,4,10);
+        Round roundTest=new Round(1,4,testSet,game);
         cTest.controlPianification(roundTest);
         System.out.print("the order is: ");
         for(int i=0;i<cTest.getActualOrder().length;i++)
