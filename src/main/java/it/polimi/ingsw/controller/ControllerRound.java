@@ -2,6 +2,8 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Round;
 
+import java.util.ArrayList;
+
 public class ControllerRound {
     private int[] actualOrder;
     private int[] playerWantsToPlay; //all'i-esimo giocatore corrisponderà l'ID della carta che vuole giocare
@@ -15,7 +17,11 @@ public class ControllerRound {
     }
 
     public void controlPianification(Round currRound){
-        currRound.setClouds(Main.clouds,Main.bag);
+        for(int i=0;i<Main.clouds.size();i++){
+            Main.clouds.set(i,currRound.setCloud(i));
+            Main.bag-=3;
+        }
+
         for(int i=0;i<actualOrder.length;i++){
             currRound.pianification(i,playerWantsToPlay[i]);
         }
