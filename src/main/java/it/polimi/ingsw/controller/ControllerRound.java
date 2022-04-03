@@ -2,31 +2,30 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Round;
 
-import java.util.ArrayList;
-
 public class ControllerRound {
     private int[] actualOrder;
     private int[] playerWantsToPlay; //all'i-esimo giocatore corrisponderà l'ID della carta che vuole giocare
     private int[] motherMovements;
+    private Game game;
 
-
-    public ControllerRound(int[]cards, int numPlayers){
+    public ControllerRound(int[]cards, int numPlayers, Game g){
         this.playerWantsToPlay=cards;
         this.actualOrder=new int[numPlayers];
         this.motherMovements=new int[numPlayers];
+        this.game=g;
     }
 
-    public void controlPianification(Round currRound){
+    public void controlPianification(){
         for(int i=0;i<Main.clouds.size();i++){
-            Main.clouds.set(i,currRound.setCloud(i));
+            Main.clouds.set(i,Round.setCloud(i,game));
             Main.bag-=3;
         }
-
+        int []tmp=new int[actualOrder.length];
         for(int i=0;i<actualOrder.length;i++){
-            currRound.pianification(i,playerWantsToPlay[i]);
+            motherMovements[i]=Round.MotherMovement(i,playerWantsToPlay[i],game);
+            tmp[i]= Round.CardPlayedValue(i, playerWantsToPlay[i],game);
         }
-        motherMovements=currRound.getMotherMovements();
-        int []tmp=currRound.getOrderForController();
+
         for(int i=0;i<tmp.length;i++){
             int minTemp=tmp[i];
             int k=i;

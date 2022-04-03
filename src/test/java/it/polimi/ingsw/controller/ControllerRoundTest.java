@@ -8,7 +8,7 @@ import static it.polimi.ingsw.model.token.TowerColor.*;
 public class ControllerRoundTest extends TestCase {
     int [] cardTest={9,9,1,4};
     Game game=new Game(false,4,10);
-    ControllerRound cTest=new ControllerRound(cardTest,4);
+    ControllerRound cTest=new ControllerRound(cardTest,4,game);
 
     public void testControllerCreation(){
         for(int i=0;i<this.cardTest.length;i++)
@@ -38,8 +38,7 @@ public class ControllerRoundTest extends TestCase {
         Player p3=new Player(3,mage3,h3,b3,black);
         Player p4=new Player(4,mage4,h4,b4,white);
         Player [] testSet={p1,p2,p3,p4};
-        Round roundTest=new Round(1,4,testSet,game);
-        cTest.controlPianification(roundTest);
+        cTest.controlPianification();
         System.out.print("the order is: ");
         for(int i=0;i<cTest.getActualOrder().length;i++)
             System.out.print("giocatore "+cTest.getActualOrder()[i]+" ");
