@@ -26,18 +26,17 @@ public class Round {
         motherMovements[numPlayer]=played.getMoveMother();
     }
 
-    public void setClouds(ArrayList<int[]> clouds,int numTokens){
-        for(int i=0;i< clouds.size();i++){
+    public int[] setCloud(int cloudNum){
             Student[] tmp=new Student[3];
-            for(int j=0;j<3;j++){
-                tmp[j]=game.getBag().getToken();
-                clouds.get(i)[j]=tmp[j].getId();
+            int[] studID=new int[3];
+            for(int i=0;i<3;i++){
+                tmp[i]=game.getBag().getToken();
+                studID[i]=tmp[i].getId();
             }
-            game.getClouds()[i].setStud(tmp);
-            numTokens-=3;
-        }
-
+            game.getClouds()[cloudNum].setStud(tmp);
+            return studID;
     }
+
     public int getNumRound(){return this.numRound;}
     public int[] getOrderForController(){return this.orderForController;}
     public int[] getMotherMovements(){return this.motherMovements;}
