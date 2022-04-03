@@ -1,6 +1,8 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.character;
 
-import java.util.ArrayList;
+import it.polimi.ingsw.model.Board;
+import it.polimi.ingsw.model.Game;
+
 import java.util.List;
 
 public class Character10 extends CharacterCard{

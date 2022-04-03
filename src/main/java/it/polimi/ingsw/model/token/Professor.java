@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.token;
 
 public class Professor extends Token {
     private final int id;

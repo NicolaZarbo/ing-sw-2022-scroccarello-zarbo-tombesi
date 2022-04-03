@@ -3,7 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.*;
 import junit.framework.TestCase;
 import static it.polimi.ingsw.model.Mage.*;
-import static it.polimi.ingsw.model.TowerColor.*;
+import static it.polimi.ingsw.model.token.TowerColor.*;
 
 public class ControllerRoundTest extends TestCase {
     int [] cardTest={9,9,1,4};

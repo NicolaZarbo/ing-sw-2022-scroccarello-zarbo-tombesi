@@ -1,6 +1,10 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.model.token.Professor;
+import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.token.TokenColor;
+import it.polimi.ingsw.model.token.TowerColor;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Setup {
@@ -29,7 +33,7 @@ public class Setup {
     public static Professor[] createProfessor(int nColors){
         Professor[] profs = new Professor[nColors];
         for (int i=0; i<nColors;i++){
-            profs[i]= new Professor(i,TokenColor.getColor(i));
+            profs[i]= new Professor(i, TokenColor.getColor(i));
         }
         return profs;
     }

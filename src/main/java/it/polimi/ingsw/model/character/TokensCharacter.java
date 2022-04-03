@@ -1,4 +1,6 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.character;
+import it.polimi.ingsw.model.token.Student;
+
 import java.util.ArrayList;
 public abstract class TokensCharacter extends CharacterCard{
 

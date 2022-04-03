@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
 
+import it.polimi.ingsw.model.token.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,7 +117,7 @@ public class Turn {
     }
 
     //controllo se una board ha il diritto ad avere il prof del colore scelto
-    public static boolean isTeacher(TokenColor color,Game game,int playerId){
+    public static boolean isTeacher(TokenColor color, Game game, int playerId){
         Player[] players=game.getPlayers();
         boolean b=true;
         Player playercheck=game.getPlayer(playerId);
@@ -180,7 +182,7 @@ public class Turn {
         Student stud;
         for(int i=0;i<students.size();i++){
             stud = students.get(i);
-            if(player.getBoard().hasProfessor(stud.getCol()) && !(stud.getCol()==game.getTargetColor() && game.isBonusActive(9)))//card 9 effect
+            if(player.getBoard().hasProfessor(stud.getColor()) && !(stud.getColor()==game.getTargetColor() && game.isBonusActive(9)))//card 9 effect
                 influence++;
 
         }//card 6 effect

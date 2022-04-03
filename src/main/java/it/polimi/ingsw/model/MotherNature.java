@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 
-public class MotherNature extends Token {
-    private final int id;
+public class MotherNature  {
+    private final int id;//mn alredy unique
     private int position;
 
     public MotherNature(int pos){

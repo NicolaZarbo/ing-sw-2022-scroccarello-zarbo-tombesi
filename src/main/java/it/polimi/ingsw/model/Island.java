@@ -1,7 +1,8 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.token.Tower;
+
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Island {
     private int ID;
@@ -48,24 +49,5 @@ public class Island {
         this.tower.addAll(t);
     }
 
-    /*
-    public void mergeIslands(Island island, List<Island> isl) {
-        this.islandSize++;
-        if(isl!=null) {
-            for (int i = 0; i < isl.size(); i++) {
-                if (isl.get(i).getID() == island.getID()) {
-                    isl.remove(i);
-                    break;
-                }
-            }
-        }
-        for (int i=0;i<island.students.size();i++){
-            this.students.add(island.students.get(i));
-        }
-        for (int i=0;i<island.tower.size();i++){
-            this.tower.add(island.tower.get(i));
-        }
-    }
 
-     */
 }

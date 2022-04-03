@@ -1,4 +1,7 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.character;
+
+import it.polimi.ingsw.model.Bag;
+import it.polimi.ingsw.model.token.Student;
 
 import java.util.ArrayList;
 
@@ -40,5 +43,6 @@ public class FactoryCharacter {
         }
 
         return card;
-    } */
-}
+        }*/
+    }
+

@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.token.TokenColor;
+
 import java.util.*;
 
 public class Bag {

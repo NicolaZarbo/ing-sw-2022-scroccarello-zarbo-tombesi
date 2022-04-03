@@ -5,24 +5,23 @@ import junit.framework.TestCase;
 public class GameTest extends TestCase {
     int n=2;
     int numeroIsole=12;
-Game testG = new Game(true, n, numeroIsole);
+Game game = new Game(true, n, numeroIsole);
     public void testGetIslands() {
-       assertNotNull(testG.getIslands());
-        for (Island island: testG.getIslands()) {
+       assertNotNull(game.getIslands());
+        for (Island island: game.getIslands()) {
             assertNotNull(island);
             System.out.println("island id "+island.getID());
         }
     }
-
     public void testIsEasy() {
-        System.out.println("is easy "+testG.isEasy());
+        System.out.println("is easy "+ game.isEasy());
 
     }
 
     public void testGetNPlayers() {
      //   assertNotNull("errore", testG.getNPlayers());
-        assertEquals("errore",n, testG.getNPlayers());
-        System.out.println(testG.getNPlayers());
+        assertEquals("errore",n, game.getNPlayers());
+        System.out.println(game.getNPlayers());
     }
 
     public void testGetMotherNature() {
@@ -30,19 +29,20 @@ Game testG = new Game(true, n, numeroIsole);
     }
 
     public void testSetMotherNature() {
+
     }
 
     public void testGetClouds() {
-        assertNotNull("clouds are null",testG.getClouds());
-        for (Cloud cloud : testG.getClouds()) {
+        assertNotNull("clouds are null", game.getClouds());
+        for (Cloud cloud : game.getClouds()) {
             assertNotNull("cloud is null",cloud);
             System.out.println(cloud.getId());
         }
 
     }
     public void testGetPlayers(){
-        assertNotNull("Players are null",testG.getPlayers());
-        for (Player player: testG.getPlayers()) {
+        assertNotNull("Players are null", game.getPlayers());
+        for (Player player: game.getPlayers()) {
             System.out.println();
             assertNotNull("a player is null",player);
             Board board=player.getBoard();
@@ -68,6 +68,12 @@ Game testG = new Game(true, n, numeroIsole);
         }
     }
     public void testSetClouds() {
+    }
+    public void testCreateTestAmbient(){
+     /*   Round round = new Round(0,2, game.getPlayers(), game);
+        for (Cloud cloud: game.getClouds()) {
+            round.setClouds();
+        }*/
     }
 
 

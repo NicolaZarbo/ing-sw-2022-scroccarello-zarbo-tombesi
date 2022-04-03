@@ -1,4 +1,8 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.character;
+
+import it.polimi.ingsw.model.Board;
+import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.token.Student;
 
 import java.util.ArrayList;
 import java.util.List;

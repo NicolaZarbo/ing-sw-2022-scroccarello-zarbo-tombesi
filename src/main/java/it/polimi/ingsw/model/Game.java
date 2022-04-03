@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
-import java.util.ArrayList;
+import it.polimi.ingsw.model.token.Professor;
+import it.polimi.ingsw.model.token.TokenColor;
+
 import java.util.List;
 
 public class Game {

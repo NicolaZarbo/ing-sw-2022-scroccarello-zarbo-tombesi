@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.token.*;
+
 import java.util.ArrayList;
 
 public class Board {
@@ -47,7 +49,7 @@ public class Board {
     public void moveToDiningRoom(Student stud ){
         boolean b=false;
         if(stud!= null) {
-            int i = stud.getCol().ordinal();
+            int i = stud.getColor().ordinal();
             for (int j = 0; j < diningRoom[i].length; j++) {
                 if (diningRoom[i][j] == null && !b){
                     diningRoom[i][j] = stud;

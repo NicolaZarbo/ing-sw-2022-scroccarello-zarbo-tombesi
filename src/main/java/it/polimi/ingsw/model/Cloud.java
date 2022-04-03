@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
-import java.util.LinkedList;
+import it.polimi.ingsw.model.token.Student;
+
 public class Cloud {
     private final int id;//per identificare la nuvola
     private Student[] stud;
