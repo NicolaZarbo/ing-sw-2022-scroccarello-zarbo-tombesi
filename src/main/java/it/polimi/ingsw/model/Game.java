@@ -34,9 +34,9 @@ public class Game {
     public Game(boolean easy, int nPlayer, int nIsole){
         this.easy=easy;
         this.nPlayers =nPlayer;
-        this.players =Setup.createPlayer(easy, nPlayer);//genera giocatori con le lore rispettive board e mani
-        this.clouds= Setup.createClouds(nPlayer);
         this.bag=new Bag(10,5);
+        this.players =Setup.createPlayer(easy, nPlayer, bag);//genera giocatori con le lore rispettive board e mani
+        this.clouds= Setup.createClouds(nPlayer);
         this.islands=Setup.createIslands(nIsole,bag);
         this.teachers= Setup.createProfessor(5);
         this.motherNature=new MotherNature(islands.get(0).getID());

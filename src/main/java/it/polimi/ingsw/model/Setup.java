@@ -1,8 +1,5 @@
 package it.polimi.ingsw.model;
-import it.polimi.ingsw.model.token.Professor;
-import it.polimi.ingsw.model.token.Student;
-import it.polimi.ingsw.model.token.TokenColor;
-import it.polimi.ingsw.model.token.TowerColor;
+import it.polimi.ingsw.model.token.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +19,6 @@ public class Setup {
         }
         return  islands;
     }
-    /*public static ArrayList<CharacterCard> createCharacterCards(Bag bag){
-        ArrayList<CharacterCard> cards = new ArrayList<>();
-        for (int i=1; i<=12; i++){
-            cards.add(  FactoryCharacter.createCharacter(i, bag)) ;
-        }
-        return cards;
-    } */
 
     public static Professor[] createProfessor(int nColors){
         Professor[] profs = new Professor[nColors];
@@ -37,14 +27,14 @@ public class Setup {
         }
         return profs;
     }
-    public static Player[] createPlayer(boolean easy , int nPlayer){
+    public static Player[] createPlayer(boolean easy , int nPlayer, Bag bag){
 
         Player players[] =new Player[nPlayer];
 
         for (int id=0; id<nPlayer;id++){
             Hand man= Setup.createHand(id, easy, 10);
             TowerColor towerColor = Setup.playerColor(id, nPlayer);
-            Board plan = Setup.createBoard(id, nPlayer, towerColor);
+            Board plan = Setup.createBoard(id, nPlayer, towerColor, bag);
             players[id]= new Player(id, Mage.getMage(id), man, plan, towerColor);
         }
         return players;
@@ -93,9 +83,8 @@ public class Setup {
         }
          return hand;
     }
-    private static Board createBoard(int playerId, int nPlayer, TowerColor towerColorolor){
+    private static Board createBoard(int playerId, int nPlayer, TowerColor towerColor, Bag bag){
         Board pla ;
-        TowerColor color;
         int nTower, dimEntry;
         if (nPlayer == 3){
             nTower=6;
@@ -108,7 +97,10 @@ public class Setup {
         if (nPlayer== 4 && playerId>1){
             nTower=0;
         }
-        pla=new Board(nTower,dimEntry,towerColorolor,playerId);
+        pla=new Board(nTower,dimEntry,towerColor,playerId);
+        for (int i = 0; i < 7; i++) {
+            pla.putStudentOnEntrance(bag.getToken());
+        }
         return pla;
     }
 

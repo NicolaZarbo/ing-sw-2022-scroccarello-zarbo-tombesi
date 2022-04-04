@@ -1,6 +1,9 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.token.Tower;
 import junit.framework.TestCase;
+
+import java.util.ArrayList;
 
 public class GameTest extends TestCase {
     int n=2;
@@ -52,16 +55,12 @@ Game game = new Game(true, n, numeroIsole);
             assertNotNull("missin coins", hand.getCoin());
             System.out.println("ncoin"+hand.getCoin());
 
-            int i=0;
+
             int j=0;
-            /* make board.tower momentarily public to test
-            for( Tower tower : board.){
-                assertNotNull(tower);
-                System.out.println(tower.getColor() + " "+ i);
-            i++;}*/
+
             for (AssistantCard ass: hand.getAssistant()) {
                 assertNotNull("carta ass"+ j+ "null",ass);
-                System.out.println(ass.getMage() + " "+ j);
+                System.out.println(ass.getMage() + " "+ ass.getId());
 
             j++;}
 

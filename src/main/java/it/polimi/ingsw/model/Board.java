@@ -7,10 +7,11 @@ import java.util.ArrayList;
 public class Board {
     private Student[][] diningRoom;
     private Professor[] table;
-    private Student[] entrance;
+    private ArrayList<Student> entrance;
     private ArrayList<Tower> towers;
     private boolean[][] coinDN;
     final int playerID;
+    final int entranceSize;
 
     //abbiamo bisogno di definire una NoSpots exception per i casi in cui entrance e diningRoom siano piene
     //per ora tampono con una generica RuntimeException()
@@ -21,12 +22,13 @@ public class Board {
         this.setCoinDN(nColors);
         this.towers = new ArrayList<Tower>(nTower);
         for (int i=0;i<nTower;i++) {
-            towers.add(new Tower(color,i));
+            towers.add(new Tower(color,i+playerID));
         }
         this.playerID=playerID;
         this.diningRoom = new Student[nColors][10];
-        this.entrance =new Student[dimEntrance];
+        this.entrance =new ArrayList<Student>(dimEntrance);
         this.table = new Professor[nColors];
+        this.entranceSize=dimEntrance;
     }
     private void setCoinDN(int nColors){
         for (int i=0;i<nColors;i++){
@@ -81,11 +83,11 @@ public class Board {
 
     public Student getStudentFromEntrance(int id){
         Student stud;
-        for (int i=0;i<entrance.length;i++) {
-            stud=entrance[i];
+        for (int i=0;i<entrance.size();i++) {
+            stud=entrance.get(i);
             if(stud != null)
                 if( stud.getId()==id){
-                    entrance[i]=null;
+                    entrance.remove(i);
                     return stud;
                 }
         }
@@ -107,13 +109,10 @@ public class Board {
 
     //piazza uno studente in ingresso
     public void putStudentOnEntrance(Student student)throws RuntimeException{
-        for(int i = 0; i< entrance.length; i++){
-                if(entrance[i]==null) {
-                    entrance[i] = student;
-                    return;
-                }
-            }
-        throw new RuntimeException();
+        if(entrance.size()<=entranceSize)
+            entrance.add(student);
+        else
+            throw new RuntimeException();
         }
 
 
@@ -126,11 +125,11 @@ public class Board {
         else return false;
     }
 
-    public Student[] getEntrance(){
+    public ArrayList<Student> getEntrance(){
         return this.entrance;
     }
-    public void setEntrance(Student[] stud){
-        this.entrance=stud;
+    public void setEntrance(ArrayList<Student> stud){
+        this.entrance= stud;
     }
     public Student[][] getDiningRoom(){
         return this.diningRoom;

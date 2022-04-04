@@ -37,17 +37,17 @@ public class Turn {
         mother.changePosition(Math.floorMod(mother.getPosition()+steps,j));
     }
     //last action of the turn
-    public static void moveFromCloudToEntrance(Game game,int pos,int playerId){
+    public static void moveFromCloudToEntrance(Game game,int cloudId,int playerId){
         Board board= game.getPlayer(playerId).getBoard();
-        Cloud[] temp=game.getClouds();
-        if(pos>=0 && pos<temp.length && temp[pos].getStud()[0]!=null){
-            Student[] tempstud=temp[pos].getStud();
-            for(int i=0;i<tempstud.length;i++) {
-                board.putStudentOnEntrance(tempstud[i]);
-                tempstud[i]=null;
+        Cloud[] clouds=game.getClouds();
+        if(cloudId>=0 && cloudId<clouds.length && clouds[cloudId].getStud()[0]!=null){
+            Student[] students=clouds[cloudId].getStud();
+            for(int i=0;i<students.length;i++) {
+                board.putStudentOnEntrance(students[i]);
+                students[i]=null;
             }
-            temp[pos].setStud(tempstud);
-            game.setClouds(temp);
+            clouds[cloudId].setStud(students);
+            //game.setClouds(clouds);
         }
         game.resetBonus();
     }
@@ -57,8 +57,9 @@ public class Turn {
         int size = game.getIslands().size();
         Island central=game.getIslands().get(pos);
         Island next=game.getIslands().get(Math.floorMod(pos+1,size));
-        if(central.getTower().get(0)!=null && next.getTower().get(0)!=null)
-            if(central.getTower().get(0).getColor()==next.getTower().get(0).getColor())
+
+        if( !central.getTowers().isEmpty() && !next.getTowers().isEmpty())
+            if(central.getTowers().get(0).getColor()==next.getTowers().get(0).getColor())
                 b=true;
         return b;
     }
@@ -67,8 +68,8 @@ public class Turn {
         int size = game.getIslands().size();
         Island central=game.getIslands().get(pos);
         Island before=game.getIslands().get(Math.floorMod(pos-1,size));
-        if(central.getTower().get(0)!=null && before.getTower().get(0)!=null)
-            if(central.getTower().get(0).getColor()==before.getTower().get(0).getColor())
+        if( !central.getTowers().isEmpty() && !before.getTowers().isEmpty())
+            if(central.getTowers().get(0).getColor()==before.getTowers().get(0).getColor())
                 b=true;
         return b;
     }
@@ -77,9 +78,9 @@ public class Turn {
         int islandNumber = game.getIslands().size();
         Island central = game.getIsland(pos);
         Island next = game.getIsland(Math.floorMod(pos + 1, islandNumber));
-        if (central.getTower().get(0).getColor() == next.getTower().get(0).getColor()) {
+        if (central.getTowers().get(0).getColor() == next.getTowers().get(0).getColor()) {
             central.addAllStudents(next.getStudents());
-            central.addAllTowers(next.getTower());
+            central.addAllTowers(next.getTowers());
             game.getIslands().remove(next);
             if (game.getMotherNature().getPosition() == pos + 1)
                 game.getMotherNature().changePosition(pos);
@@ -89,9 +90,9 @@ public class Turn {
         int islandNumber = game.getIslands().size();
         Island central = game.getIsland(pos);
         Island before = game.getIsland(Math.floorMod(pos - 1, islandNumber));
-        if (central.getTower().get(0).getColor() == before.getTower().get(0).getColor()) {
+        if (central.getTowers().get(0).getColor() == before.getTowers().get(0).getColor()) {
             central.addAllStudents(before.getStudents());
-            central.addAllTowers(before.getTower());
+            central.addAllTowers(before.getTowers());
             game.getIslands().remove(before);
             if (game.getMotherNature().getPosition() == pos - 1)
                 game.getMotherNature().changePosition(pos);
@@ -106,8 +107,8 @@ public class Turn {
         }
     }
     private static void changeTower(Island island , Player newOwner, Game game){
-        ArrayList<Tower> removedT= island.getTower();
-        island.getTower().clear();
+        ArrayList<Tower> removedT= island.getTowers();
+        island.getTowers().clear();
         Turn.putTowerFromBoardToIsland(island,newOwner);
         for (Player player: game.getPlayers()) {
             if(player.getColorT()==removedT.get(0).getColor()){
@@ -187,7 +188,7 @@ public class Turn {
 
         }//card 6 effect
         if(!game.isBonusActive(6)){
-            ArrayList<Tower> towers=where.getTower();
+            ArrayList<Tower> towers=where.getTowers();
             for(int j=0;j<towers.size();j++){
                 if(color.equals(towers.get(j).getColor()))
                     influence++;
@@ -200,7 +201,7 @@ public class Turn {
         int influence, maxInf=0;
         Island island=game.getIsland(islandId);
         Player conqueror=null;
-        Player players[]= game.getPlayers();
+        Player[] players = game.getPlayers();
         for (Player player: players) {
             influence=Turn.calculateInfluence(game,player.getId());
             if(influence > maxInf){
@@ -208,10 +209,12 @@ public class Turn {
                 conqueror=player;
             }
         }
-        if(island.getTower().get(0).getColor()==conqueror.getColorT() || island.getTower().isEmpty())
+
+        if( !island.getTowers().isEmpty() ){
+            if(island.getTowers().get(0).getColor() != conqueror.getColorT())
+               Turn.changeTower(island, conqueror, game);
+        } else
             Turn.putTowerFromBoardToIsland(island,conqueror);
-        else
-            Turn.changeTower(island, conqueror, game);
     }
 
 

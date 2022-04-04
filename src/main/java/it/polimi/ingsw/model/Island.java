@@ -20,8 +20,12 @@ public class Island {
         return this.ID;
     }
 
+    public int getIslandSize() {
+        return islandSize;
+    }
+
     //ritorna tutte le torri sull'isola attenzione ai null!(ovvero se viene chiamato e l'isola non ha torri)
-    public ArrayList<Tower> getTower() {
+    public ArrayList<Tower> getTowers() {
         return this.tower;
     }
 
