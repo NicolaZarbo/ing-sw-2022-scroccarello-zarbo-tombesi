@@ -82,10 +82,10 @@ public class Setup {
     //generazione mano da associare a player
     private static Hand createHand(int playerId, boolean easy, int nCards){
         ArrayList<AssistantCard> ass ;
-        int stIdCards= playerId * nCards ;
+        int stIdCards= playerId * nCards  ;
         ass = new ArrayList<AssistantCard>();
         for(int j=0;j<nCards; j++){
-            ass.add(new AssistantCard(stIdCards+j,j,j/2, Mage.getMage(playerId)));
+            ass.add(new AssistantCard(stIdCards+j,j+1,(j/2)+1, Mage.getMage(playerId)));
         }
         Hand hand =new Hand(ass);
         if (!easy) {
