@@ -22,10 +22,10 @@ public class Character7 extends TokensCharacter{
         if(size<=7 && size%2==1){
             board = game.getPlayer(parameters.get(0)).getBoard();
             for (int i =0; i<nstud;i++) {
-                fromBoard.add(board.getStudent(parameters.get(i+1)));
+                fromBoard.add(board.getStudentFromEntrance(parameters.get(i+1)));
             }
             for (int i =0; i<nstud;i++) {
-                board.putStudent(this.getStudent(parameters.get(i+1+nstud)));
+                board.putStudentOnEntrance(this.getStudent(parameters.get(i+1+nstud)));
             }
             addStudents(fromBoard);
         incrementCost();

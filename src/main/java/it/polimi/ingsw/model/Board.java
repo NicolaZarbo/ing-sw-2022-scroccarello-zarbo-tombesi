@@ -12,6 +12,9 @@ public class Board {
     private boolean[][] coinDN;
     final int playerID;
 
+    //abbiamo bisogno di definire una NoSpots exception per i casi in cui entrance e diningRoom siano piene
+    //per ora tampono con una generica RuntimeException()
+
     public Board(int nTower, int dimEntrance, TowerColor color, int playerID){
         int nColors = TokenColor.listGetLastIndex()+1;
         this.coinDN = new boolean[nColors][3];
@@ -41,12 +44,12 @@ public class Board {
     public boolean hasProfessor(TokenColor color){
         return getProfessor(color)!= null;
     }
-    public void putProfessore(Professor prof){
+    public void putProfessor(Professor prof){
        table[prof.getColor().ordinal()] = prof;
     }
 
     /** @param stud :sposta studente in dining room*/
-    public void moveToDiningRoom(Student stud ){
+    public void moveToDiningRoom(Student stud)throws RuntimeException{
         boolean b=false;
         if(stud!= null) {
             int i = stud.getColor().ordinal();
@@ -54,13 +57,13 @@ public class Board {
                 if (diningRoom[i][j] == null && !b){
                     diningRoom[i][j] = stud;
                     b=true;
-
+                    return;
                 }
-
             }
+        throw new RuntimeException();
         }
-        //gestire 'eccezione' riga piena e controllo moneta (oppure controllo isCoin chiamato in controller)  TODO
     }
+
     public Student getFromDiningRoom(int id){
         Student stud;
         for(int i=0; i<diningRoom.length;i++){
@@ -71,14 +74,12 @@ public class Board {
                         diningRoom[i][j]=null;
                         return stud;
                 }
-
             }
         }
         return null;
     }
 
-    //estrae studente da ingresso
-    public Student getStudent(int id){
+    public Student getStudentFromEntrance(int id){
         Student stud;
         for (int i=0;i<entrance.length;i++) {
             stud=entrance[i];
@@ -102,28 +103,20 @@ public class Board {
             towers.remove(towers.size()-1);
             return tower;
         }
-       // if(towers[towers.length-1]!=null)
-       /* for (int i=0; i< towers.size();i++) {
-            tower=towers.get(i);
-            if (tower != null) {
-                towers.remove(i);
-                return tower;
-            }
-        }*/
-
     }
 
     //piazza uno studente in ingresso
-    public void putStudent(Student student){
-        if(entrance[entrance.length-1]==null){
-            for(int i = 0; i< entrance.length; i++){
+    public void putStudentOnEntrance(Student student)throws RuntimeException{
+        for(int i = 0; i< entrance.length; i++){
                 if(entrance[i]==null) {
                     entrance[i] = student;
-                    break;
+                    return;
                 }
             }
+        throw new RuntimeException();
         }
-    }
+
+
 
     private boolean isCoin(int posDining, int indexColor){
         int pCoin=(posDining+1)/3;

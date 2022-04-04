@@ -9,7 +9,7 @@ import java.util.List;
 public class Turn {
     public static void moveInHall(int idPlayer,int idStud, Game game){
         Board board= game.getPlayer(idPlayer).getBoard();
-        Student stud = board.getStudent(idStud);
+        Student stud = board.getStudentFromEntrance(idStud);
         board.moveToDiningRoom(stud);
        /* Board board=game.getPlayer(idPlayer).getBoard();
         Student [] temp=board.getEntrance();//questo metodo è diverso serve per spostare uno studente specifico presente in sala d'attesa
@@ -25,7 +25,7 @@ public class Turn {
         }*/
     }
     public static void moveToIsland(int idPlayer,int idStud, int idIsland, Game game){
-        Student stud = game.getPlayer(idPlayer).getBoard().getStudent(idStud);
+        Student stud = game.getPlayer(idPlayer).getBoard().getStudentFromEntrance(idStud);
         Island island = game.getIsland(idIsland);
         island.addStudent(stud);
     }
@@ -43,7 +43,7 @@ public class Turn {
         if(pos>=0 && pos<temp.length && temp[pos].getStud()[0]!=null){
             Student[] tempstud=temp[pos].getStud();
             for(int i=0;i<tempstud.length;i++) {
-                board.putStudent(tempstud[i]);
+                board.putStudentOnEntrance(tempstud[i]);
                 tempstud[i]=null;
             }
             temp[pos].setStud(tempstud);
@@ -147,12 +147,12 @@ public class Turn {
         if(isTeacher(color, game, playerId)){
                 if(game.isProfessorOnGame(color)){
                 Professor temp=game.getFromGame(color);
-                game.getPlayer(playerId).getBoard().putProfessore(temp);
+                game.getPlayer(playerId).getBoard().putProfessor(temp);
             }else{
                 for(int i=0;i<players.length;i++)
                     if(players[i]!=playercheck && players[i].getBoard().getProfessor(color)!=null){
                         Professor temp=players[i].getBoard().getProfessor(color);
-                        game.getPlayer(playerId).getBoard().putProfessore(temp);
+                        game.getPlayer(playerId).getBoard().putProfessor(temp);
                         int playerTemp=players[i].getId();
                         game.getPlayer(playerTemp).getBoard().removeProfessor(color);
                     }
