@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.model.character.*;
 import it.polimi.ingsw.model.token.*;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class Setup {
         ArrayList<Student> students = bag.setupStudents(nIsole);
         for(int i=0;i<nIsole;i++){
             isl =  new Island(i);
-            if(i!=0 && i!=(nIsole-1/2)){
+            if(i!=0 && i!=(nIsole-1)/2){
                 isl.addStudent(students.get(i));
                 isl.addStudent(students.get(i));
             }
@@ -19,7 +20,16 @@ public class Setup {
         }
         return  islands;
     }
-
+    public static ArrayList<CharacterCard> createCharacterCards(Bag bag,int cardNumber){
+            ArrayList<CharacterCard> cards = new ArrayList<>(cardNumber);
+            CharacterCard cardChar;
+            for (int i=1; i<=12; i++){
+                    cardChar=FactoryCharacter.createCharacter(i, bag);
+                if(cardChar!=null)
+                    cards.add( cardChar ) ;
+            }
+            return cards;
+        }
     public static Professor[] createProfessor(int nColors){
         Professor[] profs = new Professor[nColors];
         for (int i=0; i<nColors;i++){
@@ -29,7 +39,7 @@ public class Setup {
     }
     public static Player[] createPlayer(boolean easy , int nPlayer, Bag bag){
 
-        Player players[] =new Player[nPlayer];
+        Player[] players =new Player[nPlayer];
 
         for (int id=0; id<nPlayer;id++){
             Hand man= Setup.createHand(id, easy, 10);

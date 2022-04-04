@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.token.*;
 
 import java.util.ArrayList;
@@ -161,16 +162,15 @@ public class Turn {
 
         }
     }
-    //manca tutta la questione delle monete
-    /*
+
     public static void useCharacter(int cardId, ArrayList<Integer> parameters, Game game){
         //  call to the right method with right parameters(int list) Arraylist used like a ParameterObject from omonimous pattern
         CharacterCard card = game.getCharacter(cardId);
         card.cardEffect( parameters,  game );
-        //controlli enoughCoin, isUsed e payCoin in controller(?)
+        //controls for enoughCoin, isUsed in controller, or here with an exception
     }
 
-     */
+
     public static int calculateInfluence(Game game,int playerId){
         int influence=0;
         if(game.isBonusActive(8))  //card 8 effect

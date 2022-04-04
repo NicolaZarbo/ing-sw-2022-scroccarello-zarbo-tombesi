@@ -12,8 +12,7 @@ public class FactoryCharacter {
             drawn.add(bag.getToken()) ;
         return drawn;
     }
-    //I still need to implement most of it, ecxept cards 1,7,11 and 5, the implementetion of the others will be strightfoward TODO
-   /* public static CharacterCard createCharacter(int id, Bag bag)
+    public static CharacterCard createCharacter(int id, Bag bag)
     {
         CharacterCard card=null;
         if(id==1){
@@ -21,12 +20,9 @@ public class FactoryCharacter {
             c.addStudents(drowStudents(4, bag));
             card=c;
         }
-        if(id==2||id==4||id==6||id==8)
+        if(id==2||id==6||id==8)
             card= new TurnEffectCharacter(id);
-        if(id==3)
-            card= new Character3(id);
-        if(id==5)
-            card=new Character5(id);
+
         if(id == 7){
             TokensCharacter c= new Character7(id);
             c.addStudents( drowStudents(6,bag));
@@ -43,6 +39,6 @@ public class FactoryCharacter {
         }
 
         return card;
-        }*/
+        }
     }
 

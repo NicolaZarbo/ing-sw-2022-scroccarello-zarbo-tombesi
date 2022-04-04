@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.character.*;
 import it.polimi.ingsw.model.token.Professor;
 import it.polimi.ingsw.model.token.TokenColor;
-
 import java.util.List;
 
 public class Game {
@@ -15,7 +15,7 @@ public class Game {
     private MotherNature motherNature;
     private final Bag bag;
     private Professor[] teachers;
-   // private final List<CharacterCard> characters;
+    private final List<CharacterCard> characters;
     private int cardBonusActive;
     private TokenColor targetColor;
 
@@ -25,11 +25,13 @@ public class Game {
         return teachers;
     }
 
-   /* public CharacterCard getCharacters(int id) {
-        if(characters.get(id)!= null)
-            return characters.get(id-1);
-        return null;
-    } */
+    public CharacterCard getCharacter(int id) {
+        for (CharacterCard card: this.characters) {
+            if(card.getId()==id)
+                return card;
+        }
+        return null; //input Exception(?)
+    }
 
     public Game(boolean easy, int nPlayer, int nIsole){
         this.easy=easy;
@@ -41,8 +43,9 @@ public class Game {
         this.teachers= Setup.createProfessor(5);
         this.motherNature=new MotherNature(islands.get(0).getID());
         if(!easy){
-       // this.characters= Setup.createCharacterCards(bag);
+        this.characters= Setup.createCharacterCards(bag,9);
         }
+        else{characters=null;}
         this.cardBonusActive=0;
     }
 
