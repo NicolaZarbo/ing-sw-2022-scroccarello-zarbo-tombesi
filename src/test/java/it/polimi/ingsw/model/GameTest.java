@@ -49,8 +49,8 @@ Game game = new Game(true, n, numeroIsole);
             Hand hand = player.getHand();
             assertNotNull(board);
             assertNotNull("mano null", hand);
-            assertNotNull("missin coins", hand.coin);
-            System.out.println("ncoin"+hand.coin);
+            assertNotNull("missin coins", hand.getCoin());
+            System.out.println("ncoin"+hand.getCoin());
 
             int i=0;
             int j=0;
@@ -59,7 +59,7 @@ Game game = new Game(true, n, numeroIsole);
                 assertNotNull(tower);
                 System.out.println(tower.getColor() + " "+ i);
             i++;}*/
-            for (AssistantCard ass: hand.assistant) {
+            for (AssistantCard ass: hand.getAssistant()) {
                 assertNotNull("carta ass"+ j+ "null",ass);
                 System.out.println(ass.getMage() + " "+ j);
 

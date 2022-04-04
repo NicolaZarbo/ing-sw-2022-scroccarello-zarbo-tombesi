@@ -1,17 +1,30 @@
 package it.polimi.ingsw.model;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Hand {
-    int coin;
-    AssistantCard[] assistant;
-    LinkedList<AssistantCard> discarded;
+    private int coin;
+    private ArrayList<AssistantCard> assistant;
+    private LinkedList<AssistantCard> discarded;
 
-    public Hand(AssistantCard[] assistentiIniz){
+    public Hand(ArrayList<AssistantCard> assistentiIniz){
         coin =0;
-        assistant =new AssistantCard[assistentiIniz.length];
+        assistant =new ArrayList<>();
         discarded=new LinkedList<>();
-        for(int i=0;i<assistentiIniz.length;i++)
-            assistant[i]=assistentiIniz[i];
+        for(int i=0;i<assistentiIniz.size();i++)
+            assistant.add(assistentiIniz.get(i));
+    }
+
+    public LinkedList<AssistantCard> getDiscarded() {
+        return discarded;
+    }
+
+    public ArrayList<AssistantCard> getAssistant() {
+        return assistant;
+    }
+
+    public int getCoin() {
+        return coin;
     }
 
     public void addCoin(){
@@ -26,11 +39,11 @@ public class Hand {
 
     public AssistantCard playAssistant(int n){
         AssistantCard played=null;
-        for(int i=0;i<assistant.length;i++){
-            if(i==n && assistant[i]!=null) {
-                played=assistant[i];
-                discarded.add(assistant[i]);
-                assistant[i] = null;
+        for(int i=0;i<assistant.size();i++){
+            if(i==n && assistant.get(i)!=null) {
+                played=assistant.get(i);
+                discarded.add(assistant.get(i));
+                assistant.remove(i) ;
             }
         }
         return played;
