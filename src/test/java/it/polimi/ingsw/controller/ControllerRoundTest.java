@@ -2,6 +2,9 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.*;
 import junit.framework.TestCase;
+
+import java.util.ArrayList;
+
 import static it.polimi.ingsw.model.Mage.*;
 import static it.polimi.ingsw.model.token.TowerColor.*;
 
@@ -15,15 +18,15 @@ public class ControllerRoundTest extends TestCase {
             System.out.println("player "+(i+1)+" wants to play card num "+this.cardTest[i]);
     }
     public void testPianification(){
-        AssistantCard[] a1=new AssistantCard[10];
-        AssistantCard[] a2=new AssistantCard[10];
-        AssistantCard[] a3=new AssistantCard[10];
-        AssistantCard[] a4=new AssistantCard[10];
-        for(int i=0;i<a1.length;i++){
-            a1[i]=new AssistantCard(i,i,i,mage1);
-            a2[i]=new AssistantCard(i,2*i,2*i,mage2);
-            a3[i]=new AssistantCard(i,3*i,3*i,mage3);
-            a4[i]=new AssistantCard(i,4*i,4*i,mage4);
+        ArrayList<AssistantCard> a1=new ArrayList<AssistantCard>();
+        ArrayList<AssistantCard> a2=new ArrayList<AssistantCard>();
+        ArrayList<AssistantCard> a3=new ArrayList<AssistantCard>();
+        ArrayList<AssistantCard> a4=new ArrayList<AssistantCard>();
+        for(int i=0;i<10;i++){
+            a1.add(i,new AssistantCard(i,i,i,mage1));
+            a2.add(i, new AssistantCard(i,2*i,2*i,mage2));
+            a3.add(i,new AssistantCard(i,3*i,3*i,mage3));
+            a4.add(i,new AssistantCard(i,4*i,4*i,mage4));
         }
         Hand h1=new Hand(a1);
         Hand h2=new Hand(a2);

@@ -17,7 +17,7 @@ public class ControllerRound {
 
     public void controlPianification(){
         for(int i=0;i<Main.clouds.size();i++){
-            Main.clouds.set(i,Round.setCloud(i,game));
+            Main.clouds.set(i,Round.SetCloud(i,game));
             Main.bag-=3;
         }
         int []tmp=new int[actualOrder.length];
