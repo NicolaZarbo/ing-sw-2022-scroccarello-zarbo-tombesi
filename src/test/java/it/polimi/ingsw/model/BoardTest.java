@@ -3,6 +3,8 @@ package it.polimi.ingsw.model;
 import junit.framework.TestCase;
 import it.polimi.ingsw.model.token.*;
 
+import java.util.ArrayList;
+
 public class BoardTest extends TestCase {
 
     Board boardTest=new Board(4,4,TowerColor.black,1);
@@ -17,14 +19,14 @@ public class BoardTest extends TestCase {
             System.out.println("i just removed him");
     }
     public void testEntranceSetting(){
-        Student stud[]=new Student[4];
+        ArrayList<Student> stud=new ArrayList<Student>(4);
         for(int i=0;i<4;i++){
-            stud[i]=new Student(i,TokenColor.getColor(i));
+            stud.add(new Student(i,TokenColor.getColor(i)));
         }
         boardTest.setEntrance(stud);
         System.out.print("the entrance has the following students: ");
         for(int i=0;i<4;i++){
-            System.out.print(boardTest.getEntrance()[i].getId()+" "+boardTest.getEntrance()[i].getColor()+" ");
+            System.out.print(boardTest.getEntrance().get(i).getId()+" "+boardTest.getEntrance().get(i).getColor()+" ");
         }
     }
     public void testDiningRoomSetting(){
@@ -53,11 +55,11 @@ public class BoardTest extends TestCase {
 
     }
     public void testInsertionOnEntrance(){
-        Student[] studInit=new Student[4];
+        ArrayList<Student> studInit=new ArrayList<Student>(4);
         System.out.println("initial students on entrance are:");
         for(int i=0;i<4;i++){
             if(i%2==0){
-                studInit[i]=new Student(i,TokenColor.getColor(i));
+                studInit.add(new Student(i,TokenColor.getColor(i)));
                 System.out.print(i+"  ");
             }
             else System.out.print("none  ");
@@ -69,8 +71,8 @@ public class BoardTest extends TestCase {
             boardTest.putStudentOnEntrance(studTest);
             System.out.println("inserted student "+studTest.getId()+" and now we have:");
             for(int i=0;i<4;i++){
-                if(boardTest.getEntrance()[i]!=null)
-                    System.out.print(boardTest.getEntrance()[i].getId()+"  ");
+                if(boardTest.getEntrance().get(i)!=null)
+                    System.out.print(boardTest.getEntrance().get(i).getId()+"  ");
                 else
                     System.out.print("none  ");
             }
