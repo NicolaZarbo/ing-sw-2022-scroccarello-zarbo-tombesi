@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.token.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Board {
     private Student[][] diningRoom;
@@ -73,7 +74,7 @@ public class Board {
                         stud=diningRoom[i][j];
                         diningRoom[i][j]=null;
                         return stud;
-                }
+                    }
             }
         }
         throw new NoTokenFoundException();
@@ -114,14 +115,14 @@ public class Board {
             throw new NoPlaceAvailableException();
         }
 
-
-    //TODO gestire la chiamata
-    private boolean isCoin(int posDining, int indexColor){
-        int pCoin=(posDining+1)/3;
-        if (coinDN[indexColor][pCoin]  && posDining+1%3==0 ){
-           return true;
+    public boolean foundCoin(Student stud) {
+        int colorIndex=stud.getColor().ordinal();
+        int pos = Arrays.asList(diningRoom[colorIndex]).indexOf(stud);
+        int pCoin=(pos+1)/3;
+        if (coinDN[stud.getColor().ordinal()][pCoin] && pos+1%3 == 0) {
+            return true;
         }
-        else return false;
+        return false;
     }
 
     public ArrayList<Student> getEntrance(){

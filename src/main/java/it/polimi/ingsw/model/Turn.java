@@ -9,11 +9,14 @@ import java.util.List;
 
 public class Turn {
     public static void moveInHall(int idPlayer,int idStud, Game game){
-        Board board= game.getPlayer(idPlayer).getBoard();
+        Player player=game.getPlayer(idPlayer);
+        Board board= player.getBoard();
         Student stud = board.getStudentFromEntrance(idStud);
         board.moveToDiningRoom(stud);
-
+        if(board.foundCoin(stud))
+            player.getHand().addCoin();
     }
+
     public static void moveToIsland(int idPlayer,int idStud, int idIsland, Game game){
         Student stud = game.getPlayer(idPlayer).getBoard().getStudentFromEntrance(idStud);
         Island island = game.getIsland(idIsland);
@@ -91,7 +94,7 @@ public class Turn {
             }
 
     }
-
+    //if it is a team game, insert the mainplayer id in idPlayer
     private static void putTowerFromBoardToIsland(Island island,Player player){
         if(player!= null){
             Board board=player.getBoard();
