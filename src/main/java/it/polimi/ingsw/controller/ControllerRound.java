@@ -8,11 +8,15 @@ public class ControllerRound {
     private int[] motherMovements;
     private Game game;
 
-    public ControllerRound(int[]cards, int numPlayers, Game g){
+    public ControllerRound(int[]cards, int numPlayers){
         this.playerWantsToPlay=cards;
         this.actualOrder=new int[numPlayers];
         this.motherMovements=new int[numPlayers];
-        this.game=g;
+    }
+
+    public void createGame(boolean easy, int nPlayer, int nIsole){
+        game=new Game(easy, nPlayer, nIsole);
+
     }
 
     public void controlPianification(){
