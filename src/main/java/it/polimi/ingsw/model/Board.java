@@ -13,9 +13,6 @@ public class Board {
     final int playerID;
     final int entranceSize;
 
-    //abbiamo bisogno di definire una NoSpots exception per i casi in cui entrance e diningRoom siano piene
-    //per ora tampono con una generica RuntimeException()
-
     public Board(int nTower, int dimEntrance, TowerColor color, int playerID){
         int nColors = TokenColor.listGetLastIndex()+1;
         this.coinDN = new boolean[nColors][3];
@@ -30,6 +27,7 @@ public class Board {
         this.table = new Professor[nColors];
         this.entranceSize=dimEntrance;
     }
+
     private void setCoinDN(int nColors){
         for (int i=0;i<nColors;i++){
             for (int j=0;j<3;j++) {
@@ -51,7 +49,7 @@ public class Board {
     }
 
     /** @param stud :sposta studente in dining room*/
-    public void moveToDiningRoom(Student stud)throws RuntimeException{
+    public void moveToDiningRoom(Student stud)throws NoPlaceAvailableException{
         boolean b=false;
         if(stud!= null) {
             int i = stud.getColor().ordinal();
@@ -62,11 +60,11 @@ public class Board {
                     return;
                 }
             }
-        throw new RuntimeException();
+        throw new NoPlaceAvailableException();
         }
     }
 
-    public Student getFromDiningRoom(int id){
+    public Student getFromDiningRoom(int id)throws NoTokenFoundException{
         Student stud;
         for(int i=0; i<diningRoom.length;i++){
             for (int j=0; j<diningRoom[0].length;j++){
@@ -78,10 +76,10 @@ public class Board {
                 }
             }
         }
-        return null;
+        throw new NoTokenFoundException();
     }
 
-    public Student getStudentFromEntrance(int id){
+    public Student getStudentFromEntrance(int id)throws NoTokenFoundException{
         Student stud;
         for (int i=0;i<entrance.size();i++) {
             stud=entrance.get(i);
@@ -91,32 +89,33 @@ public class Board {
                     return stud;
                 }
         }
-        return null; // <---- null se non presente
+        throw new NoTokenFoundException();
     }
+
     public void addTower(ArrayList<Tower> towers){
         this.towers.addAll(towers);
     }
+
     public Tower getTower(){
         Tower tower;
             tower = towers.get(towers.size()-1);
             towers.remove(towers.size()-1);
             if(towers.isEmpty())
-            {//victory exception
+            {//victory found
             }
             return tower;
 
     }
 
-    //piazza uno studente in ingresso
-    public void putStudentOnEntrance(Student student)throws RuntimeException{
+    public void putStudentOnEntrance(Student student)throws NoPlaceAvailableException{
         if(entrance.size()<=entranceSize)
             entrance.add(student);
         else
-            throw new RuntimeException();
+            throw new NoPlaceAvailableException();
         }
 
 
-
+    //TODO gestire la chiamata
     private boolean isCoin(int posDining, int indexColor){
         int pCoin=(posDining+1)/3;
         if (coinDN[indexColor][pCoin]  && posDining+1%3==0 ){

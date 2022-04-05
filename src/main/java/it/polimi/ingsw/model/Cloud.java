@@ -2,16 +2,14 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.token.Student;
 
 public class Cloud {
-    private final int id;//per identificare la nuvola
+    private final int id;
     private Student[] stud;
 
-    public Cloud(Student[] arr, int id){
-        this.stud=new Student[arr.length];
-        for(int i=0;i<arr.length;i++)
-            stud[i]=arr[i];
-        // System.arraycopy(arr, 0, stud, 0, arr.length); metodo più compatto e alternativo
+    public Cloud(Student[] students, int id){
+        this.stud=new Student[students.length];
+        for(int i=0;i<students.length;i++)
+            stud[i]=students[i];
         this.id=id;
-
     }
 
 
@@ -23,26 +21,24 @@ public class Cloud {
         stud=newStudents;
     }
 
-    public void putStudent(Student stunew){
-        if(stud[stud.length-1]==null){
-            boolean put=false;
-            for(int i=0;i<stud.length;i++)
-                if(!put && stud[i]==null) {
-                    stud[i] = stunew;
-                    put=true;
-                }
+    public void putStudent(Student stunew)throws NoPlaceAvailableException,NullPointerException{
+        if(stunew==null) throw new NullPointerException();
 
+        else{
+            for(int i=0;i<stud.length;i++)
+                if(stud[i]==null) {
+                    stud[i] = stunew;
+                    return;
+                }
+            throw new NoPlaceAvailableException();
         }
     }
-    public boolean isStud(){
-        boolean b=false;
-        if(stud[0]!=null)
-            b=true;
-        return b;
 
+    public boolean hasStud(){
+        if(stud[0]!=null) return true;
+        else return false;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() {return id;}
+
 }
