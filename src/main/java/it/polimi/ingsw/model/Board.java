@@ -98,13 +98,13 @@ public class Board {
     }
     public Tower getTower(){
         Tower tower;
-        if(towers.isEmpty())
-            return null;
-        else {
             tower = towers.get(towers.size()-1);
             towers.remove(towers.size()-1);
+            if(towers.isEmpty())
+            {//victory exception
+            }
             return tower;
-        }
+
     }
 
     //piazza uno studente in ingresso

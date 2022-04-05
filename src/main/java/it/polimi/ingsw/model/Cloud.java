@@ -14,6 +14,7 @@ public class Cloud {
 
     }
 
+
     public Student[] getStud() {
         return stud;
     }

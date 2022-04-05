@@ -1,14 +1,20 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.token.Tower;
+import it.polimi.ingsw.model.token.TowerColor;
 import junit.framework.TestCase;
+
+import java.util.ArrayList;
 
 public class TurnTest extends TestCase {
     Game game = new Game(true,2,12);
-
+    ArrayList<Tower> torriUguali= new ArrayList<>();
     @Override
     public void setUp() throws Exception {
         super.setUp();
+        torriUguali.add(new Tower(TowerColor.black,1));
+        torriUguali.add(new Tower(TowerColor.black,10));
 
     }
 
@@ -44,15 +50,33 @@ public class TurnTest extends TestCase {
     }
 
     public void testIsUnifiableNext() {
+
+        game.getIsland(1).setTower(new Tower(TowerColor.black,1));
+        game.getIsland(2).setTower(new Tower(TowerColor.black,3));
+        assertTrue(Turn.isUnifiableNext(game,1));
     }
 
     public void testIsUnifiableBefore() {
+
     }
 
     public void testUnifyNext() {
+        game.getIsland(1).setTower(new Tower(TowerColor.black,1));
+        game.getIsland(2).setTower(new Tower(TowerColor.black,3));
+        if(Turn.isUnifiableNext(game,1))
+            Turn.unifyNext(game,1);
+        assertTrue(game.getIsland(2)==null);
+        assertTrue("size isl: "+game.getIsland(1).getIslandSize(),game.getIsland(1).getIslandSize()==2);
     }
 
     public void testUnifyBefore() {
+        game.getIsland(1).setTower(new Tower(TowerColor.black,1));
+        game.getIsland(0).setTower(new Tower(TowerColor.black,3));
+        if(Turn.isUnifiableBefore(game,1))
+            Turn.unifyBefore(game,1);
+        assertNotNull(game.getIsland(1));
+        assertTrue(game.getIsland(0)==null);
+        assertTrue("size isl: "+game.getIsland(1).getIslandSize(),game.getIsland(1).getIslandSize()==2);
     }
 
     public void testIsTeacher() {
@@ -62,6 +86,11 @@ public class TurnTest extends TestCase {
     }
 
     public void testCalculateInfluence() {
+        game.getIsland(0).setTower(new Tower(TowerColor.getColor(1),1));
+        game.getIsland(0).setTower(new Tower(TowerColor.getColor(1),1));
+
+        int influnce = Turn.calculateInfluence(game,1);
+        System.out.println(influnce);
     }
 
     public void testIslandConquest() {

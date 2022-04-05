@@ -12,18 +12,7 @@ public class Turn {
         Board board= game.getPlayer(idPlayer).getBoard();
         Student stud = board.getStudentFromEntrance(idStud);
         board.moveToDiningRoom(stud);
-       /* Board board=game.getPlayer(idPlayer).getBoard();
-        Student [] temp=board.getEntrance();//questo metodo è diverso serve per spostare uno studente specifico presente in sala d'attesa
-        Student[][] dining=board.getDiningRoom();
-        if(temp[pos]!=null) {
-            Student stud = temp[pos];
-            int i=stud.getCol().ordinal();
-            if(dining[i][dining[i].length-1]!=null) {
-                board.moveToDiningRoom(stud);
-                temp[pos]=null;
-                board.setEntrance(temp);
-            }
-        }*/
+
     }
     public static void moveToIsland(int idPlayer,int idStud, int idIsland, Game game){
         Student stud = game.getPlayer(idPlayer).getBoard().getStudentFromEntrance(idStud);
@@ -83,6 +72,7 @@ public class Turn {
             central.addAllStudents(next.getStudents());
             central.addAllTowers(next.getTowers());
             game.getIslands().remove(next);
+            central.incrementIslandSize();
             if (game.getMotherNature().getPosition() == pos + 1)
                 game.getMotherNature().changePosition(pos);
             }
@@ -95,6 +85,7 @@ public class Turn {
             central.addAllStudents(before.getStudents());
             central.addAllTowers(before.getTowers());
             game.getIslands().remove(before);
+            central.incrementIslandSize();
             if (game.getMotherNature().getPosition() == pos - 1)
                 game.getMotherNature().changePosition(pos);
             }
@@ -119,7 +110,7 @@ public class Turn {
     }
 
     //controllo se una board ha il diritto ad avere il prof del colore scelto
-    public static boolean isTeacher(TokenColor color, Game game, int playerId){
+    public static boolean canHaveTeacher(TokenColor color, Game game, int playerId){
         Player[] players=game.getPlayers();
         boolean b=true;
         Player playercheck=game.getPlayer(playerId);
@@ -146,7 +137,7 @@ public class Turn {
     public static void getTeacher(TokenColor color,Game game,int playerId){
         Player[] players=game.getPlayers();
         Player playercheck=game.getPlayer(playerId);
-        if(isTeacher(color, game, playerId)){
+        if(canHaveTeacher(color, game, playerId)){
                 if(game.isProfessorOnGame(color)){
                 Professor temp=game.getFromGame(color);
                 game.getPlayer(playerId).getBoard().putProfessor(temp);

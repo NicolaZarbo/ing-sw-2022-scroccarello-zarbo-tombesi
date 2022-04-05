@@ -14,10 +14,15 @@ public class Island {
         this.ID = id;
         this.students = new ArrayList<Student>();
         this.tower = new ArrayList<Tower>();
+        this.islandSize=1;
     }
 
     public int getID() {
         return this.ID;
+    }
+
+    public void incrementIslandSize() {
+        this.islandSize ++;
     }
 
     public int getIslandSize() {

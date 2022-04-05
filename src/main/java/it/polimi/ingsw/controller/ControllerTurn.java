@@ -19,7 +19,7 @@ public class ControllerTurn {
     public void moveStudentToIsland(int idStudent, int idIsland){
         Turn.moveToIsland(this.idPlayerNow,idStudent,idIsland,this.game);
     }
-
+    //tutta questa logica andrà alla fine di move mother nel model
     public int moveMotherNature(int steps){
         Turn.moveMotherNature(steps, game);
         int position=game.getMotherNature().getPosition();
