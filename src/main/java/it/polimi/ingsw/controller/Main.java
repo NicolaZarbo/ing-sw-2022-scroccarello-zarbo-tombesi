@@ -47,10 +47,22 @@ public class Main {
         //mettere studente su ogni isola (ricorda nel bag all'inizio sono solo 10 pedine,2 per ogni colore
         // opposta all'isola di madre natura c'è un'isola senza studente)
         int firstRoundPlayer=rand.nextInt(numPlayers);
+        int[] cardTemp=new int[numPlayers];
+        int[] ordturn=new int[numPlayers];
         while(!someoneWon()){
-            if(bag>=6){
+            for(int k=0;i<numPlayers;i++){
+                System.out.println("which assistant card does player "+k+1+"wants to play?");
+                int j=sc.nextInt();
+                if(!assistantsplayed[k][j])
+                    cardTemp[k]=j;
+                else
+                   k--;
 
             }
+            ControllerRound round=new ControllerRound(cardTemp,numPlayers);
+            round.controlPianification();
+            ordturn=round.getActualOrder();
+
             //pesca 3 students dal bag
             //ogni giocatore sceglie un'assistente da giocare, si procede in ordine orario
             //fase azione di ogni giocatore
