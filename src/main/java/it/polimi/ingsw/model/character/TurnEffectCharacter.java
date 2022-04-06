@@ -11,7 +11,8 @@ public class TurnEffectCharacter extends CharacterCard {
     }
 
     @Override
-    public void cardEffect(List<Integer> parameters, Game game) {
+    public void cardEffect(ParameterObject parameters, Game game) {
         game.setCardBonusActive(this.getId());
+        this.incrementCost();
     }
 }

@@ -16,18 +16,14 @@ public class Character1 extends TokensCharacter{
 
     @Override
     /** @param parameters : idStudent from card, id target island*/
-    public void cardEffect(List<Integer> parameters, Game game) {
+    public void cardEffect(ParameterObject parameters, Game game) throws NullPointerException{
         Student stud;
         Island island;
-        if (parameters.size()==2 ){
-            stud = getStudent(parameters.get(0));
-            island = game.getIsland(parameters.get(1));
-            if (stud == null || island == null){}
-                // eccezione TODO
-            island.addStudent(stud);
-            addStudents(game.getBag().getToken());
-            incrementCost();
-        }
+        stud = this.getStudent(parameters.getTargetStudentId());
+        island = game.getIsland(parameters.getOtherTargetId());
+        island.addStudent(stud);
+        this.addStudents(game.getBag().getToken());
+        incrementCost();
 
     }
 

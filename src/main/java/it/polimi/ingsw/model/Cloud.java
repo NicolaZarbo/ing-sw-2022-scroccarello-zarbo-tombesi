@@ -34,8 +34,8 @@ public class Cloud {
         }
     }
 
-    public boolean hasStud(){
-        if(stud[0]!=null) return true;
+    public boolean isEmpty(){
+        if(stud[0]==null) return true;
         else return false;
     }
 

@@ -8,7 +8,14 @@ import java.util.ArrayList;
 public class GameTest extends TestCase {
     int n=2;
     int numeroIsole=12;
-Game game = new Game(true, n, numeroIsole);
+    Game game ;
+
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+        game = new Game(true, n, numeroIsole);
+    }
+
     public void testGetIslands() {
        assertNotNull(game.getIslands());
         for (Island island: game.getIslands()) {
@@ -20,7 +27,11 @@ Game game = new Game(true, n, numeroIsole);
         System.out.println("is easy "+ game.isEasy());
 
     }
+    public void testCreateGame(){
 
+        Game gamett = new Game(true, n, numeroIsole);
+        assertNotNull(gamett);
+    }
     public void testGetNPlayers() {
      //   assertNotNull("errore", testG.getNPlayers());
         assertEquals("errore",n, game.getNPlayers());
@@ -68,12 +79,7 @@ Game game = new Game(true, n, numeroIsole);
     }
     public void testSetClouds() {
     }
-    public void testCreateTestAmbient(){
-     /*   Round round = new Round(0,2, game.getPlayers(), game);
-        for (Cloud cloud: game.getClouds()) {
-            round.setClouds();
-        }*/
-    }
+
 
 
 }

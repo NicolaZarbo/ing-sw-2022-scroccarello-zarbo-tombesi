@@ -40,9 +40,9 @@ public class Bag {
 
     public ArrayList<Student> setupStudents(int nIslands){
         ArrayList<Student> students = new ArrayList<>();
-        for (int i = 0; i < nIslands; i++) {
-            students.add(this.tokenLeft.get(i));
-            students.add(this.tokenLeft.get(i+5));
+        int molt=left/(nIslands-2);
+        for (int i = 0; i < nIslands-2; i++) {
+            students.add(this.tokenLeft.get(i*molt));
         }
         Collections.shuffle(students);
         return students;

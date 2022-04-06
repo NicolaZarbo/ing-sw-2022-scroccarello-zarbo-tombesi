@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.token.Student;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Character7 extends TokensCharacter{
 
@@ -14,21 +13,18 @@ public class Character7 extends TokensCharacter{
 
     }
     @Override /**@param parameters : first playerId, then students in entrance then on studs cards*/
-    public void cardEffect(List<Integer> parameters, Game game) {
-        int size = parameters.size();
-        int nstud = size/2;
+    public void cardEffect(ParameterObject parameters, Game game) {
+        int size = parameters.getTargetStudentsOnEntrance().length;
         Board board ;
-        ArrayList<Student>  fromCard = new ArrayList<>(), fromBoard = new ArrayList<>();
-        if(size<=7 && size%2==1){
-            board = game.getPlayer(parameters.get(0)).getBoard();
-            for (int i =0; i<nstud;i++) {
-                fromBoard.add(board.getStudentFromEntrance(parameters.get(i+1)));
-            }
-            for (int i =0; i<nstud;i++) {
-                board.putStudentOnEntrance(this.getStudent(parameters.get(i+1+nstud)));
-            }
-            addStudents(fromBoard);
-        incrementCost();
+        ArrayList<Student>  fromBoard = new ArrayList<>();
+
+        board = game.getPlayer(parameters.getOtherTargetId()).getBoard();
+        for (int i =0; i<size;i++) {
+            fromBoard.add(board.getStudentFromEntrance(parameters.getTargetStudentsOnEntrance()[i]));
+            board.putStudentOnEntrance(this.getStudent(parameters.getTargetStudentsForExchange()[i]));
         }
+        this.addStudents(fromBoard);
+        incrementCost();
+
     }
 }

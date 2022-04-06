@@ -12,7 +12,7 @@ public abstract class CharacterCard extends Card {
 
     public CharacterCard(int id){
         this.id=id;
-        this.cost=(id%3)+1;
+        this.cost=((id-1)%3)+1;
     }
     public int getCost() {
         return cost;
@@ -23,7 +23,9 @@ public abstract class CharacterCard extends Card {
     }
 
     //a way to make this work is to use some kind of generic type wich encapsulates the parameters used for the different operations + the game as param.
-    public abstract void cardEffect(List<Integer> parameters, Game game);
+    public void cardEffect(ParameterObject parameters, Game game){
+        incrementCost();
+    }
     public void incrementCost(){
         this.cost ++;
     }
