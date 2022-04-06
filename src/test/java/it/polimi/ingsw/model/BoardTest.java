@@ -58,7 +58,7 @@ public class BoardTest extends TestCase {
         ArrayList<Student> studInit=new ArrayList<Student>(4);
         System.out.println("initial students on entrance are:");
         for(int i=0;i<4;i++){
-            if(i%2==0){
+            if(true){
                 studInit.add(new Student(i,TokenColor.getColor(i)));
                 System.out.print(i+"  ");
             }
@@ -77,7 +77,7 @@ public class BoardTest extends TestCase {
                     System.out.print("none  ");
             }
         }
-        catch(RuntimeException e){
+        catch(NoPlaceAvailableException e){
             System.out.println("no space available");
         }
 

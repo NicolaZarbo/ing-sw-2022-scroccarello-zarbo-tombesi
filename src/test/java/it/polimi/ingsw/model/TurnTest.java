@@ -41,7 +41,7 @@ public class TurnTest extends TestCase {
     }
 
     public void testMoveFromCloudToEntrance() {
-        Student[] studOnCloud=game.getClouds()[2].getStud();
+        Student[] studOnCloud=game.getClouds()[1].getStud();
         Turn.moveFromCloudToEntrance(game,2,1);
         for (Student stud:studOnCloud) {
             assertTrue(game.getPlayer(1).getBoard().getEntrance().contains(stud));

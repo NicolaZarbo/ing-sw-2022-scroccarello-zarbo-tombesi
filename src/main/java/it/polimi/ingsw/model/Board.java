@@ -18,13 +18,13 @@ public class Board {
         int nColors = TokenColor.listGetLastIndex()+1;
         this.coinDN = new boolean[nColors][3];
         this.setCoinDN(nColors);
-        this.towers = new ArrayList<Tower>(nTower);
+        this.towers = new ArrayList<Tower>();
         for (int i=0;i<nTower;i++) {
             towers.add(new Tower(color,i+playerID));
         }
         this.playerID=playerID;
         this.diningRoom = new Student[nColors][10];
-        this.entrance =new ArrayList<Student>(dimEntrance);
+        this.entrance =new ArrayList<Student>();
         this.table = new Professor[nColors];
         this.entranceSize=dimEntrance;
     }
@@ -109,7 +109,7 @@ public class Board {
     }
 
     public void putStudentOnEntrance(Student student)throws NoPlaceAvailableException{
-        if(entrance.size()<=entranceSize)
+        if(entrance.size()<entranceSize)
             entrance.add(student);
         else
             throw new NoPlaceAvailableException();

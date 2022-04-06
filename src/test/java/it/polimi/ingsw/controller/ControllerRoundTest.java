@@ -11,7 +11,7 @@ import static it.polimi.ingsw.model.token.TowerColor.*;
 public class ControllerRoundTest extends TestCase {
     int [] cardTest={9,9,1,4};
     Game game=new Game(false,4,10);
-    ControllerRound cTest=new ControllerRound(cardTest,4,game);
+    ControllerRound cTest=new ControllerRound(cardTest,4);
 
     public void testControllerCreation(){
         for(int i=0;i<this.cardTest.length;i++)
