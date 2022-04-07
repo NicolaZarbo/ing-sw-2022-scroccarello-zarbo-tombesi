@@ -19,15 +19,15 @@ public abstract class TokensCharacter extends CharacterCard{
     public ArrayList<Student> getStudents(){
         return this.students;
     }
-    protected Student getStudent(int id){
+    protected Student getStudent(int id)throws NullPointerException{
         Student stud;
         for (Student student: students) {
-            if (student.getId()==id){
-                stud =student;
+            if (student.getId()==id) {
+                stud = student;
                 this.students.remove(stud);
                 return stud;
             }
         }
-        return null;
+        throw new NullPointerException();
     }
 }

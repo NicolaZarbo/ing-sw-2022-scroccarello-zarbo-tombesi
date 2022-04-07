@@ -8,10 +8,13 @@ import org.junit.BeforeClass;
 import java.util.ArrayList;
 
 public class HandTest extends TestCase {
-ArrayList<AssistantCard> assistants = new ArrayList<>() ;
+ArrayList<AssistantCard> assistants;
 Hand hand ;
-@Before
-    public void testCreateHand() {
+
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+        assistants = new ArrayList<>() ;
         assertNotNull(assistants);
         assertEquals(assistants.size(),0);
         for (int i = 0; i < 10; i++) {
@@ -25,12 +28,16 @@ Hand hand ;
             assertEquals(ass.getMage(),Mage.mage1);
 
         }
-        this.tAddCoin();
-        tPlayAssistant();
+
 
     }
 
-    public void tAddCoin() {
+
+    public void testCreateHand() {
+
+    }
+
+    public void testAddCoin() {
         assertNotNull(this.hand);
         for (int i = 0; i < 8; i++) {
             hand.addCoin();
@@ -53,7 +60,7 @@ Hand hand ;
     public void testEnoughCoin() {
     }
 
-    public void tPlayAssistant() {
+    public void testPlayAssistant() {
         for (AssistantCard ass:hand.getAssistant()) {
             assertNotNull(ass);
             System.out.println("id : "+ ass.getId() + " mother "+ass.getMoveMother()+" turn "+ ass.getValTurn());

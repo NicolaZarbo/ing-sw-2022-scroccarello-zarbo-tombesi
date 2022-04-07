@@ -10,11 +10,12 @@ public class Setup {
         List<Island> islands = new ArrayList<>();
         Island isl;
         ArrayList<Student> students = bag.setupStudents(nIsole);
+        int k=0;
         for(int i=0;i<nIsole;i++){
             isl =  new Island(i);
-            if(i!=0 && i!=(nIsole-1)/2){
-                isl.addStudent(students.get(i));
-                isl.addStudent(students.get(i));
+            if(i!=0 && i!=(nIsole)/2){
+                isl.addStudent(students.get(k));
+                k++;
             }
             islands.add(isl);
         }

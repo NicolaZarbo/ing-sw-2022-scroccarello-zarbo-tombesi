@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 
 import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.model.token.*;
 
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class Turn {
         board.moveToDiningRoom(stud);
         if(board.foundCoin(stud))
             player.getHand().addCoin();
+        if(Turn.canHaveTeacher(stud.getColor(),game,idPlayer))
+            Turn.getTeacher(stud.getColor(),game,idPlayer);
     }
 
     public static void moveToIsland(int idPlayer,int idStud, int idIsland, Game game){
@@ -39,8 +42,6 @@ public class Turn {
                 board.putStudentOnEntrance(students[i]);
                 students[i]=null;
             }
-            clouds[cloudId].setStud(students);
-            //game.setClouds(clouds);
         }
         game.resetBonus();
     }
@@ -157,11 +158,15 @@ public class Turn {
         }
     }
 
-    public static void useCharacter(int cardId, ArrayList<Integer> parameters, Game game){
-        //  call to the right method with right parameters(int list) Arraylist used like a ParameterObject from omonimous pattern
+    public static void useCharacter(int cardId, ParameterObject parameters, int playerId, Game game){
         CharacterCard card = game.getCharacter(cardId);
-        card.cardEffect( parameters,  game );
-        //controls for enoughCoin, isUsed in controller, or here with an exception
+        Player player = game.getPlayer(playerId);
+        if(player.getHand().enoughCoin(card.getCost())){
+            player.getHand().payCoin(card.getCost());
+            card.cardEffect( parameters,  game );
+        }
+        else
+        {}//TODO can't pay exception
     }
 
 

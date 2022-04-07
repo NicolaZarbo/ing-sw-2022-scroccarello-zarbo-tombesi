@@ -13,11 +13,11 @@ public class Character11 extends TokensCharacter{
     }
 
     @Override/** @param parameters : 1 idplayer, 2 idStudent to get*/
-    public void cardEffect(List<Integer> parameters, Game game) {
-        if(parameters.size()==2) {
-            Board board = game.getPlayer(parameters.get(0)).getBoard();
-            board.moveToDiningRoom(getStudent(parameters.get(1)));
+    public void cardEffect(ParameterObject parameters, Game game) {
+
+            Board board = game.getPlayer(parameters.getOtherTargetId()).getBoard();
+            board.moveToDiningRoom(this.getStudent(parameters.getTargetStudentId()));
+            this.addStudents(game.getBag().getToken());
             incrementCost();
-        }
     }
 }

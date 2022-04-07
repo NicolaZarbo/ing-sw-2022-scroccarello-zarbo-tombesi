@@ -10,9 +10,9 @@ public class Character9 extends TurnEffectCharacter{
         super(id);
     }
     @Override
-    public void cardEffect(List<Integer> parameters, Game game){
+    public void cardEffect(ParameterObject parameters, Game game){
         super.cardEffect(parameters,game);
-        game.setTargetColor(TokenColor.getColor(parameters.get(0)));
+        game.setTargetColor(TokenColor.getColor(parameters.getOtherTargetId()));
     }
 
 }

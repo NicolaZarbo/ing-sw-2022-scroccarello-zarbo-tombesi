@@ -24,7 +24,7 @@ public class IslandTest extends TestCase {
 
 
     public void testAddStudent() {
-    assertEquals(island.getIslandSize(),0);
+    assertEquals(island.getIslandSize(),1);
         for (int i = 0; i < 5; i++) {
             Random rr = new Random();
             Student st = new Student(i,TokenColor.getColor(rr.nextInt(4)));

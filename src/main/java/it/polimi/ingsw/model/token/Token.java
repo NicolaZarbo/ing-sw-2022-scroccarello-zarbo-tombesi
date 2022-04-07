@@ -1,8 +1,13 @@
 package it.polimi.ingsw.model.token;
 
 public abstract class Token {
-    private int id;
-    private TokenColor color;
+    private final int id;
+    private final TokenColor color;
+
+    public Token(int id, TokenColor color) {
+        this.id = id;
+        this.color = color;
+    }
 
     public int getId() {
         return id;
