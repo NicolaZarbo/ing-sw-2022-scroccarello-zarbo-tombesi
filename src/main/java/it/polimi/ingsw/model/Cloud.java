@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.exceptions.NoPlaceAvailableException;
 import it.polimi.ingsw.model.token.Student;
 
 public class Cloud {

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.NoPlaceAvailableException;
+import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.model.token.*;
 
 import java.util.ArrayList;
@@ -50,7 +52,7 @@ public class Board {
     }
 
     /** @param stud :sposta studente in dining room*/
-    public void moveToDiningRoom(Student stud)throws NoPlaceAvailableException{
+    public void moveToDiningRoom(Student stud)throws NoPlaceAvailableException {
         boolean b=false;
         if(stud!= null) {
             int i = stud.getColor().ordinal();
@@ -65,7 +67,7 @@ public class Board {
         }
     }
 
-    public Student getFromDiningRoom(int id)throws NoTokenFoundException{
+    public Student getFromDiningRoom(int id)throws NoTokenFoundException {
         Student stud;
         for(int i=0; i<diningRoom.length;i++){
             for (int j=0; j<diningRoom[0].length;j++){
