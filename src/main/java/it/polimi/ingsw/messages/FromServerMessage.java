@@ -11,6 +11,10 @@ public abstract class FromServerMessage {
 protected String json;
 protected String type;
 
+    public String getType() {
+        return type;
+    }
+
     protected void serialize(){
         Gson gson=new Gson();
         JsonObject jj = new JsonObject();
@@ -25,6 +29,12 @@ protected String type;
         JsonObject gg = JsonParser.parseString(json).getAsJsonObject();
         parseMessage(gg);
     }
+
+    public FromServerMessage(RuntimeException error) {
+        if(error==null)
+            throw new NullPointerException("missing error");
+    }
+
     public FromServerMessage(Game game){
         if(game==null)
             throw new NullPointerException();
