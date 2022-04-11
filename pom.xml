@@ -19,7 +19,14 @@
     <sonar.exclusions>**/project_doc/**/*,**/Peer-Review  1 UML GC7.md,**/ing-sw-2022-scroccarello-zarbo-tombesi.iml</sonar.exclusions>
   </properties>
 
+
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.9.0</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
