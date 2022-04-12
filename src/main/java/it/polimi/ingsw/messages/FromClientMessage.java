@@ -22,9 +22,9 @@ public class FromClientMessage {
     protected void parseMessage(JsonObject gg) {
         if (!this.type.equals(gg.get("MessageType").getAsString()))
             throw new MessageErrorException("needed "+type+", found " + gg.get("MessageType").getAsString());
-        this.json=gg.getAsString();
+        this.json=gg.toString();
     }
-
+    //what is now view will be the simplified game from the client
    /* public FromClientMessage (View view, int realPlayerIdentifier){
          if(view == null || realPlayerIdentifier==null)
             throw new NullPointerException();

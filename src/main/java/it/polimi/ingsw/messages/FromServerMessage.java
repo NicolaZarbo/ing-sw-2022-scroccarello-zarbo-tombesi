@@ -46,7 +46,7 @@ protected String type;
     protected void parseMessage(JsonObject gg) {
         if (!this.type.equals(gg.get("MessageType").getAsString()))
             throw new MessageErrorException("needed "+type+", found " + gg.get("MessageType").getAsString());
-        this.json=gg.getAsString();
+        this.json=gg.toString();
     }
 
 
