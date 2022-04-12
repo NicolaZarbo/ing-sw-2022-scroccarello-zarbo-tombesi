@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 
+import it.polimi.ingsw.messages.CloudMessage;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.model.token.*;
@@ -44,6 +45,7 @@ public class Turn {
             }
         }
         game.resetBonus();
+        //update(new CloudMessage(game)); //the update method will get a serverMessage as a param, and will ask the server to send the mex
     }
 
     public static boolean isUnifiableNext(Game game,int pos){
