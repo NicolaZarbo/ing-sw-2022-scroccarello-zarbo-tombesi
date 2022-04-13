@@ -18,10 +18,10 @@ public class ControllerRound {
         game=new Game(easy, nPlayer, nIsole);
 
     }
-
+/*
     public void controlPianification(){
         for(int i=0;i<Main.clouds.size();i++){
-            Main.clouds.set(i,Round.SetCloud(i,game));
+           // Main.clouds.set(i,Round.SetCloud(i,game));
             Main.bag-=3;
         }
         int []tmp=new int[actualOrder.length];
@@ -43,6 +43,8 @@ public class ControllerRound {
             tmp[k]=0;
         }
     }
+
+ */
 
 
     public int[] getActualOrder() {

@@ -3,6 +3,9 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.character.*;
 import it.polimi.ingsw.model.token.Professor;
 import it.polimi.ingsw.model.token.TokenColor;
+
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Game {
@@ -13,13 +16,29 @@ public class Game {
     private Player[] players;
     private Cloud[] clouds;
     private MotherNature motherNature;
+    private int currentPlayerId;
+    private HashMap<Integer, AssistantCard> cardPlayedThisRound;
+    private List<Integer> playIngOrder;
     private final Bag bag;
     private Professor[] teachers;
     private final List<CharacterCard> characters;
     private int cardBonusActive;
     private TokenColor targetColor;
 
+    public void setPlayIngOrder(List<Integer> playIngOrder) {
+        this.playIngOrder = playIngOrder;
+    }
+    public AssistantCard getPlayedCard(int playerId){
+        return cardPlayedThisRound.get(playerId);
+    }
 
+    public HashMap<Integer, AssistantCard> getAllCardPlayedThisRound() {
+        return cardPlayedThisRound;
+    }
+
+    public void addCardPlayedThisRound(int playerId, AssistantCard playedCard) {
+        this.cardPlayedThisRound.put(playerId,playedCard);
+    }
 
     public Professor[] getTeachers() {
         return teachers;
@@ -47,6 +66,8 @@ public class Game {
         }
         else{characters=null;}
         this.cardBonusActive=0;
+        this.cardPlayedThisRound=new HashMap<>();
+        this.playIngOrder= Arrays.stream(players).map(Player::getId).toList();
     }
 
     public boolean isBonusActive(int bonus) {
@@ -68,12 +89,13 @@ public class Game {
     }
 
     //finds island based on id
-    public Island getIsland(int id){
+    public Island getIsland(int id) throws NullPointerException{
         for (Island island: this.islands) {
             if(island.getID()==id)
                 return island;
         }
-        return null;
+        //throw new NullPointerException("no island with such id");
+        return  null;
     }
     public Bag getBag(){
         return bag;
@@ -132,5 +154,11 @@ public class Game {
     }
     public List<Island> getIslandList() {return this.islands;}
 
+    public int getCurrentPlayerId() {
+        return currentPlayerId;
+    }
 
+    public void setCurrentPlayerId(int currentPlayerId) {
+        this.currentPlayerId = currentPlayerId;
+    }
 }

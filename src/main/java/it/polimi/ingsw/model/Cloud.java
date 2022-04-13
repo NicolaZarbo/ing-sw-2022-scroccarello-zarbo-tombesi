@@ -5,14 +5,19 @@ import it.polimi.ingsw.model.token.Student;
 public class Cloud {
     private final int id;
     private Student[] stud;
+    private int dimension;
 
     public Cloud(Student[] students, int id){
         this.stud=new Student[students.length];
+        this.dimension=students.length;
         for(int i=0;i<students.length;i++)
             stud[i]=students[i];
         this.id=id;
     }
 
+    public int getDimension() {
+        return dimension;
+    }
 
     public Student[] getStud() {
         return stud;

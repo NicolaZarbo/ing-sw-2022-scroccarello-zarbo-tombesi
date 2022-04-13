@@ -3,11 +3,14 @@ package it.polimi.ingsw.messages;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.exceptions.MessageErrorException;
+import it.polimi.ingsw.messages.client.ClientMessage;
+import it.polimi.ingsw.messages.server.CloudMessage;
+import it.polimi.ingsw.messages.server.ServerMessage;
 
 public class MessageFactory {
-    public static FromServerMessage getMessageFromServer(String json){
+    public static ServerMessage getMessageFromServer(String json){
         JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
-        String type= jj.get("MessageType").getAsString();
+        String type= jj.get("messageType").getAsString();
         if(type==null)
             throw new MessageErrorException("missing message Type");
         switch (type){
@@ -18,9 +21,9 @@ public class MessageFactory {
         }
     }
 
-    public static FromClientMessage getMessageFromClient(String json){
+    public static ClientMessage getMessageFromClient(String json){
         JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
-        String type= jj.get("MessageType").getAsString();
+        String type= jj.get("messageType").getAsString();
         if(type==null)
             throw new MessageErrorException("missing message Type");
         switch (type){

@@ -1,11 +1,11 @@
-package it.polimi.ingsw.messages;
+package it.polimi.ingsw.messages.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Cloud;
 import it.polimi.ingsw.model.Game;
 
 
-public class CloudMessage extends FromServerMessage {//
+public class CloudMessage extends ServerMessage {//
     private  Cloud[] clouds;
 
     public CloudMessage(Game game){
@@ -20,10 +20,11 @@ public class CloudMessage extends FromServerMessage {//
         super(json);
     }
     @Override
-    protected void parseMessage(JsonObject gg){
-        super.parseMessage(gg);
+   protected void parseMessage(JsonObject gg){
         Gson gson=new Gson();
-        this.clouds= gson.fromJson(gg.get("MessageContent"),this.getClass()).getClouds();
+        this.clouds= gson.fromJson(gg,this.getClass()).getClouds();
     }
+
+
 
 }

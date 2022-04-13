@@ -1,36 +1,34 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.messages.server.CloudMessage;
 import it.polimi.ingsw.model.token.Student;
-import java.util.Observable;
+
+import java.util.*;
 
 public class Round   {
 
-    public static int[] SetCloud(int cloudNum, Game game) {
-        Student[] studList = new Student[3];
-        int[] studID = new int[3];
-        for (int i = 0; i < 3; i++) {
-            studList[i] = game.getBag().getToken();
-            studID[i] = studList[i].getId();
+    public static void SetCloud( Game game) {
+        int cloudDim=game.getClouds()[0].getDimension();
+        Student[] students = new Student[cloudDim];
+        for (Cloud cloud:game.getClouds()) {
+            for (int i = 0; i < cloudDim; i++) {
+                students[i]=game.getBag().getToken();
+            }
+            cloud.setStud(students);
         }
-        game.getClouds()[cloudNum].setStud(studList);
-        updateClouds(game);
-        return studID;
-    }
-    public static void updateClouds(Game game){
+        //serversendAll(new CloudMessage(game))
 
     }
 
-
-
-
-    public static int CardPlayedValue(int numPlayer, int cardPlayed, Game game){
-        Hand actualHand=game.getPlayer(numPlayer).getHand();
+    public static void playCard(int playerdId, int cardPlayed, Game game){
+        Hand actualHand=game.getPlayer(playerdId).getHand();
         AssistantCard played=actualHand.playAssistant(cardPlayed);
-        return played.getValTurn();
+        game.addCardPlayedThisRound(playerdId,played);
+        //serversendAll(new CardPlayedMessage())
     }
-    public static int MotherMovement(int numPlayer, int cardPlayed,Game game){
-        Hand actualHand=game.getPlayer(numPlayer).getHand();
-        AssistantCard played=actualHand.playAssistant(cardPlayed);
-        return played.getMoveMother();
+// orders players TODO
+    public static void roundOrder(Game game){
+        ArrayList<Integer> order = new ArrayList<>();
+       game.setPlayIngOrder(order);
     }
 
 }
