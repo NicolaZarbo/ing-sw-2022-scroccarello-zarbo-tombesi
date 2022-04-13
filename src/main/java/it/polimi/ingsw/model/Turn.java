@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model;
 
-
-import it.polimi.ingsw.controller.Main;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.model.token.*;
@@ -137,22 +135,22 @@ public class Turn {
         Player playercheck=game.getPlayer(playerId);
         Board playerBoard=playercheck.getBoard();
 
-            int tokenplayer = 0; //count dei token del player
-            int tempcount=0; //count dei token degli altri players
-            for (int i = 0; i < playerBoard.getDiningRoom()[color.ordinal()].length; i++)
-                    if(playerBoard.getDiningRoom()[TokenColor.getIndex(color)][i]!=null)
-                        tokenplayer++;
-            for(int j=0;j<players.length;j++){
-                tempcount=0;
-                if(!players[j].equals(playercheck)) {
-                    for (int i = 0; i < players[j].getBoard().getDiningRoom()[color.ordinal()].length; i++) {
-                        if (players[j].getBoard().getDiningRoom()[TokenColor.getIndex(color)][i] != null)
-                            tempcount++;
-                    }//card 2 effect
-                    if (tempcount >= tokenplayer && !(game.isBonusActive(2) && tempcount<=tokenplayer))
-                        b = false;
-                }
+           int tokenplayer = 0; //count dei token del player
+        int tempcount; //count dei token degli altri players
+        for (int i = 0; i < playerBoard.getDiningRoom()[color.ordinal()].length; i++)
+            if(playerBoard.getDiningRoom()[TokenColor.getIndex(color)][i]!=null)
+                tokenplayer++;
+        for (Player player : players) {
+            tempcount = 0;
+            if (!player.equals(playercheck)) {
+                for (int i = 0; i < player.getBoard().getDiningRoom()[color.ordinal()].length; i++) {
+                    if (player.getBoard().getDiningRoom()[TokenColor.getIndex(color)][i] != null)
+                        tempcount++;
+                }//card 2 effect
+                if (tempcount >= tokenplayer && !(game.isBonusActive(2) && tempcount <= tokenplayer))
+                    b = false;
             }
+        }
         return b;
     }
     public static void getTeacher(TokenColor color,Game game,int playerId){
@@ -163,13 +161,13 @@ public class Turn {
                 Professor temp=game.getFromGame(color);
                 game.getPlayer(playerId).getBoard().putProfessor(temp);
             }else{
-                for(int i=0;i<players.length;i++)
-                    if(players[i]!=playercheck && players[i].getBoard().getProfessor(color)!=null){
-                        Professor temp=players[i].getBoard().getProfessor(color);
-                        game.getPlayer(playerId).getBoard().putProfessor(temp);
-                        int playerTemp=players[i].getId();
-                        game.getPlayer(playerTemp).getBoard().removeProfessor(color);
-                    }
+                    for (Player player : players)
+                        if (player != playercheck && player.getBoard().getProfessor(color) != null) {
+                            Professor temp = player.getBoard().getProfessor(color);
+                            game.getPlayer(playerId).getBoard().putProfessor(temp);
+                            int playerTemp = player.getId();
+                            game.getPlayer(playerTemp).getBoard().removeProfessor(color);
+                        }
             }
 
         }
@@ -198,18 +196,18 @@ public class Turn {
         Player player = game.getPlayer(playerId);
         TowerColor color=player.getColorT();
         Student stud;
-        for(int i=0;i<students.size();i++){
-            stud = students.get(i);
-            if(player.getBoard().hasProfessor(stud.getColor()) && !(stud.getColor()==game.getTargetColor() && game.isBonusActive(9)))//card 9 effect
+        for (Student student : students) {
+            stud = student;
+            if (player.getBoard().hasProfessor(stud.getColor()) && !(stud.getColor() == game.getTargetColor() && game.isBonusActive(9)))//card 9 effect
                 influence++;
 
         }//card 6 effect
         if(!game.isBonusActive(6)){
             ArrayList<Tower> towers=where.getTowers();
-            for(int j=0;j<towers.size();j++){
-                if(color.equals(towers.get(j).getColor()))
+            for (Tower tower : towers) {
+                if (color.equals(tower.getColor()))
                     influence++;
-             }
+            }
         }
         return influence;
     }
@@ -217,7 +215,7 @@ public class Turn {
     public static void islandConquest(int islandId, Game game){
         int  maxInf;
         Island island=game.getIsland(islandId);
-        Player conqueror=null;
+        Player conqueror;
         ArrayList<Integer> influence= new ArrayList<>();
         for (Player player: game.getPlayers()) {
             influence.add(Turn.calculateInfluence(game,player.getId()));

@@ -10,6 +10,7 @@ public class ControllerTurn {
     //in case we decide to use  observer pattern:
     // every method that modifies something in the model could call a notify call to an observer in controller and exchange the information through that
     //instead of having to return the new state
+    @SuppressWarnings("GrazieInspection")
     private int idPlayerNow;
     private final Game game;
 

@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.token.TokenColor;
 import it.polimi.ingsw.model.token.Tower;
 import it.polimi.ingsw.model.token.TowerColor;
 import junit.framework.TestCase;
-import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.Random;

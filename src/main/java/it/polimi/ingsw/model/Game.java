@@ -12,15 +12,15 @@ public class Game {
 
     private final boolean easy;
     private final int nPlayers;
-    private List<Island> islands;
-    private Player[] players;
+    private final List<Island> islands;
+    private final Player[] players;
     private Cloud[] clouds;
     private MotherNature motherNature;
     private int currentPlayerId;
-    private HashMap<Integer, AssistantCard> cardPlayedThisRound;
+    private final HashMap<Integer, AssistantCard> cardPlayedThisRound;
     private List<Integer> playIngOrder;
     private final Bag bag;
-    private Professor[] teachers;
+    private final Professor[] teachers;
     private final List<CharacterCard> characters;
     private int cardBonusActive;
     private TokenColor targetColor;
@@ -146,9 +146,7 @@ public class Game {
         return temp;
     }
     public boolean isProfessorOnGame(TokenColor color){
-        boolean b=false;
-        if(teachers[color.ordinal()]!=null)
-            b=true;
+        boolean b= teachers[color.ordinal()] != null;
 
         return b;
     }

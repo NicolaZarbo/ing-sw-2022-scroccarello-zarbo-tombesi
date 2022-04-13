@@ -4,7 +4,7 @@ public enum TowerColor {
     black,white,grey;
 
 
-    private static TowerColor[] list = TowerColor.values();
+    private static final TowerColor[] list = TowerColor.values();
 
 
     public static TowerColor getColor(int i) {

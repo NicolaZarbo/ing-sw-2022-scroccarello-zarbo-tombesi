@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Bag {
     int left;
-    private  List<Student> tokenLeft;
+    private final List<Student> tokenLeft;
 
     public Bag(int pedForColor, int numColor){
         int size=pedForColor*numColor;
@@ -23,9 +23,7 @@ public class Bag {
         tokenLeft =new LinkedList<>(Arrays.asList(temparr));
     }
     public boolean isToken(int i){
-        boolean present=false;
-            if(tokenLeft.get(i)!=null)
-                present=true;
+        boolean present= tokenLeft.get(i) != null;
 
         return present;
     }

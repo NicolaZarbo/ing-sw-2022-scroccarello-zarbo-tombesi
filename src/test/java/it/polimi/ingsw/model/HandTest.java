@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model;
 
 import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
 
 import java.util.ArrayList;
 
@@ -16,7 +13,7 @@ Hand hand ;
         super.setUp();
         assistants = new ArrayList<>() ;
         assertNotNull(assistants);
-        assertEquals(assistants.size(),0);
+        assertEquals(0,assistants.size());
         for (int i = 0; i < 10; i++) {
             assistants.add( new AssistantCard(i,i+1,(i/2)+1, Mage.mage1));
             assertNotNull(assistants.get(i));

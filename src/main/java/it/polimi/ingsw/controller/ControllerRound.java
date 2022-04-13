@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.Round;
 public class ControllerRound {
     private int[] actualOrder;
     private int[] playerWantsToPlay; //all'i-esimo giocatore corrisponderà l'ID della carta che vuole giocare
+    @SuppressWarnings("FieldMayBeFinal")
     private int[] motherMovements;
     private Game game;
 

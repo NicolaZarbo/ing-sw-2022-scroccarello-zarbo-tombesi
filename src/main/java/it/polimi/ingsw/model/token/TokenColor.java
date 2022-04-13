@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.token;
 public enum TokenColor {
     red,yellow,green,blue,pink;
 
-    private static TokenColor[] list = TokenColor.values();
+    private static final TokenColor[] list = TokenColor.values();
 
 
     public static TokenColor getColor(int i) {

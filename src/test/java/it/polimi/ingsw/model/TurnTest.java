@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.character.Character1;
-import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.model.token.Student;
 import it.polimi.ingsw.model.token.TokenColor;
@@ -11,8 +10,6 @@ import junit.framework.TestCase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
-import java.util.stream.Stream;
 
 public class TurnTest extends TestCase {
     Game game;
@@ -56,12 +53,12 @@ public class TurnTest extends TestCase {
         }
 
         Round.SetCloud(game);
-        Integer[] studOnCloudID =  Arrays.stream(cloud.getStud()).map(student -> Integer.valueOf( student.getId())).toArray(Integer[]::new);
+        Integer[] studOnCloudID =  Arrays.stream(cloud.getStud()).map(student -> student.getId()).toArray(Integer[]::new);
         assertTrue(board.getEntrance().size()<=board.entranceSize);
         Turn.moveFromCloudToEntrance(game,1,1);
         int nOfStudentsMovedFound=0;
         for (Integer studId:studOnCloudID) {
-            if(board.getEntrance().stream().map(student -> student.getId()).anyMatch(s->s==studId))
+            if(board.getEntrance().stream().map(student -> student.getId()).anyMatch(s-> s.equals(studId)))
                 nOfStudentsMovedFound++;
         }
         assertEquals(game.getClouds()[0].getStud().length,nOfStudentsMovedFound);
@@ -137,7 +134,7 @@ public class TurnTest extends TestCase {
             System.out.println("id ISola : "+island.getID());
             for (Tower tower:island.getTowers()) {
                 System.out.println( "torre : "+ tower.getId()+" "+tower.getColor());
-            };
+            }
         }
 
     }

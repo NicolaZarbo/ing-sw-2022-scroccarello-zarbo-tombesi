@@ -5,13 +5,12 @@ import it.polimi.ingsw.model.token.Student;
 public class Cloud {
     private final int id;
     private Student[] stud;
-    private int dimension;
+    private final int dimension;
 
     public Cloud(Student[] students, int id){
         this.stud=new Student[students.length];
         this.dimension=students.length;
-        for(int i=0;i<students.length;i++)
-            stud[i]=students[i];
+        System.arraycopy(students, 0, stud, 0, students.length);
         this.id=id;
     }
 
@@ -41,8 +40,7 @@ public class Cloud {
     }
 
     public boolean isEmpty(){
-        if(stud[0]==null) return true;
-        else return false;
+        return stud[0] == null;
     }
 
     public int getId() {return id;}

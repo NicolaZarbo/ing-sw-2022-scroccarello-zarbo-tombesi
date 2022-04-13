@@ -12,7 +12,8 @@ public class Character7 extends TokensCharacter{
         super(id);
 
     }
-    @Override /**@param parameters : first playerId, then students in entrance then on studs cards*/
+    /**@param parameters : first playerId, then students in entrance then on studs cards*/
+    @Override
     public void cardEffect(ParameterObject parameters, Game game) {
         int size = parameters.getTargetStudentsOnEntrance().length;
         Board board ;
