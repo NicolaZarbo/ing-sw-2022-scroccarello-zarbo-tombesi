@@ -39,12 +39,9 @@ public class Turn {
         Turn.islandConquest(position, game);
         if (Turn.isUnifiableNext(game, position)) {
             Turn.unifyNext(game, position);
-            Main.islands.remove(position + 1);
-
         }
         if (Turn.isUnifiableBefore(game, position)) {
             Turn.unifyBefore(game, position);
-            Main.islands.remove(position - 1);
         }
         //sereversendAll(new MotherPositionMessage(game) TODO
     }
@@ -114,7 +111,7 @@ public class Turn {
         //serverAppendAll(new IslandsMessage(game)) TODO
     }
     //if it is a team game, insert the mainplayer id in idPlayer
-    private static void putTowerFromBoardToIsland(Island island,Player player){
+    public static void putTowerFromBoardToIsland(Island island,Player player){
 
             Board board=player.getBoard();
             island.setTower(board.getTower());
@@ -122,8 +119,8 @@ public class Turn {
         //serverSendAll(new SingleBoardMessage(game,player.getId()))
     }
     private static void changeTower(Island island , Player newOwner, Game game){
-        ArrayList<Tower> removedT= island.getTowers();
-        island.getTowers().clear();
+        ArrayList<Tower> removedT=new ArrayList<>(island.getTowers());
+        island.getTowers().removeAll(removedT);
         for (Player player: game.getPlayers()) {
             if(player.getColorT()==removedT.get(0).getColor()){
                 player.getBoard().addTower(removedT);
@@ -227,6 +224,7 @@ public class Turn {
         }
         maxInf=influence.stream().max(Comparator.naturalOrder()).orElse(0);
         if(Collections.frequency(influence, maxInf)==1) {
+            conqueror=game.getPlayer(influence.lastIndexOf(maxInf));
             if (!island.getTowers().isEmpty()) {
                 if (island.getTowers().get(0).getColor() != conqueror.getColorT())
                     Turn.changeTower(island, conqueror, game);

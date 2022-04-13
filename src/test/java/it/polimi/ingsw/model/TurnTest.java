@@ -155,4 +155,39 @@ public class TurnTest extends TestCase {
         }
         assertTrue(game.getIsland(1).getStudents().stream().map(Student::getId).toList().contains(studIdOnCard));
     }
+
+    public void testConquerIsland() {
+        Student stud=game.getPlayer(1).getBoard().getEntrance().get(0);
+        Turn.moveInHall(1,stud.getId() ,game);
+        int inf;
+         for (Island isl: game.getIslands()) {
+             inf=0;
+             for (Student student: isl.getStudents()) {
+                 if(stud.getColor()==student.getColor())
+                     inf++;
+             }
+            Turn.moveMotherNature(1,game);
+            if(isl.getTowers().size()>0)
+                assertTrue(inf>0);
+        }
+    }
+
+    public void testChangeIslandOwner() {
+        Island isl= game.getIsland(7);
+        Turn.putTowerFromBoardToIsland(isl,game.getPlayer(1));
+        ArrayList<Student> sttuddd= new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            sttuddd.add(new Student(i+100, TokenColor.blue));
+        }
+        isl.addAllStudents(sttuddd);
+        Player pl = game.getPlayer(0);
+        pl.getBoard().moveToDiningRoom(new Student(500,TokenColor.blue));
+        if(Turn.canHaveTeacher(TokenColor.blue,game,pl.getId()))
+            Turn.getTeacher(TokenColor.blue,game,pl.getId());
+        assertTrue(pl.getBoard().hasProfessor(TokenColor.blue));
+        Turn.moveMotherNature(7,game);
+        assertTrue(isl.getTowers().get(0).getColor()==TowerColor.black);
+
+
+    }
 }
