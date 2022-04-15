@@ -7,14 +7,14 @@ public class StudentToHallMessage extends ClientMessage {
 
     private int studentId;
 
-    public StudentToHallMessage( int playerId, int studentId) {
-        this.playerId = playerId;
-        this.studentId = studentId;
-        super.serialize();
+    public StudentToHallMessage(String json) {
+        super(json);
     }
 
-    public int getPlayerId() {
-        return playerId;
+    public StudentToHallMessage(int playerId, int studentId) {
+        super(playerId);
+        this.studentId = studentId;
+        super.serialize();
     }
 
     public int getStudentId() {

@@ -1,14 +1,16 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.model.character.*;
 import it.polimi.ingsw.model.token.Professor;
 import it.polimi.ingsw.model.token.TokenColor;
+import it.polimi.ingsw.observer.Observable;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class Game {
+public class Game extends Observable<ServerMessage> {
 
     private final boolean easy;
     private final int nPlayers;
@@ -25,6 +27,11 @@ public class Game {
     private int cardBonusActive;
     private TokenColor targetColor;
 
+
+
+    public List<Integer> getPlayIngOrder() {
+        return playIngOrder;
+    }
     public void setPlayIngOrder(List<Integer> playIngOrder) {
         this.playIngOrder = playIngOrder;
     }

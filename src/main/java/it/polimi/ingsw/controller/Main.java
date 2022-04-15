@@ -1,5 +1,7 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.model.Game;
+
 import java.util.*;
 
 public class Main {
@@ -59,9 +61,9 @@ public class Main {
                    k--;
 
             }
-            ControllerRound round=new ControllerRound(cardTemp,numPlayers);
+           // ControllerRound round=new ControllerRound(new Game());
            // round.controlPianification();
-            ordturn=round.getActualOrder();
+           // ordturn=round.getActualOrder();
 
             //pesca 3 students dal bag
             //ogni giocatore sceglie un'assistente da giocare, si procede in ordine orario

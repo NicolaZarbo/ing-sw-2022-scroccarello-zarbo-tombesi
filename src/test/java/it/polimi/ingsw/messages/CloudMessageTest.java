@@ -28,8 +28,6 @@ public class CloudMessageTest extends TestCase {
     }
 
     public void tParseMessage(String js) {
-        Gson gson=new Gson();
-        JsonObject jj=JsonParser.parseString(js).getAsJsonObject();
         ServerMessage message =  MessageFactory.getMessageFromServer(js);
         for (Cloud cloud:((CloudMessage)message).getClouds()) {
             System.out.println( "nuvola deserializzata : "+cloud.getId());

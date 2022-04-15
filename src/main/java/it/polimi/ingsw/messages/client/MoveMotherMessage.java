@@ -15,7 +15,8 @@ public class MoveMotherMessage extends ClientMessage {
         super(json);
     }
 
-    public MoveMotherMessage(int steps) {
+    public MoveMotherMessage(int steps, int playerId) {
+        super(playerId);
         this.steps = steps;
         super.serialize();
     }

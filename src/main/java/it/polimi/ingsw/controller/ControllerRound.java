@@ -1,24 +1,26 @@
 package it.polimi.ingsw.controller;
+import it.polimi.ingsw.messages.client.PlayAssistantMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Round;
 
+import java.util.List;
+
 public class ControllerRound {
-    private int[] actualOrder;
-    private int[] playerWantsToPlay; //all'i-esimo giocatore corrisponderà l'ID della carta che vuole giocare
-    @SuppressWarnings("FieldMayBeFinal")
-    private int[] motherMovements;
+
     private Game game;
+    private final Round modelRound;
 
-    public ControllerRound(int[]cards, int numPlayers){
-        this.playerWantsToPlay=cards;
-        this.actualOrder=new int[numPlayers];
-        this.motherMovements=new int[numPlayers];
+    public ControllerRound(Game game){
+        this.modelRound= new Round(game);
     }
 
-    public void createGame(boolean easy, int nPlayer, int nIsole){
-        game=new Game(easy, nPlayer, nIsole);
-
+    public void playAssistantCard(PlayAssistantMessage message){
+        modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
     }
+    private List<Integer> getActualOrder() {
+        return Round.getRoundOrder(game);
+    }
+
 /*
     public void controlPianification(){
         for(int i=0;i<Main.clouds.size();i++){
@@ -48,7 +50,5 @@ public class ControllerRound {
  */
 
 
-    public int[] getActualOrder() {
-        return actualOrder;
-    }
+
 }

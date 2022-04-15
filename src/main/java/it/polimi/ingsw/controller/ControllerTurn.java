@@ -1,34 +1,34 @@
 package it.polimi.ingsw.controller;
+import it.polimi.ingsw.messages.client.ChooseCloudMessage;
 import it.polimi.ingsw.messages.client.MoveMotherMessage;
 import it.polimi.ingsw.messages.server.ErrorMessageForClient;
 import it.polimi.ingsw.messages.client.StudentToHallMessage;
 import it.polimi.ingsw.messages.client.StudentToIslandMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Turn;
+import it.polimi.ingsw.observer.Observable;
 
-public class ControllerTurn {
-    //in case we decide to use  observer pattern:
-    // every method that modifies something in the model could call a notify call to an observer in controller and exchange the information through that
-    //instead of having to return the new state
-    @SuppressWarnings("GrazieInspection")
+public class ControllerTurn extends Observable<ErrorMessageForClient> {
+
     private int idPlayerNow;
     private final Game game;
+    private final Turn modelTurn;
 
-    private void sendMessageError(RuntimeException e){
+    private void sendMessageError(RuntimeException e) {
         ErrorMessageForClient error =new ErrorMessageForClient(this.idPlayerNow,e);
-        //send(this.idPlayerNow)
-    }//TODO
+        this.notify(error);
+    }
 
     public void moveStudentToHall(StudentToHallMessage message){
         try {
-            Turn.moveInHall(this.idPlayerNow, message.getStudentId(), this.game);
+            modelTurn.moveInHall(this.idPlayerNow, message.getStudentId());
         }catch (NullPointerException e){
             sendMessageError(e);
         }
     }
     public void moveStudentToIsland(StudentToIslandMessage message){
         try {
-            Turn.moveToIsland(this.idPlayerNow,message.getStudentId(),message.getFinalPositionId(),this.game);
+            modelTurn.moveToIsland(this.idPlayerNow,message.getStudentId(),message.getFinalPositionId());
         }catch(NullPointerException e){
              sendMessageError(e);
         }
@@ -39,7 +39,7 @@ public class ControllerTurn {
             sendMessageError(new RuntimeException("too many steps!"));
         else {
             try {
-                Turn.moveMotherNature(message.getSteps(), game);
+                modelTurn.moveMotherNature(message.getSteps());
             }catch (RuntimeException e){
                 sendMessageError(e);
             }
@@ -47,15 +47,21 @@ public class ControllerTurn {
         }
     }
 
-    public void chooseCloud(int cloudId){
-        Turn.moveFromCloudToEntrance(this.game,cloudId,this.idPlayerNow);
+    public void chooseCloud(ChooseCloudMessage message){
+        try {
+            modelTurn.moveFromCloudToEntrance(message.getCloudId(), this.idPlayerNow);
+        }catch (RuntimeException e){
+            sendMessageError(e);
+        }
     }
     public void changeTurn(){
         this.idPlayerNow= game.getCurrentPlayerId();
     }
     public ControllerTurn(Game game){
         this.game=game;
+        this.modelTurn =new Turn(game);
     }
+
     /*
     public boolean canUseCharacter(){
         int cost=0;

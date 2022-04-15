@@ -24,6 +24,12 @@ public class CloudMessage extends ServerMessage {//
         Gson gson=new Gson();
         this.clouds= gson.fromJson(gg,this.getClass()).getClouds();
     }
+    /*public static CloudMessage parse(String json){
+        Gson gson= new Gson();
+        return gson.fromJson(json,CloudMessage.class);
+    }
+    another potential way to parse a message
+     */
 
 
 

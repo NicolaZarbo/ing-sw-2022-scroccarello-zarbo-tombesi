@@ -9,8 +9,7 @@ public class StudentToIslandMessage extends ClientMessage {
 
     //this will be changed to reflect the super constructor using the view
     public StudentToIslandMessage(int playerId, int studentId, int finalPositionId) {
-        super();
-        this.playerId = playerId;
+        super(playerId);
         this.studentId = studentId;
         this.finalPositionId = finalPositionId;
         super.serialize();
@@ -25,10 +24,6 @@ public class StudentToIslandMessage extends ClientMessage {
         this.studentId=gson.fromJson(gg,this.getClass()).getStudentId();
         this.finalPositionId=gson.fromJson(gg,this.getClass()).getFinalPositionId();
         this.playerId=gson.fromJson(gg,this.getClass()).getPlayerId();
-    }
-
-    public int getPlayerId() {
-        return playerId;
     }
 
     public int getStudentId() {

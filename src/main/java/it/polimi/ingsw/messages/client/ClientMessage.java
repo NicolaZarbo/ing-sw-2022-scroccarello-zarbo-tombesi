@@ -41,7 +41,9 @@ public abstract class ClientMessage {
     protected abstract void parseMessage(JsonObject gg) ;
 
 
-    public ClientMessage(){}
+    public ClientMessage(int playerId){
+        this.playerId=playerId;
+    }
 
 
 }

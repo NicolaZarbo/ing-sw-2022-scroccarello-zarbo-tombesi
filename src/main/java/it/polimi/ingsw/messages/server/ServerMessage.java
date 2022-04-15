@@ -41,12 +41,12 @@ protected String messageType;
         if(game==null)
             throw new NullPointerException();
     }
+    public ServerMessage(){}
     public String getJson(){
         return  json;
     }
     /** Checks the message type, further parsing in subclasses */
     protected abstract void parseMessage(JsonObject gg) ;
-
 
 
 }
