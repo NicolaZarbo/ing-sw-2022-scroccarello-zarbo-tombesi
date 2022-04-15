@@ -5,9 +5,9 @@ import it.polimi.ingsw.model.token.Tower;
 import java.util.ArrayList;
 
 public class Island {
-    private int ID;
-    private ArrayList<Student> students;
-    private ArrayList<Tower> tower;
+    private final int ID;
+    private final ArrayList<Student> students;
+    private final ArrayList<Tower> tower;
     private int islandSize;
 
     public Island(int id) {

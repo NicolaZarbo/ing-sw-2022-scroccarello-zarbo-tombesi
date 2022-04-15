@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.token.Tower;
 import junit.framework.TestCase;
-
-import java.util.ArrayList;
 
 public class GameTest extends TestCase {
     int n=2;

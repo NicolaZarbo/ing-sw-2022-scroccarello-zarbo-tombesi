@@ -9,10 +9,10 @@ import java.util.Arrays;
 
 public class Board {
     private Student[][] diningRoom;
-    private Professor[] table;
+    private final Professor[] table;
     private ArrayList<Student> entrance;
-    private ArrayList<Tower> towers;
-    private boolean[][] coinDN;
+    private final ArrayList<Tower> towers;
+    private final boolean[][] coinDN;
     final int playerID;
     final int entranceSize;
 
@@ -53,13 +53,11 @@ public class Board {
 
     /** @param stud :sposta studente in dining room*/
     public void moveToDiningRoom(Student stud)throws NoPlaceAvailableException {
-        boolean b=false;
         if(stud!= null) {
             int i = stud.getColor().ordinal();
             for (int j = 0; j < diningRoom[i].length; j++) {
-                if (diningRoom[i][j] == null && !b){
+                if (diningRoom[i][j] == null){
                     diningRoom[i][j] = stud;
-                    b=true;
                     return;
                 }
             }
@@ -121,10 +119,7 @@ public class Board {
         int colorIndex=stud.getColor().ordinal();
         int pos = Arrays.asList(diningRoom[colorIndex]).indexOf(stud);
         int pCoin=(pos+1)/3;
-        if (coinDN[stud.getColor().ordinal()][pCoin] && pos+1%3 == 0) {
-            return true;
-        }
-        return false;
+        return coinDN[stud.getColor().ordinal()][pCoin] && pos + 1 % 3 == 0;
     }
 
     public ArrayList<Student> getEntrance(){

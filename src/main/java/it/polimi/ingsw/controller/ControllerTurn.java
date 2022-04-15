@@ -1,51 +1,60 @@
 package it.polimi.ingsw.controller;
+import it.polimi.ingsw.messages.client.MoveMotherMessage;
+import it.polimi.ingsw.messages.server.ErrorMessageForClient;
+import it.polimi.ingsw.messages.client.StudentToHallMessage;
+import it.polimi.ingsw.messages.client.StudentToIslandMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Turn;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ControllerTurn {
     //in case we decide to use  observer pattern:
     // every method that modifies something in the model could call a notify call to an observer in controller and exchange the information through that
     //instead of having to return the new state
+    @SuppressWarnings("GrazieInspection")
     private int idPlayerNow;
     private final Game game;
-    public int characterActive;
 
-    public void moveStudentToHall( int idStudent){
-        Turn.moveInHall(this.idPlayerNow,idStudent, this.game);
-    }
-    public void moveStudentToIsland(int idStudent, int idIsland){
-        Turn.moveToIsland(this.idPlayerNow,idStudent,idIsland,this.game);
-    }
-    //tutta questa logica andrà alla fine di move mother nel model
-    public int moveMotherNature(int steps){
-        Turn.moveMotherNature(steps, game);
-        int position=game.getMotherNature().getPosition();
-        Turn.islandConquest(position,game);
-        if(Turn.isUnifiableNext(game,position)){
-            Turn.unifyNext(game, position);
-            Main.islands.remove(position+1);
-            
+    private void sendMessageError(RuntimeException e){
+        ErrorMessageForClient error =new ErrorMessageForClient(this.idPlayerNow,e);
+        //send(this.idPlayerNow)
+    }//TODO
+
+    public void moveStudentToHall(StudentToHallMessage message){
+        try {
+            Turn.moveInHall(this.idPlayerNow, message.getStudentId(), this.game);
+        }catch (NullPointerException e){
+            sendMessageError(e);
         }
-        if(Turn.isUnifiableBefore(game,position)){
-            Turn.unifyBefore(game, position);
-            Main.islands.remove(position-1);
+    }
+    public void moveStudentToIsland(StudentToIslandMessage message){
+        try {
+            Turn.moveToIsland(this.idPlayerNow,message.getStudentId(),message.getFinalPositionId(),this.game);
+        }catch(NullPointerException e){
+             sendMessageError(e);
+        }
+    }
+
+    public void moveMotherNature(MoveMotherMessage message){
+        if(message.getSteps()>game.getPlayedCard(game.getCurrentPlayerId()).getMoveMother())
+            sendMessageError(new RuntimeException("too many steps!"));
+        else {
+            try {
+                Turn.moveMotherNature(message.getSteps(), game);
+            }catch (RuntimeException e){
+                sendMessageError(e);
+            }
 
         }
-        return position;
     }
 
     public void chooseCloud(int cloudId){
         Turn.moveFromCloudToEntrance(this.game,cloudId,this.idPlayerNow);
     }
-    public void changeTurn(int idPlayer){
-        this.idPlayerNow=idPlayer;
+    public void changeTurn(){
+        this.idPlayerNow= game.getCurrentPlayerId();
     }
     public ControllerTurn(Game game){
         this.game=game;
-        this.idPlayerNow=0;
     }
     /*
     public boolean canUseCharacter(){

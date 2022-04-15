@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.Round;
 public class ControllerRound {
     private int[] actualOrder;
     private int[] playerWantsToPlay; //all'i-esimo giocatore corrisponderà l'ID della carta che vuole giocare
+    @SuppressWarnings("FieldMayBeFinal")
     private int[] motherMovements;
     private Game game;
 
@@ -18,10 +19,10 @@ public class ControllerRound {
         game=new Game(easy, nPlayer, nIsole);
 
     }
-
+/*
     public void controlPianification(){
         for(int i=0;i<Main.clouds.size();i++){
-            Main.clouds.set(i,Round.SetCloud(i,game));
+           // Main.clouds.set(i,Round.SetCloud(i,game));
             Main.bag-=3;
         }
         int []tmp=new int[actualOrder.length];
@@ -43,6 +44,8 @@ public class ControllerRound {
             tmp[k]=0;
         }
     }
+
+ */
 
 
     public int[] getActualOrder() {

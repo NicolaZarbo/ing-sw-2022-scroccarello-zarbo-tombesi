@@ -1,13 +1,10 @@
 package it.polimi.ingsw.model;
 
-
-import it.polimi.ingsw.messages.CloudMessage;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.model.token.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Turn {
     public static void moveInHall(int idPlayer,int idStud, Game game){
@@ -19,12 +16,16 @@ public class Turn {
             player.getHand().addCoin();
         if(Turn.canHaveTeacher(stud.getColor(),game,idPlayer))
             Turn.getTeacher(stud.getColor(),game,idPlayer);
+        //serverSendAll(new BoardMessage(game, idPlayer))
+
     }
 
-    public static void moveToIsland(int idPlayer,int idStud, int idIsland, Game game){
+    public static void moveToIsland(int idPlayer,int idStud, int idIsland, Game game) throws NullPointerException{
         Student stud = game.getPlayer(idPlayer).getBoard().getStudentFromEntrance(idStud);
         Island island = game.getIsland(idIsland);
         island.addStudent(stud);
+        //serverAppendAll(new IslandMessage())
+        //serverSendAll(new BoardMessage(game, idPlayer))
     }
     //moves mother nature and checks island
     public static void moveMotherNature(int steps,Game game){
@@ -32,6 +33,15 @@ public class Turn {
         MotherNature mother=game.getMotherNature();
         int j=islands.size();
         mother.changePosition(Math.floorMod(mother.getPosition()+steps,j));
+        int position = mother.getPosition();
+        Turn.islandConquest(position, game);
+        if (Turn.isUnifiableNext(game, position)) {
+            Turn.unifyNext(game, position);
+        }
+        if (Turn.isUnifiableBefore(game, position)) {
+            Turn.unifyBefore(game, position);
+        }
+        //sereversendAll(new MotherPositionMessage(game) TODO
     }
     //last action of the turn
     public static void moveFromCloudToEntrance(Game game,int cloudId,int playerId){
@@ -82,6 +92,7 @@ public class Turn {
             if (game.getMotherNature().getPosition() == pos + 1)
                 game.getMotherNature().changePosition(pos);
             }
+        //serverAppendAll(new IslandsMessage(game))
     }
     public static void unifyBefore(Game game, int pos) {
         int islandNumber = game.getIslands().size();
@@ -95,24 +106,26 @@ public class Turn {
             if (game.getMotherNature().getPosition() == pos - 1)
                 game.getMotherNature().changePosition(pos);
             }
-
+        //serverAppendAll(new IslandsMessage(game)) TODO
     }
     //if it is a team game, insert the mainplayer id in idPlayer
-    private static void putTowerFromBoardToIsland(Island island,Player player){
-        if(player!= null){
+    public static void putTowerFromBoardToIsland(Island island,Player player){
+
             Board board=player.getBoard();
             island.setTower(board.getTower());
-        }
+        //serverAppendAll(new IslandsMessage(game))
+        //serverSendAll(new SingleBoardMessage(game,player.getId()))
     }
     private static void changeTower(Island island , Player newOwner, Game game){
-        ArrayList<Tower> removedT= island.getTowers();
-        island.getTowers().clear();
-        Turn.putTowerFromBoardToIsland(island,newOwner);
+        ArrayList<Tower> removedT=new ArrayList<>(island.getTowers());
+        island.getTowers().removeAll(removedT);
         for (Player player: game.getPlayers()) {
             if(player.getColorT()==removedT.get(0).getColor()){
                 player.getBoard().addTower(removedT);
+                //serverAppendAll(new SingleBoardMessage(game,player.getId()))
             }
         }
+        Turn.putTowerFromBoardToIsland(island,newOwner);
     }
 
     //controllo se una board ha il diritto ad avere il prof del colore scelto
@@ -122,22 +135,22 @@ public class Turn {
         Player playercheck=game.getPlayer(playerId);
         Board playerBoard=playercheck.getBoard();
 
-            int tokenplayer = 0; //count dei token del player
-            int tempcount=0; //count dei token degli altri players
-            for (int i = 0; i < playerBoard.getDiningRoom()[color.ordinal()].length; i++)
-                    if(playerBoard.getDiningRoom()[TokenColor.getIndex(color)][i]!=null)
-                        tokenplayer++;
-            for(int j=0;j<players.length;j++){
-                tempcount=0;
-                if(!players[j].equals(playercheck)) {
-                    for (int i = 0; i < players[j].getBoard().getDiningRoom()[color.ordinal()].length; i++) {
-                        if (players[j].getBoard().getDiningRoom()[TokenColor.getIndex(color)][i] != null)
-                            tempcount++;
-                    }//card 2 effect
-                    if (tempcount >= tokenplayer && !(game.isBonusActive(2) && tempcount<=tokenplayer))
-                        b = false;
-                }
+           int tokenplayer = 0; //count dei token del player
+        int tempcount; //count dei token degli altri players
+        for (int i = 0; i < playerBoard.getDiningRoom()[color.ordinal()].length; i++)
+            if(playerBoard.getDiningRoom()[TokenColor.getIndex(color)][i]!=null)
+                tokenplayer++;
+        for (Player player : players) {
+            tempcount = 0;
+            if (!player.equals(playercheck)) {
+                for (int i = 0; i < player.getBoard().getDiningRoom()[color.ordinal()].length; i++) {
+                    if (player.getBoard().getDiningRoom()[TokenColor.getIndex(color)][i] != null)
+                        tempcount++;
+                }//card 2 effect
+                if (tempcount >= tokenplayer && !(game.isBonusActive(2) && tempcount <= tokenplayer))
+                    b = false;
             }
+        }
         return b;
     }
     public static void getTeacher(TokenColor color,Game game,int playerId){
@@ -148,16 +161,17 @@ public class Turn {
                 Professor temp=game.getFromGame(color);
                 game.getPlayer(playerId).getBoard().putProfessor(temp);
             }else{
-                for(int i=0;i<players.length;i++)
-                    if(players[i]!=playercheck && players[i].getBoard().getProfessor(color)!=null){
-                        Professor temp=players[i].getBoard().getProfessor(color);
-                        game.getPlayer(playerId).getBoard().putProfessor(temp);
-                        int playerTemp=players[i].getId();
-                        game.getPlayer(playerTemp).getBoard().removeProfessor(color);
-                    }
+                    for (Player player : players)
+                        if (player != playercheck && player.getBoard().getProfessor(color) != null) {
+                            Professor temp = player.getBoard().getProfessor(color);
+                            game.getPlayer(playerId).getBoard().putProfessor(temp);
+                            int playerTemp = player.getId();
+                            game.getPlayer(playerTemp).getBoard().removeProfessor(color);
+                        }
             }
 
         }
+        //serverSendAll(new SingleBoardMessage(game, playerId))
     }
 
     public static void useCharacter(int cardId, ParameterObject parameters, int playerId, Game game){
@@ -168,7 +182,7 @@ public class Turn {
             card.cardEffect( parameters,  game );
         }
         else
-        {}//TODO can't pay exception
+        {throw new RuntimeException("not enough money");}//TODO can't pay exception
     }
 
 
@@ -182,40 +196,39 @@ public class Turn {
         Player player = game.getPlayer(playerId);
         TowerColor color=player.getColorT();
         Student stud;
-        for(int i=0;i<students.size();i++){
-            stud = students.get(i);
-            if(player.getBoard().hasProfessor(stud.getColor()) && !(stud.getColor()==game.getTargetColor() && game.isBonusActive(9)))//card 9 effect
+        for (Student student : students) {
+            stud = student;
+            if (player.getBoard().hasProfessor(stud.getColor()) && !(stud.getColor() == game.getTargetColor() && game.isBonusActive(9)))//card 9 effect
                 influence++;
 
         }//card 6 effect
         if(!game.isBonusActive(6)){
             ArrayList<Tower> towers=where.getTowers();
-            for(int j=0;j<towers.size();j++){
-                if(color.equals(towers.get(j).getColor()))
+            for (Tower tower : towers) {
+                if (color.equals(tower.getColor()))
                     influence++;
-             }
+            }
         }
         return influence;
     }
     //call checks for influence and changes or inserts a tower
     public static void islandConquest(int islandId, Game game){
-        int influence, maxInf=0;
+        int  maxInf;
         Island island=game.getIsland(islandId);
-        Player conqueror=null;
-        Player[] players = game.getPlayers();
-        for (Player player: players) {
-            influence=Turn.calculateInfluence(game,player.getId());
-            if(influence > maxInf){
-                maxInf=influence;
-                conqueror=player;
-            }
+        Player conqueror;
+        ArrayList<Integer> influence= new ArrayList<>();
+        for (Player player: game.getPlayers()) {
+            influence.add(Turn.calculateInfluence(game,player.getId()));
         }
-
-        if( !island.getTowers().isEmpty() ){
-            if(island.getTowers().get(0).getColor() != conqueror.getColorT())
-               Turn.changeTower(island, conqueror, game);
-        } else
-            Turn.putTowerFromBoardToIsland(island,conqueror);
+        maxInf=influence.stream().max(Comparator.naturalOrder()).orElse(0);
+        if(Collections.frequency(influence, maxInf)==1) {
+            conqueror=game.getPlayer(influence.lastIndexOf(maxInf));
+            if (!island.getTowers().isEmpty()) {
+                if (island.getTowers().get(0).getColor() != conqueror.getColorT())
+                    Turn.changeTower(island, conqueror, game);
+            } else
+                Turn.putTowerFromBoardToIsland(island, conqueror);
+        }
     }
 
 

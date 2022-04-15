@@ -4,15 +4,14 @@ import java.util.LinkedList;
 
 public class Hand {
     private int coin;
-    private ArrayList<AssistantCard> assistant;
-    private LinkedList<AssistantCard> discarded;
+    private final ArrayList<AssistantCard> assistant;
+    private final LinkedList<AssistantCard> discarded;
 
     public Hand(ArrayList<AssistantCard> assistentiIniz){
         coin =0;
         assistant =new ArrayList<>();
         discarded=new LinkedList<>();
-        for(int i=0;i<assistentiIniz.size();i++)
-            assistant.add(assistentiIniz.get(i));
+        assistant.addAll(assistentiIniz);
     }
 
     public LinkedList<AssistantCard> getDiscarded() {

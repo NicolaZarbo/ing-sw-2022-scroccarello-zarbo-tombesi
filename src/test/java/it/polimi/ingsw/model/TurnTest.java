@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.character.Character1;
-import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.model.token.Student;
 import it.polimi.ingsw.model.token.TokenColor;
@@ -11,8 +10,6 @@ import junit.framework.TestCase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
-import java.util.stream.Stream;
 
 public class TurnTest extends TestCase {
     Game game;
@@ -55,13 +52,13 @@ public class TurnTest extends TestCase {
             board.getStudentFromEntrance(board.getEntrance().get(4).getId());
         }
 
-        Round.SetCloud(1,game);
-        Integer[] studOnCloudID =  Arrays.stream(cloud.getStud()).map(student -> Integer.valueOf( student.getId())).toArray(Integer[]::new);
+        Round.SetCloud(game);
+        Integer[] studOnCloudID =  Arrays.stream(cloud.getStud()).map(student -> student.getId()).toArray(Integer[]::new);
         assertTrue(board.getEntrance().size()<=board.entranceSize);
         Turn.moveFromCloudToEntrance(game,1,1);
         int nOfStudentsMovedFound=0;
         for (Integer studId:studOnCloudID) {
-            if(board.getEntrance().stream().map(student -> student.getId()).anyMatch(s->s==studId))
+            if(board.getEntrance().stream().map(student -> student.getId()).anyMatch(s-> s.equals(studId)))
                 nOfStudentsMovedFound++;
         }
         assertEquals(game.getClouds()[0].getStud().length,nOfStudentsMovedFound);
@@ -137,7 +134,7 @@ public class TurnTest extends TestCase {
             System.out.println("id ISola : "+island.getID());
             for (Tower tower:island.getTowers()) {
                 System.out.println( "torre : "+ tower.getId()+" "+tower.getColor());
-            };
+            }
         }
 
     }
@@ -154,5 +151,40 @@ public class TurnTest extends TestCase {
             System.out.println(student.getId());
         }
         assertTrue(game.getIsland(1).getStudents().stream().map(Student::getId).toList().contains(studIdOnCard));
+    }
+
+    public void testConquerIsland() {
+        Student stud=game.getPlayer(1).getBoard().getEntrance().get(0);
+        Turn.moveInHall(1,stud.getId() ,game);
+        int inf;
+         for (Island isl: game.getIslands()) {
+             inf=0;
+             for (Student student: isl.getStudents()) {
+                 if(stud.getColor()==student.getColor())
+                     inf++;
+             }
+            Turn.moveMotherNature(1,game);
+            if(isl.getTowers().size()>0)
+                assertTrue(inf>0);
+        }
+    }
+
+    public void testChangeIslandOwner() {
+        Island isl= game.getIsland(7);
+        Turn.putTowerFromBoardToIsland(isl,game.getPlayer(1));
+        ArrayList<Student> sttuddd= new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            sttuddd.add(new Student(i+100, TokenColor.blue));
+        }
+        isl.addAllStudents(sttuddd);
+        Player pl = game.getPlayer(0);
+        pl.getBoard().moveToDiningRoom(new Student(500,TokenColor.blue));
+        if(Turn.canHaveTeacher(TokenColor.blue,game,pl.getId()))
+            Turn.getTeacher(TokenColor.blue,game,pl.getId());
+        assertTrue(pl.getBoard().hasProfessor(TokenColor.blue));
+        Turn.moveMotherNature(7,game);
+        assertTrue(isl.getTowers().get(0).getColor()==TowerColor.black);
+
+
     }
 }

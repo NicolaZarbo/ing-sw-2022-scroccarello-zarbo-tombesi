@@ -7,8 +7,8 @@ public class Character10 extends CharacterCard{
     public Character10(int id) {
         super(id);
     }
-
-    @Override /** param player id, students ID from entrance and from hall */
+    /** param player id, students ID from entrance and from hall */
+    @Override
     public void cardEffect(ParameterObject parameters, Game game) {
         Board board ;
         int nStudent =parameters.getTargetStudentsOnEntrance().length;

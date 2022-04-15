@@ -60,7 +60,7 @@ public class Main {
 
             }
             ControllerRound round=new ControllerRound(cardTemp,numPlayers);
-            round.controlPianification();
+           // round.controlPianification();
             ordturn=round.getActualOrder();
 
             //pesca 3 students dal bag

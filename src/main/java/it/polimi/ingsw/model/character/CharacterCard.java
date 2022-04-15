@@ -4,10 +4,9 @@ package it.polimi.ingsw.model.character;
 import it.polimi.ingsw.model.Card;
 import it.polimi.ingsw.model.Game;
 
-import java.util.List;
 // we will have to use a strategy Pattern with the method isInstanceOff() to show the view information about 4 particular cards
 public abstract class CharacterCard extends Card {
-    private int id;
+    private final int id;
     private int cost;
 
     public CharacterCard(int id){
