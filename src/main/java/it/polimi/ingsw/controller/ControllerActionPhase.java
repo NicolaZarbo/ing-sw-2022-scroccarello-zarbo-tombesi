@@ -1,79 +1,54 @@
 package it.polimi.ingsw.controller;
+import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.messages.client.*;
-import it.polimi.ingsw.messages.server.ErrorMessageForClient;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Turn;
-import it.polimi.ingsw.observer.Observable;
 
-public class ControllerActionPhase extends Observable<ErrorMessageForClient> {
+
+public class ControllerActionPhase  {
 
     private int idPlayerNow;
     private final Game game;
     private final Turn modelTurn;
 
-    private void sendMessageError(RuntimeException e) {
-        ErrorMessageForClient error =new ErrorMessageForClient(this.idPlayerNow,e);
-        this.notify(error);
-    }
-
     public void moveStudentToHall(StudentToHallMessage message){
-        try {
-            modelTurn.moveInHall(this.idPlayerNow, message.getStudentId());
-        }catch (NullPointerException e){
-            sendMessageError(e);
-        }
+        if(game.getActualState()!= GameState.actionMoveStudent)
+            throw new IllegalMoveException();
+        modelTurn.moveInHall(this.idPlayerNow, message.getStudentId());
     }
     public void moveStudentToIsland(StudentToIslandMessage message){
-        try {
-            modelTurn.moveToIsland(this.idPlayerNow,message.getStudentId(),message.getFinalPositionId());
-        }catch(NullPointerException e){
-             sendMessageError(e);
-        }
+        if(game.getActualState()!= GameState.actionMoveStudent)
+            throw new IllegalMoveException();
+        modelTurn.moveToIsland(this.idPlayerNow,message.getStudentId(),message.getFinalPositionId());
     }
 
     public void moveMotherNature(MoveMotherMessage message){
+        if(game.getActualState()!= GameState.actionMoveMother)
+            throw new IllegalMoveException();
         if(message.getSteps()>game.getPlayedCard(game.getCurrentPlayerId()).getMoveMother())//this can be moved to a thrown exception in moveMotherNature
-            sendMessageError(new RuntimeException("too many steps!"));
+            throw new RuntimeException("too many steps!");
         else {
-            try {
                 modelTurn.moveMotherNature(message.getSteps());
-            }catch (RuntimeException e){
-                sendMessageError(e);
-            }
-
         }
     }
 
     public void chooseCloud(ChooseCloudMessage message){
-        try {
-            modelTurn.moveFromCloudToEntrance(message.getCloudId(), this.idPlayerNow);
-        }catch (RuntimeException e){
-            sendMessageError(e);
-        }
+        if(game.getActualState()!= GameState.actionChooseCloud)
+            throw new IllegalMoveException();
+        modelTurn.moveFromCloudToEntrance(message.getCloudId(), this.idPlayerNow);
     }
     public void changeTurn(){
         this.idPlayerNow= game.getCurrentPlayerId();
     }
     public ControllerActionPhase(Game game){
         this.game=game;
-        this.modelTurn =new Turn(game);
+        this.modelTurn =game.getActionPhase();
     }
 
-   /* public boolean canUseCharacter(){
-        int cost=0;
-        // int cost= game.getCharacters(character).getCost();
-        return game.getPlayer(idPlayerNow).getHand().enoughCoin(cost);
-    }
-
-    */
 
     public void playCharacter(CharacterCardMessage message) {
-        try {
-            modelTurn.useCharacter(message.getCardId(), message.getParameters(), message.getPlayerId());
-        }catch (RuntimeException e){
-            this.sendMessageError(e);
-        }
-
+        modelTurn.useCharacter(message.getCardId(), message.getParameters(), message.getPlayerId());
     }
 
 

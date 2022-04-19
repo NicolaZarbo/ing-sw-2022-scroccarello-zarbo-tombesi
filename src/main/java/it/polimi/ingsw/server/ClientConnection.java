@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server;
 
+import it.polimi.ingsw.messages.LobbySetupMessage;
 import it.polimi.ingsw.observer.Observable;
 
 import java.io.IOException;
@@ -32,8 +33,16 @@ public class ClientConnection extends Observable<String> implements Runnable{
             this.out= new PrintWriter(clientSocket.getOutputStream());
             send("Welcome!\nWhat is your name?");
             String read = in.nextLine();
-            String name = read;
-            server.lobby(this, name);
+            String name = read.toUpperCase();
+            if(server.availableLobby()){
+                server.lobby(this, name);
+            }else {
+                send("no lobby available\nCreating new lobby, number of player?");
+                String nPlayer = in.nextLine();
+                send("difficulty easy? y/n");
+                String difficulty = in.nextLine();
+                server.createLobby(this,name, Integer.parseInt(nPlayer), Boolean.parseBoolean(difficulty));
+            }
 
             while(isActive()) {
                 read = in.nextLine();
@@ -42,6 +51,9 @@ public class ClientConnection extends Observable<String> implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+    public void setUpLobby(LobbySetupMessage message){
 
     }
     public void asyncSend(final String message){

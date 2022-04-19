@@ -15,6 +15,7 @@ public class MultipleServerMessage extends ServerMessage{
     }
 
     public MultipleServerMessage(ServerMessage firstMessage) {
+        super(firstMessage);
         messages= new ArrayList<>();
         messages.add(firstMessage);
         this.serialized=false;

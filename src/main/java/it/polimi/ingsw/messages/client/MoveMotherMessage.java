@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages.client;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.controller.Controller;
 
 public class MoveMotherMessage extends ClientMessage {
     private  int steps;
@@ -13,6 +14,11 @@ public class MoveMotherMessage extends ClientMessage {
 
     public MoveMotherMessage(String json) {
         super(json);
+    }
+
+    @Override
+    public void doAction(Controller controller) {
+        controller.getControllerTurn().moveMotherNature(this);
     }
 
     public MoveMotherMessage(int steps, int playerId) {

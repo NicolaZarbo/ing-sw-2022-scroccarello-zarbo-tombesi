@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages.client;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.controller.Controller;
 
 public class StudentToHallMessage extends ClientMessage {
 
@@ -9,6 +10,11 @@ public class StudentToHallMessage extends ClientMessage {
 
     public StudentToHallMessage(String json) {
         super(json);
+    }
+
+    @Override
+    public void doAction(Controller controller) {
+        controller.getControllerTurn().moveStudentToHall(this);
     }
 
     public StudentToHallMessage(int playerId, int studentId) {

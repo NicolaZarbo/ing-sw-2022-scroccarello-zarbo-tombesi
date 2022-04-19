@@ -2,39 +2,47 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.LobbyPlayer;
+import it.polimi.ingsw.view.RemoteView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Lobby {
-    private ArrayList<ClientConnection> connections = new ArrayList<>();
-    private int lobbyCode, lobbyDimension;
+    private final ArrayList<ClientConnection> connections = new ArrayList<>();
+    private final int lobbyCode;
+    private final int lobbyDimension;
     private Game model;
-    private ArrayList<LobbyPlayer> prePlayers= new ArrayList<>(lobbyDimension);
+    private final ArrayList<RemoteView> playersViews;
     private Controller controller;
-    private boolean easy;
+    private final boolean easy;
 
-    public Lobby(ClientConnection firstConnection, int lobbyCode, int lobbyDimension, boolean easy) {
+    /** creates the lobby with the number of player and the first player connection*/
+    public Lobby(ClientConnection firstConnection, int lobbyCode, boolean easy, int lobbyDimension, String nickname) {
         connections.add(firstConnection);
-        this.lobbyDimension=lobbyDimension;
-        this.easy=easy;
+        playersViews=new ArrayList<>();
+        playersViews.add(new RemoteView(firstConnection,nickname));
         this.lobbyCode = lobbyCode;
+        this.easy=easy;
+        this.lobbyDimension=lobbyDimension;
     }
-    public void addConnection(ClientConnection connection){
+    public void addConnection(ClientConnection connection , String nickname){
         connections.add(connection);
-    }
-    public void addPrePlayer(LobbyPlayer prePlayer){
-        prePlayers.add(prePlayer);
+        playersViews.add(new RemoteView(connection, nickname));
     }
 
     public ArrayList<ClientConnection> getConnections() {
         return connections;
     }
     public void startGame(){
-        model = new Game(easy,prePlayers);
+        model = new Game(easy, getLobbyDimension());
         controller = new Controller(model);
-        //foreach connection create remote view
-        //foreach view add observer of model and from controller
+        for (RemoteView view: playersViews) {
+            model.addObserver(view);
+            model.getActionPhase().addObserver(view);
+            model.getSetupPhase().addObserver(view);
+            model.getPlanningPhase().addObserver(view);
+            view.addObserver(controller);
+        }
     }
     public int getLobbyCode() {
         return lobbyCode;

@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages.client;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.character.ParameterObject;
 
 public class CharacterCardMessage extends ClientMessage{
@@ -9,6 +10,11 @@ public class CharacterCardMessage extends ClientMessage{
     int cardId;
     protected CharacterCardMessage(String json) {
         super(json);
+    }
+
+    @Override
+    public void doAction(Controller controller) {
+        controller.getControllerTurn().playCharacter(this);
     }
 
     public CharacterCardMessage(int playerId, ParameterObject parameters,int cardId) {

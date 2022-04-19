@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages.client;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.controller.Controller;
 
 public class ChooseCloudMessage extends ClientMessage{
     private int cloudId;
@@ -12,6 +13,11 @@ public class ChooseCloudMessage extends ClientMessage{
 
     public ChooseCloudMessage(String json) {
         super(json);
+    }
+
+    @Override
+    public void doAction(Controller controller) {
+        controller.getControllerTurn().chooseCloud(this);
     }
 
     public ChooseCloudMessage(int cloudId, int playerId) {

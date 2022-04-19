@@ -17,7 +17,7 @@ public class Game extends Observable<ServerMessage> {
     private final boolean easy;
     private final int nPlayers;
     private final List<Island> islands;
-    private final Player[] players;
+    private  Player[] players;
     private Cloud[] clouds;
     private MotherNature motherNature;
     private int currentPlayerId;
@@ -28,14 +28,85 @@ public class Game extends Observable<ServerMessage> {
     private final List<CharacterCard> characters;
     private int cardBonusActive;
     private TokenColor targetColor;
+    private Turn actionPhase;
+    private Setup setupPhase;
+    private Round planningPhase;
+    private GameState actualState;
 
 
 
-    public List<Integer> getPlayIngOrder() {
-        return playIngOrder;
+
+
+    /** creates a game with the list of players from the server*/
+    public Game(boolean easy, int numberOfPlayer){
+        actionPhase= new Turn(this);
+        planningPhase= new Round(this);
+        setupPhase = new Setup(this);
+        this.easy=easy;
+        this.nPlayers =numberOfPlayer;
+        this.bag=new Bag(10,5);
+        this.islands=Setup.createIslands(12,bag);
+        this.clouds= Setup.createClouds(nPlayers);
+        this.players =new Player[numberOfPlayer];
+        this.teachers= Setup.createProfessor(5);
+        this.motherNature=new MotherNature(islands.get(0).getID());
+        if(!easy){
+            this.characters= Setup.createCharacterCards(bag,9);
+        }
+        else{characters=null;}
+        this.cardBonusActive=0;
+        this.cardPlayedThisRound=new HashMap<>();
+        actualState=GameState.setupPlayers;
+        //this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();TODO
     }
-    public void setPlayIngOrder(List<Integer> playIngOrder) {
-        this.playIngOrder = playIngOrder;
+    /** creates a game starting from the number of players, no specific nickname*/
+    public Game(boolean easy, int nPlayers, int nIsole){
+        this.easy=easy;
+        this.nPlayers =nPlayers;
+        ArrayList<LobbyPlayer>  lobbyPlayers= new ArrayList<>();
+        for (int i = 0; i < nPlayers; i++) {
+            if(nPlayers==4 && (i==2 || i==3))
+                lobbyPlayers.add(new LobbyPlayer(TowerColor.getColor(i-2), Mage.getMage(i),"nick: "+i));
+           else
+               lobbyPlayers.add(new LobbyPlayer(TowerColor.getColor(i), Mage.getMage(i),"nick: "+i));
+        }
+        this.bag=new Bag(10,5);
+        this.islands=Setup.createIslands(nIsole,bag);
+        this.clouds= Setup.createClouds(nPlayers);
+        this.players =Setup.createPlayer(easy, lobbyPlayers, bag);
+        this.teachers= Setup.createProfessor(5);
+        this.motherNature=new MotherNature(islands.get(0).getID());
+        if(!easy){
+            this.characters= Setup.createCharacterCards(bag,9);
+        }
+        else{characters=null;}
+        this.cardBonusActive=0;
+        this.cardPlayedThisRound=new HashMap<>();
+        this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();
+    }
+    public void moveToNextPhase(){
+        int before = actualState.ordinal();
+        actualState= GameState.values()[before+1];
+    }
+
+    public GameState getActualState() {
+        return actualState;
+    }
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
+    }
+
+    public Round getPlanningPhase() {
+        return planningPhase;
+    }
+
+    public Turn getActionPhase() {
+        return actionPhase;
+    }
+
+    public Setup getSetupPhase() {
+        return setupPhase;
     }
 
     public void changePlayerTurn(){
@@ -67,46 +138,13 @@ public class Game extends Observable<ServerMessage> {
         }
         return null; //input Exception(?)
     }
-/** creates a game with the list of players from the server*/
-    public Game(boolean easy, ArrayList<LobbyPlayer> lobbyPlayers){
-        this.easy=easy;
-        this.nPlayers =lobbyPlayers.size();
-        this.bag=new Bag(10,5);
-        this.islands=Setup.createIslands(12,bag);
-        this.clouds= Setup.createClouds(nPlayers);
-        this.players =Setup.createPlayer(easy, lobbyPlayers, bag);//genera giocatori con le lore rispettive board e mani
-        this.teachers= Setup.createProfessor(5);
-        this.motherNature=new MotherNature(islands.get(0).getID());
-        if(!easy){
-        this.characters= Setup.createCharacterCards(bag,9);
-        }
-        else{characters=null;}
-        this.cardBonusActive=0;
-        this.cardPlayedThisRound=new HashMap<>();
-        this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();
+    public List<Integer> getPlayIngOrder() {
+        return playIngOrder;
     }
-    /** creates a game starting from the number of players, no specific nickname*/
-    public Game(boolean easy, int nPlayers, int nIsole){
-        this.easy=easy;
-        this.nPlayers =nPlayers;
-        ArrayList<LobbyPlayer>  lobbyPlayers= new ArrayList<>();
-        for (int i = 0; i < nPlayers; i++) {
-            lobbyPlayers.add(new LobbyPlayer(TowerColor.getColor(i), Mage.getMage(i),"nick: "+i));
-        }
-        this.bag=new Bag(10,5);
-        this.islands=Setup.createIslands(nIsole,bag);
-        this.clouds= Setup.createClouds(nPlayers);
-        this.players =Setup.createPlayer(easy, lobbyPlayers, bag);
-        this.teachers= Setup.createProfessor(5);
-        this.motherNature=new MotherNature(islands.get(0).getID());
-        if(!easy){
-            this.characters= Setup.createCharacterCards(bag,9);
-        }
-        else{characters=null;}
-        this.cardBonusActive=0;
-        this.cardPlayedThisRound=new HashMap<>();
-        this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();
+    public void setPlayIngOrder(List<Integer> playIngOrder) {
+        this.playIngOrder = playIngOrder;
     }
+
 
     public boolean isBonusActive(int bonus) {
         return cardBonusActive==bonus;

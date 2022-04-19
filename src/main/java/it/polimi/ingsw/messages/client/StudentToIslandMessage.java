@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages.client;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.controller.Controller;
 
 public class StudentToIslandMessage extends ClientMessage {
     private int studentId, finalPositionId;
@@ -16,6 +17,11 @@ public class StudentToIslandMessage extends ClientMessage {
     }
     public StudentToIslandMessage(String json){
         super(json);
+    }
+
+    @Override
+    public void doAction(Controller controller) {
+        controller.getControllerTurn().moveStudentToIsland(this);
     }
 
     @Override

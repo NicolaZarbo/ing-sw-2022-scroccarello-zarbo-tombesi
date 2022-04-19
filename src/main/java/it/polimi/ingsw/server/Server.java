@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server;
 
+import it.polimi.ingsw.messages.LobbySetupMessage;
 import it.polimi.ingsw.model.LobbyPlayer;
 import it.polimi.ingsw.model.Mage;
 import it.polimi.ingsw.model.token.TowerColor;
@@ -8,44 +9,36 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
-    private ServerSocket serverSocket;
+    private final ServerSocket serverSocket;
     private int serverPort;
-    private ExecutorService executor = Executors.newFixedThreadPool(128);
-    private List<Lobby> lobbies= new ArrayList<>();
-
-
-
+    private final ExecutorService executor = Executors.newFixedThreadPool(128);
+    private final List<Lobby> lobbies= new ArrayList<>();
 
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(serverPort);
     }
+    //it would be better to not have the whole method as siyncronized but only some part of it
     public synchronized void lobby(ClientConnection connection, String nickname){
         Lobby last = lobbies.get(lobbies.size()-1);
         if(last.getLobbyDimension()>last.numberOfConnections())
-            last.addConnection(connection);
-        else {
-            connection.asyncSend("how many player? ");
-            int lobDim = 2;//receives player number for game
-            connection.asyncSend("easy rules? Y/N ");
-            boolean easyRules=true;
-            lobbies.add(new Lobby(connection, last.getLobbyCode() + 1, lobDim, easyRules));
-
-        }
-        connection.asyncSend("Choose tower color ");
-        connection.asyncSend("Choose mage ");
-        LobbyPlayer prePlayer = new LobbyPlayer(TowerColor.black, Mage.mage1,"giorgioByMoroder");
+            last.addConnection(connection,nickname);
         if(last.getLobbyDimension()==last.numberOfConnections())
             last.startGame();
-
     }
-
+    public synchronized boolean availableLobby(){
+        Lobby last = lobbies.get(lobbies.size()-1);
+        return (last.getLobbyDimension()>last.numberOfConnections());
+    }
+    public synchronized void createLobby(ClientConnection connection, String nick,int dimension, boolean easy){
+        int newLobbyCode = lobbies.size();
+        Lobby last = new Lobby(connection, newLobbyCode,easy,dimension, nick);
+        lobbies.add(last);
+    }
 
     public void run(){
         int connections = 0;

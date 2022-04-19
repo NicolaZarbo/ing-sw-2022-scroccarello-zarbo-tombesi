@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 import it.polimi.ingsw.exceptions.MessageErrorException;
 import it.polimi.ingsw.messages.client.*;
 import it.polimi.ingsw.messages.server.*;
-
+//TODO add all the messages missing
 public class MessageFactory {
     public static ServerMessage getMessageFromServer(String json){
         JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
@@ -35,6 +35,18 @@ public class MessageFactory {
             case "StudentToHallMessage" -> new StudentToHallMessage(json);
             case "PlayAssistantMessage" -> new PlayAssistantMessage(json);
             case "StudentToIslandMessage" -> new StudentToIslandMessage(json);
+            default -> throw new MessageErrorException("no corresponding message type, found :" + type);
+        };
+    }
+    public static GenericMessage setUpMessageFactory(String json){
+        JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
+        String type= jj.get("messageType").getAsString();
+        if(type==null)
+            throw new MessageErrorException("missing message Type");
+        return switch (type) {
+            case "PlayerSetUpMessage" -> new PlayerSetUpMessage(json);
+            case "PrePlayerMessage" -> new PrePlayerMessage(json);
+            case "LobbySetupMessage" -> new LobbySetupMessage(json);
             default -> throw new MessageErrorException("no corresponding message type, found :" + type);
         };
     }

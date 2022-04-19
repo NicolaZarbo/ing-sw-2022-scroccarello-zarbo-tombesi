@@ -9,7 +9,8 @@ import static it.polimi.ingsw.model.Mage.*;
 import static it.polimi.ingsw.model.token.TowerColor.*;
 
 public class ControllerRoundTest extends TestCase {
-    int [] cardTest={9,9,1,4};
+    public void test(){}
+    /* int [] cardTest={9,9,1,4};
     Game game=new Game(false,4,10);
    // ControllerRound cTest=new ControllerRound(cardTest,4);
 
@@ -17,7 +18,7 @@ public class ControllerRoundTest extends TestCase {
         for(int i=0;i<this.cardTest.length;i++)
             System.out.println("player "+(i+1)+" wants to play card num "+this.cardTest[i]);
     }
-    /*
+
     public void testPianification(){
         ArrayList<AssistantCard> a1=new ArrayList<AssistantCard>();
         ArrayList<AssistantCard> a2=new ArrayList<AssistantCard>();

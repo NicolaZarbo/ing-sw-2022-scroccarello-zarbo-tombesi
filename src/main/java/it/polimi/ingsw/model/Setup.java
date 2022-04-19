@@ -1,11 +1,49 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
+import it.polimi.ingsw.messages.server.ServerMessage;
+import it.polimi.ingsw.messages.server.WholeGameMessage;
 import it.polimi.ingsw.model.character.*;
 import it.polimi.ingsw.model.token.*;
+import it.polimi.ingsw.observer.Observable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class Setup {
+public class Setup extends Observable<ServerMessage> {
+    private Game game;
+    private ArrayList<TowerColor> availableColor;
+    private ArrayList<Mage> availableMages ;
+    private ArrayList<LobbyPlayer> prePlayers;
+
+
+    public Setup(Game game){
+        this.game=game;
+        availableColor= new ArrayList<>(List.of(TowerColor.values()));
+        availableMages = new ArrayList<>(List.of(Mage.values()));
+        prePlayers= new ArrayList<>(game.getNPlayers());
+        this.notify(new PlayerSetUpMessage(game));
+    }
+    public void addPrePlayer(LobbyPlayer prePlayer){
+        if(prePlayers.size()< game.getNPlayers()) {
+            prePlayers.add(prePlayer);
+            this.notify(new PlayerSetUpMessage(game));
+        }
+        else throw new RuntimeException("no space for more players");
+        if(prePlayers.size()== game.getNPlayers()){
+            game.setPlayers(Setup.createPlayer(game.isEasy(), prePlayers,game.getBag()));
+            this.notify(new WholeGameMessage(game));
+        }
+    }
+
+    public ArrayList<TowerColor> getAvailableColor() {
+        return availableColor;
+    }
+
+    public ArrayList<Mage> getAvailableMages() {
+        return availableMages;
+    }
+
     public static List<Island> createIslands(int nIsole, Bag bag){
         List<Island> islands = new ArrayList<>();
         Island isl;
