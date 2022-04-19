@@ -1,14 +1,11 @@
 package it.polimi.ingsw.controller;
-import it.polimi.ingsw.messages.client.ChooseCloudMessage;
-import it.polimi.ingsw.messages.client.MoveMotherMessage;
+import it.polimi.ingsw.messages.client.*;
 import it.polimi.ingsw.messages.server.ErrorMessageForClient;
-import it.polimi.ingsw.messages.client.StudentToHallMessage;
-import it.polimi.ingsw.messages.client.StudentToIslandMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Turn;
 import it.polimi.ingsw.observer.Observable;
 
-public class ControllerTurn extends Observable<ErrorMessageForClient> {
+public class ControllerActionPhase extends Observable<ErrorMessageForClient> {
 
     private int idPlayerNow;
     private final Game game;
@@ -35,7 +32,7 @@ public class ControllerTurn extends Observable<ErrorMessageForClient> {
     }
 
     public void moveMotherNature(MoveMotherMessage message){
-        if(message.getSteps()>game.getPlayedCard(game.getCurrentPlayerId()).getMoveMother())
+        if(message.getSteps()>game.getPlayedCard(game.getCurrentPlayerId()).getMoveMother())//this can be moved to a thrown exception in moveMotherNature
             sendMessageError(new RuntimeException("too many steps!"));
         else {
             try {
@@ -57,22 +54,29 @@ public class ControllerTurn extends Observable<ErrorMessageForClient> {
     public void changeTurn(){
         this.idPlayerNow= game.getCurrentPlayerId();
     }
-    public ControllerTurn(Game game){
+    public ControllerActionPhase(Game game){
         this.game=game;
         this.modelTurn =new Turn(game);
     }
 
-    /*
-    public boolean canUseCharacter(){
+   /* public boolean canUseCharacter(){
         int cost=0;
         // int cost= game.getCharacters(character).getCost();
         return game.getPlayer(idPlayerNow).getHand().enoughCoin(cost);
     }
-    public void playCharacter(int character, ArrayList<Integer> inputPar) {
-        Turn.useCharacter(character,inputPar,game);
-        //to notify changes in the game an observer is needed
+
+    */
+
+    public void playCharacter(CharacterCardMessage message) {
+        try {
+            modelTurn.useCharacter(message.getCardId(), message.getParameters(), message.getPlayerId());
+        }catch (RuntimeException e){
+            this.sendMessageError(e);
+        }
 
     }
-    */
+
+
+
 
 }

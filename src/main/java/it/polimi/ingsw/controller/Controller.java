@@ -1,18 +1,17 @@
 package it.polimi.ingsw.controller;
 
-import com.google.gson.Gson;
 import it.polimi.ingsw.messages.client.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.observer.Observer;
 
 public class Controller implements Observer<ClientMessage> {
     protected final Game game;
-    private final ControllerRound controllerRound;
-    private final ControllerTurn controllerTurn;
+    private final ControllerPlanningPhase controllerRound;
+    private final ControllerActionPhase controllerTurn;
     public  Controller(Game game){
         this.game=game;
-        this.controllerRound =new ControllerRound(game);
-        this.controllerTurn = new ControllerTurn(game);
+        this.controllerRound =new ControllerPlanningPhase(game);
+        this.controllerTurn = new ControllerActionPhase(game);
     }
     @Override
     public void update(ClientMessage message) {

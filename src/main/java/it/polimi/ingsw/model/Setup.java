@@ -38,15 +38,15 @@ public class Setup {
         }
         return profs;
     }
-    public static Player[] createPlayer(boolean easy , int nPlayer, Bag bag){
-
+    public static Player[] createPlayer(boolean easy , ArrayList<LobbyPlayer> prePlayers, Bag bag){
+        int nPlayer=prePlayers.size();
         Player[] players =new Player[nPlayer];
 
         for (int id=0; id<nPlayer;id++){
             Hand man= Setup.createHand(id, easy, 10);
             TowerColor towerColor = Setup.playerColor(id, nPlayer);
             Board plan = Setup.createBoard(id, nPlayer, towerColor, bag);
-            players[id]= new Player(id, Mage.getMage(id), man, plan, towerColor);
+            players[id]= new Player(prePlayers.get(id),id, man, plan);
         }
         return players;
     }

@@ -4,8 +4,10 @@ import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.model.character.*;
 import it.polimi.ingsw.model.token.Professor;
 import it.polimi.ingsw.model.token.TokenColor;
+import it.polimi.ingsw.model.token.TowerColor;
 import it.polimi.ingsw.observer.Observable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +37,13 @@ public class Game extends Observable<ServerMessage> {
     public void setPlayIngOrder(List<Integer> playIngOrder) {
         this.playIngOrder = playIngOrder;
     }
+
+    public void changePlayerTurn(){
+        int actualIndex = playIngOrder.indexOf(currentPlayerId);
+        if(actualIndex<nPlayers-1)
+            currentPlayerId=playIngOrder.get(actualIndex+1);
+        else throw new RuntimeException("no player next");
+    }
     public AssistantCard getPlayedCard(int playerId){
         return cardPlayedThisRound.get(playerId);
     }
@@ -58,14 +67,14 @@ public class Game extends Observable<ServerMessage> {
         }
         return null; //input Exception(?)
     }
-
-    public Game(boolean easy, int nPlayer, int nIsole){
+/** creates a game with the list of players from the server*/
+    public Game(boolean easy, ArrayList<LobbyPlayer> lobbyPlayers){
         this.easy=easy;
-        this.nPlayers =nPlayer;
+        this.nPlayers =lobbyPlayers.size();
         this.bag=new Bag(10,5);
-        this.islands=Setup.createIslands(nIsole,bag);
-        this.clouds= Setup.createClouds(nPlayer);
-        this.players =Setup.createPlayer(easy, nPlayer, bag);//genera giocatori con le lore rispettive board e mani
+        this.islands=Setup.createIslands(12,bag);
+        this.clouds= Setup.createClouds(nPlayers);
+        this.players =Setup.createPlayer(easy, lobbyPlayers, bag);//genera giocatori con le lore rispettive board e mani
         this.teachers= Setup.createProfessor(5);
         this.motherNature=new MotherNature(islands.get(0).getID());
         if(!easy){
@@ -74,7 +83,29 @@ public class Game extends Observable<ServerMessage> {
         else{characters=null;}
         this.cardBonusActive=0;
         this.cardPlayedThisRound=new HashMap<>();
-        this.playIngOrder= Arrays.stream(players).map(Player::getId).toList();
+        this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();
+    }
+    /** creates a game starting from the number of players, no specific nickname*/
+    public Game(boolean easy, int nPlayers, int nIsole){
+        this.easy=easy;
+        this.nPlayers =nPlayers;
+        ArrayList<LobbyPlayer>  lobbyPlayers= new ArrayList<>();
+        for (int i = 0; i < nPlayers; i++) {
+            lobbyPlayers.add(new LobbyPlayer(TowerColor.getColor(i), Mage.getMage(i),"nick: "+i));
+        }
+        this.bag=new Bag(10,5);
+        this.islands=Setup.createIslands(nIsole,bag);
+        this.clouds= Setup.createClouds(nPlayers);
+        this.players =Setup.createPlayer(easy, lobbyPlayers, bag);
+        this.teachers= Setup.createProfessor(5);
+        this.motherNature=new MotherNature(islands.get(0).getID());
+        if(!easy){
+            this.characters= Setup.createCharacterCards(bag,9);
+        }
+        else{characters=null;}
+        this.cardBonusActive=0;
+        this.cardPlayedThisRound=new HashMap<>();
+        this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();
     }
 
     public boolean isBonusActive(int bonus) {
@@ -101,8 +132,8 @@ public class Game extends Observable<ServerMessage> {
             if(island.getID()==id)
                 return island;
         }
-        //throw new NullPointerException("no island with such id");
-        return  null;
+        return null;
+        //throw new NullPointerException("island not available");
     }
     public Bag getBag(){
         return bag;

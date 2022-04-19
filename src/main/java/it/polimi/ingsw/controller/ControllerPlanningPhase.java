@@ -5,12 +5,12 @@ import it.polimi.ingsw.model.Round;
 
 import java.util.List;
 
-public class ControllerRound {
+public class ControllerPlanningPhase {
 
     private Game game;
     private final Round modelRound;
 
-    public ControllerRound(Game game){
+    public ControllerPlanningPhase(Game game){
         this.modelRound= new Round(game);
     }
 

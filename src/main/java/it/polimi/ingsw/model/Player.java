@@ -8,11 +8,13 @@ public class Player {
     private Hand hand;
     private Board board;
     private final int id;
+    private final String nickname;
 
-    public Player(int id, Mage mag, Hand man, Board board,TowerColor color){
+    public Player(LobbyPlayer prePlayer, int id, Hand man, Board board){
         this.id=id;
-        colorT= color;
-        mage =mag;
+        this.nickname=prePlayer.getNickname();
+        colorT= prePlayer.getTowerColor();
+        mage =prePlayer.getMage();
         hand =man;
         this.board = board;
         

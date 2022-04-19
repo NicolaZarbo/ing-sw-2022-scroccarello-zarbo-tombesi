@@ -102,6 +102,7 @@ public class TurnTest extends TestCase {
         assertNotNull(game.getIsland(1));
         assertTrue(game.getIsland(0)==null);
         assertTrue("size isl: "+game.getIsland(1).getIslandSize(),game.getIsland(1).getIslandSize()==2);
+       // System.out.println(game.getMotherNature().getPosition()+ " size islands "+ game.getIslands().size() + " isola ");
     }
 
     public void testCanHaveTeacher() {

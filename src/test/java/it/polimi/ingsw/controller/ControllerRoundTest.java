@@ -17,6 +17,7 @@ public class ControllerRoundTest extends TestCase {
         for(int i=0;i<this.cardTest.length;i++)
             System.out.println("player "+(i+1)+" wants to play card num "+this.cardTest[i]);
     }
+    /*
     public void testPianification(){
         ArrayList<AssistantCard> a1=new ArrayList<AssistantCard>();
         ArrayList<AssistantCard> a2=new ArrayList<AssistantCard>();
@@ -36,15 +37,16 @@ public class ControllerRoundTest extends TestCase {
         Board b2=new Board(4,4,grey,2);
         Board b3=new Board(4,4,black,3);
         Board b4=new Board(4,4,white,4);
-        Player p1=new Player(1,mage1,h1,b1,black);
-        Player p2=new Player(2,mage2,h2,b2,grey);
-        Player p3=new Player(3,mage3,h3,b3,black);
-        Player p4=new Player(4,mage4,h4,b4,white);
+        Player p1=new Player("io",1,mage1,h1,b1,black);
+        Player p2=new Player("sss",2,mage2,h2,b2,grey);
+        Player p3=new Player("ss",3,mage3,h3,b3,black);
+        Player p4=new Player("sdasf",4,mage4,h4,b4,white);
         Player [] testSet={p1,p2,p3,p4};
         /* cTest.controlPianification();
         System.out.print("the order is: ");    momentarily put in comments for test coverage, the controller part is going to change
         for(int i=0;i<cTest.getActualOrder().length;i++)
             System.out.print("giocatore "+cTest.getActualOrder()[i]+" ");
-            */
-    }
+
+    }*/
+
 }
