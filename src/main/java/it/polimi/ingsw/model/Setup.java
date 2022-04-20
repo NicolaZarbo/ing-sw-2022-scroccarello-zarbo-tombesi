@@ -27,12 +27,14 @@ public class Setup extends Observable<ServerMessage> {
         if (game.getNPlayers()!=3)
             availableColor.remove(TowerColor.grey);
         prePlayers= new ArrayList<>(game.getNPlayers());
-        this.notify(new PlayerSetUpMessage(game));
     }
     /** set the initial order for choosing pregame options*/
     public void setPreOrder(List<String> names){
         this.preGameOrder= new ArrayList<>(names);
         this.preGameTurnOf=preGameOrder.get(0);
+    }
+    public void startPersonalisation(){
+        this.notify(new PlayerSetUpMessage(game));
     }
     /** get prePlayer from client, if it is the last one then creates the final players in game*/
     public void addPrePlayer(LobbyPlayer prePlayer){

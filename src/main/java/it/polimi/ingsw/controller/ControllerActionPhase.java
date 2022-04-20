@@ -48,6 +48,8 @@ public class ControllerActionPhase  {
 
 
     public void playCharacter(CharacterCardMessage message) {
+        if(game.getActualState()!=GameState.actionMoveMother && game.getActualState()!=GameState.actionMoveStudent)
+            throw new IllegalMoveException();
         modelTurn.useCharacter(message.getCardId(), message.getParameters(), message.getPlayerId());
     }
 

@@ -21,6 +21,9 @@ public class Player {
     }
 
 
+    public String getNickname() {
+        return nickname;
+    }
 
     public int getId() {
         return id;

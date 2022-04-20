@@ -39,6 +39,7 @@ public class Game extends Observable<ServerMessage> {
         actionPhase= new Turn(this);
         planningPhase= new Round(this);
         setupPhase = new Setup(this);
+        setupPhase.startPersonalisation();
         this.easy=easy;
         this.nPlayers =numberOfPlayer;
         this.bag=new Bag(10,5);
