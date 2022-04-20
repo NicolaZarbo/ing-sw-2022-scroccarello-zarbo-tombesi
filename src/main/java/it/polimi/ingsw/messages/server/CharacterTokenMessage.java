@@ -25,6 +25,10 @@ public class CharacterTokenMessage extends CharacterUpdateMessage {
         super.serialize();
     }
 
+    public CharacterTokenMessage(String json) {
+        super(json);
+    }
+
     public ArrayList<Student> getStudents() {
         return students;
     }

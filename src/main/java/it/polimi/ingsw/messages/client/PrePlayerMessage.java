@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.messages.GenericMessage;
 import it.polimi.ingsw.model.LobbyPlayer;
 
 public class PrePlayerMessage extends ClientMessage {

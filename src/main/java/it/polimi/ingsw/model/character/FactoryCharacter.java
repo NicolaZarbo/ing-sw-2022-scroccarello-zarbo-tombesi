@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.token.Student;
 import java.util.ArrayList;
 
 public class FactoryCharacter {
-    private static ArrayList<Student> drowStudents(int x, Bag bag){
+    private static ArrayList<Student> drawStudents(int x, Bag bag){
         ArrayList<Student> drawn  = new ArrayList<>();
         for(int i =0;i<x; i++)
             drawn.add(bag.getToken()) ;
@@ -17,7 +17,7 @@ public class FactoryCharacter {
         CharacterCard card=null;
         if(id==1){
             TokensCharacter c= new Character1(id);
-            c.addStudents(drowStudents(4, bag));
+            c.addStudents(drawStudents(4, bag));
             card=c;
         }
         if(id==2||id==6||id==8)
@@ -25,7 +25,7 @@ public class FactoryCharacter {
 
         if(id == 7){
             TokensCharacter c= new Character7(id);
-            c.addStudents( drowStudents(6,bag));
+            c.addStudents( drawStudents(6,bag));
             card=c;
         }
         if(id==9)
@@ -34,7 +34,7 @@ public class FactoryCharacter {
             card= new Character10(id);
         if(id == 11){
             TokensCharacter c= new Character11(id);
-            c.addStudents(drowStudents(4,bag));
+            c.addStudents(drawStudents(4,bag));
             card=c;
         }
 

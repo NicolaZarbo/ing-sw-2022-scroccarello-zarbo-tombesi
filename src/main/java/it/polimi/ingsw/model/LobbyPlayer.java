@@ -1,12 +1,12 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.token.TokenColor;
+
 import it.polimi.ingsw.model.token.TowerColor;
 
 public class LobbyPlayer {
     private TowerColor towerColor;
     private Mage mage;
-    private String nickname;
+    private String nickname; //should we check the string input ? -serverside
 
     public LobbyPlayer(TowerColor towerColor, Mage mage, String nickname) {
         this.towerColor = towerColor;

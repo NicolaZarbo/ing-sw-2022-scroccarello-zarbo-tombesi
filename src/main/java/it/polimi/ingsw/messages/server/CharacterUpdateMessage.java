@@ -21,6 +21,9 @@ public class CharacterUpdateMessage extends ServerMessage{
         super.serialize();
     }
 
+    public CharacterUpdateMessage(String json) {
+        super(json);
+    }
 
     public int getCardCost() {
         return cardCost;

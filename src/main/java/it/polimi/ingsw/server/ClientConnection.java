@@ -14,7 +14,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
     private Scanner in;
     private boolean active ;
     private Server server;
-    private  int lobbyCode;
+   // private  int lobbyCode;
 
     public ClientConnection(Socket clientSocket, Server server) {
         this.clientSocket = clientSocket;
@@ -53,9 +53,6 @@ public class ClientConnection extends Observable<String> implements Runnable{
         }
 
     }
-    public void setUpLobby(LobbySetupMessage message){
-
-    }
     public void asyncSend(final String message){
         new Thread(new Runnable() {
             @Override
@@ -74,4 +71,5 @@ public class ClientConnection extends Observable<String> implements Runnable{
         }
 
     }
+    //TODO missing connection closer
 }

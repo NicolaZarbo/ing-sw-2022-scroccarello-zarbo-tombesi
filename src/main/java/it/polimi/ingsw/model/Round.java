@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 import it.polimi.ingsw.messages.server.CloudMessage;
+import it.polimi.ingsw.messages.server.PlayedAssistentMessage;
 import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.model.token.Student;
 import it.polimi.ingsw.observer.Observable;
@@ -22,15 +23,15 @@ public class Round  extends Observable<ServerMessage> {
             cloud.setStud(students);
         }
         this.notify(new CloudMessage(game));
-        //serversendAll(new CloudMessage(game))
+
 
     }
 
-    public void playCard(int playerdId, int cardPlayed){
-        Hand actualHand=game.getPlayer(playerdId).getHand();
+    public void playCard(int playerId, int cardPlayed){
+        Hand actualHand=game.getPlayer(playerId).getHand();
         AssistantCard played=actualHand.playAssistant(cardPlayed);
-        game.addCardPlayedThisRound(playerdId,played);
-        //serversendAll(new CardPlayedMessage())
+        game.addCardPlayedThisRound(playerId,played);
+        this.notify(new PlayedAssistentMessage(game));
     }
 // orders players TODO
     public static void roundOrder(Game game){

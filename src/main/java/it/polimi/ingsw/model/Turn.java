@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.messages.server.*;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.ParameterObject;
@@ -14,6 +15,7 @@ public class Turn extends Observable<ServerMessage> {
     public Turn (Game game){
         this.game=game;
     }
+    /** moves a student already inside the Board of idPlayer from entrance to hall  */
     public void moveInHall(int idPlayer,int idStud){
         Player player=game.getPlayer(idPlayer);
         Board board= player.getBoard();
@@ -27,7 +29,7 @@ public class Turn extends Observable<ServerMessage> {
         this.notify(new SingleBoardMessage(game, idPlayer));
 
     }
-
+    /** moves a student already inside the Board of idPlayer from entrance to a target island*/
     public void moveToIsland(int idPlayer,int idStud, int idIsland) throws NullPointerException{
         Student stud = game.getPlayer(idPlayer).getBoard().getStudentFromEntrance(idStud);
         Island island = game.getIsland(idIsland);
@@ -37,7 +39,7 @@ public class Turn extends Observable<ServerMessage> {
         this.notify(new SingleBoardMessage(game, idPlayer));
 
     }
-    //moves mother nature and checks island
+    /** moves motherNature for a number 'steps', then checks on the final island for tower conquest and island merge*/
     public void moveMotherNature(int steps){
         List<Island> islands=game.getIslands();
         MotherNature mother=game.getMotherNature();
@@ -55,7 +57,7 @@ public class Turn extends Observable<ServerMessage> {
 
         this.notify(new MotherPositionMessage(game));
     }
-    //last action of the turn
+    /** moves al the students on a target cloud to the board of playerId*/
     public void moveFromCloudToEntrance(int cloudId,int playerId){
         Board board= game.getPlayer(playerId).getBoard();
         Cloud[] clouds=game.getClouds();
@@ -126,6 +128,7 @@ public class Turn extends Observable<ServerMessage> {
 
     }
     //if it is a team game, insert the mainplayer id in idPlayer
+    /** @param player  if the game is in teams insert the main player id */
     public void putTowerFromBoardToIsland(Island island,Player player){
         Board board=player.getBoard();
         island.setTower(board.getTower());
@@ -191,7 +194,7 @@ public class Turn extends Observable<ServerMessage> {
         this.notify(new SingleBoardMessage(game, playerId));
         //serverSendAll(new SingleBoardMessage(game, playerId))
     }
-
+    /** activates the character effect if the player has enough money or trows an exception*/
     public  void useCharacter(int cardId, ParameterObject parameters, int playerId){
         CharacterCard card = game.getCharacter(cardId);
         Player player = game.getPlayer(playerId);
@@ -201,7 +204,7 @@ public class Turn extends Observable<ServerMessage> {
             this.notify(new CharacterUpdateMessage(cardId,game));
         }
         else
-            {throw new RuntimeException("not enough money");}
+            {throw new IllegalMoveException("not enough money");}
     }
 
 
@@ -230,7 +233,7 @@ public class Turn extends Observable<ServerMessage> {
         }
         return influence;
     }
-    //call checks for influence and changes or inserts a tower
+    /** if an island can be conquered based on influence changes towers on the island or puts another one*/
     public void islandConquest(int islandId) throws NullPointerException{
         int  maxInf;
         Island island=game.getIsland(islandId);

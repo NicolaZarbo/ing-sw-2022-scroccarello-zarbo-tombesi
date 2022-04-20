@@ -36,12 +36,14 @@ public class Lobby {
     public void startGame(){
         model = new Game(easy, getLobbyDimension());
         controller = new Controller(model);
+        model.getSetupPhase().setPreOrder(playersViews.stream().map(RemoteView::getNickname).toList());
         for (RemoteView view: playersViews) {
             model.addObserver(view);
             model.getActionPhase().addObserver(view);
             model.getSetupPhase().addObserver(view);
             model.getPlanningPhase().addObserver(view);
             view.addObserver(controller);
+            view.setErrorReceiver(controller);
         }
     }
     public int getLobbyCode() {

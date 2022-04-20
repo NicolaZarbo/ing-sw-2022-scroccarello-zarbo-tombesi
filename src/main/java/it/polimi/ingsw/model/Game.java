@@ -7,10 +7,7 @@ import it.polimi.ingsw.model.token.TokenColor;
 import it.polimi.ingsw.model.token.TowerColor;
 import it.polimi.ingsw.observer.Observable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Game extends Observable<ServerMessage> {
 
@@ -37,7 +34,7 @@ public class Game extends Observable<ServerMessage> {
 
 
 
-    /** creates a game with the list of players from the server*/
+    /** creates a game without players, which are created in a setup phase with players inputs*/
     public Game(boolean easy, int numberOfPlayer){
         actionPhase= new Turn(this);
         planningPhase= new Round(this);
@@ -59,7 +56,7 @@ public class Game extends Observable<ServerMessage> {
         actualState=GameState.setupPlayers;
         //this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();TODO
     }
-    /** creates a game starting from the number of players, no specific nickname*/
+    /** legacy constructor, still here for tests without the server*/
     public Game(boolean easy, int nPlayers, int nIsole){
         this.easy=easy;
         this.nPlayers =nPlayers;
@@ -84,6 +81,7 @@ public class Game extends Observable<ServerMessage> {
         this.cardPlayedThisRound=new HashMap<>();
         this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();
     }
+
     public void moveToNextPhase(){
         int before = actualState.ordinal();
         actualState= GameState.values()[before+1];
@@ -95,6 +93,7 @@ public class Game extends Observable<ServerMessage> {
 
     public void setPlayers(Player[] players) {
         this.players = players;
+        this.playIngOrder= Arrays.stream(players).map(Player::getId).toList();
     }
 
     public Round getPlanningPhase() {

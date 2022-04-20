@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.character.ParameterObject;
 public class CharacterCardMessage extends ClientMessage{
     ParameterObject parameters;
     int cardId;
-    protected CharacterCardMessage(String json) {
+    public CharacterCardMessage(String json) {
         super(json);
     }
 
