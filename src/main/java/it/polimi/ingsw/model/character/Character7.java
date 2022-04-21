@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.character;
 
+import it.polimi.ingsw.exceptions.CharacterErrorException;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.token.Student;
@@ -15,6 +16,8 @@ public class Character7 extends TokensCharacter{
     /**@param parameters : first playerId, then students in entrance then on studs cards*/
     @Override
     public void cardEffect(ParameterObject parameters, Game game) {
+        if(parameters.getnParam()!=3)
+            throw new CharacterErrorException("wrong parameters");
         int size = parameters.getTargetStudentsOnEntrance().length;
         Board board ;
         ArrayList<Student>  fromBoard = new ArrayList<>();

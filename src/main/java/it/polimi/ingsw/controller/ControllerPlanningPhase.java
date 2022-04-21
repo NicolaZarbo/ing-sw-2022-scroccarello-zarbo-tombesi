@@ -1,24 +1,31 @@
 package it.polimi.ingsw.controller;
+import it.polimi.ingsw.exceptions.IllegalMoveException;
+import it.polimi.ingsw.messages.client.PlayAssistantMessage;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Round;
 
-public class ControllerRound {
-    private int[] actualOrder;
-    private int[] playerWantsToPlay; //all'i-esimo giocatore corrisponderà l'ID della carta che vuole giocare
-    @SuppressWarnings("FieldMayBeFinal")
-    private int[] motherMovements;
-    private Game game;
+import java.util.List;
 
-    public ControllerRound(int[]cards, int numPlayers){
-        this.playerWantsToPlay=cards;
-        this.actualOrder=new int[numPlayers];
-        this.motherMovements=new int[numPlayers];
+public class ControllerPlanningPhase {
+
+    private final Game game;
+    private final Round modelRound;
+
+    public ControllerPlanningPhase(Game game){
+        this.modelRound= game.getPlanningPhase();
+        this.game=game;
     }
 
-    public void createGame(boolean easy, int nPlayer, int nIsole){
-        game=new Game(easy, nPlayer, nIsole);
-
+    public void playAssistantCard(PlayAssistantMessage message){
+        if(game.getActualState()!= GameState.planPlayCard)
+            throw new IllegalMoveException();
+        modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
     }
+    private List<Integer> getActualOrder() {
+        return Round.getRoundOrder(game);
+    }
+
 /*
     public void controlPianification(){
         for(int i=0;i<Main.clouds.size();i++){
@@ -48,7 +55,5 @@ public class ControllerRound {
  */
 
 
-    public int[] getActualOrder() {
-        return actualOrder;
-    }
+
 }

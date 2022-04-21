@@ -1,4 +1,6 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.exceptions.CardNotFoundException;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -36,15 +38,16 @@ public class Hand {
         return (this.coin-cost>=0);
     }
 
-    public AssistantCard playAssistant(int n){
+    public AssistantCard playAssistant(int cardId){
         AssistantCard played=null;
         for(int i=0;i<assistant.size();i++){
-            if(i==n && assistant.get(i)!=null) {
+            if(assistant.get(i).getId()==cardId) {
                 played=assistant.get(i);
                 discarded.add(assistant.get(i));
                 assistant.remove(i) ;
+                return played;
             }
         }
-        return played;
+        throw new CardNotFoundException("no such card found");
     }
 }

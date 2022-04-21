@@ -5,7 +5,8 @@ package it.polimi.ingsw.model.character;
 public class ParameterObject {
     private int targetStudentId;
     private  int otherTargetId;
-    private int[] targetStudentsOnEntrance, targetStudentsForExhange;
+    private int[] targetStudentsOnEntrance, targetStudentsForExchange;
+    private int nParam;
 
     public ParameterObject(){
 
@@ -15,7 +16,8 @@ public class ParameterObject {
         if(targetStudentsForExchange.length==targetStudentsOnEntrance.length && targetStudentsForExchange.length<=3){
             this.otherTargetId = otherTargetId;
             this.targetStudentsOnEntrance = targetStudentsOnEntrance;
-            this.targetStudentsForExhange = targetStudentsForExchange;
+            this.targetStudentsForExchange = targetStudentsForExchange;
+            nParam=3;
         }
         else
             throw new IllegalArgumentException("array dimension invalid");
@@ -25,6 +27,12 @@ public class ParameterObject {
 
         this.otherTargetId = otherTargetId;
         this.targetStudentId=targetStudentId;
+        nParam=2;
+    }
+
+    public ParameterObject(int otherTargetId) {
+        nParam=1;
+        this.otherTargetId = otherTargetId;
     }
 
     public int getTargetStudentId() {
@@ -40,6 +48,10 @@ public class ParameterObject {
     }
 
     public int[] getTargetStudentsForExchange() {
-        return targetStudentsForExhange;
+        return targetStudentsForExchange;
+    }
+
+    public int getnParam() {
+        return nParam;
     }
 }

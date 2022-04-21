@@ -13,13 +13,17 @@ import java.util.Arrays;
 
 public class TurnTest extends TestCase {
     Game game;
+    Turn turn;
+    Round round;
     @Override
     public void setUp() throws Exception {
         super.setUp();
         game = new Game(false,2,12);
+        turn= new Turn(game);
         Student[] stud = new Student[3];
         stud[0]=game.getBag().getToken();
         game.getClouds()[1].setStud(stud);
+        round= new Round(game);
 
     }
 
@@ -32,14 +36,14 @@ public class TurnTest extends TestCase {
         int idIsland=5;
         Student stud=player.getBoard().getEntrance().get(0);
         int studId= stud.getId();
-        Turn.moveToIsland(1,studId,idIsland,game);
+        turn.moveToIsland(1,studId,idIsland);
         assertTrue(game.getIsland(idIsland).getStudents().contains(stud));
     }
 
     public void testMoveMotherNature() {
         int nSteps=45;
         int posIniz=game.getMotherNature().getPosition();
-        Turn.moveMotherNature(nSteps,game);
+        turn.moveMotherNature(nSteps);
         assertTrue(game.getMotherNature().getPosition()==Math.floorMod(posIniz+nSteps,game.getIslands().size()));
         System.out.println("isola iniziale : "+posIniz+ "  pos finale :"+ game.getMotherNature().getPosition());
 
@@ -52,10 +56,10 @@ public class TurnTest extends TestCase {
             board.getStudentFromEntrance(board.getEntrance().get(4).getId());
         }
 
-        Round.SetCloud(game);
+        round.SetCloud();
         Integer[] studOnCloudID =  Arrays.stream(cloud.getStud()).map(student -> student.getId()).toArray(Integer[]::new);
         assertTrue(board.getEntrance().size()<=board.entranceSize);
-        Turn.moveFromCloudToEntrance(game,1,1);
+        turn.moveFromCloudToEntrance(1,1);
         int nOfStudentsMovedFound=0;
         for (Integer studId:studOnCloudID) {
             if(board.getEntrance().stream().map(student -> student.getId()).anyMatch(s-> s.equals(studId)))
@@ -71,21 +75,21 @@ public class TurnTest extends TestCase {
 
         game.getIsland(pos).setTower(new Tower(TowerColor.black,1));
         game.getIsland(Math.floorMod(pos+1,game.getIslandList().size())).setTower(new Tower(TowerColor.black,3));
-        assertTrue(Turn.isUnifiableNext(game,pos));
+        assertTrue(turn.isUnifiableNext(pos));
     }
 
     public void testIsUnifiableBefore() {
         int pos = 1;
         game.getIsland(pos).setTower(new Tower(TowerColor.black,1));
         game.getIsland(Math.floorMod(pos-1,game.getIslandList().size())).setTower(new Tower(TowerColor.black,3));
-        assertTrue(Turn.isUnifiableBefore(game,1));
+        assertTrue(turn.isUnifiableBefore(1));
     }
 
     public void testUnifyNext() {
         game.getIsland(1).setTower(new Tower(TowerColor.black,1));
         game.getIsland(2).setTower(new Tower(TowerColor.black,3));
-        if(Turn.isUnifiableNext(game,1))
-            Turn.unifyNext(game,1);
+        if(turn.isUnifiableNext(1))
+            turn.unifyNext(1);
         assertTrue(game.getIsland(2)==null);
         assertTrue("size isl: "+game.getIsland(1).getIslandSize(),game.getIsland(1).getIslandSize()==2);
     }
@@ -93,17 +97,18 @@ public class TurnTest extends TestCase {
     public void testUnifyBefore() {
         game.getIsland(1).setTower(new Tower(TowerColor.black,1));
         game.getIsland(0).setTower(new Tower(TowerColor.black,3));
-        if(Turn.isUnifiableBefore(game,1))
-            Turn.unifyBefore(game,1);
+        if(turn.isUnifiableBefore(1))
+            turn.unifyBefore(1);
         assertNotNull(game.getIsland(1));
         assertTrue(game.getIsland(0)==null);
         assertTrue("size isl: "+game.getIsland(1).getIslandSize(),game.getIsland(1).getIslandSize()==2);
+       // System.out.println(game.getMotherNature().getPosition()+ " size islands "+ game.getIslands().size() + " isola ");
     }
 
     public void testCanHaveTeacher() {
 
         for (Player player: game.getPlayers()) {
-            Turn.moveInHall(player.getId(), player.getBoard().getEntrance().get(0).getId(), game);
+            turn.moveInHall(player.getId(), player.getBoard().getEntrance().get(0).getId());
             for (TokenColor color: TokenColor.values()) {
                 System.out.println(color+" "+Arrays.stream(player.getBoard().getDiningRoom()[color.ordinal()]).filter(student -> student!= null).count());
                 if(player.getBoard().hasProfessor(color)) {
@@ -123,14 +128,14 @@ public class TurnTest extends TestCase {
         game.getIsland(0).setTower(new Tower(TowerColor.getColor(1),1));
         game.getIsland(0).setTower(new Tower(TowerColor.getColor(1),1));
 
-        int influnce = Turn.calculateInfluence(game,1);
+        int influnce = turn.calculateInfluence(1);
         System.out.println(influnce);
     }
 
 
     public void testIslandConquest() {
         for (Island island: game.getIslandList()) {
-            Turn.moveMotherNature(1,game);
+            turn.moveMotherNature(1);
             System.out.println("id ISola : "+island.getID());
             for (Tower tower:island.getTowers()) {
                 System.out.println( "torre : "+ tower.getId()+" "+tower.getColor());
@@ -146,7 +151,7 @@ public class TurnTest extends TestCase {
         System.out.println("id studente target "+studIdOnCard);
         ParameterObject par = new ParameterObject(stud.getId(),1);
         assertTrue(game.getPlayer(1).getHand().enoughCoin(1));
-        Turn.useCharacter(1,par,1,game);
+        turn.useCharacter(1,par,1);
         for (Student student:isl.getStudents()) {
             System.out.println(student.getId());
         }
@@ -155,7 +160,7 @@ public class TurnTest extends TestCase {
 
     public void testConquerIsland() {
         Student stud=game.getPlayer(1).getBoard().getEntrance().get(0);
-        Turn.moveInHall(1,stud.getId() ,game);
+        turn.moveInHall(1,stud.getId() );
         int inf;
          for (Island isl: game.getIslands()) {
              inf=0;
@@ -163,7 +168,7 @@ public class TurnTest extends TestCase {
                  if(stud.getColor()==student.getColor())
                      inf++;
              }
-            Turn.moveMotherNature(1,game);
+            turn.moveMotherNature(1);
             if(isl.getTowers().size()>0)
                 assertTrue(inf>0);
         }
@@ -171,7 +176,7 @@ public class TurnTest extends TestCase {
 
     public void testChangeIslandOwner() {
         Island isl= game.getIsland(7);
-        Turn.putTowerFromBoardToIsland(isl,game.getPlayer(1));
+        turn.putTowerFromBoardToIsland(isl,game.getPlayer(1));
         ArrayList<Student> sttuddd= new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             sttuddd.add(new Student(i+100, TokenColor.blue));
@@ -179,10 +184,10 @@ public class TurnTest extends TestCase {
         isl.addAllStudents(sttuddd);
         Player pl = game.getPlayer(0);
         pl.getBoard().moveToDiningRoom(new Student(500,TokenColor.blue));
-        if(Turn.canHaveTeacher(TokenColor.blue,game,pl.getId()))
-            Turn.getTeacher(TokenColor.blue,game,pl.getId());
+        if(turn.canHaveTeacher(TokenColor.blue,pl.getId()))
+            turn.getTeacher(TokenColor.blue,pl.getId());
         assertTrue(pl.getBoard().hasProfessor(TokenColor.blue));
-        Turn.moveMotherNature(7,game);
+        turn.moveMotherNature(7);
         assertTrue(isl.getTowers().get(0).getColor()==TowerColor.black);
 
 

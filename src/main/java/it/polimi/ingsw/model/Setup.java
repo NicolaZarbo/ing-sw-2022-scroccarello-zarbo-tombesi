@@ -1,11 +1,66 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
+import it.polimi.ingsw.messages.server.ServerMessage;
+import it.polimi.ingsw.messages.server.WholeGameMessage;
 import it.polimi.ingsw.model.character.*;
 import it.polimi.ingsw.model.token.*;
+import it.polimi.ingsw.observer.Observable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
-public class Setup {
+public class Setup extends Observable<ServerMessage> {
+    private Game game;
+    private ArrayList<TowerColor> availableColor;
+    private ArrayList<Mage> availableMages ;
+    private ArrayList<LobbyPlayer> prePlayers;
+    private ArrayList<String> preGameOrder;
+    private String preGameTurnOf;
+
+
+    public Setup(Game game){
+        this.game=game;
+        availableColor= new ArrayList<>(List.of(TowerColor.values()));
+        availableMages = new ArrayList<>(List.of(Mage.values()));
+        if (game.getNPlayers()!=3)
+            availableColor.remove(TowerColor.grey);
+        prePlayers= new ArrayList<>(game.getNPlayers());
+    }
+    /** set the initial order for choosing pregame options*/
+    public void setPreOrder(List<String> names){
+        this.preGameOrder= new ArrayList<>(names);
+        this.preGameTurnOf=preGameOrder.get(0);
+    }
+    public void startPersonalisation(){
+        this.notify(new PlayerSetUpMessage(game));
+    }
+    /** get prePlayer from client, if it is the last one then creates the final players in game*/
+    public void addPrePlayer(LobbyPlayer prePlayer){
+        if(prePlayers.size()< game.getNPlayers()) {
+            preGameOrder.remove(prePlayer.getNickname());
+            prePlayers.add(prePlayer);
+            availableMages.remove(prePlayer.getMage());
+            availableColor.remove(prePlayer.getTowerColor());
+            this.notify(new PlayerSetUpMessage(game));
+        }
+        else throw new RuntimeException("no space for more players");
+        if(prePlayers.size()== game.getNPlayers()){
+            game.setPlayers(Setup.createPlayer(game.isEasy(), prePlayers,game.getBag()));
+            this.notify(new WholeGameMessage(game));
+        }
+    }
+
+    public ArrayList<TowerColor> getAvailableColor() {
+        return availableColor;
+    }
+
+    public ArrayList<Mage> getAvailableMages() {
+        return availableMages;
+    }
+    /** creates a set of n Islands with 2 students on top
+     * (except for the island with MN and the opposite one)*/
     public static List<Island> createIslands(int nIsole, Bag bag){
         List<Island> islands = new ArrayList<>();
         Island isl;
@@ -21,6 +76,7 @@ public class Setup {
         }
         return  islands;
     }
+    /** creates the list of Character Cards using a constructor*/
     public static ArrayList<CharacterCard> createCharacterCards(Bag bag,int cardNumber){
             ArrayList<CharacterCard> cards = new ArrayList<>(cardNumber);
             CharacterCard cardChar;
@@ -30,7 +86,8 @@ public class Setup {
                     cards.add( cardChar ) ;
             }
             return cards;
-        }
+    }
+    /** creates the professor in game with no board assigned*/
     public static Professor[] createProfessor(int nColors){
         Professor[] profs = new Professor[nColors];
         for (int i=0; i<nColors;i++){
@@ -38,19 +95,21 @@ public class Setup {
         }
         return profs;
     }
-    public static Player[] createPlayer(boolean easy , int nPlayer, Bag bag){
-
+    /** creates an array of player from a list of PrePlayer(a bean that
+     * contains nickname, mage and tower-color)*/
+    public static Player[] createPlayer(boolean easy , ArrayList<LobbyPlayer> prePlayers, Bag bag){
+        int nPlayer=prePlayers.size();
         Player[] players =new Player[nPlayer];
 
         for (int id=0; id<nPlayer;id++){
             Hand man= Setup.createHand(id, easy, 10);
             TowerColor towerColor = Setup.playerColor(id, nPlayer);
             Board plan = Setup.createBoard(id, nPlayer, towerColor, bag);
-            players[id]= new Player(id, Mage.getMage(id), man, plan, towerColor);
+            players[id]= new Player(prePlayers.get(id),id, man, plan);
         }
         return players;
     }
-    //genera le isole con all'interno array studenti con studenti null
+    /** creates an array of clouds without player on them*/
     public static Cloud[] createClouds(int nPlayer){
         Cloud[] clouds = new Cloud[nPlayer];
         Student[] studs;
@@ -70,7 +129,6 @@ public class Setup {
         }
         return  clouds;
     }
-    //public static ArrayList<Integer> createIslands(){}   TODO creaIsole
     private static TowerColor playerColor(int playerId, int nPlayer){
         TowerColor color;
         if (nPlayer== 4 && playerId>1){
@@ -80,7 +138,6 @@ public class Setup {
             color= TowerColor.getColor(playerId);
         return color;
     }
-    //generazione mano da associare a player
     private static Hand createHand(int playerId, boolean easy, int nCards){
         ArrayList<AssistantCard> ass ;
         int stIdCards= playerId * nCards  ;

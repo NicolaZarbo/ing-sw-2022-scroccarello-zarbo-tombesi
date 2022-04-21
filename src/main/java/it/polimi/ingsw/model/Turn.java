@@ -1,50 +1,64 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.IllegalMoveException;
+import it.polimi.ingsw.messages.server.*;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.model.token.*;
+import it.polimi.ingsw.observer.Observable;
 
 import java.util.*;
 
-public class Turn {
-    public static void moveInHall(int idPlayer,int idStud, Game game){
+public class Turn extends Observable<ServerMessage> {
+    private Game game;
+
+    public Turn (Game game){
+        this.game=game;
+    }
+    /** moves a student already inside the Board of idPlayer from entrance to hall  */
+    public void moveInHall(int idPlayer,int idStud){
         Player player=game.getPlayer(idPlayer);
         Board board= player.getBoard();
         Student stud = board.getStudentFromEntrance(idStud);
         board.moveToDiningRoom(stud);
         if(board.foundCoin(stud))
             player.getHand().addCoin();
-        if(Turn.canHaveTeacher(stud.getColor(),game,idPlayer))
-            Turn.getTeacher(stud.getColor(),game,idPlayer);
-        //serverSendAll(new BoardMessage(game, idPlayer))
+        if(canHaveTeacher(stud.getColor(),idPlayer))
+            getTeacher(stud.getColor(),idPlayer);
+
+        this.notify(new SingleBoardMessage(game, idPlayer));
 
     }
-
-    public static void moveToIsland(int idPlayer,int idStud, int idIsland, Game game) throws NullPointerException{
+    /** moves a student already inside the Board of idPlayer from entrance to a target island*/
+    public void moveToIsland(int idPlayer,int idStud, int idIsland) throws NullPointerException{
         Student stud = game.getPlayer(idPlayer).getBoard().getStudentFromEntrance(idStud);
         Island island = game.getIsland(idIsland);
         island.addStudent(stud);
-        //serverAppendAll(new IslandMessage())
-        //serverSendAll(new BoardMessage(game, idPlayer))
+        //use a multiple message to reduce the number of connection use
+        this.notify(new IslandsMessage(game));
+        this.notify(new SingleBoardMessage(game, idPlayer));
+
     }
-    //moves mother nature and checks island
-    public static void moveMotherNature(int steps,Game game){
+    /** moves motherNature for a number 'steps', then checks on the final island for tower conquest and island merge*/
+    public void moveMotherNature(int steps){
         List<Island> islands=game.getIslands();
         MotherNature mother=game.getMotherNature();
         int j=islands.size();
         mother.changePosition(Math.floorMod(mother.getPosition()+steps,j));
         int position = mother.getPosition();
-        Turn.islandConquest(position, game);
-        if (Turn.isUnifiableNext(game, position)) {
-            Turn.unifyNext(game, position);
+        int islandId= game.getIslands().get(position).getID();
+        islandConquest( islandId);
+        if (isUnifiableNext( position)) {
+            unifyNext( position);
         }
-        if (Turn.isUnifiableBefore(game, position)) {
-            Turn.unifyBefore(game, position);
+        if (isUnifiableBefore( position)) {
+            unifyBefore( position);
         }
-        //sereversendAll(new MotherPositionMessage(game) TODO
+
+        this.notify(new MotherPositionMessage(game));
     }
-    //last action of the turn
-    public static void moveFromCloudToEntrance(Game game,int cloudId,int playerId){
+    /** moves al the students on a target cloud to the board of playerId*/
+    public void moveFromCloudToEntrance(int cloudId,int playerId){
         Board board= game.getPlayer(playerId).getBoard();
         Cloud[] clouds=game.getClouds();
         if(cloudId>=0 && cloudId<clouds.length && clouds[cloudId].getStud()[0]!=null){
@@ -54,11 +68,14 @@ public class Turn {
                 students[i]=null;
             }
         }
+        else throw new RuntimeException("unavailable cloud");
+
         game.resetBonus();
-        //update(new CloudMessage(game)); //the update method will get a serverMessage as a param, and will ask the server to send the mex
+        this.notify(new CloudMessage(game));
+        this.notify(new SingleBoardMessage(game,playerId));
     }
 
-    public static boolean isUnifiableNext(Game game,int pos){
+    public boolean isUnifiableNext(int pos){
         boolean b=false;
         int size = game.getIslands().size();
         Island central=game.getIslands().get(pos);
@@ -69,7 +86,7 @@ public class Turn {
                 b=true;
         return b;
     }
-    public static boolean isUnifiableBefore(Game game,int pos){
+    public  boolean isUnifiableBefore(int pos){
         boolean b=false;
         int size = game.getIslands().size();
         Island central=game.getIslands().get(pos);
@@ -80,10 +97,10 @@ public class Turn {
         return b;
     }
 
-    public static void unifyNext(Game game, int pos) {
+    public  void unifyNext(int pos) {
         int islandNumber = game.getIslands().size();
-        Island central = game.getIsland(pos);
-        Island next = game.getIsland(Math.floorMod(pos + 1, islandNumber));
+        Island central = game.getIslands().get(pos);
+        Island next = game.getIslands().get(Math.floorMod(pos + 1, islandNumber));
         if (central.getTowers().get(0).getColor() == next.getTowers().get(0).getColor()) {
             central.addAllStudents(next.getStudents());
             central.addAllTowers(next.getTowers());
@@ -92,12 +109,13 @@ public class Turn {
             if (game.getMotherNature().getPosition() == pos + 1)
                 game.getMotherNature().changePosition(pos);
             }
-        //serverAppendAll(new IslandsMessage(game))
+        this.notify(new IslandsMessage(game));
+
     }
-    public static void unifyBefore(Game game, int pos) {
+    public  void unifyBefore( int pos) {
         int islandNumber = game.getIslands().size();
-        Island central = game.getIsland(pos);
-        Island before = game.getIsland(Math.floorMod(pos - 1, islandNumber));
+        Island central = game.getIslands().get(pos);
+        Island before = game.getIslands().get(Math.floorMod(pos - 1, islandNumber));
         if (central.getTowers().get(0).getColor() == before.getTowers().get(0).getColor()) {
             central.addAllStudents(before.getStudents());
             central.addAllTowers(before.getTowers());
@@ -106,30 +124,32 @@ public class Turn {
             if (game.getMotherNature().getPosition() == pos - 1)
                 game.getMotherNature().changePosition(pos);
             }
-        //serverAppendAll(new IslandsMessage(game)) TODO
+        this.notify(new IslandsMessage(game));
+
     }
     //if it is a team game, insert the mainplayer id in idPlayer
-    public static void putTowerFromBoardToIsland(Island island,Player player){
+    /** @param player  if the game is in teams insert the main player id */
+    public void putTowerFromBoardToIsland(Island island,Player player){
+        Board board=player.getBoard();
+        island.setTower(board.getTower());
+        this.notify(new IslandsMessage(game));
+        this.notify(new SingleBoardMessage(game,player.getId()));
 
-            Board board=player.getBoard();
-            island.setTower(board.getTower());
-        //serverAppendAll(new IslandsMessage(game))
-        //serverSendAll(new SingleBoardMessage(game,player.getId()))
     }
-    private static void changeTower(Island island , Player newOwner, Game game){
+    private void changeTower(Island island , Player newOwner){
         ArrayList<Tower> removedT=new ArrayList<>(island.getTowers());
         island.getTowers().removeAll(removedT);
         for (Player player: game.getPlayers()) {
             if(player.getColorT()==removedT.get(0).getColor()){
                 player.getBoard().addTower(removedT);
-                //serverAppendAll(new SingleBoardMessage(game,player.getId()))
+                this.notify(new SingleBoardMessage(game,player.getId()));//this may cause a visual problem in the time between messages
             }
         }
-        Turn.putTowerFromBoardToIsland(island,newOwner);
+        this.putTowerFromBoardToIsland(island,newOwner);
     }
 
     //controllo se una board ha il diritto ad avere il prof del colore scelto
-    public static boolean canHaveTeacher(TokenColor color, Game game, int playerId){
+    public  boolean canHaveTeacher(TokenColor color, int playerId){
         Player[] players=game.getPlayers();
         boolean b=true;
         Player playercheck=game.getPlayer(playerId);
@@ -153,10 +173,10 @@ public class Turn {
         }
         return b;
     }
-    public static void getTeacher(TokenColor color,Game game,int playerId){
+    public  void getTeacher(TokenColor color,int playerId){
         Player[] players=game.getPlayers();
         Player playercheck=game.getPlayer(playerId);
-        if(canHaveTeacher(color, game, playerId)){
+        if(canHaveTeacher(color,  playerId)){
                 if(game.isProfessorOnGame(color)){
                 Professor temp=game.getFromGame(color);
                 game.getPlayer(playerId).getBoard().putProfessor(temp);
@@ -171,27 +191,29 @@ public class Turn {
             }
 
         }
+        this.notify(new SingleBoardMessage(game, playerId));
         //serverSendAll(new SingleBoardMessage(game, playerId))
     }
-
-    public static void useCharacter(int cardId, ParameterObject parameters, int playerId, Game game){
+    /** activates the character effect if the player has enough money or trows an exception*/
+    public  void useCharacter(int cardId, ParameterObject parameters, int playerId){
         CharacterCard card = game.getCharacter(cardId);
         Player player = game.getPlayer(playerId);
         if(player.getHand().enoughCoin(card.getCost())){
             player.getHand().payCoin(card.getCost());
             card.cardEffect( parameters,  game );
+            this.notify(new CharacterUpdateMessage(cardId,game));
         }
         else
-        {throw new RuntimeException("not enough money");}//TODO can't pay exception
+            {throw new IllegalMoveException("not enough money");}
     }
 
 
-    public static int calculateInfluence(Game game,int playerId){
+    public int calculateInfluence(int playerId){
         int influence=0;
         if(game.isBonusActive(8))  //card 8 effect
             influence=influence+2;
         MotherNature theOne=game.getMotherNature();
-        Island where=game.getIsland(theOne.getPosition());
+        Island where=game.getIslands().get(theOne.getPosition());
         ArrayList<Student> students=where.getStudents();
         Player player = game.getPlayer(playerId);
         TowerColor color=player.getColorT();
@@ -211,23 +233,23 @@ public class Turn {
         }
         return influence;
     }
-    //call checks for influence and changes or inserts a tower
-    public static void islandConquest(int islandId, Game game){
+    /** if an island can be conquered based on influence changes towers on the island or puts another one*/
+    public void islandConquest(int islandId) throws NullPointerException{
         int  maxInf;
         Island island=game.getIsland(islandId);
         Player conqueror;
         ArrayList<Integer> influence= new ArrayList<>();
         for (Player player: game.getPlayers()) {
-            influence.add(Turn.calculateInfluence(game,player.getId()));
+            influence.add(calculateInfluence(player.getId()));
         }
         maxInf=influence.stream().max(Comparator.naturalOrder()).orElse(0);
         if(Collections.frequency(influence, maxInf)==1) {
             conqueror=game.getPlayer(influence.lastIndexOf(maxInf));
             if (!island.getTowers().isEmpty()) {
                 if (island.getTowers().get(0).getColor() != conqueror.getColorT())
-                    Turn.changeTower(island, conqueror, game);
+                    changeTower(island, conqueror);
             } else
-                Turn.putTowerFromBoardToIsland(island, conqueror);
+                putTowerFromBoardToIsland(island, conqueror);
         }
     }
 
