@@ -7,18 +7,17 @@ import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Setup;
 
 public class ControllerSetupPhase {
-private Setup setup;
-private Game model;
+private final Setup setup;
+private final Game model;
  /**used to manage the player choices at the start of the game  */
     public ControllerSetupPhase(Game game){
         this.setup=game.getSetupPhase();
         this.model=game;
     }
     public void createPlayer(PrePlayerMessage message){
-        if(model.getActualState()!= GameState.setupPlayers)
+        if(model.getActualState()!= GameState.setupPlayers || !setup.isPreOrderTurnOf(message.getPlayerName()))
             throw new IllegalMoveException();
         setup.addPrePlayer(message.getPrePlayer());
-
     }
 
 }

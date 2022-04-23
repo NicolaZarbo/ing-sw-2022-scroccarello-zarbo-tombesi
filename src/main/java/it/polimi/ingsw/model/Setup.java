@@ -9,6 +9,7 @@ import it.polimi.ingsw.observer.Observable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class Setup extends Observable<ServerMessage> {
@@ -36,6 +37,9 @@ public class Setup extends Observable<ServerMessage> {
     public void startPersonalisation(){
         this.notify(new PlayerSetUpMessage(game));
     }
+    public boolean isPreOrderTurnOf(String nickname){
+        return nickname.equals(preGameTurnOf);
+    }
     /** get prePlayer from client, if it is the last one then creates the final players in game*/
     public void addPrePlayer(LobbyPlayer prePlayer){
         if(prePlayers.size()< game.getNPlayers()) {
@@ -43,6 +47,7 @@ public class Setup extends Observable<ServerMessage> {
             prePlayers.add(prePlayer);
             availableMages.remove(prePlayer.getMage());
             availableColor.remove(prePlayer.getTowerColor());
+            preGameTurnOf=preGameOrder.get(0);
             this.notify(new PlayerSetUpMessage(game));
         }
         else throw new RuntimeException("no space for more players");

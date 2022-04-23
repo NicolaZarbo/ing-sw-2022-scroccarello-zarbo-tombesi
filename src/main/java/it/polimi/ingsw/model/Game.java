@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.CardNotFoundException;
+import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.model.character.*;
 import it.polimi.ingsw.model.token.Professor;
@@ -34,7 +36,7 @@ public class Game extends Observable<ServerMessage> {
 
 
 
-    /** creates a game without players, which are created in a setup phase with players inputs*/
+    /** creates a game without players, which are then created in a setup phase through players inputs*/
     public Game(boolean easy, int numberOfPlayer){
         actionPhase= new Turn(this);
         planningPhase= new Round(this);
@@ -42,7 +44,7 @@ public class Game extends Observable<ServerMessage> {
         setupPhase.startPersonalisation();
         this.easy=easy;
         this.nPlayers =numberOfPlayer;
-        this.bag=new Bag(10,5);
+        this.bag=new Bag(26,5);
         this.islands=Setup.createIslands(12,bag);
         this.clouds= Setup.createClouds(nPlayers);
         this.players =new Player[numberOfPlayer];
@@ -57,7 +59,7 @@ public class Game extends Observable<ServerMessage> {
         actualState=GameState.setupPlayers;
         //this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();TODO
     }
-    /** legacy constructor, still here for tests without the server*/
+    /** legacy constructor, still here for tests without players customisation*/
     public Game(boolean easy, int nPlayers, int nIsole){
         this.easy=easy;
         this.nPlayers =nPlayers;
@@ -68,7 +70,7 @@ public class Game extends Observable<ServerMessage> {
            else
                lobbyPlayers.add(new LobbyPlayer(TowerColor.getColor(i), Mage.getMage(i),"nick: "+i));
         }
-        this.bag=new Bag(10,5);
+        this.bag=new Bag(26,5);
         this.islands=Setup.createIslands(nIsole,bag);
         this.clouds= Setup.createClouds(nPlayers);
         this.players =Setup.createPlayer(easy, lobbyPlayers, bag);
@@ -95,6 +97,9 @@ public class Game extends Observable<ServerMessage> {
     public void setPlayers(Player[] players) {
         this.players = players;
         this.playIngOrder= Arrays.stream(players).map(Player::getId).toList();
+    }
+    public boolean isLastPlayerTurn(){
+        return this.playIngOrder.indexOf(this.currentPlayerId)==this.nPlayers-1;
     }
 
     public Round getPlanningPhase() {
@@ -136,7 +141,7 @@ public class Game extends Observable<ServerMessage> {
             if(card.getId()==id)
                 return card;
         }
-        return null; //input Exception(?)
+        throw new CardNotFoundException();
     }
     public List<Integer> getPlayIngOrder() {
         return playIngOrder;
@@ -170,8 +175,7 @@ public class Game extends Observable<ServerMessage> {
             if(island.getID()==id)
                 return island;
         }
-        return null;
-        //throw new NullPointerException("island not available");
+        throw new NullPointerException("island not available");
     }
     public Bag getBag(){
         return bag;
@@ -189,27 +193,18 @@ public class Game extends Observable<ServerMessage> {
     public MotherNature getMotherNature(){
         return this.motherNature;
     }
-    public void setMotherNature(MotherNature m){
-        this.motherNature=m;
-    }
-
     public Cloud[] getClouds(){
         return this.clouds;
     }
-    public void setClouds(Cloud[] cloud){
-        this.clouds=cloud;
-    }
-
     public Player[] getPlayers(){
         return this.players;
     }
 
     public Player getPlayer(int playerId){
-        Player temp=null;
-        for(int j=0;j<this.players.length;j++)
-            if(this.players[j].getId()==playerId)
-                temp=this.players[j];
-        return temp;
+        for (Player player : this.players)
+            if (player.getId() == playerId)
+                return player;
+        throw new NullPointerException("not existing player ");
     }
 
 
@@ -218,13 +213,12 @@ public class Game extends Observable<ServerMessage> {
         if(isProfessorOnGame(color)){
             temp=teachers[color.ordinal()];
             teachers[color.ordinal()]=null;
-        }
-        return temp;
+            return temp;
+        }else throw new NullPointerException();
+
     }
     public boolean isProfessorOnGame(TokenColor color){
-        boolean b= teachers[color.ordinal()] != null;
-
-        return b;
+        return teachers[color.ordinal()] != null;
     }
     public List<Island> getIslandList() {return this.islands;}
 

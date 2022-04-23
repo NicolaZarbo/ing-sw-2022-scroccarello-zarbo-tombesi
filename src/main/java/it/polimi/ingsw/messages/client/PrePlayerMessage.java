@@ -23,7 +23,7 @@ public class PrePlayerMessage extends ClientMessage {
         this.prePlayer=player;
         super.serialize();
     }
-
+    public String getPlayerName(){return prePlayer.getNickname();}
     public LobbyPlayer getPrePlayer() {
         return prePlayer;
     }

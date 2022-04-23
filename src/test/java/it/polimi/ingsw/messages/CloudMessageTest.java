@@ -12,7 +12,7 @@ import junit.framework.TestCase;
 public class CloudMessageTest extends TestCase {
 
     public void testSerialize() {
-        Game game = new Game(true,2,12);
+        Game game = new Game(true,2);
         ServerMessage message =new CloudMessage(game);
         String js=message.getJson();
         System.out.println(js);

@@ -30,7 +30,7 @@ public class Bag {
     public Student getToken(){
          if(left>0){
              Random rand = new Random();
-             int i=rand.nextInt(left);
+             int i=rand.nextInt(0,left);
              Student temp= tokenLeft.get(i);
              tokenLeft.remove(i);
              left--;
@@ -45,6 +45,8 @@ public class Bag {
         for (int i = 0; i < nIslands-2; i++) {
             students.add(this.tokenLeft.get(i*molt));
         }
+        tokenLeft.removeAll(students);
+        left-=(nIslands-2);
         Collections.shuffle(students);
         return students;
     }

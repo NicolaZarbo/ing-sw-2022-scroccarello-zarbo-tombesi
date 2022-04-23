@@ -18,42 +18,17 @@ public class ControllerPlanningPhase {
     }
 
     public void playAssistantCard(PlayAssistantMessage message){
-        if(game.getActualState()!= GameState.planPlayCard)
+        if(game.getActualState()!= GameState.planPlayCard || message.getPlayerId()!= game.getCurrentPlayerId())
             throw new IllegalMoveException();
         modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
+        if(game.isLastPlayerTurn())
+            game.moveToNextPhase();
+        else {
+            game.changePlayerTurn();
+        }
     }
     private List<Integer> getActualOrder() {
         return Round.getRoundOrder(game);
     }
-
-/*
-    public void controlPianification(){
-        for(int i=0;i<Main.clouds.size();i++){
-           // Main.clouds.set(i,Round.SetCloud(i,game));
-            Main.bag-=3;
-        }
-        int []tmp=new int[actualOrder.length];
-        for(int i=0;i<actualOrder.length;i++){
-            motherMovements[i]=Round.MotherMovement(i,playerWantsToPlay[i],game);
-            tmp[i]= Round.CardPlayedValue(i, playerWantsToPlay[i],game);
-        }
-
-        for(int i=0;i<tmp.length;i++){
-            int minTemp=tmp[i];
-            int k=i;
-            for (int j = 0; j < tmp.length; j++) {
-                if ((tmp[j] < minTemp && tmp[j]!=0)||(minTemp==0&&tmp[j]!=0)) {
-                    minTemp = tmp[j];
-                    k = j;
-                }
-            }
-            actualOrder[i] = k;
-            tmp[k]=0;
-        }
-    }
-
- */
-
-
 
 }

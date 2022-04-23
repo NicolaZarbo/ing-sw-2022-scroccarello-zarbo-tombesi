@@ -13,7 +13,7 @@ public class RoundTest extends TestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        this.gameTest=new Game(false,4,10);
+        this.gameTest=new Game(false,4,12);
         this.roundTest=new Round(gameTest);
     }
 
@@ -23,7 +23,7 @@ public class RoundTest extends TestCase {
             roundTest.SetCloud();
             System.out.print("on cloud " + cloudNum + " are setted tokens: ");
             for (int i = 0; i < gameTest.getClouds().length; i++) {
-                for (int j = 0; j < gameTest.getClouds()[i].getStud().length; i++)
+                for (int j = 0; j < gameTest.getClouds()[i].getStud().length; j++)
                     System.out.print(gameTest.getClouds()[i].getStud()[j] + ", ");
             }
         }

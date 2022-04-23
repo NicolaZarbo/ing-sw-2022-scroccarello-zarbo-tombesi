@@ -11,16 +11,23 @@ public class ControllerActionPhase  {
     private int idPlayerNow;
     private final Game game;
     private final Turn modelTurn;
+    private int studentMoved;
 
     public void moveStudentToHall(StudentToHallMessage message){
-        if(game.getActualState()!= GameState.actionMoveStudent)
+        if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>=3)
             throw new IllegalMoveException();
         modelTurn.moveInHall(this.idPlayerNow, message.getStudentId());
+        studentMoved++;
+        if(studentMoved==3)
+            game.moveToNextPhase();
     }
     public void moveStudentToIsland(StudentToIslandMessage message){
-        if(game.getActualState()!= GameState.actionMoveStudent)
+        if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>=3)
             throw new IllegalMoveException();
         modelTurn.moveToIsland(this.idPlayerNow,message.getStudentId(),message.getFinalPositionId());
+        studentMoved++;
+        if(studentMoved==3)
+            game.moveToNextPhase();
     }
 
     public void moveMotherNature(MoveMotherMessage message){
@@ -30,6 +37,7 @@ public class ControllerActionPhase  {
             throw new RuntimeException("too many steps!");
         else {
                 modelTurn.moveMotherNature(message.getSteps());
+                game.moveToNextPhase();
         }
     }
 
@@ -37,9 +45,16 @@ public class ControllerActionPhase  {
         if(game.getActualState()!= GameState.actionChooseCloud)
             throw new IllegalMoveException();
         modelTurn.moveFromCloudToEntrance(message.getCloudId(), this.idPlayerNow);
+        if(game.isLastPlayerTurn())
+            game.moveToNextPhase();
+        else {
+            changeTurn();
+        }
     }
     public void changeTurn(){
+        game.changePlayerTurn();
         this.idPlayerNow= game.getCurrentPlayerId();
+        studentMoved =0;
     }
     public ControllerActionPhase(Game game){
         this.game=game;
@@ -48,7 +63,7 @@ public class ControllerActionPhase  {
 
 
     public void playCharacter(CharacterCardMessage message) {
-        if(game.getActualState()!=GameState.actionMoveMother && game.getActualState()!=GameState.actionMoveStudent)
+        if(game.getActualState()!=GameState.actionMoveMother || game.getActualState()!=GameState.actionMoveStudent)
             throw new IllegalMoveException();
         modelTurn.useCharacter(message.getCardId(), message.getParameters(), message.getPlayerId());
     }
