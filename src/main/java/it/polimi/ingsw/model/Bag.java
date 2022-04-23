@@ -4,9 +4,9 @@ import it.polimi.ingsw.model.token.Student;
 import it.polimi.ingsw.model.token.TokenColor;
 
 import java.util.*;
-
+import it.polimi.ingsw.exceptions.*;
 public class Bag {
-    int left;
+    private int left;
     private final List<Student> tokenLeft;
 
     public Bag(int pedForColor, int numColor){
@@ -24,16 +24,19 @@ public class Bag {
     }
     public boolean isToken(int i){
         boolean present= tokenLeft.get(i) != null;
-
         return present;
     }
 
     public Student getToken(){
-         Random rand = new Random();
-         int i=rand.nextInt(tokenLeft.size());
-         Student temp= tokenLeft.get(i);
-         tokenLeft.remove(i);
-         return temp;
+         if(left>0){
+             Random rand = new Random();
+             int i=rand.nextInt(left);
+             Student temp= tokenLeft.get(i);
+             tokenLeft.remove(i);
+             left--;
+             return temp;
+         }
+        else throw new EmptyBagException("no tokens left");
     }
 
     public ArrayList<Student> setupStudents(int nIslands){
