@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.NoPlaceAvailableException;
 import junit.framework.TestCase;
 import it.polimi.ingsw.model.token.*;
 
