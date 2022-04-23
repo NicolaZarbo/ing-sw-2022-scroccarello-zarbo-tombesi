@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.view.CentralView;
 
 public class CharacterUpdateMessage extends ServerMessage{
     int cardCost;
@@ -38,5 +39,10 @@ public class CharacterUpdateMessage extends ServerMessage{
         Gson gson= new Gson();
        this.cardCost=gson.fromJson(gg, CharacterUpdateMessage.class).getCardCost();
        this.cardID=gson.fromJson(gg, CharacterUpdateMessage.class).getCardID();
+    }
+
+    @Override
+    public void doAction(CentralView view) {
+
     }
 }

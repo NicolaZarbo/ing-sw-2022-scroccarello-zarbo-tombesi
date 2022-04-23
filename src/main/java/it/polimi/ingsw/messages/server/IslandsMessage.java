@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Island;
+import it.polimi.ingsw.view.CentralView;
+
 import java.util.List;
 
 public class IslandsMessage extends ServerMessage{
@@ -28,5 +30,10 @@ public class IslandsMessage extends ServerMessage{
     protected void parseMessage(JsonObject gg) {
         Gson gson = new Gson();
         this.islandList=gson.fromJson(gg,this.getClass()).getIslandList();
+    }
+
+    @Override
+    public void doAction(CentralView view) {
+        view.islandsUpdate(this);
     }
 }

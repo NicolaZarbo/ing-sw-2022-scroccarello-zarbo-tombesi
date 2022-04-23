@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.exceptions.MessageErrorException;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.view.CentralView;
 
 import java.util.ArrayList;
 
@@ -39,6 +40,11 @@ public class MultipleServerMessage extends ServerMessage{
     protected void parseMessage(JsonObject gg) {
         Gson gson = new Gson();
         this.messages=gson.fromJson(gg, MultipleServerMessage.class).getMessages();
+    }
+
+    @Override
+    public void doAction(CentralView view) {
+        //TODO
     }
 
     public ArrayList<ServerMessage> getMessages() {

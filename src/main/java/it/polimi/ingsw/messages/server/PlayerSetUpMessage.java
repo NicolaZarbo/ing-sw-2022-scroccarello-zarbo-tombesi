@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Mage;
 import it.polimi.ingsw.model.Setup;
 import it.polimi.ingsw.model.token.TowerColor;
+import it.polimi.ingsw.view.CentralView;
 
 
 import java.util.ArrayList;
@@ -19,6 +20,11 @@ public class PlayerSetUpMessage extends ServerMessage {
         Gson gson = new Gson();
         this.availableColor= gson.fromJson(gg,PlayerSetUpMessage.class).getAvailableColor();
         this.availableMages=gson.fromJson(gg,PlayerSetUpMessage.class).getAvailableMages();
+    }
+
+    @Override
+    public void doAction(CentralView view) {
+        //
     }
 
     public ArrayList<TowerColor> getAvailableColor() {

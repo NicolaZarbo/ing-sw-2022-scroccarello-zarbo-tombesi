@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.token.TokenColor;
+import it.polimi.ingsw.view.CentralView;
 
 import java.util.List;
 
@@ -32,6 +33,11 @@ public class WholeGameMessage extends ServerMessage{
         this.islands=mex.islands;
         this.motherNature=mex.motherNature;
         this.characters=mex.characters;
+    }
+
+    @Override
+    public void doAction(CentralView view) {
+        view.setView(this);
     }
 
     public Player[] getModelPlayers() {

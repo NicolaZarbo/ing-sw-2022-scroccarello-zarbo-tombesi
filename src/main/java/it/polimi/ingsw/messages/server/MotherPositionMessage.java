@@ -3,6 +3,7 @@ package it.polimi.ingsw.messages.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.view.CentralView;
 
 public class MotherPositionMessage extends ServerMessage {
     private int motherPosition;
@@ -24,6 +25,11 @@ public class MotherPositionMessage extends ServerMessage {
     protected void parseMessage(JsonObject gg) {
         Gson gson= new Gson();
         motherPosition= gson.fromJson(gg,this.getClass()).getMotherPosition();
+    }
+
+    @Override
+    public void doAction(CentralView view) {
+        view.motherPositionUpdate(this);
     }
 
 }

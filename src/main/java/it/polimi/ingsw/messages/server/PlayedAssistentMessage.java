@@ -3,6 +3,7 @@ package it.polimi.ingsw.messages.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.view.CentralView;
 
 public class PlayedAssistentMessage extends ServerMessage{
     int playedCardId;
@@ -32,5 +33,10 @@ public class PlayedAssistentMessage extends ServerMessage{
         Gson gson = new Gson();
         this.playedCardId=gson.fromJson(gg,PlayedAssistentMessage.class).getPlayedCardId();
         this.playerId=gson.fromJson(gg,PlayedAssistentMessage.class).getPlayerId();
+    }
+
+    @Override
+    public void doAction(CentralView view) {
+        //
     }
 }
