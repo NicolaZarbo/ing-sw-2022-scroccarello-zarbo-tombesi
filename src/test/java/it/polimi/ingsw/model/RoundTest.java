@@ -2,18 +2,22 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.EmptyBagException;
 import junit.framework.TestCase;
+
+import java.util.Random;
+
 public class RoundTest extends TestCase {
+
+    private Game gameTest;
+    private Round roundTest;
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        /*this.gameTest=new Game(false,4,10);
-        this.roundTest=new Round(gameTest);*/
+        this.gameTest=new Game(false,4,10);
+        this.roundTest=new Round(gameTest);
     }
 
     public void testSetCloud(){
-        Game gameTest=new Game(false,4,10);
-        Round roundTest=new Round(gameTest);
         int cloudNum=1;
         try {
             roundTest.SetCloud();
@@ -28,6 +32,18 @@ public class RoundTest extends TestCase {
         }
     }
 
+    public void testOrder() {
+        int i =0;
+        for (Player player : gameTest.getPlayers()) {
+            Random r= new Random();
+            gameTest.addCardPlayedThisRound(player.getId(), player.getHand().playAssistant(i+r.nextInt(9)));
+            i+=10;
+        }
+        roundTest.roundOrder();
+        for (Integer inttt: gameTest.getPlayIngOrder()) {
+            System.out.println(inttt);
+        }
+        }
     /*public void testCardPlayedValue(){
         int numPlayer=1;
         int cardPlayed=9;

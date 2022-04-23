@@ -19,6 +19,12 @@ public class Server {
     private final ExecutorService executor = Executors.newFixedThreadPool(128);
     private final List<Lobby> lobbies= new ArrayList<>();
 
+
+    public synchronized void deregisterConnection(ClientConnection connection){
+        for (Lobby lob:this.lobbies) {
+            lob.getConnections().remove(connection);
+        }
+    }
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(serverPort);
     }

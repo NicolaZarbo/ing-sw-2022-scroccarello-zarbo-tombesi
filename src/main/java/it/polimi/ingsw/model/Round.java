@@ -32,12 +32,12 @@ public class Round  extends Observable<ServerMessage> {
         this.notify(new PlayedAssistentMessage(game));
     }
 
-    public static void roundOrder(Game game){
+    public void roundOrder(){
        ArrayList<Integer> order = new ArrayList<>();
        ArrayList<Integer> values=new ArrayList<>();
        AssistantCard cardPlayed;
        for(int i=1;i<=game.getNPlayers();i++){
-           cardPlayed=game.getPlayedCard(i);
+           cardPlayed=game.getPlayedCard(i-1);
            values.add((i-1),cardPlayed.getValTurn());
        }
         for(int i=0;i<values.size();i++){

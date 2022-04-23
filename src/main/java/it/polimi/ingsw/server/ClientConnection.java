@@ -49,20 +49,17 @@ public class ClientConnection extends Observable<String> implements Runnable{
                 notify(read);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
+        }finally {
+            close();
         }
 
     }
     public void asyncSend(final String message){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                send(message);
-            }
-        }).start();
+        new Thread(() -> send(message)).start();
     }
 
-    private void send(String s) {
+    private synchronized void send(String s) {
         try {
             out.println(s);
             out.flush();
@@ -71,5 +68,20 @@ public class ClientConnection extends Observable<String> implements Runnable{
         }
 
     }
-    //TODO missing connection closer
+    private void close(){
+        closeConnection();
+        System.out.println("Unregistering client...");
+        server.deregisterConnection(this);
+        System.out.println("Done!");
+    }
+    public synchronized  void closeConnection(){
+        send("Connection closed from Server");
+        try {
+            clientSocket.close();
+        }catch (IOException exception){
+            send(exception.getMessage());
+            System.err.println(exception.getMessage());
+        }
+        active=false;
+    }
 }
