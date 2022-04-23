@@ -51,6 +51,8 @@ public class Main {
         int firstRoundPlayer=rand.nextInt(numPlayers);
         int[] cardTemp=new int[numPlayers];
         int[] ordturn=new int[numPlayers];
+        int commandfirst=0;
+        int countSpostamento=0;
         while(!someoneWon()){
             for(int k=0;i<numPlayers;i++){
                 System.out.println("which assistant card does player "+k+1+"wants to play?");
@@ -61,9 +63,20 @@ public class Main {
                    k--;
 
             }
-           // ControllerRound round=new ControllerRound(new Game());
-           // round.controlPianification();
-           // ordturn=round.getActualOrder();
+            sc.nextLine();
+            ControllerRound round=new ControllerRound(cardTemp,numPlayers);
+            round.controlPianification();
+            ordturn=round.getActualOrder();
+            for(int l=0;l<ordturn.length;l++){
+
+                while(commandfirst!=4 ||countSpostamento!=3)
+                System.out.println(" 1 per spostare uno studente nella hall,2 per spostarlo su un isola, 3 per guardare studenti,4 per finire la prima fase");
+                commandfirst= sc.nextInt();
+                if(commandfirst==1){
+                    System.out.println("quale studente vuoi spostare?");
+                    ControllerTurn.moveStudentToHall(sc.nextInt());
+                }
+            }
 
             //pesca 3 students dal bag
             //ogni giocatore sceglie un'assistente da giocare, si procede in ordine orario
