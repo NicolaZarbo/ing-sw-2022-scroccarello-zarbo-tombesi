@@ -3,7 +3,11 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.EmptyBagException;
 import junit.framework.TestCase;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import static it.polimi.ingsw.model.Mage.*;
+import static it.polimi.ingsw.model.token.TowerColor.*;
 
 public class RoundTest extends TestCase {
 
@@ -18,13 +22,13 @@ public class RoundTest extends TestCase {
     }
 
     public void testSetCloud(){
-        int cloudNum=1;
         try {
             roundTest.SetCloud();
-            System.out.print("on cloud " + cloudNum + " are setted tokens: ");
             for (int i = 0; i < gameTest.getClouds().length; i++) {
+                System.out.println("on cloud " + i + " are setted tokens: ");
                 for (int j = 0; j < gameTest.getClouds()[i].getStud().length; j++)
-                    System.out.print(gameTest.getClouds()[i].getStud()[j] + ", ");
+                    System.out.print(gameTest.getClouds()[i].getStud()[j].getId() + ", ");
+                System.out.println();
             }
         }
         catch(EmptyBagException e){
@@ -43,25 +47,11 @@ public class RoundTest extends TestCase {
         for (Integer inttt: gameTest.getPlayIngOrder()) {
             System.out.println(inttt);
         }
-        }
-    /*public void testCardPlayedValue(){
-        int numPlayer=1;
-        int cardPlayed=9;
-        int turnValue=Round.CardPlayedValue(numPlayer,cardPlayed,gameTest);
-        System.out.println("player "+numPlayer+" has played card "+cardPlayed+" and his turn value is "+turnValue);
     }
-   public void testMotherMovement() {
-       int numPlayer=1;
-       int cardPlayed=3;
-       int motherValue=Round.MotherMovement(numPlayer,cardPlayed,gameTest);
-       System.out.println("player "+numPlayer+" has played card "+cardPlayed+" and his mother value is "+motherValue);   }*/
 
-
- /*
 
     public void testRoundOrder(){
-        int [] cardTest={9,9,1,4};
-
+        int [] cardTest={8,8,1,4};
         ArrayList<AssistantCard> a1=new ArrayList<AssistantCard>();
         ArrayList<AssistantCard> a2=new ArrayList<AssistantCard>();
         ArrayList<AssistantCard> a3=new ArrayList<AssistantCard>();
@@ -80,15 +70,22 @@ public class RoundTest extends TestCase {
         Board b2=new Board(4,4,grey,2);
         Board b3=new Board(4,4,black,3);
         Board b4=new Board(4,4,white,4);
-        Player p1=new Player("io",1,mage1,h1,b1,black);
-        Player p2=new Player("sss",2,mage2,h2,b2,grey);
-        Player p3=new Player("ss",3,mage3,h3,b3,black);
-        Player p4=new Player("sdasf",4,mage4,h4,b4,white);
+        LobbyPlayer pp1=new LobbyPlayer(black,mage1,"player1");
+        LobbyPlayer pp2=new LobbyPlayer(grey,mage2,"player2");
+        LobbyPlayer pp3=new LobbyPlayer(black,mage2,"player3");
+        LobbyPlayer pp4=new LobbyPlayer(white,mage4,"player4");
+        Player p1=new Player(pp1,1,h1,b1);
+        Player p2=new Player(pp2,2,h2,b2);
+        Player p3=new Player(pp3,3,h3,b3);
+        Player p4=new Player(pp4,4,h4,b4);
         Player [] testSet={p1,p2,p3,p4};
-        /* cTest.controlPianification();
-        System.out.print("the order is: ");    momentarily put in comments for test coverage, the controller part is going to change
-        for(int i=0;i<cTest.getActualOrder().length;i++)
-            System.out.print("giocatore "+cTest.getActualOrder()[i]+" ");
+        for(int i=0;i<4;i++){
+            roundTest.playCard(testSet[i].getId(),cardTest[i]);
+        }
+        roundTest.roundOrder();
+        System.out.print("the order is: ");
+        for(int i=0;i<gameTest.getPlayIngOrder().size();i++)
+            System.out.print("giocatore "+gameTest.getPlayIngOrder().get(i)+" ");
 
-    }*/
+    }
 }

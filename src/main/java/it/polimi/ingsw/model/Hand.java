@@ -39,10 +39,10 @@ public class Hand {
     }
 
     public AssistantCard playAssistant(int cardId){
-        AssistantCard played=null;
+
         for(int i=0;i<assistant.size();i++){
             if(assistant.get(i).getId()==cardId) {
-                played=assistant.get(i);
+                AssistantCard played=assistant.get(i);
                 discarded.add(assistant.get(i));
                 assistant.remove(i) ;
                 return played;

@@ -14,13 +14,13 @@ public class Round  extends Observable<ServerMessage> {
     }
 
     public void SetCloud() {
-        int cloudDim=game.getClouds()[0].getDimension();
-        Student[] students = new Student[cloudDim];
-        for (Cloud cloud:game.getClouds()) {
-            for (int i = 0; i < cloudDim; i++) {
-                students[i]=game.getBag().getToken();
+        for(int i=0;i<game.getClouds().length;i++){
+            int dim=game.getClouds()[i].getStud().length;
+            Student[] students=new Student[dim];
+            for(int j=0;j<dim;j++){
+                students[j]=game.getBag().getToken();
             }
-            cloud.setStud(students);
+           game.getClouds()[i].setStud(students);
         }
         this.notify(new CloudMessage(game));
     }

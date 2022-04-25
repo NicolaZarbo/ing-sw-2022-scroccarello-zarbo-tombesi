@@ -11,16 +11,12 @@ public class Bag {
 
     public Bag(int pedForColor, int numColor){
         int size=pedForColor*numColor;
-        left =size;
-        Student[] temparr=new Student[size];
-        int k=0;
+        this.left =size;
+        tokenLeft=new ArrayList<Student>(size);
         for(int i=0;i<numColor;i++)
             for(int j=0;j<pedForColor;j++){
-                Student temp=new Student(k, TokenColor.getColor(i));
-                temparr[k]=temp;
-                k++;
+                tokenLeft.add(new Student(j, TokenColor.getColor(i)));
             }
-        tokenLeft =new LinkedList<>(Arrays.asList(temparr));
     }
     public boolean isToken(int i){
         boolean present= tokenLeft.get(i) != null;
