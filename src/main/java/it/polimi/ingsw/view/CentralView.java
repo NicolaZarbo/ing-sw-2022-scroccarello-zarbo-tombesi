@@ -16,10 +16,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class CentralView extends Observable<ClientMessage> implements Observer<ServerMessage> {
+public class  CentralView extends Observable<ClientMessage> implements Observer<ServerMessage> {
     private List<Island> islands;
     private List<Cloud> clouds;
-    private List<Player> players;
+    private List<Player> players; //va trasformato in simplified player come tutto il resto?
     private MotherNature mother;
     private String name;
     private Player personalPlayer;

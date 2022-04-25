@@ -2,6 +2,8 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.messages.LobbySetupMessage;
 import it.polimi.ingsw.observer.Observable;
+import it.polimi.ingsw.view.CentralView;
+import it.polimi.ingsw.view.SimplifiedPlayer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,12 +16,18 @@ public class ClientConnection extends Observable<String> implements Runnable{
     private Scanner in;
     private boolean active ;
     private Server server;
+    private CentralView game;
+
    // private  int lobbyCode;
 
     public ClientConnection(Socket clientSocket, Server server) {
         this.clientSocket = clientSocket;
         this.server=server;
         this.active=true;
+    }
+
+    public void assignView(CentralView game){
+        this.game=game;
     }
 
     public synchronized boolean isActive() {
@@ -47,6 +55,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
             while(isActive()) {
                 read = in.nextLine();
                 notify(read);
+                //TODO
             }
         } catch (IOException e) {
             System.err.println(e.getMessage());

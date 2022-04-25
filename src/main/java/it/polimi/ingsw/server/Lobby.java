@@ -6,6 +6,7 @@ import it.polimi.ingsw.view.RemoteView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lobby {
     private final ArrayList<ClientConnection> connections = new ArrayList<>();
@@ -36,7 +37,7 @@ public class Lobby {
     public void startGame(){
         model = new Game(easy, getLobbyDimension());
         controller = new Controller(model);
-        model.getSetupPhase().setPreOrder(playersViews.stream().map(RemoteView::getNickname).toList());
+        model.getSetupPhase().setPreOrder(playersViews.stream().map(RemoteView::getNickname).collect(Collectors.toList()));
         for (RemoteView view: playersViews) {
             model.addObserver(view);
             model.getActionPhase().addObserver(view);

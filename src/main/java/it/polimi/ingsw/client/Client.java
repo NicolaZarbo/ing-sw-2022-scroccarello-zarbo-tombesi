@@ -10,10 +10,12 @@ public class Client {
 
     private String ip;
     private int port;
+    private String username;
 
-    public Client(String ip, int port){
+    public Client(String ip, int port, String username){
         this.ip = ip;
         this.port = port;
+        this.username=username;
     }
 
     public void run() throws IOException {
