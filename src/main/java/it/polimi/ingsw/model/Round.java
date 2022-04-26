@@ -55,7 +55,7 @@ public class Round  extends Observable<ServerMessage> {
        game.setPlayIngOrder(order);
     }
 
-    public static List<Integer> getRoundOrder(Game game){
+    public List<Integer> getRoundOrder(Game game){
         return game.getPlayIngOrder();
     }
 

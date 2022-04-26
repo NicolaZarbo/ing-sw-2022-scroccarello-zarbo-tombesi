@@ -194,7 +194,7 @@ public class Turn extends Observable<ServerMessage> {
         this.notify(new SingleBoardMessage(game, playerId));
         //serverSendAll(new SingleBoardMessage(game, playerId))
     }
-    /** activates the character effect if the player has enough money or trows an exception*/
+    /** activates the character effect if the player has enough money or throws an exception*/
     public  void useCharacter(int cardId, ParameterObject parameters, int playerId){
         CharacterCard card = game.getCharacter(cardId);
         Player player = game.getPlayer(playerId);
@@ -233,7 +233,7 @@ public class Turn extends Observable<ServerMessage> {
         }
         return influence;
     }
-    /** if an island can be conquered based on influence changes towers on the island or puts another one*/
+    /** if an island can be conquered based on influence, it changes towers on the island or puts another one*/
     public void islandConquest(int islandId) throws NullPointerException{
         int  maxInf;
         Island island=game.getIsland(islandId);

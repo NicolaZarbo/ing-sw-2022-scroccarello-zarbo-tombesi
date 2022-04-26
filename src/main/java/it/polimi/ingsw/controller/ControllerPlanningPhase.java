@@ -28,7 +28,7 @@ public class ControllerPlanningPhase {
         }
     }
     private List<Integer> getActualOrder() {
-        return Round.getRoundOrder(game);
+        return modelRound.getRoundOrder(game);
     }
 
 }
