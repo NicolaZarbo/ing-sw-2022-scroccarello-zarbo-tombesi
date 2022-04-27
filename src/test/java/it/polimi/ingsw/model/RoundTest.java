@@ -2,8 +2,10 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.EmptyBagException;
 import junit.framework.TestCase;
+import org.junit.Assert;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static it.polimi.ingsw.model.Mage.*;
@@ -36,16 +38,13 @@ public class RoundTest extends TestCase {
         }
     }
 
-    public void testOrder() {
-        int i =0;
-        for (Player player : gameTest.getPlayers()) {
-            Random r= new Random();
-            gameTest.addCardPlayedThisRound(player.getId(), player.getHand().playAssistant(i+r.nextInt(9)));
-            i+=10;
+    public void testGetRoundOrder() {
+        try{
+            List<Integer> list=roundTest.getRoundOrder(gameTest);
+            System.out.println("ok");
         }
-        roundTest.roundOrder();
-        for (Integer inttt: gameTest.getPlayIngOrder()) {
-            System.out.println(inttt);
+        catch(NullPointerException e){
+            e.printStackTrace();
         }
     }
 

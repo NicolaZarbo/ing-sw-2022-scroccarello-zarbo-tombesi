@@ -68,7 +68,9 @@ public class Turn extends Observable<ServerMessage> {
                 students[i]=null;
             }
         }
-        else throw new RuntimeException("unavailable cloud");
+        else {
+            throw new RuntimeException("unavailable cloud");
+        }
 
         game.resetBonus();
         this.notify(new CloudMessage(game));

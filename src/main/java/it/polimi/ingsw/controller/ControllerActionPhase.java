@@ -44,7 +44,12 @@ public class ControllerActionPhase  {
     public void chooseCloud(ChooseCloudMessage message){
         if(game.getActualState()!= GameState.actionChooseCloud)
             throw new IllegalMoveException();
-        modelTurn.moveFromCloudToEntrance(message.getCloudId(), this.idPlayerNow);
+        try{
+            modelTurn.moveFromCloudToEntrance(message.getCloudId(), this.idPlayerNow);
+        }
+        catch(RuntimeException e) {
+            throw new IllegalMoveException(e.getMessage());
+        }
         if(game.isLastPlayerTurn())
             game.moveToNextPhase();
         else {

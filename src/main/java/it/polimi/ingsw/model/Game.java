@@ -83,11 +83,17 @@ public class Game extends Observable<ServerMessage> {
         this.cardBonusActive=0;
         this.cardPlayedThisRound=new HashMap<>();
         this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();
+        this.actionPhase=new Turn(this);
+        this.planningPhase=new Round(this);
     }
 
     public void moveToNextPhase(){
         int before = actualState.ordinal();
         actualState= GameState.values()[before+1];
+    }
+    /**method only to make testing faster*/
+    public void setManuallyGamePhase(GameState state){
+        this.actualState=state;
     }
 
     public GameState getActualState() {
