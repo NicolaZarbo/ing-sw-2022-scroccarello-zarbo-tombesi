@@ -36,20 +36,15 @@ public class Controller extends Observable<ErrorMessageForClient> implements Obs
     @Override
     public void update(ClientMessage message) {
         try{
-            this.doAction(message);
+            if(message.getPlayerId()!=this.game.getCurrentPlayerId())
+                throw new IllegalMoveException("not your turn");
+            else
+                message.doAction(this); //commandPattern
         }
         catch(IllegalMoveException e){
             e.printStackTrace();
             sendMessageError(e);
         }
-    }
-
-    /** uses command pattern to choose which controller method to call, catches errors and sends them to remote view*/
-    private void doAction(ClientMessage message){
-            if(message.getPlayerId()!=this.game.getCurrentPlayerId())
-                throw new IllegalMoveException("not your turn");
-            else
-                message.doAction(this); //commandPattern
     }
     /** notifies the ErrorMessageReceiver in RemoteView*/
     private void sendMessageError(RuntimeException e) {

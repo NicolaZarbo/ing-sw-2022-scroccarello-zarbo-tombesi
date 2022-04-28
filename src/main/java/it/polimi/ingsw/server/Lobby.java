@@ -39,9 +39,6 @@ public class Lobby {
         model.getSetupPhase().setPreOrder(playersViews.stream().map(RemoteView::getNickname).collect(Collectors.toList()));
         for (RemoteView view: playersViews) {
             model.addObserver(view);
-            model.getActionPhase().addObserver(view);
-            model.getSetupPhase().addObserver(view);
-            model.getPlanningPhase().addObserver(view);
             view.addObserver(controller);
             view.setErrorReceiver(controller);
         }

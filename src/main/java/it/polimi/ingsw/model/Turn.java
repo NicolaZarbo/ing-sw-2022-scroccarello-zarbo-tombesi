@@ -5,12 +5,11 @@ import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.messages.server.*;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.token.*;
-import it.polimi.ingsw.observer.Observable;
 
 import java.util.*;
 
-public class Turn extends Observable<ServerMessage> {
-    private Game game;
+public class Turn {
+    private final Game game;
 
     public Turn (Game game){
         this.game=game;
@@ -26,7 +25,7 @@ public class Turn extends Observable<ServerMessage> {
         if(canHaveTeacher(stud.getColor(),idPlayer))
             getTeacher(stud.getColor(),idPlayer);
 
-        this.notify(new SingleBoardMessage(game, idPlayer));
+        game.notify(new SingleBoardMessage(game, idPlayer));
 
     }
     /** moves a student already inside the Board of idPlayer from entrance to a target island*/
@@ -34,9 +33,9 @@ public class Turn extends Observable<ServerMessage> {
         Student stud = game.getPlayer(idPlayer).getBoard().getStudentFromEntrance(idStud);
         Island island = game.getIsland(idIsland);
         island.addStudent(stud);
-        //use a multiple message to reduce the number of connection use
-        this.notify(new IslandsMessage(game));
-        this.notify(new SingleBoardMessage(game, idPlayer));
+        //use a multiple message to reduce the number of connection use TODO
+        game.notify(new IslandsMessage(game));
+        game.notify(new SingleBoardMessage(game, idPlayer));
 
     }
     /** moves motherNature for a number 'steps', then checks on the final island for tower conquest and island merge*/
@@ -55,7 +54,7 @@ public class Turn extends Observable<ServerMessage> {
             unifyBefore( position);
         }
 
-        this.notify(new MotherPositionMessage(game));
+        game.notify(new MotherPositionMessage(game));
     }
     /** moves al the students on a target cloud to the board of playerId*/
     public void moveFromCloudToEntrance(int cloudId,int playerId){
@@ -73,8 +72,8 @@ public class Turn extends Observable<ServerMessage> {
         }
 
         game.resetBonus();
-        this.notify(new CloudMessage(game));
-        this.notify(new SingleBoardMessage(game,playerId));
+        game.notify(new CloudMessage(game));
+        game.notify(new SingleBoardMessage(game,playerId));
     }
 
     public boolean isUnifiableNext(int pos){
@@ -111,7 +110,7 @@ public class Turn extends Observable<ServerMessage> {
             if (game.getMotherNature().getPosition() == pos + 1)
                 game.getMotherNature().changePosition(pos);
             }
-        this.notify(new IslandsMessage(game));
+        game.notify(new IslandsMessage(game));
 
     }
     public  void unifyBefore( int pos) {
@@ -126,7 +125,7 @@ public class Turn extends Observable<ServerMessage> {
             if (game.getMotherNature().getPosition() == pos - 1)
                 game.getMotherNature().changePosition(pos);
             }
-        this.notify(new IslandsMessage(game));
+        game.notify(new IslandsMessage(game));
 
     }
     //if it is a team game, insert the mainplayer id in idPlayer
@@ -134,8 +133,8 @@ public class Turn extends Observable<ServerMessage> {
     public void putTowerFromBoardToIsland(Island island,Player player){
         Board board=player.getBoard();
         island.setTower(board.getTower());
-        this.notify(new IslandsMessage(game));
-        this.notify(new SingleBoardMessage(game,player.getId()));
+        game.notify(new IslandsMessage(game));
+        game.notify(new SingleBoardMessage(game,player.getId()));
 
     }
     private void changeTower(Island island , Player newOwner){
@@ -144,7 +143,7 @@ public class Turn extends Observable<ServerMessage> {
         for (Player player: game.getPlayers()) {
             if(player.getColorT()==removedT.get(0).getColor()){
                 player.getBoard().addTower(removedT);
-                this.notify(new SingleBoardMessage(game,player.getId()));//this may cause a visual problem in the time between messages
+                game.notify(new SingleBoardMessage(game,player.getId()));//this may cause a visual problem in the time between messages
             }
         }
         this.putTowerFromBoardToIsland(island,newOwner);
@@ -193,7 +192,7 @@ public class Turn extends Observable<ServerMessage> {
             }
 
         }
-        this.notify(new SingleBoardMessage(game, playerId));
+        game.notify(new SingleBoardMessage(game, playerId));
         //serverSendAll(new SingleBoardMessage(game, playerId))
     }
     /** activates the character effect if the player has enough money or throws an exception*/
@@ -203,7 +202,7 @@ public class Turn extends Observable<ServerMessage> {
         if(player.getHand().enoughCoin(card.getCost())){
             player.getHand().payCoin(card.getCost());
             card.cardEffect( parameters,  game );
-            this.notify(new CharacterUpdateMessage(cardId,game));
+            game.notify(new CharacterUpdateMessage(cardId,game));
         }
         else
             {throw new IllegalMoveException("not enough money");}

@@ -7,7 +7,7 @@ import it.polimi.ingsw.observer.Observable;
 
 import java.util.*;
 
-public class Round  extends Observable<ServerMessage> {
+public class Round {
     Game game;
     public Round(Game game) {
         this.game=game;
@@ -22,14 +22,14 @@ public class Round  extends Observable<ServerMessage> {
             }
            game.getClouds()[i].setStud(students);
         }
-        this.notify(new CloudMessage(game));
+        game.notify(new CloudMessage(game));
     }
 
     public void playCard(int playerId, int cardPlayed){
         Hand actualHand=game.getPlayer(playerId).getHand();
         AssistantCard played=actualHand.playAssistant(cardPlayed);
         game.addCardPlayedThisRound(playerId,played);
-        this.notify(new PlayedAssistentMessage(game));
+        game.notify(new PlayedAssistentMessage(game));
     }
 
     public void roundOrder(){

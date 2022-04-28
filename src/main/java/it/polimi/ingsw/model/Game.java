@@ -87,6 +87,11 @@ public class Game extends Observable<ServerMessage> {
         planningPhase.setCloud();
     }
 
+    @Override
+    protected void notify(ServerMessage message) {
+        super.notify(message);
+    }
+
     public void moveToNextPhase(){
         int before = actualState.ordinal();
         actualState= GameState.values()[before+1];

@@ -51,7 +51,7 @@ public class RemoteView extends Observable<ClientMessage> implements Observer<Se
                 ClientMessage clientMessage = MessageFactory.getMessageFromClient(message);
                 doAction(clientMessage);
             }catch(IllegalArgumentException | ArrayIndexOutOfBoundsException e){
-                connection.asyncSend("Error!");//usiamo l'altro
+                System.err.println(e.getMessage());
             }
         }
 
