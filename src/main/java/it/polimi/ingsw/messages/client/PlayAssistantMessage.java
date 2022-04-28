@@ -3,7 +3,6 @@ package it.polimi.ingsw.messages.client;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.model.AssistantCard;
 
 public class PlayAssistantMessage extends ClientMessage{
     private int playedCard;

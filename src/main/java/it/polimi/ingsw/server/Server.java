@@ -1,10 +1,5 @@
 package it.polimi.ingsw.server;
 
-import it.polimi.ingsw.messages.LobbySetupMessage;
-import it.polimi.ingsw.model.LobbyPlayer;
-import it.polimi.ingsw.model.Mage;
-import it.polimi.ingsw.model.token.TowerColor;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -15,7 +10,7 @@ import java.util.concurrent.Executors;
 
 public class Server {
     private final ServerSocket serverSocket;
-    private int serverPort;
+    private int serverPort=12345;
     private final ExecutorService executor = Executors.newFixedThreadPool(128);
     private final List<Lobby> lobbies= new ArrayList<>();
 
@@ -37,10 +32,16 @@ public class Server {
             last.startGame();
     }
     public synchronized boolean availableLobby(){
+        if(lobbies.isEmpty())
+            return false;
         Lobby last = lobbies.get(lobbies.size()-1);
         return (last.getLobbyDimension()>last.numberOfConnections());
     }
-    public synchronized void createLobby(ClientConnection connection, String nick,int dimension, boolean easy){
+    public synchronized void createLobby(ClientConnection connection, String nick,int dimension, String yesEasy){
+        boolean easy;
+        if(yesEasy.equals("y"))
+            easy=true;
+        else easy= false;
         int newLobbyCode = lobbies.size();
         Lobby last = new Lobby(connection, newLobbyCode,easy,dimension, nick);
         lobbies.add(last);
@@ -55,7 +56,8 @@ public class Server {
                 connections++;
                 System.out.println("Ready for the new connection - " + connections);
                 ClientConnection socketConnection = new ClientConnection(newSocket, this);
-                executor.submit(socketConnection);
+                executor.execute(socketConnection);
+               // executor.submit(socketConnection);
             } catch (IOException e) {
                 System.out.println("Connection Error!");
             }

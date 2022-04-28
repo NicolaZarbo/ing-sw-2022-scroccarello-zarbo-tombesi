@@ -15,7 +15,6 @@ import it.polimi.ingsw.observer.Observer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 //per le torri si può scegliere anche di non usare l'id ma basarsi sul mero colore
 public class  CentralView extends Observable<ClientMessage> implements Observer<ServerMessage> {

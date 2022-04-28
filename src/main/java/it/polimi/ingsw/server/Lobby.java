@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.view.RemoteView;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lobby {
@@ -46,6 +45,7 @@ public class Lobby {
             view.addObserver(controller);
             view.setErrorReceiver(controller);
         }
+        model.getSetupPhase().startPersonalisation();
     }
     public int getLobbyCode() {
         return lobbyCode;

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Random;
 
 import static it.polimi.ingsw.model.Mage.*;
-import static it.polimi.ingsw.model.token.TowerColor.*;
 
 public class RoundTest extends TestCase {
 

@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model.character;
 
 
-import it.polimi.ingsw.model.Card;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Card;
 
 // we will have to use a strategy Pattern with the method isInstanceOff() to show the view information about 4 particular cards
 public abstract class CharacterCard extends Card {

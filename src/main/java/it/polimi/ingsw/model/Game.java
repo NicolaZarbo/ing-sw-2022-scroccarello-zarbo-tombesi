@@ -1,9 +1,8 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.CardNotFoundException;
-import it.polimi.ingsw.exceptions.IllegalMoveException;
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.messages.server.ServerMessage;
-import it.polimi.ingsw.model.character.*;
 import it.polimi.ingsw.model.token.Professor;
 import it.polimi.ingsw.model.token.TokenColor;
 import it.polimi.ingsw.model.token.TowerColor;
@@ -41,7 +40,6 @@ public class Game extends Observable<ServerMessage> {
         actionPhase= new Turn(this);
         planningPhase= new Round(this);
         setupPhase = new Setup(this);
-        setupPhase.startPersonalisation();
         this.easy=easy;
         this.nPlayers =numberOfPlayer;
         this.bag=new Bag(26,5);

@@ -1,14 +1,17 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.NoPlaceAvailableException;
+import it.polimi.ingsw.model.token.Professor;
+import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.token.TokenColor;
+import it.polimi.ingsw.model.token.TowerColor;
 import junit.framework.TestCase;
-import it.polimi.ingsw.model.token.*;
 
 import java.util.ArrayList;
 
 public class BoardTest extends TestCase {
 
-    Board boardTest=new Board(4,4,TowerColor.black,1);
+    Board boardTest=new Board(4,4, TowerColor.black,1);
     public void testProfessorInsertion(){
         if(!boardTest.hasProfessor(TokenColor.green)){
             System.out.println("there's not a green professor, i put it");

@@ -2,7 +2,6 @@ package it.polimi.ingsw.messages.server;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import it.polimi.ingsw.messages.GenericMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Mage;
 import it.polimi.ingsw.model.Setup;

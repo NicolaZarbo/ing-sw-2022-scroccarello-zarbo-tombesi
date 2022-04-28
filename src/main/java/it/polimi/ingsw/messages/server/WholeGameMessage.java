@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.token.TokenColor;
 import it.polimi.ingsw.view.CentralView;
 
 import java.util.List;
