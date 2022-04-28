@@ -97,6 +97,10 @@ public class Board {
         this.towers.addAll(towers);
     }
 
+    public int towersLeft(){
+        return towers.size();
+    }
+
     public Tower getTower(){
         Tower tower;
             tower = towers.get(towers.size()-1);
@@ -106,6 +110,26 @@ public class Board {
             }
             return tower;
 
+    }
+
+    public Professor[] getTable() {
+        return table;
+    }
+
+    public int getEntranceSize() {
+        return entranceSize;
+    }
+
+    public boolean[][] getCoinDN() {
+        return coinDN;
+    }
+
+    public int getToweridFromIndex(int i){
+        int k=-1;
+        if(i<towersLeft());
+        k=towers.get(i).getId();
+
+        return k;
     }
 
     public void putStudentOnEntrance(Student student)throws NoPlaceAvailableException{

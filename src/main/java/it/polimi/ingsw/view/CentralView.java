@@ -7,6 +7,7 @@ import it.polimi.ingsw.messages.server.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.model.token.Token;
+import it.polimi.ingsw.model.token.TokenColor;
 import it.polimi.ingsw.model.token.TowerColor;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.Observer;
@@ -16,13 +17,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+//per le torri si può scegliere anche di non usare l'id ma basarsi sul mero colore
 public class  CentralView extends Observable<ClientMessage> implements Observer<ServerMessage> {
-    private List<Island> islands;
+    private List<int[]> islandsStudent;
+    private List<int[]> islandsTowers;
+    private List<Integer> numberofIslands; //indica per ogni isola da quante isole è composta
     private List<Cloud> clouds;
-    private List<Player> players; //va trasformato in simplified player come tutto il resto?
+    private List<SimplifiedPlayer> players; //va trasformato in simplified player come tutto il resto?
     private MotherNature mother;
     private String name;
-    private Player personalPlayer;
+    private SimplifiedPlayer personalPlayer;
     private GameState state;
     private int turnOf;
     private static int fakeId=99;
@@ -33,13 +37,21 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     }
     public void errorFromServer(ErrorMessageForClient message){}
     public void setView(WholeGameMessage message) {
-        islands=message.getIslands();
+        List<Island> islands= message.getIslands();
+        for(int i=0;i<islands.size();i++){
+            islandsStudent.add(translateIslandStudents(islands.get(i)));
+            islandsTowers.add(translateIslandTower(islands.get(i)));
+            numberofIslands.add(translateIslandNumbers(islands.get(i)));
+        }
+
         clouds= Arrays.stream(message.getClouds()).toList();
-        players= Arrays.asList(message.getModelPlayers());
+        List<Player> tempPlayers= Arrays.asList(message.getModelPlayers());
+        for(int i=0;i<tempPlayers.size();i++)
+            players.add(translate(tempPlayers.get(i)));
         mother = message.getMotherNature();
         playedCardThisTurn= new ArrayList<>(players.size());
-        for (Player pl: players) {
-            if(pl.getNickname().equals( name))
+        for (SimplifiedPlayer pl: players) {
+            if(pl.getUsername().equals( name))
                 personalPlayer=pl;
         }
     }
@@ -100,5 +112,70 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     }
     public void choosePlayerCustom(TowerColor towerColor, Mage mage){
         notify(new PrePlayerMessage(fakeId,new LobbyPlayer(towerColor,mage,name)));
+    }
+
+    public SimplifiedPlayer translatePlayer(Player player){
+        int tC=player.getColorT().ordinal();
+        int m=player.getMage().ordinal();
+        int c=player.getHand().getCoin();
+        boolean[] ac=new boolean[player.getHand().getAssistant().size()];
+        boolean[] dc=new boolean[player.getHand().getAssistant().size()];
+        for(int i=0;i<player.getHand().getAssistant().size();i++)
+            ac[player.getHand().getAssistant().get(i).getId()]=true;
+
+        for(int i=0;i<ac.length;i++)
+            dc[i]= !ac[i];
+        int[][] dr=new int[player.getBoard().getDiningRoom().length][player.getBoard().getDiningRoom()[0].length];
+        for(int i=0;i<dr.length;i++)
+            for(int j=0;j<dr[i].length;j++)
+                dr[i][j]=player.getBoard().getDiningRoom()[i][j].getId();
+
+        int[] pt=new int[player.getBoard().getTable().length];
+        for(int i=0;i<pt.length;i++) {//se non c'è professore di un colore quella entry avrà come valore -1
+            if (player.getBoard().hasProfessor(TokenColor.getColor(i)))
+                pt[i] = player.getBoard().getProfessor(TokenColor.getColor(i)).getId();
+            else
+                pt[i] = -1;
+        }
+        int tl=player.getBoard().towersLeft();
+        boolean[][] cDN=new boolean[player.getBoard().getCoinDN().length][player.getBoard().getCoinDN()[0].length];
+
+        for(int i=0;i<cDN.length;i++)
+            for(int j=0;j<cDN[i].length;j++)
+                cDN[i][j]=player.getBoard().getCoinDN()[i][j];
+
+
+        int es=player.getBoard().getEntranceSize();
+
+        String nick=player.getNickname();
+
+        SimplifiedPlayer temp= new SimplifiedPlayer(nick,tC,c,tl,es);
+        temp.setMage(m);
+        temp.setAssistantCards(ac);
+        temp.setDiscardedCards(dc);
+        temp.setDiningRoom(dr);
+        temp.setProfessorTable(pt);
+        temp.setCoinDN(cDN);
+
+        return temp;
+
+
+    }
+    public int[] translateIslandStudents(Island isl){
+        int[] temp=new int[isl.getStudents().size()];
+        for(int i=0;i<temp.length;i++)
+            temp[i]=isl.getStudents().get(i).getId();
+
+        return temp;
+    }
+    public int[] translateIslandTower(Island isl){
+        int[] temp=new int[isl.getTowers().size()];
+        for(int i=0;i<temp.length;i++)
+            temp[i]=isl.getTowers().get(i).getColor().ordinal();
+
+        return temp;
+    }
+    public int translateIslandNumbers(Island isl){
+       return isl.getIslandSize();
     }
 }

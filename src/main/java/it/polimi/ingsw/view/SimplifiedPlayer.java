@@ -1,6 +1,9 @@
 package it.polimi.ingsw.view;
 
 
+import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.token.TokenColor;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -9,6 +12,7 @@ public class SimplifiedPlayer {
     private String username;
     private int towerColor;//towercolor assigned to player 1-black,2-white,3-gray
     //player hand rapresentation
+    private int mage;
     private int coin;
     private boolean[] assistantCards; //card se true giocabile
     private boolean[] discardedCards; //card se true scartata
@@ -29,7 +33,7 @@ public class SimplifiedPlayer {
         Arrays.fill(discardedCards, false);
         this.diningRoom = new int[5][10];
         this.professorTable = new int[5];
-        this.towersLeft = towerNumber;
+        this.towersLeft=towerNumber;
         this.coinDN = new boolean[5][3];
         for (boolean[] booleans : coinDN) Arrays.fill(booleans, true);
         this.entranceSize = entranceSize;
@@ -66,7 +70,13 @@ public class SimplifiedPlayer {
     public void setAssistantCards(boolean[] assistantCards) {
         this.assistantCards = assistantCards;
     }
+    public int getMage() {
+        return mage;
+    }
 
+    public void setMage(int mage) {
+        this.mage = mage;
+    }
     public boolean[] getDiscardedCards() {
         return discardedCards;
     }
@@ -114,4 +124,6 @@ public class SimplifiedPlayer {
     public void setEntranceSize(int entranceSize) {
         this.entranceSize = entranceSize;
     }
+
+
 }
