@@ -5,14 +5,16 @@ import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.view.CentralView;
+import it.polimi.ingsw.view.SimplifiedIsland;
+import it.polimi.ingsw.view.SimplifiedPlayer;
 
 import java.util.List;
 
 public class WholeGameMessage extends ServerMessage{
-    private Player[] modelPlayers;
-    private Cloud[] clouds;
-    private MotherNature motherNature;
-    private List<Island> islands;
+    private List<SimplifiedPlayer> players;
+    private List<Integer[]> clouds;
+    private int motherNature;
+    private List<SimplifiedIsland> islands;
     private List<CharacterCard> characters;
 
     public WholeGameMessage(String json) {
@@ -21,13 +23,17 @@ public class WholeGameMessage extends ServerMessage{
 
     public WholeGameMessage(Game game) {
         super(game);
+        this.players=ModelToViewTranslate.translatePlayer(game.getPlayers());
+        this.islands=ModelToViewTranslate.translateIsland(game.getIslands());
+        this.motherNature=game.getMotherNature().getPosition();
+        this.clouds= ModelToViewTranslate.translateClouds(game.getClouds());
     }
 
     @Override
     protected void parseMessage(JsonObject gg) {
         Gson gson= new Gson();
         WholeGameMessage mex= gson.fromJson(gg,WholeGameMessage.class);
-        this.modelPlayers=mex.modelPlayers;
+        this.players=mex.players;
         this.clouds= mex.clouds;
         this.islands=mex.islands;
         this.motherNature=mex.motherNature;
@@ -39,19 +45,19 @@ public class WholeGameMessage extends ServerMessage{
         view.setView(this);
     }
 
-    public Player[] getModelPlayers() {
-        return modelPlayers;
+    public List<SimplifiedPlayer> getModelPlayers() {
+        return players;
     }
 
-    public Cloud[] getClouds() {
+    public List<Integer[]> getClouds() {
         return clouds;
     }
 
-    public MotherNature getMotherNature() {
+    public int getMotherNature() {
         return motherNature;
     }
 
-    public List<Island> getIslands() {
+    public List<SimplifiedIsland> getIslands() {
         return islands;
     }
 

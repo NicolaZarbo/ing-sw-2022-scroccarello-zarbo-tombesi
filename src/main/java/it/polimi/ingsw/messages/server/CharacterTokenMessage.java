@@ -7,11 +7,13 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.TokensCharacter;
 import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.token.Token;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CharacterTokenMessage extends CharacterUpdateMessage {
-    private ArrayList<Student> students;
+    private List<Integer> students;
     public CharacterTokenMessage(int cardId, Game game) {
         super( game);
         CharacterCard card;
@@ -21,7 +23,7 @@ public class CharacterTokenMessage extends CharacterUpdateMessage {
             throw new MessageErrorException("provided id corresponds to a "+card.getClass().getSuperclass().getSimpleName()+ " object, not tokensCharacter");
         super.cardID=card.getId();
         super.cardCost=card.getCost();
-        students= ((TokensCharacter) card).getStudents();
+        students= ((TokensCharacter) card).getStudents().stream().map(Token::getId).toList();
         super.serialize();
     }
 
@@ -29,7 +31,7 @@ public class CharacterTokenMessage extends CharacterUpdateMessage {
         super(json);
     }
 
-    public ArrayList<Student> getStudents() {
+    public List<Integer> getStudents() {
         return students;
     }
     @Override

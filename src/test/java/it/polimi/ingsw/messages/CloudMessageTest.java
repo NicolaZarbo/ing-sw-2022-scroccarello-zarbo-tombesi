@@ -28,8 +28,8 @@ public class CloudMessageTest extends TestCase {
 
     public void tParseMessage(String js) {
         ServerMessage message =  MessageFactory.getMessageFromServer(js);
-        for (Cloud cloud:((CloudMessage)message).getClouds()) {
-            System.out.println( "nuvola deserializzata : "+cloud.getId());
+        for (Integer[] cloud:((CloudMessage)message).getClouds()) {
+            System.out.println( "nuvola deserializzata, contains : "+ cloud);
         }
     }
 }

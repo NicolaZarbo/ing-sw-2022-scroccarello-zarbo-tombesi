@@ -37,6 +37,6 @@ public class PlayedAssistentMessage extends ServerMessage{
 
     @Override
     public void doAction(CentralView view) {
-        //
+        view.playedAssistentUpdate(this);
     }
 }

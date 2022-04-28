@@ -24,7 +24,7 @@ public class Island {
     public void incrementIslandSize() {
         this.islandSize ++;
     }
-
+    /** returns the number of islands grouped togheter*/
     public int getIslandSize() {
         return islandSize;
     }

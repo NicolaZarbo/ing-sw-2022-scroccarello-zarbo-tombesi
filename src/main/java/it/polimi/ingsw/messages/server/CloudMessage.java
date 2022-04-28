@@ -1,20 +1,21 @@
 package it.polimi.ingsw.messages.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import it.polimi.ingsw.model.Cloud;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.view.CentralView;
 
+import java.util.List;
+
 
 public class CloudMessage extends ServerMessage {//
-    private  Cloud[] clouds;
+    private List<Integer[]> clouds;
 
     public CloudMessage(Game game){
         super(game);
-        this.clouds= game.getClouds();
+        this.clouds= ModelToViewTranslate.translateClouds(game.getClouds());
         serialize();
     }
-    public Cloud[] getClouds(){
+    public List<Integer[]> getClouds(){
         return this.clouds;
     }
     public CloudMessage(String json){

@@ -54,6 +54,7 @@ public class Game extends Observable<ServerMessage> {
         else{characters=null;}
         this.cardBonusActive=0;
         this.cardPlayedThisRound=new HashMap<>();
+        planningPhase.setCloud();
         actualState=GameState.setupPlayers;
         //this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();TODO
     }
@@ -83,6 +84,7 @@ public class Game extends Observable<ServerMessage> {
         this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();
         this.actionPhase=new Turn(this);
         this.planningPhase=new Round(this);
+        planningPhase.setCloud();
     }
 
     public void moveToNextPhase(){

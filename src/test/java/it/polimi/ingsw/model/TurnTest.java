@@ -57,7 +57,7 @@ public class TurnTest extends TestCase {
             board.getStudentFromEntrance(board.getEntrance().get(4).getId());
         }
 
-        round.SetCloud();
+        round.setCloud();
         Integer[] studOnCloudID =  Arrays.stream(cloud.getStud()).map(student -> student.getId()).toArray(Integer[]::new);
         assertTrue(board.getEntrance().size()<=board.entranceSize);
         turn.moveFromCloudToEntrance(1,1);

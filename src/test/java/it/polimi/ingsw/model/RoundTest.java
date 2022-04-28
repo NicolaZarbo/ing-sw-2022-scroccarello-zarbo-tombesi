@@ -2,13 +2,8 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.EmptyBagException;
 import junit.framework.TestCase;
-import org.junit.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import static it.polimi.ingsw.model.Mage.*;
 
 public class RoundTest extends TestCase {
 
@@ -24,7 +19,7 @@ public class RoundTest extends TestCase {
 
     public void testSetCloud(){
         try {
-            roundTest.SetCloud();
+            roundTest.setCloud();
             for (int i = 0; i < gameTest.getClouds().length; i++) {
                 System.out.println("on cloud " + i + " are setted tokens: ");
                 for (int j = 0; j < gameTest.getClouds()[i].getStud().length; j++)

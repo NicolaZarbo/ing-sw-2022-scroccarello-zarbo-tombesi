@@ -10,33 +10,39 @@ import java.util.Arrays;
 public class SimplifiedPlayer {
 
     private String username;
+    private int id;
+    private SimplifiedBoard board;
     private int towerColor;//towercolor assigned to player 1-black,2-white,3-gray
-    //player hand rapresentation
+    //player hand representation
     private int mage;
     private int coin;
     private boolean[] assistantCards; //card se true giocabile
     private boolean[] discardedCards; //card se true scartata
-    //player board rapresentation
-    private int[][] diningRoom; //array in cui ci va l'id degli studenti presenti
-    private int[] professorTable;//array in cui va l'id del professore se lo ha
-    private int towersLeft; //array che rappresenta le towers presenti
-    private boolean[][] coinDN;//se true c'è ancora il coin da prendere
-    private int entranceSize;
 
-    public SimplifiedPlayer(String username, int towerColor, int coin,int towerNumber, int entranceSize) {
+
+
+    public SimplifiedPlayer(String username,int id, int towerColor, int coin, SimplifiedBoard board,int mage) {
         this.username = username;
+        this.id=id;
         this.towerColor = towerColor;
         this.coin = coin;
         this.assistantCards = new boolean[10];
         Arrays.fill(assistantCards, true);
         this.discardedCards = new boolean[10];
         Arrays.fill(discardedCards, false);
-        this.diningRoom = new int[5][10];
-        this.professorTable = new int[5];
-        this.towersLeft=towerNumber;
-        this.coinDN = new boolean[5][3];
-        for (boolean[] booleans : coinDN) Arrays.fill(booleans, true);
-        this.entranceSize = entranceSize;
+        this.board=board;
+    }
+
+    public SimplifiedBoard getBoard() {
+        return board;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -85,45 +91,7 @@ public class SimplifiedPlayer {
         this.discardedCards = discardedCards;
     }
 
-    public int[][] getDiningRoom() {
-        return diningRoom;
+    public void setBoard(SimplifiedBoard board) {
+        this.board = board;
     }
-
-    public void setDiningRoom(int[][] diningRoom) {
-        this.diningRoom = diningRoom;
-    }
-
-    public int[] getProfessorTable() {
-        return professorTable;
-    }
-
-    public void setProfessorTable(int[] professorTable) {
-        this.professorTable = professorTable;
-    }
-
-    public int getTowersLeft() {
-        return towersLeft;
-    }
-
-    public void setTowersLeft(int towersLeft) {
-        this.towersLeft = towersLeft;
-    }
-
-    public boolean[][] getCoinDN() {
-        return coinDN;
-    }
-
-    public void setCoinDN(boolean[][] coinDN) {
-        this.coinDN = coinDN;
-    }
-
-    public int getEntranceSize() {
-        return entranceSize;
-    }
-
-    public void setEntranceSize(int entranceSize) {
-        this.entranceSize = entranceSize;
-    }
-
-
 }
