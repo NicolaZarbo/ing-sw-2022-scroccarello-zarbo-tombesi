@@ -14,7 +14,6 @@ import it.polimi.ingsw.observer.Observer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class  CentralView extends Observable<ClientMessage> implements Observer<ServerMessage> {
     private List<Island> islands;

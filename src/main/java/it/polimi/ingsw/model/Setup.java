@@ -1,16 +1,17 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.character.FactoryCharacter;
+import it.polimi.ingsw.model.token.Professor;
+import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.token.TokenColor;
+import it.polimi.ingsw.model.token.TowerColor;
 import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
 import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.messages.server.WholeGameMessage;
-import it.polimi.ingsw.model.character.*;
-import it.polimi.ingsw.model.token.*;
 import it.polimi.ingsw.observer.Observable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
 
 public class Setup extends Observable<ServerMessage> {
     private Game game;
@@ -82,11 +83,11 @@ public class Setup extends Observable<ServerMessage> {
         return  islands;
     }
     /** creates the list of Character Cards using a constructor*/
-    public static ArrayList<CharacterCard> createCharacterCards(Bag bag,int cardNumber){
+    public static ArrayList<CharacterCard> createCharacterCards(Bag bag, int cardNumber){
             ArrayList<CharacterCard> cards = new ArrayList<>(cardNumber);
             CharacterCard cardChar;
             for (int i=1; i<=12; i++){
-                    cardChar=FactoryCharacter.createCharacter(i, bag);
+                    cardChar= FactoryCharacter.createCharacter(i, bag);
                 if(cardChar!=null)
                     cards.add( cardChar ) ;
             }

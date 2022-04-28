@@ -1,9 +1,9 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.IllegalMoveException;
+import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.messages.server.*;
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.model.token.*;
 import it.polimi.ingsw.observer.Observable;
 

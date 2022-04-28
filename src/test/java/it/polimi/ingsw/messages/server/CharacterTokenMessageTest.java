@@ -1,8 +1,6 @@
 package it.polimi.ingsw.messages.server;
 
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.character.TokensCharacter;
 import junit.framework.TestCase;
 
 public class CharacterTokenMessageTest extends TestCase {

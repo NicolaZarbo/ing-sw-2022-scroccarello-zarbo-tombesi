@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+
 import it.polimi.ingsw.model.character.Character1;
 import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.model.token.Student;

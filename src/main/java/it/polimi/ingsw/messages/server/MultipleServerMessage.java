@@ -3,7 +3,6 @@ package it.polimi.ingsw.messages.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.exceptions.MessageErrorException;
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.view.CentralView;
 
 import java.util.ArrayList;
