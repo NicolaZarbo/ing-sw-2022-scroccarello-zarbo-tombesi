@@ -18,7 +18,7 @@ public class Setup {
     private ArrayList<TowerColor> availableColor;
     private ArrayList<Mage> availableMages ;
     private ArrayList<LobbyPlayer> prePlayers;
-    private ArrayList<String> preGameOrder;
+    private List<String> preGameOrder;
     private String preGameTurnOf;
 
 
@@ -32,7 +32,7 @@ public class Setup {
     }
     /** set the initial order for choosing pregame options*/
     public void setPreOrder(List<String> names){
-        this.preGameOrder= new ArrayList<>(names);
+        this.preGameOrder= names;
         this.preGameTurnOf=preGameOrder.get(0);
     }
     public void startPersonalisation(){
@@ -44,11 +44,11 @@ public class Setup {
     /** get prePlayer from client, if it is the last one then creates the final players in game*/
     public void addPrePlayer(LobbyPlayer prePlayer){
         if(prePlayers.size()< game.getNPlayers()) {
-            preGameOrder.remove(prePlayer.getNickname());
             prePlayers.add(prePlayer);
             availableMages.remove(prePlayer.getMage());
             availableColor.remove(prePlayer.getTowerColor());
             preGameTurnOf=preGameOrder.get(0);
+            preGameOrder.remove(prePlayer.getNickname());
             game.notify(new PlayerSetUpMessage(game));
         }
         else throw new RuntimeException("no space for more players");

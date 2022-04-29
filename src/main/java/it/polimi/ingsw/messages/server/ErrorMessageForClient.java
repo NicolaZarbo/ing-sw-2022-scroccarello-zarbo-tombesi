@@ -29,7 +29,7 @@ int targetPlayerId;
 
     @Override
     public void doAction(CentralView view) {
-        view.errorFromServer(this);
+       // view.errorFromServer(this);
     }
 
     /** returns an error message string*/
