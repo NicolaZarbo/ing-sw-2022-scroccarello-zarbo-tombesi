@@ -20,4 +20,7 @@ private final Game model;
         setup.addPrePlayer(message.getPrePlayer());
     }
 
+    public Game getModel(){return this.model;}
+    public Setup getSetup(){return this.setup;}
+
 }

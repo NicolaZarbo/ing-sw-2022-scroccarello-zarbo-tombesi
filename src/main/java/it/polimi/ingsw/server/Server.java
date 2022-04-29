@@ -21,7 +21,7 @@ public class Server {
         }
     }
     public Server() throws IOException {
-        this.serverSocket = new ServerSocket(serverPort);
+        this.serverSocket = new ServerSocket(12345);
     }
     //it would be better to not have the whole method as siyncronized but only some part of it
     public synchronized void lobby(ClientConnection connection, String nickname){

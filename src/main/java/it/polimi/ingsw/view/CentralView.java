@@ -59,7 +59,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         return playedCardThisTurn;
     }
 
-    public CentralView(String name){
+   public CentralView(String name){
         this.name=name;
     }
     public void errorFromServer(ErrorMessageForClient message){}
