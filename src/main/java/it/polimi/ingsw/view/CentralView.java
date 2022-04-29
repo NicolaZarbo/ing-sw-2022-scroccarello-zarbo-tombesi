@@ -54,8 +54,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         return playedCardThisTurn;
     }
 
-    public CentralView(String name){
-        this.name=name;
+    public CentralView(){
+
     }
     public void errorFromServer(ErrorMessageForClient message){}
     public void setView(WholeGameMessage message) {
@@ -69,6 +69,9 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             if(pl.getUsername().equals( name))
                 personalPlayer=pl;
         }
+    }
+    public void setName(String name){
+        this.name=name;
     }
     public void cloudUpdate(CloudMessage message){
         this.clouds= message.getClouds();
