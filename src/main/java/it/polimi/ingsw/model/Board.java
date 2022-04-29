@@ -77,7 +77,7 @@ public class Board {
                     }
             }
         }
-        throw new NoTokenFoundException();
+        throw new NoTokenFoundException("no student of that color in entrance");
     }
 
     public Student getStudentFromEntrance(int id)throws NoTokenFoundException{
@@ -90,7 +90,7 @@ public class Board {
                     return stud;
                 }
         }
-        throw new NoTokenFoundException();
+        throw new NoTokenFoundException("no student of that color in entrance");
     }
 
     public void addTower(ArrayList<Tower> towers){
