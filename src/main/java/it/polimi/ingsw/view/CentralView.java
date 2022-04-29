@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.exceptions.CardNotFoundException;
+import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.messages.client.*;
 import it.polimi.ingsw.messages.server.*;
@@ -28,6 +29,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     public List<SimplifiedIsland> getIslands() {
         return islands;
+    }
+
+    public List<SimplifiedPlayer> getPlayers() {
+        return players;
     }
 
     public List<Integer[]> getClouds() {
@@ -106,15 +111,15 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     public void moveMother(int steps){
         notify(new MoveMotherMessage(personalPlayer.getId(),steps));
     }
-    public void moveStudentToHall(int studentId){
-        if(personalPlayer.getBoard().getEntrance().contains(studentId))
-            notify(new StudentToHallMessage(personalPlayer.getId(), studentId));
-        else throw new NoTokenFoundException();
+    public void moveStudentToHall(int colorOfStudent) throws NoTokenFoundException{
+            int studID=personalPlayer.getBoard().getStudentFromColor(colorOfStudent);
+            notify(new StudentToHallMessage(personalPlayer.getId(), studID));
     }
-    public void moveStudentToIsland(int studentId, int islandId){
-        if(personalPlayer.getBoard().getEntrance().contains(studentId) && islands.stream().map(SimplifiedIsland::getIslandId).toList().contains(islandId))
-            notify(new StudentToIslandMessage(personalPlayer.getId(), studentId, islandId));
-        else throw new NoTokenFoundException();
+    public void moveStudentToIsland(int colorOfStudent, int islandId) throws IllegalMoveException,NoTokenFoundException{
+        int studID=personalPlayer.getBoard().getStudentFromColor(colorOfStudent);
+        if( islands.stream().map(SimplifiedIsland::getIslandId).toList().contains(islandId))
+            notify(new StudentToIslandMessage(personalPlayer.getId(), studID, islandId));
+        else throw new IllegalMoveException("Island not available");
     }
     public void chooseCloud(int cloudId){
         if(cloudId<clouds.size() && clouds.get(cloudId).length==3)

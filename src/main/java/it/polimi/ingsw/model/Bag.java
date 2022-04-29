@@ -13,9 +13,11 @@ public class Bag {
         int size=pedForColor*numColor;
         this.left =size;
         tokenLeft=new ArrayList<Student>(size);
+        int id=0;
         for(int i=0;i<numColor;i++)
             for(int j=0;j<pedForColor;j++){
-                tokenLeft.add(new Student(j, TokenColor.getColor(i)));
+                tokenLeft.add(new Student(id, TokenColor.getColor(i)));
+                id++;
             }
     }
     public boolean isToken(int i){

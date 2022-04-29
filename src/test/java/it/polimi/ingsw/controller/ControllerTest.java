@@ -44,8 +44,8 @@ public class ControllerTest extends TestCase {
         }
     }
 
-    public void testUpdate() {
-        /*ChooseCloudMessage cloudMessage=new ChooseCloudMessage(1,0);
+    public void testUpdateRightMove() {
+        ChooseCloudMessage cloudMessage=new ChooseCloudMessage(1,0);
         try{
             this.controllerTest.game.setManuallyGamePhase(GameState.actionChooseCloud);
             this.controllerTest.update(cloudMessage);
@@ -54,8 +54,17 @@ public class ControllerTest extends TestCase {
         catch(IllegalMoveException e){
             e.printStackTrace();
         }
-        it passes the test but catches the exception 'cause the clouds are not setted, still working
-        */
+    }
+    public void testUpdateIllegalMove(){
+        ChooseCloudMessage cloudMessage=new ChooseCloudMessage(2,4);
+        try{
+            this.controllerTest.game.setManuallyGamePhase(GameState.actionChooseCloud);
+            this.controllerTest.update(cloudMessage);
+            assertEquals(cloudMessage.getPlayerId(),this.controllerTest.game.getCurrentPlayerId());
+        }
+        catch(IllegalMoveException e){
+            System.out.println(e.getMessage());
+        }
     }
 
 }

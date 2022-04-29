@@ -82,6 +82,7 @@ public class Game extends Observable<ServerMessage> {
         this.cardBonusActive=0;
         this.cardPlayedThisRound=new HashMap<>();
         this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();
+        this.setupPhase=new Setup(this);
         this.actionPhase=new Turn(this);
         this.planningPhase=new Round(this);
         planningPhase.setCloud();
