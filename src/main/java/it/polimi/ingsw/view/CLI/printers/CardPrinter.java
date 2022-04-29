@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.printers;
+package it.polimi.ingsw.view.CLI.printers;
 
 import java.util.ArrayList;
 import java.util.Arrays;

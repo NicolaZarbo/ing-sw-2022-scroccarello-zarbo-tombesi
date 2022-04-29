@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.printers;
+package it.polimi.ingsw.view.CLI.printers;
 
 public interface Printer {
     static String RED="\u001B[31m";

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.printers;
+package it.polimi.ingsw.view.CLI.printers;
 
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.SimplifiedIsland;

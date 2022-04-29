@@ -18,9 +18,7 @@ public class RemoteView extends Observable<ClientMessage> implements Observer<Se
     private LobbyPlayer player;
     private String nickname;
     private ClientConnection connection;
-    private Lobby lobby;
-    private ArrayList<Mage> availableMages ;
-    private ArrayList<LobbyPlayer> prePlayers;
+
 
     public void setPlayer(LobbyPlayer player) {
         this.player = player;

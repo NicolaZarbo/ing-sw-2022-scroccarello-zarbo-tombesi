@@ -17,7 +17,6 @@ public class ClientConnection extends Observable<String> implements Runnable{
     private Scanner in;
     private boolean active ;
     private Server server;
-    private CentralView game;
 
    // private  int lobbyCode;
 
@@ -25,10 +24,6 @@ public class ClientConnection extends Observable<String> implements Runnable{
         this.clientSocket = clientSocket;
         this.server=server;
         this.active=true;
-    }
-
-    public void assignView(CentralView game){
-        this.game=game;
     }
 
     public synchronized boolean isActive() {

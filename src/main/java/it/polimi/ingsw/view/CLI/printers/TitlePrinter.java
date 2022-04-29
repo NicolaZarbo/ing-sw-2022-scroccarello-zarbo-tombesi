@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.printers;
+package it.polimi.ingsw.view.CLI.printers;
 
 public class TitlePrinter implements Printer{
     public static String print(){

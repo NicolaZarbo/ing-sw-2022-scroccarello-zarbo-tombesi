@@ -24,12 +24,11 @@ public class Cli implements View {
 // 3: another player's turn
     private int turnState;
 
-    public CLI(){
+    public Cli(){
         this.game = new CentralView();
         this.input = new Scanner(System.in);
         this.printer = new Printer();
         this.inputManager = new InputManager(game);
-
     }
 
     public void runCLI() {
