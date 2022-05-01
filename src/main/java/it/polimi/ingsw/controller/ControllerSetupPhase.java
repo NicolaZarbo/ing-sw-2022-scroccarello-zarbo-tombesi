@@ -15,7 +15,7 @@ private final Game model;
         this.model=game;
     }
     public void createPlayer(PrePlayerMessage message){
-        if(model.getActualState()!= GameState.setupPlayers || !setup.isPreOrderTurnOf(message.getPlayerName()))
+        if(model.getActualState()!= GameState.setupPlayers || !setup.isPreOrderTurnOf(message.getName()))
             throw new IllegalMoveException();
         setup.addPrePlayer(message.getPrePlayer());
     }

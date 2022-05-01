@@ -9,13 +9,12 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.model.token.TowerColor;
 import it.polimi.ingsw.observer.Observable;
-import it.polimi.ingsw.observer.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //per le torri si può scegliere anche di non usare l'id ma basarsi sul mero colore
-public class  CentralView extends Observable<ClientMessage> implements Observer<ServerMessage> {
+public class  CentralView extends Observable<ClientMessage>  {
     private List<SimplifiedIsland> islands;
     private List<Integer[]> clouds;
     private List<SimplifiedPlayer> players; //va trasformato in simplified player come tutto il resto?
@@ -24,8 +23,9 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     private SimplifiedPlayer personalPlayer;
     private GameState state;
     private int turnOf;
-    private static int fakeId=99;
+    private int id;
     private ArrayList<Integer> playedCardThisTurn;
+    private UserInterface clientScreen;
 
     public List<SimplifiedIsland> getIslands() {
         return islands;
@@ -59,8 +59,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         return playedCardThisTurn;
     }
 
-    public CentralView(){
-
+    public CentralView(UserInterface userInterface){
+        this.clientScreen=userInterface;
     }
     public void errorFromServer(ErrorMessageForClient message){}
     public void setView(WholeGameMessage message) {
@@ -74,18 +74,21 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             if(pl.getUsername().equals( name))
                 personalPlayer=pl;
         }
+        clientScreen.showView();
     }
     public void setName(String name){
         this.name=name;
     }
     public void cloudUpdate(CloudMessage message){
         this.clouds= message.getClouds();
+        clientScreen.showView();
     }
     public void motherPositionUpdate(MotherPositionMessage message){
         this.mother=message.getMotherPosition();
     }
     public void islandsUpdate(IslandsMessage message){
         this.islands=message.getIslandList();
+        clientScreen.showView();
     }
     public void playedAssistentUpdate(PlayedAssistentMessage message){
 
@@ -97,8 +100,14 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             }
         }
     }
+    public void personalizePlayer(PlayerSetUpMessage message){
+        if(message.getTurnOf().equals(this.name)) {
+            this.id=message.getNewId();
+            clientScreen.showOptionsForPersonalization();
+        }
+    }
 
-    @Override
+
     public void update(ServerMessage message) {
         message.doAction(this);
     }
@@ -129,8 +138,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     public void playCharacter(int cardId, ParameterObject parameters){
         notify(new CharacterCardMessage(personalPlayer.getId(), parameters,cardId));
     }
-    public void choosePlayerCustom(TowerColor towerColor, Mage mage){
-        notify(new PrePlayerMessage(fakeId,new LobbyPlayer(towerColor,mage,name)));
+    public void choosePlayerCustom(int towerColor,int mage){
+       notify(new PrePlayerMessage(id,towerColor,mage,name));
     }
 
 }

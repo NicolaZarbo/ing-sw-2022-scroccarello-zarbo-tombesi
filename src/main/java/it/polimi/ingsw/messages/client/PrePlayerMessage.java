@@ -5,9 +5,12 @@ import com.google.gson.JsonObject;
 
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.LobbyPlayer;
+import it.polimi.ingsw.model.Mage;
+import it.polimi.ingsw.model.token.TowerColor;
 
 public class PrePlayerMessage extends ClientMessage {
-    private LobbyPlayer prePlayer;
+    private int towerColor, mage;
+    private String name;
 
     public PrePlayerMessage(String json) {
         super(json);
@@ -18,19 +21,30 @@ public class PrePlayerMessage extends ClientMessage {
         controller.getControllerSetup().createPlayer(this);
     }
     //are id already available??
-    public PrePlayerMessage(int playerId, LobbyPlayer player) {
+    public PrePlayerMessage(int playerId, int towerColor,  int mage, String name) {
         super(playerId);
-        this.prePlayer=player;
+        this.mage=mage;
+        this.towerColor=towerColor;
+        this.name=name;
         super.serialize();
     }
-    public String getPlayerName(){return prePlayer.getNickname();}
-    public LobbyPlayer getPrePlayer() {
-        return prePlayer;
+    public LobbyPlayer getPrePlayer(){return new LobbyPlayer(TowerColor.getColor(towerColor), Mage.getMage(mage),name);}
+    public String getName(){
+        return name;
+    }
+    public int getTowerColor() {
+        return towerColor;
+    }
+
+    public int getMage() {
+        return mage;
     }
 
     @Override
     protected void parseMessage(JsonObject gg) {
         Gson gson = new Gson();
-        gson.fromJson(gg, PrePlayerMessage.class).getPrePlayer();
+        towerColor=gson.fromJson(gg, PrePlayerMessage.class).getTowerColor();
+        mage=gson.fromJson(gg, PrePlayerMessage.class).getMage();
+        name=gson.fromJson(gg, PrePlayerMessage.class).getName();
     }
 }

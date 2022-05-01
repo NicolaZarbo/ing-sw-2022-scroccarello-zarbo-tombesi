@@ -20,6 +20,7 @@ public class Setup {
     private ArrayList<LobbyPlayer> prePlayers;
     private List<String> preGameOrder;
     private String preGameTurnOf;
+    private int idCreator;
 
 
     public Setup(Game game){
@@ -29,14 +30,21 @@ public class Setup {
         if (game.getNPlayers()!=3)
             availableColor.remove(TowerColor.grey);
         prePlayers= new ArrayList<>(game.getNPlayers());
+        idCreator=0;
     }
     /** set the initial order for choosing pregame options*/
     public void setPreOrder(List<String> names){
         this.preGameOrder= names;
         this.preGameTurnOf=preGameOrder.get(0);
     }
+
+    public String getPreGameTurnOf() {
+        return preGameTurnOf;
+    }
+
     public void startPersonalisation(){
-        game.notify(new PlayerSetUpMessage(game));
+        game.notify(new PlayerSetUpMessage(game,idCreator));
+        idCreator++;
     }
     public boolean isPreOrderTurnOf(String nickname){
         return nickname.equals(preGameTurnOf);
@@ -49,7 +57,8 @@ public class Setup {
             availableColor.remove(prePlayer.getTowerColor());
             preGameTurnOf=preGameOrder.get(0);
             preGameOrder.remove(prePlayer.getNickname());
-            game.notify(new PlayerSetUpMessage(game));
+            game.notify(new PlayerSetUpMessage(game,idCreator));
+            idCreator++;
         }
         else throw new RuntimeException("no space for more players");
         if(prePlayers.size()== game.getNPlayers()){

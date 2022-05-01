@@ -47,7 +47,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
                 String difficulty = in.nextLine();
                 server.createLobby(this,name, Integer.parseInt(nPlayer), difficulty.toLowerCase());
             }
-
+             send("connected to lobby");
             while(isActive()) {
                 read = in.nextLine();
                 notify(read);

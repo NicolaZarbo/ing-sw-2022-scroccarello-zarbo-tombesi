@@ -22,7 +22,7 @@ public class ControllerSetupPhaseTest extends TestCase {
 
     public void testFailCreatePlayer() {
         LobbyPlayer player= new LobbyPlayer(TowerColor.black, Mage.mage1,"pippo");
-        PrePlayerMessage message=new PrePlayerMessage(0,player);
+        PrePlayerMessage message=new PrePlayerMessage(0,player.getTowerColor().ordinal(),player.getMage().ordinal(), player.getNickname());
         try{
             this.cTest.createPlayer(message);
         }
@@ -39,7 +39,7 @@ public class ControllerSetupPhaseTest extends TestCase {
         list.add(player2.getNickname());
         this.cTest.getSetup().setPreOrder(list);
         this.cTest.getSetup().addPrePlayer(player1);
-        PrePlayerMessage message=new PrePlayerMessage(0,player1);
+        PrePlayerMessage message=new PrePlayerMessage(0,player1.getTowerColor().ordinal(),player1.getMage().ordinal(), player1.getNickname());
         this.cTest.getModel().setManuallyGamePhase(GameState.setupPlayers);
         try{
             this.cTest.createPlayer(message);

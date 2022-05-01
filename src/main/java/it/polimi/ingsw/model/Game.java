@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.CardNotFoundException;
+import it.polimi.ingsw.messages.server.WholeGameMessage;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.model.token.Professor;
