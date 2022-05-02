@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.view.CentralView;
-import it.polimi.ingsw.view.SimplifiedIsland;
+import it.polimi.ingsw.view.CLI.objects.SimplifiedIsland;
 
 import java.util.List;
 

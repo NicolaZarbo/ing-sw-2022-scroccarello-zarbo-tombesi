@@ -7,18 +7,26 @@ import it.polimi.ingsw.messages.client.*;
 import it.polimi.ingsw.messages.server.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.character.ParameterObject;
-import it.polimi.ingsw.model.token.TowerColor;
 import it.polimi.ingsw.observer.Observable;
+import it.polimi.ingsw.observer.Observer;
+import it.polimi.ingsw.view.CLI.objects.SimplifiedIsland;
+import it.polimi.ingsw.view.CLI.objects.SimplifiedPlayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //per le torri si può scegliere anche di non usare l'id ma basarsi sul mero colore
-public class  CentralView extends Observable<ClientMessage>  {
+public class  CentralView extends Observable<ClientMessage> implements Observer<ServerMessage> {
     private List<SimplifiedIsland> islands;
     private List<Integer[]> clouds;
     private List<SimplifiedPlayer> players; //va trasformato in simplified player come tutto il resto?
     private int mother;
+    private List<Integer> characters;
+    private Map<Integer,List<Integer>> studentsOnCard;
+    private Map<Integer,Integer> costOfCard;
+
     private String name;
     private SimplifiedPlayer personalPlayer;
     private GameState state;
@@ -74,6 +82,10 @@ public class  CentralView extends Observable<ClientMessage>  {
             if(pl.getUsername().equals( name))
                 personalPlayer=pl;
         }
+        characters=message.getCharacters();
+        studentsOnCard=message.getCardStudents();
+        costOfCard=message.getCardCosts();
+
         clientScreen.showView();
     }
     public void setName(String name){
@@ -142,4 +154,15 @@ public class  CentralView extends Observable<ClientMessage>  {
        notify(new PrePlayerMessage(id,towerColor,mage,name));
     }
 
+    public List<Integer> getCharacters() {
+        return characters;
+    }
+
+    public Map<Integer, List<Integer>> getStudentsOnCard() {
+        return studentsOnCard;
+    }
+
+    public Map<Integer, Integer> getCostOfCard() {
+        return costOfCard;
+    }
 }

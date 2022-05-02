@@ -1,7 +1,7 @@
 package it.polimi.ingsw.view.CLI.printers;
 
 import it.polimi.ingsw.view.CentralView;
-import it.polimi.ingsw.view.SimplifiedIsland;
+import it.polimi.ingsw.view.CLI.objects.SimplifiedIsland;
 
 import java.util.Arrays;
 
@@ -33,7 +33,10 @@ String yo =" ________ \n" +
             rows[3]+="|T°:"+island.getNumberOfTowers()+" "+PINK+"P:"+studentForColor[4]+""+RST+" |   \t";
             rows[4]+="| "+RED+"R:"+studentForColor[0]+" "+YELLOW+"Y:"+studentForColor[1]+""+RST+" |   \t";
             rows[5]+="| "+GREEN+"G:"+studentForColor[2]+" "+BLUE+"B:"+studentForColor[3]+""+RST+" |   \t";
-            rows[6]+="\\_________/   \t";
+            if(view.getIslands().get(view.getMother()).getIslandId()==island.getIslandId())
+                rows[6]+="\\__Mother_/   \t";
+            else
+                rows[6]="\\_________/   \t";
         }
         out.append(Printer.mergeRows(rows));
         return out.toString();

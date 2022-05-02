@@ -1,14 +1,10 @@
 package it.polimi.ingsw.server;
 
-import it.polimi.ingsw.messages.LobbySetupMessage;
 import it.polimi.ingsw.observer.Observable;
-import it.polimi.ingsw.view.CentralView;
-import it.polimi.ingsw.view.SimplifiedPlayer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class ClientConnection extends Observable<String> implements Runnable{

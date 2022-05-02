@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.view.CLI.objects;
 
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;

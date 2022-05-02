@@ -1,10 +1,6 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.view.CLI.objects;
 
 
-import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.token.TokenColor;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SimplifiedPlayer {

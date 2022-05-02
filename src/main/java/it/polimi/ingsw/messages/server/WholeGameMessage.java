@@ -4,10 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.character.TokensCharacter;
+import it.polimi.ingsw.model.token.Token;
 import it.polimi.ingsw.view.CentralView;
-import it.polimi.ingsw.view.SimplifiedIsland;
-import it.polimi.ingsw.view.SimplifiedPlayer;
+import it.polimi.ingsw.view.CLI.objects.SimplifiedIsland;
+import it.polimi.ingsw.view.CLI.objects.SimplifiedPlayer;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class WholeGameMessage extends ServerMessage{
@@ -15,7 +19,9 @@ public class WholeGameMessage extends ServerMessage{
     private List<Integer[]> clouds;
     private int motherNature;
     private List<SimplifiedIsland> islands;
-    private List<CharacterCard> characters;
+    private List<Integer> characters;
+    private HashMap<Integer,List<Integer>> cardStudents;
+    private HashMap<Integer,Integer> cardCosts;
 
     public WholeGameMessage(String json) {
         super(json);
@@ -27,6 +33,17 @@ public class WholeGameMessage extends ServerMessage{
         this.islands=ModelToViewTranslate.translateIsland(game.getIslands());
         this.motherNature=game.getMotherNature().getPosition();
         this.clouds= ModelToViewTranslate.translateClouds(game.getClouds());
+        if(!game.isEasy()){
+            this.characters=game.getCharacters().stream().map(CharacterCard::getId).toList();
+            cardStudents= new HashMap<>();
+            cardCosts= new HashMap<>();
+            for (CharacterCard card:game.getCharacters()) {
+                cardCosts.put(card.getId(),card.getCost());
+                if(card instanceof TokensCharacter)
+                    cardStudents.put(card.getId(),((TokensCharacter) card).getStudents().stream().map(Token::getId).toList());
+            }
+        }
+        else this.characters=new ArrayList<>();
     }
 
     @Override
@@ -38,6 +55,8 @@ public class WholeGameMessage extends ServerMessage{
         this.islands=mex.islands;
         this.motherNature=mex.motherNature;
         this.characters=mex.characters;
+        this.cardStudents=mex.cardStudents;
+        this.cardCosts=mex.cardCosts;
     }
 
     @Override
@@ -61,7 +80,15 @@ public class WholeGameMessage extends ServerMessage{
         return islands;
     }
 
-    public List<CharacterCard> getCharacters() {
+    public List<Integer> getCharacters() {
         return characters;
+    }
+
+    public HashMap<Integer, Integer> getCardCosts() {
+        return cardCosts;
+    }
+
+    public HashMap<Integer, List<Integer>> getCardStudents() {
+        return cardStudents;
     }
 }

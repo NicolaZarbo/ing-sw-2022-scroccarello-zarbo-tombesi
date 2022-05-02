@@ -148,7 +148,7 @@ public class Game extends Observable<ServerMessage> {
     public Professor[] getTeachers() {
         return teachers;
     }
-
+    public List<CharacterCard> getCharacters(){return characters;}
     public CharacterCard getCharacter(int id) {
         for (CharacterCard card: this.characters) {
             if(card.getId()==id)

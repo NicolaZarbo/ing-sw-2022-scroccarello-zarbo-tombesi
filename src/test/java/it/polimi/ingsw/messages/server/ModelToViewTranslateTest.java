@@ -1,13 +1,10 @@
 package it.polimi.ingsw.messages.server;
 
-import it.polimi.ingsw.model.Cloud;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.token.Student;
-import it.polimi.ingsw.view.SimplifiedBoard;
-import it.polimi.ingsw.view.SimplifiedPlayer;
+import it.polimi.ingsw.view.CLI.objects.SimplifiedBoard;
+import it.polimi.ingsw.view.CLI.objects.SimplifiedPlayer;
 import junit.framework.TestCase;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
