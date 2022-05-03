@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.CardNotFoundException;
+import it.polimi.ingsw.messages.server.ChangeTurnMessage;
 import it.polimi.ingsw.messages.server.WholeGameMessage;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.messages.server.ServerMessage;
@@ -59,7 +60,7 @@ public class Game extends Observable<ServerMessage> {
         actualState=GameState.setupPlayers;
         //this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();TODO
     }
-    /** legacy constructor, still here for tests without players customisation*/
+    /** legacy constructor, still here for tests without players customization*/
     public Game(boolean easy, int nPlayers, int nIsole){
         this.easy=easy;
         this.nPlayers =nPlayers;
@@ -87,6 +88,9 @@ public class Game extends Observable<ServerMessage> {
         this.actionPhase=new Turn(this);
         this.planningPhase=new Round(this);
         planningPhase.setCloud();
+        for(int i=0;i<nPlayers;i++){
+            this.cardPlayedThisRound.put(i,new AssistantCard(i*11,i*11,i*11,Mage.getMage(i)));
+        }
     }
 
     @Override
@@ -128,10 +132,13 @@ public class Game extends Observable<ServerMessage> {
     }
 
     public void changePlayerTurn(){
-        int actualIndex = playIngOrder.indexOf(currentPlayerId);
-        if(actualIndex<nPlayers-1)
-            currentPlayerId=playIngOrder.get(actualIndex+1);
-        else throw new RuntimeException("no player next");
+        int actualIndex=playIngOrder.indexOf(currentPlayerId);
+        actualIndex+=1;
+        if(actualIndex<nPlayers){
+            currentPlayerId=playIngOrder.get(actualIndex);
+            notify(new ChangeTurnMessage(this));
+        }
+        else throw new NullPointerException();
     }
     public AssistantCard getPlayedCard(int playerId){
         return cardPlayedThisRound.get(playerId);

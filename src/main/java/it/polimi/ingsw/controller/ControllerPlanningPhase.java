@@ -18,8 +18,10 @@ public class ControllerPlanningPhase {
     }
 
     public void playAssistantCard(PlayAssistantMessage message){
-        if(game.getActualState()!= GameState.planPlayCard || message.getPlayerId()!= game.getCurrentPlayerId())
-            throw new IllegalMoveException();
+        if(game.getActualState()!= GameState.planPlayCard || message.getPlayerId()!= game.getCurrentPlayerId()){
+            if(game.getActualState()!=GameState.planPlayCard) throw new RuntimeException("not the right state");
+            else throw new IllegalMoveException("not your turn");
+        }
         modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
         if(game.isLastPlayerTurn())
             game.moveToNextPhase();
@@ -27,8 +29,9 @@ public class ControllerPlanningPhase {
             game.changePlayerTurn();
         }
     }
-    private List<Integer> getActualOrder() {
+    public List<Integer> getActualOrder() {
         return modelRound.getRoundOrder(game);
     }
-
+    public Game getGame(){return this.game;}
+    public Round getModelRound(){return this.modelRound;}
 }

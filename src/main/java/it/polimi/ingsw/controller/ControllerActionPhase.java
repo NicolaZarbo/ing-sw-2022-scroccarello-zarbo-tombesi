@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
+import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.messages.client.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.GameState;
@@ -13,13 +14,24 @@ public class ControllerActionPhase  {
     private final Turn modelTurn;
     private int studentMoved;
 
+    public ControllerActionPhase(Game game){
+        this.game=game;
+        this.modelTurn =game.getActionPhase();
+    }
+
     public void moveStudentToHall(StudentToHallMessage message){
         if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>=3)
             throw new IllegalMoveException();
-        modelTurn.moveInHall(this.idPlayerNow, message.getStudentId());
-        studentMoved++;
-        if(studentMoved==3)
-            game.moveToNextPhase();
+        try {
+            modelTurn.moveInHall(this.idPlayerNow, message.getStudentId());
+
+            studentMoved++;
+            if (studentMoved == 3)
+                game.moveToNextPhase();
+        }
+        catch(NoTokenFoundException e){
+            throw new NoTokenFoundException(e.getMessage());
+        }
     }
     public void moveStudentToIsland(StudentToIslandMessage message){
         if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>=3)
@@ -56,23 +68,19 @@ public class ControllerActionPhase  {
             changeTurn();
         }
     }
+
     public void changeTurn(){
         game.changePlayerTurn();
         this.idPlayerNow= game.getCurrentPlayerId();
         studentMoved =0;
     }
-    public ControllerActionPhase(Game game){
-        this.game=game;
-        this.modelTurn =game.getActionPhase();
-    }
-
 
     public void playCharacter(CharacterCardMessage message) {
         if(game.getActualState()!=GameState.actionMoveMother || game.getActualState()!=GameState.actionMoveStudent)
             throw new IllegalMoveException();
         modelTurn.useCharacter(message.getCardId(), message.getParameters(), message.getPlayerId());
     }
-
+    public Game getGame(){return this.game;}
 
 
 

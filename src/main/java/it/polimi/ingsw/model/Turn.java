@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.IllegalMoveException;
+import it.polimi.ingsw.exceptions.NoPlaceAvailableException;
+import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.messages.server.*;
 import it.polimi.ingsw.model.character.CharacterCard;
@@ -14,20 +16,26 @@ public class Turn {
     public Turn (Game game){
         this.game=game;
     }
+
     /** moves a student already inside the Board of idPlayer from entrance to hall  */
     public void moveInHall(int idPlayer,int idStud){
-        Player player=game.getPlayer(idPlayer);
-        Board board= player.getBoard();
-        Student stud = board.getStudentFromEntrance(idStud);
-        board.moveToDiningRoom(stud);
-        if(board.foundCoin(stud))
-            player.getHand().addCoin();
-        if(canHaveTeacher(stud.getColor(),idPlayer))
-            getTeacher(stud.getColor(),idPlayer);
+        try {
+            Player player = game.getPlayer(idPlayer);
 
+            Board board = player.getBoard();
+            Student stud = board.getStudentFromEntrance(idStud);
+            board.moveToDiningRoom(stud);
+            if (board.foundCoin(stud))
+                player.getHand().addCoin();
+            if (canHaveTeacher(stud.getColor(), idPlayer))
+                getTeacher(stud.getColor(), idPlayer);
+        }
+        catch(NoTokenFoundException e){
+            throw new NoTokenFoundException(e.getMessage());
+        }
         game.notify(new SingleBoardMessage(game, idPlayer));
-
     }
+
     /** moves a student already inside the Board of idPlayer from entrance to a target island*/
     public void moveToIsland(int idPlayer,int idStud, int idIsland) throws NullPointerException{
         Student stud = game.getPlayer(idPlayer).getBoard().getStudentFromEntrance(idStud);
@@ -63,8 +71,13 @@ public class Turn {
         if(cloudId>=0 && cloudId<clouds.length && clouds[cloudId].getStud()[0]!=null){
             Student[] students=clouds[cloudId].getStud();
             for(int i=0;i<students.length;i++) {
-                board.putStudentOnEntrance(students[i]);
-                students[i]=null;
+                try{
+                    board.putStudentOnEntrance(students[i]);
+                    students[i]=null;
+                }
+                catch(NoPlaceAvailableException e){
+                    throw new IllegalMoveException("entrance is full");
+                }
             }
         }
         else {

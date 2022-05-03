@@ -137,7 +137,7 @@ public class Board {
             entrance.add(student);
         else
             throw new NoPlaceAvailableException();
-        }
+    }
 
     public boolean foundCoin(Student stud) {
         int colorIndex=stud.getColor().ordinal();
