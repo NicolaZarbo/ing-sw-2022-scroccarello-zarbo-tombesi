@@ -11,6 +11,7 @@ public class ChangeTurnMessage extends ServerMessage {
     public ChangeTurnMessage(Game game){
         super(game);
         this.player=game.getCurrentPlayerId();
+        super.serialize();
     }
 
     @Override
