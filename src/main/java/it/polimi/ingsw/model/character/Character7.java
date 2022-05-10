@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.character;
 
 import it.polimi.ingsw.exceptions.CharacterErrorException;
+import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.token.Student;
@@ -11,11 +12,14 @@ public class Character7 extends TokensCharacter{
 
     public  Character7(int id){
         super(id);
-
     }
+
     /**@param parameters : first playerId, then students in entrance then on studs cards*/
     @Override
     public void cardEffect(ParameterObject parameters, Game game) {
+        if(this.getCost()>game.getPlayer(game.getCurrentPlayerId()).getHand().getCoin()){
+            throw new IllegalMoveException("not enough money");
+        }
         if(parameters.getnParam()!=3)
             throw new CharacterErrorException("wrong parameters");
         int size = parameters.getTargetStudentsOnEntrance().length;

@@ -19,8 +19,6 @@ public class Character10 extends CharacterCard{
         for(int i=0; i<nStudent;i++){
             board.moveToDiningRoom(board.getStudentFromEntrance(parameters.getTargetStudentsOnEntrance()[i]));
             board.putStudentOnEntrance(board.getFromDiningRoom(parameters.getTargetStudentsForExchange()[i]));
-
-
         }
         incrementCost();
     }

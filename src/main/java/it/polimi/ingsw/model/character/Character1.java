@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.character;
 
 import it.polimi.ingsw.exceptions.CharacterErrorException;
+import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Island;
 import it.polimi.ingsw.model.token.Student;
@@ -15,7 +16,10 @@ public class Character1 extends TokensCharacter{
     /**idStudent from card, id target island*/
 
     @Override
-    public void cardEffect(ParameterObject parameters, Game game) throws NullPointerException {
+    public void cardEffect(ParameterObject parameters, Game game){
+        if(this.getCost()>game.getPlayer(game.getCurrentPlayerId()).getHand().getCoin()){
+            throw new IllegalMoveException("not enough money");
+        }
         Student stud;
         Island island;
         if(parameters.getnParam()!=2)

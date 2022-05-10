@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.character;
 
 
+import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Card;
 
@@ -23,6 +24,9 @@ public abstract class CharacterCard extends Card {
 
     //a way to make this work is to use some kind of generic type wich encapsulates the parameters used for the different operations + the game as param.
     public void cardEffect(ParameterObject parameters, Game game){
+        if(this.getCost()>game.getPlayer(game.getCurrentPlayerId()).getHand().getCoin()){
+            throw new IllegalMoveException("not enough money");
+        }
         incrementCost();
     }
     public void incrementCost(){

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.character;
 
+import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.model.Game;
 
 public class TurnEffectCharacter extends CharacterCard {
@@ -10,7 +11,12 @@ public class TurnEffectCharacter extends CharacterCard {
 
     @Override
     public void cardEffect(ParameterObject parameters, Game game) {
-        game.setCardBonusActive(this.getId());
-        this.incrementCost();
+        if(this.getCost()>game.getPlayer(game.getCurrentPlayerId()).getHand().getCoin()){
+            throw new IllegalMoveException("not enough money");
+        }
+        else {
+            game.setCardBonusActive(this.getId());
+            this.incrementCost();
+        }
     }
 }

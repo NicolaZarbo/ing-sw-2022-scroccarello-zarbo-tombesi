@@ -8,11 +8,12 @@ public class Character9 extends TurnEffectCharacter{
     public Character9(int id) {
         super(id);
     }
+
     @Override
     public void cardEffect(ParameterObject parameters, Game game){
         super.cardEffect(parameters,game);
         if(parameters.getnParam()!=1)
-            throw new CharacterErrorException("wrong");
+            throw new CharacterErrorException("wrong parameters");
         game.setTargetColor(TokenColor.getColor(parameters.getOtherTargetId()));
     }
 
