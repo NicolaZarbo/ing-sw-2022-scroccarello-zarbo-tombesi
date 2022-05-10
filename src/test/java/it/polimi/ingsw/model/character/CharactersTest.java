@@ -19,6 +19,7 @@ public class CharactersTest extends TestCase {
 
     public void testCharacter1(){
         cardTester=FactoryCharacter.createCharacter(1,gameTest.getBag());
+        assertEquals(1,cardTester.getId());
         int initialCost=cardTester.getCost();
         ArrayList<Student> list=((Character1)cardTester).getStudents();
         ParameterObject parameters=new ParameterObject(list.get(1).getId(),1);
@@ -46,6 +47,7 @@ public class CharactersTest extends TestCase {
 
     public void testCharacter2(){
         cardTester=FactoryCharacter.createCharacter(2,gameTest.getBag());
+        assertEquals(2,cardTester.getId());
         gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         ParameterObject noParameter=new ParameterObject();
         try {
@@ -71,6 +73,7 @@ public class CharactersTest extends TestCase {
 
     public void testCharacter6(){
         cardTester=FactoryCharacter.createCharacter(6,gameTest.getBag());
+        assertEquals(6,cardTester.getId());
         for(int i=0;i<2;i++)
             gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         ParameterObject noParameter=new ParameterObject();
@@ -97,6 +100,7 @@ public class CharactersTest extends TestCase {
 
     public void testCharacter7(){
         cardTester=FactoryCharacter.createCharacter(7,gameTest.getBag());
+        assertEquals(7,cardTester.getId());
         int initialCost=cardTester.getCost();
         int dim=(int)((Math.random()*(3-1))+1); //in this way you can get a random result in a range of values
         int[] targets=new int[dim];
@@ -141,6 +145,7 @@ public class CharactersTest extends TestCase {
 
     public void testCharacter8(){
         cardTester=FactoryCharacter.createCharacter(8,gameTest.getBag());
+        assertEquals(8,cardTester.getId());
         gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         ParameterObject noParameter=new ParameterObject();
         try {
@@ -166,6 +171,7 @@ public class CharactersTest extends TestCase {
 
     public void testCharacter9(){
         cardTester=FactoryCharacter.createCharacter(9,gameTest.getBag());
+        assertEquals(9,cardTester.getId());
         for(int i=0;i<2;i++)
                 gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         int colorIndex=(int)(Math.random()*4+1);
@@ -192,19 +198,23 @@ public class CharactersTest extends TestCase {
         assertNull(gameTest.getTargetColor());
     }
 
-    /*public void testCharacter10(){
+    public void testCharacter10(){
         cardTester=FactoryCharacter.createCharacter(10,gameTest.getBag());
+        assertEquals(10,cardTester.getId());
         int initialCost=cardTester.getCost();
-        int dim=(int)((Math.random()*2)+1); //in this way you can get a random result in a range of values
+        int dim=(int)((Math.random()*2)); //in this way you can get a random result in a range of values
         int[] targets=new int[dim];
         int[] exchange=new int[dim];
+        for(int i=0;i<dim;i++){
+            gameTest.getPlayer(0).getBoard().moveToDiningRoom(gameTest.getPlayer(0).getBoard().getEntrance().get(gameTest.getPlayer(0).getBoard().getEntrance().size()-1-i));
+        }
         for(int i=0;i<dim;i++){
             targets[i]=gameTest.getPlayer(0).getBoard().getEntrance().get(i).getId();
             int j=0,k=0;
             Student stud=null;
-            while(stud==null||j==gameTest.getPlayer(0).getBoard().getDiningRoom().length){
+            while(stud==null && j<gameTest.getPlayer(0).getBoard().getDiningRoom().length){
                 stud=gameTest.getPlayer(0).getBoard().getDiningRoom()[j][k];
-                if(k<gameTest.getPlayer(0).getBoard().getDiningRoom().length-1){
+                if(k<gameTest.getPlayer(0).getBoard().getDiningRoom()[j].length-1){
                     k++;
                 }
                 else{
@@ -212,12 +222,120 @@ public class CharactersTest extends TestCase {
                     j++;
                 }
             }
-            exchange[i]=stud.getId();
+            if(stud!=null){
+                exchange[i]=stud.getId();
+            }
+            else
+                throw new RuntimeException("not enough tokens on the hall");
         }
         ParameterObject parameters=new ParameterObject(0,targets,exchange);
         cardTester.cardEffect(parameters,gameTest);
         assertEquals(initialCost+1,cardTester.getCost());
     }
 
-         */
+    public void testNotEnoughMoneyCharacter10(){
+        cardTester=FactoryCharacter.createCharacter(10,gameTest.getBag());
+        int currentCost=cardTester.getCost();
+        while(cardTester.getCost()<=gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().getCoin()) {
+            int dim = (int) ((Math.random() * 2)); //in this way you can get a random result in a range of values
+            int[] targets = new int[dim];
+            int[] exchange = new int[dim];
+            for (int i = 0; i < dim; i++) {
+                gameTest.getPlayer(0).getBoard().moveToDiningRoom(gameTest.getPlayer(0).getBoard().getEntrance().get(gameTest.getPlayer(0).getBoard().getEntrance().size() - 1 - i));
+            }
+            for (int i = 0; i < dim; i++) {
+                targets[i] = gameTest.getPlayer(0).getBoard().getEntrance().get(i).getId();
+                int j = 0, k = 0;
+                Student stud = null;
+                while (stud == null && j < gameTest.getPlayer(0).getBoard().getDiningRoom().length) {
+                    stud = gameTest.getPlayer(0).getBoard().getDiningRoom()[j][k];
+                    if (k < gameTest.getPlayer(0).getBoard().getDiningRoom()[j].length - 1) {
+                        k++;
+                    } else {
+                        k = 0;
+                        j++;
+                    }
+                }
+                if (stud != null) {
+                    exchange[i] = stud.getId();
+                } else
+                    throw new RuntimeException("not enough tokens on the hall");
+            }
+            ParameterObject parameters = new ParameterObject(0, targets, exchange);
+            cardTester.cardEffect(parameters, gameTest);
+            currentCost++;
+        }
+        try{
+            int dim = (int) ((Math.random() * 2) + 1); //in this way you can get a random result in a range of values
+            int[] targets = new int[dim];
+            int[] exchange = new int[dim];
+            for (int i = 0; i < dim; i++) {
+                gameTest.getPlayer(0).getBoard().moveToDiningRoom(gameTest.getPlayer(0).getBoard().getEntrance().get(gameTest.getPlayer(0).getBoard().getEntrance().size() - 1 - i));
+            }
+            for (int i = 0; i < dim; i++) {
+                targets[i] = gameTest.getPlayer(0).getBoard().getEntrance().get(i).getId();
+                int j = 0, k = 0;
+                Student stud = null;
+                while (stud == null && j < gameTest.getPlayer(0).getBoard().getDiningRoom().length) {
+                    stud = gameTest.getPlayer(0).getBoard().getDiningRoom()[j][k];
+                    if (k < gameTest.getPlayer(0).getBoard().getDiningRoom()[j].length - 1) {
+                        k++;
+                    } else {
+                        k = 0;
+                        j++;
+                    }
+                }
+                if (stud != null) {
+                    exchange[i] = stud.getId();
+                } else
+                    throw new RuntimeException("not enough tokens on the hall");
+            }
+            ParameterObject parameters = new ParameterObject(0, targets, exchange);
+            cardTester.cardEffect(parameters, gameTest);
+        }
+        catch(RuntimeException e){
+            System.out.println(e.getMessage());
+        }
+        assertEquals(currentCost,cardTester.getCost());
+    }
+
+    public void testCharacter11(){
+        cardTester=FactoryCharacter.createCharacter(11,gameTest.getBag());
+        assertEquals(11,cardTester.getId());
+        gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
+        int initialCost= cardTester.getCost();
+        int target=((int)Math.random())*((Character11)cardTester).getStudents().size();
+        ParameterObject parameters=new ParameterObject(((Character11)cardTester).getStudents().get(target).getId(),0);
+        try{
+            cardTester.cardEffect(parameters,gameTest);
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
+        }
+        assertEquals(4,((Character11) cardTester).getStudents().size());
+        assertEquals(initialCost+1,cardTester.getCost());
+    }
+
+    public void testNotEnoughMoneyCharacter11(){
+        cardTester=FactoryCharacter.createCharacter(11,gameTest.getBag());
+        assertEquals(11,cardTester.getId());
+        while(cardTester.getCost()<=gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().getCoin()){
+            int target = ((int) Math.random()) * ((Character11) cardTester).getStudents().size();
+            ParameterObject parameters = new ParameterObject(((Character11) cardTester).getStudents().get(target).getId(), 0);
+            try {
+                cardTester.cardEffect(parameters, gameTest);
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+        }
+        try{
+            int target = ((int) Math.random()) * ((Character11) cardTester).getStudents().size();
+            ParameterObject parameters = new ParameterObject(((Character11) cardTester).getStudents().get(target).getId(), 0);
+            cardTester.cardEffect(parameters, gameTest);
+        }
+        catch(RuntimeException e){
+            System.out.println(e.getMessage());
+        }
+
+    }
 }
