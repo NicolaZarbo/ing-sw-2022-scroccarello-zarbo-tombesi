@@ -36,7 +36,7 @@ public class Turn {
             throw new NoTokenFoundException(e.getMessage());
         }
         movedStudent++;
-        if(movedStudent<2)
+        if(movedStudent<3)
             game.notify(new SingleBoardMessage(game, idPlayer));
         else {
             game.groupMultiMessage(new SingleBoardMessage(game, idPlayer));
