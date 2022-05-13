@@ -27,7 +27,7 @@ public class Round {
         Hand actualHand=game.getPlayer(playerId).getHand();
         AssistantCard played=actualHand.playAssistant(cardPlayed);
         game.addCardPlayedThisRound(playerId,played);
-        game.notify(new PlayedAssistantMessage(game));
+        game.groupMultiMessage(new PlayedAssistantMessage(game));
     }
 
     public void roundOrder(){

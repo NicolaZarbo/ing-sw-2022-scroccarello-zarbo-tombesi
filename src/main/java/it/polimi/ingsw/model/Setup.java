@@ -62,9 +62,8 @@ public class Setup {
         }
         if(prePlayers.size()== game.getNPlayers()){
             game.setPlayers(Setup.createPlayer(game.isEasy(), prePlayers,game.getBag()));
+            game.groupMultiMessage(new WholeGameMessage(game));
             game.moveToNextPhase();
-            game.notify(new WholeGameMessage(game));
-
         }
     }
 

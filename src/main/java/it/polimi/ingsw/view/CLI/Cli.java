@@ -126,6 +126,7 @@ public class Cli implements UserInterface {
     @Override
     public void askToMoveStudent() {
         System.out.println(Printer.PINK+"Choose a student in your Entrance by its color"+Printer.RST);
+        System.out.println("Student moved : "+ Printer.WHITE_BKG+""+game.getStudentMoved()+""+Printer.RST);
     }
 
     @Override

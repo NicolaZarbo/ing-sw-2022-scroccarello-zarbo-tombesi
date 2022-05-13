@@ -12,9 +12,11 @@ import java.util.*;
 
 public class Turn {
     private final Game game;
+    private int movedStudent;
 
     public Turn (Game game){
         this.game=game;
+        movedStudent=0;
     }
 
     /** moves a student already inside the Board of idPlayer from entrance to hall  */
@@ -28,12 +30,19 @@ public class Turn {
             if (board.foundCoin(stud))
                 player.getHand().addCoin();
             if (canHaveTeacher(stud.getColor(), idPlayer))
-                getTeacher(stud.getColor(), idPlayer);//FIXME get teacher can call a notify
+                getTeacher(stud.getColor(), idPlayer);//FIXME getTeacher can call a notify
         }
         catch(NoTokenFoundException e){
             throw new NoTokenFoundException(e.getMessage());
         }
-        game.notify(new SingleBoardMessage(game, idPlayer));
+        movedStudent++;
+        if(movedStudent<2)
+            game.notify(new SingleBoardMessage(game, idPlayer));
+        else {
+            game.groupMultiMessage(new SingleBoardMessage(game, idPlayer));
+            movedStudent=0;
+        }
+
     }
 
     /** moves a student already inside the Board of idPlayer from entrance to a target island*/
@@ -64,7 +73,8 @@ public class Turn {
             unifyBefore( position);
         }
 
-        game.notify(new MotherPositionMessage(game));
+        game.groupMultiMessage(new MotherPositionMessage(game));
+        game.sendMultiMessage();
     }
     /** moves al the students on a target cloud to the board of playerId*/
     public void moveFromCloudToEntrance(int cloudId,int playerId){
@@ -125,7 +135,8 @@ public class Turn {
             if (game.getMotherNature().getPosition() == pos + 1)
                 game.getMotherNature().changePosition(pos);
             }
-        game.notify(new IslandsMessage(game));
+
+        game.groupMultiMessage(new IslandsMessage(game));
 
     }
     public  void unifyBefore( int pos) {
@@ -140,7 +151,7 @@ public class Turn {
             if (game.getMotherNature().getPosition() == pos - 1)
                 game.getMotherNature().changePosition(pos);
             }
-        game.notify(new IslandsMessage(game));
+        game.groupMultiMessage(new IslandsMessage(game));
 
     }
     //if it is a team game, insert the mainplayer id in idPlayer
@@ -148,8 +159,9 @@ public class Turn {
     public void putTowerFromBoardToIsland(Island island,Player player){
         Board board=player.getBoard();
         island.setTower(board.getTower());
-        game.notify(new IslandsMessage(game));
-        game.notify(new SingleBoardMessage(game,player.getId()));
+        game.groupMultiMessage(new IslandsMessage(game));
+        game.groupMultiMessage(new SingleBoardMessage(game,player.getId()));
+
 
     }
     private void changeTower(Island island , Player newOwner){
@@ -158,7 +170,7 @@ public class Turn {
         for (Player player: game.getPlayers()) {
             if(player.getColorT()==removedT.get(0).getColor()){
                 player.getBoard().addTower(removedT);
-                game.notify(new SingleBoardMessage(game,player.getId()));//this may cause a visual problem in the time between messages
+                game.groupMultiMessage(new SingleBoardMessage(game,player.getId()));
             }
         }
         this.putTowerFromBoardToIsland(island,newOwner);

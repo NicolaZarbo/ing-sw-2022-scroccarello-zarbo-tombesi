@@ -20,13 +20,14 @@ public class ControllerActionPhase  {
     }
 
     public void moveStudentToHall(StudentToHallMessage message){
-        if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>=3)
-            throw new IllegalMoveException();
+        if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>2)
+            throw new IllegalMoveException("incorrect action, or too many students moved");
         try {
             studentMoved++;
+            modelTurn.moveInHall(this.idPlayerNow, message.getStudentId());
             if (studentMoved == 3)
                 game.moveToNextPhase();
-            modelTurn.moveInHall(this.idPlayerNow, message.getStudentId());
+
         }
         catch(NoTokenFoundException e){
             throw new NoTokenFoundException(e.getMessage());
@@ -36,10 +37,9 @@ public class ControllerActionPhase  {
         if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>=3)
             throw new IllegalMoveException();
         studentMoved++;
+        modelTurn.moveToIsland(this.idPlayerNow,message.getStudentId(),message.getFinalPositionId());
         if(studentMoved==3)
             game.moveToNextPhase();
-        modelTurn.moveToIsland(this.idPlayerNow,message.getStudentId(),message.getFinalPositionId());
-
     }
 
     public void moveMotherNature(MoveMotherMessage message){
@@ -64,9 +64,8 @@ public class ControllerActionPhase  {
         }
         if(game.isLastPlayerTurn())
             game.moveToNextPhase();
-        else {
-            changeTurn();
-        }
+        changeTurn();
+
     }
 
     public void changeTurn(){

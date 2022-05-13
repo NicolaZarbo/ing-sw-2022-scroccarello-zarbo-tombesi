@@ -30,6 +30,7 @@ public class MessageFactory {
             case "PlayerSetUpMessage" -> new PlayerSetUpMessage(json);
             case "PlayedAssistantMessage" -> new PlayedAssistantMessage(json);
             case "WholeGameMessage"-> new WholeGameMessage(json);
+            case "ChangePhaseMessage"-> new ChangePhaseMessage(json);
             default -> throw new MessageErrorException("no corresponding message type, found :" + type);
 
         };

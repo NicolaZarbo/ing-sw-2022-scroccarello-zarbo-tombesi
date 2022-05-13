@@ -30,7 +30,6 @@ public class CloudMessageTest extends TestCase {
 
     public void tParseMessage(String js) {
         ServerMessage message =  MessageFactory.getMessageFromServer(js);
-        System.out.println("kkkk0"+ message.getState());
         for (Integer[] cloud:((CloudMessage)message).getClouds()) {
             System.out.println( "nuvola deserializzata, contains : "+ Arrays.toString(cloud));
         }

@@ -45,8 +45,11 @@ public class ClientConnection extends Observable<String> implements Runnable{
             }
              send("connected to lobby");
             while(isActive()) {
-                read = in.nextLine();
-                notify(read);
+                if (in.hasNextLine()) {
+                    read = in.nextLine();
+                    notify(read);
+                }
+
                 //TODO
             }
         } catch (IOException e) {

@@ -33,6 +33,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     private ArrayList<Integer> playedCardThisTurn;
     private int cardYouPlayed;
     private final UserInterface clientScreen;
+    private int studentMoved;
 
     public List<SimplifiedIsland> getIslands() {
         return islands;
@@ -68,6 +69,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     public CentralView(UserInterface userInterface){
         this.clientScreen=userInterface;
+        this.state=GameState.setupPlayers;
     }
     public void errorFromServer(ErrorMessageForClient message){
         if(message.getTargetPlayerId()==personalPlayer.getId()|| message.getTargetPlayerId()==-1)
@@ -89,8 +91,6 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         costOfCard=message.getCardCosts();
 
         clientScreen.showView();
-        if(isYourTurn())
-            clientScreen.showHand();
     }
     public void setName(String name){
         this.name=name;
@@ -117,23 +117,23 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             cardYouPlayed=message.getPlayedCardId()%10;
         if(isYourTurn() && state==GameState.planPlayCard)
             clientScreen.showHand();
-        if(isYourTurn() && state==GameState.actionMoveStudent) {
-            clientScreen.showView();
-            clientScreen.askToMoveStudent();
-        }
+
     }
     public void singleBoardUpdate(SingleBoardMessage message){
-        for (SimplifiedPlayer p:players) {
+        for (SimplifiedPlayer p:players){
             if (p.getId() == message.getBoardPlayerId()) {
                p.setBoard(message.getBoard());
             }
         }
-        clientScreen.showView();
+       //
         if(isYourTurn() && state==GameState.actionMoveStudent) {
-            clientScreen.askToMoveStudent();
+
+            clientScreen.showView();
+            if(studentMoved<3)
+                clientScreen.askToMoveStudent();
+            studentMoved++;
         }
-        if(isYourTurn() && GameState.actionMoveMother==state)
-            clientScreen.askToMoveMother();
+
     }
     public void personalizePlayer(PlayerSetUpMessage message){
         if(message.getTurnOf().equals(this.name)) {
@@ -147,10 +147,39 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             clientScreen.showHand();
         }
     }
+    public void changePhase(ChangePhaseMessage message){
+        this.state=message.getState();
+        switch (state){
+            case setupPlayers -> {throw new RuntimeException("something went really wrong");}
+            case planPlayCard -> {
+                clientScreen.showClouds();
+                clientScreen.showView();
+                if(isYourTurn())
+                    clientScreen.showHand();
+            }
+            case actionMoveStudent -> {
+
+                clientScreen.showView();
+                if(isYourTurn()) {
+                    clientScreen.askToMoveStudent();
+                    studentMoved = 1;
+                }
+            }
+            case actionMoveMother -> {
+                clientScreen.showView();
+                if(isYourTurn())
+                    clientScreen.askToMoveMother();
+            }
+            case actionChooseCloud ->{
+                clientScreen.showView();
+                if(isYourTurn())
+                    clientScreen.showClouds();
+            }
+        }
+    }
 
 
     public void update(ServerMessage message) {
-        this.state=message.getState();
         message.doAction(this);
     }
 
@@ -208,5 +237,9 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     public int getCardYouPlayed() {
         return cardYouPlayed;
+    }
+
+    public int getStudentMoved() {
+        return studentMoved;
     }
 }

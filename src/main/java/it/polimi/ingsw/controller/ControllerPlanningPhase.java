@@ -23,14 +23,15 @@ public class ControllerPlanningPhase {
             else throw new IllegalMoveException("not your turn");
         }
         if(game.isLastPlayerTurn()) {
-            game.moveToNextPhase();
             modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
+            game.moveToNextPhase();
             modelRound.roundOrder();
 
         }
         else {
-            game.changePlayerTurn();
             modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
+            game.changePlayerTurn();
+
         }
 
     }

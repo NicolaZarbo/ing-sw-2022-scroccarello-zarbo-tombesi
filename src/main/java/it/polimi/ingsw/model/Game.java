@@ -2,7 +2,9 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
+import it.polimi.ingsw.messages.server.ChangePhaseMessage;
 import it.polimi.ingsw.messages.server.ChangeTurnMessage;
+import it.polimi.ingsw.messages.server.MultipleServerMessage;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.model.token.Professor;
@@ -32,6 +34,7 @@ public class Game extends Observable<ServerMessage> {
     private Setup setupPhase;
     private Round planningPhase;
     private GameState actualState;
+    private MultipleServerMessage multiMessage;
 
 
 
@@ -58,6 +61,7 @@ public class Game extends Observable<ServerMessage> {
         this.cardPlayedThisRound=new HashMap<>();
         planningPhase.setCloud();
         actualState=GameState.setupPlayers;
+        multiMessage=null;
         //this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();TODO
     }
     /** legacy constructor, still here for tests without players customization*/
@@ -99,6 +103,16 @@ public class Game extends Observable<ServerMessage> {
     protected void notify(ServerMessage message) {
         super.notify(message);
     }
+    public void groupMultiMessage(ServerMessage message){
+        if (multiMessage!= null)
+            multiMessage.addMessage(message);
+        else multiMessage= new MultipleServerMessage(message);
+    }
+    public void sendMultiMessage(){
+        multiMessage.serialize();
+        this.notify(multiMessage);
+        multiMessage=null;
+    }
 
     public void moveToNextPhase(){
         int before = actualState.ordinal();
@@ -108,6 +122,8 @@ public class Game extends Observable<ServerMessage> {
         }
         else
             actualState= GameState.values()[before+1];
+        groupMultiMessage(new ChangePhaseMessage(this));
+        sendMultiMessage();
     }
     /**method only to make testing faster*/
     public void setManuallyGamePhase(GameState state){
@@ -142,8 +158,9 @@ public class Game extends Observable<ServerMessage> {
         int actualIndex=playIngOrder.indexOf(currentPlayerId);
         actualIndex+=1;
         if(actualIndex<nPlayers){
-            currentPlayerId=playIngOrder.get(actualIndex);
-            notify(new ChangeTurnMessage(this));
+            currentPlayerId=playIngOrder.get(Math.floorMod(nPlayers,actualIndex));
+            groupMultiMessage(new ChangeTurnMessage(this));
+            sendMultiMessage();
         }
         else throw new NullPointerException("the phase should have moved on by now");
     }
