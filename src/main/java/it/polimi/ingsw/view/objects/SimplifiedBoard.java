@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.CLI.objects;
+package it.polimi.ingsw.view.objects;
 
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
@@ -19,6 +19,13 @@ public class SimplifiedBoard {
         this.entrance = entrance;
         this.towersLeft = towersLeft;
         this.coinDN=coinDN;
+    }
+    public boolean hasStudentOfColor(int tokenColor){
+        for (Integer id:entrance) {
+            if(id/26==tokenColor)
+                return true;
+        }
+        return false;
     }
     public int getStudentFromColor(int tokenColor){
         for (Integer id:entrance) {

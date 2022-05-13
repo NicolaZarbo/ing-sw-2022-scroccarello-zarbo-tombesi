@@ -8,6 +8,8 @@ import it.polimi.ingsw.model.Cloud;
 import it.polimi.ingsw.model.Game;
 import junit.framework.TestCase;
 
+import java.util.Arrays;
+
 public class CloudMessageTest extends TestCase {
 
     public void testSerialize() {
@@ -28,8 +30,9 @@ public class CloudMessageTest extends TestCase {
 
     public void tParseMessage(String js) {
         ServerMessage message =  MessageFactory.getMessageFromServer(js);
+        System.out.println("kkkk0"+ message.getState());
         for (Integer[] cloud:((CloudMessage)message).getClouds()) {
-            System.out.println( "nuvola deserializzata, contains : "+ cloud);
+            System.out.println( "nuvola deserializzata, contains : "+ Arrays.toString(cloud));
         }
     }
 }

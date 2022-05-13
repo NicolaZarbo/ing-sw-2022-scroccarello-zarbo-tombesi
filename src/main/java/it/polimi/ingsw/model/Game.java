@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
 import it.polimi.ingsw.messages.server.ChangeTurnMessage;
-import it.polimi.ingsw.messages.server.WholeGameMessage;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.model.token.Professor;
@@ -91,6 +91,8 @@ public class Game extends Observable<ServerMessage> {
         for(int i=0;i<nPlayers;i++){
             this.cardPlayedThisRound.put(i,new AssistantCard(i*11,i*11,i*11,Mage.getMage(i)));
         }
+
+
     }
 
     @Override
@@ -100,7 +102,12 @@ public class Game extends Observable<ServerMessage> {
 
     public void moveToNextPhase(){
         int before = actualState.ordinal();
-        actualState= GameState.values()[before+1];
+        if(before==4) {
+            actualState = GameState.planPlayCard;
+            currentPlayerId=playIngOrder.get(0);
+        }
+        else
+            actualState= GameState.values()[before+1];
     }
     /**method only to make testing faster*/
     public void setManuallyGamePhase(GameState state){
@@ -138,7 +145,7 @@ public class Game extends Observable<ServerMessage> {
             currentPlayerId=playIngOrder.get(actualIndex);
             notify(new ChangeTurnMessage(this));
         }
-        else throw new NullPointerException();
+        else throw new NullPointerException("the phase should have moved on by now");
     }
     public AssistantCard getPlayedCard(int playerId){
         return cardPlayedThisRound.get(playerId);

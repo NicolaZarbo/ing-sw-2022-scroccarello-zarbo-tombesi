@@ -26,6 +26,6 @@ public class ChangeTurnMessage extends ServerMessage {
 
     @Override
     public void doAction(CentralView view) {
-        //TODO
+        view.changeTurn(this);
     }
 }

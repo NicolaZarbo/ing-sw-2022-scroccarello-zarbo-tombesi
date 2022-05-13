@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.view.CentralView;
 
-public class PlayedAssistentMessage extends ServerMessage{
+public class PlayedAssistantMessage extends ServerMessage{
     int playedCardId;
     int playerId;
 
@@ -17,26 +17,26 @@ public class PlayedAssistentMessage extends ServerMessage{
         return playerId;
     }
 
-    public PlayedAssistentMessage(Game game) {
+    public PlayedAssistantMessage(Game game) {
         super(game);
         this.playerId= game.getCurrentPlayerId();
         this.playedCardId=game.getPlayedCard(playerId).getId();
         super.serialize();
     }
 
-    public PlayedAssistentMessage(String json) {
+    public PlayedAssistantMessage(String json) {
         super(json);
     }
 
     @Override
     protected void parseMessage(JsonObject gg) {
         Gson gson = new Gson();
-        this.playedCardId=gson.fromJson(gg,PlayedAssistentMessage.class).getPlayedCardId();
-        this.playerId=gson.fromJson(gg,PlayedAssistentMessage.class).getPlayerId();
+        this.playedCardId=gson.fromJson(gg, PlayedAssistantMessage.class).getPlayedCardId();
+        this.playerId=gson.fromJson(gg, PlayedAssistantMessage.class).getPlayerId();
     }
 
     @Override
     public void doAction(CentralView view) {
-        view.playedAssistentUpdate(this);
+        view.playedAssistantUpdate(this);
     }
 }

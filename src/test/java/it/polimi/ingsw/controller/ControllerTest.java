@@ -1,10 +1,9 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.exceptions.IllegalMoveException;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.messages.client.ChooseCloudMessage;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.Turn;
 import junit.framework.TestCase;
 
 public class ControllerTest extends TestCase {

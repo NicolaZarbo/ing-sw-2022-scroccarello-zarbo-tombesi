@@ -1,9 +1,7 @@
 package it.polimi.ingsw.model;
 import it.polimi.ingsw.messages.server.CloudMessage;
-import it.polimi.ingsw.messages.server.PlayedAssistentMessage;
-import it.polimi.ingsw.messages.server.ServerMessage;
+import it.polimi.ingsw.messages.server.PlayedAssistantMessage;
 import it.polimi.ingsw.model.token.Student;
-import it.polimi.ingsw.observer.Observable;
 
 import java.util.*;
 
@@ -29,7 +27,7 @@ public class Round {
         Hand actualHand=game.getPlayer(playerId).getHand();
         AssistantCard played=actualHand.playAssistant(cardPlayed);
         game.addCardPlayedThisRound(playerId,played);
-        game.notify(new PlayedAssistentMessage(game));
+        game.notify(new PlayedAssistantMessage(game));
     }
 
     public void roundOrder(){

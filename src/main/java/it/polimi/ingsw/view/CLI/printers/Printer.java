@@ -8,6 +8,8 @@ public interface Printer {
     static String PINK="\u001B[35m";
     static String RST="\u001B[0m";
     static String CYAN="\u001B[36m";
+    static String WHITE_BKG="\u001B[47m";
+    static String BLACK="\u001B[30m";
 
     public static String mergeRows(String[] rowsForOutput){
         StringBuilder out= new StringBuilder();

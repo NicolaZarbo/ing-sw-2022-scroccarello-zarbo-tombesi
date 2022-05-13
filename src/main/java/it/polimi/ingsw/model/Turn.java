@@ -28,7 +28,7 @@ public class Turn {
             if (board.foundCoin(stud))
                 player.getHand().addCoin();
             if (canHaveTeacher(stud.getColor(), idPlayer))
-                getTeacher(stud.getColor(), idPlayer);
+                getTeacher(stud.getColor(), idPlayer);//FIXME get teacher can call a notify
         }
         catch(NoTokenFoundException e){
             throw new NoTokenFoundException(e.getMessage());
@@ -42,8 +42,10 @@ public class Turn {
         Island island = game.getIsland(idIsland);
         island.addStudent(stud);
         //use a multiple message to reduce the number of connection use TODO
-        game.notify(new IslandsMessage(game));
-        game.notify(new SingleBoardMessage(game, idPlayer));
+        MultipleServerMessage message= new MultipleServerMessage(new  IslandsMessage(game));
+        message.addMessage(new SingleBoardMessage(game,idPlayer));
+        message.serialize();
+        game.notify(message);
 
     }
     /** moves motherNature for a number 'steps', then checks on the final island for tower conquest and island merge*/
@@ -205,7 +207,7 @@ public class Turn {
             }
 
         }
-        game.notify(new SingleBoardMessage(game, playerId));
+        //game.notify(new SingleBoardMessage(game, playerId)); FIXME can problems came from this missing notify?
         //serverSendAll(new SingleBoardMessage(game, playerId))
     }
     /** activates the character effect if the player has enough money or throws an exception*/

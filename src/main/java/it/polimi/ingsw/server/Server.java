@@ -45,6 +45,8 @@ public class Server {
         int newLobbyCode = lobbies.size();
         Lobby last = new Lobby(connection, newLobbyCode,easy,dimension, nick);
         lobbies.add(last);
+        if(last.getLobbyDimension()==last.numberOfConnections())//this is used for fast testing FIXME
+            last.startGame();
     }
 
     public void run(){

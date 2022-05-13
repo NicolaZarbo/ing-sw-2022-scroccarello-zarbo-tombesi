@@ -19,7 +19,7 @@ public class PlayerSetUpMessage extends ServerMessage {
         Gson gson = new Gson();
         this.availableColor= gson.fromJson(gg,PlayerSetUpMessage.class).getAvailableColor();
         this.availableMages=gson.fromJson(gg,PlayerSetUpMessage.class).getAvailableMages();
-        this.turnOf =gson.fromJson(gg,PlayerSetUpMessage.class).getTurnOf();
+        this.turnOf =gson.fromJson(gg,PlayerSetUpMessage.class).getTurnOf().toLowerCase();
         this.newId =gson.fromJson(gg,PlayerSetUpMessage.class).getNewId();
     }
 

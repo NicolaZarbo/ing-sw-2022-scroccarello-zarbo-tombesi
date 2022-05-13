@@ -51,19 +51,20 @@ public class Setup {
     }
     /** get prePlayer from client, if it is the last one then creates the final players in game*/
     public void addPrePlayer(LobbyPlayer prePlayer){
-        if(prePlayers.size()< game.getNPlayers()) {
-            prePlayers.add(prePlayer);
-            availableMages.remove(prePlayer.getMage());
-            availableColor.remove(prePlayer.getTowerColor());
-            preGameTurnOf=preGameOrder.get(0);
-            preGameOrder.remove(prePlayer.getNickname());
-            game.notify(new PlayerSetUpMessage(game,idCreator));
+        prePlayers.add(prePlayer);
+        availableMages.remove(prePlayer.getMage());
+        availableColor.remove(prePlayer.getTowerColor());
+        preGameOrder.remove(prePlayer.getNickname());
+        if(prePlayers.size() < game.getNPlayers()) {
+            preGameTurnOf = preGameOrder.remove(0);
+            game.notify(new PlayerSetUpMessage(game, idCreator));
             idCreator++;
         }
-        else throw new RuntimeException("no space for more players");
         if(prePlayers.size()== game.getNPlayers()){
             game.setPlayers(Setup.createPlayer(game.isEasy(), prePlayers,game.getBag()));
+            game.moveToNextPhase();
             game.notify(new WholeGameMessage(game));
+
         }
     }
 

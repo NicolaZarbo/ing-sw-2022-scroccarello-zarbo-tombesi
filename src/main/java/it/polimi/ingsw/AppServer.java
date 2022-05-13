@@ -18,7 +18,7 @@ public class AppServer
                 server= new Server();
                 server.run();
             }catch (IOException exception){
-                System.err.println( exception.getMessage() );
+                System.err.println( exception.getMessage()+ exception.getCause() );
             }
         System.out.println( "Hello World!" );
     }

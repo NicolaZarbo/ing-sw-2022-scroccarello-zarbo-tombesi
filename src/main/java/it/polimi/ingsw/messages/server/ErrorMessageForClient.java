@@ -29,7 +29,7 @@ int targetPlayerId;
 
     @Override
     public void doAction(CentralView view) {
-       // view.errorFromServer(this);
+       view.errorFromServer(this);
     }
 
     /** returns an error message string*/
@@ -37,5 +37,9 @@ int targetPlayerId;
         String info;
         info="player : "+targetPlayerId+" \n error type : "+this.getType()+" error message : " + errorMessage;
         return info;
+    }
+
+    public int getTargetPlayerId() {
+        return targetPlayerId;
     }
 }

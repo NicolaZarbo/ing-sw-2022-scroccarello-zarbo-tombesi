@@ -8,8 +8,14 @@ import it.polimi.ingsw.messages.server.*;
 //TODO add all the missing messages
 public class MessageFactory {
     public static ServerMessage getMessageFromServer(String json){
-        JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
-        String type= jj.get("messageType").getAsString();
+        String type;
+        try {
+            JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
+            type= jj.get("messageType").getAsString();
+        }catch (IllegalStateException e){
+            throw new RuntimeException(json);
+        }
+        //String type= jj.get("messageType").getAsString();
         if(type==null)
             throw new MessageErrorException("missing message Type");
         return switch (type) {
@@ -22,6 +28,7 @@ public class MessageFactory {
             case "CharacterTokenMessage" -> new CharacterTokenMessage(json);
             case "CharacterUpdateMessage" -> new CharacterUpdateMessage(json);
             case "PlayerSetUpMessage" -> new PlayerSetUpMessage(json);
+            case "PlayedAssistantMessage" -> new PlayedAssistantMessage(json);
             case "WholeGameMessage"-> new WholeGameMessage(json);
             default -> throw new MessageErrorException("no corresponding message type, found :" + type);
 

@@ -5,9 +5,9 @@ import it.polimi.ingsw.model.Cloud;
 import it.polimi.ingsw.model.Island;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.token.Token;
-import it.polimi.ingsw.view.CLI.objects.SimplifiedIsland;
-import it.polimi.ingsw.view.CLI.objects.SimplifiedBoard;
-import it.polimi.ingsw.view.CLI.objects.SimplifiedPlayer;
+import it.polimi.ingsw.view.objects.SimplifiedIsland;
+import it.polimi.ingsw.view.objects.SimplifiedBoard;
+import it.polimi.ingsw.view.objects.SimplifiedPlayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;

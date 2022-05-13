@@ -69,7 +69,7 @@ public class RemoteView extends Observable<ClientMessage> implements Observer<Se
     }
 
     public String getNickname() {
-        return nickname;
+        return nickname.toLowerCase();
     }
 
 

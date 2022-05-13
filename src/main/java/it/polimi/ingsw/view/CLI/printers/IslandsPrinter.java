@@ -1,17 +1,18 @@
 package it.polimi.ingsw.view.CLI.printers;
 
 import it.polimi.ingsw.view.CentralView;
-import it.polimi.ingsw.view.CLI.objects.SimplifiedIsland;
+import it.polimi.ingsw.view.objects.SimplifiedIsland;
 
 import java.util.Arrays;
 
 public class IslandsPrinter implements Printer{
-String yo =" ________ \n" +
-        "/        \\\n" +
-        "|        |\n" +
-        "|        |\n" +
-        "|        |\n" +
-        "\\________/";
+String yo = """
+         ________\s
+        /        \\
+        |        |
+        |        |
+        |        |
+        \\________/""";
     public static String print(CentralView view){
         StringBuilder out= new StringBuilder("\n");
         String[] rows= new String[7];

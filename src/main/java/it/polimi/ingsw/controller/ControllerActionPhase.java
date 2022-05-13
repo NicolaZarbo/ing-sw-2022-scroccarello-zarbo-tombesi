@@ -3,7 +3,7 @@ import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.messages.client.*;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.model.Turn;
 
 
@@ -23,11 +23,10 @@ public class ControllerActionPhase  {
         if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>=3)
             throw new IllegalMoveException();
         try {
-            modelTurn.moveInHall(this.idPlayerNow, message.getStudentId());
-
             studentMoved++;
             if (studentMoved == 3)
                 game.moveToNextPhase();
+            modelTurn.moveInHall(this.idPlayerNow, message.getStudentId());
         }
         catch(NoTokenFoundException e){
             throw new NoTokenFoundException(e.getMessage());
@@ -36,10 +35,11 @@ public class ControllerActionPhase  {
     public void moveStudentToIsland(StudentToIslandMessage message){
         if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>=3)
             throw new IllegalMoveException();
-        modelTurn.moveToIsland(this.idPlayerNow,message.getStudentId(),message.getFinalPositionId());
         studentMoved++;
         if(studentMoved==3)
             game.moveToNextPhase();
+        modelTurn.moveToIsland(this.idPlayerNow,message.getStudentId(),message.getFinalPositionId());
+
     }
 
     public void moveMotherNature(MoveMotherMessage message){

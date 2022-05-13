@@ -1,19 +1,18 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.messages.client.*;
 import it.polimi.ingsw.messages.server.*;
-import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.Observer;
-import it.polimi.ingsw.view.CLI.objects.SimplifiedIsland;
-import it.polimi.ingsw.view.CLI.objects.SimplifiedPlayer;
+import it.polimi.ingsw.view.objects.SimplifiedIsland;
+import it.polimi.ingsw.view.objects.SimplifiedPlayer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,19 +20,19 @@ import java.util.Map;
 public class  CentralView extends Observable<ClientMessage> implements Observer<ServerMessage> {
     private List<SimplifiedIsland> islands;
     private List<Integer[]> clouds;
-    private List<SimplifiedPlayer> players; //va trasformato in simplified player come tutto il resto?
+    private List<SimplifiedPlayer> players;
     private int mother;
     private List<Integer> characters;
     private Map<Integer,List<Integer>> studentsOnCard;
     private Map<Integer,Integer> costOfCard;
-
     private String name;
     private SimplifiedPlayer personalPlayer;
     private GameState state;
     private int turnOf;
     private int id;
     private ArrayList<Integer> playedCardThisTurn;
-    private UserInterface clientScreen;
+    private int cardYouPlayed;
+    private final UserInterface clientScreen;
 
     public List<SimplifiedIsland> getIslands() {
         return islands;
@@ -70,7 +69,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     public CentralView(UserInterface userInterface){
         this.clientScreen=userInterface;
     }
-    public void errorFromServer(ErrorMessageForClient message){}
+    public void errorFromServer(ErrorMessageForClient message){
+        if(message.getTargetPlayerId()==personalPlayer.getId()|| message.getTargetPlayerId()==-1)
+            clientScreen.showError(message.getErrorInfo());
+    }
     public void setView(WholeGameMessage message) {
         islands=message.getIslands();
         clouds=message.getClouds();
@@ -87,6 +89,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         costOfCard=message.getCardCosts();
 
         clientScreen.showView();
+        if(isYourTurn())
+            clientScreen.showHand();
     }
     public void setName(String name){
         this.name=name;
@@ -94,16 +98,29 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     public void cloudUpdate(CloudMessage message){
         this.clouds= message.getClouds();
         clientScreen.showView();
+
     }
     public void motherPositionUpdate(MotherPositionMessage message){
         this.mother=message.getMotherPosition();
+        clientScreen.showView();
+        if(state==GameState.actionChooseCloud && isYourTurn()){
+            clientScreen.showClouds();
+        }
     }
     public void islandsUpdate(IslandsMessage message){
         this.islands=message.getIslandList();
-        clientScreen.showView();
     }
-    public void playedAssistentUpdate(PlayedAssistentMessage message){
-
+    /** adds to card to the list of played card in this turn, this way the players know which card he can or cannot use*/
+    public void playedAssistantUpdate(PlayedAssistantMessage message){
+        playedCardThisTurn.add(message.getPlayedCardId()%10);
+        if(message.getPlayerId()==personalPlayer.getId())
+            cardYouPlayed=message.getPlayedCardId()%10;
+        if(isYourTurn() && state==GameState.planPlayCard)
+            clientScreen.showHand();
+        if(isYourTurn() && state==GameState.actionMoveStudent) {
+            clientScreen.showView();
+            clientScreen.askToMoveStudent();
+        }
     }
     public void singleBoardUpdate(SingleBoardMessage message){
         for (SimplifiedPlayer p:players) {
@@ -111,23 +128,37 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
                p.setBoard(message.getBoard());
             }
         }
+        clientScreen.showView();
+        if(isYourTurn() && state==GameState.actionMoveStudent) {
+            clientScreen.askToMoveStudent();
+        }
+        if(isYourTurn() && GameState.actionMoveMother==state)
+            clientScreen.askToMoveMother();
     }
     public void personalizePlayer(PlayerSetUpMessage message){
         if(message.getTurnOf().equals(this.name)) {
             this.id=message.getNewId();
-            clientScreen.showOptionsForPersonalization();
+            clientScreen.showOptionsForPersonalization(message);
+        }
+    }
+    public void changeTurn(ChangeTurnMessage message){
+        this.turnOf=message.getPlayer();
+        if(isYourTurn() && state==GameState.planPlayCard){
+            clientScreen.showHand();
         }
     }
 
 
     public void update(ServerMessage message) {
+        this.state=message.getState();
         message.doAction(this);
     }
 
-    public void useCard(int cardId){
-        if(personalPlayer.getDiscardedCards()[cardId-(10*personalPlayer.getId())])
+    public void useAssistantCard(int cardId){
+        if(personalPlayer.getAssistantCards()[cardId-1])
             notify(new PlayAssistantMessage(personalPlayer.getId(),cardId));
-        throw new CardNotFoundException();
+        else
+            throw new CardNotFoundException();
     }
     public void moveMother(int steps){
         notify(new MoveMotherMessage(personalPlayer.getId(),steps));
@@ -164,5 +195,18 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     public Map<Integer, Integer> getCostOfCard() {
         return costOfCard;
+    }
+
+    public GameState getState() {
+        return state;
+    }
+    public boolean isYourTurn(){
+        if(state!=GameState.setupPlayers)
+            return this.turnOf==personalPlayer.getId();
+        else return true;//this check on setup is only server side
+    }
+
+    public int getCardYouPlayed() {
+        return cardYouPlayed;
     }
 }

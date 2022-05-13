@@ -2,7 +2,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.messages.client.PlayAssistantMessage;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.model.Round;
 
 import java.util.List;
@@ -22,12 +22,17 @@ public class ControllerPlanningPhase {
             if(game.getActualState()!=GameState.planPlayCard) throw new RuntimeException("not the right state");
             else throw new IllegalMoveException("not your turn");
         }
-        modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
-        if(game.isLastPlayerTurn())
+        if(game.isLastPlayerTurn()) {
             game.moveToNextPhase();
+            modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
+            modelRound.roundOrder();
+
+        }
         else {
             game.changePlayerTurn();
+            modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
         }
+
     }
     public List<Integer> getActualOrder() {
         return modelRound.getRoundOrder(game);

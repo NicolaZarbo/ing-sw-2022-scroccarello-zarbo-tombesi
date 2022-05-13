@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.CLI.objects;
+package it.polimi.ingsw.view.objects;
 
 
 import java.util.Arrays;

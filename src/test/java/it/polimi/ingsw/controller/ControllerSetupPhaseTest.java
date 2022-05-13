@@ -5,8 +5,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.LobbyPlayer;
 import it.polimi.ingsw.model.token.TowerColor;
 import it.polimi.ingsw.model.Mage;
-import it.polimi.ingsw.model.GameState;
-import it.polimi.ingsw.server.Lobby;
+import it.polimi.ingsw.enumerations.GameState;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
