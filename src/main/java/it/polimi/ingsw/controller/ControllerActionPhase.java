@@ -62,16 +62,14 @@ public class ControllerActionPhase  {
         catch(RuntimeException e) {
             throw new IllegalMoveException(e.getMessage());
         }
-        if(game.isLastPlayerTurn())
-            game.moveToNextPhase();
         changeTurn();
-
     }
 
     public void changeTurn(){
         game.changePlayerTurn();
-        this.idPlayerNow= game.getCurrentPlayerId();
         studentMoved =0;
+        this.idPlayerNow= game.getCurrentPlayerId();
+
     }
 
     public void playCharacter(CharacterCardMessage message) {

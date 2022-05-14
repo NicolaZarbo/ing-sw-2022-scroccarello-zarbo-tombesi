@@ -73,7 +73,8 @@ public class Cli implements UserInterface {
                 socketLine = socketIn.nextLine();
                 game.update(MessageFactory.getMessageFromServer(socketLine));
                 //System.out.println(socketLine);//print for fast checking of messages
-                inputManager.decodeInput(input.nextLine());
+                if(game.isYourTurn())
+                    inputManager.decodeInput(input.nextLine());
             }
         } catch(NoSuchElementException e){
             System.out.println("Connection closed from the client side"+ e.getMessage());

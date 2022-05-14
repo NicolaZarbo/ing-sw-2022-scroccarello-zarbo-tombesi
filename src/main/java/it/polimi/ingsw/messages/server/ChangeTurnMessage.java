@@ -14,6 +14,10 @@ public class ChangeTurnMessage extends ServerMessage {
         super.serialize();
     }
 
+    public ChangeTurnMessage(String json) {
+        super(json);
+    }
+
     @Override
     protected void parseMessage(JsonObject gg) {
         Gson gson= new Gson();

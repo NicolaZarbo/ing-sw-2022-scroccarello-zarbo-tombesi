@@ -116,9 +116,10 @@ public class Game extends Observable<ServerMessage> {
 
     public void moveToNextPhase(){
         int before = actualState.ordinal();
-        if(before==4) {
+        if(actualState==GameState.actionChooseCloud) {
             actualState = GameState.planPlayCard;
             currentPlayerId=playIngOrder.get(0);
+            planningPhase.setCloud();
         }
         else
             actualState= GameState.values()[before+1];
@@ -157,12 +158,20 @@ public class Game extends Observable<ServerMessage> {
     public void changePlayerTurn(){
         int actualIndex=playIngOrder.indexOf(currentPlayerId);
         actualIndex+=1;
-        if(actualIndex<nPlayers){
-            currentPlayerId=playIngOrder.get(Math.floorMod(nPlayers,actualIndex));
+        if(!isLastPlayerTurn()){
+            currentPlayerId=playIngOrder.get(Math.floorMod(actualIndex,nPlayers));
             groupMultiMessage(new ChangeTurnMessage(this));
+            if(actualState==GameState.actionChooseCloud) {
+                actualState = GameState.actionMoveStudent;
+                groupMultiMessage(new ChangePhaseMessage(this));
+            }
             sendMultiMessage();
         }
-        else throw new NullPointerException("the phase should have moved on by now");
+        else {
+            currentPlayerId=playIngOrder.get(0);
+            groupMultiMessage(new ChangeTurnMessage(this));
+            moveToNextPhase();
+        }
     }
     public AssistantCard getPlayedCard(int playerId){
         return cardPlayedThisRound.get(playerId);

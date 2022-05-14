@@ -72,9 +72,7 @@ public class Turn {
         if (isUnifiableBefore( position)) {
             unifyBefore( position);
         }
-
         game.groupMultiMessage(new MotherPositionMessage(game));
-        game.sendMultiMessage();
     }
     /** moves al the students on a target cloud to the board of playerId*/
     public void moveFromCloudToEntrance(int cloudId,int playerId){
@@ -97,8 +95,9 @@ public class Turn {
         }
 
         game.resetBonus();
-        game.notify(new CloudMessage(game));
-        game.notify(new SingleBoardMessage(game,playerId));
+        game.groupMultiMessage(new CloudMessage(game));
+        game.groupMultiMessage(new SingleBoardMessage(game,playerId));
+
     }
 
     public boolean isUnifiableNext(int pos){
@@ -148,8 +147,8 @@ public class Turn {
             central.addAllTowers(before.getTowers());
             game.getIslands().remove(before);
             central.incrementIslandSize();
-            if (game.getMotherNature().getPosition() == pos - 1)
-                game.getMotherNature().changePosition(pos);
+           // if (game.getMotherNature().getPosition() == pos - 1)
+            //    game.getMotherNature().changePosition(pos);
             }
         game.groupMultiMessage(new IslandsMessage(game));
 

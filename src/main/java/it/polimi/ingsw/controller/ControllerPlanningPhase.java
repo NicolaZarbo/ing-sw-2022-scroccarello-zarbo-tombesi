@@ -22,18 +22,11 @@ public class ControllerPlanningPhase {
             if(game.getActualState()!=GameState.planPlayCard) throw new RuntimeException("not the right state");
             else throw new IllegalMoveException("not your turn");
         }
+        modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
         if(game.isLastPlayerTurn()) {
-            modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
-            game.moveToNextPhase();
             modelRound.roundOrder();
-
         }
-        else {
-            modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
             game.changePlayerTurn();
-
-        }
-
     }
     public List<Integer> getActualOrder() {
         return modelRound.getRoundOrder(game);

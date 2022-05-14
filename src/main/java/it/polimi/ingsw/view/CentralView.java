@@ -97,15 +97,9 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     }
     public void cloudUpdate(CloudMessage message){
         this.clouds= message.getClouds();
-        clientScreen.showView();
-
     }
     public void motherPositionUpdate(MotherPositionMessage message){
         this.mother=message.getMotherPosition();
-        clientScreen.showView();
-        if(state==GameState.actionChooseCloud && isYourTurn()){
-            clientScreen.showClouds();
-        }
     }
     public void islandsUpdate(IslandsMessage message){
         this.islands=message.getIslandList();
@@ -127,7 +121,6 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         }
        //
         if(isYourTurn() && state==GameState.actionMoveStudent) {
-
             clientScreen.showView();
             if(studentMoved<3)
                 clientScreen.askToMoveStudent();
@@ -152,13 +145,12 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         switch (state){
             case setupPlayers -> {throw new RuntimeException("something went really wrong");}
             case planPlayCard -> {
-                clientScreen.showClouds();
                 clientScreen.showView();
                 if(isYourTurn())
                     clientScreen.showHand();
             }
             case actionMoveStudent -> {
-
+                playedCardThisTurn = new ArrayList<>();
                 clientScreen.showView();
                 if(isYourTurn()) {
                     clientScreen.askToMoveStudent();
@@ -184,13 +176,15 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     }
 
     public void useAssistantCard(int cardId){
-        if(personalPlayer.getAssistantCards()[cardId-1])
-            notify(new PlayAssistantMessage(personalPlayer.getId(),cardId));
+        if(personalPlayer.getAssistantCards()[cardId]) {
+            notify(new PlayAssistantMessage(personalPlayer.getId(), cardId));
+            personalPlayer.removeCard(cardId);
+        }
         else
-            throw new CardNotFoundException();
+            throw new CardNotFoundException("card :"+(cardId+1)+" not available");
     }
     public void moveMother(int steps){
-        notify(new MoveMotherMessage(personalPlayer.getId(),steps));
+        notify(new MoveMotherMessage(steps,personalPlayer.getId()));
     }
     public void moveStudentToHall(int colorOfStudent) throws NoTokenFoundException{
             int studID=personalPlayer.getBoard().getStudentFromColor(colorOfStudent);
@@ -205,7 +199,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     public void chooseCloud(int cloudId){
         if(cloudId<clouds.size() && clouds.get(cloudId).length==3)
             notify(new ChooseCloudMessage(cloudId, personalPlayer.getId()));
-        throw new RuntimeException("invalid Cloud");
+        else
+            throw new RuntimeException("invalid Cloud");
     }
     public void playCharacter(int cardId, ParameterObject parameters){
         notify(new CharacterCardMessage(personalPlayer.getId(), parameters,cardId));

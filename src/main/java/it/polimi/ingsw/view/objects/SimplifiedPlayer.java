@@ -37,6 +37,9 @@ public class SimplifiedPlayer {
         return id;
     }
 
+    public void removeCard(int cardId){
+        assistantCards[cardId]=false;
+    }
     public void setId(int id) {
         this.id = id;
     }

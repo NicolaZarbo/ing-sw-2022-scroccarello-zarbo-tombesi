@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.CLI;
 
+import it.polimi.ingsw.exceptions.CardNotFoundException;
 import it.polimi.ingsw.view.CentralView;
 
 import java.util.Locale;
@@ -50,7 +51,11 @@ public class InputManager {
             }
             case planPlayCard ->{
                 if(isInteger)
-                    game.useAssistantCard(inputInteger);
+                    try {
+                        game.useAssistantCard(inputInteger - 1);
+                    }catch (CardNotFoundException e){
+                        cli.askToRetry(e.getMessage());
+                    }
                 else cli.askToRetry("please select a card");
             }
             case actionMoveMother -> {
@@ -81,7 +86,7 @@ public class InputManager {
             }
             case actionChooseCloud -> {
                 if(isInteger && inputInteger<=game.getClouds().size() && inputInteger>0)
-                    game.chooseCloud(inputInteger);
+                    game.chooseCloud(inputInteger-1);
                 else cli.askToRetry("please select an available cloud id");
             }
         }

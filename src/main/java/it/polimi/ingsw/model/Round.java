@@ -20,7 +20,7 @@ public class Round {
             }
            game.getClouds()[i].setStud(students);
         }
-        game.notify(new CloudMessage(game));
+        game.groupMultiMessage(new CloudMessage(game));
     }
 
     public void playCard(int playerId, int cardPlayed){

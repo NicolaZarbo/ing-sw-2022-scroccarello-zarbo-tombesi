@@ -22,11 +22,11 @@ public class CloudPrinter implements Printer{
             int [] colorStud = cloudStudentForColor(cloud);
             rows[0]+="  ________      \t";
             rows[1]+=" (         )    \t";
-            rows[2]+="( "+RED+"R:"+ colorStud[0] +"  "+GREEN+"G:"+colorStud[2]+"    "+RST+")   \t";
-            rows[3]+="( "+YELLOW+"Y:"+colorStud[1]+"   "+BLUE+"B:"+colorStud[3]+"   "+RST+" )   \t";
-            rows[4]+=" (   "+PINK+"P:"+colorStud[4]+"     "+RST+")    \t";
+            rows[2]+="( "+RED+"R:"+ colorStud[0] +"  "+GREEN+"G:"+colorStud[2]+"  "+RST+")   \t";
+            rows[3]+="( "+YELLOW+"Y:"+colorStud[1]+"  "+BLUE+"B:"+colorStud[3]+"  "+RST+")   \t";
+            rows[4]+=" (   "+PINK+"P:"+colorStud[4]+"   "+RST+")    \t";
             rows[5]+="  (_______)     \t";
-            rows[6]+="        "+id+"        \t";
+            rows[6]+="      "+id+"        \t";
         }
         for (String row:rows) {
             out.append(row).append("\n");
