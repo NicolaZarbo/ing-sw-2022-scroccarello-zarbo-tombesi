@@ -50,11 +50,16 @@ public class Turn {
         Student stud = game.getPlayer(idPlayer).getBoard().getStudentFromEntrance(idStud);
         Island island = game.getIsland(idIsland);
         island.addStudent(stud);
+        game.groupMultiMessage(new  IslandsMessage(game));
+        game.groupMultiMessage(new SingleBoardMessage(game,idPlayer));
         //use a multiple message to reduce the number of connection use TODO
-        MultipleServerMessage message= new MultipleServerMessage(new  IslandsMessage(game));
-        message.addMessage(new SingleBoardMessage(game,idPlayer));
-        message.serialize();
-        game.notify(message);
+        movedStudent++;
+        if(movedStudent<3)
+            game.sendMultiMessage();
+        else {
+            movedStudent=0;
+        }
+
 
     }
     /** moves motherNature for a number 'steps', then checks on the final island for tower conquest and island merge*/

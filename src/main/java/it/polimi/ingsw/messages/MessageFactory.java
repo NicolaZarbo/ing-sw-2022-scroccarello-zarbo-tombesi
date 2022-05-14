@@ -12,7 +12,7 @@ public class MessageFactory {
         try {
             JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
             type= jj.get("messageType").getAsString();
-        }catch (IllegalStateException e){
+        }catch (RuntimeException e){
             throw new RuntimeException(json);
         }
         //String type= jj.get("messageType").getAsString();

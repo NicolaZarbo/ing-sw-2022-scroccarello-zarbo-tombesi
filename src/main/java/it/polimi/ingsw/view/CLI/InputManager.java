@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.CLI;
 
 import it.polimi.ingsw.exceptions.CardNotFoundException;
+import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.view.CentralView;
 
 import java.util.Locale;
@@ -76,7 +77,11 @@ public class InputManager {
                 else {
                     if(isIsland(inLo) && isInteger) {
                         somethingSelected=false;
-                        game.moveStudentToIsland(targetColor, inputInteger);
+                        try {
+                            game.moveStudentToIsland(targetColor, inputInteger);
+                        }catch (IllegalMoveException e){
+                            cli.askToRetry("island : " +e.getMessage()+1 +" not available, select another");
+                        }
                     }
                     else {
                         somethingSelected=false;
