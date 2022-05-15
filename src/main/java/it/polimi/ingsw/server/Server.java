@@ -30,10 +30,13 @@ public class Server {
         connections=0;
     }
     //it would be better to not have the whole method as siyncronized but only some part of it
-    public synchronized void lobby(ClientConnection connection, String nickname){
+    public synchronized void lobby(ClientConnection connection, String nickname) throws IOException {
         Lobby last = lobbies.get(lobbies.size()-1);
-        if(last.getLobbyDimension()>last.numberOfConnections())
-            last.addConnection(connection,nickname);
+        if(last.isPlayerConnected(nickname))
+            throw new IOException("User not available, try to riconnect");
+        if(last.getLobbyDimension()>last.numberOfConnections()) {
+            last.addConnection(connection, nickname);
+        }
         if(last.getLobbyDimension()==last.numberOfConnections())
             last.startGame();
     }
@@ -43,15 +46,15 @@ public class Server {
         Lobby last = lobbies.get(lobbies.size()-1);
         return (last.getLobbyDimension()>last.numberOfConnections());
     }
-    public synchronized void createLobby(ClientConnection connection, String nick,int dimension, String yesEasy){
+    public synchronized void createLobby(ClientConnection connection, String nick,int dimension, String yesEasy) throws IOException {
+        if(dimension<1 || dimension>4)//this is used for fast testing, 1 shouldn't be ok FIXME
+            throw new IOException("max 4 player, min 2");
         boolean easy;
-        if(yesEasy.equals("y"))
-            easy=true;
-        else easy= false;
+        easy= yesEasy.equals("y");
         int newLobbyCode = lobbies.size();
         Lobby last = new Lobby(connection, newLobbyCode,easy,dimension, nick);
         lobbies.add(last);
-        if(last.getLobbyDimension()==last.numberOfConnections())//this is used for fast testing FIXME
+        if(last.getLobbyDimension()==last.numberOfConnections())
             last.startGame();
     }
 

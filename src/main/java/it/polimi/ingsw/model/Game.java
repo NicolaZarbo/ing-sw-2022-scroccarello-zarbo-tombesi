@@ -167,8 +167,9 @@ public class Game extends Observable<ServerMessage> {
                 planningPhase.roundOrder();
                 actualState=GameState.actionMoveStudent;
                 currentPlayerId=playIngOrder.get(0);
-                groupMultiMessage(new ChangeTurnMessage(this));
+
                 groupMultiMessage(new ChangePhaseMessage(this));
+                groupMultiMessage(new ChangeTurnMessage(this));
             }
 
         }

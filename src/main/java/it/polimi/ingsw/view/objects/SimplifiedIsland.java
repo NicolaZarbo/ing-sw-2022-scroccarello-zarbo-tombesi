@@ -7,12 +7,18 @@ public class SimplifiedIsland {
     private int towers;
     private int dimension;
     private int islandId;
+    private int towerColor;
 
-    public SimplifiedIsland(List<Integer> studentsId, int numberOfTowers, int dimension, int islandId) {
+    public SimplifiedIsland(List<Integer> studentsId, int numberOfTowers, int dimension, int islandId,int towerColor) {
         this.students = studentsId;
         this.towers = numberOfTowers ;
         this.islandId = islandId;
         this.dimension=dimension;
+        this.towerColor=towerColor;
+    }
+
+    public int getTowerColor() {
+        return towerColor;
     }
 
     public List<Integer> getStudents() {

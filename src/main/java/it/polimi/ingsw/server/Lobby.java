@@ -1,9 +1,13 @@
 package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.exceptions.MessageErrorException;
+import it.polimi.ingsw.messages.server.ErrorMessageForClient;
+import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.view.RemoteView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -47,11 +51,27 @@ public class Lobby {
     public int getLobbyCode() {
         return lobbyCode;
     }
-
+    public void removeFromLobby(ClientConnection connection){
+        if(this.connections.contains(connection)){
+            int indexOf= connections.indexOf(connection);
+            connections.remove(connection);
+            ErrorMessageForClient disconnectMess= new ErrorMessageForClient(-1, new MessageErrorException("player :"+playersViews.remove(indexOf).getNickname()+" got disconnected"));
+            for (ClientConnection conn:connections) {
+                conn.asyncSend(disconnectMess.getJson());
+            }
+        }
+    }
     public int getLobbyDimension() {
         return lobbyDimension;
     }
     public int numberOfConnections(){
         return connections.size();
+    }
+    public boolean isPlayerConnected(String nick){
+        for (RemoteView v:playersViews) {
+            if(v.getNickname().equalsIgnoreCase(nick))
+                return true;
+        }
+        return false;
     }
 }

@@ -23,10 +23,7 @@ public class ControllerPlanningPhase {
             else throw new IllegalMoveException("not your turn");
         }
         modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
-        if(game.isLastPlayerTurn()) {
-            modelRound.roundOrder();//fixme remove
-        }
-            game.changePlayerTurn();
+        game.changePlayerTurn();
     }
     public List<Integer> getActualOrder() {
         return modelRound.getRoundOrder(game);

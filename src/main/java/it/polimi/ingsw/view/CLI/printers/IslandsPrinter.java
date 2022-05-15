@@ -17,6 +17,7 @@ String yo = """
         StringBuilder out= new StringBuilder("\n");
         String[] rows= new String[7];
         Arrays.fill(rows,"");
+        String tColor;
         int escapeCounter=0;
         for (SimplifiedIsland island:view.getIslands()) {
             if(escapeCounter>=view.getIslands().size()/2){
@@ -26,11 +27,11 @@ String yo = """
                 escapeCounter=0;
             }
             escapeCounter++;
-
+            tColor=Printer.padWithSpaces(towerColor(island.getTowerColor()),6);
             int[] studentForColor= IslandsPrinter.islandColorStudents(island);
             rows[0]+="Island : "+island.getIslandId()+"  \t";
             rows[1]+=" _________    \t";
-            rows[2]+="/         \\   \t";
+            rows[2]+="/ "+tColor+"  \\   \t";
             rows[3]+="|T°:"+island.getNumberOfTowers()+" "+PINK+"P:"+studentForColor[4]+""+RST+" |   \t";
             rows[4]+="| "+RED+"R:"+studentForColor[0]+" "+YELLOW+"Y:"+studentForColor[1]+""+RST+" |   \t";
             rows[5]+="| "+GREEN+"G:"+studentForColor[2]+" "+BLUE+"B:"+studentForColor[3]+""+RST+" |   \t";
@@ -48,5 +49,14 @@ String yo = """
             studForColor[studId/26] ++;
         }
         return studForColor;
+    }
+    private static String towerColor(int tColor){
+        if(tColor==0)
+            return BLACK+YELLOW_BKG+"BLACK"+RST;
+        if(tColor==1)
+            return "WHITE";
+        if(tColor==2)
+            return "GRAY";
+        return "";
     }
 }

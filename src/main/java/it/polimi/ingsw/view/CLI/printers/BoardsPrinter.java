@@ -25,20 +25,21 @@ public class BoardsPrinter implements Printer{
 
         for (SimplifiedPlayer pl: players) {
             SimplifiedBoard board=pl.getBoard();
+            String tColor= Printer.padWithSpaces(towerColor(pl.getTowerColor()),5);
             int[] entranceColors=BoardsPrinter.entranceForColor(board);
             String[] diningColor =BoardsPrinter.diningRoomColor(board);
             String[] professors= BoardsPrinter.getProfs(board);
             String nameForBoard;
             if(pl.getUsername().equals(view.getName()))
-                nameForBoard=(WHITE_BKG+BLACK+"Your Board"+RST);
+                nameForBoard=(RED+">>>"+WHITE_BKG+BLACK+"Your Board"+RED+"<<<"+RST);
             else nameForBoard=(WHITE_BKG+BLACK+"Player "+pl.getUsername()+RST);
-            nameForBoard= Printer.padWithSpaces(nameForBoard,45);
+            nameForBoard= Printer.padWithSpaces(nameForBoard,44);
             rows[0]+=nameForBoard+"                  ";
             rows[1]+="  _Entr_____________DN_____________Prof___T°_ \t";
             rows[2]+=" |      |                        |     |    |\t" ;
             rows[3]+="R|  "+RED+entranceColors[0]+RST+"   |  "+RED+diningColor[0]+RST+"  |  "+professors[0]+" |  "+board.getTowersLeft()+" |\t";
             rows[4]+="Y|  "+YELLOW+entranceColors[1]+RST+"   |  "+YELLOW+diningColor[1]+RST+"  |  "+professors[1]+" |____|\t";
-            rows[5]+="G|  "+GREEN+entranceColors[2]+RST+"   |  "+GREEN+diningColor[2]+RST+"  |  "+professors[2]+" |     \t";
+            rows[5]+="G|  "+GREEN+entranceColors[2]+RST+"   |  "+GREEN+diningColor[2]+RST+"  |  "+professors[2]+" | "+tColor+"\t";
             rows[6]+="B|  "+BLUE+entranceColors[3]+RST+"   |  "+BLUE+diningColor[3]+RST+"  |  "+professors[3]+" |     \t";
             rows[7]+="P|  "+PINK+entranceColors[4]+RST+"   |  "+PINK+diningColor[4]+RST+"  |  "+professors[4]+" |     \t";
             rows[8]+=" |______|________________________|_____|     \t";
@@ -59,6 +60,14 @@ public class BoardsPrinter implements Printer{
             profs[i]+= RST;
         }
         return profs;
+    }
+    private static String towerColor(int tcolor){
+        return switch (tcolor){
+            default -> "nt";
+            case 1-> "B";
+            case 2-> "W";
+            case 3-> "G";
+        };
     }
     private static String[] diningRoomColor(SimplifiedBoard board){
         int[] colorQuantity= new int[5];

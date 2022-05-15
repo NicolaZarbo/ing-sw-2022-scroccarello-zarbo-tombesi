@@ -1,17 +1,18 @@
 package it.polimi.ingsw.view.CLI.printers;
 
 public interface Printer {
-    static String RED="\u001B[31m";
-    static String BLUE="\u001B[34m";
-    static String YELLOW="\u001B[33m";
-    static String GREEN="\u001B[32m";
-    static String PINK="\u001B[35m";
-    static String RST="\u001B[0m";
-    static String CYAN="\u001B[36m";
-    static String WHITE_BKG="\u001B[47m";
-    static String BLACK="\u001B[30m";
+    String RED="\u001B[31m";
+    String BLUE="\u001B[34m";
+    String YELLOW="\u001B[33m";
+    String GREEN="\u001B[32m";
+    String PINK="\u001B[35m";
+    String RST="\u001B[0m";
+    String CYAN="\u001B[36m";
+    String WHITE_BKG="\u001B[47m";
+    String YELLOW_BKG="\u001B[43m";
+    String BLACK="\u001B[30m";
 
-    public static String mergeRows(String[] rowsForOutput){
+    static String mergeRows(String[] rowsForOutput){
         StringBuilder out= new StringBuilder();
         for (String s:rowsForOutput) {
             out.append(s);
@@ -19,7 +20,7 @@ public interface Printer {
         }
         return out.toString();
     }
-    public static String getCliColor(int i){
+    static String getCliColor(int i){
         return switch (i){
             default -> RST;
             case 0 -> RED;
@@ -30,7 +31,7 @@ public interface Printer {
             case -1 -> CYAN;
         };
     }
-    public static String padWithSpaces(String in, int dimensionNeeded){
+    static String padWithSpaces(String in, int dimensionNeeded){
         StringBuilder out = new StringBuilder(in);
         while(out.length()<dimensionNeeded)
             out.append("\s");

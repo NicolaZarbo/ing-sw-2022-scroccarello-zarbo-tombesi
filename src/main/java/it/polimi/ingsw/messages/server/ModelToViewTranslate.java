@@ -20,7 +20,10 @@ public class ModelToViewTranslate {
             List<Integer> studentsIds= island.getStudents().stream().map(Token::getId).toList();
             int nTowers=island.getTowers().size();
             int dimension = island.getIslandSize();
-            simplifiedIslands.add(new SimplifiedIsland(studentsIds,nTowers,dimension,island.getID()));
+            int color=-1;
+            if(nTowers>0)
+                color=  island.getTowers().get(0).getColor().ordinal();
+            simplifiedIslands.add(new SimplifiedIsland(studentsIds,nTowers,dimension,island.getID(),color));
         }
         return simplifiedIslands;
     }
