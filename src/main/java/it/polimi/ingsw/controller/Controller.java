@@ -36,7 +36,7 @@ public class Controller extends Observable<ErrorMessageForClient> implements Obs
     @Override
     public void update(ClientMessage message) {
         if(message.getPlayerId()!=this.game.getCurrentPlayerId())
-            throw new IllegalMoveException("not your turn");
+            sendMessageError( new IllegalMoveException("not your turn, now plays " +message.getPlayerId()));
         else
             try{
                 message.doAction(this); //commandPattern

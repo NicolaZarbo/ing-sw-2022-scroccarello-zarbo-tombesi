@@ -30,10 +30,10 @@ public class BoardsPrinter implements Printer{
             String[] professors= BoardsPrinter.getProfs(board);
             String nameForBoard;
             if(pl.getUsername().equals(view.getName()))
-                nameForBoard=("Your Board");
-            else nameForBoard=("Player "+pl.getUsername());
-            nameForBoard= Printer.padWithSpaces(nameForBoard,15);
-            rows[0]+=nameForBoard+"           \t ";
+                nameForBoard=(WHITE_BKG+BLACK+"Your Board"+RST);
+            else nameForBoard=(WHITE_BKG+BLACK+"Player "+pl.getUsername()+RST);
+            nameForBoard= Printer.padWithSpaces(nameForBoard,45);
+            rows[0]+=nameForBoard+"                  ";
             rows[1]+="  _Entr_____________DN_____________Prof___T°_ \t";
             rows[2]+=" |      |                        |     |    |\t" ;
             rows[3]+="R|  "+RED+entranceColors[0]+RST+"   |  "+RED+diningColor[0]+RST+"  |  "+professors[0]+" |  "+board.getTowersLeft()+" |\t";

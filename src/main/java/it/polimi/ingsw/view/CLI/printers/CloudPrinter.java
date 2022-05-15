@@ -26,7 +26,7 @@ public class CloudPrinter implements Printer{
             rows[3]+="( "+YELLOW+"Y:"+colorStud[1]+"  "+BLUE+"B:"+colorStud[3]+"  "+RST+")   \t";
             rows[4]+=" (   "+PINK+"P:"+colorStud[4]+"   "+RST+")    \t";
             rows[5]+="  (_______)     \t";
-            rows[6]+="      "+id+"        \t";
+            rows[6]+="      "+Printer.padWithSpaces(String.valueOf(id),9)+"\t";
         }
         for (String row:rows) {
             out.append(row).append("\n");
@@ -37,7 +37,8 @@ public class CloudPrinter implements Printer{
         int[] studForColor= new int[5];
         Arrays.fill(studForColor,0);
         for (Integer studId: cloud ){
-            studForColor[studId/26] ++;
+            if(studId!=-1)
+                studForColor[studId/26] ++;
         }
         return studForColor;
     }

@@ -4,6 +4,7 @@ import it.polimi.ingsw.messages.MessageFactory;
 import it.polimi.ingsw.messages.client.ClientMessage;
 import it.polimi.ingsw.messages.server.ErrorMessageForClient;
 import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
+import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.view.CLI.printers.*;
 import it.polimi.ingsw.view.CentralView;
@@ -13,6 +14,8 @@ import it.polimi.ingsw.view.objects.SimplifiedPlayer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -71,7 +74,8 @@ public class Cli implements UserInterface {
             }
             while (true){
                 socketLine = socketIn.nextLine();
-                game.update(MessageFactory.getMessageFromServer(socketLine));
+                ServerMessage message=MessageFactory.getMessageFromServer(socketLine);
+                game.update(message);
                 //System.out.println(socketLine);//print for fast checking of messages
                 if(game.isYourTurn())
                     inputManager.decodeInput(input.nextLine());
@@ -103,7 +107,8 @@ public class Cli implements UserInterface {
     @Override
     public void showHand() {
         SimplifiedPlayer player=game.getPersonalPlayer();
-        System.out.println(Printer.PINK+"You can't use the cards n: "+game.getPlayedCardThisTurn()+Printer.RST);
+        List<Integer> played=game.getPlayedCardThisTurn().stream().map(s->s+1).toList();
+        System.out.println(Printer.PINK+"You can't use the cards n: "+played+Printer.RST);
         System.out.println(CardPrinter.print(player.getAssistantCards())+"\n coins :"+player.getCoin());
         System.out.println(Printer.PINK+"Select the card by its number"+Printer.RST);
     }

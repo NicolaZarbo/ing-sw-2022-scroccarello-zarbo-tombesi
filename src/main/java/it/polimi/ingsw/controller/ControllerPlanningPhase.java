@@ -24,7 +24,7 @@ public class ControllerPlanningPhase {
         }
         modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
         if(game.isLastPlayerTurn()) {
-            modelRound.roundOrder();
+            modelRound.roundOrder();//fixme remove
         }
             game.changePlayerTurn();
     }

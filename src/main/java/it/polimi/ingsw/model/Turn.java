@@ -209,7 +209,7 @@ public class Turn {
         Player[] players=game.getPlayers();
         Player playercheck=game.getPlayer(playerId);
         if(canHaveTeacher(color,  playerId)){
-                if(game.isProfessorOnGame(color)){
+            if(game.isProfessorOnGame(color)){
                 Professor temp=game.getFromGame(color);
                 game.getPlayer(playerId).getBoard().putProfessor(temp);
             }else{
@@ -219,12 +219,10 @@ public class Turn {
                             game.getPlayer(playerId).getBoard().putProfessor(temp);
                             int playerTemp = player.getId();
                             game.getPlayer(playerTemp).getBoard().removeProfessor(color);
+                            game.groupMultiMessage(new SingleBoardMessage(game, player.getId()));
                         }
             }
-
         }
-        //game.notify(new SingleBoardMessage(game, playerId)); FIXME can problems came from this missing notify?
-        //serverSendAll(new SingleBoardMessage(game, playerId))
     }
     /** activates the character effect if the player has enough money or throws an exception*/
     public  void useCharacter(int cardId, ParameterObject parameters, int playerId){

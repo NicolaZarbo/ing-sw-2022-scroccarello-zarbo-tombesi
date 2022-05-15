@@ -47,15 +47,15 @@ public class InputManager {
                     default -> cli.askToRetry("please select the color by its name or initial");
                 }
                     if(isInteger)
-                        game.choosePlayerCustom(colorInt, inputInteger);
+                        game.choosePlayerCustom(colorInt, inputInteger-1);
                     else cli.askToRetry("please select the mage by its number");
             }
             case planPlayCard ->{
                 if(isInteger)
                     try {
                         game.useAssistantCard(inputInteger - 1);
-                    }catch (CardNotFoundException e){
-                        cli.askToRetry(e.getMessage());
+                    }catch (CardNotFoundException | ArrayIndexOutOfBoundsException e){
+                        cli.askToRetry(e.getMessage() +"please select an available card");
                     }
                 else cli.askToRetry("please select a card");
             }

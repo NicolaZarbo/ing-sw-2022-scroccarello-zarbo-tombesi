@@ -1,13 +1,11 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.messages.server.*;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.FactoryCharacter;
 import it.polimi.ingsw.model.token.Professor;
 import it.polimi.ingsw.model.token.Student;
 import it.polimi.ingsw.model.token.TokenColor;
 import it.polimi.ingsw.model.token.TowerColor;
-import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
-import it.polimi.ingsw.messages.server.ServerMessage;
-import it.polimi.ingsw.messages.server.WholeGameMessage;
 import it.polimi.ingsw.observer.Observable;
 
 import java.util.ArrayList;
@@ -63,6 +61,7 @@ public class Setup {
         if(prePlayers.size()== game.getNPlayers()){
             game.setPlayers(Setup.createPlayer(game.isEasy(), prePlayers,game.getBag()));
             game.groupMultiMessage(new WholeGameMessage(game));
+            game.groupMultiMessage(new ChangeTurnMessage(game));
             game.moveToNextPhase();
         }
     }

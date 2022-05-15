@@ -1,5 +1,6 @@
 package it.polimi.ingsw.messages.client;
 
+import com.google.gson.JsonParser;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.messages.GenericMessage;
 
@@ -12,6 +13,7 @@ public abstract class ClientMessage extends GenericMessage {
     }
     protected ClientMessage(String json){
         super(json);
+        playerId= JsonParser.parseString(json).getAsJsonObject().get("playerId").getAsInt();
     }
     public ClientMessage(int playerId){
         this.playerId=playerId;

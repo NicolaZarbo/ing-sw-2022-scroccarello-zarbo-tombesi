@@ -62,6 +62,7 @@ public class Game extends Observable<ServerMessage> {
         planningPhase.setCloud();
         actualState=GameState.setupPlayers;
         multiMessage=null;
+        currentPlayerId=0;
         //this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();TODO
     }
     /** legacy constructor, still here for tests without players customization*/
@@ -109,6 +110,8 @@ public class Game extends Observable<ServerMessage> {
         else multiMessage= new MultipleServerMessage(message);
     }
     public void sendMultiMessage(){
+        if(multiMessage==null)
+            throw new NullPointerException("Sending a null message");
         multiMessage.serialize();
         this.notify(multiMessage);
         multiMessage=null;
@@ -116,15 +119,80 @@ public class Game extends Observable<ServerMessage> {
 
     public void moveToNextPhase(){
         int before = actualState.ordinal();
-        if(actualState==GameState.actionChooseCloud) {
-            actualState = GameState.planPlayCard;
-            currentPlayerId=playIngOrder.get(0);
-            planningPhase.setCloud();
-        }
-        else
-            actualState= GameState.values()[before+1];
+
+        actualState=GameState.values()[before + 1];
         groupMultiMessage(new ChangePhaseMessage(this));
         sendMultiMessage();
+        /*if(actualState==GameState.actionChooseCloud) {
+            if (isLastPlayerTurn()) {
+                actualState = GameState.planPlayCard;
+                planningPhase.setCloud();
+            } else actualState=GameState.actionMoveStudent;
+            //currentPlayerId=playIngOrder.get(0);
+        }
+        else {
+            if (actualState == GameState.setupPlayers)
+                groupMultiMessage(new ChangeTurnMessage(this));
+            actualState = GameState.values()[before + 1];
+        }
+        groupMultiMessage(new ChangePhaseMessage(this));
+        if(isLastPlayerTurn() && actualState==GameState.actionMoveStudent)
+            groupMultiMessage(new ChangeTurnMessage(this));
+        sendMultiMessage();
+
+         */
+    }
+
+    public void changePlayerTurn(){
+        int actualIndex=playIngOrder.indexOf(currentPlayerId);
+        actualIndex+=1;
+        if(actualState==GameState.actionChooseCloud){
+            if(!isLastPlayerTurn()){
+                actualState=GameState.actionMoveStudent;
+                currentPlayerId=playIngOrder.get(actualIndex%nPlayers);
+            }
+            else{
+                currentPlayerId=playIngOrder.get(0);
+                actualState=GameState.planPlayCard;
+                planningPhase.setCloud();
+            }
+            groupMultiMessage(new ChangeTurnMessage(this));
+            groupMultiMessage(new ChangePhaseMessage(this));
+        }
+        if (actualState == GameState.planPlayCard) {
+            if(!isLastPlayerTurn()){
+                currentPlayerId=playIngOrder.get(actualIndex%nPlayers);
+                groupMultiMessage(new ChangeTurnMessage(this));
+            }else {
+                planningPhase.roundOrder();
+                actualState=GameState.actionMoveStudent;
+                currentPlayerId=playIngOrder.get(0);
+                groupMultiMessage(new ChangeTurnMessage(this));
+                groupMultiMessage(new ChangePhaseMessage(this));
+            }
+
+        }
+        sendMultiMessage();
+        /*if(!isLastPlayerTurn()){
+            currentPlayerId=playIngOrder.get(actualIndex%nPlayers);
+            groupMultiMessage(new ChangeTurnMessage(this));
+            if(actualState==GameState.actionChooseCloud) {
+                actualState = GameState.actionMoveStudent;
+                groupMultiMessage(new ChangePhaseMessage(this));
+            }
+            sendMultiMessage();
+        }
+        else {
+            currentPlayerId=playIngOrder.get(0);
+            if(actualState!=GameState.planPlayCard)
+                groupMultiMessage(new ChangeTurnMessage(this));
+            moveToNextPhase();
+        }
+
+         */
+    }
+    public AssistantCard getPlayedCard(int playerId){
+        return cardPlayedThisRound.get(playerId);
     }
     /**method only to make testing faster*/
     public void setManuallyGamePhase(GameState state){
@@ -153,28 +221,6 @@ public class Game extends Observable<ServerMessage> {
 
     public Setup getSetupPhase() {
         return setupPhase;
-    }
-
-    public void changePlayerTurn(){
-        int actualIndex=playIngOrder.indexOf(currentPlayerId);
-        actualIndex+=1;
-        if(!isLastPlayerTurn()){
-            currentPlayerId=playIngOrder.get(Math.floorMod(actualIndex,nPlayers));
-            groupMultiMessage(new ChangeTurnMessage(this));
-            if(actualState==GameState.actionChooseCloud) {
-                actualState = GameState.actionMoveStudent;
-                groupMultiMessage(new ChangePhaseMessage(this));
-            }
-            sendMultiMessage();
-        }
-        else {
-            currentPlayerId=playIngOrder.get(0);
-            groupMultiMessage(new ChangeTurnMessage(this));
-            moveToNextPhase();
-        }
-    }
-    public AssistantCard getPlayedCard(int playerId){
-        return cardPlayedThisRound.get(playerId);
     }
 
     public HashMap<Integer, AssistantCard> getAllCardPlayedThisRound() {

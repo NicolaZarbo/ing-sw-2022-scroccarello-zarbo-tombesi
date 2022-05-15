@@ -31,7 +31,7 @@ public class PlayerSetUpMessage extends ServerMessage {
     public String getTurnOf() {
         return turnOf;
     }
-
+    /** the newly assigned id of the player who is choosing is customs right now*/
     public int getNewId() {
         return newId;
     }

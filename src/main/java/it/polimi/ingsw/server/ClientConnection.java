@@ -53,7 +53,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
                 //TODO
             }
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            System.err.println(e.getMessage()+ "  ai!");
         }finally {
             close();
         }
@@ -68,7 +68,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
             out.println(s);
             out.flush();
         } catch(RuntimeException e){
-            System.err.println(e.getMessage());
+            System.err.println(e.getMessage() +" ugh");
         }
 
     }
@@ -82,6 +82,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
         send("Connection closed from Server");
         try {
             clientSocket.close();
+            server.deregisterConnection(this);
         }catch (IOException exception){
             send(exception.getMessage());
             System.err.println(exception.getMessage());

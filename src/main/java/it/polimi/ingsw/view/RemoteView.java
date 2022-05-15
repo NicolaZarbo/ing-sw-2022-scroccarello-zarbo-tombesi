@@ -13,6 +13,7 @@ import it.polimi.ingsw.server.ClientConnection;
 import it.polimi.ingsw.server.Lobby;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RemoteView extends Observable<ClientMessage> implements Observer<ServerMessage> {
     private LobbyPlayer player;
@@ -49,7 +50,7 @@ public class RemoteView extends Observable<ClientMessage> implements Observer<Se
                 ClientMessage clientMessage = MessageFactory.getMessageFromClient(message);
                 doAction(clientMessage);
             }catch(IllegalArgumentException | ArrayIndexOutOfBoundsException e){
-                System.err.println(e.getMessage());
+                System.err.println(e.getMessage()+" "+ e.getCause());
             }
         }
 

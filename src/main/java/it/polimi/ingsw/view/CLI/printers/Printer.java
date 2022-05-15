@@ -33,7 +33,7 @@ public interface Printer {
     public static String padWithSpaces(String in, int dimensionNeeded){
         StringBuilder out = new StringBuilder(in);
         while(out.length()<dimensionNeeded)
-            out.append(" ");
+            out.append("\s");
         return out.toString();
     }
 }

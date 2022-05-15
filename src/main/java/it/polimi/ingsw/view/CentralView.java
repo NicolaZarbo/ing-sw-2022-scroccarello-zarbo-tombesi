@@ -70,9 +70,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     public CentralView(UserInterface userInterface){
         this.clientScreen=userInterface;
         this.state=GameState.setupPlayers;
+        this.id=-1;
     }
     public void errorFromServer(ErrorMessageForClient message){
-        if(message.getTargetPlayerId()==personalPlayer.getId()|| message.getTargetPlayerId()==-1)
+        if(message.getTargetPlayerId()==id|| message.getTargetPlayerId()==-1)
             clientScreen.showError(message.getErrorInfo());
     }
     public void setView(WholeGameMessage message) {
@@ -109,8 +110,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         playedCardThisTurn.add(message.getPlayedCardId()%10);
         if(message.getPlayerId()==personalPlayer.getId())
             cardYouPlayed=message.getPlayedCardId()%10;
-        if(isYourTurn() && state==GameState.planPlayCard)
-            clientScreen.showHand();
+        //if(isYourTurn() && state==GameState.planPlayCard)
+          //  clientScreen.showHand();
 
     }
     public void singleBoardUpdate(SingleBoardMessage message){
@@ -129,6 +130,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     }
     public void personalizePlayer(PlayerSetUpMessage message){
+        turnOf=message.getNewId();
         if(message.getTurnOf().equals(this.name)) {
             this.id=message.getNewId();
             clientScreen.showOptionsForPersonalization(message);
@@ -177,7 +179,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     public void useAssistantCard(int cardId){
         if(personalPlayer.getAssistantCards()[cardId]) {
-            notify(new PlayAssistantMessage(personalPlayer.getId(), cardId));
+            notify(new PlayAssistantMessage(id, cardId+10*id));
             personalPlayer.removeCard(cardId);
         }
         else
@@ -206,7 +208,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         notify(new CharacterCardMessage(personalPlayer.getId(), parameters,cardId));
     }
     public void choosePlayerCustom(int towerColor,int mage){
-       notify(new PrePlayerMessage(id,towerColor,mage,name));
+       notify(new PrePlayerMessage(0,towerColor,mage,name));
     }
 
     public List<Integer> getCharacters() {
@@ -227,7 +229,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     public boolean isYourTurn(){
         if(state!=GameState.setupPlayers)
             return this.turnOf==personalPlayer.getId();
-        else return true;//this check on setup is only server side
+        else return this.turnOf==this.id;//this check on setup is only server side
     }
 
     public int getCardYouPlayed() {
