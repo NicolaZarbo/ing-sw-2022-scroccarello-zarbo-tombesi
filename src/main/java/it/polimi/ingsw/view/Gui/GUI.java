@@ -5,22 +5,38 @@ import it.polimi.ingsw.view.CLI.Cli;
 import it.polimi.ingsw.view.CLI.InputManager;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.UserInterface;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class GUI implements UserInterface {
-    private final CentralView game;
+public class GUI extends Application implements UserInterface {
+    private  CentralView game;
     private PrintWriter socketOut;
-
+    private final Scanner input;
     private String ip="127.0.0.1";
     private int port=12345;
 
     public GUI(){
         this.game = new CentralView(this);
+        this.input = new Scanner(System.in);
 
 
+    }
 
+    @Override
+    public void start(Stage stage) throws Exception {
+        game = new CentralView(this);
+
+        stage.setTitle("Eriantys");
+       // Platform.runLater(() -> Transition.setPrimaryStage(stage));
+
+    }
+
+    public CentralView getGame() {
+        return game;
     }
     @Override
     public void showView() {
