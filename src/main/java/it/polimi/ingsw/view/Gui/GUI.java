@@ -1,8 +1,6 @@
 package it.polimi.ingsw.view.Gui;
 
 import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
-import it.polimi.ingsw.view.CLI.Cli;
-import it.polimi.ingsw.view.CLI.InputManager;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.UserInterface;
 import javafx.application.Application;
@@ -32,7 +30,8 @@ public class GUI extends Application implements UserInterface {
 
         stage.setTitle("Eriantys");
        // Platform.runLater(() -> Transition.setPrimaryStage(stage));
-
+        stage.setResizable(false);
+        stage.show();
     }
 
     public CentralView getGame() {
