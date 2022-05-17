@@ -50,7 +50,6 @@ public class Round {
             order.add(i,k);
             values.set(k,0);
         }
-        Collections.reverse(order);
         game.setPlayIngOrder(order);
     }
 

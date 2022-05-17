@@ -229,8 +229,8 @@ public class Turn {
         CharacterCard card = game.getCharacter(cardId);
         Player player = game.getPlayer(playerId);
         if(player.getHand().enoughCoin(card.getCost())){
-            player.getHand().payCoin(card.getCost());
             card.cardEffect( parameters,  game );
+            player.getHand().payCoin(card.getCost());
             game.notify(new CharacterUpdateMessage(cardId,game));
         }
         else

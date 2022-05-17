@@ -14,23 +14,11 @@ public class ControllerTest extends TestCase {
         this.controllerTest=new Controller(new Game(false,4,12));
     }
     public void testGetControllerRound() {
-        try{
-            controllerTest.getControllerRound();
-            System.out.println("ok");
-        }
-        catch(NullPointerException e){
-            e.printStackTrace();
-        }
+        assertNotNull(controllerTest.getControllerRound());
     }
 
     public void testGetControllerTurn() {
-        try{
-            controllerTest.getControllerTurn();
-            System.out.println("ok");
-        }
-        catch(NullPointerException e){
-            e.printStackTrace();
-        }
+        assertNotNull(controllerTest.getControllerTurn());
     }
 
     public void testGetControllerSetup() {
@@ -54,7 +42,7 @@ public class ControllerTest extends TestCase {
             e.printStackTrace();
         }
     }
-    public void testUpdateIllegalMove(){
+    /*public void testUpdateIllegalMove(){
         ChooseCloudMessage cloudMessage=new ChooseCloudMessage(2,4);
         try{
             this.controllerTest.game.setManuallyGamePhase(GameState.actionChooseCloud);
@@ -64,6 +52,6 @@ public class ControllerTest extends TestCase {
         catch(IllegalMoveException e){
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 
 }

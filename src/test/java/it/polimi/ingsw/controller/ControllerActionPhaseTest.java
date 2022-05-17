@@ -3,11 +3,9 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
-import it.polimi.ingsw.messages.client.ChooseCloudMessage;
-import it.polimi.ingsw.messages.client.MoveMotherMessage;
-import it.polimi.ingsw.messages.client.StudentToHallMessage;
-import it.polimi.ingsw.messages.client.StudentToIslandMessage;
+import it.polimi.ingsw.messages.client.*;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.model.token.Student;
 import junit.framework.TestCase;
 
@@ -189,7 +187,24 @@ public class ControllerActionPhaseTest extends TestCase {
     }
 
     public void testPlayCharacter() {
-        return;
-        //still implementing
+        CharacterCardMessage message=new CharacterCardMessage(gameTest.getCurrentPlayerId(), new ParameterObject(),2);
+        gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
+        int rng=(int)Math.random();
+        if(rng==1) {
+            gameTest.setManuallyGamePhase(GameState.actionMoveMother);
+            assertEquals(GameState.actionMoveMother,gameTest.getActualState());
+        }
+        else {
+            gameTest.setManuallyGamePhase(GameState.actionMoveStudent);
+            assertEquals(GameState.actionMoveStudent, gameTest.getActualState());
+        }
+
+        try{
+            controllerTest.playCharacter(message);
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
+        }
+        assertTrue(gameTest.isBonusActive(2));
     }
 }

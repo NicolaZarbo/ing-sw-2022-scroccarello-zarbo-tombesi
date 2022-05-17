@@ -29,6 +29,7 @@ public class ControllerPlanningPhaseTest extends TestCase {
             e.printStackTrace();
         }
     }
+
     public void testPhaseErrorPlayAssistantCard() {
         PlayAssistantMessage message=new PlayAssistantMessage(0,1);
         try{
@@ -39,6 +40,7 @@ public class ControllerPlanningPhaseTest extends TestCase {
             System.out.println(e.getMessage());
         }
     }
+
     public void testNotYourTurnPlayAssistancCard(){
         PlayAssistantMessage message=new PlayAssistantMessage(1,1);
         this.cTest.getGame().setManuallyGamePhase(GameState.planPlayCard);
@@ -50,6 +52,7 @@ public class ControllerPlanningPhaseTest extends TestCase {
             System.out.println(e.getMessage());
         }
     }
+
     public void testPlanning(){
         List<Integer> prediction=new ArrayList<>(4);
         this.cTest.getGame().setManuallyGamePhase(GameState.planPlayCard);
@@ -60,14 +63,17 @@ public class ControllerPlanningPhaseTest extends TestCase {
         }
         assertEquals(prediction,this.cTest.getActualOrder());
     }
+
     public void testGetActualOrder(){
-        this.testPlanning();
+        assertNotNull(this.cTest.getActualOrder());
     }
+
     public void testGetGame(){
-        this.testPlanning();
+        assertNotNull(this.cTest.getGame());
     }
+
     public void testGetRound(){
-        Round rTest=this.cTest.getModelRound();
-        System.out.println("ok");
+        assertNotNull(this.cTest.getModelRound());
     }
+
 }
