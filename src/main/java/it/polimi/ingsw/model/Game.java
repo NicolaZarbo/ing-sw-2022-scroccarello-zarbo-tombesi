@@ -157,8 +157,9 @@ public class Game extends Observable<ServerMessage> {
                 actualState=GameState.planPlayCard;
                 planningPhase.setCloud();
             }
-            groupMultiMessage(new ChangeTurnMessage(this));
+
             groupMultiMessage(new ChangePhaseMessage(this));
+            groupMultiMessage(new ChangeTurnMessage(this));
         }
         if (actualState == GameState.planPlayCard) {
             if(!isLastPlayerTurn()){

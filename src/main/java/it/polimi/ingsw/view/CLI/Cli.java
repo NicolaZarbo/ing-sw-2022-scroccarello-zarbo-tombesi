@@ -1,8 +1,8 @@
 package it.polimi.ingsw.view.CLI;
 
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.messages.MessageFactory;
 import it.polimi.ingsw.messages.client.ClientMessage;
-import it.polimi.ingsw.messages.server.ErrorMessageForClient;
 import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
 import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.observer.Observer;
@@ -14,7 +14,6 @@ import it.polimi.ingsw.view.objects.SimplifiedPlayer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -28,6 +27,7 @@ public class Cli implements UserInterface {
     private final CentralView game;
     private PrintWriter socketOut;
     private final InputManager inputManager;
+    private boolean usedCharacter;
     private final Scanner input;
     private String ip="127.0.0.1";
     private int port=12345;
@@ -79,7 +79,7 @@ public class Cli implements UserInterface {
                 game.update(message);
                 //System.out.println(socketLine);//print for fast checking of messages
                 if(game.isYourTurn())
-                    inputManager.decodeInput(input.nextLine());
+                    inputManager.decodeStringInput(input.nextLine());
             }
         } catch(NoSuchElementException e){
             System.out.println("Connection closed from the client side"+ e.getMessage());
@@ -132,15 +132,18 @@ public class Cli implements UserInterface {
 
     @Override
     public void askToMoveStudent() {
+        if(game.isEasy())
+            System.out.println(Printer.WHITE_BKG+Printer.BLACK+"write C to get character selection"+Printer.RST);
         System.out.println(Printer.PINK+"Choose a student in your Entrance by its color"+Printer.RST);
         System.out.println("Student moved : "+ Printer.WHITE_BKG+""+game.getStudentMoved()+""+Printer.RST);
     }
 
     @Override
     public void askToMoveMother() {
+        if(game.isEasy())
+            System.out.println(Printer.WHITE_BKG+Printer.BLACK+"write C to get character selection"+Printer.RST);
         System.out.println(Printer.PINK+"Chose a number of steps, max =" +(game.getCardYouPlayed()+2)/2+""+Printer.RST);
     }
-
 
     @Override
     public void showClouds() {
@@ -150,12 +153,12 @@ public class Cli implements UserInterface {
 
     public void askWhereToMove(){
         System.out.println(Printer.PINK+"Choose a present island or type anything else to move into the DiningRoom"+Printer.RST);
-        inputManager.decodeInput(input.nextLine());
+        inputManager.decodeStringInput(input.nextLine());
     }
 
     /** shows the player an error message(client side) and waits for another input*/
     public void askToRetry(String error){
-        System.out.println(error);
-        inputManager.decodeInput(input.nextLine());
+        System.out.println(Printer.RED+error+Printer.RST);
+        inputManager.decodeStringInput(input.nextLine());
     }
 }

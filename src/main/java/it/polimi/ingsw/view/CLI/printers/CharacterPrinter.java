@@ -2,6 +2,11 @@ package it.polimi.ingsw.view.CLI.printers;
 
 import it.polimi.ingsw.view.CentralView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 public class CharacterPrinter implements Printer{
     public static String print(CentralView view){
         StringBuilder out = new StringBuilder();
@@ -43,5 +48,29 @@ public class CharacterPrinter implements Printer{
                 out.append("  ");
             }
         return out.toString();
+    }
+    public static String printStudentOnTop(int cardId, List<Integer> studentOnTop){
+        StringBuilder out = new StringBuilder();
+            String [] studC = studentOfColorCard(studentOnTop);
+            out.append(" __________ ").append("\n");
+            out.append("| card n°"+CYAN+(cardId+1)+RST+" |").append("\n");
+            out.append("| "+studC[0]+"   "+studC[2]+"    |").append("\n");
+            out.append("| "+studC[1]+"   "+studC[4]+"    |").append("\n");
+            out.append("|   "+studC[3]+"      |").append("\n");
+            out.append("|__________|").append("\n");
+
+        return out.toString();
+    }
+    private static String[] studentOfColorCard(List<Integer> students){
+        int[] studForColor= new int[5];
+        Arrays.fill(studForColor,0);
+        for (Integer studId:students) {
+            studForColor[studId/26] ++;
+        }
+        String [] out = new String[5];
+        for (int i = 0; i < 5; i++) {
+            out[i]=Printer.getCliColor(i)+""+studForColor[i]+Printer.RST;
+        }
+        return out;
     }
 }

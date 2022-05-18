@@ -11,7 +11,7 @@ public interface Printer {
     String WHITE_BKG="\u001B[47m";
     String YELLOW_BKG="\u001B[43m";
     String BLACK="\u001B[30m";
-
+    String CYAN_BKG = "\u001B[46m";
     static String mergeRows(String[] rowsForOutput){
         StringBuilder out= new StringBuilder();
         for (String s:rowsForOutput) {

@@ -52,11 +52,11 @@ String yo = """
     }
     private static String towerColor(int tColor){
         if(tColor==0)
-            return BLACK+YELLOW_BKG+"BLACK"+RST;
+            return BLACK+CYAN_BKG+"BLACK"+RST;
         if(tColor==1)
-            return "WHITE";
+            return BLACK+CYAN_BKG+"WHITE"+RST;
         if(tColor==2)
-            return "GRAY";
+            return BLACK+CYAN_BKG+"GRAY"+RST;
         return "";
     }
 }

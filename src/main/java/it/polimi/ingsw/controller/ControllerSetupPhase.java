@@ -16,7 +16,7 @@ private final Game model;
     }
     public void createPlayer(PrePlayerMessage message){
         if(model.getActualState()!= GameState.setupPlayers || !setup.isPreOrderTurnOf(message.getName()))
-            throw new IllegalMoveException();
+            throw new IllegalMoveException("curr player is "+setup.getPreGameTurnOf());
         setup.addPrePlayer(message.getPrePlayer());
     }
 

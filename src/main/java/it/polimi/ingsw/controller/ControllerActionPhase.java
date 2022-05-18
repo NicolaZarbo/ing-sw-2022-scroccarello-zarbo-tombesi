@@ -9,7 +9,7 @@ import it.polimi.ingsw.model.Turn;
 
 public class ControllerActionPhase  {
 
-    private int idPlayerNow;
+    //private int idPlayerNow;
     private final Game game;
     private final Turn modelTurn;
     private int studentMoved;
@@ -23,21 +23,21 @@ public class ControllerActionPhase  {
         if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>2)
             throw new IllegalMoveException("incorrect action, or too many students moved");
         try {
+            modelTurn.moveInHall(message.getPlayerId(), message.getStudentId());
             studentMoved++;
-            modelTurn.moveInHall(this.idPlayerNow, message.getStudentId());
             if (studentMoved == 3)
                 game.moveToNextPhase();
-
         }
         catch(NoTokenFoundException e){
-            throw new NoTokenFoundException(e.getMessage());
+            throw new IllegalMoveException(e.getMessage());
         }
     }
     public void moveStudentToIsland(StudentToIslandMessage message){
         if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>=3)
             throw new IllegalMoveException();
+
+        modelTurn.moveToIsland(message.getPlayerId(), message.getStudentId(),message.getFinalPositionId());
         studentMoved++;
-        modelTurn.moveToIsland(this.idPlayerNow,message.getStudentId(),message.getFinalPositionId());
         if(studentMoved==3)
             game.moveToNextPhase();
     }
@@ -57,7 +57,7 @@ public class ControllerActionPhase  {
         if(game.getActualState()!= GameState.actionChooseCloud)
             throw new IllegalMoveException();
         try{
-            modelTurn.moveFromCloudToEntrance(message.getCloudId(), this.idPlayerNow);
+            modelTurn.moveFromCloudToEntrance(message.getCloudId(), message.getPlayerId());
         }
         catch(RuntimeException e) {
             throw new IllegalMoveException(e.getMessage());
@@ -68,7 +68,7 @@ public class ControllerActionPhase  {
     public void changeTurn(){
         game.changePlayerTurn();
         studentMoved =0;
-        this.idPlayerNow= game.getCurrentPlayerId();
+       // this.idPlayerNow= game.getCurrentPlayerId();
 
     }
 

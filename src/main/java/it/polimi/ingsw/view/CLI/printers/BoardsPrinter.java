@@ -31,8 +31,8 @@ public class BoardsPrinter implements Printer{
             String[] professors= BoardsPrinter.getProfs(board);
             String nameForBoard;
             if(pl.getUsername().equals(view.getName()))
-                nameForBoard=(RED+">>>"+WHITE_BKG+BLACK+"Your Board"+RED+"<<<"+RST);
-            else nameForBoard=(WHITE_BKG+BLACK+"Player "+pl.getUsername()+RST);
+                nameForBoard=(RED+">>>"+WHITE_BKG+BLACK+"Your Board"+RST+RED+"<<<"+RST);
+            else nameForBoard=(CYAN_BKG+BLACK+"Player "+pl.getUsername()+RST);
             nameForBoard= Printer.padWithSpaces(nameForBoard,44);
             rows[0]+=nameForBoard+"                  ";
             rows[1]+="  _Entr_____________DN_____________Prof___T°_ \t";

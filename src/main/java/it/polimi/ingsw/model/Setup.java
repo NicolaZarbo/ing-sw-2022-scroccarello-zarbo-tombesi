@@ -45,7 +45,7 @@ public class Setup {
         idCreator++;
     }
     public boolean isPreOrderTurnOf(String nickname){
-        return nickname.equals(preGameTurnOf);
+        return nickname.equalsIgnoreCase(preGameTurnOf);
     }
     /** get prePlayer from client, if it is the last one then creates the final players in game*/
     public void addPrePlayer(LobbyPlayer prePlayer){

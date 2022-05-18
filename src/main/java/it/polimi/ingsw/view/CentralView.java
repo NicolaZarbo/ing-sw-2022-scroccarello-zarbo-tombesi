@@ -26,6 +26,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     private Map<Integer,List<Integer>> studentsOnCard;
     private Map<Integer,Integer> costOfCard;
     private String name;
+    private boolean easy;
     private SimplifiedPlayer personalPlayer;
     private GameState state;
     private int turnOf;
@@ -55,6 +56,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         return name;
     }
 
+    public boolean isEasy() {
+        return easy;
+    }
+
     public SimplifiedPlayer getPersonalPlayer() {
         return personalPlayer;
     }
@@ -78,6 +83,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     }
     public void setView(WholeGameMessage message) {
         islands=message.getIslands();
+        easy= message.isEasy();
         clouds=message.getClouds();
         players=message.getModelPlayers();
         players=message.getModelPlayers();
@@ -123,9 +129,9 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
        //
         if(isYourTurn() && state==GameState.actionMoveStudent) {
             clientScreen.showView();
+            studentMoved++;
             if(studentMoved<3)
                 clientScreen.askToMoveStudent();
-            studentMoved++;
         }
 
     }
@@ -141,6 +147,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         if(isYourTurn() && state==GameState.planPlayCard){
             clientScreen.showHand();
         }
+        if(isYourTurn() && state== GameState.actionMoveStudent) {
+            studentMoved=0;
+            clientScreen.askToMoveStudent();
+        }
     }
     public void changePhase(ChangePhaseMessage message){
         this.state=message.getState();
@@ -154,10 +164,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             case actionMoveStudent -> {
                 playedCardThisTurn = new ArrayList<>();
                 clientScreen.showView();
-                if(isYourTurn()) {
-                    clientScreen.askToMoveStudent();
-                    studentMoved = 1;
-                }
+
             }
             case actionMoveMother -> {
                 clientScreen.showView();
@@ -205,7 +212,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             throw new RuntimeException("invalid Cloud");
     }
     public void playCharacter(int cardId, ParameterObject parameters){
-        notify(new CharacterCardMessage(personalPlayer.getId(), parameters,cardId));
+        notify(new CharacterCardMessage(this.id, parameters,cardId));
     }
     public void choosePlayerCustom(int towerColor,int mage){
        notify(new PrePlayerMessage(0,towerColor,mage,name));

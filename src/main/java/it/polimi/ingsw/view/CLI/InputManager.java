@@ -1,7 +1,9 @@
 package it.polimi.ingsw.view.CLI;
 
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
+import it.polimi.ingsw.view.CLI.printers.Printer;
 import it.polimi.ingsw.view.CentralView;
 
 import java.util.Locale;
@@ -15,6 +17,7 @@ public class InputManager {
     private boolean somethingSelected;
     private int nStudentsMoved;
     private int targetColor;
+    private final CharacterInputManager characterInputManager;
     boolean isInteger;
     int inputInteger;
 
@@ -22,8 +25,9 @@ public class InputManager {
 
         this.cli=cli;
         game=cli.getGame();
+        this.characterInputManager= new CharacterInputManager(game);
     }
-    public void decodeInput(String input){
+    public void decodeStringInput(String input){
         if(!game.isYourTurn() )
             return;
         String[] multipleInput=input.toLowerCase().split("\s");
@@ -43,12 +47,12 @@ public class InputManager {
                     return;
                 }
                 switch (multipleInput[1]) {
-                    case "black", "gray", "white", "b", "g", "w" -> colorInt = convertTowerColorToInteger(multipleInput[1]);
+                    case "black", "gray", "white", "b", "g", "w" -> {colorInt = convertTowerColorToInteger(multipleInput[1]);
+                        if(isInteger)
+                            game.choosePlayerCustom(colorInt, inputInteger-1);
+                        else cli.askToRetry("please select the mage by its number");}
                     default -> cli.askToRetry("please select the color by its name or initial");
                 }
-                    if(isInteger)
-                        game.choosePlayerCustom(colorInt, inputInteger-1);
-                    else cli.askToRetry("please select the mage by its number");
             }
             case planPlayCard ->{
                 if(isInteger)
@@ -60,11 +64,19 @@ public class InputManager {
                 else cli.askToRetry("please select a card");
             }
             case actionMoveMother -> {
+                if(input.equalsIgnoreCase("c")) {
+                    cli.showCharacters();
+                    charactersDecode(new Scanner(System.in).nextLine());
+                }
                 if(isInteger)
                     game.moveMother(inputInteger);
                 else cli.askToRetry("please select a number of steps, max" +(game.getCardYouPlayed()+2)/2);
             }
             case actionMoveStudent -> {
+                if(input.equalsIgnoreCase("c")) {
+                    cli.showCharacters();
+                    charactersDecode(new Scanner(System.in).nextLine());
+                }
                 if(!somethingSelected) {
                     int color=convertStudentColorToInteger(inLo);
                     if(game.getPersonalPlayer().getBoard().hasStudentOfColor(color)){
@@ -72,7 +84,7 @@ public class InputManager {
                         somethingSelected = true;
                         cli.askWhereToMove();
                     }
-                    else cli.askToRetry("please select an available student color ");
+                    else cli.askToRetry(Printer.PINK+"please select an available student color ");
                 }
                 else {
                     if(isIsland(inLo) && isInteger) {
@@ -80,7 +92,7 @@ public class InputManager {
                         try {
                             game.moveStudentToIsland(targetColor, inputInteger);
                         }catch (IllegalMoveException e){
-                            cli.askToRetry("island : " +e.getMessage()+1 +" not available, select another");
+                            cli.askToRetry(Printer.PINK+"island : " +e.getMessage()+1 +" not available, select another");
                         }
                     }
                     else {
@@ -92,8 +104,24 @@ public class InputManager {
             case actionChooseCloud -> {
                 if(isInteger && inputInteger<=game.getClouds().size() && inputInteger>0)
                     game.chooseCloud(inputInteger-1);
-                else cli.askToRetry("please select an available cloud id");
+                else cli.askToRetry(Printer.PINK+"please select an available cloud id"+Printer.RST);
             }
+        }
+    }
+    public void charactersDecode(String input){
+        int nChar;
+        try{
+            nChar=Integer.parseInt(input);
+            characterInputManager.characterManagerCall(nChar);
+        }catch (IllegalMoveException e){
+            cli.showView();
+            if(game.getState()== GameState.actionMoveStudent)
+                cli.askToMoveStudent();
+            if(game.getState()==GameState.actionMoveMother)
+                cli.askToMoveMother();
+            cli.askToRetry("\n"+e.getMessage());
+        }catch (NumberFormatException e){
+            cli.askToRetry("not a card");
         }
     }
 
@@ -104,7 +132,7 @@ public class InputManager {
             return false;
         }
     }
-    private int convertTowerColorToInteger(String color){
+    public static int convertTowerColorToInteger(String color){
         String cc=color.toLowerCase(Locale.ROOT);
         return switch (cc){
             default -> -1;
@@ -113,7 +141,7 @@ public class InputManager {
             case "gray","g"->2;
         };
     }
-    private int convertStudentColorToInteger(String color){
+    public static int convertStudentColorToInteger(String color){
         return switch (color){
             default -> -1;
             case "red", "r" -> 0;
@@ -122,5 +150,8 @@ public class InputManager {
             case "blue","b"-> 3;
             case "pink","p"-> 4;
         };
+    }
+    private void character1(){
+
     }
 }

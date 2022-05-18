@@ -20,7 +20,7 @@ public class PrePlayerMessage extends ClientMessage {
     public void doAction(Controller controller) {
         controller.getControllerSetup().createPlayer(this);
     }
-    //are id already available??
+
     public PrePlayerMessage(int playerId, int towerColor,  int mage, String name) {
         super(playerId);
         this.mage=mage;

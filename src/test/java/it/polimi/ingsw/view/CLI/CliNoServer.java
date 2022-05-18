@@ -2,15 +2,12 @@ package it.polimi.ingsw.view.CLI;
 
 import it.polimi.ingsw.messages.server.ErrorMessageForClient;
 import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
-import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.view.CLI.printers.*;
 import it.polimi.ingsw.view.CentralView;
-import it.polimi.ingsw.view.UserInterface;
 import it.polimi.ingsw.view.objects.SimplifiedPlayer;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class CliNoServer extends Cli implements Observer<ErrorMessageForClient> {
@@ -48,7 +45,7 @@ public class CliNoServer extends Cli implements Observer<ErrorMessageForClient> 
     @Override
     public void showView() {
         System.out.println(GamePrinter.printGameTable(game));
-        inputManager.decodeInput(input.nextLine());
+        inputManager.decodeStringInput(input.nextLine());
     }
 
     @Override
@@ -57,43 +54,43 @@ public class CliNoServer extends Cli implements Observer<ErrorMessageForClient> 
         System.out.println(Printer.PINK+"You can't use the cards n: "+game.getPlayedCardThisTurn()+Printer.RST);
         System.out.println(CardPrinter.print(player.getAssistantCards())+"\n coins :"+player.getCoin());
         System.out.println(Printer.PINK+"Select the card by its number"+Printer.RST);
-        inputManager.decodeInput(input.nextLine());
+        inputManager.decodeStringInput(input.nextLine());
     }
 
     @Override
     public void showCharacters() {
         System.out.println(CharacterPrinter.print(game));
-        inputManager.decodeInput(input.nextLine());
+        inputManager.decodeStringInput(input.nextLine());
     }
 
 
     public void showOptionsForPersonalization(PlayerSetUpMessage message) {
         System.out.println(PersonalizationPrinter.printForColorsAndMages(message));
-        inputManager.decodeInput(input.nextLine());
+        inputManager.decodeStringInput(input.nextLine());
     }
 
     @Override
     public void showError(String errorMessage) {
         System.out.println(errorMessage);
-        inputManager.decodeInput(input.nextLine());
+        inputManager.decodeStringInput(input.nextLine());
     }
 
     @Override
     public void askToMoveStudent() {
         super.askToMoveStudent();
-        inputManager.decodeInput(input.nextLine());
+        inputManager.decodeStringInput(input.nextLine());
     }
 
     @Override
     public void askToMoveMother() {
         System.out.println(Printer.PINK+"Chose a number of steps, max =" +(game.getCardYouPlayed()+2)/2+""+Printer.RST);
-        inputManager.decodeInput(input.nextLine());
+        inputManager.decodeStringInput(input.nextLine());
     }
 
     @Override
     public void showClouds() {
         System.out.println(CloudPrinter.print(game));
-        inputManager.decodeInput(input.nextLine());
+        inputManager.decodeStringInput(input.nextLine());
     }
 
     @Override

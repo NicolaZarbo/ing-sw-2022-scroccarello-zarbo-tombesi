@@ -16,6 +16,7 @@ import java.util.List;
 
 public class WholeGameMessage extends ServerMessage{
     private List<SimplifiedPlayer> players;
+    private boolean easy;
     private List<Integer[]> clouds;
     private int motherNature;
     private List<SimplifiedIsland> islands;
@@ -29,6 +30,7 @@ public class WholeGameMessage extends ServerMessage{
 
     public WholeGameMessage(Game game) {
         super(game);
+        this.easy=game.isEasy();
         this.players=ModelToViewTranslate.translatePlayer(game.getPlayers());
         this.islands=ModelToViewTranslate.translateIsland(game.getIslands());
         this.motherNature=game.getMotherNature().getPosition();
@@ -51,6 +53,7 @@ public class WholeGameMessage extends ServerMessage{
     protected void parseMessage(JsonObject gg) {
         Gson gson= new Gson();
         WholeGameMessage mex= gson.fromJson(gg,WholeGameMessage.class);
+        this.easy= mex.easy;
         this.players=mex.players;
         this.clouds= mex.clouds;
         this.islands=mex.islands;
@@ -63,6 +66,10 @@ public class WholeGameMessage extends ServerMessage{
     @Override
     public void doAction(CentralView view) {
         view.setView(this);
+    }
+
+    public boolean isEasy() {
+        return easy;
     }
 
     public List<SimplifiedPlayer> getModelPlayers() {
