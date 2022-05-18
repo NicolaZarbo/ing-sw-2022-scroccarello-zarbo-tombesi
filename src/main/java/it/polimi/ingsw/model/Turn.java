@@ -164,12 +164,12 @@ public class Turn {
     //if it is a team game, insert the mainplayer id in idPlayer
     /** @param player  if the game is in teams insert the main player id */
     public void putTowerFromBoardToIsland(Island island,Player player){
+        if(island.getTowers().size()!=0)
+            return;
         Board board=player.getBoard();
         island.setTower(board.getTower());
         game.groupMultiMessage(new IslandsMessage(game));
         game.groupMultiMessage(new SingleBoardMessage(game,player.getId()));
-
-
     }
     private void changeTower(Island island , Player newOwner){
         ArrayList<Tower> removedT=new ArrayList<>(island.getTowers());
