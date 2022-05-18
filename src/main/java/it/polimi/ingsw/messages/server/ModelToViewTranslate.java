@@ -24,7 +24,7 @@ public class ModelToViewTranslate {
             int color=-1;
             if(nTowers>0)
                 color=  island.getTowers().get(0).getColor().ordinal();
-            simplifiedIslands.add(new SimplifiedIsland(studentsIds,nTowers,dimension,island.getID(),color));
+            simplifiedIslands.add(new SimplifiedIsland(studentsIds,translateIsland(island.getSubIslands()),nTowers,dimension,island.getID(),color));
         }
         return simplifiedIslands;
     }

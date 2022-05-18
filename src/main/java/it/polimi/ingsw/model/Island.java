@@ -8,10 +8,12 @@ public class Island {
     private final int ID;
     private final ArrayList<Student> students;
     private final ArrayList<Tower> tower;
+    private final ArrayList<Island> subIslands;
     private int islandSize;
 
     public Island(int id) {
         this.ID = id;
+        this.subIslands= new ArrayList<>();
         this.students = new ArrayList<Student>();
         this.tower = new ArrayList<Tower>();
         this.islandSize=1;
@@ -19,6 +21,13 @@ public class Island {
 
     public int getID() {
         return this.ID;
+    }
+
+    public ArrayList<Island> getSubIslands() {
+        return subIslands;
+    }
+    public void addSubIsland(Island added){
+        this.subIslands.add(added);
     }
 
     public void incrementIslandSize() {

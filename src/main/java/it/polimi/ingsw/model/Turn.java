@@ -134,8 +134,9 @@ public class Turn {
         Island central = game.getIslands().get(pos);
         Island next = game.getIslands().get(Math.floorMod(pos + 1, islandNumber));
         if (central.getTowers().get(0).getColor() == next.getTowers().get(0).getColor()) {
-            central.addAllStudents(next.getStudents());
-            central.addAllTowers(next.getTowers());
+            //central.addAllStudents(next.getStudents());
+            central.addSubIsland(next);
+            //central.addAllTowers(next.getTowers());
             game.getIslands().remove(next);
             central.incrementIslandSize();
             //game.getMotherNature().changePosition(pos);
@@ -149,8 +150,9 @@ public class Turn {
         Island central = game.getIslands().get(pos);
         Island before = game.getIslands().get(Math.floorMod(pos - 1, islandNumber));
         if (central.getTowers().get(0).getColor() == before.getTowers().get(0).getColor()) {
-            central.addAllStudents(before.getStudents());
-            central.addAllTowers(before.getTowers());
+            //central.addAllStudents(before.getStudents());
+            central.addSubIsland(before);
+            //central.addAllTowers(before.getTowers());
             game.getIslands().remove(before);
             central.incrementIslandSize();
            // if (game.getMotherNature().getPosition() == pos - 1)
@@ -245,7 +247,10 @@ public class Turn {
             influence=influence+2;
         MotherNature theOne=game.getMotherNature();
         Island where=game.getIslands().get(theOne.getPosition());
-        ArrayList<Student> students=where.getStudents();
+        ArrayList<Student> students=new ArrayList<>(where.getStudents());
+        for (Island subIsland: where.getSubIslands()) {
+            students.addAll(subIsland.getStudents());
+        }
         Player player = game.getPlayer(playerId);
         TowerColor color=player.getColorT();
         Student stud;
@@ -256,7 +261,9 @@ public class Turn {
 
         }//card 6 effect
         if(!game.isBonusActive(6)){
-            ArrayList<Tower> towers=where.getTowers();
+            ArrayList<Tower> towers=new ArrayList<>(where.getTowers());
+            for(Island subIsland: where.getSubIslands())
+                towers.addAll(subIsland.getTowers());
             for (Tower tower : towers) {
                 if (color.equals(tower.getColor()))
                     influence++;

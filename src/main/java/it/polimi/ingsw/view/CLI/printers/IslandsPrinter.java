@@ -3,7 +3,9 @@ package it.polimi.ingsw.view.CLI.printers;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.objects.SimplifiedIsland;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class IslandsPrinter implements Printer{
 String yo = """
@@ -30,6 +32,10 @@ String yo = """
             escapeCounter++;
             tColor=Printer.padWithSpaces(towerColor(island.getTowerColor()),6);
             int[] studentForColor= IslandsPrinter.islandColorStudents(island);
+            int numberOfTower=island.getNumberOfTowers();
+            for (SimplifiedIsland subIsland: island.getSubIsland()) {
+                numberOfTower+=subIsland.getNumberOfTowers();
+            }
             preRows[0]="Island : "+island.getIslandId()+"  \t";
             preRows[1]=" _________    \t";
             preRows[2]="/ "+tColor+"  \\   \t";
@@ -70,7 +76,11 @@ String yo = """
     private static int[] islandColorStudents(SimplifiedIsland island){
         int[] studForColor= new int[5];
         Arrays.fill(studForColor,0);
-        for (Integer studId:island.getStudents()) {
+        List<Integer> students= new ArrayList<>(island.getStudents());
+        for (SimplifiedIsland subIsland:island.getSubIsland()) {
+            students.addAll(subIsland.getStudents());
+        }
+        for (Integer studId:students) {
             studForColor[studId/26] ++;
         }
         return studForColor;

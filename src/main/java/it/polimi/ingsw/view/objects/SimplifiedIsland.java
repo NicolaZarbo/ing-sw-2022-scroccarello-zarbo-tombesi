@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.objects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimplifiedIsland {
@@ -8,9 +9,11 @@ public class SimplifiedIsland {
     private int dimension;
     private int islandId;
     private int towerColor;
+    private List<SimplifiedIsland> subIsland;
 
-    public SimplifiedIsland(List<Integer> studentsId, int numberOfTowers, int dimension, int islandId,int towerColor) {
+    public SimplifiedIsland(List<Integer> studentsId,List<SimplifiedIsland> subIsland, int numberOfTowers, int dimension, int islandId,int towerColor) {
         this.students = studentsId;
+        this.subIsland=subIsland;
         this.towers = numberOfTowers ;
         this.islandId = islandId;
         this.dimension=dimension;
@@ -19,6 +22,10 @@ public class SimplifiedIsland {
 
     public int getTowerColor() {
         return towerColor;
+    }
+
+    public List<SimplifiedIsland> getSubIsland() {
+        return subIsland;
     }
 
     public List<Integer> getStudents() {
