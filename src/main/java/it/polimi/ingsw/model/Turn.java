@@ -138,8 +138,7 @@ public class Turn {
             central.addAllTowers(next.getTowers());
             game.getIslands().remove(next);
             central.incrementIslandSize();
-            if (game.getMotherNature().getPosition() == pos + 1)
-                game.getMotherNature().changePosition(pos);
+            //game.getMotherNature().changePosition(pos);
             }
 
         game.groupMultiMessage(new IslandsMessage(game));
@@ -155,7 +154,7 @@ public class Turn {
             game.getIslands().remove(before);
             central.incrementIslandSize();
            // if (game.getMotherNature().getPosition() == pos - 1)
-            //    game.getMotherNature().changePosition(pos);
+            game.getMotherNature().changePosition(pos-1);
             }
         game.groupMultiMessage(new IslandsMessage(game));
 
