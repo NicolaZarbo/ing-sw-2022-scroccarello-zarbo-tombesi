@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.enumerations;
 public enum Mage {
     mage1,mage2,mage3,mage4;
 

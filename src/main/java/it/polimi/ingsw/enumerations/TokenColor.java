@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.token;
+package it.polimi.ingsw.enumerations;
 
 public enum TokenColor {
     red,yellow,green,blue,pink;

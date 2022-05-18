@@ -14,5 +14,7 @@ public class MessageExchangeTest extends TestCase {
         assertNotNull(message.getJson());
     }
 
-
+    public void testFoo(){
+        return;
+    }
 }

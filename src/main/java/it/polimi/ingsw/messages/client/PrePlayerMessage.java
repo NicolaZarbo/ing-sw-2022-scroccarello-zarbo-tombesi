@@ -5,8 +5,8 @@ import com.google.gson.JsonObject;
 
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.LobbyPlayer;
-import it.polimi.ingsw.model.Mage;
-import it.polimi.ingsw.model.token.TowerColor;
+import it.polimi.ingsw.enumerations.Mage;
+import it.polimi.ingsw.enumerations.TowerColor;
 
 public class PrePlayerMessage extends ClientMessage {
     private int towerColor, mage;

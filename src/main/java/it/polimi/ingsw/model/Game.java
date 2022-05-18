@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.enumerations.GameState;
+import it.polimi.ingsw.enumerations.Mage;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
 import it.polimi.ingsw.messages.server.ChangePhaseMessage;
 import it.polimi.ingsw.messages.server.ChangeTurnMessage;
@@ -8,8 +9,8 @@ import it.polimi.ingsw.messages.server.MultipleServerMessage;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.model.token.Professor;
-import it.polimi.ingsw.model.token.TokenColor;
-import it.polimi.ingsw.model.token.TowerColor;
+import it.polimi.ingsw.enumerations.TokenColor;
+import it.polimi.ingsw.enumerations.TowerColor;
 import it.polimi.ingsw.observer.Observable;
 
 import java.util.*;

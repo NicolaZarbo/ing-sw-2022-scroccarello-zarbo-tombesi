@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.character;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.token.Student;
-import it.polimi.ingsw.model.token.TokenColor;
+import it.polimi.ingsw.enumerations.TokenColor;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;

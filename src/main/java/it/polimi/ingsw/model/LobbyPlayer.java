@@ -1,7 +1,8 @@
 package it.polimi.ingsw.model;
 
 
-import it.polimi.ingsw.model.token.TowerColor;
+import it.polimi.ingsw.enumerations.Mage;
+import it.polimi.ingsw.enumerations.TowerColor;
 
 public class LobbyPlayer {
     private TowerColor towerColor;

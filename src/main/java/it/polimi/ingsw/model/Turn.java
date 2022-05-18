@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.enumerations.TokenColor;
+import it.polimi.ingsw.enumerations.TowerColor;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoPlaceAvailableException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;

@@ -6,14 +6,9 @@ import it.polimi.ingsw.messages.client.ClientMessage;
 import it.polimi.ingsw.messages.server.ErrorMessageForClient;
 import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.model.LobbyPlayer;
-import it.polimi.ingsw.model.Mage;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.server.ClientConnection;
-import it.polimi.ingsw.server.Lobby;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RemoteView extends Observable<ClientMessage> implements Observer<ServerMessage> {
     private LobbyPlayer player;

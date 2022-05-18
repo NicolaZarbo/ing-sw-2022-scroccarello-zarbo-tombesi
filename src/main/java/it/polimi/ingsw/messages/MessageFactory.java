@@ -53,16 +53,5 @@ public class MessageFactory {
             default -> throw new MessageErrorException("no corresponding message type, found:" + type);
         };
     }
-    public static GenericMessage setUpMessageFactory(String json){
-        JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
-        String type= jj.get("messageType").getAsString();
-        if(type==null)
-            throw new MessageErrorException("missing message Type");
-        return switch (type) {
-            case "PlayerSetUpMessage" -> new PlayerSetUpMessage(json);
-            case "PrePlayerMessage" -> new PrePlayerMessage(json);
-            case "LobbySetupMessage" -> new LobbySetupMessage(json);
-            default -> throw new MessageErrorException("no corresponding message type, found:" + type);
-        };
-    }
+
 }

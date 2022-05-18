@@ -1,12 +1,12 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.enumerations.Mage;
 import it.polimi.ingsw.messages.server.*;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.FactoryCharacter;
 import it.polimi.ingsw.model.token.Professor;
 import it.polimi.ingsw.model.token.Student;
-import it.polimi.ingsw.model.token.TokenColor;
-import it.polimi.ingsw.model.token.TowerColor;
-import it.polimi.ingsw.observer.Observable;
+import it.polimi.ingsw.enumerations.TokenColor;
+import it.polimi.ingsw.enumerations.TowerColor;
 
 import java.util.ArrayList;
 import java.util.List;

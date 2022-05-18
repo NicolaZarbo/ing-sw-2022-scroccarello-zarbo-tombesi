@@ -3,10 +3,9 @@ package it.polimi.ingsw.messages;
 import it.polimi.ingsw.messages.client.*;
 import it.polimi.ingsw.messages.server.*;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.Mage;
+import it.polimi.ingsw.enumerations.Mage;
 import it.polimi.ingsw.model.character.ParameterObject;
-import it.polimi.ingsw.model.token.TokenColor.*;
-import it.polimi.ingsw.model.token.TowerColor;
+import it.polimi.ingsw.enumerations.TowerColor;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;

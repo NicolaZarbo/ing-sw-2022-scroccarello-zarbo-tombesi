@@ -3,8 +3,8 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.NoPlaceAvailableException;
 import it.polimi.ingsw.model.token.Professor;
 import it.polimi.ingsw.model.token.Student;
-import it.polimi.ingsw.model.token.TokenColor;
-import it.polimi.ingsw.model.token.TowerColor;
+import it.polimi.ingsw.enumerations.TokenColor;
+import it.polimi.ingsw.enumerations.TowerColor;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;

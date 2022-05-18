@@ -3,8 +3,8 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.messages.client.PrePlayerMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.LobbyPlayer;
-import it.polimi.ingsw.model.token.TowerColor;
-import it.polimi.ingsw.model.Mage;
+import it.polimi.ingsw.enumerations.TowerColor;
+import it.polimi.ingsw.enumerations.Mage;
 import it.polimi.ingsw.enumerations.GameState;
 import junit.framework.TestCase;
 

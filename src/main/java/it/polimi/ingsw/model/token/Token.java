@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.token;
 
+import it.polimi.ingsw.enumerations.TokenColor;
+
 public abstract class Token {
     private final int id;
     private final TokenColor color;

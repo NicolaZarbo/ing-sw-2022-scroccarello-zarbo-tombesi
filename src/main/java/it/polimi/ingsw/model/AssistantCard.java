@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.enumerations.Mage;
+
 public class AssistantCard extends Card {
     private final int id;
     private final Mage mage;

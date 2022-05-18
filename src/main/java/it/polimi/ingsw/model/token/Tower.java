@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.token;
 
+import it.polimi.ingsw.enumerations.TowerColor;
+
 public class Tower {
     private final TowerColor color;
     private final int id;

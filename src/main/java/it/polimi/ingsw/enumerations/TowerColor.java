@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.token;
+package it.polimi.ingsw.enumerations;
 
 public enum TowerColor {
     black,white,grey;
