@@ -50,7 +50,7 @@ public class MessageFactory {
             case "StudentToIslandMessage" -> new StudentToIslandMessage(json);
             case "CharacterCardMessage"-> new CharacterCardMessage(json);
             case "PrePlayerMessage"-> new PrePlayerMessage(json);
-            default -> throw new MessageErrorException("no corresponding message type, found :" + type);
+            default -> throw new MessageErrorException("no corresponding message type, found:" + type);
         };
     }
     public static GenericMessage setUpMessageFactory(String json){
@@ -62,7 +62,7 @@ public class MessageFactory {
             case "PlayerSetUpMessage" -> new PlayerSetUpMessage(json);
             case "PrePlayerMessage" -> new PrePlayerMessage(json);
             case "LobbySetupMessage" -> new LobbySetupMessage(json);
-            default -> throw new MessageErrorException("no corresponding message type, found :" + type);
+            default -> throw new MessageErrorException("no corresponding message type, found:" + type);
         };
     }
 }

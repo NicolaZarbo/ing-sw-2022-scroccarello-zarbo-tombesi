@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ModelToViewTranslate {
+
     public static List<SimplifiedIsland> translateIsland(List<Island> islands){
         ArrayList<SimplifiedIsland> simplifiedIslands =new ArrayList<>();
         for (Island island: islands) {
@@ -27,7 +28,6 @@ public class ModelToViewTranslate {
         }
         return simplifiedIslands;
     }
-
 
     public static List<SimplifiedPlayer> translatePlayer(Player[] modelPlayers){
         List<SimplifiedPlayer> viewPlayers=new ArrayList<>();

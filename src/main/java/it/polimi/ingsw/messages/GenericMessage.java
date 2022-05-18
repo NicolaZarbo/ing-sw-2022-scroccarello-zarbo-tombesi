@@ -10,6 +10,7 @@ public abstract class GenericMessage {
     protected String messageType;
 
     public GenericMessage(){}
+
     protected void serialize(){
         Gson gson=new Gson();
         JsonObject jj ;
@@ -17,6 +18,7 @@ public abstract class GenericMessage {
         jj=gson.toJsonTree(this,this.getClass()).getAsJsonObject();
         this.json= jj.toString();
     }
+
     public GenericMessage(String json){
         this.messageType = this.getClass().getSimpleName();
         JsonObject gg = JsonParser.parseString(json).getAsJsonObject();
@@ -25,13 +27,17 @@ public abstract class GenericMessage {
         this.json=gg.toString();
         parseMessage(gg);
     }
+
     protected abstract void parseMessage(JsonObject gg);
+
     public String getType() {
         return messageType;
     }
+
     public String getJson(){
         return  json;
     }
+
 
 
 }

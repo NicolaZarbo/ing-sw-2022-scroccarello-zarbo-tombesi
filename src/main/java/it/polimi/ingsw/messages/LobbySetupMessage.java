@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 public class LobbySetupMessage extends GenericMessage{
+
     private int lobbyDimension;
     private boolean easy;
 

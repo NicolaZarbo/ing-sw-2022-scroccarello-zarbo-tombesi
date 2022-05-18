@@ -60,7 +60,7 @@ public class Server {
 
     public void run(){
         System.out.println("Server is running");
-        while(connections < 120){
+        while(connections < 128){
             try {
                 Socket newSocket = serverSocket.accept();
                 connections++;
@@ -73,4 +73,5 @@ public class Server {
             }
         }
     }
+
 }

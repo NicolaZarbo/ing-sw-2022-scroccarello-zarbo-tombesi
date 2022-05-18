@@ -1,5 +1,6 @@
-package it.polimi.ingsw.messages.server;
+package it.polimi.ingsw.messages;
 
+import it.polimi.ingsw.messages.server.ModelToViewTranslate;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.view.objects.SimplifiedBoard;
 import it.polimi.ingsw.view.objects.SimplifiedPlayer;
