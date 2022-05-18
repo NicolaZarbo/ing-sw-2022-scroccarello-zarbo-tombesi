@@ -20,7 +20,7 @@ public class Server {
 
     public synchronized void deregisterConnection(ClientConnection connection){
         for (Lobby lob:this.lobbies) {
-            lob.getConnections().remove(connection);
+            lob.removeFromLobby(connection);
             executor.remove(connection);
             connections--;
         }
@@ -29,7 +29,6 @@ public class Server {
         this.serverSocket = new ServerSocket(12345);
         connections=0;
     }
-    //it would be better to not have the whole method as siyncronized but only some part of it
     public synchronized void lobby(ClientConnection connection, String nickname) throws IOException {
         Lobby last = lobbies.get(lobbies.size()-1);
         if(last.isPlayerConnected(nickname))

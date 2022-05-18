@@ -23,7 +23,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
     }
 
     public synchronized boolean isActive() {
-        return active;
+        return active;//todo add constant ping to check for bad disconnection
     }
 
     @Override
@@ -32,15 +32,15 @@ public class ClientConnection extends Observable<String> implements Runnable{
            this.in =new Scanner(clientSocket.getInputStream());
             this.out= new PrintWriter(clientSocket.getOutputStream());
             send("Welcome! What is your name?");
-            String read = in.nextLine();
+            String read = readFromSocket();
             String name = read.toUpperCase();
             if(server.availableLobby()){
                 server.lobby(this, name);
             }else {
                 send("no lobby available. Creating new lobby, number of player?");
-                String nPlayer = in.nextLine();
+                String nPlayer = readFromSocket();;
                 send("difficulty easy? y/n");
-                String difficulty = in.nextLine();
+                String difficulty = readFromSocket();;
                 server.createLobby(this,name, Integer.parseInt(nPlayer), difficulty.toLowerCase());
             }
              send("connected to lobby");
@@ -50,7 +50,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
                     notify(read);
                 }
 
-                //TODO
+
             }
         } catch (IOException e) {
             System.err.println(e.getMessage()+ "  ai!");
@@ -58,6 +58,18 @@ public class ClientConnection extends Observable<String> implements Runnable{
             close();
         }
 
+    }
+    private synchronized String readFromSocket() {
+        String result = "null";
+        String read;
+        while (isActive()) {
+            if (in.hasNextLine()) {
+                read = in.nextLine();
+                result = read;
+                break;
+            }
+        }
+        return result;
     }
     public void asyncSend(final String message){
         new Thread(() -> send(message)).start();

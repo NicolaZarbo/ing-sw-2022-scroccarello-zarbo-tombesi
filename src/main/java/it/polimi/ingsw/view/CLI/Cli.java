@@ -53,7 +53,7 @@ public class Cli implements UserInterface {
     public void run() throws IOException {
         Socket socket = new Socket(ip, port);
         System.out.println("Connection established");
-        System.out.println(TitlePrinter.print());
+        System.out.println(Printer.WHITE_BKG+TitlePrinter.print()+Printer.RST+Printer.PINK);
         Scanner socketIn = new Scanner(socket.getInputStream());
         socketOut = new PrintWriter(socket.getOutputStream());
         String socketLine="";
@@ -73,6 +73,7 @@ public class Cli implements UserInterface {
                 socketLine = socketIn.nextLine();
                 System.out.println(socketLine);
             }
+            System.out.println(Printer.RST);
             while (true){
                 socketLine = socketIn.nextLine();
                 ServerMessage message=MessageFactory.getMessageFromServer(socketLine);
