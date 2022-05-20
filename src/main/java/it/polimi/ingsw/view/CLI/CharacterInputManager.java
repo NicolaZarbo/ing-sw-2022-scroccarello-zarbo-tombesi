@@ -36,7 +36,7 @@ public class CharacterInputManager {
                 return;
         String[] multipleInput=input.toLowerCase().split("\s");
         int islandId;
-        int studID = studentInListFromColor(InputManager.convertStudentColorToInteger(multipleInput[0]), studentOnTop);
+        int studID = studentInListFromColor(InputManagerCli.convertStudentColorToInteger(multipleInput[0]), studentOnTop);
         islandId= Integer.parseInt(multipleInput[1])-1;
         ParameterObject par = new ParameterObject(studID,islandId);
         game.playCharacter(1, par);
@@ -76,7 +76,7 @@ public class CharacterInputManager {
             int[] studIdsFromBoard= new int[nOfStud];
             int i = 0;
             for (String studColor : multipleInput) {
-                studIdsFromCard[i]=studentInListFromColor( InputManager.convertStudentColorToInteger(studColor),studentOnTop);
+                studIdsFromCard[i]=studentInListFromColor( InputManagerCli.convertStudentColorToInteger(studColor),studentOnTop);
                 if (studIdsFromCard[i]==-1)
                     throw new NullPointerException("Student color not present");
                 i++;
@@ -86,7 +86,7 @@ public class CharacterInputManager {
             multipleInput=input.toLowerCase().split("\s");
             i = 0;
             for (String studColor : multipleInput) {
-                studIdsFromBoard[i]=studentInListFromColor( InputManager.convertStudentColorToInteger(studColor),studentOnTop);
+                studIdsFromBoard[i]=studentInListFromColor( InputManagerCli.convertStudentColorToInteger(studColor),studentOnTop);
                 if (studIdsFromBoard[i]==-1)
                     throw new NullPointerException("Student color not present");
                 i++;

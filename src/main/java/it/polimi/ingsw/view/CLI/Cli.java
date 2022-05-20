@@ -1,6 +1,6 @@
 package it.polimi.ingsw.view.CLI;
 
-import it.polimi.ingsw.enumerations.GameState;
+import it.polimi.ingsw.client.ServerConnection;
 import it.polimi.ingsw.messages.MessageFactory;
 import it.polimi.ingsw.messages.client.ClientMessage;
 import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
@@ -26,24 +26,18 @@ public class Cli implements UserInterface {
 
     private final CentralView game;
     private PrintWriter socketOut;
-    private final InputManager inputManager;
+    private final InputManagerCli inputManagerCli;
     private boolean usedCharacter;
     private final Scanner input;
     private String ip="127.0.0.1";
     private int port=12345;
 
-    //Turn state is an integer used to represent the state of the game, here are the meaning of the values:
-// 0: pre game
-// 1: initialisation of the game
-// 2: player's turn
-// 3: another player's turn
-    private int turnState;
-
     public Cli(){
         this.game = new CentralView(this);
         this.input = new Scanner(System.in);
-        this.inputManager = new InputManager(this);
-        game.addObserver(new MessagesFromViewHandler());
+        this.inputManagerCli = new InputManagerCli(this);
+
+
     }
 
     public CentralView getGame() {
@@ -51,55 +45,9 @@ public class Cli implements UserInterface {
     }
 
     public void run() throws IOException {
-        Socket socket = new Socket(ip, port);
-        System.out.println("Connection established");
-        System.out.println(Printer.WHITE_BKG+TitlePrinter.print()+Printer.RST+Printer.PINK);
-        Scanner socketIn = new Scanner(socket.getInputStream());
-        socketOut = new PrintWriter(socket.getOutputStream());
-        String socketLine="";
-        try{
-            socketLine = socketIn.nextLine();
-            System.out.println(socketLine);
-            String inputLine = input.nextLine();
-            game.setName(inputLine);
-            socketOut.println(inputLine);
-            socketOut.flush();
-            socketLine = socketIn.nextLine();
-            System.out.println(socketLine);
-            while (!socketLine.equals("connected to lobby")) {
-                inputLine = input.nextLine();
-                socketOut.println(inputLine);
-                socketOut.flush();
-                socketLine = socketIn.nextLine();
-                System.out.println(socketLine);
-            }
-            System.out.println(Printer.RST);
-            while (true){
-                socketLine = socketIn.nextLine();
-                ServerMessage message=MessageFactory.getMessageFromServer(socketLine);
-                game.update(message);
-                //System.out.println(socketLine);//print for fast checking of messages
-                if(game.isYourTurn())
-                    inputManager.decodeStringInput(input.nextLine());
-            }
-        } catch(NoSuchElementException e){
-            System.out.println("Connection closed from the client side"+ e.getMessage());
-        } finally {
-            input.close();
-            socketIn.close();
-            socketOut.close();
-            socket.close();
-        }
-    }
-
-
-
-    private class MessagesFromViewHandler implements Observer<ClientMessage> {
-        @Override
-        public void update(ClientMessage message) {
-            socketOut.println(message.getJson());
-            socketOut.flush();
-        }
+        ServerConnection connection = new ServerConnection(new Scanner(System.in), game, inputManagerCli);
+        game.addObserver( connection.setMessageHandler());
+        connection.run();
     }
     @Override
     public void showView() {
@@ -133,7 +81,7 @@ public class Cli implements UserInterface {
 
     @Override
     public void askToMoveStudent() {
-        if(game.isEasy())
+        if(!game.isEasy())
             System.out.println(Printer.WHITE_BKG+Printer.BLACK+"write C to get character selection"+Printer.RST);
         System.out.println(Printer.PINK+"Choose a student in your Entrance by its color"+Printer.RST);
         System.out.println("Student moved : "+ Printer.WHITE_BKG+""+game.getStudentMoved()+""+Printer.RST);
@@ -141,7 +89,7 @@ public class Cli implements UserInterface {
 
     @Override
     public void askToMoveMother() {
-        if(game.isEasy())
+        if(!game.isEasy())
             System.out.println(Printer.WHITE_BKG+Printer.BLACK+"write C to get character selection"+Printer.RST);
         System.out.println(Printer.PINK+"Chose a number of steps, max =" +(game.getCardYouPlayed()+2)/2+""+Printer.RST);
     }
@@ -154,12 +102,12 @@ public class Cli implements UserInterface {
 
     public void askWhereToMove(){
         System.out.println(Printer.PINK+"Choose a present island or type anything else to move into the DiningRoom"+Printer.RST);
-        inputManager.decodeStringInput(input.nextLine());
+        inputManagerCli.decodeStringInput(input.nextLine());
     }
 
     /** shows the player an error message(client side) and waits for another input*/
     public void askToRetry(String error){
         System.out.println(Printer.RED+error+Printer.RST);
-        inputManager.decodeStringInput(input.nextLine());
+        inputManagerCli.decodeStringInput(input.nextLine());
     }
 }

@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class CliNoServer extends Cli implements Observer<ErrorMessageForClient> {
     private final CentralView game;
-    private final InputManager inputManager;
+    private final InputManagerCli inputManagerCli;
     private final Scanner input;
     public int nPlayer;
     boolean easy;
@@ -34,7 +34,7 @@ public class CliNoServer extends Cli implements Observer<ErrorMessageForClient> 
 
     public CliNoServer(){
         game= new CentralView(this);
-        inputManager= new InputManager(this);
+        inputManagerCli = new InputManagerCli(this);
         input= new Scanner(System.in);
     }
     @Override
@@ -45,7 +45,7 @@ public class CliNoServer extends Cli implements Observer<ErrorMessageForClient> 
     @Override
     public void showView() {
         System.out.println(GamePrinter.printGameTable(game));
-        inputManager.decodeStringInput(input.nextLine());
+        inputManagerCli.decodeStringInput(input.nextLine());
     }
 
     @Override
@@ -54,43 +54,43 @@ public class CliNoServer extends Cli implements Observer<ErrorMessageForClient> 
         System.out.println(Printer.PINK+"You can't use the cards n: "+game.getPlayedCardThisTurn()+Printer.RST);
         System.out.println(CardPrinter.print(player.getAssistantCards())+"\n coins :"+player.getCoin());
         System.out.println(Printer.PINK+"Select the card by its number"+Printer.RST);
-        inputManager.decodeStringInput(input.nextLine());
+        inputManagerCli.decodeStringInput(input.nextLine());
     }
 
     @Override
     public void showCharacters() {
         System.out.println(CharacterPrinter.print(game));
-        inputManager.decodeStringInput(input.nextLine());
+        inputManagerCli.decodeStringInput(input.nextLine());
     }
 
 
     public void showOptionsForPersonalization(PlayerSetUpMessage message) {
         System.out.println(PersonalizationPrinter.printForColorsAndMages(message));
-        inputManager.decodeStringInput(input.nextLine());
+        inputManagerCli.decodeStringInput(input.nextLine());
     }
 
     @Override
     public void showError(String errorMessage) {
         System.out.println(errorMessage);
-        inputManager.decodeStringInput(input.nextLine());
+        inputManagerCli.decodeStringInput(input.nextLine());
     }
 
     @Override
     public void askToMoveStudent() {
         super.askToMoveStudent();
-        inputManager.decodeStringInput(input.nextLine());
+        inputManagerCli.decodeStringInput(input.nextLine());
     }
 
     @Override
     public void askToMoveMother() {
         System.out.println(Printer.PINK+"Chose a number of steps, max =" +(game.getCardYouPlayed()+2)/2+""+Printer.RST);
-        inputManager.decodeStringInput(input.nextLine());
+        inputManagerCli.decodeStringInput(input.nextLine());
     }
 
     @Override
     public void showClouds() {
         System.out.println(CloudPrinter.print(game));
-        inputManager.decodeStringInput(input.nextLine());
+        inputManagerCli.decodeStringInput(input.nextLine());
     }
 
     @Override
