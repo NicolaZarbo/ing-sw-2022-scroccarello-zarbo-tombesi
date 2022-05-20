@@ -45,6 +45,7 @@ public class Cli implements UserInterface {
     }
 
     public void run() throws IOException {
+        inputManagerCli.printToScreen(TitlePrinter.print());
         ServerConnection connection = new ServerConnection(new Scanner(System.in), game, inputManagerCli);
         game.addObserver( connection.setMessageHandler());
         connection.run();
