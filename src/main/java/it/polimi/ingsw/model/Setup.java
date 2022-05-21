@@ -93,10 +93,9 @@ public class Setup {
     /** creates the list of Character Cards using a constructor*/
     public static ArrayList<CharacterCard> createCharacterCards(Bag bag, int cardNumber){
             ArrayList<CharacterCard> cards = new ArrayList<>(cardNumber);
-            CharacterCard cardChar=null;
+            CharacterCard cardChar;
             for (int i=1; i<=12; i++){
-                if(i!=3&&i!=4&&i!=5&&i!=12)
-                    cardChar= FactoryCharacter.createCharacter(i, bag);
+                cardChar= FactoryCharacter.createCharacter(i, bag);
                 if(cardChar!=null)
                     cards.add( cardChar ) ;
             }

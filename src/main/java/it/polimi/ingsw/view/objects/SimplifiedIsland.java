@@ -27,7 +27,13 @@ public class SimplifiedIsland {
     public List<SimplifiedIsland> getSubIsland() {
         return subIsland;
     }
-
+    public int getEntireNumberOfTower(){
+        int n=getNumberOfTowers();
+        for (SimplifiedIsland subIsland:subIsland) {
+            n+=subIsland.getEntireNumberOfTower();
+        }
+        return n;
+    }
     public List<Integer> getStudents() {
         return students;
     }

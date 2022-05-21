@@ -109,7 +109,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         this.mother=message.getMotherPosition();
     }
     public void islandsUpdate(IslandsMessage message){
-        this.islands=message.getIslandList();
+
+    this.islands=message.getIslandList();
     }
     /** adds to card to the list of played card in this turn, this way the players know which card he can or cannot use*/
     public void playedAssistantUpdate(PlayedAssistantMessage message){

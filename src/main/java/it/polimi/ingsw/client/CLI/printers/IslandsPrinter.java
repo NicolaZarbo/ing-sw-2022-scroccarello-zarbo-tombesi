@@ -32,10 +32,7 @@ String yo = """
             escapeCounter++;
             tColor=Printer.padWithSpaces(towerColor(island.getTowerColor()),6);
             int[] studentForColor= IslandsPrinter.islandColorStudents(island);
-            int numberOfTower=island.getNumberOfTowers();
-            for (SimplifiedIsland subIsland: island.getSubIsland()) {
-                numberOfTower+=subIsland.getNumberOfTowers();
-            }
+            int numberOfTower=island.getEntireNumberOfTower();
             preRows[0]="Island : "+island.getIslandId()+"  \t";
             preRows[1]=" _________    \t";
             preRows[2]="/ "+tColor+" \\   \t";

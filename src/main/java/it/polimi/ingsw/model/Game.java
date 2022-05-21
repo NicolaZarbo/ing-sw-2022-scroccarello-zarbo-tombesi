@@ -55,7 +55,7 @@ public class Game extends Observable<ServerMessage> {
         this.teachers= Setup.createProfessor(5);
         this.motherNature=new MotherNature(islands.get(0).getID());
         if(!easy){
-            this.characters= Setup.createCharacterCards(bag,9);
+            this.characters= Setup.createCharacterCards(bag,8);
         }
         else{characters=null;}
         this.cardBonusActive=0;
@@ -84,7 +84,7 @@ public class Game extends Observable<ServerMessage> {
         this.teachers= Setup.createProfessor(5);
         this.motherNature=new MotherNature(islands.get(0).getID());
         if(!easy){
-            this.characters= Setup.createCharacterCards(bag,9);
+            this.characters= Setup.createCharacterCards(bag,8);
         }
         else{characters=null;}
         this.cardBonusActive=0;

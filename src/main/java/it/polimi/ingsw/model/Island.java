@@ -22,7 +22,29 @@ public class Island {
     public int getID() {
         return this.ID;
     }
-
+    /** used to get a list of all the student on this island and all it's subIslands*/
+    public ArrayList<Student> getEveryStudents(){
+        ArrayList<Student> stud = new ArrayList<>(students);
+        for (Island subIsland: subIslands) {
+            stud.addAll(subIsland.getEveryStudents());
+        }
+        return stud;
+    }
+    /** used to get towers from every island in the group*/
+    public ArrayList<Tower> getEveryTower(){
+        ArrayList<Tower> towers = new ArrayList<>(getTowers());
+        for (Island subIsland:subIslands) {
+            towers.addAll(subIsland.getEveryTower());
+        }
+        return towers;
+    }
+    /** used to remove every tower from the group of islands*/
+    public void removeEveryTower(){
+        tower.remove(0);
+        for (Island subIsland:subIslands) {
+            subIsland.removeEveryTower();
+        }
+    }
     public ArrayList<Island> getSubIslands() {
         return subIslands;
     }

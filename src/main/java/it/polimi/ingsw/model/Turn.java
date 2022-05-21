@@ -172,8 +172,8 @@ public class Turn {
         game.groupMultiMessage(new SingleBoardMessage(game,player.getId()));
     }
     private void changeTower(Island island , Player newOwner){
-        ArrayList<Tower> removedT=new ArrayList<>(island.getTowers());
-        island.getTowers().removeAll(removedT);
+        ArrayList<Tower> removedT=new ArrayList<>(island.getEveryTower());
+        island.removeEveryTower();
         for (Player player: game.getPlayers()) {
             if(player.getColorT()==removedT.get(0).getColor()){
                 player.getBoard().addTower(removedT);
@@ -247,10 +247,7 @@ public class Turn {
             influence=influence+2;
         MotherNature theOne=game.getMotherNature();
         Island where=game.getIslands().get(theOne.getPosition());
-        ArrayList<Student> students=new ArrayList<>(where.getStudents());
-        for (Island subIsland: where.getSubIslands()) {
-            students.addAll(subIsland.getStudents());
-        }
+        ArrayList<Student> students=new ArrayList<>(where.getEveryStudents());
         Player player = game.getPlayer(playerId);
         TowerColor color=player.getColorT();
         Student stud;
@@ -261,9 +258,7 @@ public class Turn {
 
         }//card 6 effect
         if(!game.isBonusActive(6)){
-            ArrayList<Tower> towers=new ArrayList<>(where.getTowers());
-            for(Island subIsland: where.getSubIslands())
-                towers.addAll(subIsland.getTowers());
+            ArrayList<Tower> towers=new ArrayList<>(where.getEveryTower());
             for (Tower tower : towers) {
                 if (color.equals(tower.getColor()))
                     influence++;
