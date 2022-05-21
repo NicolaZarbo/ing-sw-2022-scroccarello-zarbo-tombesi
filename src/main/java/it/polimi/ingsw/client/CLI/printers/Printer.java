@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.CLI.printers;
+package it.polimi.ingsw.client.CLI.printers;
 
 public interface Printer {
     String RED="\u001B[31m";
@@ -12,6 +12,12 @@ public interface Printer {
     String YELLOW_BKG="\u001B[43m";
     String BLACK="\u001B[30m";
     String CYAN_BKG = "\u001B[46m";
+    String BR_GREEN_BKG ="\u001B[102m";
+    String DR_GRAY = "\u001B[90m";
+    String DR_GRAY_BKG = "\u001B[100m";
+    String BR_PINK="\u001B[95m";
+    String BR_WHITE_BKG="\u001B[107m";
+    String BR_WHITE="\u001B[97m";
     static String mergeRows(String[] rowsForOutput){
         StringBuilder out= new StringBuilder();
         for (String s:rowsForOutput) {

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.view.CLI;
 
-import it.polimi.ingsw.view.CentralView;
+import it.polimi.ingsw.client.CLI.Cli;
 import junit.framework.TestCase;
 
 public class CharacterInputManagerCliTest extends TestCase {

@@ -1,10 +1,10 @@
-package it.polimi.ingsw.view.CLI;
+package it.polimi.ingsw.client.CLI;
 
+import it.polimi.ingsw.client.CLI.printers.BoardsPrinter;
+import it.polimi.ingsw.client.CLI.printers.Printer;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.model.character.ParameterObject;
-import it.polimi.ingsw.view.CLI.printers.BoardsPrinter;
-import it.polimi.ingsw.view.CLI.printers.CharacterPrinter;
-import it.polimi.ingsw.view.CLI.printers.Printer;
+import it.polimi.ingsw.client.CLI.printers.CharacterPrinter;
 import it.polimi.ingsw.view.CentralView;
 
 import java.lang.reflect.InvocationTargetException;
@@ -29,7 +29,7 @@ public class CharacterInputManager {
     private void character1(){
         List<Integer> studentOnTop=game.getStudentsOnCard().get(1);
         System.out.println(CharacterPrinter.printStudentOnTop(1,studentOnTop));
-        System.out.println("select a student color in this card followed by a target Island \n"+Printer.PINK+"or press enter to go back"+Printer.RST);
+        System.out.println("select a student color in this card followed by a target Island \n"+ Printer.PINK+"or press enter to go back"+Printer.RST);
         try{
         String input = (new Scanner(System.in)).nextLine();
             if(input.equalsIgnoreCase(""))

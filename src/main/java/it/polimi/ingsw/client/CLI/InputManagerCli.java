@@ -1,11 +1,11 @@
-package it.polimi.ingsw.view.CLI;
+package it.polimi.ingsw.client.CLI;
 
+import it.polimi.ingsw.client.CLI.printers.Printer;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
-import it.polimi.ingsw.view.CLI.printers.Printer;
 import it.polimi.ingsw.view.CentralView;
-import it.polimi.ingsw.view.InputManager;
+import it.polimi.ingsw.client.InputManager;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -63,7 +63,7 @@ public class InputManagerCli  extends InputManager {
 
     @Override
     public void printToScreen(String string) {
-        System.out.println(string);
+        System.out.println(Cli.IMP+string+ Cli.RST);
     }
 
     @Override

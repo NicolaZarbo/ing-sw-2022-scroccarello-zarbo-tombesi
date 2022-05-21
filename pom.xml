@@ -25,7 +25,7 @@
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
-      <scope>provided</scope>
+      <scope>compile</scope>
       <version>2.9.0</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->

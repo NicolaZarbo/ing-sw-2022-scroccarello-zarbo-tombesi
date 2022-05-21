@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.enumerations.GameState;
 

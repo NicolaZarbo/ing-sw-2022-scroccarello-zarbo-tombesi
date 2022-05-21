@@ -4,14 +4,10 @@ import it.polimi.ingsw.messages.MessageFactory;
 import it.polimi.ingsw.messages.client.ClientMessage;
 import it.polimi.ingsw.messages.server.ServerMessage;
 import it.polimi.ingsw.observer.Observer;
-import it.polimi.ingsw.view.CLI.printers.Printer;
-import it.polimi.ingsw.view.CLI.printers.TitlePrinter;
 import it.polimi.ingsw.view.CentralView;
-import it.polimi.ingsw.view.InputManager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Writer;
 import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;

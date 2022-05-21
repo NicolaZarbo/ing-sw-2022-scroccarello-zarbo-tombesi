@@ -1,6 +1,5 @@
-package it.polimi.ingsw.view.CLI.printers;
+package it.polimi.ingsw.client.CLI.printers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CardPrinter implements Printer{

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Island {
     private final int ID;
     private final ArrayList<Student> students;
-    private final ArrayList<Tower> tower;
+    private final ArrayList<Tower> tower;//todo this should be a single tower, fix also all methods that access
     private final ArrayList<Island> subIslands;
     private int islandSize;
 
@@ -33,7 +33,7 @@ public class Island {
     public void incrementIslandSize() {
         this.islandSize ++;
     }
-    /** returns the number of islands grouped togheter*/
+    /** returns the number of islands grouped together*/
     public int getIslandSize() {
         return islandSize;
     }

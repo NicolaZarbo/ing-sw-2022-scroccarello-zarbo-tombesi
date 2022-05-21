@@ -7,7 +7,7 @@ import it.polimi.ingsw.enumerations.TowerColor;
 public class LobbyPlayer {
     private TowerColor towerColor;
     private Mage mage;
-    private String nickname; //should we check the string input ? -serverside
+    private String nickname;
 
     public LobbyPlayer(TowerColor towerColor, Mage mage, String nickname) {
         this.towerColor = towerColor;

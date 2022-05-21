@@ -1,11 +1,9 @@
-package it.polimi.ingsw.view.CLI.printers;
+package it.polimi.ingsw.client.CLI.printers;
 
 import it.polimi.ingsw.view.CentralView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class CharacterPrinter implements Printer{
     public static String print(CentralView view){

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.CLI.printers;
+package it.polimi.ingsw.client.CLI.printers;
 
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.objects.SimplifiedIsland;
@@ -17,7 +17,7 @@ String yo = """
         \\________/""";
     public static String print(CentralView view){
         StringBuilder out= new StringBuilder("\n");
-        String[] rows= new String[7];
+        String[] rows= new String[9];
         String[] preRows= new String[7];
         Arrays.fill(rows,"");
         String tColor;
@@ -38,8 +38,8 @@ String yo = """
             }
             preRows[0]="Island : "+island.getIslandId()+"  \t";
             preRows[1]=" _________    \t";
-            preRows[2]="/ "+tColor+"  \\   \t";
-            preRows[3]="|T°:"+island.getNumberOfTowers()+" "+PINK+"P:"+studentForColor[4]+""+RST+" |   \t";
+            preRows[2]="/ "+tColor+" \\   \t";
+            preRows[3]="|T°:"+numberOfTower+" "+PINK+"P:"+studentForColor[4]+""+RST+" |   \t";
             preRows[4]="| "+RED+"R:"+studentForColor[0]+" "+YELLOW+"Y:"+studentForColor[1]+""+RST+" |   \t";
             preRows[5]="| "+GREEN+"G:"+studentForColor[2]+" "+BLUE+"B:"+studentForColor[3]+""+RST+" |   \t";
             if(view.getIslands().get(view.getMother()).getIslandId()==island.getIslandId()){
@@ -49,12 +49,38 @@ String yo = """
                 for (int i = 0; i < 7; i++) {
                     preRows[i]=reverseString(preRows[i]);
                 }
-            for (int i = 0; i < 7; i++) {
+            /*for (int i = 0; i < 7; i++) {
                 rows[i]+=preRows[i];
             }
+
+             */
+            if(escapeCounter<=(size/2) ) {
+                if (escapeCounter == 1 || escapeCounter == (size / 2))
+                    addLowerIsland(rows, preRows);
+                else addHigherIsland(rows,preRows);
+            }
+            if(escapeCounter>(size/2) ){
+                if(escapeCounter== size || escapeCounter==(size/2)+1)
+                    addHigherIsland(rows, preRows);
+                else addLowerIsland(rows,preRows);
+                }
         }
         out.append(reversedMerge(rows));
         return out.toString();
+    }
+    private static void addLowerIsland(String [] rows, String []preRows) {
+        rows[0] += "            \t";
+        rows[1] += "            \t";
+        for (int i = 0; i < 7; i++) {
+            rows[i + 2] += preRows[i];
+        }
+    }
+    private static void addHigherIsland(String [] rows, String []preRows){
+        rows[8] += "            \t";
+        rows[7] += "            \t";
+        for (int i = 0; i < 7; i++) {
+            rows[i] += preRows[i];
+        }
     }
     private static String reversedMerge(String[] rowsForOutput){
         StringBuilder out= new StringBuilder();
@@ -87,11 +113,11 @@ String yo = """
     }
     private static String towerColor(int tColor){
         if(tColor==0)
-            return BLACK+CYAN_BKG+"BLACK"+RST;
+            return BLACK+CYAN_BKG+" BLACK "+RST;
         if(tColor==1)
-            return BLACK+CYAN_BKG+"WHITE"+RST;
+            return BLACK+CYAN_BKG+" WHITE "+RST;
         if(tColor==2)
-            return BLACK+CYAN_BKG+"GRAY"+RST;
-        return "";
+            return BLACK+CYAN_BKG+" GRAY "+RST;
+        return "       ";
     }
 }

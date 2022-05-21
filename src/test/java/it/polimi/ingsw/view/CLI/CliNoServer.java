@@ -1,9 +1,11 @@
 package it.polimi.ingsw.view.CLI;
 
+import it.polimi.ingsw.client.CLI.Cli;
+import it.polimi.ingsw.client.CLI.InputManagerCli;
+import it.polimi.ingsw.client.CLI.printers.*;
 import it.polimi.ingsw.messages.server.ErrorMessageForClient;
 import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
 import it.polimi.ingsw.observer.Observer;
-import it.polimi.ingsw.view.CLI.printers.*;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.objects.SimplifiedPlayer;
 
