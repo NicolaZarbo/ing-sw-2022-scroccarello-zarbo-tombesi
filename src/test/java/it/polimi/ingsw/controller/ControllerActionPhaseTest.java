@@ -53,9 +53,7 @@ public class ControllerActionPhaseTest extends TestCase {
             try {
                 this.controllerTest.moveStudentToHall(message);
             } catch (IllegalMoveException e) {
-                e.printStackTrace();
-            } catch (NoTokenFoundException e) {
-                System.out.println(e.getMessage());
+                assertNotNull(e);
             }
         }
 

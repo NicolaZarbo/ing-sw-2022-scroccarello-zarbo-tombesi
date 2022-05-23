@@ -27,6 +27,7 @@ public class SimplifiedPlayer {
         this.discardedCards = new boolean[10];
         Arrays.fill(discardedCards, false);
         this.board=board;
+        this.mage=mage;
     }
 
     public SimplifiedBoard getBoard() {

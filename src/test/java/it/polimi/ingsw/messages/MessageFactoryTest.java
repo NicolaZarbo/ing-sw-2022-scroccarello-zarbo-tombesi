@@ -149,9 +149,13 @@ public class MessageFactoryTest extends TestCase {
         catch(RuntimeException e){
             assertNotNull(e);
         }
+
+        testSerialize(msgTest);
     }
 
-    public void testSetUpMessageFactory() {
-
+    private void testSerialize(GenericMessage message) {
+        message.serialize();
+        assertEquals(message.getClass().getSimpleName(),message.getType());
+        assertNotNull(message.getJson());
     }
 }
