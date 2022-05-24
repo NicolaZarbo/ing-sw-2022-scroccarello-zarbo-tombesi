@@ -17,6 +17,10 @@ public class Server {
     private final List<Lobby> lobbies= new ArrayList<>();
     private int connections;
 
+    public Server() throws IOException {
+        this.serverSocket = new ServerSocket(12345);
+        connections=0;
+    }
 
     public synchronized void deregisterConnection(ClientConnection connection){
         for (Lobby lob:this.lobbies) {
@@ -25,10 +29,7 @@ public class Server {
             connections--;
         }
     }
-    public Server() throws IOException {
-        this.serverSocket = new ServerSocket(12345);
-        connections=0;
-    }
+
     public synchronized void lobby(ClientConnection connection, String nickname) throws IOException {
         Lobby last = lobbies.get(lobbies.size()-1);
         if(last.isPlayerConnected(nickname))
@@ -39,15 +40,17 @@ public class Server {
         if(last.getLobbyDimension()==last.numberOfConnections())
             last.startGame();
     }
+
     public synchronized boolean availableLobby(){
         if(lobbies.isEmpty())
             return false;
         Lobby last = lobbies.get(lobbies.size()-1);
         return (last.getLobbyDimension()>last.numberOfConnections());
     }
+
     public synchronized void createLobby(ClientConnection connection, String nick,int dimension, String yesEasy) throws IOException {
-        if(dimension<1 || dimension>4)//this is used for fast testing, 1 shouldn't be ok FIXME
-            throw new IOException("max 4 player, min 2");
+        if(dimension<2|| dimension>4)
+            throw new IOException("min 2 players, max 4");
         boolean easy;
         easy= yesEasy.equals("y");
         int newLobbyCode = lobbies.size();
@@ -70,6 +73,9 @@ public class Server {
             } catch (IOException e) {
                 System.out.println("Connection Error!");
             }
+        }
+        if(connections>=128){
+            System.out.println("Too many players, the server has been stopped");
         }
     }
 

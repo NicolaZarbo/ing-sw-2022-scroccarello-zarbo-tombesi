@@ -37,7 +37,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
             if(server.availableLobby()){
                 server.lobby(this, name);
             }else {
-                send("no lobby available. Creating new lobby, number of player?");
+                send("no lobby available. Creating new lobby, number of players?");
                 String nPlayer = readFromSocket();;
                 send("difficulty easy? y/n");
                 String difficulty = readFromSocket();;
