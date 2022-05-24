@@ -14,7 +14,7 @@ public class ServerTest extends TestCase {
         this.serverTest=new Server();
     }
 
-    public synchronized void testStressRun() {
+   /* public synchronized void testStressRun() {
     try{
         ServerThread thr=new ServerThread(this.serverTest);
         thr.start();
@@ -71,5 +71,5 @@ public class ServerTest extends TestCase {
             client.run();
         }
     }
-
+*/
 }
