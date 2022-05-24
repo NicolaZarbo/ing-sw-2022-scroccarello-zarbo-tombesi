@@ -1,8 +1,6 @@
 package it.polimi.ingsw.messages;
 
-import it.polimi.ingsw.messages.server.ModelToViewTranslate;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.token.Student;
 import it.polimi.ingsw.view.objects.SimplifiedBoard;
 import it.polimi.ingsw.view.objects.SimplifiedIsland;
 import it.polimi.ingsw.view.objects.SimplifiedPlayer;
@@ -41,18 +39,17 @@ public class ModelToViewTranslateTest extends TestCase {
             assertEquals(gameTest.getPlayer(i).getColorT().ordinal(),listTest.get(i).getTowerColor());
             assertEquals(gameTest.getPlayer(i).getHand().getCoin(),listTest.get(i).getCoin());
             int finalI = i;
-           /* if(gameTest.getPlayer(i).getHand().getAssistant().size()>0){
-                assertTrue(gameTest.getPlayer(i).getHand().getAssistant().stream().anyMatch(x->listTest.get(finalI).getAssistantCards()[x.getId()]));
+           if(gameTest.getPlayer(i).getHand().getAssistant().size()>0){
+                assertTrue(gameTest.getPlayer(i).getHand().getAssistant().stream().anyMatch(x->listTest.get(finalI).getAssistantCards()[x.getId()%10]));
             }
             else
-                assertFalse(gameTest.getPlayer(i).getHand().getAssistant().stream().anyMatch(x->listTest.get(finalI).getAssistantCards()[x.getId()]));
+                assertFalse(gameTest.getPlayer(i).getHand().getAssistant().stream().anyMatch(x->listTest.get(finalI).getAssistantCards()[x.getId()%10]));
             if(gameTest.getPlayer(i).getHand().getDiscarded().size()>0){
-                assertTrue(gameTest.getPlayer(i).getHand().getDiscarded().stream().anyMatch(x->listTest.get(finalI).getDiscardedCards()[x.getId()]));
+                assertTrue(gameTest.getPlayer(i).getHand().getDiscarded().stream().anyMatch(x->listTest.get(finalI).getDiscardedCards()[x.getId()%10]));
             }
             else
-                assertFalse(gameTest.getPlayer(i).getHand().getDiscarded().stream().anyMatch(x->listTest.get(finalI).getDiscardedCards()[x.getId()]));
-         */
-           // TODO
+                assertFalse(gameTest.getPlayer(i).getHand().getDiscarded().stream().anyMatch(x->listTest.get(finalI).getDiscardedCards()[x.getId()%10]));
+
         }
     }
 
@@ -72,6 +69,16 @@ public class ModelToViewTranslateTest extends TestCase {
     }
 
     public void testTranslateClouds() {
-        //TODO
+        ArrayList<Integer[]> list=ModelToViewTranslate.translateClouds(gameTest.getClouds());
+        for(int i=0;i<list.size();i++){
+            for(int j=0;j<list.get(i).length;j++){
+                if(list.get(i)[j]!=-1){
+                    assertTrue(gameTest.getClouds()[i].getStud()[j].getId()==list.get(i)[j]);
+                }
+                else{
+                    assertNull(gameTest.getClouds()[i]);
+                }
+            }
+        }
     }
 }

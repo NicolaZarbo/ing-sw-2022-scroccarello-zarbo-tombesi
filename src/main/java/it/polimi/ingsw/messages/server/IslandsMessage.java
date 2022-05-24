@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages.server;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.messages.ModelToViewTranslate;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.objects.SimplifiedIsland;
@@ -18,7 +19,7 @@ public class IslandsMessage extends ServerMessage{
 
     public IslandsMessage(Game game) {
         super(game);
-        this.islandList=ModelToViewTranslate.translateIsland(game.getIslandList());
+        this.islandList= ModelToViewTranslate.translateIsland(game.getIslandList());
         super.serialize();
     }
 

@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages.server;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.messages.ModelToViewTranslate;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.TokensCharacter;
@@ -31,7 +32,7 @@ public class WholeGameMessage extends ServerMessage{
     public WholeGameMessage(Game game) {
         super(game);
         this.easy=game.isEasy();
-        this.players=ModelToViewTranslate.translatePlayer(game.getPlayers());
+        this.players= ModelToViewTranslate.translatePlayer(game.getPlayers());
         this.islands=ModelToViewTranslate.translateIsland(game.getIslands());
         this.motherNature=game.getMotherNature().getPosition();
         this.clouds= ModelToViewTranslate.translateClouds(game.getClouds());

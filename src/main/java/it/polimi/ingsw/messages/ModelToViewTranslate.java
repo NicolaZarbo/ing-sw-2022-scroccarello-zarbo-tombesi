@@ -1,4 +1,4 @@
-package it.polimi.ingsw.messages.server;
+package it.polimi.ingsw.messages;
 
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Cloud;

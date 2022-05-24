@@ -1,6 +1,7 @@
 package it.polimi.ingsw.messages.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.messages.ModelToViewTranslate;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.view.CentralView;
 
