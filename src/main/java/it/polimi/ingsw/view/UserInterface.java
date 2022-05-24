@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.messages.server.ErrorMessageForClient;
-import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
+import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
 
 public interface UserInterface {
     /** shows or updates on the screen the islands, clouds and boards*/

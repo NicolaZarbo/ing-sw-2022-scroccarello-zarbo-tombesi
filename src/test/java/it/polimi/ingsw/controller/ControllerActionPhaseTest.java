@@ -3,7 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
-import it.polimi.ingsw.messages.client.*;
+import it.polimi.ingsw.messages.clientmessages.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.model.token.Student;

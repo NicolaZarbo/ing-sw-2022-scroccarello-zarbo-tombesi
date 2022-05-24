@@ -1,8 +1,8 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.messages.MessageFactory;
-import it.polimi.ingsw.messages.client.ClientMessage;
-import it.polimi.ingsw.messages.server.ServerMessage;
+import it.polimi.ingsw.messages.clientmessages.ClientMessage;
+import it.polimi.ingsw.messages.servermessages.ServerMessage;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.view.CentralView;
 

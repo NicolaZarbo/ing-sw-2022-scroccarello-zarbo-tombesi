@@ -1,10 +1,8 @@
-package it.polimi.ingsw.messages.server;
+package it.polimi.ingsw.messages.servermessages;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.messages.GenericMessage;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.view.CentralView;
 
 public abstract class ServerMessage extends GenericMessage {

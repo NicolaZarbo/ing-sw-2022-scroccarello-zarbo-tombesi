@@ -1,10 +1,9 @@
 package it.polimi.ingsw.view.Gui;
 
-import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
+import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.UserInterface;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import java.io.PrintWriter;

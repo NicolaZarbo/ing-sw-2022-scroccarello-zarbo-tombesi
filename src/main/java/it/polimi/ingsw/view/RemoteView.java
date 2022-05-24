@@ -2,9 +2,9 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.messages.GenericMessage;
 import it.polimi.ingsw.messages.MessageFactory;
-import it.polimi.ingsw.messages.client.ClientMessage;
-import it.polimi.ingsw.messages.server.ErrorMessageForClient;
-import it.polimi.ingsw.messages.server.ServerMessage;
+import it.polimi.ingsw.messages.clientmessages.ClientMessage;
+import it.polimi.ingsw.messages.servermessages.ErrorMessageForClient;
+import it.polimi.ingsw.messages.servermessages.ServerMessage;
 import it.polimi.ingsw.model.LobbyPlayer;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.Observer;

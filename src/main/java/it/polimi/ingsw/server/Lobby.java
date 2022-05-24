@@ -2,12 +2,10 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.exceptions.MessageErrorException;
-import it.polimi.ingsw.messages.server.ErrorMessageForClient;
-import it.polimi.ingsw.messages.server.ServerMessage;
+import it.polimi.ingsw.messages.servermessages.ErrorMessageForClient;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.view.RemoteView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 

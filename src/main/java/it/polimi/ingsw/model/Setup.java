@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 import it.polimi.ingsw.enumerations.Mage;
-import it.polimi.ingsw.messages.server.*;
+import it.polimi.ingsw.messages.servermessages.*;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.FactoryCharacter;
 import it.polimi.ingsw.model.token.Professor;

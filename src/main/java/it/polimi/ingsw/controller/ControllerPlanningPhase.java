@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
-import it.polimi.ingsw.messages.client.PlayAssistantMessage;
+import it.polimi.ingsw.messages.clientmessages.PlayAssistantMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.model.Round;

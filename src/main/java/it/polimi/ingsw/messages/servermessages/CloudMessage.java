@@ -1,4 +1,4 @@
-package it.polimi.ingsw.messages.server;
+package it.polimi.ingsw.messages.servermessages;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.messages.ModelToViewTranslate;

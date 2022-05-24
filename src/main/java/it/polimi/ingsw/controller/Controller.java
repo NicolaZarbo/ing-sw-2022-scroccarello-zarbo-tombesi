@@ -1,8 +1,8 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.exceptions.IllegalMoveException;
-import it.polimi.ingsw.messages.client.*;
-import it.polimi.ingsw.messages.server.ErrorMessageForClient;
+import it.polimi.ingsw.messages.clientmessages.*;
+import it.polimi.ingsw.messages.servermessages.ErrorMessageForClient;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.Observer;

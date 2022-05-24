@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.messages.client.PrePlayerMessage;
+import it.polimi.ingsw.messages.clientmessages.PrePlayerMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.LobbyPlayer;
 import it.polimi.ingsw.enumerations.TowerColor;

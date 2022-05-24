@@ -1,6 +1,6 @@
 package it.polimi.ingsw.client.CLI.printers;
 
-import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
+import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
 
 public class PersonalizationPrinter implements Printer{
     public static String printForColorsAndMages(PlayerSetUpMessage message){

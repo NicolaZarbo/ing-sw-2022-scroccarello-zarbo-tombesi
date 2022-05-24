@@ -6,7 +6,7 @@ import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoPlaceAvailableException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.model.character.ParameterObject;
-import it.polimi.ingsw.messages.server.*;
+import it.polimi.ingsw.messages.servermessages.*;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.token.*;
 

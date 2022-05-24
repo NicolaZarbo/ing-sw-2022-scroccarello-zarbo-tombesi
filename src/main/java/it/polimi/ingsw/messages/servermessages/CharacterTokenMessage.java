@@ -1,4 +1,4 @@
-package it.polimi.ingsw.messages.server;
+package it.polimi.ingsw.messages.servermessages;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -6,10 +6,8 @@ import it.polimi.ingsw.exceptions.MessageErrorException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.TokensCharacter;
-import it.polimi.ingsw.model.token.Student;
 import it.polimi.ingsw.model.token.Token;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CharacterTokenMessage extends CharacterUpdateMessage {

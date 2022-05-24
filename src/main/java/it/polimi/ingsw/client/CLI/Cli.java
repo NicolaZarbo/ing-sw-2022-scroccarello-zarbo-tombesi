@@ -2,7 +2,7 @@ package it.polimi.ingsw.client.CLI;
 
 import it.polimi.ingsw.client.CLI.printers.*;
 import it.polimi.ingsw.client.ServerConnection;
-import it.polimi.ingsw.messages.server.PlayerSetUpMessage;
+import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.UserInterface;
 import it.polimi.ingsw.view.objects.SimplifiedPlayer;

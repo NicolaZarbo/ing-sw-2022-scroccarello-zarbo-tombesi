@@ -3,8 +3,8 @@ package it.polimi.ingsw.messages;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.exceptions.MessageErrorException;
-import it.polimi.ingsw.messages.client.*;
-import it.polimi.ingsw.messages.server.*;
+import it.polimi.ingsw.messages.clientmessages.*;
+import it.polimi.ingsw.messages.servermessages.*;
 //TODO add all the missing messages
 public class MessageFactory {
     public static ServerMessage getMessageFromServer(String json){

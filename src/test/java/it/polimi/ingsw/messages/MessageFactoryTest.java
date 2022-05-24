@@ -1,7 +1,7 @@
 package it.polimi.ingsw.messages;
 
-import it.polimi.ingsw.messages.client.*;
-import it.polimi.ingsw.messages.server.*;
+import it.polimi.ingsw.messages.clientmessages.*;
+import it.polimi.ingsw.messages.servermessages.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.enumerations.Mage;
 import it.polimi.ingsw.model.character.ParameterObject;
