@@ -54,6 +54,7 @@ public class Cli implements UserInterface {
 
     @Override
     public void showHand() {
+        showView();
         SimplifiedPlayer player=game.getPersonalPlayer();
         List<Integer> played=game.getPlayedCardThisTurn().stream().map(s->s+1).toList();
         System.out.println(IMP+"You can't use the cards n: "+played+RST);
@@ -90,6 +91,7 @@ public class Cli implements UserInterface {
 
     @Override
     public void askToMoveMother() {
+        showView();
         System.out.println(IslandsPrinter.print(game));
         if(!game.isEasy()) {
             if(game.getActiveCharacter()==0)
@@ -101,8 +103,19 @@ public class Cli implements UserInterface {
 
     @Override
     public void showClouds() {
+        showView();
         System.out.println(CloudPrinter.print(game));
         System.out.println(IMP+"Choose a cloud from which you will replenish your students "+RST);
+    }
+
+    @Override
+    public void showBoards() {
+        System.out.println(BoardsPrinter.print(game));
+    }
+
+    @Override
+    public void showIslands() {
+        System.out.println(IslandsPrinter.print(game));
     }
 
     public void askWhereToMove(){

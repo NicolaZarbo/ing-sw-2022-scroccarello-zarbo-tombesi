@@ -132,8 +132,6 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         playedCardThisTurn.add(message.getPlayedCardId()%10);
         if(message.getPlayerId()==personalPlayer.getId())
             cardYouPlayed=message.getPlayedCardId()%10;
-        //if(isYourTurn() && state==GameState.planPlayCard)
-          //  clientScreen.showHand();
 
     }
     public void singleBoardUpdate(SingleBoardMessage message){
@@ -174,22 +172,21 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         switch (state){
             case setupPlayers -> {throw new RuntimeException("something went really wrong");}
             case planPlayCard -> {
-                clientScreen.showView();
                 if(isYourTurn())
                     clientScreen.showHand();
             }
             case actionMoveStudent -> {
                 activeCharacter=0;
                 playedCardThisTurn = new ArrayList<>();
-                clientScreen.showView();
+                //clientScreen.showView();
             }
             case actionMoveMother -> {
-                clientScreen.showView();
+                //clientScreen.showView();
                 if(isYourTurn())
                     clientScreen.askToMoveMother();
             }
             case actionChooseCloud ->{
-                clientScreen.showView();
+                //clientScreen.showView();
                 if(isYourTurn())
                     clientScreen.showClouds();
             }

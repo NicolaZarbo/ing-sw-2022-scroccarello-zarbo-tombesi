@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="360.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Documenti/GitHub/ing-sw-2022-scroccarello-zarbo-tombesi/Graphical_Assets/Plancia/Plancia_DEF2.png" />
+                  <Image url="@../../main/resources/images/boards/Plancia_DEF2.png" />
                </image>
             </ImageView>
             <Circle id="hall1" fill="DODGERBLUE" layoutX="19.0" layoutY="99.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
@@ -179,7 +179,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="360.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Documenti/GitHub/ing-sw-2022-scroccarello-zarbo-tombesi/Graphical_Assets/Plancia/Plancia_DEF2.png" />
+                  <Image url="@../../main/resources/images/boards/Plancia_DEF2.png" />
                </image>
             </ImageView>
             <Circle id="hall1" fill="DODGERBLUE" layoutX="19.0" layoutY="99.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
@@ -336,7 +336,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="360.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Documenti/GitHub/ing-sw-2022-scroccarello-zarbo-tombesi/Graphical_Assets/Plancia/Plancia_DEF2.png" />
+                  <Image url="@../../main/resources/images/boards/Plancia_DEF2.png" />
                </image>
             </ImageView>
             <Circle id="hall1" fill="DODGERBLUE" layoutX="19.0" layoutY="99.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />

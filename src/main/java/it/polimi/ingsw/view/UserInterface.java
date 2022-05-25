@@ -19,4 +19,6 @@ public interface UserInterface {
     void askToMoveMother();
     /** shows / focuses on the clouds*/
     void showClouds();
+    void showBoards();
+    void showIslands();
 }
