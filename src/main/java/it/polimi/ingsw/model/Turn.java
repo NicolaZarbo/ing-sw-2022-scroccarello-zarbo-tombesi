@@ -32,7 +32,7 @@ public class Turn {
             if (board.foundCoin(stud))
                 player.getHand().addCoin();
             if (canHaveTeacher(stud.getColor(), idPlayer))
-                getTeacher(stud.getColor(), idPlayer);//FIXME getTeacher can call a notify
+                getTeacher(stud.getColor(), idPlayer);
         }
         catch(NoTokenFoundException e){
             throw new NoTokenFoundException(e.getMessage());

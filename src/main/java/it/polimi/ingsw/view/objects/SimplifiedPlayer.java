@@ -8,12 +8,12 @@ public class SimplifiedPlayer {
     private String username;
     private int id;
     private SimplifiedBoard board;
-    private int towerColor;//towercolor assigned to player 1-black,2-white,3-gray
+    private int towerColor;//tower-color assigned to player 1-black,2-white,3-gray
     //player hand representation
     private int mage;
     private int coin;
-    private boolean[] assistantCards; //card se true giocabile
-    private boolean[] discardedCards; //card se true scartata
+    private boolean[] assistantCards;
+    private boolean[] discardedCards; //it is simply !assistnatCards, do we need this?
 
 
 

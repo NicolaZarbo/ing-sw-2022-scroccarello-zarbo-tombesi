@@ -33,8 +33,6 @@ public class Cli implements UserInterface {
         this.game = new CentralView(this);
         this.input = new Scanner(System.in);
         this.inputManagerCli = new InputManagerCli(this);
-
-
     }
 
     public CentralView getGame() {
@@ -42,8 +40,9 @@ public class Cli implements UserInterface {
     }
 
     public void run() throws IOException {
+        PrintWriter printer= new PrintWriter(System.out,true);
         inputManagerCli.printToScreen(BKG);
-        inputManagerCli.printToScreen(WRD+ TitlePrinter.print()+RST);
+        printer.println(WRD+ TitlePrinter.print()+RST);
         ServerConnection connection = new ServerConnection(new Scanner(System.in), game, inputManagerCli);
         game.addObserver( connection.setMessageHandler());
         connection.run();

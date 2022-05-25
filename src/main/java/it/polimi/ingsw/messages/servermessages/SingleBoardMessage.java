@@ -11,6 +11,7 @@ import it.polimi.ingsw.view.objects.SimplifiedBoard;
 public class SingleBoardMessage extends ServerMessage {
     private SimplifiedBoard board;
     private int boardPlayerId;
+    private int nCoin;
     public SingleBoardMessage(String json) {
         super(json);
     }
@@ -19,17 +20,23 @@ public class SingleBoardMessage extends ServerMessage {
         super(game);
         this.boardPlayerId = boardPlayerId;
         this.board= ModelToViewTranslate.translateBoard(game.getPlayer(boardPlayerId).getBoard());
+        this.nCoin=game.getPlayer(boardPlayerId).getHand().getCoin();
         serialize();
     }
     public void parseMessage(JsonObject gg){
         Gson gson= new Gson();
         this.board= gson.fromJson(gg,this.getClass()).getBoard();
         this.boardPlayerId =gson.fromJson(gg,this.getClass()).getBoardPlayerId();
+        this.nCoin=gson.fromJson(gg,this.getClass()).getCoin();
     }
 
     @Override
     public void doAction(CentralView view) {
         view.singleBoardUpdate(this);
+    }
+
+    public int getCoin() {
+        return nCoin;
     }
 
     public int getBoardPlayerId() {

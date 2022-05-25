@@ -140,6 +140,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         for (SimplifiedPlayer p:players){
             if (p.getId() == message.getBoardPlayerId()) {
                p.setBoard(message.getBoard());
+               p.setCoin(message.getCoin());
             }
         }
        //
@@ -265,5 +266,9 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     public int getStudentMoved() {
         return studentMoved;
+    }
+
+    public UserInterface getClientScreen() {
+        return clientScreen;
     }
 }

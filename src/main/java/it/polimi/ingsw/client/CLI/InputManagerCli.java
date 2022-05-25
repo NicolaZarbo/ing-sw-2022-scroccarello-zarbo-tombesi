@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.CLI;
 import it.polimi.ingsw.client.CLI.printers.*;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
+import it.polimi.ingsw.exceptions.CharacterErrorException;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.client.InputManager;
@@ -14,7 +15,6 @@ public class InputManagerCli  extends InputManager {
 
     private final CentralView game;
     private final Cli cli;
-    private int colorInt;
     private boolean somethingSelected;
     private int targetColor;
     private final CharacterInputManager characterInputManager;
@@ -73,12 +73,14 @@ public class InputManagerCli  extends InputManager {
             nChar=Integer.parseInt(input);
             characterInputManager.characterManagerCall(nChar);
         }catch (IllegalMoveException e){
-            System.out.println("character error");
+            System.out.println(e.getMessage());
             seeAction();
             decodeInput();
-            //cli.askToRetry("\n"+e.getMessage());
         }catch (NumberFormatException e){
             cli.askToRetry("not a card");
+        }catch(CharacterErrorException e){
+            seeAction();
+            decodeInput();
         }
     }
 
@@ -87,6 +89,7 @@ public class InputManagerCli  extends InputManager {
         decodeStringInput(new Scanner(System.in).nextLine());
     }
 
+    /** may also be used in case we need to manage how stuff is print in windows console*/
     @Override
     public void printToScreen(String string) {
         System.out.println(Cli.IMP+string+ Cli.RST);
@@ -99,7 +102,8 @@ public class InputManagerCli  extends InputManager {
             return;
         }
         switch (multipleInput[1]) {
-            case "black", "gray", "white", "b", "g", "w" -> {colorInt = convertTowerColorToInteger(multipleInput[1]);
+            case "black", "gray", "white", "b", "g", "w" -> {
+                int colorInt = convertTowerColorToInteger(multipleInput[1]);
                 if(isInteger)
                     game.choosePlayerCustom(colorInt, inputInteger-1);
                 else cli.askToRetry("please select the mage by its number");}
