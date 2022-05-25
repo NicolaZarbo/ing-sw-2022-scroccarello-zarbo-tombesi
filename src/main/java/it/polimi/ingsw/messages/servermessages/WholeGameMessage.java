@@ -24,11 +24,13 @@ public class WholeGameMessage extends ServerMessage{
     private List<Integer> characters;
     private HashMap<Integer,List<Integer>> cardStudents;
     private HashMap<Integer,Integer> cardCosts;
+    private int activeCharacter;
 
     public WholeGameMessage(String json) {
         super(json);
     }
 
+    /** used to send every info about players(boards;hand), clouds, islands, MN, and CharacterCards*/
     public WholeGameMessage(Game game) {
         super(game);
         this.easy=game.isEasy();
@@ -36,6 +38,7 @@ public class WholeGameMessage extends ServerMessage{
         this.islands=ModelToViewTranslate.translateIsland(game.getIslands());
         this.motherNature=game.getMotherNature().getPosition();
         this.clouds= ModelToViewTranslate.translateClouds(game.getClouds());
+        this.activeCharacter=game.getCardBonusActive();
         if(!game.isEasy()){
             this.characters=game.getCharacters().stream().map(CharacterCard::getId).toList();
             cardStudents= new HashMap<>();
@@ -50,6 +53,10 @@ public class WholeGameMessage extends ServerMessage{
         super.serialize();
     }
 
+    public int getActiveCharacter() {
+        return activeCharacter;
+    }
+
     @Override
     protected void parseMessage(JsonObject gg) {
         Gson gson= new Gson();
@@ -62,6 +69,7 @@ public class WholeGameMessage extends ServerMessage{
         this.characters=mex.characters;
         this.cardStudents=mex.cardStudents;
         this.cardCosts=mex.cardCosts;
+        this.activeCharacter= mex.activeCharacter;
     }
 
     @Override

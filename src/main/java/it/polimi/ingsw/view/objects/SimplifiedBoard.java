@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.objects;
 
-import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
 
 import java.util.List;
@@ -20,20 +19,35 @@ public class SimplifiedBoard {
         this.towersLeft = towersLeft;
         this.coinDN=coinDN;
     }
-    public boolean hasStudentOfColor(int tokenColor){
+    public boolean hasStudentOfColorInEntrance(int tokenColor){
         for (Integer id:entrance) {
             if(id/26==tokenColor)
                 return true;
         }
         return false;
     }
-    public int getStudentFromColor(int tokenColor){
+    public int getStudentFromColorInEntrance(int tokenColor){
         for (Integer id:entrance) {
             if(id/26==tokenColor)
                 return id;
         }
         throw new NoTokenFoundException("no student of that color in entrance");
     }
+    public boolean hasStudentOfColorInDining(int tokenColor){
+        for (Integer id:diningRoom[tokenColor]) {
+            if(id/26==tokenColor)
+                return true;
+        }
+        return false;
+    }
+    public int getStudentFromColorInDining(int tokenColor){
+        for (Integer id:diningRoom[tokenColor]) {
+            if(id/26==tokenColor)
+                return id;
+        }
+        throw new NoTokenFoundException("no student of that color in dining room");
+    }
+
     public boolean[][] getCoinDN() {
         return coinDN;
     }

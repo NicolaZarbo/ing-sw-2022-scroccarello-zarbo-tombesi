@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.character;
 
 import it.polimi.ingsw.exceptions.CharacterErrorException;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
+import it.polimi.ingsw.messages.servermessages.CharacterTokenMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Island;
 import it.polimi.ingsw.model.token.Student;
@@ -17,9 +18,6 @@ public class Character1 extends TokensCharacter{
 
     @Override
     public void cardEffect(ParameterObject parameters, Game game){
-        if(this.getCost()>game.getPlayer(game.getCurrentPlayerId()).getHand().getCoin()){
-            throw new IllegalMoveException("not enough money");
-        }
         Student stud;
         Island island;
         if(parameters.getnParam()!=2)
@@ -29,6 +27,7 @@ public class Character1 extends TokensCharacter{
         island.addStudent(stud);
         this.addStudents(game.getBag().getToken());
         incrementCost();
+        game.groupMultiMessage(new CharacterTokenMessage(1,game));
     }
 
 

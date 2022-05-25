@@ -144,7 +144,7 @@ public class TurnTest extends TestCase {
         }
 
     }
-    public  void testCharacter1(){
+    /*public  void testCharacter1(){
         Character1 c=(Character1)game.getCharacter(1);
         Student stud =(c).getStudents().get(1);
         Island isl = game.getIsland(1);
@@ -158,6 +158,8 @@ public class TurnTest extends TestCase {
         }
         assertTrue(game.getIsland(1).getStudents().stream().map(Student::getId).toList().contains(studIdOnCard));
     }
+    terrible test lmao
+     */
 
     public  void testConquerIsland() {
         Student stud=game.getPlayer(1).getBoard().getEntrance().get(0);

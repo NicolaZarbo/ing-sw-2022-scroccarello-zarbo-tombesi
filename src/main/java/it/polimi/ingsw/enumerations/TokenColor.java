@@ -15,8 +15,7 @@ public enum TokenColor {
         for(int k=0;k<list.length;k++)
             if(TokenColor.getColor(k).equals(i))
                 j=k;
-
-            return j;
+        return j;
     }
 
     public static int listGetLastIndex() {

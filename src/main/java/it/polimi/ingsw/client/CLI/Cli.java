@@ -70,7 +70,6 @@ public class Cli implements UserInterface {
     @Override
     public void showOptionsForPersonalization(PlayerSetUpMessage message) {
         System.out.println(PersonalizationPrinter.printForColorsAndMages(message));
-
     }
 
     @Override
@@ -80,17 +79,24 @@ public class Cli implements UserInterface {
 
     @Override
     public void askToMoveStudent() {
-        if(!game.isEasy())
-            System.out.println(Printer.WHITE_BKG+Printer.BLACK+"write C to get character selection"+RST);
+        showView();
+        if(!game.isEasy()) {
+            if(game.getActiveCharacter()==0)
+                System.out.println(Printer.WHITE_BKG + Printer.BLACK + "write C to get character selection" + RST);
+            else System.out.println(Printer.WHITE_BKG + Printer.BLACK + "Character "+game.getActiveCharacter()+" active" + RST);
+        }
         System.out.println(IMP+"Choose a student in your Entrance by its color"+RST);
         System.out.println("Student moved : "+ Printer.DR_GRAY_BKG+" "+game.getStudentMoved()+" "+RST);
     }
 
     @Override
     public void askToMoveMother() {
-        if(!game.isEasy())
-            System.out.println(Printer.WHITE_BKG+Printer.BLACK+"write C to get character selection"+RST);
         System.out.println(IslandsPrinter.print(game));
+        if(!game.isEasy()) {
+            if(game.getActiveCharacter()==0)
+                System.out.println(Printer.WHITE_BKG + Printer.BLACK + "write C to get character selection" + RST);
+            else System.out.println(Printer.WHITE_BKG + Printer.BLACK + "Character "+game.getActiveCharacter()+" active" + RST);
+        }
         System.out.println(IMP+"Chose a number of steps, max =" +(game.getCardYouPlayed()+2)/2+""+RST);
     }
 

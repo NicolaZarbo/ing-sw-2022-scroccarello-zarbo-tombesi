@@ -14,7 +14,7 @@ public class CharacterPrinter implements Printer{
             out.append("\n ");
             out.append("---------------------------------------------------------------------------------------------------\n");
         }
-
+        out.append(CYAN+"        YOU HAVE  : "+view.getPersonalPlayer().getCoin()+" COINS"+RST);
         return out.toString();
     }
     private static String getCost(int i, CentralView view){

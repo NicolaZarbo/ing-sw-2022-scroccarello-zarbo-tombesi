@@ -49,7 +49,7 @@ public class Server {
     }
 
     public synchronized void createLobby(ClientConnection connection, String nick,int dimension, String yesEasy) throws IOException {
-        if(dimension<2|| dimension>4)
+        if(dimension<1|| dimension>4)//fixme but not so fast
             throw new IOException("min 2 players, max 4");
         boolean easy;
         easy= yesEasy.equals("y");

@@ -1,4 +1,5 @@
 package it.polimi.ingsw.controller;
+import it.polimi.ingsw.exceptions.CharacterErrorException;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.messages.clientmessages.*;
@@ -75,7 +76,11 @@ public class ControllerActionPhase  {
     public void playCharacter(CharacterCardMessage message) {
         if(game.getActualState()!=GameState.actionMoveMother && game.getActualState()!=GameState.actionMoveStudent)
             throw new IllegalMoveException();
-        modelTurn.useCharacter(message.getCardId(), message.getParameters(), message.getPlayerId());
+        try {
+            modelTurn.useCharacter(message.getCardId(), message.getParameters(), message.getPlayerId());
+        }catch (CharacterErrorException e){
+            throw new IllegalMoveException("you selected the wrong parameters for this character");
+        }
     }
 
     public Game getGame(){return this.game;}

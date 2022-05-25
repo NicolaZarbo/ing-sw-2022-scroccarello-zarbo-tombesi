@@ -53,7 +53,7 @@ public class Board {
        table[prof.getColor().ordinal()] = prof;
     }
 
-    /** @param stud :sposta studente in dining room*/
+    /** used to move a student into the dining room*/
     public void moveToDiningRoom(Student stud)throws NoPlaceAvailableException {
         if(stud!= null) {
             int i = stud.getColor().ordinal();
@@ -63,7 +63,7 @@ public class Board {
                     return;
                 }
             }
-        throw new NoPlaceAvailableException();
+        throw new NoPlaceAvailableException("no place available in dining room");
         }
     }
 
@@ -79,7 +79,7 @@ public class Board {
                     }
             }
         }
-        throw new NoTokenFoundException("no student of that color in entrance");
+        throw new NoTokenFoundException("no student of that color in dining room");
     }
 
     public Student getStudentFromEntrance(int id)throws NoTokenFoundException{
@@ -92,7 +92,7 @@ public class Board {
                     return stud;
                 }
         }
-        throw new NoTokenFoundException("no student of that color in entrance");
+        throw new NoTokenFoundException("no student of color : "+TokenColor.getColor(id/26)+" in entrance");
     }
 
     public void addTower(ArrayList<Tower> towers){
@@ -138,7 +138,7 @@ public class Board {
         if(entrance.size()<entranceSize)
             entrance.add(student);
         else
-            throw new NoPlaceAvailableException();
+            throw new NoPlaceAvailableException("no place left on entrance");
     }
 
     public boolean foundCoin(Student stud) {

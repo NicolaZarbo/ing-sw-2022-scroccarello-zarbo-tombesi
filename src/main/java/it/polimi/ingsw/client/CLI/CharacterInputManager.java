@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.CLI;
 
 import it.polimi.ingsw.client.CLI.printers.BoardsPrinter;
+import it.polimi.ingsw.client.CLI.printers.IslandsPrinter;
 import it.polimi.ingsw.client.CLI.printers.Printer;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.model.character.ParameterObject;
@@ -9,8 +10,10 @@ import it.polimi.ingsw.view.CentralView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.IntFunction;
 
 public class CharacterInputManager {
     CentralView game;
@@ -28,8 +31,9 @@ public class CharacterInputManager {
     }
     private void character1(){
         List<Integer> studentOnTop=game.getStudentsOnCard().get(1);
+        System.out.println(IslandsPrinter.print(game));
         System.out.println(CharacterPrinter.printStudentOnTop(1,studentOnTop));
-        System.out.println("select a student color in this card followed by a target Island \n"+ Printer.PINK+"or press enter to go back"+Printer.RST);
+        System.out.println(Printer.PINK+"select a student color in this card followed by a target Island \n"+ Printer.RED+"or press enter to go back"+Printer.RST);
         try{
         String input = (new Scanner(System.in)).nextLine();
             if(input.equalsIgnoreCase(""))
@@ -37,11 +41,12 @@ public class CharacterInputManager {
         String[] multipleInput=input.toLowerCase().split("\s");
         int islandId;
         int studID = studentInListFromColor(InputManagerCli.convertStudentColorToInteger(multipleInput[0]), studentOnTop);
-        islandId= Integer.parseInt(multipleInput[1])-1;
+        islandId= Integer.parseInt(multipleInput[1]);
         ParameterObject par = new ParameterObject(studID,islandId);
         game.playCharacter(1, par);
         }
         catch (NumberFormatException e){
+            System.out.println("pick the island by its number");
             character1();
         }catch (NullPointerException e){
             System.out.println("color not present");
@@ -106,13 +111,55 @@ public class CharacterInputManager {
         game.playCharacter(8,par);
     }
     private  void character9(){
-        //TODO
+        System.out.println("Choose a target color");
+        String input = (new Scanner(System.in)).nextLine().toLowerCase().substring(0,1);
+        int color=InputManagerCli.convertStudentColorToInteger(input);
+        ParameterObject parameter = new ParameterObject(color);
+        game.playCharacter(9,parameter);
     }
     private  void character10(){
-        //TODO
+        System.out.println(BoardsPrinter.print(game));
+        System.out.println(Cli.IMP+"Choose up to 2 student in your Dining Room"+Cli.RST+" \n[Color Color]"+ Printer.RED+"\nor press enter to go back"+Printer.RST);
+        String input = (new Scanner(System.in)).nextLine().toLowerCase();
+        if(input.equalsIgnoreCase(""))
+            return;
+        String[] multipleInput=input.split("\s");
+        if(multipleInput.length>2)
+        {
+            throw new IllegalMoveException("you can choose 2 students color at max");
+        }
+        int[] studentFromDining = new int[multipleInput.length];
+        int numberPicked=0;
+        for (int i = 0; i<multipleInput.length; i++) {
+            if(game.getPersonalPlayer().getBoard().hasStudentOfColorInDining(InputManagerCli.convertStudentColorToInteger(multipleInput[i]))){
+                studentFromDining[i]=(game.getPersonalPlayer().getBoard().getStudentFromColorInDining(InputManagerCli.convertStudentColorToInteger(multipleInput[i])));
+                numberPicked++;
+            }
+        }
+        int[] studentFromEntrance = new int[numberPicked];
+        System.out.println(" Now pick "+numberPicked+" students from your Entrance");
+        input = (new Scanner(System.in)).nextLine().toLowerCase();
+        multipleInput=input.split("\s");
+        if(multipleInput.length>2)
+        {
+            throw new IllegalMoveException("you should've choose "+ numberPicked+" students color at max");
+        }
+        for (int i = 0; i < numberPicked; i++) {
+            if(game.getPersonalPlayer().getBoard().hasStudentOfColorInDining(InputManagerCli.convertStudentColorToInteger(multipleInput[i])))
+                studentFromEntrance[i]=(game.getPersonalPlayer().getBoard().getStudentFromColorInEntrance(InputManagerCli.convertStudentColorToInteger(multipleInput[i])));
+        }
+        ParameterObject parameter= new ParameterObject(game.getPersonalPlayer().getId(),studentFromEntrance,studentFromDining);
+        game.playCharacter(10,parameter);
     }
     private  void character11(){
-        //TODO
+        List<Integer> studentOnTop=game.getStudentsOnCard().get(11);
+        System.out.println(BoardsPrinter.printPersonal(game));
+        System.out.println(CharacterPrinter.printStudentOnTop(11,studentOnTop));
+        System.out.println("Choose a student on the card by its color");
+        String input = (new Scanner(System.in)).nextLine().toLowerCase().substring(0,1);
+        int color=InputManagerCli.convertStudentColorToInteger(input);
+        ParameterObject parameter= new ParameterObject(color,game.getPersonalPlayer().getId());
+        game.playCharacter(11,parameter);
     }
     //private static void character12(){}
 
@@ -128,6 +175,8 @@ public class CharacterInputManager {
             method.invoke(this);
         }catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
             throw new IllegalMoveException("not available "+in+ " char method");
+        }catch (IllegalMoveException e ){
+    //TODO check for exception trowed in the above methods
         }
         }
 

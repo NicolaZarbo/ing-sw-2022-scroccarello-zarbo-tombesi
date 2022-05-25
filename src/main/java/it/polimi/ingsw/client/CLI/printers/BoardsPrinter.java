@@ -17,6 +17,24 @@ public class BoardsPrinter implements Printer{
             B|      |     |     |
             P|      |     |     |
              |______|_____|_____|\s""".indent(1);
+    public static String printPersonal(CentralView view){
+        StringBuilder out = new StringBuilder();
+        SimplifiedBoard board=view.getPersonalPlayer().getBoard();
+        String tColor= Printer.padWithSpaces(towerColor(view.getPersonalPlayer().getTowerColor()),5);
+        int[] entranceColors=BoardsPrinter.entranceForColor(board);
+        String[] diningColor =BoardsPrinter.diningRoomColor(board);
+        String[] professors= BoardsPrinter.getProfs(board);
+
+        out.append("  _Entr_____________DN_____________Prof___T°_ \n");
+        out.append(" |      |                        |     |    |\n") ;
+        out.append("R|  "+RED+entranceColors[0]+RST+"   |  "+RED+diningColor[0]+RST+"  |  "+professors[0]+" |  "+board.getTowersLeft()+" |\n");
+        out.append("Y|  "+YELLOW+entranceColors[1]+RST+"   |  "+YELLOW+diningColor[1]+RST+"  |  "+professors[1]+" |____|\n");
+        out.append("G|  "+GREEN+entranceColors[2]+RST+"   |  "+GREEN+diningColor[2]+RST+"  |  "+professors[2]+" | "+tColor+"\n");
+        out.append("B|  "+BLUE+entranceColors[3]+RST+"   |  "+BLUE+diningColor[3]+RST+"  |  "+professors[3]+" |     \n");
+        out.append("P|  "+PINK+entranceColors[4]+RST+"   |  "+PINK+diningColor[4]+RST+"  |  "+professors[4]+" |     \n");
+        out.append(" |______|________________________|_____|     \n");
+        return out.toString();
+    }
     public static String print(CentralView view){
         StringBuilder out= new StringBuilder();
         List<SimplifiedPlayer> players = view.getPlayers();

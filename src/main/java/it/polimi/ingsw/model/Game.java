@@ -124,24 +124,6 @@ public class Game extends Observable<ServerMessage> {
         actualState=GameState.values()[before + 1];
         groupMultiMessage(new ChangePhaseMessage(this));
         sendMultiMessage();
-        /*if(actualState==GameState.actionChooseCloud) {
-            if (isLastPlayerTurn()) {
-                actualState = GameState.planPlayCard;
-                planningPhase.setCloud();
-            } else actualState=GameState.actionMoveStudent;
-            //currentPlayerId=playIngOrder.get(0);
-        }
-        else {
-            if (actualState == GameState.setupPlayers)
-                groupMultiMessage(new ChangeTurnMessage(this));
-            actualState = GameState.values()[before + 1];
-        }
-        groupMultiMessage(new ChangePhaseMessage(this));
-        if(isLastPlayerTurn() && actualState==GameState.actionMoveStudent)
-            groupMultiMessage(new ChangeTurnMessage(this));
-        sendMultiMessage();
-
-         */
     }
 
     public void changePlayerTurn(){
@@ -176,23 +158,6 @@ public class Game extends Observable<ServerMessage> {
 
         }
         sendMultiMessage();
-        /*if(!isLastPlayerTurn()){
-            currentPlayerId=playIngOrder.get(actualIndex%nPlayers);
-            groupMultiMessage(new ChangeTurnMessage(this));
-            if(actualState==GameState.actionChooseCloud) {
-                actualState = GameState.actionMoveStudent;
-                groupMultiMessage(new ChangePhaseMessage(this));
-            }
-            sendMultiMessage();
-        }
-        else {
-            currentPlayerId=playIngOrder.get(0);
-            if(actualState!=GameState.planPlayCard)
-                groupMultiMessage(new ChangeTurnMessage(this));
-            moveToNextPhase();
-        }
-
-         */
     }
     public AssistantCard getPlayedCard(int playerId){
         return cardPlayedThisRound.get(playerId);
@@ -269,6 +234,10 @@ public class Game extends Observable<ServerMessage> {
     public void resetBonus(){
         this.cardBonusActive=0;
         this.targetColor=null;
+    }
+
+    public int getCardBonusActive() {
+        return cardBonusActive;
     }
 
     //finds island based on id

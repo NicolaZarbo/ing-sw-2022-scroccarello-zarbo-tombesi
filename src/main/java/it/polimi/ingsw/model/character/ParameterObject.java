@@ -6,17 +6,19 @@ public class ParameterObject {
     private int targetStudentId;
     private  int otherTargetId;
     private int[] targetStudentsOnEntrance, targetStudentsForExchange;
-    private int nParam;
+    private final int nParam;
 
     /**use it for Turn Effect Cards, aka:
      * card2, card6, card8
      * */
-    public ParameterObject(){}
+    public ParameterObject(){
+        nParam=0;
+    }
 
     /** use it for card7 and card 10
      * otherTarget -> player ID
      * targetStudentsOnEntrance -> student IDs
-     * targetStudentsForExhange : card10 -> students on hall, card7 -> students on card
+     * targetStudentsForExchange : card10 -> students on hall, card7 -> students on card
      * */
     public ParameterObject(int otherTargetId, int[] targetStudentsOnEntrance, int[] targetStudentsForExchange) {
         if(targetStudentsForExchange.length==targetStudentsOnEntrance.length && targetStudentsForExchange.length<=3){
@@ -60,6 +62,7 @@ public class ParameterObject {
         return targetStudentsForExchange;
     }
 
+    /** used to check if the right type of param is being used */
     public int getnParam() {
         return nParam;
     }

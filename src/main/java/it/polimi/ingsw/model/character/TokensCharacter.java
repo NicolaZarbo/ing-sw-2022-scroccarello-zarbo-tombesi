@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.token.Student;
 import java.util.ArrayList;
 public abstract class TokensCharacter extends CharacterCard{
 
-    private ArrayList<Student> students;
+    private final ArrayList<Student> students;
     public TokensCharacter (int id){
         super(id);
         this.students= new ArrayList<>();
@@ -28,6 +28,6 @@ public abstract class TokensCharacter extends CharacterCard{
                 return stud;
             }
         }
-        throw new NullPointerException();
+        throw new NullPointerException("no student with id: "+id+" present on card "+getId());
     }
 }

@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-//per le torri si può scegliere anche di non usare l'id ma basarsi sul mero colore
 public class  CentralView extends Observable<ClientMessage> implements Observer<ServerMessage> {
     private List<SimplifiedIsland> islands;
     private List<Integer[]> clouds;
@@ -28,6 +27,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     private String name;
     private boolean easy;
     private SimplifiedPlayer personalPlayer;
+    private int activeCharacter;
     private GameState state;
     private int turnOf;
     private int id;
@@ -78,8 +78,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         this.id=-1;
     }
     public void errorFromServer(ErrorMessageForClient message){
-        if(message.getTargetPlayerId()==id|| message.getTargetPlayerId()==-1)
+        if(message.getTargetPlayerId()==id|| message.getTargetPlayerId()==-1) {
             clientScreen.showError(message.getErrorInfo());
+            seeAction();
+        }
     }
     public void setView(WholeGameMessage message) {
         islands=message.getIslands();
@@ -96,8 +98,21 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         characters=message.getCharacters();
         studentsOnCard=message.getCardStudents();
         costOfCard=message.getCardCosts();
-
+        activeCharacter= message.getActiveCharacter();
         clientScreen.showView();
+        if(state==GameState.actionMoveStudent||state==GameState.actionMoveMother)
+            seeAction();
+    }
+    /** used to return to the right input point*/
+    public void seeAction() {
+        if(!isYourTurn())
+            return;
+        switch (state) {
+            case planPlayCard -> clientScreen.showHand();
+            case actionMoveMother -> clientScreen.askToMoveMother();
+            case actionMoveStudent -> clientScreen.askToMoveStudent();
+            case actionChooseCloud -> clientScreen.showClouds();
+        }
     }
     public void setName(String name){
         this.name=name;
@@ -129,7 +144,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         }
        //
         if(isYourTurn() && state==GameState.actionMoveStudent) {
-            clientScreen.showView();
+            //clientScreen.showView();
             studentMoved++;
             if(studentMoved<3)
                 clientScreen.askToMoveStudent();
@@ -163,9 +178,9 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
                     clientScreen.showHand();
             }
             case actionMoveStudent -> {
+                activeCharacter=0;
                 playedCardThisTurn = new ArrayList<>();
                 clientScreen.showView();
-
             }
             case actionMoveMother -> {
                 clientScreen.showView();
@@ -197,11 +212,11 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         notify(new MoveMotherMessage(steps,personalPlayer.getId()));
     }
     public void moveStudentToHall(int colorOfStudent) throws NoTokenFoundException{
-            int studID=personalPlayer.getBoard().getStudentFromColor(colorOfStudent);
+            int studID=personalPlayer.getBoard().getStudentFromColorInEntrance(colorOfStudent);
             notify(new StudentToHallMessage(personalPlayer.getId(), studID));
     }
     public void moveStudentToIsland(int colorOfStudent, int islandId) throws IllegalMoveException,NoTokenFoundException{
-        int studID=personalPlayer.getBoard().getStudentFromColor(colorOfStudent);
+        int studID=personalPlayer.getBoard().getStudentFromColorInEntrance(colorOfStudent);
         if( islands.stream().map(SimplifiedIsland::getIslandId).toList().contains(islandId))
             notify(new StudentToIslandMessage(personalPlayer.getId(), studID, islandId));
         else throw new IllegalMoveException("Island not available");
@@ -242,6 +257,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     public int getCardYouPlayed() {
         return cardYouPlayed;
+    }
+
+    public int getActiveCharacter() {
+        return activeCharacter;
     }
 
     public int getStudentMoved() {

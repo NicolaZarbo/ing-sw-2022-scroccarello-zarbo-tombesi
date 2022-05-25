@@ -13,9 +13,6 @@ public class Character10 extends CharacterCard{
     @Override
     public void cardEffect(ParameterObject parameters, Game game) {
         Board board ;
-        if(this.getCost()>game.getPlayer(game.getCurrentPlayerId()).getHand().getCoin()){
-            throw new IllegalMoveException("not enough money");
-        }
         if(parameters.getnParam()!=3)
             throw new CharacterErrorException("wrong parameters");
         int nStudent =parameters.getTargetStudentsOnEntrance().length;

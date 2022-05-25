@@ -63,7 +63,7 @@ public class CharactersTest extends TestCase {
         cardTester=FactoryCharacter.createCharacter(2,gameTest.getBag());
         ParameterObject noParameter=new ParameterObject();
         try {
-            cardTester.cardEffect(noParameter, this.gameTest);
+            cardTester.cardEffect(noParameter, this.gameTest);//fixme card effect doesn't check for cost, use turn.useCharacter instead
         }
         catch(RuntimeException e){
             System.out.println(e.getMessage());

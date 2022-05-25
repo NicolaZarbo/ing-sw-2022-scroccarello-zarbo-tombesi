@@ -11,12 +11,7 @@ public class TurnEffectCharacter extends CharacterCard {
 
     @Override
     public void cardEffect(ParameterObject parameters, Game game) {
-        if(this.getCost()>game.getPlayer(game.getCurrentPlayerId()).getHand().getCoin()){
-            throw new IllegalMoveException("not enough money");
-        }
-        else {
-            game.setCardBonusActive(this.getId());
-            this.incrementCost();
-        }
+        game.setCardBonusActive(this.getId());
+        this.incrementCost();
     }
 }

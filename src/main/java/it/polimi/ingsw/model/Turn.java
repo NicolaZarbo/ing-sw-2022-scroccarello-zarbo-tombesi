@@ -81,7 +81,7 @@ public class Turn {
         }
         game.groupMultiMessage(new MotherPositionMessage(game));
     }
-    /** moves al the students on a target cloud to the board of playerId*/
+    /** moves al the students on a target cloud to the board of playerId, it is also the last actin of the turn*/
     public void moveFromCloudToEntrance(int cloudId,int playerId){
         Board board= game.getPlayer(playerId).getBoard();
         Cloud[] clouds=game.getClouds();
@@ -232,9 +232,15 @@ public class Turn {
         CharacterCard card = game.getCharacter(cardId);
         Player player = game.getPlayer(playerId);
         if(player.getHand().enoughCoin(card.getCost())){
-            card.cardEffect( parameters,  game );
-            player.getHand().payCoin(card.getCost());
-            game.notify(new CharacterUpdateMessage(cardId,game));
+            try {
+                player.getHand().payCoin(card.getCost());
+                card.cardEffect(parameters, game);
+            }catch (RuntimeException e){
+                throw new IllegalMoveException(e.getMessage());
+            }
+            game.setCardBonusActive(cardId);
+            game.groupMultiMessage(new WholeGameMessage(game));
+            game.sendMultiMessage();
         }
         else
             {throw new IllegalMoveException("not enough money");}

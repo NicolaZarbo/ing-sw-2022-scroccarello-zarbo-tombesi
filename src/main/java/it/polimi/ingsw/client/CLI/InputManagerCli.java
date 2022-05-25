@@ -1,6 +1,6 @@
 package it.polimi.ingsw.client.CLI;
 
-import it.polimi.ingsw.client.CLI.printers.Printer;
+import it.polimi.ingsw.client.CLI.printers.*;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
@@ -27,6 +27,8 @@ public class InputManagerCli  extends InputManager {
         if(!game.isYourTurn() )
             return;
         multipleInput=input.toLowerCase().split("\s");
+        if(multipleInput[0].equalsIgnoreCase("show") && game.getState()!= GameState.setupPlayers)
+            showManager();
         try{
             inputInteger=Integer.parseInt(multipleInput[0]);
             isInteger=true;
@@ -38,19 +40,43 @@ public class InputManagerCli  extends InputManager {
         stateSwitch(game.getState());
 
     }
-
+    private void showManager(){
+        System.out.println("Select the on you need to see" +
+                "\n Islands   Boards   Cards   Characters   Clouds");
+        String input=new Scanner(System.in).nextLine().toLowerCase();
+        System.out.println(switch (input){
+            case "islands"-> IslandsPrinter.print(game);
+            case "boards"-> BoardsPrinter.print(game);
+            case "cards"-> CardPrinter.print(game.getPersonalPlayer().getAssistantCards());
+            case "characters"-> CharacterPrinter.print(game);
+            case "clouds" -> CloudPrinter.print(game);
+            default -> "not available";
+        });
+        System.out.println("press enter to return");
+        new Scanner(System.in).nextLine();
+        seeAction();
+        decodeInput();
+    }
+    public void seeAction() {
+        if(!game.isYourTurn())
+            return;
+        switch (game.getState()) {
+            case planPlayCard -> cli.showHand();
+            case actionMoveMother -> cli.askToMoveMother();
+            case actionMoveStudent -> cli.askToMoveStudent();
+            case actionChooseCloud -> cli.showClouds();
+        }
+    }
     public void charactersDecode(String input){
         int nChar;
         try{
             nChar=Integer.parseInt(input);
             characterInputManager.characterManagerCall(nChar);
         }catch (IllegalMoveException e){
-            cli.showView();
-            if(game.getState()== GameState.actionMoveStudent)
-                cli.askToMoveStudent();
-            if(game.getState()==GameState.actionMoveMother)
-                cli.askToMoveMother();
-            cli.askToRetry("\n"+e.getMessage());
+            System.out.println("character error");
+            seeAction();
+            decodeInput();
+            //cli.askToRetry("\n"+e.getMessage());
         }catch (NumberFormatException e){
             cli.askToRetry("not a card");
         }
@@ -91,12 +117,15 @@ public class InputManagerCli  extends InputManager {
             }
         else cli.askToRetry("please select a card");
     }
-
+    private boolean canPlayCharacter(){
+        return multipleInput[0].equalsIgnoreCase("c") && !game.isEasy() && game.getActiveCharacter()==0;
+    }
     @Override
     public void caseActionMoveMother() {
-        if(multipleInput[0].equalsIgnoreCase("c") && !game.isEasy()) {
+        if(canPlayCharacter()) {
             cli.showCharacters();
             charactersDecode(new Scanner(System.in).nextLine());
+            return;
         }
         if(isInteger)
             game.moveMother(inputInteger);
@@ -106,13 +135,14 @@ public class InputManagerCli  extends InputManager {
 
     @Override
     public void caseActionMoveStudent() {
-        if(multipleInput[0].equalsIgnoreCase("c") && !game.isEasy()) {
+        if(canPlayCharacter()) {
             cli.showCharacters();
             charactersDecode(new Scanner(System.in).nextLine());
+            return;
         }
         if(!somethingSelected) {
             int color=convertStudentColorToInteger(multipleInput[0]);
-            if(game.getPersonalPlayer().getBoard().hasStudentOfColor(color)){
+            if(game.getPersonalPlayer().getBoard().hasStudentOfColorInEntrance(color)){
                 targetColor = color;
                 somethingSelected = true;
                 cli.askWhereToMove();
