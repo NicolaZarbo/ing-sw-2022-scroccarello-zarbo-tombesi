@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client.GUI;
 
+import it.polimi.ingsw.client.GUI.Scenes.LobbySceneController;
+import it.polimi.ingsw.client.GUI.Scenes.SceneController;
 import it.polimi.ingsw.client.ServerConnection;
 import it.polimi.ingsw.messages.GenericMessage;
 import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
@@ -21,9 +23,9 @@ import java.util.Scanner;
 public class GUI extends Application implements UserInterface{
     private  CentralView game;
     private ServerConnection connection;
-    private Stage mainStage;
+    public static Stage mainStage;
     private GuiInputManager inputManager;
-    private Map<String,Scene> scenes;
+    public Map<String,Scene> scenes;//there are probably smarter way to store these
 
 
     public GUI(){
@@ -37,9 +39,9 @@ public class GUI extends Application implements UserInterface{
         stage.setTitle("Eriantys");
         mainStage=stage;
         setScenes();
-        Platform.runLater(() -> {
+        //Platform.runLater(() -> {
             stage.setScene(scenes.get("FirstScene"));
-        });
+        //});
         stage.setResizable(false);
         stage.show();
     }
@@ -51,6 +53,7 @@ public class GUI extends Application implements UserInterface{
             throw new RuntimeException("connection failed");
         }
         game.addObserver(connection.setMessageHandler());
+        mainStage.setScene(scenes.get("LobbyScene"));//there are possibly better way to change scene and to update it at the same time
     }
     public void setLobbyRules(int numberPlayer, boolean easy){
         String e;
@@ -63,8 +66,9 @@ public class GUI extends Application implements UserInterface{
     private void setScenes(){
         //creates scenes and then saves them in this.scene with their name as a key
         scenes= new HashMap<>();
-        scenes.put("FirstScene",new FirstSceneController(this).getPane().getScene());
-        scenes.put("MapScene",new MapSceneController().getPane().getScene());
+        scenes.put("FirstScene",new Scene(new FirstSceneController(this).getPane()));
+        scenes.put("MapScene",new Scene(new MapSceneController().getPane()));
+        scenes.put("LobbyScene",new Scene(new LobbySceneController(this).getPane()));
     }
 
     public CentralView getGame() {

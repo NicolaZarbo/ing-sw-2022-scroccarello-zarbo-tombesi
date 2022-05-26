@@ -7,7 +7,6 @@ import javafx.scene.layout.Pane;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 public class FirstSceneController extends SceneController {
     private final GUI gui;
@@ -18,15 +17,17 @@ public class FirstSceneController extends SceneController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+        initialize();
     }
 
     @Override
-    public void updateScene() {
+    public void initialize() {
         Button  startBtn= (Button) pane.lookup("#sendButton");
         startBtn.setOnAction(event -> {
                     String name = ((TextField)pane.lookup("#usernameBox")).getText();
                     gui.startConnection(new ByteArrayInputStream(name.getBytes()));
+                    System.out.println("oooooooooooooooooo");
+
                 });
     }
 
