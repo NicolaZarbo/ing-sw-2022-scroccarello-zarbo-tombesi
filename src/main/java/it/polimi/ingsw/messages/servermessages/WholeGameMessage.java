@@ -8,8 +8,8 @@ import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.TokensCharacter;
 import it.polimi.ingsw.model.token.Token;
 import it.polimi.ingsw.view.CentralView;
-import it.polimi.ingsw.view.objects.SimplifiedIsland;
-import it.polimi.ingsw.view.objects.SimplifiedPlayer;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 
 import java.util.ArrayList;
 import java.util.HashMap;

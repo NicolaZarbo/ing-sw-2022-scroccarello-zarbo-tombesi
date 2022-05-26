@@ -1,7 +1,7 @@
 package it.polimi.ingsw.client.CLI.printers;
 
 import it.polimi.ingsw.view.CentralView;
-import it.polimi.ingsw.view.objects.SimplifiedIsland;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 
 import java.util.ArrayList;
 import java.util.Arrays;

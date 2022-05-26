@@ -1,5 +1,5 @@
-package it.polimi.ingsw.view.Gui.Scenes;
-import it.polimi.ingsw.view.Gui.GUI;
+package it.polimi.ingsw.client.GUI.Scenes;
+import it.polimi.ingsw.client.GUI.GUI;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 

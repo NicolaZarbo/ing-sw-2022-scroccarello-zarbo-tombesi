@@ -66,9 +66,9 @@ public class CharactersTest extends TestCase {
             cardTester.cardEffect(noParameter, this.gameTest);//fixme card effect doesn't check for cost, use turn.useCharacter instead
         }
         catch(RuntimeException e){
-            System.out.println(e.getMessage());
+            assertFalse(gameTest.isBonusActive(2));
         }
-        assertFalse(gameTest.isBonusActive(2));
+
     }
 
     public void testCharacter6(){
@@ -93,9 +93,8 @@ public class CharactersTest extends TestCase {
             cardTester.cardEffect(noParameter, this.gameTest);
         }
         catch(RuntimeException e){
-            System.out.println(e.getMessage());
+            assertFalse(gameTest.isBonusActive(6));
         }
-        assertFalse(gameTest.isBonusActive(6));
     }
 
     public void testCharacter7(){
@@ -164,9 +163,9 @@ public class CharactersTest extends TestCase {
             cardTester.cardEffect(noParameter, this.gameTest);
         }
         catch(RuntimeException e){
-            System.out.println(e.getMessage());
+            assertFalse(gameTest.isBonusActive(8));
         }
-        assertFalse(gameTest.isBonusActive(8));
+
     }
 
     public void testCharacter9(){
@@ -193,9 +192,9 @@ public class CharactersTest extends TestCase {
             assertEquals(TokenColor.getColor(colorIndex),gameTest.getTargetColor());
         }
         catch(RuntimeException e){
-            System.out.println(e.getMessage());
+            assertNull(gameTest.getTargetColor());
         }
-        assertNull(gameTest.getTargetColor());
+
     }
 
     public void testCharacter10(){
@@ -294,9 +293,9 @@ public class CharactersTest extends TestCase {
             cardTester.cardEffect(parameters, gameTest);
         }
         catch(RuntimeException e){
-            System.out.println(e.getMessage());
+            assertEquals(currentCost,cardTester.getCost());
+
         }
-        assertEquals(currentCost,cardTester.getCost());
     }
 
     public void testCharacter11(){

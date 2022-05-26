@@ -9,8 +9,8 @@ import it.polimi.ingsw.messages.servermessages.*;
 import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.Observer;
-import it.polimi.ingsw.view.objects.SimplifiedIsland;
-import it.polimi.ingsw.view.objects.SimplifiedPlayer;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 
 import java.util.ArrayList;
 import java.util.List;

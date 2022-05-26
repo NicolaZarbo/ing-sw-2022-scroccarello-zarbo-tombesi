@@ -1,7 +1,7 @@
-package it.polimi.ingsw.view.Gui.Scenes;
+package it.polimi.ingsw.client.GUI.Scenes;
 
 
-import it.polimi.ingsw.view.Gui.GUI;
+import it.polimi.ingsw.client.GUI.GUI;
 
 public abstract class ObservableByGUI {
         protected GUI observer;

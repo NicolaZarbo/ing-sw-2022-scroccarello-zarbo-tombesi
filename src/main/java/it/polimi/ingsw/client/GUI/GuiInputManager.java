@@ -1,7 +1,5 @@
-package it.polimi.ingsw.view.Gui;
+package it.polimi.ingsw.client.GUI;
 
-import it.polimi.ingsw.client.CLI.Cli;
-import it.polimi.ingsw.client.CLI.InputManagerCli;
 import it.polimi.ingsw.client.InputManager;
 import it.polimi.ingsw.view.CentralView;
 

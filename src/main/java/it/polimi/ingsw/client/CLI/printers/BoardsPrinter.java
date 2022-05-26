@@ -1,8 +1,8 @@
 package it.polimi.ingsw.client.CLI.printers;
 
 import it.polimi.ingsw.view.CentralView;
-import it.polimi.ingsw.view.objects.SimplifiedBoard;
-import it.polimi.ingsw.view.objects.SimplifiedPlayer;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedBoard;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 
 import java.util.Arrays;
 import java.util.List;

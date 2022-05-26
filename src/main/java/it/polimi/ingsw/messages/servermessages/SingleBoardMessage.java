@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import it.polimi.ingsw.messages.ModelToViewTranslate;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.view.CentralView;
-import it.polimi.ingsw.view.objects.SimplifiedBoard;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedBoard;
 
 
 public class SingleBoardMessage extends ServerMessage {

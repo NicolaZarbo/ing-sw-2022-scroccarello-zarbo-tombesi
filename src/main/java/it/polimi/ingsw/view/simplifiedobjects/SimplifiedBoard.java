@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.objects;
+package it.polimi.ingsw.view.simplifiedobjects;
 
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
 

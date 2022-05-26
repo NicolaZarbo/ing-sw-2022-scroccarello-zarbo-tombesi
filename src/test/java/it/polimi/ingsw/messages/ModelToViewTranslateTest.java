@@ -1,17 +1,17 @@
 package it.polimi.ingsw.messages;
 
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.view.objects.SimplifiedBoard;
-import it.polimi.ingsw.view.objects.SimplifiedIsland;
-import it.polimi.ingsw.view.objects.SimplifiedPlayer;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedBoard;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ModelToViewTranslateTest extends TestCase {
     Game gameTest;
+
     public void setUp() throws Exception {
         super.setUp();
         this.gameTest=new Game(false,4,12);

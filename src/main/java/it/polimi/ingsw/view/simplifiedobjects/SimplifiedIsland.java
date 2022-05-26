@@ -1,6 +1,5 @@
-package it.polimi.ingsw.view.objects;
+package it.polimi.ingsw.view.simplifiedobjects;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SimplifiedIsland {

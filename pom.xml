@@ -113,7 +113,7 @@
           <artifactId>javafx-maven-plugin</artifactId>
           <version>0.0.8</version>
           <configuration>
-            <mainClass>it.polimi.ingsw.view.Gui.GUI</mainClass>
+            <mainClass>it.polimi.ingsw.client.GUI.GUI</mainClass>
           </configuration>
         </plugin>
         <plugin>

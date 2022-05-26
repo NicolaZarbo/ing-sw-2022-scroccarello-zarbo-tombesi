@@ -1,12 +1,12 @@
-package it.polimi.ingsw.view.Gui;
+package it.polimi.ingsw.client.GUI;
 
 import it.polimi.ingsw.client.ServerConnection;
 import it.polimi.ingsw.messages.GenericMessage;
 import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.view.CentralView;
-import it.polimi.ingsw.view.Gui.Scenes.FirstSceneController;
-import it.polimi.ingsw.view.Gui.Scenes.MapSceneController;
+import it.polimi.ingsw.client.GUI.Scenes.FirstSceneController;
+import it.polimi.ingsw.client.GUI.Scenes.MapSceneController;
 import it.polimi.ingsw.view.UserInterface;
 import javafx.application.Application;
 import javafx.application.Platform;

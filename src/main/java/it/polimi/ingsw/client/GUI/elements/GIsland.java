@@ -1,9 +1,9 @@
-package it.polimi.ingsw.view.Gui.elements;
+package it.polimi.ingsw.client.GUI.elements;
 
-public class GCloud extends Entity {
+public class GIsland extends Entity {
 
 
-    public GCloud(int x,int y){
+    public GIsland(int x,int y){
         // setImage(new Image(new File(MenuScene.IMAGE_PATH+"End.png").toURI().toString(), 31, 31, true, true));
         setX(x);
         setY(y);

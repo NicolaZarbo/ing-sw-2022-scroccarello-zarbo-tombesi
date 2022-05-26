@@ -5,7 +5,7 @@ import it.polimi.ingsw.client.ServerConnection;
 import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.UserInterface;
-import it.polimi.ingsw.view.objects.SimplifiedPlayer;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
