@@ -13,34 +13,27 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.InputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class GUI extends Application implements UserInterface, Observer<GenericMessage> {
+public class GUI extends Application implements UserInterface{
     private  CentralView game;
-    private PrintWriter socketOut;
-    private final Scanner input;
     private ServerConnection connection;
     private Stage mainStage;
+    private GuiInputManager inputManager;
     private Map<String,Scene> scenes;
 
 
     public GUI(){
-        this.game = new CentralView(this);
-        this.input = new Scanner(System.in);
-
 
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage){
         game = new CentralView(this);
-        GuiInputManager inputManager= new GuiInputManager(game);
-        Scanner starter= new Scanner(InputStream.nullInputStream());//will contain an inputStream with the name; and if needed Number of player and difficulty
-        connection= new ServerConnection(starter,game,inputManager);
+        inputManager= new GuiInputManager(game);
         stage.setTitle("Eriantys");
         mainStage=stage;
         setScenes();
@@ -49,6 +42,23 @@ public class GUI extends Application implements UserInterface, Observer<GenericM
         });
         stage.setResizable(false);
         stage.show();
+    }
+    public void startConnection(InputStream  inputString)  {
+        Scanner starter= new Scanner(inputString);//will contain an inputStream with the name
+        try {
+            connection = new ServerConnection(starter, game, inputManager);
+        }catch (IOException e){
+            throw new RuntimeException("connection failed");
+        }
+        game.addObserver(connection.setMessageHandler());
+    }
+    public void setLobbyRules(int numberPlayer, boolean easy){
+        String e;
+        if(easy)
+            e="y";
+        else e="n";
+        InputStream rules = new ByteArrayInputStream((numberPlayer+"\n"+e).getBytes());
+        connection.writeTxtForLobby(rules);
     }
     private void setScenes(){
         //creates scenes and then saves them in this.scene with their name as a key
@@ -114,8 +124,4 @@ public class GUI extends Application implements UserInterface, Observer<GenericM
         });
     }
 
-    @Override
-    public void update(GenericMessage message) {
-
-    }
 }

@@ -1,12 +1,15 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.messages.MessageFactory;
 import it.polimi.ingsw.messages.clientmessages.ClientMessage;
 import it.polimi.ingsw.messages.servermessages.ServerMessage;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.view.CentralView;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.NoSuchElementException;
@@ -15,11 +18,12 @@ import java.util.Scanner;
 public class ServerConnection {
     private final PrintWriter socketOut;
     private final Scanner socketIn;
-    private final Scanner input;
+    private Scanner input;
     private final CentralView game;
     private final InputManager inputManager;
     private final String ip="127.0.0.1";
     private final int port=12345;
+    private volatile boolean canWrite;
 
     /** @param input a scanner object to read some string needed for the lobby setup*/
     public ServerConnection( Scanner input, CentralView view, InputManager inputManager) throws IOException {
@@ -29,6 +33,9 @@ public class ServerConnection {
         socketIn = new Scanner(socket.getInputStream());
         socketOut = new PrintWriter(socket.getOutputStream());
         this.inputManager=inputManager;
+        if(inputManager instanceof GuiInputManager)
+            canWrite=false;
+        else canWrite=true;
         this.game=view;
         this.input=input;
     }
@@ -43,7 +50,10 @@ public class ServerConnection {
             socketOut.flush();
             socketLine = socketIn.nextLine();
             inputManager.printToScreen(socketLine);
-            while (!socketLine.equals("connected to lobby")) {
+            while (!canWrite) {
+                Thread.onSpinWait();
+            }
+            while (!socketLine.equals("connected to lobby") ) {
                 inputLine = input.nextLine();
                 socketOut.println(inputLine);
                 socketOut.flush();
@@ -64,7 +74,10 @@ public class ServerConnection {
             socketOut.close();
         }
     }
-
+    public void writeTxtForLobby(InputStream rules){
+        input = new Scanner(rules);
+        canWrite=true;
+    }
     public MessagesFromViewHandler setMessageHandler(){
         return new MessagesFromViewHandler();
     }
