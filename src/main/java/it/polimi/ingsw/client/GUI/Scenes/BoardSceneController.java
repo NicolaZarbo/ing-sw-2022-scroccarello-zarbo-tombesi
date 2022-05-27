@@ -19,9 +19,11 @@ public class BoardSceneController extends SceneController{
         try {
             if(gui.getGame().getPlayers().size()==3){
                 pane= FXMLLoader.load(getClass().getResource("/BoardScene3.fxml"));
+                Scene scene=new Scene(pane);
             }
             else{
                 pane= FXMLLoader.load(getClass().getResource("/BoardScene2.fxml"));
+                Scene scene=new Scene(pane);
             }
 
         } catch (IOException e) {
@@ -40,5 +42,23 @@ public class BoardSceneController extends SceneController{
 
         });*/
     }
+
+    //metodo per settare tutti i cerchi, rettangoli e esagoni trasparenti poichè all'inizio la board è vuota
+    public void setToStart(Gui gui){
+    /*    if(gui.getGame().getPlayers().size()==3) {
+            AnchorPane first = pane.lookup("#boardPlayer1");
+            AnchorPane second = pane.lookup("#boardPlayer2");
+            AnchorPane third = pane.lookup("#boardPlayer3");
+            for(int i=1;i<10;i++) {
+                first.lookup("#hall" + i).setFill("transparent");
+                second.lookup("#hall" + i).setFill("transparent");
+                third.lookup("#hall" + i).setFill("transparent");
+
+
+            }
+
+        }
+
+    } */
 
 }
