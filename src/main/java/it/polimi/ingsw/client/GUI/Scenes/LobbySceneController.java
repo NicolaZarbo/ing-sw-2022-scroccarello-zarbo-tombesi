@@ -51,8 +51,9 @@ public class LobbySceneController extends SceneController  {
        // this.gui=gui;
         try {
             pane= FXMLLoader.load(getClass().getResource("/lobbyScene.fxml"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        }
+        catch (IOException e) {
+          System.out.println(e.getMessage());
         }
         System.out.println("terrible");
         //initialize();
