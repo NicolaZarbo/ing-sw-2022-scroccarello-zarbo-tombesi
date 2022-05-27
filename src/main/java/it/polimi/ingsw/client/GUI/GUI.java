@@ -30,6 +30,7 @@ public class GUI extends Application implements UserInterface {
 
     public GUI(){
     }
+
     public void start(Stage stage) throws IOException {
         game = new CentralView(this);
         inputManager= new GuiInputManager(game,this);
@@ -37,9 +38,14 @@ public class GUI extends Application implements UserInterface {
         mainStage=stage;
         scenes=new HashMap<>();
         initScene(SceneEnum.FirstScene);
-        //Platform.runLater(() -> {
         stage.setScene(scenes.get(SceneEnum.FirstScene));
-        //});
+
+        /*
+        initScene(SceneEnum.WizardScene);
+        stage.setScene(scenes.get(SceneEnum.WizardScene));
+        //just to test the displaying of the image
+        */
+
         stage.setResizable(false);
         stage.show();
     }
