@@ -8,7 +8,9 @@ import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.UserInterface;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.ByteArrayInputStream;
@@ -30,14 +32,14 @@ public class GUI extends Application implements UserInterface {
     }
     public void start(Stage stage) throws IOException {
         game = new CentralView(this);
-        inputManager= new GuiInputManager(game);
+        inputManager= new GuiInputManager(game,this);
         stage.setTitle("Eriantys");
         mainStage=stage;
-        setScenes();
-
-
+        scenes=new HashMap<>();
+        initScene(SceneEnum.FirstScene);
+        //Platform.runLater(() -> {
         stage.setScene(scenes.get(SceneEnum.FirstScene));
-
+        //});
         stage.setResizable(false);
         stage.show();
     }
@@ -54,7 +56,7 @@ public class GUI extends Application implements UserInterface {
             mainStage.setScene(scenes.get(SceneEnum.LobbyScene));//there are possibly better way to change scene and to update it at the same time
         }
         else{
-            // mainStage.setScene();
+            // mainStage.setScene(); todo
         }
     }
     public void setLobbyRules(int numberPlayer, boolean easy){
@@ -66,15 +68,17 @@ public class GUI extends Application implements UserInterface {
         connection.writeTxtForLobby(rules);
     }
     private void setScenes(){
-        //creates scenes and then saves them in this.scene with their name as a key
         scenes= new HashMap<>();
         scenes.put(SceneEnum.FirstScene,new Scene(new FirstSceneController(this).getPane()));
-        //scenes.put("MapScene",new Scene(new MapSceneController().getPane())); cant initialize it now, there is no view yet
-        scenes.put(SceneEnum.LobbyScene,new Scene(new LobbySceneController().getPane()));
-        //scenes.put("BoardSecene",new Scene(new  BoardSceneController(this).getPane()));
     }
-    public void setScene(SceneEnum sceneName, Scene scene){
-        scenes.put(sceneName,scene);
+    public void initScene(SceneEnum sceneName){
+        Pane pane ;
+        try {
+            pane=FXMLLoader.load(getClass().getResource(sceneName.getPath()));//todo add to all fxml the fx:controller attribute to the right controller class
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        scenes.put(sceneName,new Scene(pane));
     }
 
     public CentralView getGame() {
@@ -88,7 +92,7 @@ public class GUI extends Application implements UserInterface {
     @Override
     public void showHand() {
         Platform.runLater(() -> {
-            mainStage.setScene(scenes.get("HandScene"));
+            mainStage.setScene(scenes.get(SceneEnum.HandScene));
         });
     }
 

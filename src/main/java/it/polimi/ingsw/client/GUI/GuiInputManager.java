@@ -8,10 +8,15 @@ public class GuiInputManager extends InputManager {
     private CentralView game;
     private boolean canDoAction;
     private boolean isLobbyAvailable;
+    private static GUI gui;
 
-    public GuiInputManager(CentralView game) {
+    public GuiInputManager(CentralView game,GUI gui) {
         this.isLobbyAvailable=false;
         this.game = game;
+        GuiInputManager.gui =gui;
+    }
+    public static GUI getGui(){
+        return gui;
     }
 
     @Override

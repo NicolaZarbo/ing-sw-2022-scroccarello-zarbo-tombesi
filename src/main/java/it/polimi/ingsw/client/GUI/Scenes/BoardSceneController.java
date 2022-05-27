@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.GUI.Scenes;
 
 import it.polimi.ingsw.client.GUI.GUI;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -44,7 +45,7 @@ public class BoardSceneController extends SceneController{
     }
 
     //metodo per settare tutti i cerchi, rettangoli e esagoni trasparenti poichè all'inizio la board è vuota
-    public void setToStart(Gui gui){
+    public void setToStart(GUI gui){
     /*    if(gui.getGame().getPlayers().size()==3) {
             AnchorPane first = pane.lookup("#boardPlayer1");
             AnchorPane second = pane.lookup("#boardPlayer2");
@@ -58,7 +59,7 @@ public class BoardSceneController extends SceneController{
             }
 
         }
-
-    } */
+*/
+    }
 
 }
