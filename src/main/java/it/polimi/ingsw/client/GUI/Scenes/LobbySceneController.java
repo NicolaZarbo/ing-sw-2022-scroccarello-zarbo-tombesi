@@ -14,7 +14,7 @@ import java.io.IOException;
 public class LobbySceneController extends SceneController{
     private GUI gui;
 
-   // @FXML
+    // @FXML
     //ChoiceBox<Integer> nPlayers;
 
     @FXML
@@ -46,3 +46,4 @@ public class LobbySceneController extends SceneController{
         //initialize();
     }
 }
+

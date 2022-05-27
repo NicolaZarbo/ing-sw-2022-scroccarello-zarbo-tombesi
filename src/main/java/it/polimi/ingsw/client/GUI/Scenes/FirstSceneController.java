@@ -20,18 +20,15 @@ public class FirstSceneController extends SceneController {
         initialize();
     }
 
-    @Override
+   @Override
     public void initialize() {
-        Button  startBtn= (Button) pane.lookup("#sendButton");
+        /*Button  startBtn= (Button) pane.lookup("#sendButton");
         startBtn.setOnAction(event -> {
                     String name = ((TextField)pane.lookup("#usernameBox")).getText();
                     gui.startConnection(new ByteArrayInputStream(name.getBytes()));
                     System.out.println("oooooooooooooooooo");
 
-                });
+                });*/
     }
 
-    public Pane getPane() {
-        return pane;
-    }
 }
