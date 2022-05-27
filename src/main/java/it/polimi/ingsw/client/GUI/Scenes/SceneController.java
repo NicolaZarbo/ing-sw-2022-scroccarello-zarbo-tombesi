@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.GUI.Scenes;
 
+import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 
 public abstract class SceneController {

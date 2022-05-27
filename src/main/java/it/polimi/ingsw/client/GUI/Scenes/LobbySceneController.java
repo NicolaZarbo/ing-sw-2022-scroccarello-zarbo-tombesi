@@ -2,24 +2,36 @@ package it.polimi.ingsw.client.GUI.Scenes;
 
 import it.polimi.ingsw.client.GUI.GUI;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 
+
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LobbySceneController extends SceneController{
+public class LobbySceneController extends SceneController  {
     private GUI gui;
+    @FXML
+    ChoiceBox<Integer> nPlayers;
+    @FXML
+    Button createLobbyButton;
+    @FXML
+    CheckBox easySelector;
 
-    // @FXML
-    //ChoiceBox<Integer> nPlayers;
 
     @FXML
     public void initialize() {//todo the lookup methods finds a node only if it is a child of the node, there are other ways to reference a fxml object, lookout for those
-        /*Node pp=pane.lookup("#");
+
+/*
+        Node pp=pane.lookup("#");
         if(pp==null)
             throw new RuntimeException("ooooooooooooooooo");
         ChoiceBox<Integer> nPlayers = ((ChoiceBox<Integer>)pp);
@@ -35,8 +47,8 @@ public class LobbySceneController extends SceneController{
 
     }
 
-    public LobbySceneController(GUI gui) {
-        this.gui=gui;
+    public LobbySceneController() {
+       // this.gui=gui;
         try {
             pane= FXMLLoader.load(getClass().getResource("/lobbyScene.fxml"));
         } catch (IOException e) {
@@ -44,6 +56,12 @@ public class LobbySceneController extends SceneController{
         }
         System.out.println("terrible");
         //initialize();
+    }
+
+@FXML
+    public void goButton(javafx.event.ActionEvent actionEvent) {
+        System.out.println("lmao");
+
     }
 }
 

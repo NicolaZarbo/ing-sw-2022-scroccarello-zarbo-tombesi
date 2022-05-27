@@ -10,12 +10,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #003049;"  xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:controller="it.polimi.ingsw.client.GUI.Scenes.LobbySceneController" maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #003049;"  xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ScrollPane id="scrollPane" layoutY="35.0" prefHeight="311.0" prefWidth="600.0"
                   style="-fx-background-color: #003049;">
          <FlowPane prefHeight="308.0" prefWidth="591.0">
-            <CheckBox id="easySelector" mnemonicParsing="false" prefHeight="97.0" prefWidth="267.0" text="Easy Rules"
+            <CheckBox fx:id="easySelector" onAction="#goButton" mnemonicParsing="false" prefHeight="97.0" prefWidth="267.0" text="Easy Rules"
                       translateX="20.0" translateY="20.0">
                <font>
                   <Font size="36.0"/>
@@ -26,10 +26,10 @@
                   <Font size="36.0"/>
                </font>
             </Label>
-            <ChoiceBox id="nPlayers" prefHeight="64.0" prefWidth="122.0" translateX="-50.0" translateY="20.0"/>
+            <ChoiceBox fx:id="nPlayers" prefHeight="64.0" prefWidth="122.0" translateX="-50.0" translateY="20.0"/>
          </FlowPane>
       </ScrollPane>
-      <Button id="createLobbyButton" layoutX="227.0" layoutY="358.0" mnemonicParsing="false" text="Create new lobby">
+      <Button fx:id="createLobbyButton" layoutX="227.0" layoutY="358.0" mnemonicParsing="false" text="Create new lobby">
          <font>
             <Font name="Bookman Old Style" size="15.0" />
          </font>
