@@ -5,10 +5,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="it.polimi.ingsw.client.GUI.Scenes.FirstSceneController" maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button id="sendButton" layoutX="279.0" layoutY="313.0" mnemonicParsing="false" text="Send" />
-      <TextField id="usernameBox" layoutX="226.0" layoutY="266.0" />
+      <Button fx:id="sendButton" onAction="#doAction" layoutX="279.0" layoutY="313.0" mnemonicParsing="false" text="Send" />
+      <TextField fx:id="usernameBox" layoutX="226.0" layoutY="266.0" />
       <Label layoutX="239.0" layoutY="243.0" text="Choose your username" />
       <Label layoutX="289.0" layoutY="166.0" text="Port" />
       <Label layoutX="273.0" layoutY="110.0" text="IP address" />

@@ -69,7 +69,7 @@ public class GUI extends Application implements UserInterface {
     }
     private void setScenes(){
         scenes= new HashMap<>();
-        scenes.put(SceneEnum.FirstScene,new Scene(new FirstSceneController(this).getPane()));
+        scenes.put(SceneEnum.FirstScene,new Scene(new FirstSceneController().getPane()));
     }
     public void initScene(SceneEnum sceneName){
         Pane pane ;
