@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.GUI;
 
-import it.polimi.ingsw.client.GUI.Scenes.*;
 import it.polimi.ingsw.client.ServerConnection;
 import it.polimi.ingsw.enumerations.SceneEnum;
 import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
@@ -37,17 +36,17 @@ public class GUI extends Application implements UserInterface {
         stage.setTitle("Eriantys");
         mainStage=stage;
         scenes=new HashMap<>();
-        initScene(SceneEnum.FirstScene);
-        stage.setScene(scenes.get(SceneEnum.FirstScene));
 
-        /*
-        initScene(SceneEnum.WizardScene);
-        stage.setScene(scenes.get(SceneEnum.WizardScene));
+        initScene(SceneEnum.WelcomeScene);
+        mainStage.setScene(scenes.get(SceneEnum.WelcomeScene));
+
+       /* initScene(SceneEnum.WizardScene);
+        mainStage.setScene(scenes.get(SceneEnum.WizardScene));
         //just to test the displaying of the image
-        */
+    */
 
-        stage.setResizable(false);
-        stage.show();
+        mainStage.setResizable(false);
+        mainStage.show();
     }
 
     public void startConnection(InputStream  inputString)  {
@@ -59,10 +58,15 @@ public class GUI extends Application implements UserInterface {
         }
         game.addObserver(connection.setMessageHandler());
         if(!this.inputManager.isLobbyAvailable()) {
-            mainStage.setScene(scenes.get(SceneEnum.LobbyScene));//there are possibly better way to change scene and to update it at the same time
+            initScene(SceneEnum.LobbyScene);
+            mainStage.setScene(scenes.get(SceneEnum.LobbyScene));
+            mainStage.setResizable(false);
+            mainStage.show();
         }
         else{
-            // mainStage.setScene(); todo
+            mainStage.setScene(scenes.get(SceneEnum.WizardScene));
+            mainStage.setResizable(false);
+            mainStage.show();
         }
     }
     public void setLobbyRules(int numberPlayer, boolean easy){
@@ -73,10 +77,7 @@ public class GUI extends Application implements UserInterface {
         InputStream rules = new ByteArrayInputStream((numberPlayer+"\n"+e).getBytes());
         connection.writeTxtForLobby(rules);
     }
-    private void setScenes(){
-        scenes= new HashMap<>();
-        scenes.put(SceneEnum.FirstScene,new Scene(new FirstSceneController().getPane()));
-    }
+
     public void initScene(SceneEnum sceneName){
         Pane pane ;
         try {
@@ -90,6 +91,7 @@ public class GUI extends Application implements UserInterface {
     public CentralView getGame() {
         return game;
     }
+
     @Override
     public void showView() {
 

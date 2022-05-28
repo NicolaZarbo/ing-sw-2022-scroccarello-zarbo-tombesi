@@ -47,6 +47,7 @@ public class Cli implements UserInterface {
         game.addObserver( connection.setMessageHandler());
         connection.run();
     }
+
     @Override
     public void showView() {
         System.out.println(GamePrinter.printGameTable(game));
