@@ -14,7 +14,7 @@
    <children>
       <ScrollPane id="scrollPane" layoutY="35.0" prefHeight="311.0" prefWidth="600.0" style="-fx-background-color: #003049;">
          <FlowPane prefHeight="308.0" prefWidth="591.0">
-            <CheckBox fx:id="easySelector" mnemonicParsing="false" onAction="#goButton" prefHeight="97.0" prefWidth="267.0" text="Easy Rules" translateX="20.0" translateY="20.0">
+            <CheckBox fx:id="easySelector" mnemonicParsing="false"  prefHeight="97.0" prefWidth="267.0" text="Easy Rules" translateX="20.0" translateY="20.0">
                <font>
                   <Font size="36.0" />
                </font>
@@ -27,7 +27,7 @@
             <ChoiceBox fx:id="nPlayers" prefHeight="64.0" prefWidth="122.0" translateX="-50.0" translateY="20.0" />
          </FlowPane>
       </ScrollPane>
-      <Button fx:id="createLobbyButton" layoutX="227.0" layoutY="358.0" mnemonicParsing="false" text="Create new lobby">
+      <Button fx:id="createLobbyButton" onAction="#createLobby" layoutX="227.0" layoutY="358.0" mnemonicParsing="false" text="Create new lobby">
          <font>
             <Font name="Bookman Old Style" size="15.0" />
          </font>

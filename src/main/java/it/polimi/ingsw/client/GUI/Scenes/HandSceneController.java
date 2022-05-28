@@ -9,11 +9,7 @@ import java.io.IOException;
 public class HandSceneController {
     Pane scene;
     public HandSceneController() {
-        try {
-            scene= FXMLLoader.load(getClass().getResource("/HandScene.fxml"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     public Pane getPane() {

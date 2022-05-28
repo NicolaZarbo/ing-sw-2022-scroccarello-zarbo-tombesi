@@ -55,7 +55,7 @@ public class GUI extends Application implements UserInterface {
             throw new RuntimeException("connection failed");
         }
         game.addObserver(connection.setMessageHandler());
-        if(!this.inputManager.isLobbyAvailable()) {//todo thread stuff
+        if(!this.inputManager.isLobbyAvailable()) {
             //mainStage.setScene(scenes.get(SceneEnum.LobbyScene));//there are possibly better way to change scene and to update it at the same time
             setScene(SceneEnum.LobbyScene);
         }
@@ -64,10 +64,7 @@ public class GUI extends Application implements UserInterface {
         }
     }
     private void goToWizardSelection(){
-        initScene(SceneEnum.SetupScene);
-        mainStage.setScene(scenes.get(SceneEnum.SetupScene));
-        //mainStage.setResizable(false);
-        //mainStage.show();
+        setScene(SceneEnum.SetupScene);
     }
     public void setLobbyRules(int numberPlayer, boolean easy){
         String e;
@@ -102,15 +99,13 @@ public class GUI extends Application implements UserInterface {
     }
 
     @Override
-    public void showHand() {//todo have these methods call this class setScene method inside
-        Platform.runLater(() -> {
-            mainStage.setScene(scenes.get(SceneEnum.HandScene));
-        });
+    public void showHand() {
+        setScene(SceneEnum.HandScene);
     }
 
     @Override
     public void showCharacters() {
-
+        //todo have these methods call this class setScene method inside
     }
 
     @Override

@@ -75,7 +75,6 @@ public class ServerConnection {
         }
     }
     public void writeTxtForLobby(InputStream rules){
-        System.out.println("breakpoint");
         input = new Scanner(rules);
         canWrite=true;
     }
