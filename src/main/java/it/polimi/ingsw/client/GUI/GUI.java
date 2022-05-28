@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.GUI;
 
+import it.polimi.ingsw.client.GUI.Scenes.*;
 import it.polimi.ingsw.client.ServerConnection;
 import it.polimi.ingsw.enumerations.SceneEnum;
 import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
@@ -40,28 +41,23 @@ public class GUI extends Application implements UserInterface {
         initScene(SceneEnum.WelcomeScene);
         mainStage.setScene(scenes.get(SceneEnum.WelcomeScene));
 
-     /*  initScene(SceneEnum.SetupScene);
-        mainStage.setScene(scenes.get(SceneEnum.SetupScene));
-        //just to test the displaying of the images
-    */
-
         mainStage.setResizable(false);
         mainStage.show();
     }
-
+    /** @param inputString an inputStream with the name of the player*/
     public void startConnection(InputStream  inputString)  {
-      Scanner starter= new Scanner(inputString);//will contain an inputStream with the name
+      Scanner starter= new Scanner(inputString);
         try {
             connection = new ServerConnection(starter, game, inputManager);
+            Thread serverThread= new Thread(()->connection.run());
+            serverThread.start();
         }catch (IOException e){
             throw new RuntimeException("connection failed");
         }
         game.addObserver(connection.setMessageHandler());
-        if(!this.inputManager.isLobbyAvailable()) {
-            initScene(SceneEnum.LobbyScene);
-            mainStage.setScene(scenes.get(SceneEnum.LobbyScene));
-            mainStage.setResizable(false);
-            mainStage.show();
+        if(!this.inputManager.isLobbyAvailable()) {//todo thread stuff
+            //mainStage.setScene(scenes.get(SceneEnum.LobbyScene));//there are possibly better way to change scene and to update it at the same time
+            setScene(SceneEnum.LobbyScene);
         }
         else{
             goToWizardSelection();
@@ -70,8 +66,8 @@ public class GUI extends Application implements UserInterface {
     private void goToWizardSelection(){
         initScene(SceneEnum.SetupScene);
         mainStage.setScene(scenes.get(SceneEnum.SetupScene));
-        mainStage.setResizable(false);
-        mainStage.show();
+        //mainStage.setResizable(false);
+        //mainStage.show();
     }
     public void setLobbyRules(int numberPlayer, boolean easy){
         String e;
@@ -81,7 +77,11 @@ public class GUI extends Application implements UserInterface {
         InputStream rules = new ByteArrayInputStream((numberPlayer+"\n"+e).getBytes());
         connection.writeTxtForLobby(rules);
     }
-
+    public void setScene(SceneEnum sceneName){
+        if(!scenes.containsKey(sceneName))
+            initScene(sceneName);
+        Platform.runLater(()->mainStage.setScene(scenes.get(sceneName)));
+    }
     public void initScene(SceneEnum sceneName){
         Pane pane ;
         try {
@@ -102,7 +102,7 @@ public class GUI extends Application implements UserInterface {
     }
 
     @Override
-    public void showHand() {
+    public void showHand() {//todo have these methods call this class setScene method inside
         Platform.runLater(() -> {
             mainStage.setScene(scenes.get(SceneEnum.HandScene));
         });

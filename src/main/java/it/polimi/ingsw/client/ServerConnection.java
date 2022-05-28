@@ -50,10 +50,10 @@ public class ServerConnection {
             socketOut.flush();
             socketLine = socketIn.nextLine();
             inputManager.printToScreen(socketLine);
-            while (!canWrite) {
-                Thread.onSpinWait();
-            }
             while (!socketLine.equals("connected to lobby") ) {
+                while (!canWrite) {
+                    Thread.onSpinWait();
+                }
                 inputLine = input.nextLine();
                 socketOut.println(inputLine);
                 socketOut.flush();
@@ -75,6 +75,7 @@ public class ServerConnection {
         }
     }
     public void writeTxtForLobby(InputStream rules){
+        System.out.println("breakpoint");
         input = new Scanner(rules);
         canWrite=true;
     }
