@@ -7,7 +7,7 @@ public class GuiInputManager extends InputManager {
 
     private CentralView game;
     private boolean canDoAction;
-    private boolean isLobbyAvailable;
+    private static boolean isLobbyAvailable;
     private static GUI gui;
 
     public GuiInputManager(CentralView game,GUI gui) {
@@ -26,8 +26,10 @@ public class GuiInputManager extends InputManager {
 /** prints in a label in the connection page info from server*/
     @Override
     public void printToScreen(String string) {
-        if(string.equals("connected to lobby"))
-            this.isLobbyAvailable=true;
+        if(string.equals("connected to lobby")){
+            isLobbyAvailable=true;
+            System.out.println("lemao connection");
+        }
 
         if(string.contains("connection closed")){
             //TODO
@@ -59,7 +61,7 @@ public class GuiInputManager extends InputManager {
 
     }
 
-    public boolean isLobbyAvailable(){
-        return this.isLobbyAvailable;
+    public static boolean isLobbyAvailable(){
+        return isLobbyAvailable;
     }
 }

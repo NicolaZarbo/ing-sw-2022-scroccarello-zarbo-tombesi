@@ -35,6 +35,9 @@ public class LobbySceneController extends SceneController  {
 
     public void createLobby(ActionEvent actionEvent) {
         gui.setLobbyRules(nPlayers.getValue(), easySelector.isSelected());
+        setWaitingScreen();
+    }
+    public void setWaitingScreen(){
         mainpanel.setOpacity(0.5);
         waitingtext.setText("Waiting for players to join..");
     }

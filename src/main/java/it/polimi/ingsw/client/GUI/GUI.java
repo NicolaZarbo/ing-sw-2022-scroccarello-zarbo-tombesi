@@ -55,10 +55,9 @@ public class GUI extends Application implements UserInterface {
             throw new RuntimeException("connection failed");
         }
         game.addObserver(connection.setMessageHandler());
-        if(!this.inputManager.isLobbyAvailable()) {
-            setScene(SceneEnum.LobbyScene);
-        }
-        else{
+
+        setScene(SceneEnum.LobbyScene);
+        if(GuiInputManager.isLobbyAvailable()){
             goToWizardSelection();
         }
     }
