@@ -29,13 +29,11 @@ public class SetupSceneController extends SceneController{
     @FXML
     private ImageView greytower;
     @FXML
-    private Text errorWizard;
-    @FXML
-    private Text errorTower;
-    @FXML
-    private Label wizardChoice;
-    @FXML
     private Label towerChoice;
+    @FXML
+    private Label choiceMsg;
+    @FXML
+    private Text errorMsg;
 
 
     public SetupSceneController() {
@@ -44,8 +42,7 @@ public class SetupSceneController extends SceneController{
     @Override@FXML
     public void initialize() {
         this.gui= GuiInputManager.getGui();
-        errorTower.setVisible(false);
-        errorWizard.setVisible(false);
+        choiceMsg.setText("Choose your color");
 
         towerchosen=0;
         wizardchosen =0;
@@ -61,12 +58,12 @@ public class SetupSceneController extends SceneController{
         img=new Image("images/towers/grey_tower.png");
         greytower.setImage(img);
         //just for temporary testing
-        wizardChoice.setVisible(false);
+
     }
 
     private void showMagicians(){
-        errorTower.setVisible(false);
-        errorWizard.setVisible(false);
+        errorMsg.setText("");
+        choiceMsg.setText("Choose a magician");
         blacktower.setImage(null);
         whitetower.setImage(null);
         greytower.setImage(null);
@@ -83,48 +80,63 @@ public class SetupSceneController extends SceneController{
     @FXML
     public void setMage1(MouseEvent click){
         this.wizardchosen =1;
-        System.out.println("clicked on "+ wizardchosen);
+        restoreAllOpacities();
+        mage1.setOpacity(0.5);
     }
     @FXML
     public void setMage2(MouseEvent click){
         this.wizardchosen =2;
-        System.out.println("clicked on "+ wizardchosen);
+        restoreAllOpacities();
+        mage2.setOpacity(0.5);
     }
     @FXML
     public void setMage3(MouseEvent click){
         this.wizardchosen =3;
-        System.out.println("clicked on "+ wizardchosen);
+        restoreAllOpacities();
+        mage3.setOpacity(0.5);
     }
     @FXML
     public void setMage4(MouseEvent click){
         this.wizardchosen =4;
-        System.out.println("clicked on "+ wizardchosen);
+        restoreAllOpacities();
+        mage4.setOpacity(0.5);
     }
     @FXML public void setBlackTower(MouseEvent click){
         this.towerchosen=1;
+        restoreAllOpacities();
+        blacktower.setOpacity(0.5);
     }
     @FXML public void setWhiteTower(MouseEvent click){
         this.towerchosen=2;
+        restoreAllOpacities();
+        whitetower.setOpacity(0.5);
     }
     @FXML public void setGrayTower(MouseEvent click){
         this.towerchosen=3;
+        restoreAllOpacities();
+        greytower.setOpacity(0.5);
+    }
+    private void restoreAllOpacities(){
+        blacktower.setOpacity(1.0);
+        whitetower.setOpacity(1.0);
+        greytower.setOpacity(1.0);
+        mage1.setOpacity(1.0);
+        mage2.setOpacity(1.0);
+        mage3.setOpacity(1.0);
+        mage4.setOpacity(1.0);
     }
     public void confirmChoice(MouseEvent mouseEvent) {
-        if(towerchosen == 0){
-            errorTower.setVisible(true);
-            return;
+        if(towerchosen==0){
+            errorMsg.setText("Please choose your color");
         }
-        else{
-            towerChoice.setVisible(false);
-            wizardChoice.setVisible(true);
+        else if(mage1.getImage()==null){
             showMagicians();
         }
-        if(wizardchosen ==0){
-            errorWizard.setVisible(true);
-            return;
+        else if(wizardchosen==0){
+            errorMsg.setText("Please choose a magician");
         }
         else{
-            //TODO it should bring the player to the board page, still working on how to implement the scene
+            System.out.println("lmao");
         }
     }
 }

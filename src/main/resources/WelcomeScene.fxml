@@ -9,8 +9,8 @@
 <AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.WelcomeSceneController">
    <children>
       <Button fx:id="startButton" layoutX="268.0" layoutY="284.0" mnemonicParsing="false" onAction="#startGame" prefHeight="30.0" prefWidth="65.0" text="Start" />
-      <TextField fx:id="usernameBox" alignment="CENTER" layoutX="226.0" layoutY="238.0" />
+      <TextField fx:id="usernameBox" alignment="CENTER" layoutX="227.0" layoutY="240.0" />
       <Label layoutX="239.0" layoutY="212.0" text="Choose your username" />
-      <Text fx:id="errorMsg" fill="RED" layoutX="172.0" layoutY="343.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Please, choose your username to start the game" wrappingWidth="258.0" />
+      <Text fx:id="errorMsg" fill="RED" layoutX="101.0" layoutY="340.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="400.0" />
    </children>
 </AnchorPane>

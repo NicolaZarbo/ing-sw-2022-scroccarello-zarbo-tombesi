@@ -56,7 +56,6 @@ public class GUI extends Application implements UserInterface {
         }
         game.addObserver(connection.setMessageHandler());
         if(!this.inputManager.isLobbyAvailable()) {
-            //mainStage.setScene(scenes.get(SceneEnum.LobbyScene));//there are possibly better way to change scene and to update it at the same time
             setScene(SceneEnum.LobbyScene);
         }
         else{

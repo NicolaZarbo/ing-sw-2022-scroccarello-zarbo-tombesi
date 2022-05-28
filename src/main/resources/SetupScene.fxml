@@ -46,7 +46,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label fx:id="wizardChoice" alignment="CENTER" layoutX="232.0" layoutY="219.0" style="&#10;" text="Choose your magician" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+        <Label fx:id="choiceMsg" alignment="CENTER" layoutX="232.0" layoutY="219.0" prefHeight="27.0" prefWidth="164.0" style="&#10;" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
             <Font size="18.0" />
           </font>
@@ -59,16 +59,18 @@
                </contextMenu>
         </Label>
             <Button layoutX="296.0" layoutY="316.0" mnemonicParsing="false" onMouseClicked="#confirmChoice" text="Select" />
-            <ImageView fx:id="mage1" fitHeight="150.0" fitWidth="121.0" layoutX="148.0" layoutY="27.0" onMouseClicked="#setMage1" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="mage2" fitHeight="150.0" fitWidth="121.0" layoutX="362.0" layoutY="27.0" onMouseClicked="#setMage2" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="mage3" fitHeight="150.0" fitWidth="121.0" layoutX="483.0" layoutY="187.0" onMouseClicked="#setMage3" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="mage4" fitHeight="150.0" fitWidth="121.0" layoutX="34.0" layoutY="191.0" onMouseClicked="#setMage4" pickOnBounds="true" preserveRatio="true" />
-            <Text fx:id="errorWizard" fill="RED" layoutX="246.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please choose one magician" />
-            <ImageView fx:id="blacktower" fitHeight="150.0" fitWidth="121.0" layoutX="79.0" layoutY="144.0" onMouseClicked="#setBlackTower" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="whitetower" fitHeight="150.0" fitWidth="121.0" layoutX="431.0" layoutY="150.0" onMouseClicked="#setWhiteTower" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="greytower" fitHeight="150.0" fitWidth="121.0" layoutX="260.0" layoutY="14.0" onMouseClicked="#setGrayTower" pickOnBounds="true" preserveRatio="true" />
-            <Text fx:id="errorTower" fill="RED" layoutX="254.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please choose one tower" />
-            <Label fx:id="towerChoice" alignment="CENTER" layoutX="238.0" layoutY="219.0" prefHeight="27.0" prefWidth="164.0" style="&#10;" text="Choose your color" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+            <ImageView fx:id="mage1" fitHeight="150.0" fitWidth="121.0" layoutX="99.0" layoutY="14.0" onMouseClicked="#setMage1" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="mage2" fitHeight="150.0" fitWidth="121.0" layoutX="415.0" layoutY="14.0" onMouseClicked="#setMage2" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="mage3" fitHeight="150.0" fitWidth="121.0" layoutX="453.0" layoutY="219.0" onMouseClicked="#setMage3" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="mage4" fitHeight="150.0" fitWidth="121.0" layoutX="78.0" layoutY="219.0" onMouseClicked="#setMage4" pickOnBounds="true" preserveRatio="true" />
+            <Text fx:id="errorMsg" fill="RED" layoutX="224.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="200.0">
+               <font>
+                  <Font size="15.0" />
+               </font></Text>
+            <ImageView fx:id="blacktower" fitHeight="150.0" fitWidth="121.0" layoutX="139.0" layoutY="144.0" onMouseClicked="#setBlackTower" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="whitetower" fitHeight="150.0" fitWidth="121.0" layoutX="366.0" layoutY="144.0" onMouseClicked="#setWhiteTower" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="greytower" fitHeight="150.0" fitWidth="121.0" layoutX="257.0" layoutY="20.0" onMouseClicked="#setGrayTower" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="towerChoice" alignment="CENTER" contentDisplay="CENTER" layoutX="220.0" layoutY="231.0" prefHeight="30.0" prefWidth="200.0" style="&#10;" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>

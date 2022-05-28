@@ -18,17 +18,22 @@ public class WelcomeSceneController extends SceneController {
 
     public void initialize(){
         this.gui= GuiInputManager.getGui();
-        this.errorMsg.setVisible(false);
     }
+
     @FXML
     public void startGame(){
         String usr=usernameBox.getText();
         System.out.println(usr);
         if(usr==""){
-            this.errorMsg.setVisible(true);
+            this.errorMsg.setText("Please insert the username");
         }
         else{
-            gui.startConnection(new ByteArrayInputStream(usr.getBytes()));
+            try{
+                gui.startConnection(new ByteArrayInputStream(usr.getBytes()));
+            }
+            catch(RuntimeException e){
+                errorMsg.setText("Username not available, please choose another one");
+            }
         }
     }
 }
