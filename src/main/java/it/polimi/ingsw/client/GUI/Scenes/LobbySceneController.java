@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
 
@@ -41,7 +42,7 @@ public class LobbySceneController extends SceneController  {
 
     public void goButton(javafx.event.ActionEvent actionEvent) {
         System.out.println("lmao");
-
     }
+
 }
 

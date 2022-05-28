@@ -40,9 +40,9 @@ public class GUI extends Application implements UserInterface {
         initScene(SceneEnum.WelcomeScene);
         mainStage.setScene(scenes.get(SceneEnum.WelcomeScene));
 
-       /* initScene(SceneEnum.WizardScene);
-        mainStage.setScene(scenes.get(SceneEnum.WizardScene));
-        //just to test the displaying of the image
+     /*  initScene(SceneEnum.SetupScene);
+        mainStage.setScene(scenes.get(SceneEnum.SetupScene));
+        //just to test the displaying of the images
     */
 
         mainStage.setResizable(false);
@@ -64,10 +64,14 @@ public class GUI extends Application implements UserInterface {
             mainStage.show();
         }
         else{
-            mainStage.setScene(scenes.get(SceneEnum.WizardScene));
-            mainStage.setResizable(false);
-            mainStage.show();
+            goToWizardSelection();
         }
+    }
+    private void goToWizardSelection(){
+        initScene(SceneEnum.SetupScene);
+        mainStage.setScene(scenes.get(SceneEnum.SetupScene));
+        mainStage.setResizable(false);
+        mainStage.show();
     }
     public void setLobbyRules(int numberPlayer, boolean easy){
         String e;
@@ -111,7 +115,7 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void showOptionsForPersonalization(PlayerSetUpMessage message) {
-
+        goToWizardSelection();
     }
 
     @Override
