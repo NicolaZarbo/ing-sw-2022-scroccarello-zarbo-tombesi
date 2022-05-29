@@ -14,8 +14,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>18</maven.compiler.source>
-    <maven.compiler.target>18</maven.compiler.target>
+    <maven.compiler.source>18.0.1</maven.compiler.source>
+    <maven.compiler.target>18.0.1</maven.compiler.target>
     <sonar.exclusions>**/project_doc/**/*,**/server/**/*,**/client/**/*,**/view/**/*,**/Peer-Review  1 UML GC7.md,**/ing-sw-2022-scroccarello-zarbo-tombesi.iml</sonar.exclusions>
   </properties>
 
