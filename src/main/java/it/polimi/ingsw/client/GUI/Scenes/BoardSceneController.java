@@ -1,50 +1,138 @@
 package it.polimi.ingsw.client.GUI.Scenes;
-
 import it.polimi.ingsw.client.GUI.GUI;
-import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class BoardSceneController extends SceneController{
+public abstract class BoardSceneController extends SceneController{
 
     private GUI gui;
 
-    @FXML
-    private Circle hall6;
-
-
-    private ArrayList<Circle> entrance;
-    private ArrayList<ArrayList<Circle>> hall;
-
-    /**constructor which decides how many boards to display according to the number of players*/
     public BoardSceneController(GUI g) {
         this.gui=g;
-        this.entrance =new ArrayList<>();
-        this.hall =new ArrayList<>();
     }
 
-    @Override
-    public void initialize() {
+    public abstract void initialize();
 
-    }
+    /**displays the tokens in the entrance*/
+    public void setEntrance(ArrayList<Circle> entrance){
+        List<Integer> playerentrance=gui.getGame().getPersonalPlayer().getBoard().getEntrance();
+        int id;
+        for(int i=0;i<entrance.size();i++){
+            Image img;
+            id=playerentrance.get(i).intValue();
+            if(id!=-1){
+                switch(id/26){
+                    case 0->{
+                      img=new Image("images/students/student_red.png");
+                      entrance.get(i).setFill(new ImagePattern(img));
+                      entrance.get(i).setVisible(true);
+                    }
+                    case 1 ->{
+                        img=new Image("images/students/student_yellow.png");
+                        entrance.get(i).setFill(new ImagePattern(img));
+                        entrance.get(i).setVisible(true);
+                    }
+                    case 2->{
+                        img=new Image("images/students/student_green.png");
+                        entrance.get(i).setFill(new ImagePattern(img));
+                        entrance.get(i).setVisible(true);
+                    }
+                    case 3->{
+                        img=new Image("images/students/student_blue.png");
+                        entrance.get(i).setFill(new ImagePattern(img));
+                        entrance.get(i).setVisible(true);
+                    }
+                    case 4->{
+                        img=new Image("images/students/student_pink.png");
+                        entrance.get(i).setFill(new ImagePattern(img));
+                        entrance.get(i).setVisible(true);
+                    }
 
-    //metodo per settare tutti i cerchi, rettangoli e esagoni trasparenti poichè all'inizio la board è vuota
-    public void setToStart(GUI gui){
-    /*    if(gui.getGame().getPlayers().size()==3) {
-            AnchorPane first = pane.lookup("#boardPlayer1");
-            AnchorPane second = pane.lookup("#boardPlayer2");
-            AnchorPane third = pane.lookup("#boardPlayer3");
-            for(int i=1;i<10;i++) {
-                first.lookup("#hall" + i).setFill("Color.TRANSPARENT");
-                second.lookup("#hall" + i).setFill("Color.TRANSPARENT");
-                third.lookup("#hall" + i).setFill("Color.TRANSPARENT");
-
-
+                }
             }
-
         }
-*/
+    }
+
+    public void setHall(ArrayList<ArrayList<Circle>> hall){
+        Integer[][] diningroom=gui.getGame().getPersonalPlayer().getBoard().getDiningRoom();
+        for(int i=0;i<diningroom.length;i++){
+            for(int j=0;j<diningroom[i].length;i++){
+                Image img;
+                int id=diningroom[i][j].intValue();
+                if(id!=-1){
+                    switch(id/26){
+                        case 0->{
+                            img=new Image("images/students/student_red.png");
+                            hall.get(i).get(j).setFill(new ImagePattern(img));
+                            hall.get(i).get(j).setVisible(true);
+                        }
+                        case 1 ->{
+                            img=new Image("images/students/student_yellow.png");
+                            hall.get(i).get(j).setFill(new ImagePattern(img));
+                            hall.get(i).get(j).setVisible(true);
+                        }
+                        case 2->{
+                            img=new Image("images/students/student_green.png");
+                            hall.get(i).get(j).setFill(new ImagePattern(img));
+                            hall.get(i).get(j).setVisible(true);
+                        }
+                        case 3->{
+                            img=new Image("images/students/student_blue.png");
+                            hall.get(i).get(j).setFill(new ImagePattern(img));
+                            hall.get(i).get(j).setVisible(true);
+                        }
+                        case 4->{
+                            img=new Image("images/students/student_pink.png");
+                            hall.get(i).get(j).setFill(new ImagePattern(img));
+                            hall.get(i).get(j).setVisible(true);
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    /**displays professors if the player has*/
+    public void setProfessors(ArrayList<Polygon> table){
+        Integer[] professors=gui.getGame().getPersonalPlayer().getBoard().getProfessorTable();
+        for(Integer i : professors){
+            if(i.intValue()!=0){
+                Image img;
+                switch(i.intValue()){
+                    case 0->{
+                        img=new Image("images/teachers/teacher_red.png");
+                        table.get(i.intValue()).setFill(new ImagePattern(img));
+                        table.get(i.intValue()).setVisible(true);
+                    }
+                    case 1->{
+                        img=new Image("images/teachers/teacher_yellow.png");
+                        table.get(i.intValue()).setFill(new ImagePattern(img));
+                        table.get(i.intValue()).setVisible(true);
+                    }
+                    case 2->{
+                        img=new Image("images/teachers/teacher_green.png");
+                        table.get(i.intValue()).setFill(new ImagePattern(img));
+                        table.get(i.intValue()).setVisible(true);
+                    }
+                    case 3->{
+                        img=new Image("images/teachers/teacher_blue.png");
+                        table.get(i.intValue()).setFill(new ImagePattern(img));
+                        table.get(i.intValue()).setVisible(true);
+                    }
+                    case 4->{
+                        img=new Image("images/teachers/teacher_pink.png");
+                        table.get(i.intValue()).setFill(new ImagePattern(img));
+                        table.get(i.intValue()).setVisible(true);
+                    }
+                }
+            }
+        }
     }
 
 }

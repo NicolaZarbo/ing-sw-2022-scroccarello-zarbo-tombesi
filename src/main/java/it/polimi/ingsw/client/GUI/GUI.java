@@ -138,7 +138,7 @@ public class GUI extends Application implements UserInterface {
     @Override
     public void showBoards() {
         Platform.runLater(() -> {
-            mainStage.setScene(scenes.get("BoardScene"));
+            mainStage.setScene(scenes.get(SceneEnum.BoardScene2));
         });
     }
 
