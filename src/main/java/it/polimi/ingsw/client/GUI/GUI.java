@@ -59,7 +59,8 @@ public class GUI extends Application implements UserInterface {
         {Thread.onSpinWait();}
         if(!GuiInputManager.isLobbyAvailable()) {
             setScene(SceneEnum.LobbyScene);
-        }//todo else tell the player to wait
+        }
+
 
     }
     private void goToWizardSelection(){

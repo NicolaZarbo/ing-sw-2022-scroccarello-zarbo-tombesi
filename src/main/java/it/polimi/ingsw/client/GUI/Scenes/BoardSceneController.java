@@ -1,47 +1,32 @@
 package it.polimi.ingsw.client.GUI.Scenes;
 
 import it.polimi.ingsw.client.GUI.GUI;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
+import javafx.fxml.FXML;
+import javafx.scene.shape.Circle;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+import java.util.ArrayList;
 
 public class BoardSceneController extends SceneController{
 
-    private final GUI gui;
+    private GUI gui;
+
+    @FXML
+    private Circle hall6;
+
+
+    private ArrayList<Circle> entrance;
+    private ArrayList<ArrayList<Circle>> hall;
 
     /**constructor which decides how many boards to display according to the number of players*/
-    public BoardSceneController(GUI gui) {
-        this.gui=gui;
-        try {
-            if(gui.getGame().getPlayers().size()==3){
-                pane= FXMLLoader.load(getClass().getResource("/BoardScene3.fxml"));
-                Scene scene=new Scene(pane);
-            }
-            else{
-                pane= FXMLLoader.load(getClass().getResource("/BoardScene2.fxml"));
-                Scene scene=new Scene(pane);
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        initialize();
+    public BoardSceneController(GUI g) {
+        this.gui=g;
+        this.entrance =new ArrayList<>();
+        this.hall =new ArrayList<>();
     }
 
     @Override
     public void initialize() {
-        /*Button startBtn= (Button) pane.lookup("#sendButton");
-        startBtn.setOnAction(event -> {
-            String name = ((TextField)pane.lookup("#usernameBox")).getText();
-            gui.startConnection(new ByteArrayInputStream(name.getBytes()));
-            System.out.println("oooooooooooooooooo");
 
-        });*/
     }
 
     //metodo per settare tutti i cerchi, rettangoli e esagoni trasparenti poichè all'inizio la board è vuota
