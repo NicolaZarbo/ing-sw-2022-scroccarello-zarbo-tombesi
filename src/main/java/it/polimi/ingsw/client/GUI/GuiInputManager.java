@@ -8,10 +8,12 @@ public class GuiInputManager extends InputManager {
     private CentralView game;
     private boolean canDoAction;
     private static boolean isLobbyAvailable;
+    private static boolean isConnected;
     private static GUI gui;
 
     public GuiInputManager(CentralView game,GUI gui) {
-        this.isLobbyAvailable=false;
+        isLobbyAvailable=false;
+        isConnected=false;
         this.game = game;
         GuiInputManager.gui =gui;
     }
@@ -26,8 +28,11 @@ public class GuiInputManager extends InputManager {
 /** prints in a label in the connection page info from server*/
     @Override
     public void printToScreen(String string) {
+        if(string.equals("no lobby available. Creating new lobby, number of players?"))
+            isConnected=true;
         if(string.equals("connected to lobby")){
             isLobbyAvailable=true;
+            isConnected=true;
             System.out.println("lemao connection");
         }
 
@@ -35,7 +40,12 @@ public class GuiInputManager extends InputManager {
             //TODO
         }
     }
-//these methods could be either put insides the scenes controllers or kept here
+
+    public static boolean isIsConnected() {
+        return isConnected;
+    }
+
+    //these methods could be either put insides the scenes controllers or kept here
     @Override
     protected void caseSetupPlayers() {
 

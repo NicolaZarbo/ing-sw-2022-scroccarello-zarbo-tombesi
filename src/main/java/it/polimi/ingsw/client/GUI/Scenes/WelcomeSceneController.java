@@ -32,7 +32,7 @@ public class WelcomeSceneController extends SceneController {
                 gui.startConnection(new ByteArrayInputStream(usr.getBytes()));
             }
             catch(RuntimeException e){
-                errorMsg.setText("Username not available, please choose another one");
+                errorMsg.setText("Username not available, please choose another one " + e.getMessage());
             }
         }
     }
