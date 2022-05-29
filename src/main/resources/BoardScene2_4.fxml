@@ -12,73 +12,73 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="948.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane id="boardPlayer1" layoutX="191.0" layoutY="52.0" prefHeight="218.0" prefWidth="508.0">
+      <AnchorPane fx:id="boardPlayer1" layoutX="191.0" layoutY="52.0" prefHeight="218.0" prefWidth="508.0">
          <children>
             <ImageView fitHeight="248.0" fitWidth="508.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/boards/Plancia_DEF2.png" />
                </image>
             </ImageView>
-            <Circle id="hall6" fx:id="hall6" fill="DODGERBLUE" layoutX="28.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall2" fill="DODGERBLUE" layoutX="28.0" layoutY="75.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall4" fill="DODGERBLUE" layoutX="28.0" layoutY="111.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall7" fill="DODGERBLUE" layoutX="57.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall3" fill="DODGERBLUE" layoutX="57.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall5" fill="DODGERBLUE" layoutX="58.0" layoutY="111.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall1" fill="DODGERBLUE" layoutX="58.0" layoutY="38.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall8" fill="DODGERBLUE" layoutX="28.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall9" fill="DODGERBLUE" layoutX="58.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board1c5r" fill="DODGERBLUE" layoutX="105.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board2c5r" fill="DODGERBLUE" layoutX="130.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board3c5r" fill="DODGERBLUE" layoutX="154.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board4c5r" fill="DODGERBLUE" layoutX="178.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board5c5r" fill="DODGERBLUE" layoutX="202.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board6c5r" fill="DODGERBLUE" layoutX="226.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board7c5r" fill="DODGERBLUE" layoutX="251.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board8c5r" fill="DODGERBLUE" layoutX="275.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board9c5r" fill="DODGERBLUE" layoutX="299.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board10c5r" fill="DODGERBLUE" layoutX="323.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board1c4r" fill="DODGERBLUE" layoutX="105.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board2c4r" fill="DODGERBLUE" layoutX="130.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board3c4r" fill="DODGERBLUE" layoutX="154.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board4c4r" fill="DODGERBLUE" layoutX="178.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board5c4r" fill="DODGERBLUE" layoutX="202.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board6c4r" fill="DODGERBLUE" layoutX="225.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board7c4r" fill="DODGERBLUE" layoutX="251.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board8c4r" fill="DODGERBLUE" layoutX="275.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board9c4r" fill="DODGERBLUE" layoutX="299.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board10c4r" fill="DODGERBLUE" layoutX="323.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board1c3r" fill="DODGERBLUE" layoutX="105.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board2c3r" fill="DODGERBLUE" layoutX="130.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board3c3r" fill="DODGERBLUE" layoutX="154.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board4c3r" fill="DODGERBLUE" layoutX="178.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board5c3r" fill="DODGERBLUE" layoutX="202.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board6c3r" fill="DODGERBLUE" layoutX="225.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board7c3r" fill="DODGERBLUE" layoutX="251.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board8c3r" fill="DODGERBLUE" layoutX="275.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board9c3r" fill="DODGERBLUE" layoutX="299.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board10c3r" fill="DODGERBLUE" layoutX="323.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board1c2r" fill="DODGERBLUE" layoutX="105.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board2c2r" fill="DODGERBLUE" layoutX="130.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board3c2r" fill="DODGERBLUE" layoutX="154.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board4c2r" fill="DODGERBLUE" layoutX="178.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board5c2r" fill="DODGERBLUE" layoutX="202.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board6c2r" fill="DODGERBLUE" layoutX="225.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board7c2r" fill="DODGERBLUE" layoutX="251.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board8c2r" fill="DODGERBLUE" layoutX="275.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board9c2r" fill="DODGERBLUE" layoutX="299.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board10c2r" fill="DODGERBLUE" layoutX="323.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board1c1r" fill="DODGERBLUE" layoutX="105.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board2c1r" fill="DODGERBLUE" layoutX="130.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board3c1r" fill="DODGERBLUE" layoutX="154.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board4c1r" fill="DODGERBLUE" layoutX="178.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board5c1r" fill="DODGERBLUE" layoutX="202.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board6c1r" fill="DODGERBLUE" layoutX="225.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board7c1r" fill="DODGERBLUE" layoutX="251.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board8c1r" fill="DODGERBLUE" layoutX="275.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board9c1r" fill="DODGERBLUE" layoutX="299.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board10c1r" fill="DODGERBLUE" layoutX="323.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Polygon id="teacher5" fill="DODGERBLUE" layoutX="371.0" layoutY="182.0" scaleX="0.2" scaleY="0.2" scaleZ="0.1" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Circle fx:id="hall6"  fill="DODGERBLUE" layoutX="28.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall2" fill="DODGERBLUE" layoutX="28.0" layoutY="75.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall4" fill="DODGERBLUE" layoutX="28.0" layoutY="111.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall7" fill="DODGERBLUE" layoutX="57.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall3" fill="DODGERBLUE" layoutX="57.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall5" fill="DODGERBLUE" layoutX="58.0" layoutY="111.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall1" fill="DODGERBLUE" layoutX="58.0" layoutY="38.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall8" fill="DODGERBLUE" layoutX="28.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall9" fill="DODGERBLUE" layoutX="58.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board1c5r" fill="DODGERBLUE" layoutX="105.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board2c5r" fill="DODGERBLUE" layoutX="130.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board3c5r" fill="DODGERBLUE" layoutX="154.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board4c5r" fill="DODGERBLUE" layoutX="178.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board5c5r" fill="DODGERBLUE" layoutX="202.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board6c5r" fill="DODGERBLUE" layoutX="226.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board7c5r" fill="DODGERBLUE" layoutX="251.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board8c5r" fill="DODGERBLUE" layoutX="275.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board9c5r" fill="DODGERBLUE" layoutX="299.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board10c5r" fill="DODGERBLUE" layoutX="323.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board1c4r" fill="DODGERBLUE" layoutX="105.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board2c4r" fill="DODGERBLUE" layoutX="130.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board3c4r" fill="DODGERBLUE" layoutX="154.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board4c4r" fill="DODGERBLUE" layoutX="178.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board5c4r" fill="DODGERBLUE" layoutX="202.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board6c4r" fill="DODGERBLUE" layoutX="225.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board7c4r" fill="DODGERBLUE" layoutX="251.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board8c4r" fill="DODGERBLUE" layoutX="275.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board9c4r" fill="DODGERBLUE" layoutX="299.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board10c4r" fill="DODGERBLUE" layoutX="323.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board1c3r" fill="DODGERBLUE" layoutX="105.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board2c3r" fill="DODGERBLUE" layoutX="130.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board3c3r" fill="DODGERBLUE" layoutX="154.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board4c3r" fill="DODGERBLUE" layoutX="178.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board5c3r" fill="DODGERBLUE" layoutX="202.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board6c3r" fill="DODGERBLUE" layoutX="225.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board7c3r" fill="DODGERBLUE" layoutX="251.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board8c3r" fill="DODGERBLUE" layoutX="275.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board9c3r" fill="DODGERBLUE" layoutX="299.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board10c3r" fill="DODGERBLUE" layoutX="323.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board1c2r" fill="DODGERBLUE" layoutX="105.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board2c2r" fill="DODGERBLUE" layoutX="130.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board3c2r" fill="DODGERBLUE" layoutX="154.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board4c2r" fill="DODGERBLUE" layoutX="178.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board5c2r" fill="DODGERBLUE" layoutX="202.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board6c2r" fill="DODGERBLUE" layoutX="225.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board7c2r" fill="DODGERBLUE" layoutX="251.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board8c2r" fill="DODGERBLUE" layoutX="275.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board9c2r" fill="DODGERBLUE" layoutX="299.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board10c2r" fill="DODGERBLUE" layoutX="323.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board1c1r" fill="DODGERBLUE" layoutX="105.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board2c1r" fill="DODGERBLUE" layoutX="130.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board3c1r" fill="DODGERBLUE" layoutX="154.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board4c1r" fill="DODGERBLUE" layoutX="178.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board5c1r" fill="DODGERBLUE" layoutX="202.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board6c1r" fill="DODGERBLUE" layoutX="225.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board7c1r" fill="DODGERBLUE" layoutX="251.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board8c1r" fill="DODGERBLUE" layoutX="275.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board9c1r" fill="DODGERBLUE" layoutX="299.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board10c1r" fill="DODGERBLUE" layoutX="323.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Polygon fx:id="teacher5" fill="DODGERBLUE" layoutX="371.0" layoutY="182.0" scaleX="0.2" scaleY="0.2" scaleZ="0.1" stroke="BLACK" strokeType="INSIDE" visible="false">
               <points>
       
                  <Double fx:value="-50.0" />
@@ -100,7 +100,7 @@
                  <Double fx:value="-30.0" />
               </points>
             </Polygon>
-            <Polygon id="teacher4" fill="DODGERBLUE" layoutX="371.0" layoutY="146.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Polygon fx:id="teacher4" fill="DODGERBLUE" layoutX="371.0" layoutY="146.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
                <points>
                   <Double fx:value="-50.0" />
                   <Double fx:value="30.0" />
@@ -116,7 +116,7 @@
                   <Double fx:value="-30.0" />
                </points>
             </Polygon>
-            <Polygon id="teacher3" fill="DODGERBLUE" layoutX="371.0" layoutY="110.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Polygon fx:id="teacher3" fill="DODGERBLUE" layoutX="371.0" layoutY="110.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
                <points>
                   <Double fx:value="-50.0" />
                   <Double fx:value="30.0" />
@@ -132,7 +132,7 @@
                   <Double fx:value="-30.0" />
                </points>
             </Polygon>
-            <Polygon id="teacher2" fill="DODGERBLUE" layoutX="371.0" layoutY="74.0" scaleX="0.2" scaleY="0.2" scaleZ="0.16" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Polygon fx:id="teacher2" fill="DODGERBLUE" layoutX="371.0" layoutY="74.0" scaleX="0.2" scaleY="0.2" scaleZ="0.16" stroke="BLACK" strokeType="INSIDE" visible="false">
                <points>
                   <Double fx:value="-50.0" />
                   <Double fx:value="30.0" />
@@ -148,7 +148,7 @@
                   <Double fx:value="-30.0" />
                </points>
             </Polygon>
-            <Polygon id="teacher1" fill="DODGERBLUE" layoutX="371.0" layoutY="38.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Polygon fx:id="teacher1" fill="DODGERBLUE" layoutX="371.0" layoutY="38.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
                <points>
                   <Double fx:value="-50.0" />
                   <Double fx:value="30.0" />
@@ -164,85 +164,85 @@
                   <Double fx:value="-30.0" />
                </points>
             </Polygon>
-            <Rectangle id="tower3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="143.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="143.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="143.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="143.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
          </children>
       </AnchorPane>
       <Text layoutX="209.0" layoutY="27.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" wrappingWidth="37.78790283203125" />
       <Button layoutX="36.0" layoutY="594.0" mnemonicParsing="false" scaleX="1.5" scaleY="1.5" text="Map" />
-      <AnchorPane id="boardPlayer2" layoutX="191.0" layoutY="358.0" prefHeight="218.0" prefWidth="508.0">
+      <AnchorPane fx:id="boardPlayer2" layoutX="191.0" layoutY="358.0" prefHeight="218.0" prefWidth="508.0">
          <children>
             <ImageView fitHeight="248.0" fitWidth="508.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/boards/Plancia_DEF2.png" />
                </image>
             </ImageView>
-            <Circle id="hall6" fill="DODGERBLUE" layoutX="28.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall2" fill="DODGERBLUE" layoutX="28.0" layoutY="75.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall4" fill="DODGERBLUE" layoutX="28.0" layoutY="111.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall7" fill="DODGERBLUE" layoutX="57.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall3" fill="DODGERBLUE" layoutX="57.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall5" fill="DODGERBLUE" layoutX="58.0" layoutY="111.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall1" fill="DODGERBLUE" layoutX="58.0" layoutY="38.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall8" fill="DODGERBLUE" layoutX="28.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="hall9" fill="DODGERBLUE" layoutX="58.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board1c5r" fill="DODGERBLUE" layoutX="105.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board2c5r" fill="DODGERBLUE" layoutX="130.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board3c5r" fill="DODGERBLUE" layoutX="154.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board4c5r" fill="DODGERBLUE" layoutX="178.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board5c5r" fill="DODGERBLUE" layoutX="202.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board6c5r" fill="DODGERBLUE" layoutX="226.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board7c5r" fill="DODGERBLUE" layoutX="251.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board8c5r" fill="DODGERBLUE" layoutX="275.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board9c5r" fill="DODGERBLUE" layoutX="299.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board10c5r" fill="DODGERBLUE" layoutX="323.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board1c4r" fill="DODGERBLUE" layoutX="105.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board2c4r" fill="DODGERBLUE" layoutX="130.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board3c4r" fill="DODGERBLUE" layoutX="154.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board4c4r" fill="DODGERBLUE" layoutX="178.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board5c4r" fill="DODGERBLUE" layoutX="202.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board6c4r" fill="DODGERBLUE" layoutX="225.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board7c4r" fill="DODGERBLUE" layoutX="251.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board8c4r" fill="DODGERBLUE" layoutX="275.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board9c4r" fill="DODGERBLUE" layoutX="299.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board10c4r" fill="DODGERBLUE" layoutX="323.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board1c3r" fill="DODGERBLUE" layoutX="105.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board2c3r" fill="DODGERBLUE" layoutX="130.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board3c3r" fill="DODGERBLUE" layoutX="154.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board4c3r" fill="DODGERBLUE" layoutX="178.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board5c3r" fill="DODGERBLUE" layoutX="202.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board6c3r" fill="DODGERBLUE" layoutX="225.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board7c3r" fill="DODGERBLUE" layoutX="251.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board8c3r" fill="DODGERBLUE" layoutX="275.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board9c3r" fill="DODGERBLUE" layoutX="299.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board10c3r" fill="DODGERBLUE" layoutX="323.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board1c2r" fill="DODGERBLUE" layoutX="105.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board2c2r" fill="DODGERBLUE" layoutX="130.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board3c2r" fill="DODGERBLUE" layoutX="154.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board4c2r" fill="DODGERBLUE" layoutX="178.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board5c2r" fill="DODGERBLUE" layoutX="202.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board6c2r" fill="DODGERBLUE" layoutX="225.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board7c2r" fill="DODGERBLUE" layoutX="251.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board8c2r" fill="DODGERBLUE" layoutX="275.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board9c2r" fill="DODGERBLUE" layoutX="299.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board10c2r" fill="DODGERBLUE" layoutX="323.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board1c1r" fill="DODGERBLUE" layoutX="105.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board2c1r" fill="DODGERBLUE" layoutX="130.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board3c1r" fill="DODGERBLUE" layoutX="154.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board4c1r" fill="DODGERBLUE" layoutX="178.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board5c1r" fill="DODGERBLUE" layoutX="202.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board6c1r" fill="DODGERBLUE" layoutX="225.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board7c1r" fill="DODGERBLUE" layoutX="251.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board8c1r" fill="DODGERBLUE" layoutX="275.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board9c1r" fill="DODGERBLUE" layoutX="299.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle id="board10c1r" fill="DODGERBLUE" layoutX="323.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Polygon id="teacher5" fill="DODGERBLUE" layoutX="371.0" layoutY="182.0" scaleX="0.2" scaleY="0.2" scaleZ="0.1" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Circle fx:id="hall6" fill="DODGERBLUE" layoutX="28.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall2" fill="DODGERBLUE" layoutX="28.0" layoutY="75.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall4" fill="DODGERBLUE" layoutX="28.0" layoutY="111.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall7" fill="DODGERBLUE" layoutX="57.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall3" fill="DODGERBLUE" layoutX="57.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall5" fill="DODGERBLUE" layoutX="58.0" layoutY="111.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall1" fill="DODGERBLUE" layoutX="58.0" layoutY="38.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall8" fill="DODGERBLUE" layoutX="28.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="hall9" fill="DODGERBLUE" layoutX="58.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board1c5r" fill="DODGERBLUE" layoutX="105.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board2c5r" fill="DODGERBLUE" layoutX="130.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board3c5r" fill="DODGERBLUE" layoutX="154.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board4c5r" fill="DODGERBLUE" layoutX="178.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board5c5r" fill="DODGERBLUE" layoutX="202.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board6c5r" fill="DODGERBLUE" layoutX="226.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board7c5r" fill="DODGERBLUE" layoutX="251.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board8c5r" fill="DODGERBLUE" layoutX="275.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board9c5r" fill="DODGERBLUE" layoutX="299.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board10c5r" fill="DODGERBLUE" layoutX="323.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board1c4r" fill="DODGERBLUE" layoutX="105.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board2c4r" fill="DODGERBLUE" layoutX="130.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board3c4r" fill="DODGERBLUE" layoutX="154.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board4c4r" fill="DODGERBLUE" layoutX="178.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board5c4r" fill="DODGERBLUE" layoutX="202.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board6c4r" fill="DODGERBLUE" layoutX="225.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board7c4r" fill="DODGERBLUE" layoutX="251.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board8c4r" fill="DODGERBLUE" layoutX="275.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board9c4r" fill="DODGERBLUE" layoutX="299.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board10c4r" fill="DODGERBLUE" layoutX="323.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board1c3r" fill="DODGERBLUE" layoutX="105.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board2c3r" fill="DODGERBLUE" layoutX="130.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board3c3r" fill="DODGERBLUE" layoutX="154.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board4c3r" fill="DODGERBLUE" layoutX="178.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board5c3r" fill="DODGERBLUE" layoutX="202.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board6c3r" fill="DODGERBLUE" layoutX="225.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board7c3r" fill="DODGERBLUE" layoutX="251.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board8c3r" fill="DODGERBLUE" layoutX="275.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board9c3r" fill="DODGERBLUE" layoutX="299.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board10c3r" fill="DODGERBLUE" layoutX="323.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board1c2r" fill="DODGERBLUE" layoutX="105.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board2c2r" fill="DODGERBLUE" layoutX="130.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board3c2r" fill="DODGERBLUE" layoutX="154.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board4c2r" fill="DODGERBLUE" layoutX="178.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board5c2r" fill="DODGERBLUE" layoutX="202.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board6c2r" fill="DODGERBLUE" layoutX="225.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board7c2r" fill="DODGERBLUE" layoutX="251.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board8c2r" fill="DODGERBLUE" layoutX="275.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board9c2r" fill="DODGERBLUE" layoutX="299.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board10c2r" fill="DODGERBLUE" layoutX="323.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board1c1r" fill="DODGERBLUE" layoutX="105.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board2c1r" fill="DODGERBLUE" layoutX="130.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board3c1r" fill="DODGERBLUE" layoutX="154.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board4c1r" fill="DODGERBLUE" layoutX="178.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board5c1r" fill="DODGERBLUE" layoutX="202.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board6c1r" fill="DODGERBLUE" layoutX="225.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board7c1r" fill="DODGERBLUE" layoutX="251.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board8c1r" fill="DODGERBLUE" layoutX="275.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board9c1r" fill="DODGERBLUE" layoutX="299.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="board10c1r" fill="DODGERBLUE" layoutX="323.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Polygon fx:id="teacher5" fill="DODGERBLUE" layoutX="371.0" layoutY="182.0" scaleX="0.2" scaleY="0.2" scaleZ="0.1" stroke="BLACK" strokeType="INSIDE" visible="false">
                <points>
                   <Double fx:value="-50.0" />
                   <Double fx:value="30.0" />
@@ -258,7 +258,7 @@
                   <Double fx:value="-30.0" />
                </points>
             </Polygon>
-            <Polygon id="teacher4" fill="DODGERBLUE" layoutX="371.0" layoutY="146.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Polygon fx:id="teacher4" fill="DODGERBLUE" layoutX="371.0" layoutY="146.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
                <points>
                   <Double fx:value="-50.0" />
                   <Double fx:value="30.0" />
@@ -274,7 +274,7 @@
                   <Double fx:value="-30.0" />
                </points>
             </Polygon>
-            <Polygon id="teacher3" fill="DODGERBLUE" layoutX="371.0" layoutY="110.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Polygon fx:id="teacher3" fill="DODGERBLUE" layoutX="371.0" layoutY="110.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
                <points>
                   <Double fx:value="-50.0" />
                   <Double fx:value="30.0" />
@@ -290,7 +290,7 @@
                   <Double fx:value="-30.0" />
                </points>
             </Polygon>
-            <Polygon id="teacher2" fill="DODGERBLUE" layoutX="371.0" layoutY="74.0" scaleX="0.2" scaleY="0.2" scaleZ="0.16" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Polygon fx:id="teacher2" fill="DODGERBLUE" layoutX="371.0" layoutY="74.0" scaleX="0.2" scaleY="0.2" scaleZ="0.16" stroke="BLACK" strokeType="INSIDE" visible="false">
                <points>
                   <Double fx:value="-50.0" />
                   <Double fx:value="30.0" />
@@ -306,7 +306,7 @@
                   <Double fx:value="-30.0" />
                </points>
             </Polygon>
-            <Polygon id="teacher1" fill="DODGERBLUE" layoutX="371.0" layoutY="38.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Polygon fx:id="teacher1" fill="DODGERBLUE" layoutX="371.0" layoutY="38.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
                <points>
                   <Double fx:value="-50.0" />
                   <Double fx:value="30.0" />
@@ -322,14 +322,14 @@
                   <Double fx:value="-30.0" />
                </points>
             </Polygon>
-            <Rectangle id="tower3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="143.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="143.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle id="tower2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="143.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="143.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <Rectangle fx:id="tower2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
          </children>
       </AnchorPane>
       <Text layoutX="209.0" layoutY="335.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" wrappingWidth="37.78790283203125" />

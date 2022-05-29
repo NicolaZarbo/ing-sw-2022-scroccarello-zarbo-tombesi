@@ -51,9 +51,9 @@ public class BoardSceneController extends SceneController{
             AnchorPane second = pane.lookup("#boardPlayer2");
             AnchorPane third = pane.lookup("#boardPlayer3");
             for(int i=1;i<10;i++) {
-                first.lookup("#hall" + i).setFill("transparent");
-                second.lookup("#hall" + i).setFill("transparent");
-                third.lookup("#hall" + i).setFill("transparent");
+                first.lookup("#hall" + i).setFill("Color.TRANSPARENT");
+                second.lookup("#hall" + i).setFill("Color.TRANSPARENT");
+                third.lookup("#hall" + i).setFill("Color.TRANSPARENT");
 
 
             }

@@ -9,28 +9,28 @@
    <children>
       <Button layoutX="857.0" layoutY="610.0" mnemonicParsing="false" scaleX="1.3" scaleY="1.3" text="Next" />
       <Text layoutX="393.0" layoutY="55.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose your character" />
-      <Rectangle id="Character1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="26.0" layoutY="126.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
+      <Rectangle fx:id="Character1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="26.0" layoutY="126.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
       <Text layoutX="47.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 1:" />
       <Text layoutX="140.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect: In setup, draw 4 Students and place them on this card. Take 1 Student from this card and place it on an Island of your choice. Then, draw a new Student from the Bag and place it on this card." wrappingWidth="100.0" />
-      <Rectangle id="Character7" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="262.0" layoutY="126.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
+      <Rectangle fx:id="Character7" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="262.0" layoutY="126.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
       <Text layoutX="283.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 2:" />
       <Text layoutX="376.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect: In setup, draw 6 Students and place them on this card. You may take up to 3 Students from this card and replace them with the same number of Students from your Entrance." wrappingWidth="100.0" />
-      <Rectangle id="Character9" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="499.0" layoutY="126.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
+      <Rectangle fx:id="Character9" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="499.0" layoutY="126.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
       <Text layoutX="520.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 3:" />
       <Text layoutX="610.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:           Choose a color of Student: during the influence calculation this turn, that color adds no influence." wrappingWidth="100.0" />
-      <Rectangle id="Character10" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="732.0" layoutY="126.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
+      <Rectangle fx:id="Character10" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="732.0" layoutY="126.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
       <Text layoutX="753.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 4:" />
       <Text layoutX="844.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:               You may exchange up to 2 Students between your Entrance and your Dining Room." wrappingWidth="100.0" />
-      <Rectangle id="Character11" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="26.0" layoutY="393.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
+      <Rectangle fx:id="Character11" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="26.0" layoutY="393.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
       <Text layoutX="47.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 5:" />
       <Text layoutX="139.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect: In setup, draw 4 Students and place them on this card. Take 1 Student from this card and place it in your Dining Room. Then draw a new Student from the Bag and place it on this card." wrappingWidth="100.0" />
-      <Rectangle id="Character2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="262.0" layoutY="393.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
+      <Rectangle fx:id="Character2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="262.0" layoutY="393.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
       <Text layoutX="283.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 6:" />
       <Text layoutX="374.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:               During this turn, you take control of any number of Professors even if you have the same number of Students as the player who currently controls them." wrappingWidth="100.0" />
-      <Rectangle id="Character8" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="499.0" layoutY="393.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
+      <Rectangle fx:id="Character8" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="499.0" layoutY="393.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
       <Text layoutX="520.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 7:" />
       <Text layoutX="612.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:                     During the influence calculation this turn, you count as having 2 more influence." wrappingWidth="100.0" />
-      <Rectangle id="Character6" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="732.0" layoutY="393.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
+      <Rectangle fx:id="Character6" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="732.0" layoutY="393.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
       <Text layoutX="753.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 8:" />
       <Text layoutX="842.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:                   When resolving a Conquering on an Island, Towers do not count towards influence." wrappingWidth="100.0" />
    </children>
