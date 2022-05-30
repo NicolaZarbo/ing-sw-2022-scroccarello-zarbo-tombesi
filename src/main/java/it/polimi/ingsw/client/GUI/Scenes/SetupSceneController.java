@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.GUI.Scenes;
 
 import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
+import it.polimi.ingsw.view.CentralView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -9,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+
+import java.util.List;
 
 public class SetupSceneController extends SceneController{
     private GUI gui;
@@ -35,6 +38,7 @@ public class SetupSceneController extends SceneController{
     @FXML
     private Text errorMsg;
 
+    private List<Integer> availableMages;
 
     public SetupSceneController() {
     }
@@ -58,6 +62,25 @@ public class SetupSceneController extends SceneController{
         img=new Image("images/towers/grey_tower.png");
         greytower.setImage(img);
         //just for temporary testing
+        CentralView view = gui.getGame();
+        List<Integer> availableTowers = view.getAvailableColor();
+        availableMages = view.getAvailableMages();
+        blacktower.setVisible(false);
+        whitetower.setVisible(false);
+        greytower.setVisible(false);
+        mage1.setVisible(false);
+        mage2.setVisible(false);
+        mage3.setVisible(false);
+        mage4.setVisible(false);
+
+        for (Integer towerColor:availableTowers) {
+            if(towerColor==0)
+                blacktower.setVisible(true);
+            if(towerColor==1)
+                whitetower.setVisible(true);
+            if(towerColor==2)
+                greytower.setVisible(true);
+        }
 
     }
 
@@ -67,7 +90,16 @@ public class SetupSceneController extends SceneController{
         blacktower.setImage(null);
         whitetower.setImage(null);
         greytower.setImage(null);
-
+        for (Integer mage:availableMages) {
+            if(mage==0)
+                mage1.setVisible(true);
+            if(mage==1)
+                mage2.setVisible(true);
+            if(mage==2)
+                mage3.setVisible(true);
+            if(mage==3)
+                mage4.setVisible(true);
+        }
         Image img=new Image("images/wizards/Wizard (1).png");
         mage1.setImage(img);
         img=new Image("images/wizards/Wizard (2).png");
@@ -137,6 +169,7 @@ public class SetupSceneController extends SceneController{
         }
         else{
             System.out.println("lmao");
+            gui.getGame().choosePlayerCustom(towerchosen-1,wizardchosen-1);
         }
     }
 }

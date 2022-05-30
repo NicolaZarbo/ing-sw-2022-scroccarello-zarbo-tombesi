@@ -34,6 +34,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     private ArrayList<Integer> playedCardThisTurn;
     private int cardYouPlayed;
     private final UserInterface clientScreen;
+    private List<Integer> availableColor;
+    private List<Integer> availableMages;
     private int studentMoved;
 
     public List<SimplifiedIsland> getIslands() {
@@ -154,6 +156,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         turnOf=message.getNewId();
         if(message.getTurnOf().equals(this.name)) {
             this.id=message.getNewId();
+            this.availableColor=message.getAvailableColor();
+            this.availableMages=message.getAvailableMages();
             clientScreen.showOptionsForPersonalization(message);
         }
     }
@@ -267,5 +271,13 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     public UserInterface getClientScreen() {
         return clientScreen;
+    }
+
+    public List<Integer> getAvailableColor() {
+        return availableColor;
+    }
+
+    public List<Integer> getAvailableMages() {
+        return availableMages;
     }
 }

@@ -1,7 +1,13 @@
 package it.polimi.ingsw.enumerations;
 
 public enum SceneEnum {
-    WelcomeScene("/WelcomeScene.fxml"), LobbyScene("/LobbyScene.fxml"), HandScene("/HandScene.fxml"), MapScene("/MapScene.fxml"), SetupScene("/SetupScene.fxml");
+    WelcomeScene("/WelcomeScene.fxml"),
+    LobbyScene("/LobbyScene.fxml"),
+    SetupScene("/SetupScene.fxml"),
+    BoardScene2("/BoardScene2.fxml"),
+    BoardScene3("/BoardScene3.fxml"),
+    HandScene("/HandScene.fxml"),
+    MapScene("/MapScene.fxml");
 
     private String path;
 

@@ -55,11 +55,13 @@ public class GUI extends Application implements UserInterface {
             throw new RuntimeException("connection failed");
         }
         game.addObserver(connection.setMessageHandler());
-
-        setScene(SceneEnum.LobbyScene);
-        if(GuiInputManager.isLobbyAvailable()){
-            goToWizardSelection();
+        while (!GuiInputManager.isIsConnected())
+        {Thread.onSpinWait();}
+        if(!GuiInputManager.isLobbyAvailable()) {
+            setScene(SceneEnum.LobbyScene);
         }
+
+
     }
     private void goToWizardSelection(){
         setScene(SceneEnum.SetupScene);
@@ -136,7 +138,7 @@ public class GUI extends Application implements UserInterface {
     @Override
     public void showBoards() {
         Platform.runLater(() -> {
-            mainStage.setScene(scenes.get("BoardScene"));
+            mainStage.setScene(scenes.get(SceneEnum.BoardScene2));
         });
     }
 
