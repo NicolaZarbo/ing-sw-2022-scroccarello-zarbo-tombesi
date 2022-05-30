@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.GUI.Scenes;
 import it.polimi.ingsw.client.GUI.GUI;
+import it.polimi.ingsw.client.GUI.GuiInputManager;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -12,8 +13,8 @@ public abstract class BoardSceneController extends SceneController{
 
     private GUI gui;
 
-    public BoardSceneController(GUI g) {
-        this.gui=g;
+    public BoardSceneController() {
+        this.gui= GuiInputManager.getGui();
     }
 
     public abstract void initialize();
@@ -22,7 +23,7 @@ public abstract class BoardSceneController extends SceneController{
     public void setEntrance(ArrayList<Circle> entrance){
         List<Integer> playerentrance=gui.getGame().getPersonalPlayer().getBoard().getEntrance();
         int id;
-        for(int i=0;i<entrance.size();i++){
+        for(int i=0;i<playerentrance.size();i++){
             Image img;
             id=playerentrance.get(i).intValue();
             if(id!=-1){

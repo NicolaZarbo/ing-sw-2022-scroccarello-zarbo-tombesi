@@ -186,15 +186,15 @@
             </ImageView>
             <Pane fx:id="yourentrance" layoutX="17.0" layoutY="27.0">
                <children>
-                  <Circle fx:id="player2hall6" fill="DODGERBLUE" layoutY="109.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-                  <Circle fx:id="player2hall2" fill="DODGERBLUE" layoutY="37.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-                  <Circle fx:id="player2hall4" fill="DODGERBLUE" layoutY="73.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-                  <Circle fx:id="player2hall7" fill="DODGERBLUE" layoutX="29.0" layoutY="109.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-                  <Circle fx:id="player2hall3" fill="DODGERBLUE" layoutX="29.0" layoutY="36.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-                  <Circle fx:id="player2hall5" fill="DODGERBLUE" layoutX="30.0" layoutY="73.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-                  <Circle fx:id="player2hall1" fill="DODGERBLUE" layoutX="30.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-                  <Circle fx:id="player2hall8" fill="DODGERBLUE" layoutY="144.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-                  <Circle fx:id="player2hall9" fill="DODGERBLUE" layoutX="30.0" layoutY="144.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                  <Circle fx:id="player2hall6" fill="DODGERBLUE" layoutX="11.0" layoutY="120.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                  <Circle fx:id="player2hall2" fill="DODGERBLUE" layoutX="11.0" layoutY="48.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                  <Circle fx:id="player2hall4" fill="DODGERBLUE" layoutX="11.0" layoutY="84.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                  <Circle fx:id="player2hall7" fill="DODGERBLUE" layoutX="40.0" layoutY="120.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                  <Circle fx:id="player2hall3" fill="DODGERBLUE" layoutX="40.0" layoutY="47.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                  <Circle fx:id="player2hall5" fill="DODGERBLUE" layoutX="41.0" layoutY="84.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                  <Circle fx:id="player2hall1" fill="DODGERBLUE" layoutX="41.0" layoutY="11.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                  <Circle fx:id="player2hall8" fill="DODGERBLUE" layoutX="11.0" layoutY="155.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                  <Circle fx:id="player2hall9" fill="DODGERBLUE" layoutX="41.0" layoutY="155.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
                </children>
             </Pane>
             <Pane fx:id="yourhall" layoutX="94.0" layoutY="28.0">

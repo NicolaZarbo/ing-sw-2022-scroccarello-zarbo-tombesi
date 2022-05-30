@@ -35,6 +35,6 @@
       <Text layoutX="120.0" layoutY="106.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
       <Text fx:id="PlayerCoins" layoutX="157.0" layoutY="104.0" scaleX="5.0" scaleY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
       <Button layoutX="37.0" layoutY="611.0" mnemonicParsing="false" scaleX="1.3" scaleY="1.3" text="Map" />
-      <Button layoutX="141.0" layoutY="611.0" mnemonicParsing="false" scaleX="1.3" scaleY="1.3" text="Board" />
+      <Button fx:id="boardbutton" layoutX="141.0" layoutY="611.0" mnemonicParsing="false" onMouseClicked="#showboards" scaleX="1.3" scaleY="1.3" text="Board" />
    </children>
 </AnchorPane>
