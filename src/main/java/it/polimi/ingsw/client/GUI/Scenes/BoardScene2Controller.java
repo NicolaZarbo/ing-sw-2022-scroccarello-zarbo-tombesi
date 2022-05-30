@@ -8,6 +8,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class BoardScene2Controller extends BoardSceneController{
@@ -59,8 +60,8 @@ public class BoardScene2Controller extends BoardSceneController{
         setTowers(towers2,2);
         setPlayerName(player1name,1);
         setPlayerName(player2name,2);
-    }
 
+    }
     private void buildEntrance(int player){
         if(player==1){
             entrance1List= new ArrayList<>();

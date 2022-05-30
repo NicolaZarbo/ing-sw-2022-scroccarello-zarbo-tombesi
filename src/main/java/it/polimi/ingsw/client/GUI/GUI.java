@@ -146,5 +146,8 @@ public class GUI extends Application implements UserInterface {
             mainStage.setScene(scenes.get("MapScene"));
         });
     }
+    public GuiInputManager getInputManager(){
+        return inputManager;
+    }
 
 }

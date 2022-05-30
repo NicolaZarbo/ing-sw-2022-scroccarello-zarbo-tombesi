@@ -3,6 +3,8 @@ package it.polimi.ingsw.client.GUI;
 import it.polimi.ingsw.client.InputManager;
 import it.polimi.ingsw.view.CentralView;
 
+import java.util.ArrayList;
+
 public class GuiInputManager extends InputManager {
 
     private CentralView game;
@@ -10,6 +12,10 @@ public class GuiInputManager extends InputManager {
     private static boolean isLobbyAvailable;
     private static boolean isConnected;
     private static GUI gui;
+    private ArrayList<Integer> selectedStudents;
+    private int selectedIsland;
+    private int selectedCloud;
+
 
     public GuiInputManager(CentralView game,GUI gui) {
         isLobbyAvailable=false;
@@ -40,7 +46,8 @@ public class GuiInputManager extends InputManager {
             //TODO
         }
     }
-
+    /** used to refrain the user from spamming actions before receiving the state update*/
+    private void waitForAnswer(){this.canDoAction=false;}
     public static boolean isIsConnected() {
         return isConnected;
     }
@@ -65,6 +72,23 @@ public class GuiInputManager extends InputManager {
     protected void caseActionMoveStudent() {
 
     }
+    public void moveToBoard(int color){
+        if(!canDoAction)
+            return;
+        game.moveStudentToHall(color);
+        waitForAnswer();
+    }
+    public void moveToIsland(int islandId){
+        if(!canDoAction)
+            return;;
+        int studColor=selectedStudents.get(0);
+        game.moveStudentToIsland(studColor,islandId);
+        selectedStudents=new ArrayList<>();//cleaned
+        waitForAnswer();
+
+    }
+    /** used to keep track of the selected students when you need to move to a different scene*/
+    public void saveSelectedStud(ArrayList<Integer> selectedStudents){this.selectedStudents=selectedStudents;}
 
     @Override
     protected void caseActionChooseCloud() {
