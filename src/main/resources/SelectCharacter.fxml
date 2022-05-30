@@ -48,13 +48,37 @@
       <Circle fx:id="Character11stud2" fill="DODGERBLUE" layoutX="108.0" layoutY="488.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="Character11stud3" fill="DODGERBLUE" layoutX="51.0" layoutY="543.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="Character11stud4" fill="DODGERBLUE" layoutX="108.0" layoutY="543.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="character1coin" fill="DODGERBLUE" layoutX="76.0" layoutY="333.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="28.0" layoutY="336.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost:" />
-      <Text layoutX="90.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
-      <Text fx:id="character1cost" layoutX="103.0" layoutY="338.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Circle fx:id="character1coin" fill="DODGERBLUE" layoutX="80.0" layoutY="334.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="32.0" layoutY="337.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost:" />
+      <Text layoutX="94.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+      <Text fx:id="character1cost" layoutX="107.0" layoutY="339.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
       <Circle fx:id="character7coin" fill="DODGERBLUE" layoutX="314.0" layoutY="333.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="266.0" layoutY="336.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost:" />
       <Text layoutX="328.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
       <Text fx:id="character7cost" layoutX="341.0" layoutY="338.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Circle fx:id="character7coin1" fill="DODGERBLUE" layoutX="552.0" layoutY="333.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="504.0" layoutY="336.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost:" />
+      <Text layoutX="566.0" layoutY="338.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+      <Text fx:id="character9cost" layoutX="579.0" layoutY="338.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Circle fx:id="character7coin11" fill="DODGERBLUE" layoutX="780.0" layoutY="333.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="732.0" layoutY="336.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost:" />
+      <Text layoutX="794.0" layoutY="338.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+      <Text fx:id="character10cost" layoutX="807.0" layoutY="338.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Circle fx:id="character1coin1" fill="DODGERBLUE" layoutX="77.0" layoutY="596.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="29.0" layoutY="599.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost:" />
+      <Text layoutX="91.0" layoutY="601.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+      <Text fx:id="character11cost" layoutX="104.0" layoutY="601.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Circle fx:id="character1coin11" fill="DODGERBLUE" layoutX="314.0" layoutY="596.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="266.0" layoutY="599.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost:" />
+      <Text layoutX="328.0" layoutY="601.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+      <Text fx:id="character2cost" layoutX="341.0" layoutY="601.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Circle fx:id="character1coin111" fill="DODGERBLUE" layoutX="552.0" layoutY="596.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="504.0" layoutY="599.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost:" />
+      <Text layoutX="566.0" layoutY="601.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+      <Text fx:id="character8cost" layoutX="579.0" layoutY="601.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Circle fx:id="character1coin1111" fill="DODGERBLUE" layoutX="780.0" layoutY="596.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="732.0" layoutY="599.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost:" />
+      <Text layoutX="794.0" layoutY="601.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+      <Text fx:id="character6cost" layoutX="807.0" layoutY="601.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
    </children>
 </AnchorPane>
