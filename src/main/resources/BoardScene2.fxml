@@ -12,17 +12,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="948.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="211.0" layoutY="34.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You" />
-      <Text layoutX="31.0" layoutY="348.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" />
-      <Text layoutX="502.0" layoutY="348.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" />
-      <AnchorPane fx:id="boardPlayer1" layoutX="201.0" layoutY="62.0" prefHeight="218.0" prefWidth="508.0">
+      <AnchorPane fx:id="boardPlayer1" layoutX="191.0" layoutY="52.0" prefHeight="218.0" prefWidth="508.0">
          <children>
             <ImageView fitHeight="248.0" fitWidth="508.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/boards/Plancia_DEF2.png" />
                </image>
             </ImageView>
-            <Circle fx:id="player1hall6" fill="DODGERBLUE" layoutX="28.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="player1hall6"  fill="DODGERBLUE" layoutX="28.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
             <Circle fx:id="player1hall2" fill="DODGERBLUE" layoutX="28.0" layoutY="75.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
             <Circle fx:id="player1hall4" fill="DODGERBLUE" layoutX="28.0" layoutY="111.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
             <Circle fx:id="player1hall7" fill="DODGERBLUE" layoutX="57.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
@@ -82,20 +79,26 @@
             <Circle fx:id="player1board9c1r" fill="DODGERBLUE" layoutX="299.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
             <Circle fx:id="player1board10c1r" fill="DODGERBLUE" layoutX="323.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
             <Polygon fx:id="player1teacher5" fill="DODGERBLUE" layoutX="371.0" layoutY="182.0" scaleX="0.2" scaleY="0.2" scaleZ="0.1" stroke="BLACK" strokeType="INSIDE" visible="false">
-               <points>
-                  <Double fx:value="-50.0" />
-                  <Double fx:value="30.0" />
-                  <Double fx:value="0.0" />
-                  <Double fx:value="60.0" />
-                  <Double fx:value="50.0" />
-                  <Double fx:value="30.0" />
-                  <Double fx:value="50.0" />
-                  <Double fx:value="-30.0" />
-                  <Double fx:value="0.0" />
-                  <Double fx:value="-60.0" />
-                  <Double fx:value="-50.0" />
-                  <Double fx:value="-30.0" />
-               </points>
+              <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+              </points>
             </Polygon>
             <Polygon fx:id="player1teacher4" fill="DODGERBLUE" layoutX="371.0" layoutY="146.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
                <points>
@@ -171,7 +174,9 @@
             <Rectangle fx:id="player1tower2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="boardPlayer2" layoutX="-14.0" layoutY="363.0" prefHeight="218.0" prefWidth="508.0" scaleX="0.9" scaleY="0.9">
+      <Text layoutX="209.0" layoutY="27.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" wrappingWidth="37.78790283203125" />
+      <Button layoutX="36.0" layoutY="594.0" mnemonicParsing="false" scaleX="1.5" scaleY="1.5" text="Map" />
+      <AnchorPane fx:id="boardPlayer2" layoutX="191.0" layoutY="358.0" prefHeight="218.0" prefWidth="508.0">
          <children>
             <ImageView fitHeight="248.0" fitWidth="508.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -327,163 +332,7 @@
             <Rectangle fx:id="player2tower2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="boardPlayer3" layoutX="459.0" layoutY="363.0" prefHeight="208.0" prefWidth="508.0" scaleX="0.9" scaleY="0.9">
-         <children>
-            <ImageView fitHeight="248.0" fitWidth="508.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/boards/Plancia_DEF2.png" />
-               </image>
-            </ImageView>
-            <Circle fx:id="player3hall6" fill="DODGERBLUE" layoutX="28.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3hall2" fill="DODGERBLUE" layoutX="28.0" layoutY="75.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3hall4" fill="DODGERBLUE" layoutX="28.0" layoutY="111.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3hall7" fill="DODGERBLUE" layoutX="57.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3hall3" fill="DODGERBLUE" layoutX="57.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3hall5" fill="DODGERBLUE" layoutX="58.0" layoutY="111.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3hall1" fill="DODGERBLUE" layoutX="58.0" layoutY="38.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3hall8" fill="DODGERBLUE" layoutX="28.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3hall9" fill="DODGERBLUE" layoutX="58.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board1c5r" fill="DODGERBLUE" layoutX="105.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board2c5r" fill="DODGERBLUE" layoutX="130.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board3c5r" fill="DODGERBLUE" layoutX="154.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board4c5r" fill="DODGERBLUE" layoutX="178.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board5c5r" fill="DODGERBLUE" layoutX="202.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board6c5r" fill="DODGERBLUE" layoutX="226.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board7c5r" fill="DODGERBLUE" layoutX="251.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board8c5r" fill="DODGERBLUE" layoutX="275.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board9c5r" fill="DODGERBLUE" layoutX="299.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board10c5r" fill="DODGERBLUE" layoutX="323.0" layoutY="182.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board1c4r" fill="DODGERBLUE" layoutX="105.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board2c4r" fill="DODGERBLUE" layoutX="130.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board3c4r" fill="DODGERBLUE" layoutX="154.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board4c4r" fill="DODGERBLUE" layoutX="178.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board5c4r" fill="DODGERBLUE" layoutX="202.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board6c4r" fill="DODGERBLUE" layoutX="225.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board7c4r" fill="DODGERBLUE" layoutX="251.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board8c4r" fill="DODGERBLUE" layoutX="275.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board9c4r" fill="DODGERBLUE" layoutX="299.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board10c4r" fill="DODGERBLUE" layoutX="323.0" layoutY="147.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board1c3r" fill="DODGERBLUE" layoutX="105.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board2c3r" fill="DODGERBLUE" layoutX="130.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board3c3r" fill="DODGERBLUE" layoutX="154.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board4c3r" fill="DODGERBLUE" layoutX="178.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board5c3r" fill="DODGERBLUE" layoutX="202.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board6c3r" fill="DODGERBLUE" layoutX="225.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board7c3r" fill="DODGERBLUE" layoutX="251.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board8c3r" fill="DODGERBLUE" layoutX="275.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board9c3r" fill="DODGERBLUE" layoutX="299.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board10c3r" fill="DODGERBLUE" layoutX="323.0" layoutY="110.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board1c2r" fill="DODGERBLUE" layoutX="105.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board2c2r" fill="DODGERBLUE" layoutX="130.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board3c2r" fill="DODGERBLUE" layoutX="154.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board4c2r" fill="DODGERBLUE" layoutX="178.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board5c2r" fill="DODGERBLUE" layoutX="202.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board6c2r" fill="DODGERBLUE" layoutX="225.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board7c2r" fill="DODGERBLUE" layoutX="251.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board8c2r" fill="DODGERBLUE" layoutX="275.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board9c2r" fill="DODGERBLUE" layoutX="299.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board10c2r" fill="DODGERBLUE" layoutX="323.0" layoutY="74.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board1c1r" fill="DODGERBLUE" layoutX="105.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board2c1r" fill="DODGERBLUE" layoutX="130.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board3c1r" fill="DODGERBLUE" layoutX="154.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board4c1r" fill="DODGERBLUE" layoutX="178.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board5c1r" fill="DODGERBLUE" layoutX="202.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board6c1r" fill="DODGERBLUE" layoutX="225.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board7c1r" fill="DODGERBLUE" layoutX="251.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board8c1r" fill="DODGERBLUE" layoutX="275.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board9c1r" fill="DODGERBLUE" layoutX="299.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="player3board10c1r" fill="DODGERBLUE" layoutX="323.0" layoutY="39.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Polygon fx:id="player3teacher5" fill="DODGERBLUE" layoutX="371.0" layoutY="182.0" scaleX="0.2" scaleY="0.2" scaleZ="0.1" stroke="BLACK" strokeType="INSIDE" visible="false">
-               <points>
-                  <Double fx:value="-50.0" />
-                  <Double fx:value="30.0" />
-                  <Double fx:value="0.0" />
-                  <Double fx:value="60.0" />
-                  <Double fx:value="50.0" />
-                  <Double fx:value="30.0" />
-                  <Double fx:value="50.0" />
-                  <Double fx:value="-30.0" />
-                  <Double fx:value="0.0" />
-                  <Double fx:value="-60.0" />
-                  <Double fx:value="-50.0" />
-                  <Double fx:value="-30.0" />
-               </points>
-            </Polygon>
-            <Polygon fx:id="player3teacher4" fill="DODGERBLUE" layoutX="371.0" layoutY="146.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
-               <points>
-                  <Double fx:value="-50.0" />
-                  <Double fx:value="30.0" />
-                  <Double fx:value="0.0" />
-                  <Double fx:value="60.0" />
-                  <Double fx:value="50.0" />
-                  <Double fx:value="30.0" />
-                  <Double fx:value="50.0" />
-                  <Double fx:value="-30.0" />
-                  <Double fx:value="0.0" />
-                  <Double fx:value="-60.0" />
-                  <Double fx:value="-50.0" />
-                  <Double fx:value="-30.0" />
-               </points>
-            </Polygon>
-            <Polygon fx:id="player3teacher3" fill="DODGERBLUE" layoutX="371.0" layoutY="110.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
-               <points>
-                  <Double fx:value="-50.0" />
-                  <Double fx:value="30.0" />
-                  <Double fx:value="0.0" />
-                  <Double fx:value="60.0" />
-                  <Double fx:value="50.0" />
-                  <Double fx:value="30.0" />
-                  <Double fx:value="50.0" />
-                  <Double fx:value="-30.0" />
-                  <Double fx:value="0.0" />
-                  <Double fx:value="-60.0" />
-                  <Double fx:value="-50.0" />
-                  <Double fx:value="-30.0" />
-               </points>
-            </Polygon>
-            <Polygon fx:id="player3teacher2" fill="DODGERBLUE" layoutX="371.0" layoutY="74.0" scaleX="0.2" scaleY="0.2" scaleZ="0.16" stroke="BLACK" strokeType="INSIDE" visible="false">
-               <points>
-                  <Double fx:value="-50.0" />
-                  <Double fx:value="30.0" />
-                  <Double fx:value="0.0" />
-                  <Double fx:value="60.0" />
-                  <Double fx:value="50.0" />
-                  <Double fx:value="30.0" />
-                  <Double fx:value="50.0" />
-                  <Double fx:value="-30.0" />
-                  <Double fx:value="0.0" />
-                  <Double fx:value="-60.0" />
-                  <Double fx:value="-50.0" />
-                  <Double fx:value="-30.0" />
-               </points>
-            </Polygon>
-            <Polygon fx:id="player3teacher1" fill="DODGERBLUE" layoutX="371.0" layoutY="38.0" scaleX="0.2" scaleY="0.2" stroke="BLACK" strokeType="INSIDE" visible="false">
-               <points>
-                  <Double fx:value="-50.0" />
-                  <Double fx:value="30.0" />
-                  <Double fx:value="0.0" />
-                  <Double fx:value="60.0" />
-                  <Double fx:value="50.0" />
-                  <Double fx:value="30.0" />
-                  <Double fx:value="50.0" />
-                  <Double fx:value="-30.0" />
-                  <Double fx:value="0.0" />
-                  <Double fx:value="-60.0" />
-                  <Double fx:value="-50.0" />
-                  <Double fx:value="-30.0" />
-               </points>
-            </Polygon>
-            <Rectangle fx:id="player3tower3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player3tower4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player3tower5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player3tower7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="143.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player3tower8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="143.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player3tower6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player3tower1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player3tower2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-         </children>
-      </AnchorPane>
-      <Button layoutX="122.0" layoutY="602.0" mnemonicParsing="false" scaleX="1.5" scaleY="1.5" text="Hand" />
-      <Button layoutX="36.0" layoutY="602.0" mnemonicParsing="false" scaleX="1.5" scaleY="1.5" text="Map" />
+      <Text layoutX="209.0" layoutY="335.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" wrappingWidth="37.78790283203125" />
+      <Button layoutX="122.0" layoutY="594.0" mnemonicParsing="false" scaleX="1.5" scaleY="1.5" text="Hand" />
    </children>
 </AnchorPane>

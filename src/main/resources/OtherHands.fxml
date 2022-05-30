@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
@@ -48,26 +47,5 @@
       <Rectangle fx:id="player4card3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="106.0" layoutY="47.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
       <Rectangle fx:id="player4card2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="67.0" layoutY="47.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
       <Rectangle fx:id="player4card1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="34.0" layoutY="47.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-      <Rectangle fx:id="playercharacter4" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="699.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
-      <Circle fx:id="student4_1" fill="DODGERBLUE" layoutX="723.0" layoutY="53.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student4_2" fill="DODGERBLUE" layoutX="773.0" layoutY="53.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student4_4" fill="DODGERBLUE" layoutX="773.0" layoutY="96.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student4_6" fill="DODGERBLUE" layoutX="774.0" layoutY="140.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student4_3" fill="DODGERBLUE" layoutX="723.0" layoutY="96.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student4_5" fill="DODGERBLUE" layoutX="723.0" layoutY="140.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Rectangle fx:id="playercharacter2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="699.0" layoutY="227.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
-      <Circle fx:id="student2_1" fill="DODGERBLUE" layoutX="723.0" layoutY="257.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student2_2" fill="DODGERBLUE" layoutX="773.0" layoutY="257.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student2_4" fill="DODGERBLUE" layoutX="773.0" layoutY="300.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student2_6" fill="DODGERBLUE" layoutX="774.0" layoutY="344.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student2_3" fill="DODGERBLUE" layoutX="723.0" layoutY="300.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student2_5" fill="DODGERBLUE" layoutX="723.0" layoutY="344.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Rectangle fx:id="playercharacter3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="699.0" layoutY="429.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
-      <Circle fx:id="student3_1" fill="DODGERBLUE" layoutX="723.0" layoutY="459.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student3_2" fill="DODGERBLUE" layoutX="773.0" layoutY="459.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student3_4" fill="DODGERBLUE" layoutX="773.0" layoutY="502.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student3_6" fill="DODGERBLUE" layoutX="774.0" layoutY="546.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student3_3" fill="DODGERBLUE" layoutX="723.0" layoutY="502.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="student3_5" fill="DODGERBLUE" layoutX="723.0" layoutY="546.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

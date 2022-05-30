@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
@@ -33,5 +34,27 @@
       <Rectangle fx:id="Character6" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="732.0" layoutY="393.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
       <Text layoutX="753.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 8:" />
       <Text layoutX="842.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:                   When resolving a Conquering on an Island, Towers do not count towards influence." wrappingWidth="100.0" />
+      <Circle fx:id="Character1stud1" fill="DODGERBLUE" layoutX="51.0" layoutY="215.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Character1stud2" fill="DODGERBLUE" layoutX="108.0" layoutY="215.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Character1stud3" fill="DODGERBLUE" layoutX="51.0" layoutY="270.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Character1stud4" fill="DODGERBLUE" layoutX="108.0" layoutY="270.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Character7stud3" fill="DODGERBLUE" layoutX="287.0" layoutY="223.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Character7stud4" fill="DODGERBLUE" layoutX="344.0" layoutY="223.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Character7stud5" fill="DODGERBLUE" layoutX="287.0" layoutY="278.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Character7stud6" fill="DODGERBLUE" layoutX="344.0" layoutY="278.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Character7stud1" fill="DODGERBLUE" layoutX="287.0" layoutY="168.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Character7stud2" fill="DODGERBLUE" layoutX="344.0" layoutY="168.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Character11stud1" fill="DODGERBLUE" layoutX="51.0" layoutY="488.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Character11stud2" fill="DODGERBLUE" layoutX="108.0" layoutY="488.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Character11stud3" fill="DODGERBLUE" layoutX="51.0" layoutY="543.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Character11stud4" fill="DODGERBLUE" layoutX="108.0" layoutY="543.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="character1coin" fill="DODGERBLUE" layoutX="76.0" layoutY="333.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="28.0" layoutY="336.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost:" />
+      <Text layoutX="90.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+      <Text fx:id="character1cost" layoutX="103.0" layoutY="338.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Circle fx:id="character7coin" fill="DODGERBLUE" layoutX="314.0" layoutY="333.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="266.0" layoutY="336.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost:" />
+      <Text layoutX="328.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+      <Text fx:id="character7cost" layoutX="341.0" layoutY="338.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
    </children>
 </AnchorPane>
