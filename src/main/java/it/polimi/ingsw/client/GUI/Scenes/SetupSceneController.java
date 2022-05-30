@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.util.List;
@@ -37,6 +38,10 @@ public class SetupSceneController extends SceneController{
     private Label choiceMsg;
     @FXML
     private Text errorMsg;
+    @FXML
+    private Text waitingmsg;
+    @FXML
+    private Pane mainpane;
 
     private List<Integer> availableMages;
 
@@ -170,6 +175,8 @@ public class SetupSceneController extends SceneController{
         else{
             System.out.println("lmao");
             gui.getGame().choosePlayerCustom(towerchosen-1,wizardchosen-1);
+            mainpane.setOpacity(0.5);
+            waitingmsg.setVisible(true);
         }
     }
 }

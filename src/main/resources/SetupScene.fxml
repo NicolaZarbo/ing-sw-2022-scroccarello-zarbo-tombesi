@@ -44,7 +44,7 @@
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.SetupSceneController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="mainpane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="83.0" prefWidth="260.0" VBox.vgrow="ALWAYS">
       <children>
         <Label fx:id="choiceMsg" alignment="CENTER" layoutX="232.0" layoutY="219.0" prefHeight="27.0" prefWidth="164.0" style="&#10;" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
@@ -84,5 +84,14 @@
             </Label>
       </children>
     </AnchorPane>
+      <AnchorPane prefHeight="400.0" prefWidth="640.0">
+         <children>
+            <Text fx:id="waitingmsg" layoutX="189.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for other players.." visible="false" wrappingWidth="385.0">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
   </children>
 </VBox>

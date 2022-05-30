@@ -336,8 +336,8 @@
             </Pane>
             <Pane fx:id="yourtowers" layoutX="402.0" layoutY="34.0" prefHeight="150.0" prefWidth="100.0">
                <children>
-                  <ImageView fx:id="player2tower7" fitHeight="24.0" fitWidth="25.0" layoutX="14.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player2tower8" fitHeight="24.0" fitWidth="25.0" layoutX="50.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2tower7" fitHeight="24.0" fitWidth="25.0" layoutX="14.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2tower8" fitHeight="24.0" fitWidth="25.0" layoutX="50.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="player2tower5" fitHeight="24.0" fitWidth="25.0" layoutX="14.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="player2tower6" fitHeight="24.0" fitWidth="25.0" layoutX="50.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="player2tower3" fitHeight="24.0" fitWidth="25.0" layoutX="14.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" />
