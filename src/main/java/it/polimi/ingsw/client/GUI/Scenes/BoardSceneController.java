@@ -7,13 +7,14 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BoardSceneController extends SceneController{
 
-    private GUI gui;
+    protected GUI gui;
 
     public BoardSceneController() {
         this.gui= GuiInputManager.getGui();
@@ -22,8 +23,8 @@ public abstract class BoardSceneController extends SceneController{
     public abstract void initialize();
 
     /**displays the tokens in the entrance*/
-    public void setEntrance(ArrayList<Circle> entrance){
-        List<Integer> playerentrance=gui.getGame().getPersonalPlayer().getBoard().getEntrance();
+    public void setEntrance(ArrayList<Circle> entrance, int player){
+        List<Integer> playerentrance=gui.getGame().getPlayers().get(player-1).getBoard().getEntrance();
         int id;
         for(int i=0;i<playerentrance.size();i++){
             Image img;
@@ -61,8 +62,8 @@ public abstract class BoardSceneController extends SceneController{
         }
     }
 
-    public void setHall(ArrayList<ArrayList<Circle>> hall){
-        Integer[][] diningroom=gui.getGame().getPersonalPlayer().getBoard().getDiningRoom();
+    public void setHall(ArrayList<ArrayList<Circle>> hall, int player){
+        Integer[][] diningroom=gui.getGame().getPlayers().get(player-1).getBoard().getDiningRoom();
         for(int i=0;i<diningroom.length;i++){
             for(int j=0;j<diningroom[i].length;j++){
                 Image img;
@@ -102,7 +103,7 @@ public abstract class BoardSceneController extends SceneController{
     }
 
     /**displays professors if the player has*/
-    public void setProfessors(ArrayList<Polygon> table){
+    public void setProfessors(ArrayList<Polygon> table, int player){
         Integer[] professors=gui.getGame().getPersonalPlayer().getBoard().getProfessorTable();
         for(Integer i : professors){
             if(i.intValue()!=0){
@@ -137,12 +138,12 @@ public abstract class BoardSceneController extends SceneController{
             }
         }
     }
-    public void setTowers(ArrayList<ImageView>towers){
-        int towercolor=gui.getGame().getPersonalPlayer().getTowerColor();
-        int towersleft=gui.getGame().getPersonalPlayer().getBoard().getTowersLeft();
+    public void setTowers(ArrayList<ImageView>towers,int player){
+        int towercolor=gui.getGame().getPlayers().get(player-1).getTowerColor();
+        int towersleft=gui.getGame().getPlayers().get(player-1).getBoard().getTowersLeft();
 
         switch(towercolor){
-            case 1->{
+            case 0->{
                 //black
                 Image img=new Image("images/towers/black_tower.png");
                 for(int i=0;i<towersleft;i++){
@@ -150,7 +151,7 @@ public abstract class BoardSceneController extends SceneController{
                     towers.get(i).setVisible(true);
                 }
             }
-            case 2->{
+            case 1->{
                 //white
                 Image img=new Image("images/towers/white_tower.png");
                 for(int i=0;i<towersleft;i++){
@@ -158,7 +159,7 @@ public abstract class BoardSceneController extends SceneController{
                     towers.get(i).setVisible(true);
                 }
             }
-            case 3->{
+            case 2->{
                 //grey
                 Image img=new Image("images/towers/grey_tower.png");
                 for(int i=0;i<towersleft;i++){
@@ -168,5 +169,9 @@ public abstract class BoardSceneController extends SceneController{
             }
 
         }
+    }
+    public void setPlayerName(Text textbox, int player){
+        String name=gui.getGame().getPlayers().get(player-1).getUsername();
+        textbox.setText("Player: "+name);
     }
 }

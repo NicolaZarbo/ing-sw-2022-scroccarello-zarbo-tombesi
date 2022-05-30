@@ -8,12 +8,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Polygon?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="948.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.BoardScene2Controller">
    <children>
-      <AnchorPane fx:id="boardPlayer1" layoutX="191.0" layoutY="52.0" prefHeight="218.0" prefWidth="508.0">
+      <AnchorPane fx:id="boardPlayer1" layoutX="191.0" layoutY="52.0" mouseTransparent="true" prefHeight="218.0" prefWidth="508.0">
          <children>
             <ImageView fitHeight="248.0" fitWidth="508.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -165,17 +164,17 @@
                   <Double fx:value="-30.0" />
                </points>
             </Polygon>
-            <Rectangle fx:id="player1tower3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player1tower4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player1tower5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player1tower7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="143.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player1tower8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="143.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player1tower6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player1tower1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="414.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="player1tower2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="453.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+            <ImageView fx:id="player1tower7" fitHeight="32.0" fitWidth="33.0" layoutX="409.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="player1tower8" fitHeight="32.0" fitWidth="33.0" layoutX="448.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="player1tower5" fitHeight="32.0" fitWidth="33.0" layoutX="409.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="player1tower6" fitHeight="32.0" fitWidth="33.0" layoutX="448.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="player1tower3" fitHeight="32.0" fitWidth="33.0" layoutX="409.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="player1tower4" fitHeight="32.0" fitWidth="33.0" layoutX="448.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="player1tower1" fitHeight="32.0" fitWidth="33.0" layoutX="409.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="player1tower2" fitHeight="32.0" fitWidth="33.0" layoutX="448.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
-      <Text layoutX="209.0" layoutY="27.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" wrappingWidth="37.78790283203125" />
+      <Text fx:id="player1name" layoutX="323.0" layoutY="39.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" wrappingWidth="261.2878875732422" />
       <Button layoutX="36.0" layoutY="594.0" mnemonicParsing="false" scaleX="1.5" scaleY="1.5" text="Map" />
       <AnchorPane fx:id="boardPlayer2" layoutX="191.0" layoutY="358.0" prefHeight="218.0" prefWidth="508.0">
          <children>
@@ -349,7 +348,7 @@
             </Pane>
          </children>
       </AnchorPane>
-      <Text layoutX="209.0" layoutY="335.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" wrappingWidth="37.78790283203125" />
-      <Button layoutX="122.0" layoutY="594.0" mnemonicParsing="false" scaleX="1.5" scaleY="1.5" text="Hand" />
+      <Text fx:id="player2name" layoutX="322.0" layoutY="345.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" wrappingWidth="259.7878875732422" />
+      <Button fx:id="handbutton" layoutX="122.0" layoutY="594.0" mnemonicParsing="false" onMouseClicked="#sendToHand" scaleX="1.5" scaleY="1.5" text="Hand" />
    </children>
 </AnchorPane>
