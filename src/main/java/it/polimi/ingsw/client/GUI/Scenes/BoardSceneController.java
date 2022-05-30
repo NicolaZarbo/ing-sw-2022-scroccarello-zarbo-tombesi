@@ -2,9 +2,11 @@ package it.polimi.ingsw.client.GUI.Scenes;
 import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +64,7 @@ public abstract class BoardSceneController extends SceneController{
     public void setHall(ArrayList<ArrayList<Circle>> hall){
         Integer[][] diningroom=gui.getGame().getPersonalPlayer().getBoard().getDiningRoom();
         for(int i=0;i<diningroom.length;i++){
-            for(int j=0;j<diningroom[i].length;i++){
+            for(int j=0;j<diningroom[i].length;j++){
                 Image img;
                 int id=diningroom[i][j].intValue();
                 if(id!=-1){
@@ -135,5 +137,36 @@ public abstract class BoardSceneController extends SceneController{
             }
         }
     }
+    public void setTowers(ArrayList<ImageView>towers){
+        int towercolor=gui.getGame().getPersonalPlayer().getTowerColor();
+        int towersleft=gui.getGame().getPersonalPlayer().getBoard().getTowersLeft();
 
+        switch(towercolor){
+            case 1->{
+                //black
+                Image img=new Image("images/towers/black_tower.png");
+                for(int i=0;i<towersleft;i++){
+                    towers.get(i).setImage(img);
+                    towers.get(i).setVisible(true);
+                }
+            }
+            case 2->{
+                //white
+                Image img=new Image("images/towers/white_tower.png");
+                for(int i=0;i<towersleft;i++){
+                    towers.get(i).setImage(img);
+                    towers.get(i).setVisible(true);
+                }
+            }
+            case 3->{
+                //grey
+                Image img=new Image("images/towers/grey_tower.png");
+                for(int i=0;i<towersleft;i++){
+                    towers.get(i).setImage(img);
+                    towers.get(i).setVisible(true);
+                }
+            }
+
+        }
+    }
 }

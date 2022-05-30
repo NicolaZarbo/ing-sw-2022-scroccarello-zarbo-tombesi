@@ -4,10 +4,12 @@ import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+
 
 import java.util.ArrayList;
 
@@ -131,11 +133,40 @@ public class BoardScene2Controller extends BoardSceneController{
     private Circle player2board9c5r;
     @FXML
     private Circle player2board10c5r;
+    @FXML
+    private Polygon player2teacher1;
+    @FXML
+    private Polygon player2teacher2;
+    @FXML
+    private Polygon player2teacher3;
+    @FXML
+    private Polygon player2teacher4;
+    @FXML
+    private Polygon player2teacher5;
+    @FXML
+    private ImageView player2tower1;
+    @FXML
+    private ImageView player2tower2;
+    @FXML
+    private ImageView player2tower3;
+    @FXML
+    private ImageView player2tower4;
+    @FXML
+    private ImageView player2tower5;
+    @FXML
+    private ImageView player2tower6;
+    @FXML
+    private ImageView player2tower7;
+    @FXML
+    private ImageView player2tower8;
+
+
+
 
     private ArrayList<Circle> entrance;
     private ArrayList<ArrayList<Circle>> hall;
     private ArrayList<Polygon> table;
-    private ArrayList<Rectangle>towers;
+    private ArrayList<ImageView>towers;
 
     public BoardScene2Controller(){
         super();
@@ -144,18 +175,22 @@ public class BoardScene2Controller extends BoardSceneController{
         this.table=new ArrayList<>();
         this.towers=new ArrayList<>();
 
-        buildEntrance(entrance,2);
-        buildHall(hall,2);
-
     }
 
     @Override
     public void initialize(){
-        setEntrance(entrance);
+        buildEntrance(2);
+        buildHall(2);
+        buildTable(2);
+        buildTowers(2);
 
+        setEntrance(entrance);
+        setHall(hall);
+        setProfessors(table);
+        setTowers(towers);
     }
 
-    private void buildEntrance(ArrayList<Circle>entrance,int player){
+    private void buildEntrance(int player){
         if(player==1){
 
         }
@@ -172,12 +207,105 @@ public class BoardScene2Controller extends BoardSceneController{
         }
 
     }
-    private void buildHall(ArrayList<ArrayList<Circle>>hall,int player){
+    private void buildHall(int player){
+        ArrayList<Circle> row;
         if(player==1){
 
         }
         else{
+            row=new ArrayList<>(); //row 1
+            row.add(player2board1c1r);
+            row.add(player2board2c1r);
+            row.add(player2board3c1r);
+            row.add(player2board4c1r);
+            row.add(player2board5c1r);
+            row.add(player2board6c1r);
+            row.add(player2board7c1r);
+            row.add(player2board8c1r);
+            row.add(player2board9c1r);
+            row.add(player2board10c1r);
+            hall.add(row);
 
+            row=new ArrayList<>(); //row 2
+            row.add(player2board1c2r);
+            row.add(player2board2c2r);
+            row.add(player2board3c2r);
+            row.add(player2board4c2r);
+            row.add(player2board5c2r);
+            row.add(player2board6c2r);
+            row.add(player2board7c2r);
+            row.add(player2board8c2r);
+            row.add(player2board9c2r);
+            row.add(player2board10c2r);
+            hall.add(row);
+
+            row=new ArrayList<>(); //row 3
+            row.add(player2board1c3r);
+            row.add(player2board2c3r);
+            row.add(player2board3c3r);
+            row.add(player2board4c3r);
+            row.add(player2board5c3r);
+            row.add(player2board6c3r);
+            row.add(player2board7c3r);
+            row.add(player2board8c3r);
+            row.add(player2board9c3r);
+            row.add(player2board10c3r);
+            hall.add(row);
+
+            row=new ArrayList<>(); //row 4
+            row.add(player2board1c4r);
+            row.add(player2board2c4r);
+            row.add(player2board3c4r);
+            row.add(player2board4c4r);
+            row.add(player2board5c4r);
+            row.add(player2board6c4r);
+            row.add(player2board7c4r);
+            row.add(player2board8c4r);
+            row.add(player2board9c4r);
+            row.add(player2board10c4r);
+            hall.add(row);
+
+            row=new ArrayList<>(); //row 5
+            row.add(player2board1c5r);
+            row.add(player2board2c5r);
+            row.add(player2board3c5r);
+            row.add(player2board4c5r);
+            row.add(player2board5c5r);
+            row.add(player2board6c5r);
+            row.add(player2board7c5r);
+            row.add(player2board8c5r);
+            row.add(player2board9c5r);
+            row.add(player2board10c5r);
+            hall.add(row);
+
+
+        }
+    }
+    private void buildTable(int player){
+        if(player==1){
+
+        }
+        else{
+            table.add(player2teacher1);
+            table.add(player2teacher2);
+            table.add(player2teacher3);
+            table.add(player2teacher4);
+            table.add(player2teacher5);
+        }
+    }
+    private void buildTowers(int player){
+        if(player==1){
+
+        }
+        else{
+            towers.add(player2tower1);
+            towers.add(player2tower2);
+            towers.add(player2tower3);
+            towers.add(player2tower4);
+            towers.add(player2tower5);
+            towers.add(player2tower6);
+            towers.add(player2tower7);
+            towers.add(player2tower8);
         }
     }
 }

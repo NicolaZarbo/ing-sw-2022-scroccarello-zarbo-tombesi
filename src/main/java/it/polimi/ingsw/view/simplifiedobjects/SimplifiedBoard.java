@@ -8,7 +8,7 @@ public class SimplifiedBoard {
     private Integer[][] diningRoom; //array in cui ci va l'id degli studenti presenti
     private Integer[] professorTable;//array in cui va l'id del professore se lo ha
     private List<Integer> entrance;
-    private int towersLeft; //array che rappresenta le towers presenti
+    private int towersLeft; //int che rappresenta le towers presenti
     private boolean[][] coinDN;//se true c'è ancora il coin da prendere
 
 
