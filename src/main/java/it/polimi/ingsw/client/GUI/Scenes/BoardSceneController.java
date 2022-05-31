@@ -6,12 +6,14 @@ import it.polimi.ingsw.enumerations.SceneEnum;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public abstract class BoardSceneController extends SceneController{
@@ -19,7 +21,6 @@ public abstract class BoardSceneController extends SceneController{
     protected GUI gui;
     protected ArrayList<Integer> clickedEntranceStudentsColor;
     protected ArrayList<Integer> clickedDiningStudentsColor;
-
 
     public BoardSceneController() {
         this.gui= GuiInputManager.getGui();
@@ -166,7 +167,7 @@ public abstract class BoardSceneController extends SceneController{
                 for(int i=0;i<towersleft;i++){
                     towers.get(i).setImage(img);
                     towers.get(i).setVisible(true);
-                }//todo make the others not visible
+                }
             }
             case 1->{
                 //white
