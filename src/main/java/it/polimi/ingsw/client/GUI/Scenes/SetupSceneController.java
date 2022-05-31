@@ -66,7 +66,7 @@ public class SetupSceneController extends SceneController{
         availableMages = view.getAvailableMages();
         blacktower.setVisible(false);
         whitetower.setVisible(false);
-        greytower.setVisible(true); //just for testing waiting for bug fixes
+        greytower.setVisible(false);
         mage1.setVisible(false);
         mage2.setVisible(false);
         mage3.setVisible(false);

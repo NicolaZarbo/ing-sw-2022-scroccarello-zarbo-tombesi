@@ -45,7 +45,7 @@ public class BoardScene3Controller extends BoardSceneController{
     public void initialize() {
         for(int i=0;i<3;i++){
             buildEntrance(i);
-            setEntrance(entrance0List,i-1);
+            setEntrance(entrance0List,i+1);
         }
 
 
@@ -72,5 +72,30 @@ public class BoardScene3Controller extends BoardSceneController{
             }
         }
        }
+    }
+    private void buildHall(int player){
+        ArrayList<Circle> diningRow = new ArrayList<>();
+        Pane diningReference;
+        ArrayList<ArrayList<Circle>> diningContainer=null;
+        switch(player) {
+            case 0-> {
+                diningContainer=diningRoom0;
+                diningReference=dining_1;
+            }
+            case 1->{}
+
+            case 2-> {
+                diningContainer = diningRoom2;
+                diningReference = yourhall;
+            }
+        }
+
+        for (Node row: diningReference.getChildren()) {
+            for (Node student:((Pane) row).getChildren()) {
+                diningRow.add((Circle)student);
+            }
+            diningContainer.add(diningRow);
+            diningRow=new ArrayList<>();
+        }
     }
 }
