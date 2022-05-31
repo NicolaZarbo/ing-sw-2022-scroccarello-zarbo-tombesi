@@ -2,82 +2,110 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="948.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="948.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.MapSceneController">
    <children>
       <AnchorPane layoutX="35.0" layoutY="14.0" prefHeight="586.0" prefWidth="895.0">
          <children>
-            <Circle fx:id="island12" fill="DODGERBLUE" layoutX="71.0" layoutY="266.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="island1" fill="DODGERBLUE" layoutX="150.0" layoutY="129.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="island2" fill="DODGERBLUE" layoutX="286.0" layoutY="69.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="island11" fill="DODGERBLUE" layoutX="150.0" layoutY="392.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="island10" fill="DODGERBLUE" layoutX="286.0" layoutY="468.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="island3" fill="#1f93ff" layoutX="448.0" layoutY="50.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="island9" fill="DODGERBLUE" layoutX="448.0" layoutY="512.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="island8" fill="DODGERBLUE" layoutX="605.0" layoutY="468.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="island4" fill="#1f93ff" layoutX="605.0" layoutY="80.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="island5" fill="DODGERBLUE" layoutX="733.0" layoutY="152.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="island7" fill="DODGERBLUE" layoutX="733.0" layoutY="392.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="island6" fill="DODGERBLUE" layoutX="821.0" layoutY="266.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-            <Rectangle fx:id="brigde12_1" arcHeight="5.0" arcWidth="5.0" fill="#3696ea" height="80.0" layoutX="87.0" layoutY="149.0" rotate="-155.0" stroke="BLACK" strokeType="INSIDE" width="22.0" />
-            <Rectangle fx:id="brigde6_7" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="90.0" layoutX="763.0" layoutY="284.0" rotate="47.9" stroke="BLACK" strokeType="INSIDE" width="22.0" />
-            <Rectangle fx:id="brigde5_6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="765.0" layoutY="161.0" rotate="-36.6" stroke="BLACK" strokeType="INSIDE" width="22.0" />
-            <Rectangle fx:id="brigde4_5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="654.0" layoutY="70.0" rotate="-54.9" stroke="BLACK" strokeType="INSIDE" width="22.0" />
-            <Rectangle fx:id="brigde3_4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="512.0" layoutY="16.0" rotate="-75.0" stroke="BLACK" strokeType="INSIDE" width="22.0" />
-            <Rectangle fx:id="brigde2_3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="348.0" layoutY="3.0" rotate="-92.3" stroke="BLACK" strokeType="INSIDE" width="22.0" />
-            <Rectangle fx:id="brigde1_2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="206.0" layoutY="51.0" rotate="66.3" stroke="BLACK" strokeType="INSIDE" width="22.0" />
-            <Rectangle fx:id="brigde7_8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="654.0" layoutY="389.0" rotate="59.0" stroke="BLACK" strokeType="INSIDE" width="22.0" />
-            <Rectangle fx:id="brigde8_9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="512.0" layoutY="458.0" rotate="75.3" stroke="BLACK" strokeType="INSIDE" width="22.0" />
-            <Rectangle fx:id="brigde11_12" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="98.0" layoutY="286.0" rotate="-40.0" stroke="BLACK" strokeType="INSIDE" width="22.0" />
-            <Rectangle fx:id="brigde10_11" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="206.0" layoutY="399.0" rotate="118.1" stroke="BLACK" strokeType="INSIDE" width="22.0" />
-            <Rectangle fx:id="brigde9_10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="347.0" layoutY="452.0" rotate="110.9" stroke="BLACK" strokeType="INSIDE" width="22.0" />
-            <Circle fx:id="cloud1" fill="DODGERBLUE" layoutX="286.0" layoutY="274.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud3" fill="DODGERBLUE" layoutX="578.0" layoutY="274.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud2" fill="DODGERBLUE" layoutX="428.0" layoutY="175.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud4" fill="DODGERBLUE" layoutX="428.0" layoutY="367.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-            <Rectangle fx:id="tower1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="118.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
-            <Rectangle fx:id="tower2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="259.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
-            <Rectangle fx:id="tower3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="412.0" layoutY="-12.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
-            <Rectangle fx:id="tower4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="579.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
-            <Rectangle fx:id="tower5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="712.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
-            <Rectangle fx:id="tower6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="815.0" layoutY="183.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
-            <Rectangle fx:id="tower7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="705.0" layoutY="312.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
-            <Rectangle fx:id="tower8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="588.0" layoutY="382.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
-            <Rectangle fx:id="tower9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="448.0" layoutY="430.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
-            <Rectangle fx:id="tower10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="273.0" layoutY="385.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
-            <Rectangle fx:id="tower11" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="155.0" layoutY="317.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
-            <Rectangle fx:id="tower12" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="29.0" layoutY="189.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
-            <Circle fx:id="cloud1_1" fill="DODGERBLUE" layoutX="259.0" layoutY="255.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud1_2" fill="DODGERBLUE" layoutX="304.0" layoutY="254.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud1_3" fill="DODGERBLUE" layoutX="259.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud1_4" fill="DODGERBLUE" layoutX="304.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud2_1" fill="DODGERBLUE" layoutX="402.0" layoutY="154.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud2_2" fill="DODGERBLUE" layoutX="448.0" layoutY="153.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud2_4" fill="DODGERBLUE" layoutX="448.0" layoutY="201.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud2_3" fill="DODGERBLUE" layoutX="402.0" layoutY="201.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud3_1" fill="DODGERBLUE" layoutX="553.0" layoutY="254.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud3_2" fill="DODGERBLUE" layoutX="601.0" layoutY="255.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud3_3" fill="DODGERBLUE" layoutX="553.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud3_4" fill="DODGERBLUE" layoutX="602.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud4_1" fill="DODGERBLUE" layoutX="402.0" layoutY="346.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud4_2" fill="DODGERBLUE" layoutX="448.0" layoutY="346.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud4_3" fill="DODGERBLUE" layoutX="402.0" layoutY="387.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="cloud4_4" fill="DODGERBLUE" layoutX="448.0" layoutY="388.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Rectangle fx:id="mothernature1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="140.0" layoutY="124.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="mothernature2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="289.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="mothernature3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="448.0" layoutY="48.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="mothernature4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="591.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="mothernature5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="703.0" layoutY="151.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="mothernature6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="827.0" layoutY="264.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="mothernature7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="746.0" layoutY="379.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="mothernature8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="602.0" layoutY="467.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="mothernature9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="413.0" layoutY="504.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="mothernature10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="258.0" layoutY="467.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="mothernature11" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="110.0" layoutY="379.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="mothernature12" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="83.0" layoutY="235.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-         </children>
+            <Pane fx:id="island_container">
+               <Circle fx:id="island12" fill="DODGERBLUE" layoutX="71.0" layoutY="266.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="island1" fill="DODGERBLUE" layoutX="150.0" layoutY="129.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="island2" fill="DODGERBLUE" layoutX="286.0" layoutY="69.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="island11" fill="DODGERBLUE" layoutX="150.0" layoutY="392.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="island10" fill="DODGERBLUE" layoutX="286.0" layoutY="468.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="island3" fill="#1f93ff" layoutX="448.0" layoutY="50.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="island9" fill="DODGERBLUE" layoutX="448.0" layoutY="512.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="island8" fill="DODGERBLUE" layoutX="605.0" layoutY="468.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="island4" fill="#1f93ff" layoutX="605.0" layoutY="80.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="island5" fill="DODGERBLUE" layoutX="733.0" layoutY="152.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="island7" fill="DODGERBLUE" layoutX="733.0" layoutY="392.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="island6" fill="DODGERBLUE" layoutX="821.0" layoutY="266.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+            </Pane>
+            <Pane fx:id="studentHover_container">
+
+            </Pane>
+            <Pane fx:id="bridge_container">
+               <Rectangle fx:id="brigde12" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="87.0" layoutY="149.0" rotate="-155.0" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+               <Rectangle fx:id="brigde6" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="90.0" layoutX="763.0" layoutY="284.0" rotate="47.9" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+               <Rectangle fx:id="brigde5" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="765.0" layoutY="161.0" rotate="-36.6" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+               <Rectangle fx:id="brigde4" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="654.0" layoutY="70.0" rotate="-54.9" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+               <Rectangle fx:id="brigde3" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="512.0" layoutY="16.0" rotate="-75.0" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+               <Rectangle fx:id="brigde2" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="348.0" layoutY="3.0" rotate="-92.3" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+               <Rectangle fx:id="brigde1" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="206.0" layoutY="51.0" rotate="66.3" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+               <Rectangle fx:id="brigde7" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="654.0" layoutY="389.0" rotate="59.0" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+               <Rectangle fx:id="brigde8" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="512.0" layoutY="458.0" rotate="75.3" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+               <Rectangle fx:id="brigde11" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="98.0" layoutY="286.0" rotate="-40.0" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+               <Rectangle fx:id="brigde10" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="206.0" layoutY="399.0" rotate="118.1" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+               <Rectangle fx:id="brigde9" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="347.0" layoutY="452.0" rotate="110.9" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+
+            </Pane>
+            <Pane fx:id="cloud_container">
+               <Circle fx:id="cloud1" fill="DODGERBLUE" layoutX="286.0" layoutY="274.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="cloud3" fill="DODGERBLUE" layoutX="578.0" layoutY="274.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="cloud2" fill="DODGERBLUE" layoutX="428.0" layoutY="175.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fx:id="cloud4" fill="DODGERBLUE" layoutX="428.0" layoutY="367.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
+
+            </Pane>
+            <Pane fx:id="tower_container">
+               <Rectangle fx:id="tower1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="118.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+               <Rectangle fx:id="tower2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="259.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+               <Rectangle fx:id="tower3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="412.0" layoutY="-12.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+               <Rectangle fx:id="tower4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="579.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+               <Rectangle fx:id="tower5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="712.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+               <Rectangle fx:id="tower6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="815.0" layoutY="183.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+               <Rectangle fx:id="tower7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="705.0" layoutY="312.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+               <Rectangle fx:id="tower8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="588.0" layoutY="382.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+               <Rectangle fx:id="tower9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="448.0" layoutY="430.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+               <Rectangle fx:id="tower10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="273.0" layoutY="385.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+               <Rectangle fx:id="tower11" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="155.0" layoutY="317.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+               <Rectangle fx:id="tower12" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="29.0" layoutY="189.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+
+            </Pane>
+            <Pane fx:id="cloudStudents_container">
+               <Pane fx:id="cloud1Students_container">
+                  <Circle fx:id="cloud1_1" fill="DODGERBLUE" layoutX="259.0" layoutY="255.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="cloud1_2" fill="DODGERBLUE" layoutX="304.0" layoutY="254.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="cloud1_3" fill="DODGERBLUE" layoutX="259.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="cloud1_4" fill="DODGERBLUE" layoutX="304.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+               </Pane>
+               <Pane fx:id="cloud2Students_container">
+                  <Circle fx:id="cloud2_1" fill="DODGERBLUE" layoutX="402.0" layoutY="154.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="cloud2_2" fill="DODGERBLUE" layoutX="448.0" layoutY="153.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="cloud2_4" fill="DODGERBLUE" layoutX="448.0" layoutY="201.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="cloud2_3" fill="DODGERBLUE" layoutX="402.0" layoutY="201.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+               </Pane>
+               <Pane fx:id="cloud3Students_container">
+                  <Circle fx:id="cloud3_1" fill="DODGERBLUE" layoutX="553.0" layoutY="254.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="cloud3_2" fill="DODGERBLUE" layoutX="601.0" layoutY="255.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="cloud3_3" fill="DODGERBLUE" layoutX="553.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="cloud3_4" fill="DODGERBLUE" layoutX="602.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+
+               </Pane>
+               <Pane fx:id="cloud4Students_container">
+                  <Circle fx:id="cloud4_1" fill="DODGERBLUE" layoutX="402.0" layoutY="346.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="cloud4_2" fill="DODGERBLUE" layoutX="448.0" layoutY="346.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="cloud4_3" fill="DODGERBLUE" layoutX="402.0" layoutY="387.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="cloud4_4" fill="DODGERBLUE" layoutX="448.0" layoutY="388.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+               </Pane>
+            </Pane>
+            <Pane fx:id="motherZones_container">
+               <Rectangle fx:id="mothernature1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="140.0" layoutY="124.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+               <Rectangle fx:id="mothernature2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="289.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+               <Rectangle fx:id="mothernature3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="448.0" layoutY="48.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+               <Rectangle fx:id="mothernature4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="591.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+               <Rectangle fx:id="mothernature5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="703.0" layoutY="151.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+               <Rectangle fx:id="mothernature6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="827.0" layoutY="264.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+               <Rectangle fx:id="mothernature7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="746.0" layoutY="379.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+               <Rectangle fx:id="mothernature8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="602.0" layoutY="467.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+               <Rectangle fx:id="mothernature9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="413.0" layoutY="504.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+               <Rectangle fx:id="mothernature10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="258.0" layoutY="467.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+               <Rectangle fx:id="mothernature11" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="110.0" layoutY="379.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+               <Rectangle fx:id="mothernature12" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="83.0" layoutY="235.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            </Pane>
+              </children>
       </AnchorPane>
       <Button layoutX="69.0" layoutY="607.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="81.0" text="Show Hand" />
       <Button layoutX="207.0" layoutY="608.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="94.0" text="Show Boards" />

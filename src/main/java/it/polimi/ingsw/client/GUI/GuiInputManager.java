@@ -12,10 +12,16 @@ public class GuiInputManager extends InputManager {
     private static boolean isLobbyAvailable;
     private static boolean isConnected;
     private static GUI gui;
+
+
+
     private ArrayList<Integer> selectedStudents;
     private int selectedIsland;
     private int selectedCloud;
-
+    private static boolean canChooseIsland;
+    public ArrayList<Integer> getSelectedStudents() {
+        return selectedStudents;
+    }
 
     public GuiInputManager(CentralView game,GUI gui) {
         isLobbyAvailable=false;
@@ -67,6 +73,12 @@ public class GuiInputManager extends InputManager {
     protected void caseActionMoveMother() {
 
     }
+    public static void setChooseIsland(boolean can){
+        canChooseIsland=can;
+    }
+    public static boolean canChooseIsland(){
+        return canChooseIsland;
+    }
 
     @Override
     protected void caseActionMoveStudent() {
@@ -77,6 +89,12 @@ public class GuiInputManager extends InputManager {
             return;
         game.moveStudentToHall(color);
         waitForAnswer();
+    }
+    public void moveMotherTo(int islandID){
+        int steps=(game.getMother()-islandID)%game.getIslands().size();
+        if(steps<game.getCardYouPlayed())
+            game.moveMother(steps);
+        canChooseIsland=false;
     }
     public void moveToIsland(int islandId){
         if(!canDoAction)
