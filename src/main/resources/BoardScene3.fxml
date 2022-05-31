@@ -109,7 +109,7 @@
                   </Pane>
                </children>
             </Pane>
-            <Pane fx:id="yourtable" layoutX="361.0" layoutY="26.0">
+            <Pane fx:id="yourtable" layoutX="359.0" layoutY="27.0">
                <children>
                   <Polygon fx:id="player1teacher5" fill="DODGERBLUE" layoutY="144.0" scaleX="0.2" scaleY="0.2" scaleZ="0.1" stroke="BLACK" strokeType="INSIDE" visible="false">
                      <points>
@@ -193,16 +193,16 @@
                   </Polygon>
                </children>
             </Pane>
-            <Pane fx:id="yourtowers" layoutX="414.0" layoutY="34.0" prefHeight="158.0" prefWidth="90.0">
+            <Pane fx:id="yourtowers" layoutX="404.0" layoutY="27.0" prefHeight="158.0" prefWidth="90.0">
                <children>
-                  <ImageView fx:id="player1tower3" fitHeight="5.0" fitWidth="5.0" layoutX="11.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player1tower4" fitHeight="5.0" fitWidth="5.0" layoutX="44.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player1tower5" fitHeight="5.0" fitWidth="5.0" layoutX="9.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player1tower7" fitHeight="5.0" fitWidth="5.0" layoutX="7.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player1tower8" fitHeight="5.0" fitWidth="5.0" layoutX="47.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player1tower6" fitHeight="5.0" fitWidth="5.0" layoutX="11.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player1tower1" fitHeight="5.0" fitWidth="5.0" layoutX="47.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player1tower2" fitHeight="5.0" fitWidth="5.0" layoutX="47.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player1tower3" fitHeight="30.0" fitWidth="30.0" layoutX="11.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player1tower4" fitHeight="30.0" fitWidth="30.0" layoutX="44.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player1tower5" fitHeight="30.0" fitWidth="30.0" layoutX="9.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player1tower7" fitHeight="30.0" fitWidth="30.0" layoutX="7.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player1tower8" fitHeight="30.0" fitWidth="30.0" layoutX="47.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player1tower6" fitHeight="30.0" fitWidth="30.0" layoutX="11.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player1tower1" fitHeight="30.0" fitWidth="30.0" layoutX="47.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player1tower2" fitHeight="30.0" fitWidth="30.0" layoutX="47.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
          </children>
@@ -388,14 +388,14 @@
             <Pane fx:id="other1towers" layoutX="414.0" layoutY="34.0">
                <children>
 
-                  <ImageView fx:id="player2tower3" fitHeight="5.0" fitWidth="5.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player2tower4" fitHeight="5.0" fitWidth="5.0" layoutX="39.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player2tower5" fitHeight="5.0" fitWidth="5.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player2tower7" fitHeight="5.0" fitWidth="5.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player2tower8" fitHeight="5.0" fitWidth="5.0" layoutX="39.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player2tower6" fitHeight="5.0" fitWidth="5.0" layoutX="39.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player2tower1" fitHeight="5.0" fitWidth="5.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player2tower2" fitHeight="5.0" fitWidth="5.0" layoutX="39.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2tower3" fitHeight="30.0" fitWidth="30.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2tower4" fitHeight="30.0" fitWidth="30.0" layoutX="39.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2tower5" fitHeight="30.0" fitWidth="30.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2tower7" fitHeight="30.0" fitWidth="30.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2tower8" fitHeight="30.0" fitWidth="30.0" layoutX="39.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2tower6" fitHeight="30.0" fitWidth="30.0" layoutX="39.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2tower1" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2tower2" fitHeight="30.0" fitWidth="30.0" layoutX="39.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
          </children>
@@ -580,14 +580,14 @@
             </Pane>
             <Pane fx:id="other2towers" layoutX="414.0" layoutY="34.0">
                <children>
-                  <ImageView fx:id="player3tower3" fitHeight="5.0" fitWidth="5.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player3tower4" fitHeight="5.0" fitWidth="5.0" layoutX="39.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player3tower5" fitHeight="5.0" fitWidth="5.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player3tower7" fitHeight="5.0" fitWidth="5.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player3tower8" fitHeight="5.0" fitWidth="5.0" layoutX="39.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player3tower6" fitHeight="5.0" fitWidth="5.0" layoutX="39.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="player3tower1" fitHeight="5.0" fitWidth="5.0" />
-                  <ImageView fx:id="player3tower2" fitHeight="5.0" fitWidth="5.0" layoutX="39.0" />
+                  <ImageView fx:id="player3tower3" fitHeight="30.0" fitWidth="30.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player3tower4" fitHeight="30.0" fitWidth="30.0" layoutX="39.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player3tower5" fitHeight="30.0" fitWidth="30.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player3tower7" fitHeight="30.0" fitWidth="30.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player3tower8" fitHeight="30.0" fitWidth="30.0" layoutX="39.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player3tower6" fitHeight="30.0" fitWidth="30.0" layoutX="39.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player3tower1" fitHeight="30.0" fitWidth="30.0" />
+                  <ImageView fx:id="player3tower2" fitHeight="30.0" fitWidth="30.0" layoutX="39.0" />
                </children>
             </Pane>
          </children>

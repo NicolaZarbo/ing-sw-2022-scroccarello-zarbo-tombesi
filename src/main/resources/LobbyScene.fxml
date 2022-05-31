@@ -4,40 +4,47 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="457.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.LobbySceneController">
+<Pane maxHeight="400.0" maxWidth="600.0" minHeight="342.0" minWidth="600.0" prefHeight="342.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.LobbySceneController">
    <children>
-      <Pane fx:id="waitingpanel" prefHeight="400.0" prefWidth="600.0">
+      <Pane fx:id="waitingpanel" prefHeight="153.0" prefWidth="600.0">
          <children>
-            <Text fx:id="waitingtext" layoutX="18.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="563.13671875">
+            <Text fx:id="waitingtext" layoutX="21.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="560.13671875">
                <font>
                   <Font size="40.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="mainpanel" layoutX="124.0" layoutY="4.0" prefHeight="392.0" prefWidth="370.0">
+      <Pane fx:id="mainpanel" layoutX="6.0" layoutY="4.0" prefHeight="392.0" prefWidth="589.0">
          <children>
-            <CheckBox fx:id="easySelector" layoutX="108.0" layoutY="229.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="154.0" text="Easy Rules">
+            <ImageView fitHeight="353.0" fitWidth="610.0" layoutX="-11.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/wallpapers/Lobby.jpg" />
+               </image>
+            </ImageView>
+            <CheckBox fx:id="easySelector" layoutX="197.0" layoutY="240.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="154.0" text="Easy Rules">
                <font>
                   <Font size="24.0" />
                </font>
             </CheckBox>
-            <Label layoutX="165.0" layoutY="158.0" prefHeight="77.0" prefWidth="205.0" text="Number of Players">
+            <Label layoutX="254.0" layoutY="169.0" prefHeight="77.0" prefWidth="205.0" text="Number of Players">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="nPlayers" layoutX="69.0" layoutY="174.0" prefHeight="46.0" prefWidth="78.0" />
-            <Label layoutX="-71.0" layoutY="14.0" text="There are no available lobbies, please create one">
+            <ChoiceBox fx:id="nPlayers" layoutX="158.0" layoutY="185.0" prefHeight="46.0" prefWidth="78.0" />
+            <Label layoutX="21.0" layoutY="147.0" text="There are no available lobbies, please create one">
                <font>
-                  <Font size="24.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="createLobbyButton" layoutX="112.0" layoutY="350.0" mnemonicParsing="false" onAction="#createLobby" text="Create new lobby">
+            <Button fx:id="createLobbyButton" layoutX="211.0" layoutY="307.0" mnemonicParsing="false" onAction="#createLobby" text="Create new lobby">
                <font>
                   <Font name="Bookman Old Style" size="15.0" />
                </font>
