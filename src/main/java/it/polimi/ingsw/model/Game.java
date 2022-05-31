@@ -43,11 +43,11 @@ public class Game extends Observable<ServerMessage> {
 
     /** creates a game without players, which are then created in a setup phase through players inputs*/
     public Game(boolean easy, int numberOfPlayer){
+        this.nPlayers =numberOfPlayer;
         actionPhase= new Turn(this);
         planningPhase= new Round(this);
         setupPhase = new Setup(this);
         this.easy=easy;
-        this.nPlayers =numberOfPlayer;
         this.bag=new Bag(26,5);
         this.islands=Setup.createIslands(12,bag);
         this.clouds= Setup.createClouds(nPlayers);
