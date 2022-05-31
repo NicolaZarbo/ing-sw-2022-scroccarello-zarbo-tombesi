@@ -3,16 +3,12 @@ import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.enumerations.SceneEnum;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
@@ -156,7 +152,7 @@ public abstract class BoardSceneController extends SceneController{
                         table.get(i).setVisible(true);
                     }
                 }
-            }else table.get(i).setVisible(false);
+            }
         }
     }
     public void setTowers(ArrayList<ImageView>towers,int player){
@@ -194,6 +190,12 @@ public abstract class BoardSceneController extends SceneController{
     public void setPlayerName(Text textbox, int player){
         String name=gui.getGame().getPlayers().get(player-1).getUsername();
         textbox.setText("Player: "+name);
+    }
+    public void sendToHand(){
+        gui.showHand();
+    }
+    public void sendToMap(){
+        gui.showIslands();
     }
     /**
      * used in initialize to set the present student Clickable based on some need

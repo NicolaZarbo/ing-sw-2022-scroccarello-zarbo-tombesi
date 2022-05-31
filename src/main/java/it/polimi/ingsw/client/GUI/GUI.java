@@ -130,21 +130,28 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void showClouds() {
-        Platform.runLater(() -> {
-            mainStage.setScene(scenes.get("MapScene"));
-        });
+        setScene(SceneEnum.MapScene);
     }
 
     @Override
     public void showBoards() {
-        setScene(SceneEnum.BoardScene2);
+        switch(game.getPlayers().size()){
+            case 2->{
+                setScene(SceneEnum.BoardScene2);
+            }
+            case 3->{
+                setScene(SceneEnum.BoardScene3);
+            }
+            case 4->{
+                setScene(SceneEnum.BoardScene4);
+            }
+        }
+
     }
 
     @Override
     public void showIslands() {
-        Platform.runLater(() -> {
-            mainStage.setScene(scenes.get("MapScene"));
-        });
+        setScene(SceneEnum.MapScene);
     }
     public GuiInputManager getInputManager(){
         return inputManager;

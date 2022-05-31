@@ -33,8 +33,6 @@ public class SetupSceneController extends SceneController{
     @FXML
     private ImageView greytower;
     @FXML
-    private Label towerChoice;
-    @FXML
     private Label choiceMsg;
     @FXML
     private Text errorMsg;
@@ -44,6 +42,7 @@ public class SetupSceneController extends SceneController{
     private Pane mainpane;
 
     private List<Integer> availableMages;
+    private List<Integer> availableTowers;
 
     public SetupSceneController() {
     }
@@ -60,19 +59,14 @@ public class SetupSceneController extends SceneController{
         blacktower.setImage(img);
         img=new Image("images/towers/white_tower.png");
         whitetower.setImage(img);
-        /*if(gui.getGame().getPlayers().size()==3){
-            img=new Image("images/towers/grey_tower.png");
-            greytower.setImage(img);
-        }*/
         img=new Image("images/towers/grey_tower.png");
         greytower.setImage(img);
-        //just for temporary testing
         CentralView view = gui.getGame();
-        List<Integer> availableTowers = view.getAvailableColor();
+        availableTowers = view.getAvailableColor();
         availableMages = view.getAvailableMages();
         blacktower.setVisible(false);
         whitetower.setVisible(false);
-        greytower.setVisible(false);
+        greytower.setVisible(true); //just for testing waiting for bug fixes
         mage1.setVisible(false);
         mage2.setVisible(false);
         mage3.setVisible(false);
@@ -95,6 +89,14 @@ public class SetupSceneController extends SceneController{
         blacktower.setImage(null);
         whitetower.setImage(null);
         greytower.setImage(null);
+        Image img=new Image("images/wizards/Wizard (1).png");
+        mage1.setImage(img);
+        img=new Image("images/wizards/Wizard (2).png");
+        mage2.setImage(img);
+        img=new Image("images/wizards/Wizard (3).png");
+        mage3.setImage(img);
+        img=new Image("images/wizards/Wizard (4).png");
+        mage4.setImage(img);
         for (Integer mage:availableMages) {
             if(mage==0)
                 mage1.setVisible(true);
@@ -105,14 +107,7 @@ public class SetupSceneController extends SceneController{
             if(mage==3)
                 mage4.setVisible(true);
         }
-        Image img=new Image("images/wizards/Wizard (1).png");
-        mage1.setImage(img);
-        img=new Image("images/wizards/Wizard (2).png");
-        mage2.setImage(img);
-        img=new Image("images/wizards/Wizard (3).png");
-        mage3.setImage(img);
-        img=new Image("images/wizards/Wizard (4).png");
-        mage4.setImage(img);
+
     }
     @FXML
     public void setMage1(MouseEvent click){

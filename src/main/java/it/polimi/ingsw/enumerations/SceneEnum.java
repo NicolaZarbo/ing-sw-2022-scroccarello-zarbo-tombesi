@@ -6,6 +6,7 @@ public enum SceneEnum {
     SetupScene("/SetupScene.fxml"),
     BoardScene2("/BoardScene2.fxml"),
     BoardScene3("/BoardScene3.fxml"),
+    BoardScene4("/BoardScene4.fxml"),
     HandScene("/HandScene.fxml"),
     MapScene("/MapScene.fxml");
 

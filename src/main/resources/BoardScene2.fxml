@@ -197,7 +197,7 @@
             </children>
       </AnchorPane>
       <Text fx:id="player1name" layoutX="323.0" layoutY="39.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" wrappingWidth="261.2878875732422" />
-      <Button layoutX="36.0" layoutY="594.0" mnemonicParsing="false" scaleX="1.5" scaleY="1.5" text="Map" />
+      <Button layoutX="36.0" layoutY="594.0" mnemonicParsing="false" onMouseClicked="#sendToMap" scaleX="1.5" scaleY="1.5" text="Map" />
       <AnchorPane fx:id="boardPlayer2" layoutX="191.0" layoutY="358.0" prefHeight="218.0" prefWidth="508.0">
          <children>
             <ImageView fitHeight="248.0" fitWidth="508.0" pickOnBounds="true" preserveRatio="true">
@@ -220,7 +220,7 @@
             </Pane>
             <Pane fx:id="yourhall" layoutX="94.0" layoutY="28.0">
                <children>
-                  <Pane  fx:id="hall2Row5">
+                  <Pane fx:id="hall2Row5">
                      <Circle fx:id="player2board1c5r" fill="DODGERBLUE" layoutX="11.0" layoutY="154.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
                      <Circle fx:id="player2board2c5r" fill="DODGERBLUE" layoutX="36.0" layoutY="154.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
                      <Circle fx:id="player2board3c5r" fill="DODGERBLUE" layoutX="60.0" layoutY="154.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />

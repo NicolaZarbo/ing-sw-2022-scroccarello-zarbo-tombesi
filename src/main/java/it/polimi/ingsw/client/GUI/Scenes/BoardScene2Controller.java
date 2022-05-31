@@ -21,14 +21,14 @@ public class BoardScene2Controller extends BoardSceneController{
     public Pane towers_1;
     public Pane yourtowers;
 
-    ArrayList<ImageView> towers1;
-    ArrayList<ImageView> towers2;
-    ArrayList<Polygon> table1;
-    ArrayList<Polygon> table2;
-    ArrayList<Circle> entrance1List;
-    ArrayList<ArrayList<Circle>> diningRoom1;
-    ArrayList<Circle> entrance2List;
-    ArrayList<ArrayList<Circle>> diningRoom2;
+    private ArrayList<ImageView> towers1;
+    private ArrayList<ImageView> towers2;
+    private ArrayList<Polygon> table1;
+    private ArrayList<Polygon> table2;
+    private ArrayList<Circle> entrance1List;
+    private ArrayList<Circle> entrance2List;
+    private ArrayList<ArrayList<Circle>> diningRoom1;
+    private ArrayList<ArrayList<Circle>> diningRoom2;
 
     @FXML
     private Text player1name;
@@ -131,7 +131,4 @@ public class BoardScene2Controller extends BoardSceneController{
         }
     }
 
-    public void sendToHand(){
-        gui.showHand();
-    }
 }
