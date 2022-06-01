@@ -110,7 +110,7 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void showOptionsForPersonalization(PlayerSetUpMessage message) {
-        goToWizardSelection();
+        setScene(SceneEnum.SetupScene);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void askToMoveStudent() {
-
+        setScene(SceneEnum.MapScene);
     }
 
     @Override

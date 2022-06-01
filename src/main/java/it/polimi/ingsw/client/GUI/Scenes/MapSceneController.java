@@ -8,10 +8,13 @@ import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,13 +24,16 @@ import java.util.Map;
 
 public class MapSceneController extends SceneController {
     public Pane island_container;
+    public Pane islandStudent_container;
     public Pane bridge_container;
     public Pane motherZones_container;
     public Pane cloudStudents_container;
     public Pane cloud_container;
     public Pane tower_container;
-    public Pane studentHover_container;
-    private Pane scene;
+    public Text info;
+    private List<Pane> containers;
+    public ImageView hoverBackGround;
+    private List<ImageView> islandStudentPlaces;
     private GUI gui;
     private CentralView view;
     private Map<Integer, Circle> islandByNumber;
@@ -45,14 +51,55 @@ public class MapSceneController extends SceneController {
 
     @Override
     public void initialize() {
+        saveContainers();
         initClouds();
         initIslands();
         initTowers();
         initBridges();
         initMotherZones();
-
+        initHoverIsland();
         setCloud();
         setIslands();
+        prepareForContext();
+    }
+    /** used to modify some properties based on the state*/
+    private void prepareForContext(){
+        switch (view.getState()){
+            case actionMoveMother -> {
+                setOtherContainerTransparent(island_container);
+                info.setText("Select a target island for Mother");
+                moveMotherContext();
+            }
+            case actionMoveStudent -> {
+                setOtherContainerTransparent(island_container);
+                info.setText("Select a target island for the student");
+            }
+            case planPlayCard -> {
+                setOtherContainerTransparent(island_container);
+                info.setText("go to hand to choose a card");
+            }
+            case actionChooseCloud ->{
+                setOtherContainerTransparent(cloud_container);
+                info.setText("Choose a cloud to refill");
+                chooseCloudContext();
+            }
+        }
+    }
+    private void chooseCloudContext(){
+        //todo make only the not empty clouds clickable and highlighted
+    }
+    private void moveMotherContext(){
+        //todo make only the available island highlighted and clickable
+    }
+    private void saveContainers(){
+        containers= new ArrayList<>();
+        containers.add(island_container);
+        containers.add(islandStudent_container);
+        containers.add(bridge_container);
+        containers.add(tower_container);
+        containers.add(motherZones_container);
+        containers.add(cloud_container);
+        containers.add(cloudStudents_container);
     }
     private void setTower(SimplifiedIsland island){
         //todo check if the number on island reflect those on view
@@ -92,14 +139,66 @@ public class MapSceneController extends SceneController {
             int islandImage=(islandID%3)+1;
             Image img = new Image("images/simple_elements/island"+islandImage+".png");
             islandByNumber.get(islandID+1).setFill(new ImagePattern(img));
-           clickChooseIsland( islandByNumber.get(islandID+1),island.getIslandId());
+            islandByNumber.get(islandID+1).setDisable(false);
+            clickChooseIsland( islandByNumber.get(islandID+1));
+            hoverShowInside(islandByNumber.get(islandID+1));
             setTower(island);
             setMotherZone(island);
         }
     }
-    private void clickChooseIsland(Circle island, int islandID){
+    private void initHoverIsland(){
+        islandStudent_container.setVisible(false);
+        islandStudentPlaces= new ArrayList<>();
+        for (Node student:islandStudent_container.getChildren()) {
+            islandStudentPlaces.add((ImageView) student);
+        }
+    }
+    private void setStudentsInHover(List<Integer> students){
+        int i=0;
+        for (Integer stud:students) {
+            islandStudentPlaces.get(i).setImage(studentColorPath(stud));
+            islandStudentPlaces.get(i).setVisible(true);
+            i++;
+        }//fixme this works when showing less than 10 stud
+    }
+    private void resetStudentsHover(){
+        for (ImageView place:islandStudentPlaces) {
+            place.setVisible(false);
+        }
+    }
+    /** used so that only the useful panel can receive mouseEvent, other-ways the other panels could block the event */
+    private void setOtherContainerTransparent(Pane container){
+        for (Pane cont:containers) {
+            cont.setMouseTransparent(true);
+        }
+        container.setMouseTransparent(false);
+    }
+
+    private void hoverShowInside(Circle island){
+        //SimplifiedIsland viewIsland= view.getIslands().get(Integer.parseInt(island.getId().substring(6)));
+        //int islandImage= (islandID%3)+1;
+        //List<Integer> students= viewIsland.getStudents();
         island.setDisable(false);
+        island.setOnMouseEntered(mouseEvent -> {
+            SimplifiedIsland isl= view.getIslands().get(Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6)));
+            int islandImage= ((isl.getIslandId()+1)%3)+1;
+            resetStudentsHover();
+            setStudentsInHover(isl.getStudents());
+            hoverBackGround.setImage(new Image("images/simple_elements/island"+islandImage+".png"));
+            hoverBackGround.setVisible(true);
+            islandStudent_container.setVisible(true);
+        });
+        island.setOnMouseExited(mouseEvent -> {
+            hoverBackGround.setVisible(false);
+            islandStudent_container.setVisible(false);
+        });
+    }
+    private void clickChooseIsland(Circle island){
+        //island.setDisable(false);
+        //int id=Integer.parseInt(island.getId().substring(6));
         island.setOnMouseClicked(mouseEvent -> {
+            int islandID=Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6));
+
             if(view.getState()==GameState.actionMoveStudent && gui.getInputManager().getSelectedStudents().size()==1)
                 gui.getInputManager().moveToIsland(islandID);
             if(view.getState()==GameState.actionMoveMother)
@@ -115,15 +214,15 @@ public class MapSceneController extends SceneController {
             cloudByNumber.get(cloudId+1).setFill(new ImagePattern(cloudImage));
             cloudByNumber.get(cloudId+1).setVisible(true);
             setCloudStudents(cloud,cloudId+1);
-            if(view.getState()== GameState.actionChooseCloud)
-                clickChooseCloud(cloudByNumber.get(cloudId+1),cloudId);
-            else cloudByNumber.get(cloudId+1).setDisable(true);
+            clickChooseCloud(cloudByNumber.get(cloudId+1),cloudId);
+
         }
     }
     private void clickChooseCloud(Circle cloud, int cloudID){
         cloud.setDisable(false);
         cloud.setOnMouseClicked(mouseEvent -> {
-            view.chooseCloud(cloudID-1);
+            gui.getInputManager().cloudChoose(cloudID-1);
+
         });
     }
     private void setCloudStudents(Integer[] cloud, int cloudNumber){
@@ -131,7 +230,7 @@ public class MapSceneController extends SceneController {
         int i=0;
         for (Integer stud:cloud) {
             cloudStud.get(i).setFill(new ImagePattern(studentColorPath(stud)));
-            cloudStud.get(i).setVisible(true);//fixme why aren't they becoming visible???
+            cloudStud.get(i).setVisible(true);
             i++;
         }
     }
@@ -218,7 +317,12 @@ public class MapSceneController extends SceneController {
         }
 
     }
-    public Pane getPane() {
-        return scene;
+
+    public void goToHand() {
+        gui.showHand();
+    }
+
+    public void goToBoard() {
+        gui.showBoards();
     }
 }

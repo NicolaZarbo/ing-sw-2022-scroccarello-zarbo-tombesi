@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.GUI;
 
 import it.polimi.ingsw.client.InputManager;
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.view.CentralView;
 
 import java.util.ArrayList;
@@ -45,11 +46,10 @@ public class GuiInputManager extends InputManager {
         if(string.equals("connected to lobby")){
             isLobbyAvailable=true;
             isConnected=true;
-            System.out.println("lemao connection");
         }
 
         if(string.contains("connection closed")){
-            //TODO
+            //TODO show a message at screen
         }
     }
     /** used to refrain the user from spamming actions before receiving the state update*/
@@ -95,6 +95,7 @@ public class GuiInputManager extends InputManager {
         if(steps<game.getCardYouPlayed())
             game.moveMother(steps);
         canChooseIsland=false;
+        waitForAnswer();
     }
     public void moveToIsland(int islandId){
         if(!canDoAction)
@@ -103,8 +104,20 @@ public class GuiInputManager extends InputManager {
         game.moveStudentToIsland(studColor,islandId);
         selectedStudents=new ArrayList<>();//cleaned
         waitForAnswer();
-
     }
+    public void useAssistantCard(int cardID){
+        if(!canDoAction && game.getState()== GameState.planPlayCard)
+            return;
+        game.useAssistantCard(cardID);
+        waitForAnswer();
+    }
+    public void cloudChoose(int cloudID){
+        if(!canDoAction && game.getState()==GameState.actionChooseCloud)
+            return;
+        game.chooseCloud(cloudID);
+        waitForAnswer();
+    }
+
     /** used to keep track of the selected students when you need to move to a different scene*/
     public void saveSelectedStud(ArrayList<Integer> selectedStudents){this.selectedStudents=selectedStudents;}
 

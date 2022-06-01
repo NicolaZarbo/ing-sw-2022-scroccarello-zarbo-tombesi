@@ -19,7 +19,7 @@ public class ControllerPlanningPhase {
 
     public void playAssistantCard(PlayAssistantMessage message){
         if(game.getActualState()!= GameState.planPlayCard || message.getPlayerId()!= game.getCurrentPlayerId()){
-            if(game.getActualState()!=GameState.planPlayCard) throw new RuntimeException("not the right state");
+            if(game.getActualState()!=GameState.planPlayCard) throw new IllegalMoveException("not the right state");
             else throw new IllegalMoveException("not your turn");
         }
         modelRound.playCard(message.getPlayerId(),message.getPlayedCard());
