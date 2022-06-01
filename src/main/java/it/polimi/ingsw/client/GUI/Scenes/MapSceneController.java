@@ -47,8 +47,6 @@ public class MapSceneController extends SceneController {
         gui= GuiInputManager.getGui();
         view=gui.getGame();
     }
-
-
     @Override
     public void initialize() {
         saveContainers();
@@ -72,7 +70,7 @@ public class MapSceneController extends SceneController {
             }
             case actionMoveStudent -> {
                 setOtherContainerTransparent(island_container);
-                info.setText("Select a target island for the student");
+                moveStudentContext();
             }
             case planPlayCard -> {
                 setOtherContainerTransparent(island_container);
@@ -84,6 +82,11 @@ public class MapSceneController extends SceneController {
                 chooseCloudContext();
             }
         }
+    }
+    private void moveStudentContext(){
+        GuiInputManager inputManager= gui.getInputManager();
+        if(inputManager.hasSelectedStudent())
+            info.setText("Select a target island for the student");
     }
     private void chooseCloudContext(){
         //todo make only the not empty clouds clickable and highlighted
@@ -108,19 +111,9 @@ public class MapSceneController extends SceneController {
         if(color!=-1){
             Image img;
             switch (color){
-                case 0->{
-                    //black
-                    img=new Image("images/towers/black_tower.png");
-                }
-
-                case 1-> {
-                    //white
-                    img = new Image("images/towers/white_tower.png");
-                }
-                case 2->{
-                    //grey
-                    img=new Image("images/towers/grey_tower.png");
-                }
+                case 0->img=new Image("images/towers/black_tower.png");
+                case 1-> img = new Image("images/towers/white_tower.png");
+                case 2->img=new Image("images/towers/grey_tower.png");
                 default -> {return;}
             }
             towerByIslandNumber.get(islandId).setFill(new ImagePattern(img));
@@ -175,9 +168,6 @@ public class MapSceneController extends SceneController {
     }
 
     private void hoverShowInside(Circle island){
-        //SimplifiedIsland viewIsland= view.getIslands().get(Integer.parseInt(island.getId().substring(6)));
-        //int islandImage= (islandID%3)+1;
-        //List<Integer> students= viewIsland.getStudents();
         island.setDisable(false);
         island.setOnMouseEntered(mouseEvent -> {
             SimplifiedIsland isl= view.getIslands().get(Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6)));
@@ -199,7 +189,7 @@ public class MapSceneController extends SceneController {
         island.setOnMouseClicked(mouseEvent -> {
             int islandID=Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6));
 
-            if(view.getState()==GameState.actionMoveStudent && gui.getInputManager().getSelectedStudents().size()==1)
+            if(view.getState()==GameState.actionMoveStudent && gui.getInputManager().hasSelectedStudent())
                 gui.getInputManager().moveToIsland(islandID);
             if(view.getState()==GameState.actionMoveMother)
                 gui.getInputManager().moveToIsland(islandID);

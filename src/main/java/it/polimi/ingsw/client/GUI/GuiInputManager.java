@@ -5,6 +5,7 @@ import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.view.CentralView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GuiInputManager extends InputManager {
 
@@ -17,6 +18,8 @@ public class GuiInputManager extends InputManager {
 
 
     private ArrayList<Integer> selectedStudents;
+    private List<Integer> selectedStudentFromElsewhere;
+    private boolean cardEffectActivation;
     private int selectedIsland;
     private int selectedCloud;
     private static boolean canChooseIsland;
@@ -89,6 +92,20 @@ public class GuiInputManager extends InputManager {
             return;
         game.moveStudentToHall(color);
         waitForAnswer();
+    }
+    public boolean isActivatingCardEffect(){
+        return cardEffectActivation;
+    }
+    public void selectManyStudentFromEntrance(List<Integer> listOfColorsStudent){
+        selectedStudentFromElsewhere= new ArrayList<>();
+        for (Integer colorStud:listOfColorsStudent) {
+            game.getPersonalPlayer().getBoard().getStudentFromColorInEntrance(colorStud);
+        }
+    }
+    public boolean hasSelectedStudent(){
+        if(selectedStudents.size()==0)
+            return false;
+        return selectedStudents.get(0)!=-1;
     }
     public void moveMotherTo(int islandID){
         int steps=(game.getMother()-islandID)%game.getIslands().size();

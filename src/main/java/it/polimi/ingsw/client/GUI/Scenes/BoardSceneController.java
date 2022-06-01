@@ -31,15 +31,13 @@ public abstract class BoardSceneController extends SceneController{
 
     /**displays the tokens in the entrance*/
     public void setEntrance(ArrayList<Circle> entrance, int player){
-        boolean canBeClicked= gui.getGame().getState()== GameState.actionMoveStudent && gui.getGame().getPersonalPlayer().getId()==player-1;//todo && not currently activating a character
         List<Integer> playerEntrance=gui.getGame().getPlayers().get(player-1).getBoard().getEntrance();
         int id;
         for(int i=0;i<playerEntrance.size();i++){
             Image img;
             id= playerEntrance.get(i);
             if(id!=-1){
-                if(canBeClicked)
-                    setEntranceClickable(entrance.get(i),id/26);
+                setEntranceClickable(entrance.get(i),id/26);
                 switch(id/26){
                     case 0->{
                       img=new Image("images/students/student_red.png");
@@ -204,13 +202,21 @@ public abstract class BoardSceneController extends SceneController{
     protected void setEntranceClickable(Circle student, int clickedColor){
         student.setDisable(false);
         student.setOnMouseClicked(mouseEvent -> {clickedEntranceStudentsColor.add(clickedColor);
+            if (gui.getGame().getState()==GameState.actionMoveStudent && !gui.getInputManager().isActivatingCardEffect())
+            {//todo show the button that ask to move either in board or islands
+                 }
+
         });
     }
+    //this should be attached to a button which appears when a student in entrance has been selected
+    /** used to put the selected student inside the dining room */
     protected void moveToDining(){
         GuiInputManager inputManager=gui.getInputManager();
         inputManager.moveToBoard(this.clickedEntranceStudentsColor.get(0));
         this.clickedEntranceStudentsColor=new ArrayList<>();
     }
+    //attached to a button which appears when a student in entrance has been selected */
+    /** used to show the map and prompt the user to choose an island */
     protected void chooseTargetIsland(){
         gui.getInputManager().saveSelectedStud(this.clickedEntranceStudentsColor);
         this.clickedEntranceStudentsColor=new ArrayList<>();

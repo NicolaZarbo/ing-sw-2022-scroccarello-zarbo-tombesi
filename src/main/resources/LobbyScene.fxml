@@ -10,8 +10,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="400.0" maxWidth="600.0" minHeight="342.0" minWidth="600.0" prefHeight="342.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.LobbySceneController">
+<Pane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.LobbySceneController">
    <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0" layoutX="-11.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/wallpapers/Lobby.jpg" />
+         </image>
+      </ImageView>
       <Pane fx:id="waitingpanel" prefHeight="153.0" prefWidth="600.0">
          <children>
             <Text fx:id="waitingtext" layoutX="21.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="560.13671875">
@@ -23,11 +28,6 @@
       </Pane>
       <Pane fx:id="mainpanel" layoutX="6.0" layoutY="4.0" prefHeight="392.0" prefWidth="589.0">
          <children>
-            <ImageView fitHeight="353.0" fitWidth="610.0" layoutX="-11.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/wallpapers/Lobby.jpg" />
-               </image>
-            </ImageView>
             <CheckBox fx:id="easySelector" layoutX="197.0" layoutY="240.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="154.0" text="Easy Rules">
                <font>
                   <Font size="24.0" />
