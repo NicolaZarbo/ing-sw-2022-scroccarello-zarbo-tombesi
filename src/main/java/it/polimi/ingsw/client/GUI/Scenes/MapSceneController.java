@@ -300,6 +300,8 @@ public class MapSceneController extends SceneController {
         for (Node island:island_container.getChildren()) {
             int islandNumber= Integer.parseInt(island.getId().substring(6));
             islandByNumber.put(islandNumber, (Circle) island);
+            island.setScaleX(1.5);
+            island.setScaleY(1.5);
         }
     }
 

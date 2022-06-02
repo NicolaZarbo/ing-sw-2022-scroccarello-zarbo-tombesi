@@ -135,9 +135,11 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void showBoards() {
-        switch(game.getPlayers().size()){
+        setScene(SceneEnum.BoardSceneX);
+
+        /*switch(game.getPlayers().size()){
             case 2->{
-                setScene(SceneEnum.BoardScene2);
+                setScene(SceneEnum.BoardSceneX);
             }
             case 3->{
                 setScene(SceneEnum.BoardScene3);
@@ -146,6 +148,8 @@ public class GUI extends Application implements UserInterface {
                 setScene(SceneEnum.BoardScene4);
             }
         }
+
+         */
 
     }
 

@@ -19,6 +19,7 @@ import java.util.List;
 public abstract class BoardSceneController extends SceneController{
 
     protected GUI gui;
+    private int playerOwner;
     protected ArrayList<Integer> clickedEntranceStudentsColor;
     protected ArrayList<Integer> clickedDiningStudentsColor;
 
@@ -30,7 +31,8 @@ public abstract class BoardSceneController extends SceneController{
 
 
     /**displays the tokens in the entrance*/
-    public void setEntrance(ArrayList<Circle> entrance, int player){
+    public void setEntrance(List<Circle> entrance, int player){
+        playerOwner=player-1;
         clickedEntranceStudentsColor=new ArrayList<>();
         List<Integer> playerEntrance=gui.getGame().getPlayers().get(player-1).getBoard().getEntrance();
         int id;
@@ -76,7 +78,7 @@ public abstract class BoardSceneController extends SceneController{
         }
     }
 
-    public void setHall(ArrayList<ArrayList<Circle>> hall, int player){
+    public void setHall(List<ArrayList<Circle>> hall, int player){
         clickedDiningStudentsColor=new ArrayList<>();
         Integer[][] diningroom=gui.getGame().getPlayers().get(player-1).getBoard().getDiningRoom();
         for(int i=0;i<diningroom.length;i++){
@@ -122,7 +124,7 @@ public abstract class BoardSceneController extends SceneController{
     }
 
     /**displays professors if the player has*/
-    public void setProfessors(ArrayList<Polygon> table, int player){
+    public void setProfessors(List<Polygon> table, int player){
         Integer[] professors=gui.getGame().getPersonalPlayer().getBoard().getProfessorTable();
         for(Integer i : professors){
             if(i!=-1){
@@ -157,7 +159,7 @@ public abstract class BoardSceneController extends SceneController{
             }
         }
     }
-    public void setTowers(ArrayList<ImageView>towers,int player){
+    public void setTowers(List<ImageView>towers,int player){
         int towercolor=gui.getGame().getPlayers().get(player-1).getTowerColor();
         int towersleft=gui.getGame().getPlayers().get(player-1).getBoard().getTowersLeft();
         switch(towercolor){
@@ -203,12 +205,16 @@ public abstract class BoardSceneController extends SceneController{
      * @param clickedColor the color of the student (id/26) */
     protected void setEntranceClickable(Circle student, int clickedColor){
         student.setDisable(false);
-        student.setOnMouseClicked(mouseEvent -> {clickedEntranceStudentsColor.add(clickedColor);
-            if (gui.getGame().getState()==GameState.actionMoveStudent && !gui.getInputManager().isActivatingCardEffect())
-            {//todo show the button that ask to move either in board or islands
-                 }
-
+        student.setOnMouseClicked(mouseEvent -> {
+            if(isYourBoard()) {
+                clickedEntranceStudentsColor.add(clickedColor);
+                if (gui.getGame().getState() == GameState.actionMoveStudent && !gui.getInputManager().isActivatingCardEffect()) {//todo show the button that ask to move either in board or islands
+                }
+            }
         });
+    }
+    public boolean isYourBoard(){
+        return playerOwner==gui.getGame().getPersonalPlayer().getId();
     }
     //this should be attached to a button which appears when a student in entrance has been selected
     /** used to put the selected student inside the dining room */
@@ -227,7 +233,9 @@ public abstract class BoardSceneController extends SceneController{
     /** @param clickedColor studentID/26*/
     protected void setDiningRoomClickable(Circle student, int clickedColor){
         student.setDisable(false);
-        student.setOnMouseClicked(mouseEvent -> {clickedDiningStudentsColor.add(clickedColor);
+        student.setOnMouseClicked(mouseEvent -> {
+            if(isYourBoard())
+                clickedDiningStudentsColor.add(clickedColor);
         });
     }
 

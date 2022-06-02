@@ -10,11 +10,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.util.List;
 
 public class SetupSceneController extends SceneController{
+    public VBox root;
     private GUI gui;
     private int wizardchosen, towerchosen;
 
@@ -50,6 +52,7 @@ public class SetupSceneController extends SceneController{
     @Override@FXML
     public void initialize() {
         this.gui= GuiInputManager.getGui();
+        root.setStyle("-fx-background-image: url(images/wallpapers/LowerQualityLobby.png); -fx-background-size: 640 400");
         choiceMsg.setText("Choose your color");
 
         towerchosen=0;

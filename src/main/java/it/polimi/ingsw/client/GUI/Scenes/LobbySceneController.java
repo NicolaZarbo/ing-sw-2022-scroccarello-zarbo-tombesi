@@ -23,9 +23,11 @@ public class LobbySceneController extends SceneController  {
     public Text waitingtext;
 
     private final GUI gui;
+    public Pane root;
 
     @FXML
     public void initialize() {
+        root.setStyle("-fx-background-image: url(images/wallpapers/LowerQualityLobby.png); -fx-background-size: 600 400");
         nPlayers.setItems(FXCollections.observableArrayList(1,2,3,4));//fixme 1 is here for test purposes
     }
 

@@ -10,13 +10,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.LobbySceneController">
+<Pane fx:id="root" maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.LobbySceneController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" layoutX="-11.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/wallpapers/LowerQualityLobby.png" />
-         </image>
-      </ImageView>
       <Pane fx:id="waitingpanel" prefHeight="153.0" prefWidth="600.0">
          <children>
             <Text fx:id="waitingtext" layoutX="21.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="560.13671875">
