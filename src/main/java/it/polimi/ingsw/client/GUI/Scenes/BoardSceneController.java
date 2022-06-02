@@ -31,6 +31,7 @@ public abstract class BoardSceneController extends SceneController{
 
     /**displays the tokens in the entrance*/
     public void setEntrance(ArrayList<Circle> entrance, int player){
+        clickedEntranceStudentsColor=new ArrayList<>();
         List<Integer> playerEntrance=gui.getGame().getPlayers().get(player-1).getBoard().getEntrance();
         int id;
         for(int i=0;i<playerEntrance.size();i++){
@@ -71,11 +72,12 @@ public abstract class BoardSceneController extends SceneController{
                 entrance.get(i).setVisible(false);// the student must be made not visible when absent and also not clickable
                 entrance.get(i).setDisable(true);
             }
+            entrance.get(i).getStyleClass().add(".studentCircle");
         }
     }
 
     public void setHall(ArrayList<ArrayList<Circle>> hall, int player){
-        boolean canBeClicked=false;//currently activating a character? one of the effects targets studs on hall todo
+        clickedDiningStudentsColor=new ArrayList<>();
         Integer[][] diningroom=gui.getGame().getPlayers().get(player-1).getBoard().getDiningRoom();
         for(int i=0;i<diningroom.length;i++){
             for(int j=0;j<diningroom[i].length;j++){
@@ -114,6 +116,7 @@ public abstract class BoardSceneController extends SceneController{
                     hall.get(i).get(j).setVisible(false);
                     hall.get(i).get(j).setDisable(true);
                 }
+                hall.get(i).get(j).getStyleClass().add(".studentCircle");
             }
         }
     }
@@ -157,7 +160,6 @@ public abstract class BoardSceneController extends SceneController{
     public void setTowers(ArrayList<ImageView>towers,int player){
         int towercolor=gui.getGame().getPlayers().get(player-1).getTowerColor();
         int towersleft=gui.getGame().getPlayers().get(player-1).getBoard().getTowersLeft();
-
         switch(towercolor){
             case 0->{
                 //black

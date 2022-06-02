@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" layoutX="-11.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/wallpapers/Lobby.jpg" />
+            <Image url="@images/wallpapers/LowerQualityLobby.png" />
          </image>
       </ImageView>
       <Pane fx:id="waitingpanel" prefHeight="153.0" prefWidth="600.0">

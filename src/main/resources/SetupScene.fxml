@@ -48,7 +48,7 @@
     <AnchorPane fx:id="mainpane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="83.0" prefWidth="260.0" VBox.vgrow="ALWAYS">
         <ImageView fitHeight="400.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@images/wallpapers/Lobby.jpg" />
+                <Image url="@images/wallpapers/LowerQualityLobby.png" />
             </image>
         </ImageView>
       <children>

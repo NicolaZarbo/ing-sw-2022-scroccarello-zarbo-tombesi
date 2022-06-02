@@ -31,11 +31,10 @@ public class MapSceneController extends SceneController {
     public Pane cloud_container;
     public Pane tower_container;
     public Text info;
-    private List<Pane> containers;
     public ImageView hoverBackGround;
     private List<ImageView> islandStudentPlaces;
-    private GUI gui;
-    private CentralView view;
+    private final GUI gui;
+    private final CentralView view;
     private Map<Integer, Circle> islandByNumber;
     private Map<Integer, Rectangle> towerByIslandNumber;
     private Map<Integer, Circle> cloudByNumber;
@@ -64,8 +63,6 @@ public class MapSceneController extends SceneController {
     private void prepareForContext(){
         switch (view.getState()){
             case actionMoveMother -> {
-                setOtherContainerTransparent(island_container);
-                info.setText("Select a target island for Mother");
                 moveMotherContext();
             }
             case actionMoveStudent -> {
@@ -77,25 +74,48 @@ public class MapSceneController extends SceneController {
                 info.setText("go to hand to choose a card");
             }
             case actionChooseCloud ->{
-                setOtherContainerTransparent(cloud_container);
-                info.setText("Choose a cloud to refill");
                 chooseCloudContext();
             }
         }
     }
     private void moveStudentContext(){
-        GuiInputManager inputManager= gui.getInputManager();
+        if(gui.getInputManager().isActivatingCardEffect()) {
+            //todo logic of what to show if a character is being used
+            info.setText("text of what you should do");
+            return;
+        }
+            GuiInputManager inputManager= gui.getInputManager();
         if(inputManager.hasSelectedStudent())
             info.setText("Select a target island for the student");
     }
     private void chooseCloudContext(){
-        //todo make only the not empty clouds clickable and highlighted
+        setOtherContainerTransparent(cloud_container);
+        info.setText("Choose a cloud to refill");
+        for (int i = 1; i <= 4; i++) {
+            cloudByNumber.get(i).setDisable(false);
+            // todo cloudByNumber.get(i) add colored overlay
+        }
     }
     private void moveMotherContext(){
-        //todo make only the available island highlighted and clickable
+        if(gui.getInputManager().isActivatingCardEffect()){
+            //todo logic of what to show if a character is being used
+            return;
+        }
+        setOtherContainerTransparent(island_container);
+        info.setText("Select a target island for Mother");
+        int maxSteps= (view.getCardYouPlayed()+2)/2;
+        int motherPos= view.getMother()+1;
+        for (int i = 1; i < 13; i++) {
+            islandByNumber.get(i).setDisable(true);
+        }
+        for (int i = motherPos+1; i <= motherPos+maxSteps; i++) {
+            //islandByNumber.get(i) add a colored overlay todo
+            islandByNumber.get(i).setDisable(false);
+        }
+
     }
     private void saveContainers(){
-        containers= new ArrayList<>();
+        List<Pane> containers = new ArrayList<>();
         containers.add(island_container);
         containers.add(islandStudent_container);
         containers.add(bridge_container);
@@ -103,6 +123,7 @@ public class MapSceneController extends SceneController {
         containers.add(motherZones_container);
         containers.add(cloud_container);
         containers.add(cloudStudents_container);
+        setContainerList(containers);
     }
     private void setTower(SimplifiedIsland island){
         //todo check if the number on island reflect those on view
@@ -141,6 +162,7 @@ public class MapSceneController extends SceneController {
     }
     private void initHoverIsland(){
         islandStudent_container.setVisible(false);
+        hoverBackGround.setMouseTransparent(true);
         islandStudentPlaces= new ArrayList<>();
         for (Node student:islandStudent_container.getChildren()) {
             islandStudentPlaces.add((ImageView) student);
@@ -149,7 +171,7 @@ public class MapSceneController extends SceneController {
     private void setStudentsInHover(List<Integer> students){
         int i=0;
         for (Integer stud:students) {
-            islandStudentPlaces.get(i).setImage(studentColorPath(stud));
+            islandStudentPlaces.get(i).setImage(studentColorPath(stud,true));
             islandStudentPlaces.get(i).setVisible(true);
             i++;
         }//fixme this works when showing less than 10 stud
@@ -160,18 +182,21 @@ public class MapSceneController extends SceneController {
         }
     }
     /** used so that only the useful panel can receive mouseEvent, other-ways the other panels could block the event */
-    private void setOtherContainerTransparent(Pane container){
-        for (Pane cont:containers) {
+    private void setOtherContainerTransparent(Pane container){//duplicate of method in super
+        super.setOthersContainerMouseTransparent(container);
+        /*for (Pane cont:containers) {
             cont.setMouseTransparent(true);
         }
         container.setMouseTransparent(false);
+
+         */
     }
 
     private void hoverShowInside(Circle island){
         island.setDisable(false);
         island.setOnMouseEntered(mouseEvent -> {
-            SimplifiedIsland isl= view.getIslands().get(Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6)));
-            int islandImage= ((isl.getIslandId()+1)%3)+1;
+            SimplifiedIsland isl= view.getIslands().get(Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6))-1);
+            int islandImage= ((isl.getIslandId())%3)+1;
             resetStudentsHover();
             setStudentsInHover(isl.getStudents());
             hoverBackGround.setImage(new Image("images/simple_elements/island"+islandImage+".png"));
@@ -212,32 +237,37 @@ public class MapSceneController extends SceneController {
         cloud.setDisable(false);
         cloud.setOnMouseClicked(mouseEvent -> {
             gui.getInputManager().cloudChoose(cloudID-1);
-
         });
     }
     private void setCloudStudents(Integer[] cloud, int cloudNumber){
         List<Circle> cloudStud=cloudStudentsByNumber.get(cloudNumber);
         int i=0;
         for (Integer stud:cloud) {
-            cloudStud.get(i).setFill(new ImagePattern(studentColorPath(stud)));
+            cloudStud.get(i).setFill(new ImagePattern(studentColorPath(stud,false)));
             cloudStud.get(i).setVisible(true);
             i++;
         }
     }
-    private Image studentColorPath(int studId){
-        return switch (studId/26){
-            case 0->new Image("images/students/student_red.png");
-
-            case 1 ->new Image("images/students/student_yellow.png");
-
-            case 2->new Image("images/students/student_green.png");
-
-            case 3-> new Image("images/students/student_blue.png");
-
-            case 4-> new Image("images/students/student_pink.png");
-
-            default -> throw new IllegalStateException("Unexpected value: " + studId / 26);
-        };
+    private Image studentColorPath(int studId, boolean highContrast){
+        if(highContrast){
+            return switch (studId / 26) {
+                case 0 -> new Image("images/students/student_red.png");
+                case 1 -> new Image("images/students/student_yellow.png");
+                case 2 -> new Image("images/students/high_contrast_green.png");
+                case 3 -> new Image("images/students/student_blue.png");
+                case 4 -> new Image("images/students/student_pink.png");
+                default -> throw new IllegalStateException("Unexpected value: " + studId / 26);
+            };
+        }else {
+            return switch (studId / 26) {
+                case 0 -> new Image("images/students/student_red.png");
+                case 1 -> new Image("images/students/student_yellow.png");
+                case 2 -> new Image("images/students/student_green.png");
+                case 3 -> new Image("images/students/student_blue.png");
+                case 4 -> new Image("images/students/student_pink.png");
+                default -> throw new IllegalStateException("Unexpected value: " + studId / 26);
+            };
+        }
     }
     private void setMotherZone(SimplifiedIsland island){
         int motherPosition= view.getMother();
