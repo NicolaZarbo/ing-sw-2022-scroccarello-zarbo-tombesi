@@ -50,6 +50,12 @@
       <artifactId>javafx-fxml</artifactId>
       <version>18.0.1</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.fusesource.jansi/jansi -->
+    <dependency>
+      <groupId>org.fusesource.jansi</groupId>
+      <artifactId>jansi</artifactId>
+      <version>2.4.0</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

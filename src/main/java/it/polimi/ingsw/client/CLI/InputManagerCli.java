@@ -8,6 +8,7 @@ import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.client.InputManager;
 
+
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -93,7 +94,8 @@ public class InputManagerCli  extends InputManager {
     @Override
     public void printToScreen(String string) {
         System.out.println(Cli.IMP+string+ Cli.RST);
-    }
+        //AnsiConsole.out().println(Cli.IMP+string+ Cli.RST);
+     }
 
     @Override
     public void caseSetupPlayers() {

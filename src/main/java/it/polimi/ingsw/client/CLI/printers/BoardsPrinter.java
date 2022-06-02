@@ -22,7 +22,7 @@ public class BoardsPrinter implements Printer{
         SimplifiedBoard board=view.getPersonalPlayer().getBoard();
         String tColor= Printer.padWithSpaces(towerColor(view.getPersonalPlayer().getTowerColor()),5);
         int[] entranceColors=BoardsPrinter.entranceForColor(board);
-        String[] diningColor =BoardsPrinter.diningRoomColor(board);
+        String[] diningColor =BoardsPrinter.diningRoomColor(board, view.isEasy());
         String[] professors= BoardsPrinter.getProfs(board);
 
         out.append("  _Entr_____________DN_____________Prof___T°_ \n");
@@ -45,7 +45,7 @@ public class BoardsPrinter implements Printer{
             SimplifiedBoard board=pl.getBoard();
             String tColor= Printer.padWithSpaces(towerColor(pl.getTowerColor()),5);
             int[] entranceColors=BoardsPrinter.entranceForColor(board);
-            String[] diningColor =BoardsPrinter.diningRoomColor(board);
+            String[] diningColor =BoardsPrinter.diningRoomColor(board, view.isEasy());
             String[] professors= BoardsPrinter.getProfs(board);
             String nameForBoard;
             if(pl.getUsername().equals(view.getName()))
@@ -87,7 +87,7 @@ public class BoardsPrinter implements Printer{
             case 3-> "G";
         };
     }
-    private static String[] diningRoomColor(SimplifiedBoard board){
+    private static String[] diningRoomColor(SimplifiedBoard board, boolean easy){
         int[] colorQuantity= new int[5];
         String[] coloredStudents= new String[5];
         Arrays.fill(coloredStudents,"");
@@ -104,7 +104,9 @@ public class BoardsPrinter implements Printer{
                 else
                     if((j+1)%3==0 && j<9) {
                         if (board.getCoinDN()[i][(j) / 3])
-                            coloredStudents[i] += " C";
+                            if(!easy)
+                                coloredStudents[i] += " C";
+                        else coloredStudents[i] += " |";
                     }
                     else
                         coloredStudents[i]+="  ";
