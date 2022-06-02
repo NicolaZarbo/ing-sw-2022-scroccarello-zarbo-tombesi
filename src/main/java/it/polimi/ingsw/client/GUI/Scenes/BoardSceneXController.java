@@ -58,7 +58,16 @@ public class BoardSceneXController extends SceneController{
         }
     }
     private void disposition2(){
-
+        up_left.setTranslateX(280);
+        up_right.setTranslateX(-280);
+        up_right.setTranslateY(330);
+        if(view.getPlayers().get(0)==view.getPersonalPlayer()) {
+            up_left.setScaleX(1.5);
+            up_left.setScaleY(1.5);
+        }else{
+            up_right.setScaleX(1.5);
+            up_right.setScaleY(1.5);
+        }
         down_left.setVisible(false);
         down_right.setVisible(false);
     }
@@ -74,16 +83,19 @@ public class BoardSceneXController extends SceneController{
         down_right.setVisible(false);
         up_right.setVisible(false);
     }
-    private void disposition3(){//todo it should check who is the player and then make that  board bigger
+    private void disposition3(){
+        Pane personal=containerList.get(view.getPlayers().lastIndexOf(view.getPersonalPlayer()));
         up_left.setTranslateX(280);
         up_right.setTranslateY(330);
-        up_left.setScaleX(1.4);
-        up_left.setScaleY(1.4);
-        up_right.setScaleX(0.7);
-        up_right.setScaleY(0.7);
-        down_left.setScaleX(0.7);
-        down_left.setScaleY(0.7);
         down_left.setTranslateY(56);
+        for (Pane container:containerList) {
+            container.setScaleX(0.7);
+            container.setScaleY(0.7);
+        }
+        personal.setScaleX(1.4);
+        personal.setScaleY(1.4);
+
+
         down_right.setVisible(false);
     }
 

@@ -244,7 +244,6 @@ public abstract class BoardSceneController extends SceneController{
 
     /** used to show the map and prompt the user to choose an island */
     protected void chooseTargetIsland(){
-        gui.getInputManager().saveSelectedStud(this.clickedEntranceStudentsColor);
         this.clickedEntranceStudentsColor=new ArrayList<>();
         gui.setScene(SceneEnum.MapScene);
         hideMoveButtons();

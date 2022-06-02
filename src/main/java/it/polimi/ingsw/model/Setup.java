@@ -117,7 +117,7 @@ public class Setup {
 
         for (int id=0; id<nPlayer;id++){
             Hand man= Setup.createHand(id, easy, 10);
-            TowerColor towerColor = Setup.playerColor(id, nPlayer);
+            TowerColor towerColor = prePlayers.get(id).getTowerColor();
             Board plan = Setup.createBoard(id, nPlayer, towerColor, bag);
             players[id]= new Player(prePlayers.get(id),id, man, plan);
         }

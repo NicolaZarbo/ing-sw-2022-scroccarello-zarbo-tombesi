@@ -24,13 +24,12 @@ public class GuiInputManager extends InputManager {
     private int selectedIsland;
     private int selectedCloud;
     private static boolean canChooseIsland;
-    private static boolean boardArrived;
     public ArrayList<Integer> getSelectedStudents() {
         return selectedStudents;
     }
 
     public GuiInputManager(CentralView game,GUI gui) {
-        boardArrived=false;
+        singleStudent=-1;
         isLobbyAvailable=false;
         isConnected=false;
         this.game = game;
@@ -108,9 +107,7 @@ public class GuiInputManager extends InputManager {
         }
     }
     public boolean hasSelectedStudent(){
-        if(selectedStudents.size()==0)
-            return false;
-        return selectedStudents.get(0)!=-1;
+        return singleStudent!=-1;
     }
     public void moveMotherTo(int islandID){
         int steps=(islandID-game.getMother())%game.getIslands().size();
@@ -122,11 +119,10 @@ public class GuiInputManager extends InputManager {
         waitForAnswer();
     }
     public void moveToIsland(int islandId){
-        if(!canDoAction || game.getState()!= GameState.actionMoveMother || !game.isYourTurn())
-            return;;
-        int studColor=selectedStudents.get(0);
-        game.moveStudentToIsland(studColor,islandId);
-        selectedStudents=new ArrayList<>();//cleaned
+        if(!canDoAction || game.getState()!= GameState.actionMoveStudent || !game.isYourTurn())
+            return;
+        game.moveStudentToIsland(singleStudent,islandId);
+        singleStudent=-1;
         waitForAnswer();
     }
     public void useAssistantCard(int cardID){
