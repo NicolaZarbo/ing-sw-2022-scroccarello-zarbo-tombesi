@@ -18,6 +18,7 @@ public class GuiInputManager extends InputManager {
 
 
     private ArrayList<Integer> selectedStudents;
+    private int singleStudent;
     private List<Integer> selectedStudentFromElsewhere;
     private boolean cardEffectActivation;
     private int selectedIsland;
@@ -89,10 +90,10 @@ public class GuiInputManager extends InputManager {
     protected void caseActionMoveStudent() {
 
     }
-    public void moveToBoard(int color){
+    public void moveToBoard(){
         if(!canDoAction)
             return;
-        game.moveStudentToHall(color);
+        game.moveStudentToHall(singleStudent);
         waitForAnswer();
     }
     public boolean isActivatingCardEffect(){
@@ -117,7 +118,7 @@ public class GuiInputManager extends InputManager {
         waitForAnswer();
     }
     public void moveToIsland(int islandId){
-        if(!canDoAction)
+        if(!canDoAction || game.getState()!= GameState.actionMoveMother || !game.isYourTurn())
             return;;
         int studColor=selectedStudents.get(0);
         game.moveStudentToIsland(studColor,islandId);
@@ -125,20 +126,22 @@ public class GuiInputManager extends InputManager {
         waitForAnswer();
     }
     public void useAssistantCard(int cardID){
-        if(!canDoAction || game.getState()!= GameState.planPlayCard)
+        if(!canDoAction || game.getState()!= GameState.planPlayCard || !game.isYourTurn())
             return;
         game.useAssistantCard(cardID);
         waitForAnswer();
     }
     public void cloudChoose(int cloudID){
-        if(!canDoAction && game.getState()==GameState.actionChooseCloud)
+        if(!canDoAction || game.getState()!=GameState.actionChooseCloud || !game.isYourTurn())
             return;
         game.chooseCloud(cloudID);
         waitForAnswer();
     }
 
     /** used to keep track of the selected students when you need to move to a different scene*/
-    public void saveSelectedStud(ArrayList<Integer> selectedStudents){this.selectedStudents=selectedStudents;}
+    public void saveSelectedStud(ArrayList<Integer> selectedStudents){this.selectedStudents=new ArrayList<>(selectedStudents);}
+    public void saveSelectedStud(int selectedStudent){this.singleStudent=selectedStudent;}
+
 
     @Override
     protected void caseActionChooseCloud() {

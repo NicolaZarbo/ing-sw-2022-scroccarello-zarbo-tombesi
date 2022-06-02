@@ -19,7 +19,7 @@ import java.util.List;
 public abstract class BoardSceneController extends SceneController{
 
     protected GUI gui;
-    private int playerOwner;
+    private int playerOwner;//the same id of view
     protected ArrayList<Integer> clickedEntranceStudentsColor;
     protected ArrayList<Integer> clickedDiningStudentsColor;
 
@@ -32,8 +32,12 @@ public abstract class BoardSceneController extends SceneController{
 
     /**displays the tokens in the entrance*/
     public void setEntrance(List<Circle> entrance, int player){
+        for (Circle stud:entrance) {
+            stud.setDisable(true);
+            stud.setVisible(false);
+        }
         playerOwner=player-1;
-        clickedEntranceStudentsColor=new ArrayList<>();
+       // clickedEntranceStudentsColor=new ArrayList<>();
         List<Integer> playerEntrance=gui.getGame().getPlayers().get(player-1).getBoard().getEntrance();
         int id;
         for(int i=0;i<playerEntrance.size();i++){
@@ -74,11 +78,16 @@ public abstract class BoardSceneController extends SceneController{
                 entrance.get(i).setVisible(false);// the student must be made not visible when absent and also not clickable
                 entrance.get(i).setDisable(true);
             }
-            entrance.get(i).getStyleClass().add(".studentCircle");
         }
     }
 
     public void setHall(List<ArrayList<Circle>> hall, int player){
+        for (ArrayList<Circle> list:hall) {
+            for (Circle stud:list) {
+                stud.setVisible(false);
+                stud.setDisable(true);
+            }
+        }
         clickedDiningStudentsColor=new ArrayList<>();
         Integer[][] diningroom=gui.getGame().getPlayers().get(player-1).getBoard().getDiningRoom();
         for(int i=0;i<diningroom.length;i++){
@@ -118,14 +127,16 @@ public abstract class BoardSceneController extends SceneController{
                     hall.get(i).get(j).setVisible(false);
                     hall.get(i).get(j).setDisable(true);
                 }
-                hall.get(i).get(j).getStyleClass().add(".studentCircle");
             }
         }
     }
 
     /**displays professors if the player has*/
     public void setProfessors(List<Polygon> table, int player){
-        Integer[] professors=gui.getGame().getPersonalPlayer().getBoard().getProfessorTable();
+        Integer[] professors=gui.getGame().getPlayers().get(playerOwner).getBoard().getProfessorTable();
+        for (Polygon teach:table) {
+            teach.setVisible(false);
+        }
         for(Integer i : professors){
             if(i!=-1){
                 Image img;
@@ -204,31 +215,39 @@ public abstract class BoardSceneController extends SceneController{
      * used in initialize to set the present student Clickable based on some need
      * @param clickedColor the color of the student (id/26) */
     protected void setEntranceClickable(Circle student, int clickedColor){
+        clickedEntranceStudentsColor=new ArrayList<>();//fixme make distinctions on saved student
         student.setDisable(false);
         student.setOnMouseClicked(mouseEvent -> {
             if(isYourBoard()) {
-                clickedEntranceStudentsColor.add(clickedColor);
-                if (gui.getGame().getState() == GameState.actionMoveStudent && !gui.getInputManager().isActivatingCardEffect()) {//todo show the button that ask to move either in board or islands
+                //clickedEntranceStudentsColor.add(clickedColor);
+                gui.getInputManager().saveSelectedStud(clickedColor);
+                if (gui.getGame().getState() == GameState.actionMoveStudent && !gui.getInputManager().isActivatingCardEffect()) {
+                    showMoveButton();
                 }
             }
         });
     }
+    protected abstract void showMoveButton();
+    protected abstract void hideMoveButtons();
     public boolean isYourBoard(){
         return playerOwner==gui.getGame().getPersonalPlayer().getId();
     }
-    //this should be attached to a button which appears when a student in entrance has been selected
     /** used to put the selected student inside the dining room */
     protected void moveToDining(){
         GuiInputManager inputManager=gui.getInputManager();
-        inputManager.moveToBoard(this.clickedEntranceStudentsColor.get(0));
+        inputManager.moveToBoard();
         this.clickedEntranceStudentsColor=new ArrayList<>();
+        //fixme is the board being refreshed?
+        //initialize();//does this make sense? and what about the refresh method in sub?
+        hideMoveButtons();
     }
-    //attached to a button which appears when a student in entrance has been selected */
+
     /** used to show the map and prompt the user to choose an island */
     protected void chooseTargetIsland(){
         gui.getInputManager().saveSelectedStud(this.clickedEntranceStudentsColor);
         this.clickedEntranceStudentsColor=new ArrayList<>();
         gui.setScene(SceneEnum.MapScene);
+        hideMoveButtons();
     }
     /** @param clickedColor studentID/26*/
     protected void setDiningRoomClickable(Circle student, int clickedColor){

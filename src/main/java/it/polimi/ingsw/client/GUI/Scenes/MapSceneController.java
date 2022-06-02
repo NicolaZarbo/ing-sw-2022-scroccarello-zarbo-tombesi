@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -32,6 +33,7 @@ public class MapSceneController extends SceneController {
     public Pane tower_container;
     public Text info;
     public ImageView hoverBackGround;
+    public AnchorPane root;
     private List<ImageView> islandStudentPlaces;
     private final GUI gui;
     private final CentralView view;
@@ -48,6 +50,7 @@ public class MapSceneController extends SceneController {
     }
     @Override
     public void initialize() {
+        root.setStyle("-fx-background-image:url(images/wallpapers/sky_no_title.png); -fx-background-position: center; -fx-background-size: 1236 863");
         saveContainers();
         initClouds();
         initIslands();
@@ -92,7 +95,10 @@ public class MapSceneController extends SceneController {
         setOtherContainerTransparent(cloud_container);
         info.setText("Choose a cloud to refill");
         for (int i = 1; i <= 4; i++) {
-            cloudByNumber.get(i).setDisable(false);
+            if(view.getClouds().get(i-1)[0]==-1){
+                cloudByNumber.get(i).setDisable(true);
+                cloudByNumber.get(i).setOpacity(0.4);
+            }else cloudByNumber.get(i).setDisable(false);
             // todo cloudByNumber.get(i) add colored overlay
         }
     }
@@ -107,9 +113,10 @@ public class MapSceneController extends SceneController {
         int motherPos= view.getMother()+1;
         for (int i = 1; i < 13; i++) {
             islandByNumber.get(i).setDisable(true);
+            islandByNumber.get(i).setOpacity(0.4);
         }
         for (int i = motherPos+1; i <= motherPos+maxSteps; i++) {
-            //islandByNumber.get(i) add a colored overlay todo
+            islandByNumber.get(i).setOpacity(1);
             islandByNumber.get(i).setDisable(false);
         }
 
@@ -154,6 +161,7 @@ public class MapSceneController extends SceneController {
             Image img = new Image("images/simple_elements/island"+islandImage+".png");
             islandByNumber.get(islandID+1).setFill(new ImagePattern(img));
             islandByNumber.get(islandID+1).setDisable(false);
+            islandByNumber.get(islandID+1).setOpacity(1);
             clickChooseIsland( islandByNumber.get(islandID+1));
             hoverShowInside(islandByNumber.get(islandID+1));
             setTower(island);
@@ -212,7 +220,7 @@ public class MapSceneController extends SceneController {
         //island.setDisable(false);
         //int id=Integer.parseInt(island.getId().substring(6));
         island.setOnMouseClicked(mouseEvent -> {
-            int islandID=Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6));
+            int islandID=Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6))-1;
 
             if(view.getState()==GameState.actionMoveStudent && gui.getInputManager().hasSelectedStudent())
                 gui.getInputManager().moveToIsland(islandID);
@@ -228,6 +236,7 @@ public class MapSceneController extends SceneController {
             cloudImage= new Image("images/simple_elements/cloud_card_"+cloudImg+".png");
             cloudByNumber.get(cloudId+1).setFill(new ImagePattern(cloudImage));
             cloudByNumber.get(cloudId+1).setVisible(true);
+            cloudByNumber.get(cloudId+1).setOpacity(1);
             setCloudStudents(cloud,cloudId+1);
             clickChooseCloud(cloudByNumber.get(cloudId+1),cloudId);
 

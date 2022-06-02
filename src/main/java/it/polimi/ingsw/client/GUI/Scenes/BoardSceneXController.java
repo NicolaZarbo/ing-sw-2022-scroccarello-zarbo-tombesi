@@ -32,12 +32,6 @@ public class BoardSceneXController extends SceneController{
 
     @Override
     public void initialize() {
-       /* root.setBackground(new Background(new BackgroundImage( new Image("images/wallpapers/sky_no_title.png"), BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT)));
-
-        */
         root.setStyle("-fx-background-image:url(images/wallpapers/sky_no_title.png); -fx-background-position: center; -fx-background-size: 1280 796");
         List<Pane> containers= new ArrayList<>();
         containers.add(up_left);
@@ -64,6 +58,7 @@ public class BoardSceneXController extends SceneController{
         }
     }
     private void disposition2(){
+
         down_left.setVisible(false);
         down_right.setVisible(false);
     }
@@ -79,7 +74,7 @@ public class BoardSceneXController extends SceneController{
         down_right.setVisible(false);
         up_right.setVisible(false);
     }
-    private void disposition3(){
+    private void disposition3(){//todo it should check who is the player and then make that  board bigger
         up_left.setTranslateX(280);
         up_right.setTranslateY(330);
         up_left.setScaleX(1.4);

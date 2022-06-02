@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.GUI.Scenes;
 
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
@@ -16,6 +17,7 @@ public class SingleBoardController extends BoardSceneController{
     public Pane hall;
     public Pane table;
     public Pane towers;
+    public Pane popupPanel;
     private int boardNumber;
 
     private List<Circle> entranceList;
@@ -56,6 +58,8 @@ public class SingleBoardController extends BoardSceneController{
     }
     @Override
     public void initialize() {
+        popupPanel.setVisible(false);
+        popupPanel.setMouseTransparent(true);
         initEntrance();
         initTowers();
         initTable();
@@ -65,5 +69,31 @@ public class SingleBoardController extends BoardSceneController{
         super.setTowers(towerList,boardNumber+1);
         setProfessors(teacherList,boardNumber+1);
     }
+    public void refresh(){
+        super.setEntrance(entranceList,boardNumber+1);
+        super.setHall(diningRows,boardNumber+1);
+        super.setTowers(towerList,boardNumber+1);
+        setProfessors(teacherList,boardNumber+1);
+    }
 
+    @Override
+    protected void showMoveButton() {
+        popupPanel.setVisible(true);
+        popupPanel.setMouseTransparent(false);
+    }
+
+    @Override
+    protected void hideMoveButtons() {
+        popupPanel.setVisible(false);
+        popupPanel.setMouseTransparent(true);
+        refresh();
+    }
+
+    public void moveToBoard() {
+        super.moveToDining();
+    }
+
+    public void sendToIsland() {
+        super.chooseTargetIsland();
+    }
 }

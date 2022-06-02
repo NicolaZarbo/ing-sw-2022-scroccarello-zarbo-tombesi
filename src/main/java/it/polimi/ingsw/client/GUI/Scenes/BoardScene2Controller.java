@@ -62,6 +62,17 @@ public class BoardScene2Controller extends BoardSceneController{
         setPlayerName(player2name,2);
 
     }
+
+    @Override
+    protected void showMoveButton() {
+
+    }
+
+    @Override
+    protected void hideMoveButtons() {
+
+    }
+
     private void buildEntrance(int player){
         if(player==1){
             entrance1List= new ArrayList<>();

@@ -82,6 +82,16 @@ public class BoardScene3Controller extends BoardSceneController{
         setTowers(towers2,other2+1);
     }
 
+    @Override
+    protected void showMoveButton() {
+
+    }
+
+    @Override
+    protected void hideMoveButtons() {
+
+    }
+
     private void buildEntrance(int player){
        switch(player){
            case 0->{

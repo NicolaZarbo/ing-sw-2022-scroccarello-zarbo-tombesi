@@ -33,6 +33,17 @@ public class BoardScene4Controller extends BoardSceneController{
             buildTowers(i);
         }
     }
+
+    @Override
+    protected void showMoveButton() {
+
+    }
+
+    @Override
+    protected void hideMoveButtons() {
+
+    }
+
     private void buildEntrance(int player){
 
     }

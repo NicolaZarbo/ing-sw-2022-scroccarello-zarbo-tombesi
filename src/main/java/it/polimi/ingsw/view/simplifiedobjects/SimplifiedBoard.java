@@ -31,7 +31,7 @@ public class SimplifiedBoard {
             if(id/26==tokenColor)
                 return id;
         }
-        throw new NoTokenFoundException("no student of that color in entrance");
+        throw new NoTokenFoundException("no student of color: "+tokenColor+" in entrance");
     }
     public boolean hasStudentOfColorInDining(int tokenColor){
         for (Integer id:diningRoom[tokenColor]) {
