@@ -32,6 +32,8 @@ public class GuiInputManager extends InputManager {
         isConnected=false;
         this.game = game;
         GuiInputManager.gui =gui;
+        selectedStudents=new ArrayList<>();
+        selectedStudentFromElsewhere=new ArrayList<>();
     }
     public static GUI getGui(){
         return gui;
@@ -123,7 +125,7 @@ public class GuiInputManager extends InputManager {
         waitForAnswer();
     }
     public void useAssistantCard(int cardID){
-        if(!canDoAction && game.getState()== GameState.planPlayCard)
+        if(!canDoAction || game.getState()!= GameState.planPlayCard)
             return;
         game.useAssistantCard(cardID);
         waitForAnswer();

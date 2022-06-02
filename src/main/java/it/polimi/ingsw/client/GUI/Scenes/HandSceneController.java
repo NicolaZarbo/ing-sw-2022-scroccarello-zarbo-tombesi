@@ -12,6 +12,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.image.Image;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HandSceneController extends SceneController{
     public Pane assistant_container;
@@ -29,6 +30,7 @@ public class HandSceneController extends SceneController{
     }
 
     public void initialize(){
+        played_container.setMouseTransparent(true);
         setCards();
         setDiscarded();
         setCoins();
@@ -65,6 +67,7 @@ public class HandSceneController extends SceneController{
             assistantCards.add((Rectangle) card);
             int cardNumber= Integer.parseInt(card.getId().substring(13));
             ( (Rectangle) card).setFill(new ImagePattern(getCardImage(cardNumber)));
+            card.setVisible(false);
         }
         int i = 0;
         for (Boolean card:view.getPersonalPlayer().getAssistantCards()) {
@@ -73,9 +76,9 @@ public class HandSceneController extends SceneController{
             i++;
         }
     }
-    private void setClickChoose(Rectangle cardAssitant, int cardId){
-        cardAssitant.setDisable(false);
-        cardAssitant.setOnMouseClicked(mouseEvent -> {
+    private void setClickChoose(Rectangle cardAssistant, int cardId){
+        cardAssistant.setDisable(false);
+        cardAssistant.setOnMouseClicked(mouseEvent -> {
             if(view.getState()== GameState.planPlayCard )
                  gui.getInputManager().useAssistantCard(cardId);
         });

@@ -176,13 +176,13 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         switch (state){
             case setupPlayers -> {throw new RuntimeException("something went really wrong");}
             case planPlayCard -> {
+                playedCardThisTurn = new ArrayList<>();
                 if(isYourTurn())
                     clientScreen.showHand();
             }
             case actionMoveStudent -> {
                 activeCharacter=0;
-                playedCardThisTurn = new ArrayList<>();
-                //clientScreen.showView();
+
             }
             case actionMoveMother -> {
                 //clientScreen.showView();

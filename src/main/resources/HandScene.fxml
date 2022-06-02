@@ -24,7 +24,7 @@
       <Circle fx:id="coinPlace" fill="DODGERBLUE" layoutX="69.0" layoutY="101.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="68.0" layoutY="44.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of coins:" />
       <Text layoutX="61.0" layoutY="174.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card Playable:" />
-      <Pane fx:id="assistant_container" mouseTransparent="true">
+      <Pane fx:id="assistant_container">
          <Rectangle fx:id="AssistantCard1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="26.0" layoutY="201.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
          <Rectangle fx:id="AssistantCard2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="117.0" layoutY="201.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
          <Rectangle fx:id="AssistantCard3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="209.0" layoutY="201.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
