@@ -238,7 +238,7 @@ public abstract class BoardSceneController extends SceneController{
         inputManager.moveToBoard();
         this.clickedEntranceStudentsColor=new ArrayList<>();
         //fixme is the board being refreshed?
-        //initialize();//does this make sense? and what about the refresh method in sub?
+        initialize();//does this make sense? and what about the refresh method in sub?
         hideMoveButtons();
     }
 

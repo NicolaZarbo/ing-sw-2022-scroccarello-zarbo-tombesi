@@ -1,11 +1,14 @@
 package it.polimi.ingsw.client.GUI.Scenes;
 
+import it.polimi.ingsw.client.GUI.GuiInputManager;
+import javafx.animation.PauseTransition;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
+import javafx.util.Duration;
 
 
 import java.util.ArrayList;
@@ -86,7 +89,15 @@ public class SingleBoardController extends BoardSceneController{
     protected void hideMoveButtons() {
         popupPanel.setVisible(false);
         popupPanel.setMouseTransparent(true);
+
         refresh();
+        /*PauseTransition littlePause= new PauseTransition(Duration.seconds(1));//wait for the message to arrive
+        littlePause.setOnFinished( actionEvent -> refresh());
+
+
+         */
+
+
     }
 
     public void moveToBoard() {

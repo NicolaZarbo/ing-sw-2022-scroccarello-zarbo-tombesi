@@ -75,7 +75,7 @@ public class GUI extends Application implements UserInterface {
         connection.writeTxtForLobby(rules);
     }
     public void setScene(SceneEnum sceneName){
-        if(!scenes.containsKey(sceneName))
+        //if(!scenes.containsKey(sceneName))fixme test actually, is this even a problem?, works better by loading all every time
             initScene(sceneName);
         Platform.runLater(()->mainStage.setScene(scenes.get(sceneName)));
     }
@@ -125,7 +125,7 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void askToMoveMother() {
-
+        setScene(SceneEnum.MapScene);
     }
 
     @Override

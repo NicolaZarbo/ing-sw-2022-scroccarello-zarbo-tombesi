@@ -94,8 +94,9 @@ public class MapSceneController extends SceneController {
     private void chooseCloudContext(){
         setOtherContainerTransparent(cloud_container);
         info.setText("Choose a cloud to refill");
-        for (int i = 1; i <= 4; i++) {
-            if(view.getClouds().get(i-1)[0]==-1){
+        for (Integer[] cloud:view.getClouds()) {
+            int i = view.getClouds().lastIndexOf(cloud)+1;
+            if(cloud[0]==-1){
                 cloudByNumber.get(i).setDisable(true);
                 cloudByNumber.get(i).setOpacity(0.4);
             }else cloudByNumber.get(i).setDisable(false);
@@ -115,9 +116,14 @@ public class MapSceneController extends SceneController {
             islandByNumber.get(i).setDisable(true);
             islandByNumber.get(i).setOpacity(0.4);
         }
+        int mod;
+
         for (int i = motherPos+1; i <= motherPos+maxSteps; i++) {
-            islandByNumber.get(i).setOpacity(1);
-            islandByNumber.get(i).setDisable(false);
+            if(i<=12)
+                mod=i;
+            else mod=i-12;
+            islandByNumber.get(mod).setOpacity(1);
+            islandByNumber.get(mod).setDisable(false);
         }
 
     }
@@ -221,11 +227,11 @@ public class MapSceneController extends SceneController {
         //int id=Integer.parseInt(island.getId().substring(6));
         island.setOnMouseClicked(mouseEvent -> {
             int islandID=Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6))-1;
-
+            if(view.getState()==GameState.actionMoveMother)
+                gui.getInputManager().moveMotherTo(islandID);
             if(view.getState()==GameState.actionMoveStudent && gui.getInputManager().hasSelectedStudent())
                 gui.getInputManager().moveToIsland(islandID);
-            if(view.getState()==GameState.actionMoveMother)
-                gui.getInputManager().moveToIsland(islandID);
+
         });
     }
     private void setCloud(){
@@ -245,7 +251,7 @@ public class MapSceneController extends SceneController {
     private void clickChooseCloud(Circle cloud, int cloudID){
         cloud.setDisable(false);
         cloud.setOnMouseClicked(mouseEvent -> {
-            gui.getInputManager().cloudChoose(cloudID-1);
+            gui.getInputManager().cloudChoose(cloudID);
         });
     }
     private void setCloudStudents(Integer[] cloud, int cloudNumber){

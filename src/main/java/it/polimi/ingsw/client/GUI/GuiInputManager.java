@@ -24,11 +24,13 @@ public class GuiInputManager extends InputManager {
     private int selectedIsland;
     private int selectedCloud;
     private static boolean canChooseIsland;
+    private static boolean boardArrived;
     public ArrayList<Integer> getSelectedStudents() {
         return selectedStudents;
     }
 
     public GuiInputManager(CentralView game,GUI gui) {
+        boardArrived=false;
         isLobbyAvailable=false;
         isConnected=false;
         this.game = game;
@@ -111,7 +113,9 @@ public class GuiInputManager extends InputManager {
         return selectedStudents.get(0)!=-1;
     }
     public void moveMotherTo(int islandID){
-        int steps=(game.getMother()-islandID)%game.getIslands().size();
+        int steps=(islandID-game.getMother())%game.getIslands().size();
+        if(steps<0)
+            steps=-steps;
         if(steps<game.getCardYouPlayed())
             game.moveMother(steps);
         canChooseIsland=false;

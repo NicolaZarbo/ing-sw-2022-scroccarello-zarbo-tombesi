@@ -142,7 +142,7 @@ public class Game extends Observable<ServerMessage> {
 
             groupMultiMessage(new ChangePhaseMessage(this));
             groupMultiMessage(new ChangeTurnMessage(this));
-        }
+        }else
         if (actualState == GameState.planPlayCard) {
             if(!isLastPlayerTurn()){
                 currentPlayerId=playIngOrder.get(actualIndex%nPlayers);

@@ -47,7 +47,7 @@ public class ControllerActionPhase  {
         if(game.getActualState()!= GameState.actionMoveMother)
             throw new IllegalMoveException();
         if(message.getSteps()>game.getPlayedCard(game.getCurrentPlayerId()).getMoveMother())//this can be moved to a thrown exception in moveMotherNature
-            throw new RuntimeException("too many steps!");
+            throw new IllegalMoveException("too many steps!");
         else {
                 modelTurn.moveMotherNature(message.getSteps());
                 game.moveToNextPhase();
