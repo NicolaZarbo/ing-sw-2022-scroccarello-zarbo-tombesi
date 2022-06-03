@@ -8,6 +8,7 @@ import it.polimi.ingsw.view.CentralView;
 public class GameOverMessage extends ServerMessage{
     private int winnerID;
     private int winnerTeam;
+    //todo maybe we could add the reason that triggered the end of game
     public GameOverMessage(String json) {
         super(json);
     }

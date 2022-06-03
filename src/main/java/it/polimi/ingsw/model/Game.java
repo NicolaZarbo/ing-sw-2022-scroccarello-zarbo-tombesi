@@ -130,6 +130,8 @@ public class Game extends Observable<ServerMessage> {
             if(!isLastPlayerTurn()){
                 actualState=GameState.actionMoveStudent;
                 currentPlayerId=playIngOrder.get(actualIndex%nPlayers);
+                if(players[0].getHand().getAssistant().size()==0)
+                    gameOver();
             }
             else{
                 currentPlayerId=playIngOrder.get(0);
@@ -285,6 +287,12 @@ public class Game extends Observable<ServerMessage> {
         }else throw new NullPointerException();
 
     }
+    /** Used when a endGame check is passed
+     * Checks used:
+     * 1 bag is empty
+     * 2 someone used every tower in their board
+     * 3 someone used his last card
+     * 4 there are only 3 cluster of islands left*/
     public void gameOver(){// todo test for 4 player etc
         int winner;
         int min;
