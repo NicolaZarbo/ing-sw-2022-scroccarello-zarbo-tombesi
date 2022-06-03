@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class BoardSceneXController extends SceneController{
     public Button moveToMap;
     public Button moveToHand;
     public AnchorPane root;
+    public Text context_text;
+    public Pane context_container;
     private GUI gui;
     private CentralView view;
     public BoardSceneXController() {
@@ -33,6 +36,7 @@ public class BoardSceneXController extends SceneController{
     @Override
     public void initialize() {
         root.setStyle("-fx-background-image:url(images/wallpapers/sky_no_title.png); -fx-background-position: center; -fx-background-size: 1280 796");
+        setContextText();
         List<Pane> containers= new ArrayList<>();
         containers.add(up_left);
         containers.add(up_right);
@@ -48,6 +52,17 @@ public class BoardSceneXController extends SceneController{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    private void setContextText(){
+        String text;
+        switch (view.getState()){
+            case actionChooseCloud -> text="Go to map to choose a cloud";
+            case actionMoveStudent -> text="Move a student in entrance by selecting it";
+            case actionMoveMother -> text="Go to Map to move Mother Nature";
+            case planPlayCard -> text="Go to hand to choose a card";
+            default -> text= "this are the boards";
+        }
+        context_text.setText(text);
     }
     private void setDisposition(){
         switch (view.getPlayers().size()){
@@ -70,6 +85,7 @@ public class BoardSceneXController extends SceneController{
         }
         down_left.setVisible(false);
         down_right.setVisible(false);
+        context_container.setTranslateY(20);
     }
     private void disposition4(){
 
@@ -94,8 +110,8 @@ public class BoardSceneXController extends SceneController{
         }
         personal.setScaleX(1.4);
         personal.setScaleY(1.4);
-
-
+        context_container.setTranslateY(-600);
+        context_container.setTranslateX(190);
         down_right.setVisible(false);
     }
 

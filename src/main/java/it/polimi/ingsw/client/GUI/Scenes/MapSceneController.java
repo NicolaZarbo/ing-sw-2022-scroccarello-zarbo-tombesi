@@ -5,11 +5,9 @@ import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
@@ -17,7 +15,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -100,7 +97,7 @@ public class MapSceneController extends SceneController {
                 cloudByNumber.get(i).setDisable(true);
                 cloudByNumber.get(i).setOpacity(0.4);
             }else cloudByNumber.get(i).setDisable(false);
-            // todo cloudByNumber.get(i) add colored overlay
+
         }
     }
     private void moveMotherContext(){
@@ -111,7 +108,7 @@ public class MapSceneController extends SceneController {
         setOtherContainerTransparent(island_container);
         info.setText("Select a target island for Mother");
         int maxSteps= (view.getCardYouPlayed()+2)/2;
-        int motherPos= view.getMother()+1;
+        int motherPos=view.getMother();
         for (int i = 1; i < 13; i++) {
             islandByNumber.get(i).setDisable(true);
             islandByNumber.get(i).setOpacity(0.4);
@@ -119,11 +116,12 @@ public class MapSceneController extends SceneController {
         int mod;
 
         for (int i = motherPos+1; i <= motherPos+maxSteps; i++) {
-            if(i<=12)
+            if(i<12)
                 mod=i;
             else mod=i-12;
-            islandByNumber.get(mod).setOpacity(1);
-            islandByNumber.get(mod).setDisable(false);
+            SimplifiedIsland presentIsland= view.getIslands().get(mod);
+            islandByNumber.get(presentIsland.getIslandId()+1).setOpacity(1);
+            islandByNumber.get(presentIsland.getIslandId()+1).setDisable(false);
         }
 
     }
@@ -159,7 +157,7 @@ public class MapSceneController extends SceneController {
         List<SimplifiedIsland> fullIslandView= new ArrayList<>(islandsView);
         for (SimplifiedIsland island:islandsView) {
             setBridges(island);
-            fullIslandView.addAll(island.getSubIsland());
+            fullIslandView.addAll(view.getEverySubIsland(island));
         }
         for (SimplifiedIsland island:fullIslandView) {
             int islandID= island.getIslandId();
@@ -203,7 +201,7 @@ public class MapSceneController extends SceneController {
     private void hoverShowInside(Circle island){
         island.setDisable(false);
         island.setOnMouseEntered(mouseEvent -> {
-            SimplifiedIsland isl= view.getIslands().get(Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6))-1);
+            SimplifiedIsland isl= view.getIslandById(Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6))-1);
             int islandImage= ((isl.getIslandId())%3)+1;
             resetStudentsHover();
             setStudentsInHover(isl.getStudents());
@@ -280,14 +278,19 @@ public class MapSceneController extends SceneController {
     }
     private void setMotherZone(SimplifiedIsland island){
         int motherPosition= view.getMother();
-        boolean isMotherOn = island.getIslandId()==motherPosition;
+        boolean isMotherOn=false;
+        if(view.getIslands().contains(island)){
+            int islandPlace=view.getIslands().lastIndexOf(island);
+            isMotherOn = islandPlace==motherPosition;
+        }
         Rectangle mZone=motherZoneOfIsland.get(island.getIslandId()+1);
         mZone.setVisible(isMotherOn);
         mZone.setFill(new ImagePattern(new Image("images/simple_elements/mother_nature.png")));
     }
+    /** used to add bridges to every island and its subIslands*/
     private void setBridges(SimplifiedIsland island){
         int mainId=island.getIslandId()+1;
-        for (SimplifiedIsland subIsland:island.getSubIsland()) {
+        for (SimplifiedIsland subIsland:island.getSubIslands()) {
             int subId=subIsland.getIslandId()+1;
             if(subId<mainId){
                 bridgeByIslandBefore.get(subId).setVisible(true);

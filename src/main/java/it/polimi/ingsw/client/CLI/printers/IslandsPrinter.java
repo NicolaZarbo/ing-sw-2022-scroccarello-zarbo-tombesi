@@ -100,7 +100,7 @@ String yo = """
         int[] studForColor= new int[5];
         Arrays.fill(studForColor,0);
         List<Integer> students= new ArrayList<>(island.getStudents());
-        for (SimplifiedIsland subIsland:island.getSubIsland()) {
+        for (SimplifiedIsland subIsland:island.getSubIslands()) {
             students.addAll(subIsland.getStudents());
         }
         for (Integer studId:students) {

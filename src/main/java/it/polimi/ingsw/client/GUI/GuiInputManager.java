@@ -109,11 +109,14 @@ public class GuiInputManager extends InputManager {
     public boolean hasSelectedStudent(){
         return singleStudent!=-1;
     }
-    public void moveMotherTo(int islandID){
-        int steps=(islandID-game.getMother())%game.getIslands().size();
+    public void moveMotherTo(int islandID){//fixme doesn't work after merging
+        int islandPos=game.getIslandPositionByID(islandID);
+        if(islandPos==-1)
+            return;
+        int steps=(islandPos-game.getMother())%game.getIslands().size();
         if(steps<0)
             steps=-steps;
-        if(steps<game.getCardYouPlayed())
+        if(steps<=(game.getCardYouPlayed()+2)/2)
             game.moveMother(steps);
         canChooseIsland=false;
         waitForAnswer();

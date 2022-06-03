@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.simplifiedobjects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimplifiedIsland {
@@ -8,11 +9,11 @@ public class SimplifiedIsland {
     private int dimension;
     private int islandId;
     private int towerColor;
-    private List<SimplifiedIsland> subIsland;
+    private List<SimplifiedIsland> subIslands;
 
     public SimplifiedIsland(List<Integer> studentsId,List<SimplifiedIsland> subIsland, int numberOfTowers, int dimension, int islandId,int towerColor) {
         this.students = studentsId;
-        this.subIsland=subIsland;
+        this.subIslands =subIsland;
         this.towers = numberOfTowers ;
         this.islandId = islandId;
         this.dimension=dimension;
@@ -22,13 +23,29 @@ public class SimplifiedIsland {
     public int getTowerColor() {
         return towerColor;
     }
+    /*
+    public ArrayList<SimplifiedIsland> getAllSubIsland(){
+        ArrayList<SimplifiedIsland> everyIsland= new ArrayList<>();
+        for (SimplifiedIsland subIsland: subIslands) {
+            everyIsland.addAll(allGetter(subIsland));
+        }
+        return everyIsland;
+    }
+    private ArrayList<SimplifiedIsland> allGetter(SimplifiedIsland subIsland){
+        ArrayList<SimplifiedIsland> recursiveCon= new ArrayList<>();
+        for (SimplifiedIsland subSub:subIsland.subIslands) {
 
-    public List<SimplifiedIsland> getSubIsland() {
-        return subIsland;
+        }
+    }
+
+     */
+
+    public List<SimplifiedIsland> getSubIslands() {
+        return subIslands;
     }
     public int getEntireNumberOfTower(){
         int n=getNumberOfTowers();
-        for (SimplifiedIsland subIsland:subIsland) {
+        for (SimplifiedIsland subIsland: subIslands) {
             n+=subIsland.getEntireNumberOfTower();
         }
         return n;

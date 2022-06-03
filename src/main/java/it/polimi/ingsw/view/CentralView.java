@@ -286,9 +286,34 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     public boolean isTeamPlay() {
         return teamPlay;
     }
+    public int getIslandPositionByID(int islandID){
+        for (SimplifiedIsland island:islands) {
+            if(island.getIslandId()==islandID)
+                return islands.lastIndexOf(island);
+        }
+        return -1;
+    }
 
     public int getPlayersWaitingInLobby() {
         return playersWaitingInLobby;
+    }
+    public ArrayList<SimplifiedIsland> getEverySubIsland(SimplifiedIsland island){
+        ArrayList<SimplifiedIsland> every = new ArrayList<>(island.getSubIslands());
+        for (SimplifiedIsland subIsland:island.getSubIslands()) {
+            every.addAll(getEverySubIsland(subIsland));
+        }
+        return every;
+    }
+    public SimplifiedIsland getIslandById(int id){
+        for (SimplifiedIsland island: islands) {
+            if(island.getIslandId()==id)
+                return island;
+            for (SimplifiedIsland subIsland:getEverySubIsland(island)) {
+                if(subIsland.getIslandId()==id)
+                    return subIsland;
+            }
+        }
+        throw new NullPointerException("no island found");
     }
 
     public List<Integer> getAvailableMages() {
