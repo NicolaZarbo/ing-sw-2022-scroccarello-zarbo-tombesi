@@ -17,6 +17,8 @@ public class Round {
             Student[] students=new Student[dim];
             for(int j=0;j<dim;j++){
                 students[j]=game.getBag().getToken();
+                if(game.getBag().isEmpty())
+                    game.gameOver();
             }
            game.getClouds()[i].setStud(students);
         }

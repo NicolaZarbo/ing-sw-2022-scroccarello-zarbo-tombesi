@@ -39,6 +39,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     private int studentMoved;
     private boolean teamPlay;
     private int playersWaitingInLobby;
+    private int winner;
 
     public List<SimplifiedIsland> getIslands() {
         return islands;
@@ -98,6 +99,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         for (SimplifiedPlayer pl: players) {
             if(pl.getUsername().equals( name))
                 personalPlayer=pl;
+            if (isTeamPlay())
+                pl.setTeam((pl.getId())%2+1);
         }
         characters=message.getCharacters();
         studentsOnCard=message.getCardStudents();
@@ -201,6 +204,12 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
                     clientScreen.showClouds();
             }
         }
+    }
+    public void gameOver(GameOverMessage message){
+        if(players.size()==4)
+            winner= message.getWinnerTeam();
+        else winner=message.getWinnerID();
+        clientScreen.gameOver();
     }
 
 
@@ -314,6 +323,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             }
         }
         throw new NullPointerException("no island found");
+    }
+
+    public int getWinner() {
+        return winner;
     }
 
     public List<Integer> getAvailableMages() {

@@ -80,6 +80,8 @@ public class Turn {
             unifyBefore( position);
         }
         game.groupMultiMessage(new MotherPositionMessage(game));
+        if(game.getIslands().size()<=3)
+            game.gameOver();
     }
     /** moves al the students on a target cloud to the board of playerId, it is also the last actin of the turn*/
     public void moveFromCloudToEntrance(int cloudId,int playerId){
@@ -159,7 +161,6 @@ public class Turn {
             game.getMotherNature().changePosition(pos-1);
             }
         game.groupMultiMessage(new IslandsMessage(game));
-
     }
     /**
      @param player  the player who won the influence contest */
@@ -173,6 +174,8 @@ public class Turn {
         island.setTower(board.getTower());
         game.groupMultiMessage(new IslandsMessage(game));
         game.groupMultiMessage(new SingleBoardMessage(game,player.getId()));
+        if(board.towersLeft()==0)
+            game.gameOver();
     }
     private void changeTower(Island island , Player newOwner){
         ArrayList<Tower> removedT=new ArrayList<>(island.getEveryTower());

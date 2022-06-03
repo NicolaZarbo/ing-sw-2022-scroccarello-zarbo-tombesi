@@ -119,6 +119,11 @@ public class Cli implements UserInterface {
         System.out.println(IslandsPrinter.print(game));
     }
 
+    @Override
+    public void gameOver() {
+        System.out.println(GameOverPrinter.print(game));
+    }
+
     public void askWhereToMove(){
         System.out.println(IMP+"Choose a present island or type anything else to move into the DiningRoom"+RST);
         inputManagerCli.decodeStringInput(input.nextLine());

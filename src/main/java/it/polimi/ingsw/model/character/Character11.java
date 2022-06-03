@@ -19,6 +19,8 @@ public class Character11 extends TokensCharacter{
             Board board = game.getPlayer(parameters.getOtherTargetId()).getBoard();
             board.moveToDiningRoom(this.getStudent(parameters.getTargetStudentId()));
             this.addStudents(game.getBag().getToken());
+            if(game.getBag().isEmpty())
+                game.gameOver();
             incrementCost();
     }
 }

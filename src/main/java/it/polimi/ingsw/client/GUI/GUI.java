@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.GUI;
 
-import it.polimi.ingsw.client.GUI.Scenes.*;
 import it.polimi.ingsw.client.ServerConnection;
 import it.polimi.ingsw.enumerations.SceneEnum;
 import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
@@ -136,27 +135,18 @@ public class GUI extends Application implements UserInterface {
     @Override
     public void showBoards() {
         setScene(SceneEnum.BoardSceneX);
-
-        /*switch(game.getPlayers().size()){
-            case 2->{
-                setScene(SceneEnum.BoardSceneX);
-            }
-            case 3->{
-                setScene(SceneEnum.BoardScene3);
-            }
-            case 4->{
-                setScene(SceneEnum.BoardScene4);
-            }
-        }
-
-         */
-
     }
 
     @Override
     public void showIslands() {
         setScene(SceneEnum.MapScene);
     }
+
+    @Override
+    public void gameOver() {
+        setScene(SceneEnum.GameOverScene);
+    }
+
     public GuiInputManager getInputManager(){
         return inputManager;
     }

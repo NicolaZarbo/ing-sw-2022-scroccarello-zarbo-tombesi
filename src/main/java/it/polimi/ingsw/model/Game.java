@@ -3,11 +3,8 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.enumerations.Mage;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
-import it.polimi.ingsw.messages.servermessages.ChangePhaseMessage;
-import it.polimi.ingsw.messages.servermessages.ChangeTurnMessage;
-import it.polimi.ingsw.messages.servermessages.MultipleServerMessage;
+import it.polimi.ingsw.messages.servermessages.*;
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.messages.servermessages.ServerMessage;
 import it.polimi.ingsw.model.token.Professor;
 import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.enumerations.TowerColor;
@@ -287,6 +284,21 @@ public class Game extends Observable<ServerMessage> {
             return temp;
         }else throw new NullPointerException();
 
+    }
+    public void gameOver(){// todo test for 4 player etc
+        int winner;
+        int min;
+        if(nPlayers==4){
+            if(players[1].getBoard().towersLeft()>players[0].getBoard().towersLeft()){
+                winner=1;
+            }else winner=2;
+        }else {
+            List<Integer> towerForPlayer= Arrays.stream(players).map(Player::getBoard).map(Board::towersLeft).toList();
+            min=towerForPlayer.stream().min(Integer::compareTo).orElse(-1);
+            winner=towerForPlayer.lastIndexOf(min);
+        }
+        groupMultiMessage(new GameOverMessage(this,winner));
+        sendMultiMessage();
     }
     public boolean isProfessorOnGame(TokenColor color){
         return teachers[color.ordinal()] != null;

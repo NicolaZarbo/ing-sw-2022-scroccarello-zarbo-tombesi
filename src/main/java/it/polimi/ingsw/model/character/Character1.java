@@ -26,6 +26,8 @@ public class Character1 extends TokensCharacter{
         island = game.getIsland(parameters.getOtherTargetId());
         island.addStudent(stud);
         this.addStudents(game.getBag().getToken());
+        if(game.getBag().isEmpty())
+            game.gameOver();
         incrementCost();
         game.groupMultiMessage(new CharacterTokenMessage(1,game));
     }

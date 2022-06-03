@@ -10,7 +10,7 @@ public enum SceneEnum {
     HandScene("/HandScene.fxml"),
     MapScene("/MapScene.fxml"),
     BoardSceneX("/boardSceneX.fxml"),
-    WinningScene("/GameOver.fxml");
+    GameOverScene("/GameOver.fxml");
 
     private String path;
 

@@ -48,4 +48,8 @@ public class Bag {
         Collections.shuffle(students);
         return students;
     }
+
+    public boolean isEmpty() {
+        return left<=0;
+    }
 }
