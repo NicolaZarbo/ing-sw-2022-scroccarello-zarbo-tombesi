@@ -198,12 +198,6 @@ public class MapSceneController extends SceneController {
     /** used so that only the useful panel can receive mouseEvent, other-ways the other panels could block the event */
     private void setOtherContainerTransparent(Pane container){//duplicate of method in super
         super.setOthersContainerMouseTransparent(container);
-        /*for (Pane cont:containers) {
-            cont.setMouseTransparent(true);
-        }
-        container.setMouseTransparent(false);
-
-         */
     }
 
     private void hoverShowInside(Circle island){

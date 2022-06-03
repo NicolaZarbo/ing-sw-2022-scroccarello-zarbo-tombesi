@@ -2,11 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.layout.Pane?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="948.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.HandSceneController">
    <children>
       <Pane fx:id="played_container">
@@ -37,9 +38,18 @@
          <Rectangle fx:id="AssistantCard10" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="850.0" layoutY="201.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
       </Pane>
        <Text layoutX="59.0" layoutY="393.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discarded pile:" />
-      <Text fx:id="xSign" layoutX="120.0" layoutY="106.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+      <Text layoutX="120.0" layoutY="106.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" fx:id="xSign" />
       <Text fx:id="playerCoins" layoutX="157.0" layoutY="104.0" scaleX="5.0" scaleY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-      <Button fx:id="mapButton" onMouseClicked="#showMap" layoutX="37.0" layoutY="611.0" mnemonicParsing="false" scaleX="1.3" scaleY="1.3" text="Map" />
+      <Button fx:id="mapButton" layoutX="37.0" layoutY="611.0" mnemonicParsing="false" onMouseClicked="#showMap" scaleX="1.3" scaleY="1.3" text="Map" />
       <Button fx:id="boardButton" layoutX="141.0" layoutY="611.0" mnemonicParsing="false" onMouseClicked="#showboards" scaleX="1.3" scaleY="1.3" text="Board" />
+      <Pane layoutX="566.0" layoutY="372.0" prefHeight="168.0" prefWidth="346.0" style="-fx-background-color: brown; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 20; -fx-background-radius: 20;">
+         <children>
+            <Text fx:id="help_text" fill="WHITE" layoutX="14.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pick a card" wrappingWidth="306.13671875">
+               <font>
+                  <Font name="System Italic" size="32.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

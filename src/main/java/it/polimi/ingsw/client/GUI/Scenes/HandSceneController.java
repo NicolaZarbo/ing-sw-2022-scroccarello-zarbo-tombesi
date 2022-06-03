@@ -20,6 +20,7 @@ public class HandSceneController extends SceneController{
     public Circle coinPlace;
     public Text playerCoins;
     public Text xSign;
+    public Text help_text;
     private ArrayList<Integer> discardedCard;
     GUI gui;
     private ArrayList<Rectangle> assistantCards;
@@ -61,6 +62,11 @@ public class HandSceneController extends SceneController{
             i++;
         }
     }
+    private void setContext(){
+        if(view.isYourTurn() && view.getState()==GameState.planPlayCard)
+            help_text.setText("Pick a card");
+        else help_text.setText("This is your hand");
+    }
     private void setCards(){
         assistantCards= new ArrayList<>();
         for (Node card:assistant_container.getChildren()) {
@@ -72,6 +78,9 @@ public class HandSceneController extends SceneController{
         int i = 0;
         for (Boolean card:view.getPersonalPlayer().getAssistantCards()) {
             assistantCards.get(i).setVisible(card);
+            if(view.getPlayedCardThisTurn().contains(i))
+                assistantCards.get(i).setOpacity(0.4);
+            else assistantCards.get(i).setOpacity(1);
             setClickChoose(assistantCards.get(i),i);
             i++;
         }
@@ -80,7 +89,9 @@ public class HandSceneController extends SceneController{
         cardAssistant.setDisable(false);
         cardAssistant.setOnMouseClicked(mouseEvent -> {
             if(view.getState()== GameState.planPlayCard )
-                 gui.getInputManager().useAssistantCard(cardId);
+                if (view.getPlayedCardThisTurn().contains(cardId))
+                    help_text.setText("You can't use that card!!\n Pick another");
+                else gui.getInputManager().useAssistantCard(cardId);
         });
     }
     private Image getCardImage(int cardNumber){

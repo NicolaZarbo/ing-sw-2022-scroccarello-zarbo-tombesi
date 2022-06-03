@@ -1,7 +1,5 @@
 package it.polimi.ingsw.enumerations;
 
-import it.polimi.ingsw.client.GUI.Scenes.BoardSceneXController;
-
 public enum SceneEnum {
     WelcomeScene("/WelcomeScene.fxml"),
     LobbyScene("/LobbyScene.fxml"),
@@ -11,12 +9,13 @@ public enum SceneEnum {
     BoardScene4("/BoardScene4.fxml"),
     HandScene("/HandScene.fxml"),
     MapScene("/MapScene.fxml"),
-    BoardSceneX("/boardSceneX.fxml");
+    BoardSceneX("/boardSceneX.fxml"),
+    WinningScene("/GameOver.fxml");
 
     private String path;
 
-    SceneEnum(String s) {
-        path=s;
+    SceneEnum(String sourcePath) {
+        path=sourcePath;
     }
 
     public String  getPath(){

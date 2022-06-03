@@ -17,6 +17,7 @@ import java.util.List;
 
 public class SetupSceneController extends SceneController{
     public VBox root;
+    public Text teamWelcome_text;
     private GUI gui;
     private int wizardchosen, towerchosen;
 
@@ -53,11 +54,12 @@ public class SetupSceneController extends SceneController{
     public void initialize() {
         this.gui= GuiInputManager.getGui();
         root.setStyle("-fx-background-image: url(images/wallpapers/LowerQualityLobby.png); -fx-background-size: 640 400");
-        choiceMsg.setText("Choose your color");
+        choiceMsg.setText("Choose your color");//todo add info iF view.isTeamPlay
 
         towerchosen=0;
         wizardchosen =0;
-
+        if(gui.getGame().isTeamPlay())
+            teamWelcome();
         Image img=new Image("images/towers/black_tower.png");
         blacktower.setImage(img);
         img=new Image("images/towers/white_tower.png");
@@ -84,6 +86,13 @@ public class SetupSceneController extends SceneController{
                 greytower.setVisible(true);
         }
 
+    }
+    private void teamWelcome(){
+        teamWelcome_text.setVisible(true);
+        int team=1;
+        if(gui.getGame().getPlayersWaitingInLobby()%2==0)
+            team=2;
+        teamWelcome_text.setText("Welcome to team "+team);
     }
 
     private void showMagicians(){

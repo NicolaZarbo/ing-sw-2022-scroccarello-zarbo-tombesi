@@ -143,6 +143,7 @@ public class Setup {
         }
         return  clouds;
     }
+    //obsolete fixme remove
     private static TowerColor playerColor(int playerId, int nPlayer){
         TowerColor color;
         if (nPlayer== 4 && playerId>1){

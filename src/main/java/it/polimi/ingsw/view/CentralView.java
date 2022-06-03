@@ -37,6 +37,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     private List<Integer> availableColor;
     private List<Integer> availableMages;
     private int studentMoved;
+    private boolean teamPlay;
+    private int playersWaitingInLobby;
 
     public List<SimplifiedIsland> getIslands() {
         return islands;
@@ -154,6 +156,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     }
     public void personalizePlayer(PlayerSetUpMessage message){
         turnOf=message.getNewId();
+        this.teamPlay=message.isTeamPlay();
+        if(teamPlay)
+            playersWaitingInLobby=message.getAvailableMages().size()-1;
+        else playersWaitingInLobby=message.getAvailableColor().size()-1;
         if(message.getTurnOf().equals(this.name)) {
             this.id=message.getNewId();
             this.availableColor=message.getAvailableColor();
@@ -275,6 +281,14 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     public List<Integer> getAvailableColor() {
         return availableColor;
+    }
+
+    public boolean isTeamPlay() {
+        return teamPlay;
+    }
+
+    public int getPlayersWaitingInLobby() {
+        return playersWaitingInLobby;
     }
 
     public List<Integer> getAvailableMages() {

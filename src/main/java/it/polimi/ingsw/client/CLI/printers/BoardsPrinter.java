@@ -48,11 +48,12 @@ public class BoardsPrinter implements Printer{
             String[] diningColor =BoardsPrinter.diningRoomColor(board, view.isEasy());
             String[] professors= BoardsPrinter.getProfs(board);
             String nameForBoard;
+            int team=pl.getTeam();
             if(pl.getUsername().equals(view.getName()))
-                nameForBoard=(RED+">>>"+WHITE_BKG+BLACK+"Your Board"+RST+RED+"<<<"+RST);
-            else nameForBoard=(CYAN_BKG+BLACK+"Player "+pl.getUsername()+RST);
-            nameForBoard= Printer.padWithSpaces(nameForBoard,44);
-            rows[0]+=nameForBoard+"                  ";
+                nameForBoard=(teamBackground(pl.getTowerColor())+"You"+RST+" TEAM:"+team);
+            else nameForBoard=(teamBackground(pl.getTowerColor())+"Player "+pl.getUsername()+RST+" TEAM:"+team);
+            nameForBoard= Printer.padWithSpaces(nameForBoard,51);
+            rows[0]+=nameForBoard+"           ";
             rows[1]+="  _Entr_____________DN_____________Prof___T°_ \t";
             rows[2]+=" |      |                        |     |    |\t" ;
             rows[3]+="R|  "+RED+entranceColors[0]+RST+"   |  "+RED+diningColor[0]+RST+"  |  "+professors[0]+" |  "+board.getTowersLeft()+" |\t";
@@ -67,6 +68,15 @@ public class BoardsPrinter implements Printer{
             out.append(s);
         }
         return out.toString();
+    }
+    private static String teamBackground(int tColor){
+        if(tColor==0)
+            return "";
+        if(tColor==1)
+            return BR_WHITE_BKG+BLACK;
+        if(tColor==2)
+            return DR_GRAY_BKG+BR_WHITE;
+        return "";
     }
     private static String[] getProfs(SimplifiedBoard board){
         String[] profs= new String[5];

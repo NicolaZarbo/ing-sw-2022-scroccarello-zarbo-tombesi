@@ -8,7 +8,10 @@ public class SimplifiedPlayer {
     private String username;
     private int id;
     private SimplifiedBoard board;
+    private int team;
     private int towerColor;//tower-color assigned to player 1-black,2-white,3-gray
+
+
     //player hand representation
     private int mage;
     private int coin;
@@ -17,7 +20,8 @@ public class SimplifiedPlayer {
 
 
 
-    public SimplifiedPlayer(String username,int id, int towerColor, int coin, SimplifiedBoard board,int mage) {
+
+    public SimplifiedPlayer(String username, int id, int towerColor, int coin, SimplifiedBoard board, int mage) {
         this.username = username;
         this.id=id;
         this.towerColor = towerColor;
@@ -28,14 +32,20 @@ public class SimplifiedPlayer {
         Arrays.fill(discardedCards, false);
         this.board=board;
         this.mage=mage;
+        team=0;
     }
 
     public SimplifiedBoard getBoard() {
         return board;
     }
-
+    public void setTeam(int team) {
+        this.team = team;
+    }
     public int getId() {
         return id;
+    }
+    public int getTeam() {
+        return team;
     }
 
     public void removeCard(int cardId){
