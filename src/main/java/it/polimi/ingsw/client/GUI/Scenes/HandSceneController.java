@@ -31,6 +31,7 @@ public class HandSceneController extends SceneController{
     }
 
     public void initialize(){
+        setContext();
         played_container.setMouseTransparent(true);
         setCards();
         setDiscarded();
@@ -63,9 +64,17 @@ public class HandSceneController extends SceneController{
         }
     }
     private void setContext(){
-        if(view.isYourTurn() && view.getState()==GameState.planPlayCard)
-            help_text.setText("Pick a card");
-        else help_text.setText("This is your hand");
+        String text;
+        if(view.isYourTurn()) {
+            switch (view.getState()) {
+                case actionChooseCloud -> text = "Go to map to choose a cloud";
+                case actionMoveStudent -> text = "Go to board to move your students";
+                case actionMoveMother -> text = "Go to Map to move Mother Nature";
+                case planPlayCard -> text = "Pick a card";
+                default -> text = "this is you Hand";
+            }
+        }else text="this is you Hand \n wait for you turn";
+       help_text.setText(text);
     }
     private void setCards(){
         assistantCards= new ArrayList<>();

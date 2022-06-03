@@ -55,13 +55,15 @@ public class BoardSceneXController extends SceneController{
     }
     private void setContextText(){
         String text;
-        switch (view.getState()){
-            case actionChooseCloud -> text="Go to map to choose a cloud";
-            case actionMoveStudent -> text="Move a student in entrance by selecting it";
-            case actionMoveMother -> text="Go to Map to move Mother Nature";
-            case planPlayCard -> text="Go to hand to choose a card";
-            default -> text= "this are the boards";
-        }
+        if(view.isYourTurn()) {
+            switch (view.getState()) {
+                case actionChooseCloud -> text = "Go to map to choose a cloud";
+                case actionMoveStudent -> text = "Move a student in entrance by selecting it";
+                case actionMoveMother -> text = "Go to Map to move Mother Nature";
+                case planPlayCard -> text = "Go to hand to choose a card";
+                default -> text = "this are the boards";
+            }
+        }else text="this are the boards\n Wait for your turn";
         context_text.setText(text);
     }
     private void setDisposition(){
