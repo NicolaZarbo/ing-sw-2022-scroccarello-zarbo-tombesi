@@ -160,7 +160,8 @@
           </executions>
         </plugin>
        <plugin>
-       <artifactId>maven-assembly-plugin</artifactId>
+       <artifactId>maven-assembly-plugin</artifactId><!-- make sure you don't have a module-info around when
+       calling assembly, for whatever reason it breaks the compiler in this phase-->
           <executions>
           <execution>
             <id>build-a</id>
