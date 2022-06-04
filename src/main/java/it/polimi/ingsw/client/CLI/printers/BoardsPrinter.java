@@ -92,9 +92,9 @@ public class BoardsPrinter implements Printer{
     private static String towerColor(int tcolor){
         return switch (tcolor){
             default -> "nt";
-            case 1-> "B";
-            case 2-> "W";
-            case 3-> "G";
+            case 0-> "B";
+            case 1-> "W";
+            case 2-> "G";
         };
     }
     private static String[] diningRoomColor(SimplifiedBoard board, boolean easy){

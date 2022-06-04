@@ -87,7 +87,8 @@ public class BoardSceneXController extends SceneController{
         }
         down_left.setVisible(false);
         down_right.setVisible(false);
-        context_container.setTranslateY(20);
+        context_container.setTranslateY(-540);
+        context_container.setTranslateX(120);
     }
     private void disposition4(){
 

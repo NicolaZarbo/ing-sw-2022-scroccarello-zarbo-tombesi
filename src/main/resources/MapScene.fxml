@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="863.0" prefWidth="1236.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.MapSceneController">
    <children>
-      <AnchorPane layoutX="150.0" layoutY="90.0" prefHeight="586.0" prefWidth="895.0" scaleX="1.15" scaleY="1.15">
+      <AnchorPane fx:id="map_container" layoutX="150.0" layoutY="90.0" prefHeight="586.0" prefWidth="895.0" scaleX="1.15" scaleY="1.15">
          <children>
             <Pane fx:id="island_container">
                <Circle fx:id="island12" fill="DODGERBLUE" layoutX="71.0" layoutY="266.0" radius="60.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />

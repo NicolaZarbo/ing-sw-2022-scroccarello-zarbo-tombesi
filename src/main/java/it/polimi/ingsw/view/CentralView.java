@@ -40,6 +40,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     private boolean teamPlay;
     private int playersWaitingInLobby;
     private int winner;
+    private boolean firstTurn;
 
     public List<SimplifiedIsland> getIslands() {
         return islands;
@@ -81,6 +82,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         this.clientScreen=userInterface;
         this.state=GameState.setupPlayers;
         this.id=-1;
+        firstTurn=true;
     }
     public void errorFromServer(ErrorMessageForClient message){
         if(message.getTargetPlayerId()==id|| message.getTargetPlayerId()==-1) {
@@ -186,8 +188,12 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             case setupPlayers -> {throw new RuntimeException("something went really wrong");}
             case planPlayCard -> {
                 playedCardThisTurn = new ArrayList<>();
-                if(isYourTurn())
-                    clientScreen.showHand();
+                if( firstTurn) {//&&
+                    if(isYourTurn())
+                        clientScreen.showHand();
+                    else clientScreen.showBoards();
+                    firstTurn=false;
+                }
             }
             case actionMoveStudent -> {
                 activeCharacter=0;

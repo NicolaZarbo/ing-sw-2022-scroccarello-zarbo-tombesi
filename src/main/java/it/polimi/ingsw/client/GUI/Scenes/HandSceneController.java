@@ -67,6 +67,7 @@ public class HandSceneController extends SceneController{
     private void setContext(){
         String text;
         if(view.isYourTurn()) {
+            assistant_container.setOpacity(1);
             switch (view.getState()) {
                 case actionChooseCloud -> text = "Go to map to choose a cloud";
                 case actionMoveStudent -> text = "Go to board to move your students";
@@ -74,7 +75,10 @@ public class HandSceneController extends SceneController{
                 case planPlayCard -> text = "Pick a card";
                 default -> text = "this is you Hand";
             }
-        }else text="this is you Hand \n wait for you turn";
+        }else {
+            assistant_container.setOpacity(0.4);
+            text = "this is you Hand \n wait for you turn";
+        }
        help_text.setText(text);
     }
     private void setCards(){
@@ -109,10 +113,17 @@ public class HandSceneController extends SceneController{
     private void setClickChoose(Rectangle cardAssistant, int cardId){
         cardAssistant.setDisable(false);
         cardAssistant.setOnMouseClicked(mouseEvent -> {
-            if(view.getState()== GameState.planPlayCard )
+            if(view.getState()== GameState.planPlayCard && view.isYourTurn()) {
                 if (view.getPlayedCardThisTurn().contains(cardId) && atLeastOneFree)
                     help_text.setText("You can't use that card!!\n Pick another");
-                else gui.getInputManager().useAssistantCard(cardId);
+                else
+                    gui.getInputManager().useAssistantCard(cardId);
+            }
+            if(view.getState()== GameState.planPlayCard) {
+                cardAssistant.setScaleX(1.08);
+                cardAssistant.setScaleY(1.08);
+                help_text.setText("Wait for your turn");
+            }
         });
     }
     private Image getCardImage(int cardNumber){

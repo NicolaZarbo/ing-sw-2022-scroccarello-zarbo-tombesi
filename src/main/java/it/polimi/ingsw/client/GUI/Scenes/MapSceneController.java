@@ -31,6 +31,7 @@ public class MapSceneController extends SceneController {
     public Text info;
     public ImageView hoverBackGround;
     public AnchorPane root;
+    public AnchorPane map_container;
     private List<ImageView> islandStudentPlaces;
     private final GUI gui;
     private final CentralView view;
@@ -114,11 +115,11 @@ public class MapSceneController extends SceneController {
             islandByNumber.get(i).setOpacity(0.4);
         }
         int mod;
-
+        int howManyAvailableIslands=view.getIslands().size();
         for (int i = motherPos+1; i <= motherPos+maxSteps; i++) {
-            if(i<12)
+            if(i<howManyAvailableIslands)
                 mod=i;
-            else mod=i-12;
+            else mod=i-howManyAvailableIslands;
             SimplifiedIsland presentIsland= view.getIslands().get(mod);
             islandByNumber.get(presentIsland.getIslandId()+1).setOpacity(1);
             islandByNumber.get(presentIsland.getIslandId()+1).setDisable(false);
@@ -208,8 +209,13 @@ public class MapSceneController extends SceneController {
             hoverBackGround.setImage(new Image("images/simple_elements/island"+islandImage+".png"));
             hoverBackGround.setVisible(true);
             islandStudent_container.setVisible(true);
+            map_container.setOpacity(0.7);
+            island.setOpacity(0.5);
+
         });
         island.setOnMouseExited(mouseEvent -> {
+            island.setOpacity(1);
+            map_container.setOpacity(1);
             hoverBackGround.setVisible(false);
             islandStudent_container.setVisible(false);
         });
@@ -219,11 +225,15 @@ public class MapSceneController extends SceneController {
         //int id=Integer.parseInt(island.getId().substring(6));
         island.setOnMouseClicked(mouseEvent -> {
             int islandID=Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6))-1;
-            if(view.getState()==GameState.actionMoveMother)
+            if(view.getState()==GameState.actionMoveMother) {
                 gui.getInputManager().moveMotherTo(islandID);
-            if(view.getState()==GameState.actionMoveStudent && gui.getInputManager().hasSelectedStudent())
+                info.setText("wait for your turn");
+            }
+            if(view.getState()==GameState.actionMoveStudent && gui.getInputManager().hasSelectedStudent()) {
                 gui.getInputManager().moveToIsland(islandID);
-
+                for (int i = 1; i < 13; i++)
+                    islandByNumber.get(i).setDisable(false);
+            }
         });
     }
     private void setCloud(){
@@ -244,6 +254,7 @@ public class MapSceneController extends SceneController {
         cloud.setDisable(false);
         cloud.setOnMouseClicked(mouseEvent -> {
             gui.getInputManager().cloudChoose(cloudID);
+            info.setText("wait for your turn");
         });
     }
     private void setCloudStudents(Integer[] cloud, int cloudNumber){
