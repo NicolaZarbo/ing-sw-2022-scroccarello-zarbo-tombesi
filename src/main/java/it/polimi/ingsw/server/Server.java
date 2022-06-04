@@ -12,13 +12,13 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 public class Server {
     private final ServerSocket serverSocket;
-    private int serverPort=12345;
+    public static int serverPort=12345;
     private final ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(128);
     private final List<Lobby> lobbies= new ArrayList<>();
     private int connections;
 
     public Server() throws IOException {
-        this.serverSocket = new ServerSocket(12345);
+        this.serverSocket = new ServerSocket(serverPort);
         connections=0;
     }
 

@@ -21,8 +21,8 @@ public class ServerConnection {
     private Scanner input;
     private final CentralView game;
     private final InputManager inputManager;
-    private final String ip="127.0.0.1";
-    private final int port=12345;
+    public static String ip="127.0.0.1";
+    public static int port=12345;
     private volatile boolean canWrite;
 
     /** @param input a scanner object to read some string needed for the lobby setup*/

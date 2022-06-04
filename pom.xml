@@ -7,7 +7,6 @@
   <groupId>it.polimi.ingsw</groupId>
   <artifactId>GC62</artifactId>
   <version>1.0-SNAPSHOT</version>
-
   <name>GC62</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
@@ -126,6 +125,13 @@
           <artifactId>javafx-maven-plugin</artifactId>
           <version>0.0.8</version>
           <configuration>
+            <stripDebug>true</stripDebug>   <!-- you need to add the module-info file for this plugin, remove the import of jansi, since or set exclusions -->
+            <compress>2</compress>
+            <noHeaderFiles>true</noHeaderFiles>
+            <noManPages>true</noManPages>
+            <launcher>eriantysGui_launcher</launcher>
+            <jlinkImageName>eriantys</jlinkImageName>
+            <jlinkZipName>eriantysGui</jlinkZipName>
             <mainClass>it.polimi.ingsw.client.GUI.GUI</mainClass>
           </configuration>
         </plugin>
@@ -153,6 +159,49 @@
             </execution>
           </executions>
         </plugin>
+       <plugin>
+       <artifactId>maven-assembly-plugin</artifactId>
+          <executions>
+          <execution>
+            <id>build-a</id>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>it.polimi.ingsw.server.AppServer</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <appendAssemblyId>false</appendAssemblyId>
+              <finalName>server_eriantys</finalName>
+            </configuration>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+            <execution>
+              <id>build-b</id>
+              <configuration>
+                <archive>
+                  <manifest>
+                    <mainClass>it.polimi.ingsw.client.CLI.AppCli</mainClass>
+                  </manifest>
+                </archive>
+                <descriptorRefs>
+                  <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+                 <appendAssemblyId>false</appendAssemblyId>
+                <finalName>CommandLine_Eriantys</finalName>
+              </configuration>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+            </execution>
+          </executions>
+         </plugin>
       </plugins>
   </build>
 </project>
