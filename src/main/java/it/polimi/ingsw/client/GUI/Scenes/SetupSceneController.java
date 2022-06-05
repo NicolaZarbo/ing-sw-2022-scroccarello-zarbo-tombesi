@@ -53,7 +53,7 @@ public class SetupSceneController extends SceneController{
     @Override@FXML
     public void initialize() {
         this.gui= GuiInputManager.getGui();
-        root.setStyle("-fx-background-image: url(images/wallpapers/LowerQualityLobby.png); -fx-background-size: 640 400");
+        root.setStyle("-fx-background-image: url(images/wallpapers/LowerQualityLobby.png); -fx-background-size: 640 400 ;-fx-background-repeat: no-repeat; ");
         choiceMsg.setText("Choose your color");//todo add info iF view.isTeamPlay
 
         towerchosen=0;

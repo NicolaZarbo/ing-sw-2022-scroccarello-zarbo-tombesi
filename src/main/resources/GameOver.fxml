@@ -4,7 +4,7 @@
 <?import javafx.scene.text.*?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.GameOverSceneController">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.GameOverSceneController">
    <children>
       <Text fx:id="txt" layoutX="162.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You won, so cool, very nice" wrappingWidth="275.13671875">
          <font>

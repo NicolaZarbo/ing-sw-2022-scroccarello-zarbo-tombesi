@@ -5,6 +5,7 @@ import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.view.CentralView;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -21,6 +22,7 @@ public class HandSceneController extends SceneController{
     public Text playerCoins;
     public Text xSign;
     public Text help_text;
+    public AnchorPane root;
     private ArrayList<Integer> discardedCard;
     GUI gui;
     private ArrayList<Rectangle> assistantCards;
@@ -32,6 +34,7 @@ public class HandSceneController extends SceneController{
     }
 
     public void initialize(){
+        root.setStyle("-fx-background-image: url(images/wallpapers/sky_no_title.png); ");//todo add a prettier background
         setContext();
         played_container.setMouseTransparent(true);
         setCards();
