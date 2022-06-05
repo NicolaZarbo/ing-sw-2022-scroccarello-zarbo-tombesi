@@ -22,6 +22,7 @@ public class GameOverMessage extends ServerMessage{
             winnerTeam=-1;
             winnerID=winner;
         }
+        serialize();
     }
 
     public int getWinnerID() {
