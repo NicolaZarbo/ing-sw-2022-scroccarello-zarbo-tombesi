@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.GUI.Scenes;
 import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.view.CentralView;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -119,46 +120,57 @@ public class SetupSceneController extends SceneController{
             if(mage==3)
                 mage4.setVisible(true);
         }
-
+    }
+    private void addDoubleClickConfirm(MouseEvent event){
+        ((ImageView)event.getSource()).setOnMouseClicked(event1 -> {
+            confirmChoice(event1);
+        });
     }
     @FXML
     public void setMage1(MouseEvent click){
         this.wizardchosen =1;
         restoreAllOpacities();
         mage1.setOpacity(0.5);
+        addDoubleClickConfirm(click);
     }
     @FXML
     public void setMage2(MouseEvent click){
         this.wizardchosen =2;
         restoreAllOpacities();
         mage2.setOpacity(0.5);
+        addDoubleClickConfirm(click);
     }
     @FXML
     public void setMage3(MouseEvent click){
         this.wizardchosen =3;
         restoreAllOpacities();
         mage3.setOpacity(0.5);
+        addDoubleClickConfirm(click);
     }
     @FXML
     public void setMage4(MouseEvent click){
         this.wizardchosen =4;
         restoreAllOpacities();
         mage4.setOpacity(0.5);
+        addDoubleClickConfirm(click);
     }
     @FXML public void setBlackTower(MouseEvent click){
         this.towerchosen=1;
         restoreAllOpacities();
         blacktower.setOpacity(0.5);
+        addDoubleClickConfirm(click);
     }
     @FXML public void setWhiteTower(MouseEvent click){
         this.towerchosen=2;
         restoreAllOpacities();
         whitetower.setOpacity(0.5);
+        addDoubleClickConfirm(click);
     }
     @FXML public void setGrayTower(MouseEvent click){
         this.towerchosen=3;
         restoreAllOpacities();
         greytower.setOpacity(0.5);
+        addDoubleClickConfirm(click);
     }
     private void restoreAllOpacities(){
         blacktower.setOpacity(1.0);

@@ -3,6 +3,7 @@ import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.enumerations.SceneEnum;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -219,10 +220,17 @@ public abstract class BoardSceneController extends SceneController{
         student.setDisable(false);
         student.setOnMouseClicked(mouseEvent -> {
             if(isYourBoard()) {
-                //clickedEntranceStudentsColor.add(clickedColor);
                 gui.getInputManager().saveSelectedStud(clickedColor);
                 if (gui.getGame().getState() == GameState.actionMoveStudent && !gui.getInputManager().isActivatingCardEffect()) {
                     showMoveButton();
+                    student.setOnMouseClicked(new EventHandler<>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            moveToDining();
+                            student.removeEventHandler(MouseEvent.MOUSE_CLICKED,this);
+
+                        }
+                    });
                 }
             }
         });

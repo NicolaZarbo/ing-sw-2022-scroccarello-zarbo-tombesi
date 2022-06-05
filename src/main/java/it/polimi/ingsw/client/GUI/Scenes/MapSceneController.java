@@ -305,7 +305,10 @@ public class MapSceneController extends SceneController {
             int subId=subIsland.getIslandId()+1;
             if(subId<mainId){
                 bridgeByIslandBefore.get(subId).setVisible(true);
-            }else bridgeByIslandBefore.get(mainId).setVisible(true);
+            }
+            else {
+                bridgeByIslandBefore.get(mainId).setVisible(true);
+            }
             setBridges(subIsland);
         }
     }
@@ -358,6 +361,7 @@ public class MapSceneController extends SceneController {
         for (Node bridge:bridge_container.getChildren()) {
             int islandBeforeNumber= Integer.parseInt(bridge.getId().substring(6));
             bridge.setVisible(false);
+            ((Rectangle)bridge).setFill(new ImagePattern(new Image("images/simple_elements/bridgePlank.png")));
             bridgeByIslandBefore.put(islandBeforeNumber, (Rectangle) bridge);
         }
 
