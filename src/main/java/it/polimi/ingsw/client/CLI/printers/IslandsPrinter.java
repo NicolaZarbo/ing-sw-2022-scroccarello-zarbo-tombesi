@@ -33,15 +33,17 @@ String yo = """
             tColor=Printer.padWithSpaces(towerColor(island.getTowerColor()),6);
             int[] studentForColor= IslandsPrinter.islandColorStudents(island);
             int numberOfTower=island.getEntireNumberOfTower();
-            preRows[0]="Island : "+island.getIslandId()+"  \t";
-            preRows[1]=" _________    \t";
-            preRows[2]="/ "+tColor+" \\   \t";
-            preRows[3]="|T°:"+numberOfTower+" "+PINK+"P:"+studentForColor[4]+""+RST+" |   \t";
-            preRows[4]="| "+RED+"R:"+studentForColor[0]+" "+YELLOW+"Y:"+studentForColor[1]+""+RST+" |   \t";
-            preRows[5]="| "+GREEN+"G:"+studentForColor[2]+" "+BLUE+"B:"+studentForColor[3]+""+RST+" |   \t";
+            if(island.getIslandId()>9)
+                preRows[0]="Island - "+island.getIslandId()+"       ";
+            else preRows[0]="Island - "+island.getIslandId()+"        ";
+            preRows[1]=" _________        ";
+            preRows[2]="/ "+tColor+" \\       ";
+            preRows[3]="|T#:"+numberOfTower+" "+PINK+"P:"+studentForColor[4]+""+RST+" |       ";
+            preRows[4]="| "+RED+"R:"+studentForColor[0]+" "+YELLOW+"Y:"+studentForColor[1]+""+RST+" |       ";
+            preRows[5]="| "+GREEN+"G:"+studentForColor[2]+" "+BLUE+"B:"+studentForColor[3]+""+RST+" |       ";
             if(view.getIslands().get(view.getMother()).getIslandId()==island.getIslandId()){
-                preRows[6]="\\__"+CYAN+"Mother"+RST+"_/   \t";}
-            else preRows[6]="\\_________/   \t";
+                preRows[6]="\\__"+CYAN+"Mother"+RST+"_/       ";}
+            else preRows[6]="\\_________/       ";
             if(escapeCounter>(size/2))
                 for (int i = 0; i < 7; i++) {
                     preRows[i]=reverseString(preRows[i]);
@@ -66,15 +68,15 @@ String yo = """
         return out.toString();
     }
     private static void addLowerIsland(String [] rows, String []preRows) {
-        rows[0] += "            \t";
-        rows[1] += "            \t";
+        rows[0] += "                  ";
+        rows[1] += "                  ";
         for (int i = 0; i < 7; i++) {
             rows[i + 2] += preRows[i];
         }
     }
     private static void addHigherIsland(String [] rows, String []preRows){
-        rows[8] += "            \t";
-        rows[7] += "            \t";
+        rows[8] += "                  ";
+        rows[7] += "                  ";
         for (int i = 0; i < 7; i++) {
             rows[i] += preRows[i];
         }

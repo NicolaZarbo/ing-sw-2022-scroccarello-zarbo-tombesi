@@ -17,9 +17,17 @@ public class Server {
     private final List<Lobby> lobbies= new ArrayList<>();
     private int connections;
 
-    public Server() throws IOException {
+    public Server() throws IOException, IllegalArgumentException {
+        if(!isGoodPort(serverPort))
+        {
+            throw new IllegalArgumentException("bad port number");
+        }
         this.serverSocket = new ServerSocket(serverPort);
         connections=0;
+    }
+    private boolean isGoodPort(int port){
+        // fixme should we only use this range? 49152–65535
+        return port > 0;
     }
 
     public synchronized void deregisterConnection(ClientConnection connection){

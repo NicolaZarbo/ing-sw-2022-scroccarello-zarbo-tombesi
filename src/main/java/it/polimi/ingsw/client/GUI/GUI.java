@@ -29,6 +29,9 @@ public class GUI extends Application implements UserInterface {
 
     public GUI(){
     }
+    public static void main(String [] args){
+        launch(args);
+    }
 
     public void start(Stage stage) throws IOException {
         game = new CentralView(this);

@@ -16,6 +16,9 @@ public class AppServer
                 server.run();
             }catch (IOException exception){
                 System.err.println( exception.getMessage()+ exception.getCause()+" ops" );
+            } catch (IllegalArgumentException err){
+                System.out.println(err.getMessage()+" \n Please insert a correct port Number");
             }
     }
+
 }
