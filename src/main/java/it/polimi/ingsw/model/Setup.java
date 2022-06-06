@@ -143,16 +143,6 @@ public class Setup {
         }
         return  clouds;
     }
-    //obsolete fixme remove
-    private static TowerColor playerColor(int playerId, int nPlayer){
-        TowerColor color;
-        if (nPlayer== 4 && playerId>1){
-         color = TowerColor.getColor(playerId-2);
-        }
-        else
-            color= TowerColor.getColor(playerId);
-        return color;
-    }
     private static Hand createHand(int playerId, boolean easy, int nCards){
         ArrayList<AssistantCard> ass ;
         int stIdCards= playerId * nCards  ;

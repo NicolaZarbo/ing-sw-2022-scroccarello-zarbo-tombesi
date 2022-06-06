@@ -77,8 +77,7 @@ public class GUI extends Application implements UserInterface {
         connection.writeTxtForLobby(rules);
     }
     public void setScene(SceneEnum sceneName){
-        //if(!scenes.containsKey(sceneName))fixme test actually, is this even a problem?, works better by loading all every time
-            initScene(sceneName);
+        initScene(sceneName);
         Platform.runLater(()->mainStage.setScene(scenes.get(sceneName)));
     }
     public void initScene(SceneEnum sceneName){
@@ -153,5 +152,14 @@ public class GUI extends Application implements UserInterface {
     public GuiInputManager getInputManager(){
         return inputManager;
     }
+
+    /**
+     * Method called by default by javafx on window close
+     */
+    public void stop(){
+        System.out.println("closed the application");
+        System.exit(0);
+    }
+
 
 }

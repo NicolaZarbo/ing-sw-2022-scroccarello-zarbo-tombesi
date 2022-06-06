@@ -22,7 +22,7 @@ public class ServerConnection {
     private final CentralView game;
     private final InputManager inputManager;
     public static String ip="127.0.0.1";
-    public static int port=12345;
+    public static int port=50000;
     private volatile boolean canWrite;
 
     /** @param input a scanner object to read some string needed for the lobby setup*/
@@ -43,8 +43,8 @@ public class ServerConnection {
         this.input=input;
     }
     private boolean checkSocketOptions() {
-        if (port < 0)// fixme should we only use this range? 49152–65535
-            return false;
+        if (port < 65536 && port>49152)
+            return true;
         String[] ipv4St = ip.split("\\.", 4);
         int[] ipv4 = new int[4];
         for (int i = 0; i < 4; i++) {

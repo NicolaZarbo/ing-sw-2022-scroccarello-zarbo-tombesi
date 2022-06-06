@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 public class Server {
     private final ServerSocket serverSocket;
-    public static int serverPort=12345;
+    public static int serverPort=50000;
     private final ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(128);
     private final List<Lobby> lobbies= new ArrayList<>();
     private int connections;
@@ -26,8 +26,7 @@ public class Server {
         connections=0;
     }
     private boolean isGoodPort(int port){
-        // fixme should we only use this range? 49152–65535
-        return port > 0;
+        return port > 49152 && port<65535;
     }
 
     public synchronized void deregisterConnection(ClientConnection connection){

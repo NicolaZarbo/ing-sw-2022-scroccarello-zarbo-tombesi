@@ -6,6 +6,7 @@ import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedBoard;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.util.Arrays;
@@ -14,16 +15,21 @@ public class GameOverSceneController extends SceneController {
     public Text txt;
     private final CentralView view;
     public AnchorPane root;
+    public Pane text_container;
+    public Text reasonText;
+    GUI gui;
 
 
     public GameOverSceneController() {
-        GUI gui = GuiInputManager.getGui();
+        gui = GuiInputManager.getGui();
         view = gui.getGame();
     }
 
     @Override
     public void initialize() {
+        setBackground();
        setWinner();
+       text_container.setOnMouseClicked(event -> gui.stop());
     }
     private void setBackground(){
         if(view.isTeamPlay()) {
@@ -34,11 +40,32 @@ public class GameOverSceneController extends SceneController {
         }else {
             int studentForBack=winnerBestAllies(view.getPlayers().get(view.getWinner()));
             switch (studentForBack){
-                case 0->root.setStyle("-fx-background-image: url(images/wallpapers/gameOver_red.png)");
-                case 1->root.setStyle("-fx-background-image: url(images/wallpapers/gameOver_yellow.png)");
-                case 2->root.setStyle("-fx-background-image: url(images/wallpapers/gameOver_green.png)");
-                case 3->root.setStyle("-fx-background-image: url(images/wallpapers/gameOver_blue.png)");
-                case 4->root.setStyle("-fx-background-image: url(images/wallpapers/gameOver_pink.png)");
+                case 0->{
+                    root.setStyle("-fx-background-image: url(images/wallpapers/gameOver_red.png) ; -fx-background-size: 830 552");
+                    text_container.setTranslateX(-200);
+                    text_container.setTranslateY(-150);
+                }
+                case 1 -> {
+                    root.setStyle("-fx-background-image: url(images/wallpapers/gameOver_yellow.png); -fx-background-size: 830 552");
+                    text_container.setTranslateX(-80);
+                    text_container.setTranslateY(-130);
+                }
+                case 2->{
+                    root.setStyle("-fx-background-image: url(images/wallpapers/gameOver_green.png); -fx-background-size: 830 552");
+                    text_container.setTranslateX(80);
+                    text_container.setTranslateY(-50);
+                }
+
+                case 3-> {
+                    root.setStyle("-fx-background-image: url(images/wallpapers/gameOver_blue.png); -fx-background-size: 830 552");
+                    text_container.setTranslateX(-150);
+                    text_container.setTranslateY(-50);
+                }
+                case 4->{
+                    root.setStyle("-fx-background-image: url(images/wallpapers/gameOver_pink.png); -fx-background-size: 830 552");
+                    text_container.setTranslateX(120);
+                    text_container.setTranslateY(100);
+                }
             }
         }
     }
@@ -82,5 +109,18 @@ public class GameOverSceneController extends SceneController {
             else text="player : "+view.getPlayers().get(view.getWinner()).getUsername()+" Won!";
         }
         txt.setText(text);
+        reasonText.setText(gameOverReason());
+    }
+    private String gameOverReason(){
+        int reason= view.getGameOverReason();
+
+        return switch (reason){
+          case 1->"Empty bag!";
+          case 2->"Winner used every tower";
+          case 3->" out of assistants";
+          case 4-> "only 3 cluster of island left";
+            default -> "";
+        };
+
     }
 }

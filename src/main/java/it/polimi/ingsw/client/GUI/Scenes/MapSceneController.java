@@ -187,7 +187,7 @@ public class MapSceneController extends SceneController {
             islandStudentPlaces.get(i).setImage(studentColorPath(stud,true));
             islandStudentPlaces.get(i).setVisible(true);
             i++;
-        }//fixme this works when showing less than 10 stud
+        }//fixme this works only when showing less than 10 stud, add something to show the overflown ones
     }
     private void resetStudentsHover(){
         for (ImageView place:islandStudentPlaces) {

@@ -23,7 +23,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
     }
 
     public synchronized boolean isActive() {
-        return active;//todo add constant ping to check for bad disconnection
+        return active;
     }
 
     @Override

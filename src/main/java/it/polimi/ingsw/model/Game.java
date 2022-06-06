@@ -39,7 +39,7 @@ public class Game extends Observable<ServerMessage> {
 
 
     /** creates a game without players, which are then created in a setup phase through players inputs*/
-    public Game(boolean easy, int numberOfPlayer){
+    public Game(boolean easy, int numberOfPlayer){//fixme move this stub to test class
         this.nPlayers =numberOfPlayer;
         actionPhase= new Turn(this);
         planningPhase= new Round(this);
@@ -306,7 +306,7 @@ public class Game extends Observable<ServerMessage> {
             winner=towerForPlayer.lastIndexOf(min);
         }
         groupMultiMessage(new GameOverMessage(this,winner));
-        sendMultiMessage();
+        //sendMultiMessage();
     }
     public boolean isProfessorOnGame(TokenColor color){
         return teachers[color.ordinal()] != null;

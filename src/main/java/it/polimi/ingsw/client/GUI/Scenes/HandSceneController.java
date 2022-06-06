@@ -34,7 +34,7 @@ public class HandSceneController extends SceneController{
     }
 
     public void initialize(){
-        root.setStyle("-fx-background-image: url(images/wallpapers/sky_no_title.png); ");//todo add a prettier background
+        root.setStyle("-fx-background-image: url(images/wallpapers/sky_no_title.png); ");
         setContext();
         played_container.setMouseTransparent(true);
         setCards();

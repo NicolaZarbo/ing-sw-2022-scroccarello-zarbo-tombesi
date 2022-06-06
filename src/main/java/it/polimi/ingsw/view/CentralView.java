@@ -41,6 +41,11 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     private int playersWaitingInLobby;
     private int winner;
     private boolean firstTurn;
+    /**1 bag is empty
+     * 2 someone used every tower in their board
+     * 3 someone used his last card
+     * 4 there are only 3 cluster of islands left*/
+    private int gameOverReason;
 
     public List<SimplifiedIsland> getIslands() {
         return islands;
@@ -82,6 +87,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         this.clientScreen=userInterface;
         this.state=GameState.setupPlayers;
         this.id=-1;
+        winner=-1;
         firstTurn=true;
     }
     public void errorFromServer(ErrorMessageForClient message){
@@ -174,10 +180,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     }
     public void changeTurn(ChangeTurnMessage message){
         this.turnOf=message.getPlayer();
-        if(isYourTurn() && state==GameState.planPlayCard){
+        if(isYourTurn() && state==GameState.planPlayCard && winner==-1){
             clientScreen.showHand();
         }
-        if(isYourTurn() && state== GameState.actionMoveStudent) {
+        if(isYourTurn() && state== GameState.actionMoveStudent && winner==-1) {
             studentMoved=0;
             clientScreen.askToMoveStudent();
         }
@@ -201,12 +207,12 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             }
             case actionMoveMother -> {
                 //clientScreen.showView();
-                if(isYourTurn())
+                if(isYourTurn() && winner==-1)
                     clientScreen.askToMoveMother();
             }
             case actionChooseCloud ->{
                 //clientScreen.showView();
-                if(isYourTurn())
+                if(isYourTurn() && winner==-1)
                     clientScreen.showClouds();
             }
         }
@@ -215,6 +221,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         if(players.size()==4)
             winner= message.getWinnerTeam();
         else winner=message.getWinnerID();
+        gameOverReason=message.getWinningCondition();
         clientScreen.gameOver();
     }
 
@@ -333,6 +340,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     public int getWinner() {
         return winner;
+    }
+
+    public int getGameOverReason() {
+        return gameOverReason;
     }
 
     public List<Integer> getAvailableMages() {
