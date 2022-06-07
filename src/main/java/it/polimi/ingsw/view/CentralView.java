@@ -13,6 +13,7 @@ import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     private GameState state;
     private int turnOf;
     private int id;
-    private ArrayList<Integer> playedCardThisTurn;
+    private HashMap<Integer,Integer> playedCardThisTurnByPlayerId;
     private int cardYouPlayed;
     private final UserInterface clientScreen;
     private List<Integer> availableColor;
@@ -79,8 +80,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         return turnOf;
     }
 
-    public ArrayList<Integer> getPlayedCardThisTurn() {
-        return playedCardThisTurn;
+    public Integer getPlayedCardThisTurnByPlayerId(int id) {
+        return playedCardThisTurnByPlayerId.get(id);
     }
 
     public CentralView(UserInterface userInterface){
@@ -103,7 +104,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         players=message.getModelPlayers();
         players=message.getModelPlayers();
         mother = message.getMotherNature();
-        playedCardThisTurn= new ArrayList<>(players.size());
+        playedCardThisTurnByPlayerId = new HashMap<>(players.size());
         for (SimplifiedPlayer pl: players) {
             if(pl.getUsername().equals( name))
                 personalPlayer=pl;
@@ -144,7 +145,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     }
     /** adds to card to the list of played card in this turn, this way the players know which card he can or cannot use*/
     public void playedAssistantUpdate(PlayedAssistantMessage message){
-        playedCardThisTurn.add(message.getPlayedCardId()%10);
+        playedCardThisTurnByPlayerId.put(message.getPlayerId(),message.getPlayedCardId()%10);
         if(message.getPlayerId()==personalPlayer.getId())
             cardYouPlayed=message.getPlayedCardId()%10;
 
@@ -193,7 +194,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         switch (state){
             case setupPlayers -> {throw new RuntimeException("something went really wrong");}
             case planPlayCard -> {
-                playedCardThisTurn = new ArrayList<>();
+                playedCardThisTurnByPlayerId = new HashMap<>();
                 if( firstTurn) {//&&
                     if(isYourTurn())
                         clientScreen.showHand();

@@ -9,6 +9,7 @@ import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -57,7 +58,10 @@ public class Cli implements UserInterface {
     public void showHand() {
         showView();
         SimplifiedPlayer player=game.getPersonalPlayer();
-        List<Integer> played=game.getPlayedCardThisTurn().stream().map(s->s+1).toList();
+        List<Integer> played=new ArrayList<>();
+        for (Integer playerID:game.getPlayers().stream().map(SimplifiedPlayer::getId).toList()) {
+            played.add(game.getPlayedCardThisTurnByPlayerId(playerID)+1);
+        }
         System.out.println(IMP+"You can't use the cards n: "+played+RST);
         System.out.println(CardPrinter.print(player.getAssistantCards())+"\n coins :"+player.getCoin());
         System.out.println(IMP+"Select the card by its number"+RST);

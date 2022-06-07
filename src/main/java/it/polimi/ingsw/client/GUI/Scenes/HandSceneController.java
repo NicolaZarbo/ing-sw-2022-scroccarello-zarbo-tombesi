@@ -4,6 +4,8 @@ import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.view.CentralView;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
+import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -13,7 +15,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.image.Image;
 import java.util.ArrayList;
-import java.util.List;
 
 public class HandSceneController extends SceneController{
     public Pane assistant_container;
@@ -23,6 +24,7 @@ public class HandSceneController extends SceneController{
     public Text xSign;
     public Text help_text;
     public AnchorPane root;
+    public Pane card_used_by_others;
     private ArrayList<Integer> discardedCard;
     GUI gui;
     private ArrayList<Rectangle> assistantCards;
@@ -40,6 +42,31 @@ public class HandSceneController extends SceneController{
         setCards();
         setDiscarded();
         setCoins();
+        setOthersLastPlayed();
+    }
+    private void setOthersLastPlayed(){
+        ArrayList<Text> names= new ArrayList<>();
+        ArrayList<Rectangle> cardsLastPlayed= new ArrayList<>();
+        for (Node child:card_used_by_others.getChildren()) {
+            if(child instanceof Rectangle)
+                cardsLastPlayed.add((Rectangle) child);
+            if(child instanceof Text)
+                names.add((Text)child);
+            child.setVisible(false);
+        }
+        int i =0;
+        for (SimplifiedPlayer player:view.getPlayers()) {
+            if(player.getId()!=view.getPersonalPlayer().getId() && (view.getPlayedCardThisTurnByPlayerId(player.getId())!=null)) {
+                names.get(i).setVisible(true);
+                cardsLastPlayed.get(i).setVisible(true);
+                names.get(i).setText(player.getUsername().substring(0,Math.min(9,player.getUsername().length())));
+                cardsLastPlayed.get(i).setFill(new ImagePattern(getCardImage(view.getPlayedCardThisTurnByPlayerId(player.getId()))));
+                i++;
+            }
+        }
+
+
+
     }
     private void setCoins(){
         if(view.isEasy()){
@@ -97,7 +124,11 @@ public class HandSceneController extends SceneController{
         for (Boolean card:view.getPersonalPlayer().getAssistantCards()) {
             assistantCards.get(i).setVisible(card);
             assistantCards.get(i).setDisable(!card);
-            if(view.getPlayedCardThisTurn().contains(i))
+            ArrayList<Integer> played= new ArrayList<>();
+            for (Integer playerID:view.getPlayers().stream().map(SimplifiedPlayer::getId).toList()) {
+                played.add(view.getPlayedCardThisTurnByPlayerId(playerID));
+            }
+            if(played.contains(i))
                 assistantCards.get(i).setOpacity(0.4);
             else {
                 assistantCards.get(i).setOpacity(1);
@@ -117,7 +148,11 @@ public class HandSceneController extends SceneController{
         cardAssistant.setDisable(false);
         cardAssistant.setOnMouseClicked(mouseEvent -> {
             if(view.getState()== GameState.planPlayCard && view.isYourTurn()) {
-                if (view.getPlayedCardThisTurn().contains(cardId) && atLeastOneFree)
+                ArrayList<Integer> played= new ArrayList<>();
+                for (Integer playerID:view.getPlayers().stream().map(SimplifiedPlayer::getId).toList()) {
+                    played.add(view.getPlayedCardThisTurnByPlayerId(playerID));
+                }
+                if (played.contains(cardId) && atLeastOneFree)
                     help_text.setText("You can't use that card!!\n Pick another");
                 else
                     gui.getInputManager().useAssistantCard(cardId);
@@ -137,5 +172,9 @@ public class HandSceneController extends SceneController{
     }
     public void showMap(){
         gui.showIslands();
+    }
+
+    public void goToCharacters() {
+        gui.showCharacters();
     }
 }

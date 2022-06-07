@@ -7,9 +7,14 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Shadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.io.ByteArrayInputStream;
@@ -38,6 +43,16 @@ public class WelcomeSceneController extends SceneController {
             if (keyEvent.getCode().equals(KeyCode.ENTER)) {
                 startGame();
             }
+        });
+        connectionOptions.setOnMouseEntered(event -> {
+            DropShadow test= new DropShadow();
+            test.setColor(Color.RED);
+            test.setBlurType(BlurType.THREE_PASS_BOX);
+            connectionOptions.setEffect(test);
+            connectionOptions.setOnMouseExited(event1 -> {
+                connectionOptions.setEffect(null);
+            });
+
         });
         Platform.runLater(()->{
             usernameBox.requestFocus();
@@ -105,6 +120,7 @@ public class WelcomeSceneController extends SceneController {
     }
 
     public void openOptions() {
+
         connectionOptions.setOnMouseClicked(new EventHandler<>() {
             /** double click closes pane*/
             public void handle(MouseEvent event) {

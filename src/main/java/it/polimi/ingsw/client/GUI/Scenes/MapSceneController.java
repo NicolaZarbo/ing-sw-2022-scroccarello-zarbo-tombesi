@@ -6,10 +6,13 @@ import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 import javafx.scene.Node;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -88,6 +91,7 @@ public class MapSceneController extends SceneController {
             GuiInputManager inputManager= gui.getInputManager();
         if(inputManager.hasSelectedStudent())
             info.setText("Select a target island for the student");
+        else info.setText("Choose a student to move out of entrance");
     }
     private void chooseCloudContext(){
         setOtherContainerTransparent(cloud_container);
@@ -210,11 +214,15 @@ public class MapSceneController extends SceneController {
             hoverBackGround.setVisible(true);
             islandStudent_container.setVisible(true);
             map_container.setOpacity(0.7);
-            island.setOpacity(0.5);
+            DropShadow islandShadow = new DropShadow(8, Color.DARKRED);
+            Bloom islandBloom= new Bloom();
+            islandBloom.setThreshold(0.1);
+
+            island.setEffect(islandShadow);
 
         });
         island.setOnMouseExited(mouseEvent -> {
-            island.setOpacity(1);
+            island.setEffect(null);
             map_container.setOpacity(1);
             hoverBackGround.setVisible(false);
             islandStudent_container.setVisible(false);
