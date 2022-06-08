@@ -36,15 +36,16 @@ public class LobbySceneController extends SceneController  {
     private void playerSetter(){
         //Platform.runLater(()-> nPlayers.requestFocus());
         mainpanel.setOnKeyPressed(keyEvent -> {
-            int nPlayer=0;
-            if(keyEvent.getCode().equals(KeyCode.DIGIT1))
-                nPlayer=1;
-            if(keyEvent.getCode().equals(KeyCode.DIGIT2))
-                nPlayer=2;
-            if(keyEvent.getCode().equals(KeyCode.DIGIT3))
-                nPlayer=3;
-            if(keyEvent.getCode().equals(KeyCode.DIGIT4))
-                nPlayer=4;
+            int nPlayer;
+            switch (keyEvent.getCode()){
+                case DIGIT1 -> nPlayer=1;
+                case DIGIT2 -> nPlayer=2;
+                case DIGIT3 -> nPlayer=3;
+                case DIGIT4 -> nPlayer=4;
+                default -> {
+                    return;
+                }
+            }
             gui.setLobbyRules(nPlayer, easySelector.isSelected());
         });
     }

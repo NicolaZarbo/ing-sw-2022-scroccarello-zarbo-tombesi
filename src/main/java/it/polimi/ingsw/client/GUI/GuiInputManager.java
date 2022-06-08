@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.GUI;
 import it.polimi.ingsw.client.InputManager;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.view.CentralView;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +96,7 @@ public class GuiInputManager extends InputManager {
         if(!canDoAction)
             return;
         game.moveStudentToHall(singleStudent);
+        singleStudent=-1;
         waitForAnswer();
     }
     public boolean isActivatingCardEffect(){
@@ -124,7 +126,11 @@ public class GuiInputManager extends InputManager {
     public void moveToIsland(int islandId){
         if(!canDoAction || game.getState()!= GameState.actionMoveStudent || !game.isYourTurn())
             return;
-        game.moveStudentToIsland(singleStudent,islandId);
+        if(!game.getIslands().contains(game.getIslandById(islandId)))
+            game.moveStudentToIsland(singleStudent,getFatherIsland(islandId).getIslandId());
+        else {
+            game.moveStudentToIsland(singleStudent, islandId);
+        }
         singleStudent=-1;
         waitForAnswer();
     }
@@ -144,7 +150,14 @@ public class GuiInputManager extends InputManager {
     /** used to keep track of the selected students when you need to move to a different scene*/
     public void saveSelectedStud(ArrayList<Integer> selectedStudents){this.selectedStudents=new ArrayList<>(selectedStudents);}
     public void saveSelectedStud(int selectedStudent){this.singleStudent=selectedStudent;}
-
+    private SimplifiedIsland getFatherIsland(int islandId){
+        SimplifiedIsland sub= game.getIslandById(islandId);
+        for (SimplifiedIsland main: game.getIslands()) {
+            if(game.getEverySubIsland(main).contains(sub))
+                return main;
+        }
+        throw new NullPointerException();
+    }
 
     @Override
     protected void caseActionChooseCloud() {

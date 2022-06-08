@@ -89,7 +89,7 @@ public class MapSceneController extends SceneController {
             GuiInputManager inputManager= gui.getInputManager();
         if(inputManager.hasSelectedStudent())
             info.setText("Select a target island for the student");
-        else info.setText("Choose a student to move out of entrance");
+        else info.setText("Go to bord and choose a student to move out of entrance");
     }
     private void chooseCloudContext(){
         setOtherContainerTransparent(cloud_container);
@@ -245,13 +245,19 @@ public class MapSceneController extends SceneController {
             island.setEffect(islandShadow);
             hoverBackGround.setEffect(islandShadow);
             DropShadow blackShadow= new DropShadow(10,Color.BLACK);
-
+            islandStudent_container.setEffect(blackShadow);
+            if(view.isYourTurn()&& view.getState()==GameState.actionMoveMother){
+                motherZoneOfIsland.get(isl.getIslandId()+1).setVisible(true);
+                motherZoneOfIsland.get(isl.getIslandId()+1).setOpacity(0.6);
+            }
         });
         island.setOnMouseExited(mouseEvent -> {
             island.setEffect(null);
             map_container.setOpacity(1);
             hoverBackGround.setVisible(false);
             islandStudent_container.setVisible(false);
+            SimplifiedIsland isl= view.getIslandById(Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6))-1);
+            setMotherZone(isl);
         });
     }
     private void clickChooseIsland(Circle island){
