@@ -24,7 +24,7 @@
       </Pane>
       <Circle fx:id="coinPlace" fill="DODGERBLUE" layoutX="69.0" layoutY="101.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="68.0" layoutY="44.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of coins:" />
-      <Text layoutX="61.0" layoutY="174.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card Playable:" />
+      <Text layoutX="61.0" layoutY="174.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Playable Card :" />
       <Pane fx:id="assistant_container" layoutY="187.0" prefHeight="186.0" prefWidth="948.0" style="-fx-background-image: url(images/simple_elements/card_wood_background.png);-fx-background-size: 948 186; -fx-background-color: pink;">
          <Rectangle fx:id="AssistantCard1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="22.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
          <Rectangle fx:id="AssistantCard2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="113.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />

@@ -34,8 +34,8 @@ public class LobbySceneController extends SceneController  {
         playerSetter();
     }
     private void playerSetter(){
-        Platform.runLater(()-> nPlayers.requestFocus());
-        nPlayers.setOnKeyPressed(keyEvent -> {
+        //Platform.runLater(()-> nPlayers.requestFocus());
+        mainpanel.setOnKeyPressed(keyEvent -> {
             int nPlayer=0;
             if(keyEvent.getCode().equals(KeyCode.DIGIT1))
                 nPlayer=1;

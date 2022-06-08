@@ -7,8 +7,11 @@ import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -115,6 +118,7 @@ public class HandSceneController extends SceneController{
         assistantCards= new ArrayList<>();
         for (Node card:assistant_container.getChildren()) {
             assistantCards.add((Rectangle) card);
+            setShadow((Rectangle) card);
             int cardNumber= Integer.parseInt(card.getId().substring(13));
             ( (Rectangle) card).setFill(new ImagePattern(getCardImage(cardNumber)));
             card.setVisible(false);
@@ -163,6 +167,11 @@ public class HandSceneController extends SceneController{
                 help_text.setText("Wait for your turn");
             }
         });
+    }
+    private void setShadow(Rectangle clickable){
+        DropShadow islandShadow = new DropShadow(8, Color.DARKRED);
+        clickable.setOnMouseEntered(event -> clickable.setEffect(islandShadow));
+        clickable.setOnMouseExited(event -> clickable.setEffect(null));
     }
     private Image getCardImage(int cardNumber){
         return new Image("images/assistants/assistant_"+cardNumber+".png");

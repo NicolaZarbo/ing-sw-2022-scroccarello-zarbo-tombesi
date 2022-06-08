@@ -18,10 +18,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MapSceneController extends SceneController {
     public Pane island_container;
@@ -35,6 +32,7 @@ public class MapSceneController extends SceneController {
     public ImageView hoverBackGround;
     public AnchorPane root;
     public AnchorPane map_container;
+    public Pane overflown_students;
     private List<ImageView> islandStudentPlaces;
     private final GUI gui;
     private final CentralView view;
@@ -182,16 +180,45 @@ public class MapSceneController extends SceneController {
         hoverBackGround.setMouseTransparent(true);
         islandStudentPlaces= new ArrayList<>();
         for (Node student:islandStudent_container.getChildren()) {
-            islandStudentPlaces.add((ImageView) student);
+            if(!(student instanceof Pane) )
+                islandStudentPlaces.add((ImageView) student);
         }
     }
     private void setStudentsInHover(List<Integer> students){
         int i=0;
+        ArrayList<Integer>overflow= new ArrayList<>();
         for (Integer stud:students) {
-            islandStudentPlaces.get(i).setImage(studentColorPath(stud,true));
-            islandStudentPlaces.get(i).setVisible(true);
+            if(i>8){
+                overflow.add(stud);
+            }else {
+                islandStudentPlaces.get(i).setImage(studentColorPath(stud, true));
+                islandStudentPlaces.get(i).setVisible(true);
+            }
             i++;
         }//fixme this works only when showing less than 10 stud, add something to show the overflown ones
+       // if(overflow.size()>0)
+            setOverflow(overflow);
+    }
+
+    private void setOverflow(List<Integer> overflown){
+        int[]colorNumber=new int[5];
+        Arrays.fill(colorNumber,0);
+        for (Integer ovr:overflown) {
+            colorNumber[ovr/26]++;
+        }
+        int imageCounter=0, numberCounter=0;
+        for (Node child:overflown_students.getChildren()) {
+            if(child instanceof ImageView) {
+                child.setVisible(colorNumber[imageCounter] != 0);
+                ((ImageView) child).setImage(studentColorPath(imageCounter * 26, false));
+                imageCounter++;
+            }
+            if(child instanceof Text) {
+                child.setVisible(colorNumber[numberCounter] != 0);
+                ((Text) child).setText(colorNumber[numberCounter] + "");
+                numberCounter++;
+            }
+        }
     }
     private void resetStudentsHover(){
         for (ImageView place:islandStudentPlaces) {
@@ -214,11 +241,10 @@ public class MapSceneController extends SceneController {
             hoverBackGround.setVisible(true);
             islandStudent_container.setVisible(true);
             map_container.setOpacity(0.7);
-            DropShadow islandShadow = new DropShadow(8, Color.DARKRED);
-            Bloom islandBloom= new Bloom();
-            islandBloom.setThreshold(0.1);
-
+            DropShadow islandShadow = new DropShadow(15, Color.DARKRED);
             island.setEffect(islandShadow);
+            hoverBackGround.setEffect(islandShadow);
+            DropShadow blackShadow= new DropShadow(10,Color.BLACK);
 
         });
         island.setOnMouseExited(mouseEvent -> {
@@ -259,6 +285,23 @@ public class MapSceneController extends SceneController {
         }
     }
     private void clickChooseCloud(Circle cloud, int cloudID){
+        DropShadow islandShadow = new DropShadow(8, Color.DARKRED);
+        cloud.setOnMouseEntered(event -> {
+            cloudStudentsByNumber.get(cloudID+1).forEach(circle -> {
+                circle.setScaleY(1.3);
+                circle.setScaleX(1.3);
+            });
+            cloud.setEffect(islandShadow);
+            cloud.setScaleX(1.5);
+            cloud.setScaleY(1.5);});
+        cloud.setOnMouseExited(event -> {
+            cloudStudentsByNumber.get(cloudID+1).forEach(circle -> {
+                circle.setScaleY(1);
+                circle.setScaleX(1);
+            });
+            cloud.setEffect(null);
+            cloud.setScaleX(1);
+            cloud.setScaleY(1);});
         cloud.setDisable(false);
         cloud.setOnMouseClicked(mouseEvent -> {
             gui.getInputManager().cloudChoose(cloudID);

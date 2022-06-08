@@ -4,10 +4,12 @@ import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.enumerations.SceneEnum;
 import javafx.event.EventHandler;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
@@ -218,6 +220,7 @@ public abstract class BoardSceneController extends SceneController{
     protected void setEntranceClickable(Circle student, int clickedColor){
         clickedEntranceStudentsColor=new ArrayList<>();//fixme make distinctions on saved student
         student.setDisable(false);
+        setStudentColoredShadow(student,clickedColor);
         student.setOnMouseClicked(mouseEvent -> {
             if(isYourBoard()) {
                 gui.getInputManager().saveSelectedStud(clickedColor);
@@ -234,6 +237,20 @@ public abstract class BoardSceneController extends SceneController{
                 }
             }
         });
+    }
+    private void setStudentColoredShadow(Circle student, int color){
+        Color shadowColor =switch (color){
+            case 0-> Color.DARKRED;
+            case 1 -> Color.LIGHTGOLDENRODYELLOW;
+            case 2 ->Color.DARKOLIVEGREEN;
+            case 3 -> Color.DARKBLUE;
+            case 4 ->Color.PURPLE;
+            default -> Color.WHITESMOKE;
+        };
+        DropShadow islandShadow = new DropShadow(8, shadowColor);
+        student.setOnMouseEntered(event -> student.setEffect(islandShadow));
+        student.setOnMouseExited(event -> student.setEffect(null));
+
     }
     protected abstract void showMoveButton();
     protected abstract void hideMoveButtons();

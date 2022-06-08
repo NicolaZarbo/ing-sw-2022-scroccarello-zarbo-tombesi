@@ -193,10 +193,10 @@
             </Pane>
         </children>
     </AnchorPane>
-   <Pane fx:id="popupPanel" layoutX="250.0" layoutY="20.0" prefHeight="92.0" prefWidth="183.0" style="-fx-background-color: red; -fx-border-radius: 20; -fx-background-radius: 20;">
+   <Pane fx:id="popupPanel" layoutX="250.0" layoutY="20.0" prefHeight="92.0" prefWidth="183.0" style="-fx-background-color: red; -fx-border-radius: 15; -fx-background-radius: 20; -fx-border-color: gold; -fx-border-width: 2;">
       <children>
-         <Button onMouseClicked="#moveToBoard" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" />
-         <Button onMouseClicked="#sendToIsland" layoutX="14.0" layoutY="50.0" mnemonicParsing="false" />
+         <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#moveToBoard" />
+         <Button layoutX="14.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#sendToIsland" />
          <Text layoutX="35.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a target Island" />
          <Text layoutX="35.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Send to Dining Room" />
       </children>
