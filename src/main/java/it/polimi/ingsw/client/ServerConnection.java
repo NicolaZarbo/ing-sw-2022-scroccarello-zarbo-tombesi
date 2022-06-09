@@ -21,12 +21,15 @@ public class ServerConnection {
     private Scanner input;
     private final CentralView game;
     private final InputManager inputManager;
-    private final String ip="127.0.0.1";
-    private final int port=12345;
+    public static String ip="127.0.0.1";
+    public static int port=50000;
     private volatile boolean canWrite;
 
     /** @param input a scanner object to read some string needed for the lobby setup*/
     public ServerConnection( Scanner input, CentralView view, InputManager inputManager) throws IOException {
+        if(!checkSocketOptions()){
+            throw new IllegalArgumentException("bad connection arguments");
+        }
         Socket socket = new Socket(ip, port);
         inputManager.printToScreen("Connection established");
         //(Printer.WHITE_BKG+ TitlePrinter.print()+Printer.RST+Printer.PINK);
@@ -38,6 +41,24 @@ public class ServerConnection {
         else canWrite=true;
         this.game=view;
         this.input=input;
+    }
+    private boolean checkSocketOptions() {
+        if (port < 65536 && port>49152)
+            return true;
+        String[] ipv4St = ip.split("\\.", 4);
+        int[] ipv4 = new int[4];
+        for (int i = 0; i < 4; i++) {
+            try {
+                ipv4[i] = Integer.parseInt(ipv4St[i]);
+                if (ipv4[i] < 0 || ipv4[i] > 254) {
+                    return false;
+                }
+            } catch (NumberFormatException e) {
+                return false;
+            }
+
+        }
+        return true;
     }
     public void run() {
         String socketLine="";

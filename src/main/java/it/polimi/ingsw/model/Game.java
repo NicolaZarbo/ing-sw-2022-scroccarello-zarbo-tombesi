@@ -3,11 +3,8 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.enumerations.Mage;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
-import it.polimi.ingsw.messages.servermessages.ChangePhaseMessage;
-import it.polimi.ingsw.messages.servermessages.ChangeTurnMessage;
-import it.polimi.ingsw.messages.servermessages.MultipleServerMessage;
+import it.polimi.ingsw.messages.servermessages.*;
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.messages.servermessages.ServerMessage;
 import it.polimi.ingsw.model.token.Professor;
 import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.enumerations.TowerColor;
@@ -42,12 +39,12 @@ public class Game extends Observable<ServerMessage> {
 
 
     /** creates a game without players, which are then created in a setup phase through players inputs*/
-    public Game(boolean easy, int numberOfPlayer){
+    public Game(boolean easy, int numberOfPlayer){//fixme move this stub to test class
+        this.nPlayers =numberOfPlayer;
         actionPhase= new Turn(this);
         planningPhase= new Round(this);
         setupPhase = new Setup(this);
         this.easy=easy;
-        this.nPlayers =numberOfPlayer;
         this.bag=new Bag(26,5);
         this.islands=Setup.createIslands(12,bag);
         this.clouds= Setup.createClouds(nPlayers);
@@ -133,6 +130,8 @@ public class Game extends Observable<ServerMessage> {
             if(!isLastPlayerTurn()){
                 actualState=GameState.actionMoveStudent;
                 currentPlayerId=playIngOrder.get(actualIndex%nPlayers);
+                if(players[0].getHand().getAssistant().size()==0)
+                    gameOver();
             }
             else{
                 currentPlayerId=playIngOrder.get(0);
@@ -142,7 +141,7 @@ public class Game extends Observable<ServerMessage> {
 
             groupMultiMessage(new ChangePhaseMessage(this));
             groupMultiMessage(new ChangeTurnMessage(this));
-        }
+        }else
         if (actualState == GameState.planPlayCard) {
             if(!isLastPlayerTurn()){
                 currentPlayerId=playIngOrder.get(actualIndex%nPlayers);
@@ -287,6 +286,27 @@ public class Game extends Observable<ServerMessage> {
             return temp;
         }else throw new NullPointerException();
 
+    }
+    /** Used when a endGame check is passed
+     * Checks used:
+     * 1 bag is empty
+     * 2 someone used every tower in their board
+     * 3 someone used his last card
+     * 4 there are only 3 cluster of islands left*/
+    public void gameOver(){// todo test for 4 player etc
+        int winner;
+        int min;
+        if(nPlayers==4){
+            if(players[1].getBoard().towersLeft()>players[0].getBoard().towersLeft()){
+                winner=1;
+            }else winner=2;
+        }else {
+            List<Integer> towerForPlayer= Arrays.stream(players).map(Player::getBoard).map(Board::towersLeft).toList();
+            min=towerForPlayer.stream().min(Integer::compareTo).orElse(-1);
+            winner=towerForPlayer.lastIndexOf(min);
+        }
+        groupMultiMessage(new GameOverMessage(this,winner));
+        //sendMultiMessage();
     }
     public boolean isProfessorOnGame(TokenColor color){
         return teachers[color.ordinal()] != null;

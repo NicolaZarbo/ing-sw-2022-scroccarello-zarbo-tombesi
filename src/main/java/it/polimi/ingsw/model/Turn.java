@@ -80,6 +80,8 @@ public class Turn {
             unifyBefore( position);
         }
         game.groupMultiMessage(new MotherPositionMessage(game));
+        if(game.getIslands().size()<=3)
+            game.gameOver();
     }
     /** moves al the students on a target cloud to the board of playerId, it is also the last actin of the turn*/
     public void moveFromCloudToEntrance(int cloudId,int playerId){
@@ -159,17 +161,21 @@ public class Turn {
             game.getMotherNature().changePosition(pos-1);
             }
         game.groupMultiMessage(new IslandsMessage(game));
-
     }
-    //if it is a team game, insert the mainplayer id in idPlayer
-    /** @param player  if the game is in teams insert the main player id */
+    /**
+     @param player  the player who won the influence contest */
     public void putTowerFromBoardToIsland(Island island,Player player){
         if(island.getTowers().size()!=0)
             return;
-        Board board=player.getBoard();
+        Board board;
+        if(isSquadLeader(player))
+             board=player.getBoard();
+        else board=game.getPlayer(player.getId()-2).getBoard();
         island.setTower(board.getTower());
         game.groupMultiMessage(new IslandsMessage(game));
         game.groupMultiMessage(new SingleBoardMessage(game,player.getId()));
+        if(board.towersLeft()==0)
+            game.gameOver();
     }
     private void changeTower(Island island , Player newOwner){
         ArrayList<Tower> removedT=new ArrayList<>(island.getEveryTower());
@@ -181,6 +187,12 @@ public class Turn {
             }
         }
         this.putTowerFromBoardToIsland(island,newOwner);
+    }
+    /** used to differentiate behavior when the player isn't the owner of the team towers*/
+    private boolean isSquadLeader(Player player){
+        if(game.getNPlayers()!=4)
+            return true;//believe in yourself, be your own leader
+        return player.getId()<2;
     }
 
     //controllo se una board ha il diritto ad avere il prof del colore scelto

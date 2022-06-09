@@ -7,7 +7,6 @@
   <groupId>it.polimi.ingsw</groupId>
   <artifactId>GC62</artifactId>
   <version>1.0-SNAPSHOT</version>
-
   <name>GC62</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
@@ -16,7 +15,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>18</maven.compiler.source>
     <maven.compiler.target>18</maven.compiler.target>
-    <sonar.exclusions>**/project_doc/**/*,**/server/**/*,**/client/**/*,**/view/**/*,**/Peer-Review  1 UML GC7.md,**/ing-sw-2022-scroccarello-zarbo-tombesi.iml</sonar.exclusions>
+    <sonar.exclusions>**/project_doc/**/*,**/review/**/*,**/resources/**/*,**/ing-sw-2022-scroccarello-zarbo-tombesi.iml</sonar.exclusions>
   </properties>
 
 
@@ -50,12 +49,25 @@
       <artifactId>javafx-fxml</artifactId>
       <version>18.0.1</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.fusesource.jansi/jansi -->
+    <dependency>
+      <groupId>org.fusesource.jansi</groupId>
+      <artifactId>jansi</artifactId>
+      <version>2.4.0</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+    <dependency>
+      <groupId>org.jacoco</groupId>
+      <artifactId>jacoco-maven-plugin</artifactId>
+      <version>0.8.8</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -113,13 +125,20 @@
           <artifactId>javafx-maven-plugin</artifactId>
           <version>0.0.8</version>
           <configuration>
+            <stripDebug>true</stripDebug>   <!-- you need to add the module-info file for this plugin, remove the import of jansi, since or set exclusions -->
+            <compress>2</compress>
+            <noHeaderFiles>true</noHeaderFiles>
+            <noManPages>true</noManPages>
+            <launcher>eriantysGui_launcher</launcher>
+            <jlinkImageName>eriantys</jlinkImageName>
+            <jlinkZipName>eriantysGui</jlinkZipName>
             <mainClass>it.polimi.ingsw.client.GUI.GUI</mainClass>
           </configuration>
         </plugin>
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.7</version>
+          <version>0.8.8</version>
           <configuration>
             <excludes>
             </excludes>
@@ -140,6 +159,50 @@
             </execution>
           </executions>
         </plugin>
+       <plugin>
+       <artifactId>maven-assembly-plugin</artifactId><!-- make sure you don't have a module-info around when
+       calling assembly, for whatever reason it breaks the compiler in this phase-->
+          <executions>
+          <execution>
+            <id>build-a</id>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>it.polimi.ingsw.server.AppServer</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <appendAssemblyId>false</appendAssemblyId>
+              <finalName>server_eriantys</finalName>
+            </configuration>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+            <execution>
+              <id>build-b</id>
+              <configuration>
+                <archive>
+                  <manifest>
+                    <mainClass>it.polimi.ingsw.client.CLI.AppCli</mainClass>
+                  </manifest>
+                </archive>
+                <descriptorRefs>
+                  <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+                 <appendAssemblyId>false</appendAssemblyId>
+                <finalName>CommandLine_Eriantys</finalName>
+              </configuration>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+            </execution>
+          </executions>
+         </plugin>
       </plugins>
   </build>
 </project>

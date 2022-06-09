@@ -42,11 +42,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.SetupSceneController">
+<VBox fx:id="root" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.SetupSceneController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="mainpane" VBox.vgrow="ALWAYS">
       <children>
-        <Label fx:id="choiceMsg" alignment="CENTER" layoutX="232.0" layoutY="219.0" prefHeight="27.0" prefWidth="164.0" style="&#10;" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+        <Label fx:id="choiceMsg" alignment="CENTER" layoutX="232.0" layoutY="219.0" mouseTransparent="true" prefHeight="27.0" prefWidth="164.0" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
             <Font size="18.0" />
           </font>
@@ -67,10 +67,11 @@
                <font>
                   <Font size="15.0" />
                </font></Text>
+
             <ImageView fx:id="blacktower" fitHeight="150.0" fitWidth="121.0" layoutX="139.0" layoutY="144.0" onMouseClicked="#setBlackTower" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="whitetower" fitHeight="150.0" fitWidth="121.0" layoutX="366.0" layoutY="144.0" onMouseClicked="#setWhiteTower" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="greytower" fitHeight="150.0" fitWidth="121.0" layoutX="257.0" layoutY="20.0" onMouseClicked="#setGrayTower" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="towerChoice" alignment="CENTER" contentDisplay="CENTER" layoutX="220.0" layoutY="231.0" prefHeight="30.0" prefWidth="200.0" style="&#10;" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+            <Label fx:id="towerChoice" alignment="CENTER" contentDisplay="CENTER" layoutX="220.0" layoutY="231.0" mouseTransparent="true" prefHeight="30.0" prefWidth="200.0" textAlignment="CENTER" textFill="#fafafa" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
@@ -82,7 +83,21 @@
                   </ContextMenu>
                </contextMenu>
             </Label>
+            <Text fx:id="teamWelcome_text" fill="RED" layoutX="232.0" layoutY="285.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="164.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
       </children>
     </AnchorPane>
+      <AnchorPane prefHeight="400.0" prefWidth="640.0">
+         <children>
+            <Text fx:id="waitingmsg" layoutX="189.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for other players.." visible="false" wrappingWidth="385.0">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
   </children>
 </VBox>

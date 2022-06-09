@@ -8,7 +8,7 @@ public class SimplifiedBoard {
     private Integer[][] diningRoom; //array in cui ci va l'id degli studenti presenti
     private Integer[] professorTable;//array in cui va l'id del professore se lo ha
     private List<Integer> entrance;
-    private int towersLeft; //array che rappresenta le towers presenti
+    private int towersLeft; //int che rappresenta le towers presenti
     private boolean[][] coinDN;//se true c'è ancora il coin da prendere
 
 
@@ -31,7 +31,7 @@ public class SimplifiedBoard {
             if(id/26==tokenColor)
                 return id;
         }
-        throw new NoTokenFoundException("no student of that color in entrance");
+        throw new NoTokenFoundException("no student of color: "+tokenColor+" in entrance");
     }
     public boolean hasStudentOfColorInDining(int tokenColor){
         for (Integer id:diningRoom[tokenColor]) {

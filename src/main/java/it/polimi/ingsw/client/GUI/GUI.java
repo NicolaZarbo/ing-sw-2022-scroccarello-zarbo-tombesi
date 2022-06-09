@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.GUI;
 
-import it.polimi.ingsw.client.GUI.Scenes.*;
 import it.polimi.ingsw.client.ServerConnection;
 import it.polimi.ingsw.enumerations.SceneEnum;
 import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
@@ -29,6 +28,9 @@ public class GUI extends Application implements UserInterface {
 
 
     public GUI(){
+    }
+    public static void main(String [] args){
+        launch(args);
     }
 
     public void start(Stage stage) throws IOException {
@@ -75,8 +77,7 @@ public class GUI extends Application implements UserInterface {
         connection.writeTxtForLobby(rules);
     }
     public void setScene(SceneEnum sceneName){
-        if(!scenes.containsKey(sceneName))
-            initScene(sceneName);
+        initScene(sceneName);
         Platform.runLater(()->mainStage.setScene(scenes.get(sceneName)));
     }
     public void initScene(SceneEnum sceneName){
@@ -110,7 +111,7 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void showOptionsForPersonalization(PlayerSetUpMessage message) {
-        goToWizardSelection();
+        setScene(SceneEnum.SetupScene);
     }
 
     @Override
@@ -120,33 +121,45 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void askToMoveStudent() {
-
+        showBoards();
     }
 
     @Override
     public void askToMoveMother() {
-
+        setScene(SceneEnum.MapScene);
     }
 
     @Override
     public void showClouds() {
-        Platform.runLater(() -> {
-            mainStage.setScene(scenes.get("MapScene"));
-        });
+        setScene(SceneEnum.MapScene);
     }
 
     @Override
     public void showBoards() {
-        Platform.runLater(() -> {
-            mainStage.setScene(scenes.get(SceneEnum.BoardScene2));
-        });
+        setScene(SceneEnum.BoardSceneX);
     }
 
     @Override
     public void showIslands() {
-        Platform.runLater(() -> {
-            mainStage.setScene(scenes.get("MapScene"));
-        });
+        setScene(SceneEnum.MapScene);
     }
+
+    @Override
+    public void gameOver() {
+        setScene(SceneEnum.GameOverScene);
+    }
+
+    public GuiInputManager getInputManager(){
+        return inputManager;
+    }
+
+    /**
+     * Method called by default by javafx on window close
+     */
+    public void stop(){
+        System.out.println("closed the application");
+        System.exit(0);
+    }
+
 
 }

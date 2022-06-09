@@ -13,6 +13,7 @@ import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,12 +32,21 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     private GameState state;
     private int turnOf;
     private int id;
-    private ArrayList<Integer> playedCardThisTurn;
+    private HashMap<Integer,Integer> playedCardThisTurnByPlayerId;
     private int cardYouPlayed;
     private final UserInterface clientScreen;
     private List<Integer> availableColor;
     private List<Integer> availableMages;
     private int studentMoved;
+    private boolean teamPlay;
+    private int playersWaitingInLobby;
+    private int winner;
+    private boolean firstTurn;
+    /**1 bag is empty
+     * 2 someone used every tower in their board
+     * 3 someone used his last card
+     * 4 there are only 3 cluster of islands left*/
+    private int gameOverReason;
 
     public List<SimplifiedIsland> getIslands() {
         return islands;
@@ -70,14 +80,16 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         return turnOf;
     }
 
-    public ArrayList<Integer> getPlayedCardThisTurn() {
-        return playedCardThisTurn;
+    public Integer getPlayedCardThisTurnByPlayerId(int id) {
+        return playedCardThisTurnByPlayerId.get(id);
     }
 
     public CentralView(UserInterface userInterface){
         this.clientScreen=userInterface;
         this.state=GameState.setupPlayers;
         this.id=-1;
+        winner=-1;
+        firstTurn=true;
     }
     public void errorFromServer(ErrorMessageForClient message){
         if(message.getTargetPlayerId()==id|| message.getTargetPlayerId()==-1) {
@@ -92,10 +104,12 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         players=message.getModelPlayers();
         players=message.getModelPlayers();
         mother = message.getMotherNature();
-        playedCardThisTurn= new ArrayList<>(players.size());
+        playedCardThisTurnByPlayerId = new HashMap<>(players.size());
         for (SimplifiedPlayer pl: players) {
             if(pl.getUsername().equals( name))
                 personalPlayer=pl;
+            if (isTeamPlay())
+                pl.setTeam((pl.getId())%2+1);
         }
         characters=message.getCharacters();
         studentsOnCard=message.getCardStudents();
@@ -131,7 +145,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     }
     /** adds to card to the list of played card in this turn, this way the players know which card he can or cannot use*/
     public void playedAssistantUpdate(PlayedAssistantMessage message){
-        playedCardThisTurn.add(message.getPlayedCardId()%10);
+        playedCardThisTurnByPlayerId.put(message.getPlayerId(),message.getPlayedCardId()%10);
         if(message.getPlayerId()==personalPlayer.getId())
             cardYouPlayed=message.getPlayedCardId()%10;
 
@@ -154,6 +168,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     }
     public void personalizePlayer(PlayerSetUpMessage message){
         turnOf=message.getNewId();
+        this.teamPlay=message.isTeamPlay();
+        if(teamPlay)
+            playersWaitingInLobby=message.getAvailableMages().size()-1;
+        else playersWaitingInLobby=message.getAvailableColor().size()-1;
         if(message.getTurnOf().equals(this.name)) {
             this.id=message.getNewId();
             this.availableColor=message.getAvailableColor();
@@ -163,10 +181,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     }
     public void changeTurn(ChangeTurnMessage message){
         this.turnOf=message.getPlayer();
-        if(isYourTurn() && state==GameState.planPlayCard){
+        if(isYourTurn() && state==GameState.planPlayCard && winner==-1){
             clientScreen.showHand();
         }
-        if(isYourTurn() && state== GameState.actionMoveStudent) {
+        if(isYourTurn() && state== GameState.actionMoveStudent && winner==-1) {
             studentMoved=0;
             clientScreen.askToMoveStudent();
         }
@@ -176,25 +194,36 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         switch (state){
             case setupPlayers -> {throw new RuntimeException("something went really wrong");}
             case planPlayCard -> {
-                if(isYourTurn())
-                    clientScreen.showHand();
+                playedCardThisTurnByPlayerId = new HashMap<>();
+                if( firstTurn) {//&&
+                    if(isYourTurn())
+                        clientScreen.showHand();
+                    else clientScreen.showBoards();
+                    firstTurn=false;
+                }
             }
             case actionMoveStudent -> {
                 activeCharacter=0;
-                playedCardThisTurn = new ArrayList<>();
-                //clientScreen.showView();
+
             }
             case actionMoveMother -> {
                 //clientScreen.showView();
-                if(isYourTurn())
+                if(isYourTurn() && winner==-1)
                     clientScreen.askToMoveMother();
             }
             case actionChooseCloud ->{
                 //clientScreen.showView();
-                if(isYourTurn())
+                if(isYourTurn() && winner==-1)
                     clientScreen.showClouds();
             }
         }
+    }
+    public void gameOver(GameOverMessage message){
+        if(players.size()==4)
+            winner= message.getWinnerTeam();
+        else winner=message.getWinnerID();
+        gameOverReason=message.getWinningCondition();
+        clientScreen.gameOver();
     }
 
 
@@ -275,6 +304,47 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     public List<Integer> getAvailableColor() {
         return availableColor;
+    }
+
+    public boolean isTeamPlay() {
+        return teamPlay;
+    }
+    public int getIslandPositionByID(int islandID){
+        for (SimplifiedIsland island:islands) {
+            if(island.getIslandId()==islandID)
+                return islands.lastIndexOf(island);
+        }
+        return -1;
+    }
+
+    public int getPlayersWaitingInLobby() {
+        return playersWaitingInLobby;
+    }
+    public ArrayList<SimplifiedIsland> getEverySubIsland(SimplifiedIsland island){
+        ArrayList<SimplifiedIsland> every = new ArrayList<>(island.getSubIslands());
+        for (SimplifiedIsland subIsland:island.getSubIslands()) {
+            every.addAll(getEverySubIsland(subIsland));
+        }
+        return every;
+    }
+    public SimplifiedIsland getIslandById(int id){
+        for (SimplifiedIsland island: islands) {
+            if(island.getIslandId()==id)
+                return island;
+            for (SimplifiedIsland subIsland:getEverySubIsland(island)) {
+                if(subIsland.getIslandId()==id)
+                    return subIsland;
+            }
+        }
+        throw new NullPointerException("no island found");
+    }
+
+    public int getWinner() {
+        return winner;
+    }
+
+    public int getGameOverReason() {
+        return gameOverReason;
     }
 
     public List<Integer> getAvailableMages() {

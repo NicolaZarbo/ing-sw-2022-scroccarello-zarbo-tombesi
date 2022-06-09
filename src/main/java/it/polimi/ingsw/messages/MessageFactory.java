@@ -13,6 +13,7 @@ public class MessageFactory {
             JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
             type= jj.get("messageType").getAsString();
         }catch (RuntimeException e){
+            System.out.println(json);
             throw new RuntimeException(json);
         }
         //String type= jj.get("messageType").getAsString();
@@ -32,6 +33,7 @@ public class MessageFactory {
             case "WholeGameMessage"-> new WholeGameMessage(json);
             case "ChangePhaseMessage"-> new ChangePhaseMessage(json);
             case "ChangeTurnMessage"-> new ChangeTurnMessage(json);
+            case "GameOverMessage"-> new GameOverMessage(json);
             default -> throw new MessageErrorException("no corresponding message type, found :" + type);
 
         };

@@ -21,4 +21,6 @@ public interface UserInterface {
     void showClouds();
     void showBoards();
     void showIslands();
+    /** used to end a game, it should show everyone who won*/
+    void gameOver();
 }

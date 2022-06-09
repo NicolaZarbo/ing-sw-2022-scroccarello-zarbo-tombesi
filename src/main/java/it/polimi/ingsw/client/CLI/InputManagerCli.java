@@ -8,6 +8,7 @@ import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.client.InputManager;
 
+
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -93,7 +94,11 @@ public class InputManagerCli  extends InputManager {
     @Override
     public void printToScreen(String string) {
         System.out.println(Cli.IMP+string+ Cli.RST);
-    }
+        //AnsiConsole.out().println(Cli.IMP+string+ Cli.RST);
+     }
+     private void showWait(){
+        System.out.println(Printer.BLACK+Printer.BR_WHITE_BKG+"Please Wait...."+Printer.RST);
+     }
 
     @Override
     public void caseSetupPlayers() {
@@ -104,8 +109,11 @@ public class InputManagerCli  extends InputManager {
         switch (multipleInput[1]) {
             case "black", "gray", "white", "b", "g", "w" -> {
                 int colorInt = convertTowerColorToInteger(multipleInput[1]);
-                if(isInteger)
-                    game.choosePlayerCustom(colorInt, inputInteger-1);
+                if(isInteger) {
+                    game.choosePlayerCustom(colorInt, inputInteger - 1);
+                    showWait();
+                }
+
                 else cli.askToRetry("please select the mage by its number");}
             default -> cli.askToRetry("please select the color by its name or initial");
         }
@@ -116,6 +124,7 @@ public class InputManagerCli  extends InputManager {
         if(isInteger)
             try {
                 game.useAssistantCard(inputInteger - 1);
+                showWait();
             }catch (CardNotFoundException | ArrayIndexOutOfBoundsException e){
                 cli.askToRetry(e.getMessage() +"please select an available card");
             }
@@ -131,8 +140,10 @@ public class InputManagerCli  extends InputManager {
             charactersDecode(new Scanner(System.in).nextLine());
             return;
         }
-        if(isInteger)
+        if(isInteger) {
             game.moveMother(inputInteger);
+            showWait();
+        }
         else cli.askToRetry("please select a number of steps, max" +(game.getCardYouPlayed()+2)/2);
 
     }
@@ -158,6 +169,7 @@ public class InputManagerCli  extends InputManager {
                 somethingSelected=false;
                 try {
                     game.moveStudentToIsland(targetColor, inputInteger);
+                    showWait();
                 }catch (IllegalMoveException e){
                     cli.askToRetry(Printer.PINK+"island : " +e.getMessage()+1 +" not available, select another");
                 }
@@ -165,14 +177,17 @@ public class InputManagerCli  extends InputManager {
             else {
                 somethingSelected=false;
                 game.moveStudentToHall(targetColor);
+                showWait();
             }
         }
     }
 
     @Override
     public void caseActionChooseCloud() {
-        if(isInteger && inputInteger<=game.getClouds().size() && inputInteger>0)
-            game.chooseCloud(inputInteger-1);
+        if(isInteger && inputInteger<=game.getClouds().size() && inputInteger>0) {
+            game.chooseCloud(inputInteger - 1);
+            showWait();
+        }
         else cli.askToRetry(Printer.PINK+"please select an available cloud id"+Printer.RST);
     }
 
