@@ -41,8 +41,8 @@ public class SelectCharacterController extends SceneController{
             characters.add((Rectangle)CharacterContainer.getChildren() );
             coins.add((Circle)coinImageContainer.getChildren() );
 
-            coinPlace.setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
-            charactercost.setText(view.getPersonalPlayer().getCoin()+"");
+           // coinPlace.setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
+          //  charactercost.setText(view.getPersonalPlayer().getCoin()+"");
         }
         for(int i=0;i<coins.size();i++)
             coins.get(i).setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
