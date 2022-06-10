@@ -115,13 +115,17 @@ public class GuiInputManager extends InputManager {
         int islandPos=game.getIslandPositionByID(islandID);
         if(islandPos==-1)
             return;
-        int steps=(islandPos-game.getMother())%game.getIslands().size();
+        int steps;
+        if(islandPos>game.getMother())
+            steps=(islandPos-game.getMother())%game.getIslands().size();
+        else steps=islandPos+(game.getIslands().size()-game.getMother());
         if(steps<0)
             steps=-steps;
-        if(steps<=(game.getCardYouPlayed()+2)/2)
+        if(steps<=(game.getCardYouPlayed()+2)/2) {
             game.moveMother(steps);
-        canChooseIsland=false;
-        waitForAnswer();
+            canChooseIsland = false;
+            waitForAnswer();
+        }
     }
     public void moveToIsland(int islandId){
         if(!canDoAction || game.getState()!= GameState.actionMoveStudent || !game.isYourTurn())

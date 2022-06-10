@@ -144,7 +144,7 @@ public class Board {
     public boolean foundCoin(Student stud) {
         int colorIndex=stud.getColor().ordinal();
         int pos = Arrays.asList(diningRoom[colorIndex]).indexOf(stud);
-        int pCoin=(pos+1)/3;
+        int pCoin=(pos)/3;
         return coinDN[stud.getColor().ordinal()][pCoin] && pos + 1 % 3 == 0;
     }
 

@@ -92,8 +92,11 @@ public class ServerConnection {
             inputManager.printToScreen("Connection closed from the client side" + e.getMessage());
         } finally {
             socketIn.close();
-            socketOut.close();
         }
+    }
+    public void closeConnection(){
+        socketOut.close();
+        System.out.println("Connection Closed");
     }
     public void writeTxtForLobby(InputStream rules){
         input = new Scanner(rules);

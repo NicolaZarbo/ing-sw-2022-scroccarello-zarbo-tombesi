@@ -5,6 +5,7 @@ import it.polimi.ingsw.observer.Observable;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ClientConnection extends Observable<String> implements Runnable{
@@ -45,15 +46,15 @@ public class ClientConnection extends Observable<String> implements Runnable{
             }
              send("connected to lobby");
             while(isActive()) {
-                if (in.hasNextLine()) {
+                //if (in.hasNextLine()) {
                     read = in.nextLine();
                     notify(read);
-                }
+                //}fixme, this ensure correct unregistering in case of orderly disconnection, but could it bring any problem?
 
 
             }
-        } catch (IOException e) {
-            System.err.println(e.getMessage()+ "  ai!");
+        } catch (IOException | NoSuchElementException e) {
+           // System.err.println(e.getMessage()+ "  ai!");
         }finally {
             close();
         }
@@ -63,7 +64,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
         String result = "null";
         String read;
         while (isActive()) {
-            if (in.hasNextLine()) {
+            if (in.hasNextLine()) {//fixme same as the other fixme
                 read = in.nextLine();
                 result = read;
                 break;

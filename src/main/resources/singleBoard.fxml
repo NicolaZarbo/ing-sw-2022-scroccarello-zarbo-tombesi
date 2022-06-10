@@ -15,7 +15,7 @@
         <children>
             <ImageView fitHeight="218.0" fitWidth="508.0" pickOnBounds="true" preserveRatio="true">
                 <image>
-                    <Image url="@images/boards/Plancia_DEF2.png" />
+                    <Image url="@images/boards/Plancia_DEF.png" />
                 </image>
             </ImageView>
             <Pane fx:id="entrance" layoutX="17.0" layoutY="27.0">

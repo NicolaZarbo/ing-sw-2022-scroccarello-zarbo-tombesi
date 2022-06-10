@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="863.0" prefWidth="1236.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.MapSceneController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="863.0" prefWidth="1236.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.MapSceneController">
    <children>
       <AnchorPane fx:id="map_container" layoutX="150.0" layoutY="90.0" prefHeight="586.0" prefWidth="895.0" scaleX="1.15" scaleY="1.15">
          <children>
@@ -39,26 +42,26 @@
                <Rectangle fx:id="brigde9" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="347.0" layoutY="452.0" rotate="110.9" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
 
             </Pane>
-            <Pane fx:id="cloud_container" mouseTransparent="true">
-               <Circle fx:id="cloud1" fill="DODGERBLUE" layoutX="286.0" layoutY="274.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-               <Circle fx:id="cloud3" fill="DODGERBLUE" layoutX="578.0" layoutY="274.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-               <Circle fx:id="cloud2" fill="DODGERBLUE" layoutX="428.0" layoutY="175.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-               <Circle fx:id="cloud4" fill="DODGERBLUE" layoutX="428.0" layoutY="367.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Pane fx:id="cloud_container" layoutX="217.0" layoutY="116.0" mouseTransparent="true" prefHeight="306.0" prefWidth="416.0">
+               <Circle fx:id="cloud1" fill="DODGERBLUE" layoutX="286.0" layoutY="274.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" translateX="-218.0" translateY="-114.0" />
+               <Circle fx:id="cloud3" fill="DODGERBLUE" layoutX="578.0" layoutY="274.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" translateX="-218.0" translateY="-114.0" />
+               <Circle fx:id="cloud2" fill="DODGERBLUE" layoutX="428.0" layoutY="175.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" translateX="-218.0" translateY="-114.0" />
+               <Circle fx:id="cloud4" fill="DODGERBLUE" layoutX="428.0" layoutY="367.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" translateX="-218.0" translateY="-114.0" />
 
             </Pane>
             <Pane fx:id="tower_container" mouseTransparent="true">
-               <Rectangle fx:id="tower1" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="118.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="27.0" />
-               <Rectangle fx:id="tower2" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="259.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="27.0" />
-               <Rectangle fx:id="tower3" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="412.0" layoutY="-12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="27.0" />
-               <Rectangle fx:id="tower4" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="579.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="27.0" />
-               <Rectangle fx:id="tower5" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="712.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="27.0" />
-               <Rectangle fx:id="tower6" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="815.0" layoutY="183.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="27.0" />
-               <Rectangle fx:id="tower7" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="705.0" layoutY="312.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="27.0" />
-               <Rectangle fx:id="tower8" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="588.0" layoutY="382.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="27.0" />
-               <Rectangle fx:id="tower9" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="448.0" layoutY="430.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="27.0" />
-               <Rectangle fx:id="tower10" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="273.0" layoutY="385.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="27.0" />
-               <Rectangle fx:id="tower11" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="155.0" layoutY="317.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="27.0" />
-               <Rectangle fx:id="tower12" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="29.0" layoutY="189.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="27.0" />
+               <Rectangle fx:id="tower1" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="118.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
+               <Rectangle fx:id="tower2" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="259.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
+               <Rectangle fx:id="tower3" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="412.0" layoutY="-12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
+               <Rectangle fx:id="tower4" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="579.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
+               <Rectangle fx:id="tower5" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="712.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
+               <Rectangle fx:id="tower6" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="815.0" layoutY="183.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
+               <Rectangle fx:id="tower7" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="705.0" layoutY="312.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
+               <Rectangle fx:id="tower8" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="588.0" layoutY="382.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
+               <Rectangle fx:id="tower9" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="448.0" layoutY="430.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
+               <Rectangle fx:id="tower10" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="273.0" layoutY="385.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
+               <Rectangle fx:id="tower11" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="155.0" layoutY="317.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
+               <Rectangle fx:id="tower12" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="75.0" layoutX="29.0" layoutY="189.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
 
             </Pane>
             <Pane fx:id="cloudStudents_container" mouseTransparent="true">

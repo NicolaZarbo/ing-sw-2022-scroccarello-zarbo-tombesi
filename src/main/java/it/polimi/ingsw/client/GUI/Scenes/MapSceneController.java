@@ -5,8 +5,8 @@ import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
-import javafx.scene.effect.Bloom;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -50,6 +50,7 @@ public class MapSceneController extends SceneController {
     @Override
     public void initialize() {
         root.setStyle("-fx-background-image:url(images/wallpapers/sky_no_title.png); -fx-background-position: center; -fx-background-size: 1236 863");
+        root.setCursor(new ImageCursor(new Image("images/pointer/baseArrow.png")));
         saveContainers();
         initClouds();
         initIslands();
@@ -99,7 +100,11 @@ public class MapSceneController extends SceneController {
             if(cloud[0]==-1){
                 cloudByNumber.get(i).setDisable(true);
                 cloudByNumber.get(i).setOpacity(0.4);
-            }else cloudByNumber.get(i).setDisable(false);
+                cloudByNumber.get(i).setCursor(new ImageCursor(new Image("images/pointer/basePointer.png")));
+            }else {
+                cloudByNumber.get(i).setCursor(new ImageCursor(new Image("images/pointer/pickUpPointer.png")));
+                cloudByNumber.get(i).setDisable(false);
+            }
 
         }
     }
@@ -167,9 +172,12 @@ public class MapSceneController extends SceneController {
             int islandImage=(islandID%3)+1;
             Image img = new Image("images/simple_elements/island"+islandImage+".png");
             islandByNumber.get(islandID+1).setFill(new ImagePattern(img));
+            if(view.getState()!=GameState.actionMoveMother)
+                islandByNumber.get(islandID+1).setCursor(new ImageCursor(new Image("images/pointer/lookUp.png")));
+            else islandByNumber.get(islandID+1).setCursor(new ImageCursor(new Image("images/pointer/basePointer.png")));
             islandByNumber.get(islandID+1).setDisable(false);
             islandByNumber.get(islandID+1).setOpacity(1);
-            clickChooseIsland( islandByNumber.get(islandID+1));
+            setClickChooseIsland( islandByNumber.get(islandID+1));
             hoverShowInside(islandByNumber.get(islandID+1));
             setTower(island);
             setMotherZone(island);
@@ -260,7 +268,7 @@ public class MapSceneController extends SceneController {
             setMotherZone(isl);
         });
     }
-    private void clickChooseIsland(Circle island){
+    private void setClickChooseIsland(Circle island){
         //island.setDisable(false);
         //int id=Integer.parseInt(island.getId().substring(6));
         island.setOnMouseClicked(mouseEvent -> {
@@ -291,19 +299,21 @@ public class MapSceneController extends SceneController {
         }
     }
     private void clickChooseCloud(Circle cloud, int cloudID){
-        DropShadow islandShadow = new DropShadow(8, Color.DARKRED);
+        DropShadow cloudShadow = new DropShadow(8, Color.DARKRED);
         cloud.setOnMouseEntered(event -> {
             cloudStudentsByNumber.get(cloudID+1).forEach(circle -> {
                 circle.setScaleY(1.3);
                 circle.setScaleX(1.3);
+                circle.setEffect(new DropShadow(4,Color.BLACK));
             });
-            cloud.setEffect(islandShadow);
+            cloud.setEffect(cloudShadow);
             cloud.setScaleX(1.5);
             cloud.setScaleY(1.5);});
         cloud.setOnMouseExited(event -> {
             cloudStudentsByNumber.get(cloudID+1).forEach(circle -> {
                 circle.setScaleY(1);
                 circle.setScaleX(1);
+                circle.setEffect(null);
             });
             cloud.setEffect(null);
             cloud.setScaleX(1);

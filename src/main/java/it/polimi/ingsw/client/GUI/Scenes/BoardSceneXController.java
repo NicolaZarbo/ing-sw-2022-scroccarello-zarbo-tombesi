@@ -4,9 +4,9 @@ import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.view.CentralView;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
@@ -36,6 +36,7 @@ public class BoardSceneXController extends SceneController{
     @Override
     public void initialize() {
         root.setStyle("-fx-background-image:url(images/wallpapers/sky_no_title.png); -fx-background-position: center; -fx-background-size: 1280 796");
+        root.setCursor(new ImageCursor(new Image("images/pointer/baseArrow.png")));
         setContextText();
         List<Pane> containers= new ArrayList<>();
         containers.add(up_left);

@@ -3,9 +3,11 @@ package it.polimi.ingsw.client.GUI.Scenes;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
 import javafx.animation.PauseTransition;
 import javafx.scene.Node;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
@@ -21,7 +23,7 @@ public class SingleBoardController extends BoardSceneController{
     public Pane table;
     public Pane towers;
     public Pane popupPanel;
-    private int boardNumber;
+    private final int boardNumber;
 
     private List<Circle> entranceList;
     private List<ArrayList<Circle>> diningRows;
@@ -35,6 +37,7 @@ public class SingleBoardController extends BoardSceneController{
         for (Node student:entrance.getChildren()) {
             entranceList.add((Circle)student);
         }
+        entrance.setEffect(new DropShadow(6, Color.DARKGRAY));
     }
     private void initDiningRoom(){
         diningRows=new ArrayList<>();
@@ -46,12 +49,14 @@ public class SingleBoardController extends BoardSceneController{
             diningRows.add(diningRow);
             diningRow=new ArrayList<>();
         }
+        hall.setEffect(new DropShadow(5, Color.BLACK));
     }
     private void initTable(){
         teacherList=new ArrayList<>();
         for (Node teacher :table.getChildren()) {
             teacherList.add((Polygon) teacher);
         }
+        table.setEffect(new DropShadow(6, Color.BLACK));
     }
     private void initTowers(){
         towerList=new ArrayList<>();

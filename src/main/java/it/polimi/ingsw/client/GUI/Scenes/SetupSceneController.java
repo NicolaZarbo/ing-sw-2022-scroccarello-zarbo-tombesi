@@ -3,13 +3,10 @@ package it.polimi.ingsw.client.GUI.Scenes;
 import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.view.CentralView;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.scene.ImageCursor;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Bloom;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 
 import javafx.scene.image.ImageView;
@@ -60,6 +57,7 @@ public class SetupSceneController extends SceneController{
     public void initialize() {
         this.gui= GuiInputManager.getGui();
         root.setStyle("-fx-background-image: url(images/wallpapers/LowerQualityLobby.png); -fx-background-size: 640 400 ;-fx-background-repeat: no-repeat; ");
+        root.setCursor(new ImageCursor(new Image("images/pointer/basePointer.png")));
         choiceMsg.setText("Choose your color");
 
         towerchosen=0;

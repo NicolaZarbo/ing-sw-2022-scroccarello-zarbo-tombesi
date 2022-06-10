@@ -5,10 +5,9 @@ import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
-import javafx.event.ActionEvent;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -40,6 +39,7 @@ public class HandSceneController extends SceneController{
 
     public void initialize(){
         root.setStyle("-fx-background-image: url(images/wallpapers/sky_no_title.png); ");
+        root.setCursor(new ImageCursor(new Image("images/pointer/baseArrow.png")));
         setContext();
         played_container.setMouseTransparent(true);
         setCards();
@@ -149,6 +149,7 @@ public class HandSceneController extends SceneController{
         }
     }
     private void setClickChoose(Rectangle cardAssistant, int cardId){
+        cardAssistant.setCursor(new ImageCursor(new Image("images/pointer/basePointer.png")));
         cardAssistant.setDisable(false);
         cardAssistant.setOnMouseClicked(mouseEvent -> {
             if(view.getState()== GameState.planPlayCard && view.isYourTurn()) {

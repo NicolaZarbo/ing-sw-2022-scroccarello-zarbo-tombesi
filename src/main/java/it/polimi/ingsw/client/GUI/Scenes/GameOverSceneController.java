@@ -5,6 +5,8 @@ import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedBoard;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
+import javafx.scene.ImageCursor;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -28,8 +30,12 @@ public class GameOverSceneController extends SceneController {
     @Override
     public void initialize() {
         setBackground();
-       setWinner();
-       text_container.setOnMouseClicked(event -> gui.stop());
+        setWinner();
+        root.setCursor(new ImageCursor(new Image("images/pointer/baseArrow.png")));
+        root.setCursor(new ImageCursor(new Image("images/pointer/basePointer.png")));
+        text_container.setOnMouseClicked(event -> gui.stop());
+        text_container.setOnMouseEntered(event ->txt.setText("Click to close the game"));
+        text_container.setOnMouseExited(event -> setWinner());
     }
     private void setBackground(){
         if(view.isTeamPlay()) {

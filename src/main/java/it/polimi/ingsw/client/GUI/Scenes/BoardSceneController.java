@@ -4,11 +4,11 @@ import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.enumerations.SceneEnum;
 import javafx.event.EventHandler;
+import javafx.scene.ImageCursor;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -16,7 +16,6 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public abstract class BoardSceneController extends SceneController{
@@ -38,50 +37,50 @@ public abstract class BoardSceneController extends SceneController{
         for (Circle stud:entrance) {
             stud.setDisable(true);
             stud.setVisible(false);
+            stud.setStyle("-fx-stroke-width: 0");
         }
         playerOwner=player-1;
-       // clickedEntranceStudentsColor=new ArrayList<>();
         List<Integer> playerEntrance=gui.getGame().getPlayers().get(player-1).getBoard().getEntrance();
         int id;
         for(int i=0;i<playerEntrance.size();i++){
             Image img;
             id= playerEntrance.get(i);
             if(id!=-1){
+                if(gui.getGame().isYourTurn()&& gui.getGame().getState()==GameState.actionMoveStudent)
+                    entrance.get(i).setCursor(new ImageCursor(new Image("images/pointer/pickUpPointer.png")));
                 setEntranceClickable(entrance.get(i),id/26);
-                switch(id/26){
-                    case 0->{
-                      img=new Image("images/students/student_red.png");
-                      entrance.get(i).setFill(new ImagePattern(img));
-                      entrance.get(i).setVisible(true);
-                    }
-                    case 1 ->{
-                        img=new Image("images/students/student_yellow.png");
-                        entrance.get(i).setFill(new ImagePattern(img));
-                        entrance.get(i).setVisible(true);
-                    }
-                    case 2->{
-                        img=new Image("images/students/student_green.png");
-                        entrance.get(i).setFill(new ImagePattern(img));
-                        entrance.get(i).setVisible(true);
-                    }
-                    case 3->{
-                        img=new Image("images/students/student_blue.png");
-                        entrance.get(i).setFill(new ImagePattern(img));
-                        entrance.get(i).setVisible(true);
-                    }
-                    case 4->{
-                        img=new Image("images/students/student_pink.png");
-                        entrance.get(i).setFill(new ImagePattern(img));
-                        entrance.get(i).setVisible(true);
-                    }
-
-                }
+                img=getStudentImage(id);
+                entrance.get(i).setFill(new ImagePattern(img));
+                entrance.get(i).setVisible(true);
                 entrance.get(i).setDisable(false);
-            }else {
-                entrance.get(i).setVisible(false);// the student must be made not visible when absent and also not clickable
-                entrance.get(i).setDisable(true);
             }
         }
+    }
+
+    private Image getStudentImage(int idStudent){
+        Image stud;
+        switch(idStudent/26){
+            case 0->{
+                stud=new Image("images/students/student3d/red.png");
+            }
+            case 1 ->{
+                stud=new Image("images/students/student3d/yellow.png");
+            }
+            case 2->{
+                stud=new Image("images/students/student3d/green.png");
+
+            }
+            case 3->{
+                stud=new Image("images/students/student3d/blue.png");
+            }
+            case 4->{
+                stud=new Image("images/students/student3d/pink.png");
+            }
+            default -> {
+                throw new NullPointerException("not an iD");
+            }
+        }
+        return stud;
     }
 
     public void setHall(List<ArrayList<Circle>> hall, int player){
@@ -89,6 +88,7 @@ public abstract class BoardSceneController extends SceneController{
             for (Circle stud:list) {
                 stud.setVisible(false);
                 stud.setDisable(true);
+                stud.setStyle("-fx-stroke-width: 0");
             }
         }
         clickedDiningStudentsColor=new ArrayList<>();
@@ -98,37 +98,39 @@ public abstract class BoardSceneController extends SceneController{
                 Image img;
                 int id= diningroom[i][j];
                 if(id!=-1){
-                    switch(id/26){
+                    img=getStudentImage(id);
+                   /* switch(id/26){
                         case 0->{
-                            img=new Image("images/students/student_red.png");
+                            img=new Image("images/students/student3d/red.png");
                             hall.get(i).get(j).setFill(new ImagePattern(img));
                             hall.get(i).get(j).setVisible(true);
                         }
                         case 1 ->{
-                            img=new Image("images/students/student_yellow.png");
+                            img=new Image("images/students/student3d/yellow.png");
                             hall.get(i).get(j).setFill(new ImagePattern(img));
                             hall.get(i).get(j).setVisible(true);
                         }
                         case 2->{
-                            img=new Image("images/students/student_green.png");
+                            img=new Image("images/students/student3d/green.png");
                             hall.get(i).get(j).setFill(new ImagePattern(img));
                             hall.get(i).get(j).setVisible(true);
                         }
                         case 3->{
-                            img=new Image("images/students/student_blue.png");
+                            img=new Image("images/students/student3d/blue.png");
                             hall.get(i).get(j).setFill(new ImagePattern(img));
                             hall.get(i).get(j).setVisible(true);
                         }
                         case 4->{
-                            img=new Image("images/students/student_pink.png");
+                            img=new Image("images/students/student3d/pink.png");
                             hall.get(i).get(j).setFill(new ImagePattern(img));
                             hall.get(i).get(j).setVisible(true);
                         }
-                    }
+
+
+                    }*/
+                    hall.get(i).get(j).setFill(new ImagePattern(img));
+                    hall.get(i).get(j).setVisible(true);
                     hall.get(i).get(j).setDisable(false);
-                }else {
-                    hall.get(i).get(j).setVisible(false);
-                    hall.get(i).get(j).setDisable(true);
                 }
             }
         }
@@ -145,31 +147,32 @@ public abstract class BoardSceneController extends SceneController{
                 Image img;
                 switch(i){
                     case 0->{
-                        img=new Image("images/teachers/teacher_red.png");
+                        img=new Image("images/teachers/teacher3d/redProf.png");
                         table.get(i).setFill(new ImagePattern(img));
                         table.get(i).setVisible(true);
                     }
                     case 1->{
-                        img=new Image("images/teachers/teacher_yellow.png");
+                        img=new Image("images/teachers/teacher3d/yellowProf.png");
                         table.get(i).setFill(new ImagePattern(img));
                         table.get(i).setVisible(true);
                     }
                     case 2->{
-                        img=new Image("images/teachers/teacher_green.png");
+                        img=new Image("images/teachers/teacher3d/greenProf.png");
                         table.get(i).setFill(new ImagePattern(img));
                         table.get(i).setVisible(true);
                     }
                     case 3->{
-                        img=new Image("images/teachers/teacher_blue.png");
+                        img=new Image("images/teachers/teacher3d/blueProf.png");
                         table.get(i).setFill(new ImagePattern(img));
                         table.get(i).setVisible(true);
                     }
                     case 4->{
-                        img=new Image("images/teachers/teacher_pink.png");
+                        img=new Image("images/teachers/teacher3d/pinkProf.png");
                         table.get(i).setFill(new ImagePattern(img));
                         table.get(i).setVisible(true);
                     }
                 }
+
             }
         }
     }

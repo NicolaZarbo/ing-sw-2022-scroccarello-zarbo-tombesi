@@ -23,6 +23,7 @@ public class Server {
             throw new IllegalArgumentException("bad port number");
         }
         this.serverSocket = new ServerSocket(serverPort);
+        serverSocket.setSoTimeout(10*60*1000);
         connections=0;
     }
     private boolean isGoodPort(int port){

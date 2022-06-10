@@ -10,8 +10,10 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,7 +44,6 @@ public class GUI extends Application implements UserInterface {
 
         initScene(SceneEnum.WelcomeScene);
         mainStage.setScene(scenes.get(SceneEnum.WelcomeScene));
-
         mainStage.setResizable(false);
         mainStage.show();
     }
@@ -158,6 +159,7 @@ public class GUI extends Application implements UserInterface {
      */
     public void stop(){
         System.out.println("closed the application");
+        connection.closeConnection();
         System.exit(0);
     }
 
