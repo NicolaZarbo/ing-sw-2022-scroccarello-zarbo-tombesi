@@ -41,7 +41,7 @@ public class Server {
     public synchronized void lobby(ClientConnection connection, String nickname) throws IOException {
         Lobby last = lobbies.get(lobbies.size()-1);
         if(last.isPlayerConnected(nickname))
-            throw new IOException("User not available, try to riconnect");
+            throw new IOException("User not available, try to reconnect");
         if(last.getLobbyDimension()>last.numberOfConnections()) {
             last.addConnection(connection, nickname);
         }

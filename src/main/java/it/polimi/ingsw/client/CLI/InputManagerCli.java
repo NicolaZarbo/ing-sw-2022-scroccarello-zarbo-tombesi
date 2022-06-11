@@ -28,8 +28,10 @@ public class InputManagerCli  extends InputManager {
         if(!game.isYourTurn() )
             return;
         multipleInput=input.toLowerCase().split("\s");
-        if(multipleInput[0].equalsIgnoreCase("show") && game.getState()!= GameState.setupPlayers)
+        if(multipleInput[0].equalsIgnoreCase("show") && game.getState()!= GameState.setupPlayers) {
             showManager();
+            return;
+        }
         try{
             inputInteger=Integer.parseInt(multipleInput[0]);
             isInteger=true;
@@ -43,9 +45,11 @@ public class InputManagerCli  extends InputManager {
     }
     private void showManager(){
         System.out.println("Select the on you need to see" +
-                "\n Islands   Boards   Cards   Characters   Clouds");
+                Cli.IMP+"\n Islands | Boards |  Cards |  Characters |  Clouds | Used Card | Active Effect"+ Cli.RST);
         String input=new Scanner(System.in).nextLine().toLowerCase();
         System.out.println(switch (input){
+            case "active effect"->CharacterPrinter.printUsedCharacterEffect(game);
+            case "used cards"-> UsedCardsPrinter.printUsedAssistant(game);
             case "islands"-> IslandsPrinter.print(game);
             case "boards"-> BoardsPrinter.print(game);
             case "cards"-> CardPrinter.print(game.getPersonalPlayer().getAssistantCards());

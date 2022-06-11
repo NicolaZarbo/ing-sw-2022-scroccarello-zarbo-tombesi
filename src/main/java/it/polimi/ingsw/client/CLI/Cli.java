@@ -60,9 +60,11 @@ public class Cli implements UserInterface {
         SimplifiedPlayer player=game.getPersonalPlayer();
         List<Integer> played=new ArrayList<>();
         for (Integer playerID:game.getPlayers().stream().map(SimplifiedPlayer::getId).toList()) {
-            played.add(game.getPlayedCardThisTurnByPlayerId(playerID)+1);
+            if(game.getPlayedCardThisTurnByPlayerId(playerID)!=null)
+                played.add(game.getPlayedCardThisTurnByPlayerId(playerID)+1);
         }
-        System.out.println(IMP+"You can't use the cards n: "+played+RST);
+        if(played.size()>0)
+            System.out.println(IMP+"You can't use the cards n: "+played+RST);
         System.out.println(CardPrinter.print(player.getAssistantCards())+"\n coins :"+player.getCoin());
         System.out.println(IMP+"Select the card by its number"+RST);
     }

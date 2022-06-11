@@ -46,10 +46,10 @@ public class ClientConnection extends Observable<String> implements Runnable{
             }
              send("connected to lobby");
             while(isActive()) {
-                //if (in.hasNextLine()) {
+                if (in.hasNextLine()) {
                     read = in.nextLine();
                     notify(read);
-                //}fixme, this ensure correct unregistering in case of orderly disconnection, but could it bring any problem?
+                }//fixme, this ensure correct unregistering in case of orderly disconnection, but could it bring any problem?
 
 
             }

@@ -17,6 +17,10 @@ public class CharacterPrinter implements Printer{
         out.append(CYAN+"        YOU HAVE  : "+view.getPersonalPlayer().getCoin()+" COINS"+RST);
         return out.toString();
     }
+    public static String printUsedCharacterEffect(CentralView view){
+        int active=view.getActiveCharacter();
+        return CYAN+"Active effect - CARD# "+active+RST+" \n" + getDescription(active,view);
+    }
     private static String getCost(int i, CentralView view){
         return CYAN+"COST : "+view.getCostOfCard().get(i)+RST+"\n";
     }

@@ -20,7 +20,7 @@ public class AppCli {
         }
         finally {
             AnsiConsole.systemUninstall();//since jlink has some problem with this library, comment its usage in
-                                            //this class when deploying the javafx application
+                                            //this class when deploying the javafx application with maven
         }
     }
 }
