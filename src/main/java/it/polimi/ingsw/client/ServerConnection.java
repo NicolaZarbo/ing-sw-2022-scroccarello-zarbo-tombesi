@@ -25,23 +25,22 @@ public class ServerConnection {
     public static int port=50000;
     private volatile boolean canWrite;
 
-    /** @param input a scanner object to read some string needed for the lobby setup*/
+    /**Used to connect to the server and to manage responses through an InputManager and a MessageHandler
+     *  @param input a scanner object to read some string needed for the lobby setup*/
     public ServerConnection( Scanner input, CentralView view, InputManager inputManager) throws IOException {
         if(!checkSocketOptions()){
             throw new IllegalArgumentException("bad connection arguments");
         }
         Socket socket = new Socket(ip, port);
         inputManager.printToScreen("Connection established");
-        //(Printer.WHITE_BKG+ TitlePrinter.print()+Printer.RST+Printer.PINK);
         socketIn = new Scanner(socket.getInputStream());
         socketOut = new PrintWriter(socket.getOutputStream());
         this.inputManager=inputManager;
-        if(inputManager instanceof GuiInputManager)
-            canWrite=false;
-        else canWrite=true;
+        canWrite= !(inputManager instanceof GuiInputManager);
         this.game=view;
         this.input=input;
     }
+    /** Used to control if the port and ip chose are acceptable*/
     private boolean checkSocketOptions() {
         if (port < 65536 && port>49152)
             return true;
@@ -60,6 +59,9 @@ public class ServerConnection {
         }
         return true;
     }
+    /** Starts using the socket connection to read and send messages,
+     *  received messages are handled by an InputManager
+     *  the sending of messages is done through the observer of ClientMessage MessageHandler*/
     public void run() {
         String socketLine="";
         try {
@@ -94,18 +96,23 @@ public class ServerConnection {
             socketIn.close();
         }
     }
+    /** Used to close the socket connections in an orderly way*/
     public void closeConnection(){
         socketOut.close();
         System.out.println("Connection Closed");
     }
+    /** Used to modify the scanner used at the start of the connection when creating a lobby
+     * used only for gui before the creation of the game
+     * @param rules string values containing the parameters the server needs to create a lobby*/
     public void writeTxtForLobby(InputStream rules){
         input = new Scanner(rules);
         canWrite=true;
     }
+    /** Used when setting the messageHandler as the observer of the CentralView*/
     public MessagesFromViewHandler setMessageHandler(){
         return new MessagesFromViewHandler();
     }
-
+    /** The messageHandler that is notified by the CentralView when it needs to send to the server a message */
     public class MessagesFromViewHandler implements Observer<ClientMessage> {
         @Override
         public void update(ClientMessage message) {

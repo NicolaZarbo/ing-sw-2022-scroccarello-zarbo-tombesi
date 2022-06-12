@@ -14,9 +14,6 @@ import java.util.List;
 import java.util.Scanner;
 
 
-
-
-
 public class Cli implements UserInterface {
     public static final String BKG= "";
     public static final String WRD= Printer.BR_PINK;

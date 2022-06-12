@@ -16,9 +16,6 @@ public class GuiInputManager extends InputManager {
     private static boolean isLobbyAvailable;
     private static boolean isConnected;
     private static GUI gui;
-
-
-
     private ArrayList<Integer> selectedStudents;
     private int singleStudent;
     private List<Integer> selectedStudentFromElsewhere;
@@ -30,6 +27,7 @@ public class GuiInputManager extends InputManager {
         return selectedStudents;
     }
 
+    /** Creates an instance of an InputManager for the gui*/
     public GuiInputManager(CentralView game,GUI gui) {
         singleStudent=-1;
         isLobbyAvailable=false;
@@ -42,7 +40,7 @@ public class GuiInputManager extends InputManager {
     public static GUI getGui(){
         return gui;
     }
-
+    /** Allows the user to act (IE sending a message to server) on the view as a result of interaction in the gui */
     @Override
     public void decodeInput() {
         canDoAction=true;    //  after every time you send a message set canDoAction to false
@@ -63,25 +61,11 @@ public class GuiInputManager extends InputManager {
     }
     /** used to refrain the user from spamming actions before receiving the state update*/
     private void waitForAnswer(){this.canDoAction=false;}
+    /** used to check if the connection to the server has been established*/
     public static boolean isIsConnected() {
         return isConnected;
     }
 
-    //these methods could be either put insides the scenes controllers or kept here
-    @Override
-    protected void caseSetupPlayers() {
-
-    }
-
-    @Override
-    protected void casePlanPlayCard() {
-
-    }
-
-    @Override
-    protected void caseActionMoveMother() {
-
-    }
     public static void setChooseIsland(boolean can){
         canChooseIsland=can;
     }
@@ -89,10 +73,7 @@ public class GuiInputManager extends InputManager {
         return canChooseIsland;
     }
 
-    @Override
-    protected void caseActionMoveStudent() {
-
-    }
+    /** Used to move a student from the entrance to the dining room*/
     public void moveToBoard(){
         if(!canDoAction)
             return;
@@ -100,6 +81,7 @@ public class GuiInputManager extends InputManager {
         singleStudent=-1;
         waitForAnswer();
     }
+    /** Used to check if the user is currently activating an effect and ensures he can interact with elements contextually*/
     public boolean isActivatingCardEffect(){
         return cardEffectActivation;
     }
@@ -109,10 +91,13 @@ public class GuiInputManager extends InputManager {
             game.getPersonalPlayer().getBoard().getStudentFromColorInEntrance(colorStud);
         }
     }
+    /** Check if a student has already been selected, for example when moving students from entrance*/
     public boolean hasSelectedStudent(){
         return singleStudent!=-1;
     }
-    public void moveMotherTo(int islandID){//fixme doesn't work after merging
+    /** Moves the mother to the target island
+     * @param islandID the id of the selected island, if it is too far the mother isn't moved*/
+    public void moveMotherTo(int islandID){
         int islandPos=game.getIslandPositionByID(islandID);
         if(islandPos==-1)
             return;
@@ -128,6 +113,7 @@ public class GuiInputManager extends InputManager {
             waitForAnswer();
         }
     }
+    /** Used to move a student from entrance into a target island*/
     public void moveToIsland(int islandId){
         if(!canDoAction || game.getState()!= GameState.actionMoveStudent || !game.isYourTurn())
             return;
@@ -139,12 +125,15 @@ public class GuiInputManager extends InputManager {
         singleStudent=-1;
         waitForAnswer();
     }
+    /** Used to play a card during the planning phase
+     * @param cardID the identifier of the selected card*/
     public void useAssistantCard(int cardID){
         if(!canDoAction || game.getState()!= GameState.planPlayCard || !game.isYourTurn())
             return;
         game.useAssistantCard(cardID);
         waitForAnswer();
     }
+    /**Used to choose a target cloud from which refill the player entrance */
     public void cloudChoose(int cloudID){
         if(!canDoAction || game.getState()!=GameState.actionChooseCloud || !game.isYourTurn())
             return;
@@ -154,7 +143,10 @@ public class GuiInputManager extends InputManager {
 
     /** used to keep track of the selected students when you need to move to a different scene*/
     public void saveSelectedStud(ArrayList<Integer> selectedStudents){this.selectedStudents=new ArrayList<>(selectedStudents);}
+    /** Save a selected student, used when the memory of the selected student must persist after changing scene*/
     public void saveSelectedStud(int selectedStudent){this.singleStudent=selectedStudent;}
+    /** Used to get the main island of the cluster
+     * @param islandId a sub-island of the cluster */
     private SimplifiedIsland getFatherIsland(int islandId){
         SimplifiedIsland sub= game.getIslandById(islandId);
         for (SimplifiedIsland main: game.getIslands()) {
@@ -217,16 +209,10 @@ public class GuiInputManager extends InputManager {
         game.playCharacter(11, new ParameterObject(studentId, game.getPersonalPlayer().getId()));
         cardEffectActivation=false;
     }
-
-
-
+    /** Sets a flag that ensures the user can only do actions that are contextually allowed
+     * IE : when the player is in the middle of selecting the target of an effect he can't move tokens */
     public void setCardEffectActivation() {
         cardEffectActivation=true;
-    }
-
-    @Override
-    protected void caseActionChooseCloud() {
-
     }
 
     public static boolean isLobbyAvailable(){

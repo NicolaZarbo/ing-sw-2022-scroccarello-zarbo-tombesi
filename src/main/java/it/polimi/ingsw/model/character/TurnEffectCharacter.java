@@ -9,6 +9,7 @@ public class TurnEffectCharacter extends CharacterCard {
         super(id);
     }
 
+    /** Version used for the cards that have an influence on how the game rules*/
     @Override
     public void cardEffect(ParameterObject parameters, Game game) {
         game.setCardBonusActive(this.getId());

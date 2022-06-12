@@ -19,11 +19,11 @@ public class InputManagerCli  extends InputManager {
     private boolean somethingSelected;
     private int targetColor;
     private final CharacterInputManager characterInputManager;
-    boolean isInteger;
-    int inputInteger;
-    String[] multipleInput;
+    private boolean isInteger;
+    private int inputInteger;
+    private String[] multipleInput;
 
-
+    /** Decodes an input string from the user into a meaningful action on the view*/
     public void decodeStringInput(String input){
         if(!game.isYourTurn() )
             return;
@@ -41,8 +41,18 @@ public class InputManagerCli  extends InputManager {
             inputInteger=-1;
         }
         stateSwitch(game.getState());
-
     }
+    /** switches the right manager based on the state of the game*/
+    protected void stateSwitch(GameState state){
+        switch (state){
+            case setupPlayers -> caseSetupPlayers();
+            case planPlayCard -> casePlanPlayCard();
+            case actionMoveMother -> caseActionMoveMother();
+            case actionMoveStudent -> caseActionMoveStudent();
+            case actionChooseCloud -> caseActionChooseCloud();
+        }
+    }
+    /**Used to manage the show command */
     private void showManager(){
         System.out.println("Select the on you need to see" +
                 Cli.IMP+"\n Islands | Boards |  Cards |  Characters |  Clouds | Used Card | Active Effect"+ Cli.RST);
@@ -62,6 +72,8 @@ public class InputManagerCli  extends InputManager {
         seeAction();
         decodeInput();
     }
+    /**Shows the user contextual information based of the state of the game
+     * Used to bring the player focus back to the task at hand*/
     public void seeAction() {
         if(!game.isYourTurn())
             return;
@@ -72,6 +84,9 @@ public class InputManagerCli  extends InputManager {
             case actionChooseCloud -> cli.showClouds();
         }
     }
+    /** Used when the player choose to activate a character
+     * @see CharacterInputManager class for more info on the
+     * managing of text input into meaningful action*/
     public void charactersDecode(String input){
         int nChar;
         try{
@@ -88,23 +103,21 @@ public class InputManagerCli  extends InputManager {
             decodeInput();
         }
     }
-
+    /** Used to start decoding the user text commands from keyboard*/
     @Override
     public void decodeInput() {
         decodeStringInput(new Scanner(System.in).nextLine());
     }
 
-    /** may also be used in case we need to manage how stuff is print in windows console*/
+    /**Used before the start of a game during lobby creation to show to the user informations*/
     @Override
     public void printToScreen(String string) {
         System.out.println(Cli.IMP+string+ Cli.RST);
-        //AnsiConsole.out().println(Cli.IMP+string+ Cli.RST);
      }
+     /** After every command ensures the player that it was sent and that the server is processing a response*/
      private void showWait(){
         System.out.println(Printer.BLACK+Printer.BR_WHITE_BKG+"Please Wait...."+Printer.RST);
      }
-
-    @Override
     public void caseSetupPlayers() {
         if(multipleInput.length!=2){
             cli.askToRetry("please select a mage value followed by the initial of the color");
@@ -123,7 +136,6 @@ public class InputManagerCli  extends InputManager {
         }
     }
 
-    @Override
     public void casePlanPlayCard() {
         if(isInteger)
             try {
@@ -137,7 +149,6 @@ public class InputManagerCli  extends InputManager {
     private boolean canPlayCharacter(){
         return multipleInput[0].equalsIgnoreCase("c") && !game.isEasy() && game.getActiveCharacter()==0;
     }
-    @Override
     public void caseActionMoveMother() {
         if(canPlayCharacter()) {
             cli.showCharacters();
@@ -152,7 +163,6 @@ public class InputManagerCli  extends InputManager {
 
     }
 
-    @Override
     public void caseActionMoveStudent() {
         if(canPlayCharacter()) {
             cli.showCharacters();
@@ -186,7 +196,6 @@ public class InputManagerCli  extends InputManager {
         }
     }
 
-    @Override
     public void caseActionChooseCloud() {
         if(isInteger && inputInteger<=game.getClouds().size() && inputInteger>0) {
             game.chooseCloud(inputInteger - 1);
@@ -195,13 +204,14 @@ public class InputManagerCli  extends InputManager {
         else cli.askToRetry(Printer.PINK+"please select an available cloud id"+Printer.RST);
     }
 
+    /** Creates the instance of the InputManager with a reference to the cli class*/
     public InputManagerCli(Cli cli){
-
         this.cli=cli;
         game=cli.getGame();
         this.characterInputManager= new CharacterInputManager(game);
     }
 
+    /**Checks if a string wrote by the user represent an existing island */
     private boolean isIsland(String input){
         try {
             return Integer.parseInt(input) < game.getIslands().size() && Integer.parseInt(input) >= 0;
@@ -209,6 +219,8 @@ public class InputManagerCli  extends InputManager {
             return false;
         }
     }
+    /**Used during the personalisation of the player
+     * Parses the text input into an integer representing the color of tower*/
     public static int convertTowerColorToInteger(String color){
         String cc=color.toLowerCase(Locale.ROOT);
         return switch (cc){
@@ -218,6 +230,7 @@ public class InputManagerCli  extends InputManager {
             case "gray","g"->2;
         };
     }
+    /** Parses the text input into an integer representing the color of student*/
     public static int convertStudentColorToInteger(String color){
         return switch (color){
             default -> -1;
@@ -227,8 +240,5 @@ public class InputManagerCli  extends InputManager {
             case "blue","b"-> 3;
             case "pink","p"-> 4;
         };
-    }
-    private void character1(){
-
     }
 }

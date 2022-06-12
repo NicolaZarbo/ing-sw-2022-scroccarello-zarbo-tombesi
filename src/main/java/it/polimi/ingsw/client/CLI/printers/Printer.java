@@ -18,6 +18,7 @@ public interface Printer {
     String BR_PINK="\u001B[95m";
     String BR_WHITE_BKG="\u001B[107m";
     String BR_WHITE="\u001B[97m";
+    /** used to merge the rows that are dynamically built to show to the player some game info*/
     static String mergeRows(String[] rowsForOutput){
         StringBuilder out= new StringBuilder();
         for (String s:rowsForOutput) {
@@ -26,6 +27,8 @@ public interface Printer {
         }
         return out.toString();
     }
+    /** @return The color corresponding to an integer value
+     *  */
     static String getCliColor(int i){
         return switch (i){
             default -> RST;
@@ -37,6 +40,7 @@ public interface Printer {
             case -1 -> CYAN;
         };
     }
+    /** Used to add some spacing to ensure correct visuals even with player dependent text*/
     static String padWithSpaces(String in, int dimensionNeeded){
         StringBuilder out = new StringBuilder(in);
         while(out.length()<dimensionNeeded)

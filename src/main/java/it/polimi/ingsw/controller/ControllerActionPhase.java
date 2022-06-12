@@ -19,7 +19,7 @@ public class ControllerActionPhase  {
         this.game=game;
         this.modelTurn =game.getActionPhase();
     }
-
+    /**Performs the movement of a student from the entrance to dining room, changes the state of the model after third movement */
     public void moveStudentToHall(StudentToHallMessage message){
         if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>2)
             throw new IllegalMoveException("incorrect action, or too many students moved");
@@ -33,6 +33,8 @@ public class ControllerActionPhase  {
             throw new IllegalMoveException(e.getMessage());
         }
     }
+    /**Performs the movement of a student from the entrance to an Island, changes the state of the model after third movement  */
+
     public void moveStudentToIsland(StudentToIslandMessage message){
         if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>=3)
             throw new IllegalMoveException();
@@ -42,18 +44,18 @@ public class ControllerActionPhase  {
         if(studentMoved==3)
             game.moveToNextPhase();
     }
-
+    /** Moves motherNature in the model*/
     public void moveMotherNature(MoveMotherMessage message){
         if(game.getActualState()!= GameState.actionMoveMother)
             throw new IllegalMoveException();
-        if(message.getSteps()>game.getPlayedCard(game.getCurrentPlayerId()).getMoveMother())//this can be moved to a thrown exception in moveMotherNature
+        if(message.getSteps()>game.getPlayedCard(game.getCurrentPlayerId()).getMoveMother())
             throw new IllegalMoveException("too many steps!");
         else {
                 modelTurn.moveMotherNature(message.getSteps());
                 game.moveToNextPhase();
         }
     }
-
+    /** Used to move students from a cloud to an entrance, acts as the last state of an action phase for the player */
     public void chooseCloud(ChooseCloudMessage message){
         if(game.getActualState()!= GameState.actionChooseCloud)
             throw new IllegalMoveException();
@@ -65,14 +67,12 @@ public class ControllerActionPhase  {
         }
         changeTurn();
     }
-
+    /**Used to change turn in model, also resets the students' movement counter*/
     public void changeTurn(){
         game.changePlayerTurn();
         studentMoved =0;
-       // this.idPlayerNow= game.getCurrentPlayerId();
-
     }
-
+    /** Used to activate a character during action phase*/
     public void playCharacter(CharacterCardMessage message) {
         if(game.getActualState()!=GameState.actionMoveMother && game.getActualState()!=GameState.actionMoveStudent)
             throw new IllegalMoveException();

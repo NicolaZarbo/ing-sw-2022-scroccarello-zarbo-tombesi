@@ -15,6 +15,7 @@ import java.util.List;
 
 public class ModelToViewTranslate {
 
+    /**Create a simplified representation of the islands for the view */
     public static List<SimplifiedIsland> translateIsland(List<Island> islands){
         ArrayList<SimplifiedIsland> simplifiedIslands =new ArrayList<>();
         for (Island island: islands) {
@@ -29,6 +30,7 @@ public class ModelToViewTranslate {
         return simplifiedIslands;
     }
 
+    /**Create a simplified representation of the players for the view */
     public static List<SimplifiedPlayer> translatePlayer(Player[] modelPlayers){
         List<SimplifiedPlayer> viewPlayers=new ArrayList<>();
         for (Player modelPlayer :modelPlayers) {
@@ -39,7 +41,7 @@ public class ModelToViewTranslate {
         }
         return viewPlayers;
     }
-
+    /**Create a simplified representation of a board*/
     public static SimplifiedBoard translateBoard(Board modelBoard){
         Integer[][] diningRoom= new Integer[modelBoard.getDiningRoom().length][modelBoard.getDiningRoom()[0].length];
         for (int i = 0; i < modelBoard.getDiningRoom().length; i++) {
@@ -60,6 +62,7 @@ public class ModelToViewTranslate {
         return  new SimplifiedBoard(diningRoom,profBoard,entrance,towerLeft, modelBoard.getCoinDN());
     }
 
+    /**Create a simplified representation of the clouds for the view */
     public static ArrayList<Integer[]> translateClouds(Cloud[] modelClouds){
         ArrayList<Integer[]> viewClouds=new ArrayList<>();
 

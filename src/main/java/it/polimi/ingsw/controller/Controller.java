@@ -13,6 +13,8 @@ public class Controller extends Observable<ErrorMessageForClient> implements Obs
     private final ControllerActionPhase controllerTurn;
     private final ControllerSetupPhase controllerSetup;
 
+    /** Creates an instance of controller and subControllers
+     * @param game the model on which this controller acts*/
     public  Controller(Game game){
         this.game=game;
         this.controllerRound =new ControllerPlanningPhase(game);
@@ -32,7 +34,7 @@ public class Controller extends Observable<ErrorMessageForClient> implements Obs
         return controllerSetup;
     }
 
-    /** update on remote view notify*/
+    /** Called by RemoteView.notify(), used to act on the model as effect of a user's interaction*/
     @Override
     public void update(ClientMessage message) {
         if(message.getPlayerId()!=this.game.getCurrentPlayerId())
@@ -45,7 +47,7 @@ public class Controller extends Observable<ErrorMessageForClient> implements Obs
                 sendMessageError(e);
             }
     }
-    /** notifies the ErrorMessageReceiver in RemoteView*/
+    /** notifies the ErrorMessageReceiver in RemoteView, used to send to the client an error*/
     private void sendMessageError(RuntimeException e) {
         ErrorMessageForClient error =new ErrorMessageForClient(game.getCurrentPlayerId(),e);
         this.notify(error);

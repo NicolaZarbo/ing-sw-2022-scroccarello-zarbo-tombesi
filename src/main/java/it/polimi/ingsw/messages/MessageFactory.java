@@ -7,6 +7,7 @@ import it.polimi.ingsw.messages.clientmessages.*;
 import it.polimi.ingsw.messages.servermessages.*;
 //TODO add all the missing messages
 public class MessageFactory {
+    /** Used to parse a message from the server with the right dynamic type*/
     public static ServerMessage getMessageFromServer(String json){
         String type;
         try {
@@ -16,7 +17,6 @@ public class MessageFactory {
             System.out.println(json);
             throw new RuntimeException(json);
         }
-        //String type= jj.get("messageType").getAsString();
         if(type==null)
             throw new MessageErrorException("missing message Type");
         return switch (type) {
@@ -38,7 +38,7 @@ public class MessageFactory {
 
         };
     }
-
+    /** Used to parse a message from the client with the right dynamic type*/
     public static ClientMessage getMessageFromClient(String json){
         JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
         String type= jj.get("messageType").getAsString();

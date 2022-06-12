@@ -7,12 +7,14 @@ import it.polimi.ingsw.model.token.Student;
 import java.util.ArrayList;
 
 public class FactoryCharacter {
+    /**Draws student from the bag when setting up characters */
     private static ArrayList<Student> drawStudents(int x, Bag bag){
         ArrayList<Student> drawn  = new ArrayList<>();
         for(int i =0;i<x; i++)
             drawn.add(bag.getToken()) ;
         return drawn;
     }
+    /** Factory method used to create the right instance of character based on id in the parameters*/
     public static CharacterCard createCharacter(int id, Bag bag)
     {
         CharacterCard card;
@@ -37,7 +39,7 @@ public class FactoryCharacter {
                 c.addStudents(drawStudents(4, bag));
                 card = c;
             }
-            default -> card = null;//throw new CharacterNotFoundException("No results for character " + id);
+            default -> card = null;
         }
 
         return card;

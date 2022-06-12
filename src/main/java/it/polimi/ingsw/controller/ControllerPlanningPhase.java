@@ -16,7 +16,7 @@ public class ControllerPlanningPhase {
         this.modelRound= game.getPlanningPhase();
         this.game=game;
     }
-
+    /** Used to assign to a player the card he just used*/
     public void playAssistantCard(PlayAssistantMessage message){
         if(game.getActualState()!= GameState.planPlayCard || message.getPlayerId()!= game.getCurrentPlayerId()){
             if(game.getActualState()!=GameState.planPlayCard) throw new IllegalMoveException("not the right state");
