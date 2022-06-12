@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-import java.util.List;
+import java.util.*;
 
 public class SetupSceneController extends SceneController{
     public VBox root;
@@ -48,6 +48,8 @@ public class SetupSceneController extends SceneController{
 
     private List<Integer> availableMages;
     private List<Integer> availableTowers;
+    private List<ImageView> towers;
+    private List<ImageView> mages;
     private final DropShadow islandShadow = new DropShadow(8, Color.DARKRED);
 
     public SetupSceneController() {
@@ -59,46 +61,44 @@ public class SetupSceneController extends SceneController{
         root.setStyle("-fx-background-image: url(images/wallpapers/LowerQualityLobby.png); -fx-background-size: 640 400 ;-fx-background-repeat: no-repeat; ");
         root.setCursor(new ImageCursor(new Image("images/pointer/basePointer.png")));
         choiceMsg.setText("Choose your color");
-
         towerchosen=0;
-        wizardchosen =0;
+        wizardchosen=0;
         if(gui.getGame().isTeamPlay())
             teamWelcome();
+        CentralView view = gui.getGame();
+        initClickable();
+        availableTowers = view.getAvailableColor();
+        availableMages = view.getAvailableMages();
+        setTowers();
+    }
+    private void initClickable(){
+        mages= new ArrayList<>();
+        mages.add(mage1);
+        mages.add(mage2);
+        mages.add(mage3);
+        mages.add(mage4);
+        mages.forEach(magus->{magus.setVisible(false);
+            setShadow(magus);
+            magus.setMouseTransparent(true);});
+        towers= new ArrayList<>();
+        towers.add(blacktower);
+        towers.add(whitetower);
+        towers.add(greytower);
+        towers.forEach(pillar->{
+            pillar.setVisible(false);
+            pillar.setMouseTransparent(true);
+        });
+    }
+
+    private void setTowers(){
         Image img=new Image("images/towers/black_tower.png");
         blacktower.setImage(img);
         img=new Image("images/towers/white_tower.png");
         whitetower.setImage(img);
         img=new Image("images/towers/grey_tower.png");
         greytower.setImage(img);
-        CentralView view = gui.getGame();
-        availableTowers = view.getAvailableColor();
-        availableMages = view.getAvailableMages();
-        blacktower.setVisible(false);
-        whitetower.setVisible(false);
-        greytower.setVisible(false);
-        mage1.setVisible(false);
-        setShadow(mage1);
-        mage1.setMouseTransparent(true);
-        mage2.setVisible(false);
-        setShadow(mage2);
-        mage2.setMouseTransparent(true);
-        mage3.setVisible(false);
-        setShadow(mage3);
-        mage3.setMouseTransparent(true);
-        mage4.setVisible(false);
-        setShadow(mage4);
-        mage4.setMouseTransparent(true);
-        setTowers();
-    }
-    private void setTowers(){
         for (Integer towerColor:availableTowers) {
-            ImageView towerC=blacktower;
-            if(towerColor==0)
-                towerC= blacktower;
-            if(towerColor==1)
-                towerC=whitetower;
-            if(towerColor==2)
-                towerC=greytower;
+            ImageView towerC= towers.get(towerColor);
             towerC.setVisible(true);
             towerC.setMouseTransparent(false);
             setShadow(towerC);
@@ -120,12 +120,8 @@ public class SetupSceneController extends SceneController{
     private void showMagicians(){
         errorMsg.setText("");
         choiceMsg.setText("Choose a magician");
-        blacktower.setVisible(false);
-        blacktower.setMouseTransparent(true);
-        whitetower.setVisible(false);
-        whitetower.setMouseTransparent(true);
-        greytower.setVisible(false);
-        greytower.setMouseTransparent(true);
+        towers.forEach(pillar->{pillar.setVisible(false);
+            pillar.setMouseTransparent(true);});
         Image img=new Image("images/wizards/Wizard (1).png");
         mage1.setImage(img);
         img=new Image("images/wizards/Wizard (2).png");
@@ -135,15 +131,7 @@ public class SetupSceneController extends SceneController{
         img=new Image("images/wizards/Wizard (4).png");
         mage4.setImage(img);
         for (Integer mage:availableMages) {
-            ImageView mageT=mage1;
-            if(mage==0)
-                mageT=mage1;
-            if(mage==1)
-                mageT=mage2;
-            if(mage==2)
-                mageT=mage3;
-            if(mage==3)
-                mageT=mage4;
+            ImageView mageT=mages.get(mage);
             mageT.setVisible(true);
             mageT.setMouseTransparent(false);
         }
