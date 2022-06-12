@@ -90,7 +90,7 @@ public class CharacterInputManager {
                 i++;
             }
             System.out.println(BoardsPrinter.print(game));
-            System.out.println("now choose from your board the color of "+nOfStud+" students\n"+Printer.BLUE+"[Color Color Color");
+            System.out.println("now choose from your entrance the color of "+nOfStud+" students\n"+Printer.BLUE+"[Color Color Color");
             input=(new Scanner(System.in)).nextLine();
             multipleInput=input.toLowerCase().split("\s");
             i = 0;

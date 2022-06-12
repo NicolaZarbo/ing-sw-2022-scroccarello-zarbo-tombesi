@@ -2,10 +2,12 @@ package it.polimi.ingsw.client.GUI;
 
 import it.polimi.ingsw.client.InputManager;
 import it.polimi.ingsw.enumerations.GameState;
+import it.polimi.ingsw.model.character.ParameterObject;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class GuiInputManager extends InputManager {
@@ -161,6 +163,66 @@ public class GuiInputManager extends InputManager {
                 return main;
         }
         throw new NullPointerException();
+    }
+    /**
+     * Used solely for character that need no additional parameters
+     * IE : 2-6-8
+     * */
+    public void usaCharacterNoParameter(int characterNumber){
+        if(!game.isYourTurn()||game.getCostOfCard().get(characterNumber)>game.getPersonalPlayer().getCoin())
+            return;
+        if(characterNumber==8 || characterNumber==6 ||characterNumber==2)
+            game.playCharacter(characterNumber, new ParameterObject());
+        cardEffectActivation=false;
+    }
+    public void useCharacter1(int studId, int islandId){
+        if(!game.isYourTurn()||game.getCostOfCard().get(1)>game.getPersonalPlayer().getCoin())
+            return;
+        try{
+            //int stud= getStudentOnCardFromColor(studentColor, 1);
+            ParameterObject param= new ParameterObject(studId,islandId);
+            game.playCharacter(1, param);
+            cardEffectActivation=false;
+        }catch (NullPointerException e){
+            //todo error handling in gui
+        }
+    }
+    public void useCharacter7(List<Integer> studentsFromCard){
+        if(!game.isYourTurn()||game.getCostOfCard().get(7)>game.getPersonalPlayer().getCoin())
+            return;
+        if(!game.getStudentsOnCard().get(7).containsAll(studentsFromCard))
+        {
+            throw new NullPointerException();
+        }
+        //todo needs custom logic to show the entrance and save students
+
+
+    }
+    public void useCharacter9(int targetColor){
+        if(!game.isYourTurn()||game.getCostOfCard().get(9)>game.getPersonalPlayer().getCoin())
+            return;
+        if(targetColor>4 || targetColor<0)
+            return;
+        game.playCharacter(9, new ParameterObject(targetColor));
+        cardEffectActivation=false;
+    }
+    public void useCharacter10(){
+        if(!game.isYourTurn()||game.getCostOfCard().get(10)>game.getPersonalPlayer().getCoin())
+            return;
+
+        //todo a bit tricky must write custom logic for this effect in boardController
+    }
+    public void useCharacter11(int studentId){
+        if(!game.isYourTurn()||game.getCostOfCard().get(11)>game.getPersonalPlayer().getCoin())
+            return;
+        game.playCharacter(11, new ParameterObject(studentId, game.getPersonalPlayer().getId()));
+        cardEffectActivation=false;
+    }
+
+
+
+    public void setCardEffectActivation() {
+        cardEffectActivation=true;
     }
 
     @Override
