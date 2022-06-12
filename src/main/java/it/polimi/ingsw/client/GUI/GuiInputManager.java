@@ -2,17 +2,16 @@ package it.polimi.ingsw.client.GUI;
 
 import it.polimi.ingsw.client.InputManager;
 import it.polimi.ingsw.enumerations.GameState;
-import it.polimi.ingsw.model.character.ParameterObject;
+import it.polimi.ingsw.util.ParameterObject;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class GuiInputManager extends InputManager {
 
-    private CentralView game;
+    private final CentralView game;
     private boolean canDoAction;
     private static boolean isLobbyAvailable;
     private static boolean isConnected;

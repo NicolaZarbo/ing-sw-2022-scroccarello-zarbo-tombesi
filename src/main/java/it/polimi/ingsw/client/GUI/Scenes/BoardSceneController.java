@@ -18,7 +18,7 @@ import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BoardSceneController extends SceneController{
+public abstract class BoardSceneController extends SceneController{// todo eventually we could merge this class with singleBoardController
 
     protected GUI gui;
     private int playerOwner;//the same id of view
@@ -60,22 +60,11 @@ public abstract class BoardSceneController extends SceneController{
     private Image getStudentImage(int idStudent){
         Image stud;
         switch(idStudent/26){
-            case 0->{
-                stud=new Image("images/students/student3d/red.png");
-            }
-            case 1 ->{
-                stud=new Image("images/students/student3d/yellow.png");
-            }
-            case 2->{
-                stud=new Image("images/students/student3d/green.png");
-
-            }
-            case 3->{
-                stud=new Image("images/students/student3d/blue.png");
-            }
-            case 4->{
-                stud=new Image("images/students/student3d/pink.png");
-            }
+            case 0->stud=new Image("images/students/student3d/red.png");
+            case 1 ->stud=new Image("images/students/student3d/yellow.png");
+            case 2-> stud=new Image("images/students/student3d/green.png");
+            case 3-> stud=new Image("images/students/student3d/blue.png");
+            case 4->stud=new Image("images/students/student3d/pink.png");
             default -> {
                 throw new NullPointerException("not an iD");
             }
@@ -99,35 +88,6 @@ public abstract class BoardSceneController extends SceneController{
                 int id= diningroom[i][j];
                 if(id!=-1){
                     img=getStudentImage(id);
-                   /* switch(id/26){
-                        case 0->{
-                            img=new Image("images/students/student3d/red.png");
-                            hall.get(i).get(j).setFill(new ImagePattern(img));
-                            hall.get(i).get(j).setVisible(true);
-                        }
-                        case 1 ->{
-                            img=new Image("images/students/student3d/yellow.png");
-                            hall.get(i).get(j).setFill(new ImagePattern(img));
-                            hall.get(i).get(j).setVisible(true);
-                        }
-                        case 2->{
-                            img=new Image("images/students/student3d/green.png");
-                            hall.get(i).get(j).setFill(new ImagePattern(img));
-                            hall.get(i).get(j).setVisible(true);
-                        }
-                        case 3->{
-                            img=new Image("images/students/student3d/blue.png");
-                            hall.get(i).get(j).setFill(new ImagePattern(img));
-                            hall.get(i).get(j).setVisible(true);
-                        }
-                        case 4->{
-                            img=new Image("images/students/student3d/pink.png");
-                            hall.get(i).get(j).setFill(new ImagePattern(img));
-                            hall.get(i).get(j).setVisible(true);
-                        }
-
-
-                    }*/
                     hall.get(i).get(j).setFill(new ImagePattern(img));
                     hall.get(i).get(j).setVisible(true);
                     hall.get(i).get(j).setDisable(false);
@@ -146,82 +106,42 @@ public abstract class BoardSceneController extends SceneController{
             if(i!=-1){
                 Image img;
                 switch(i){
-                    case 0->{
-                        img=new Image("images/teachers/teacher3d/redProf.png");
-                        table.get(i).setFill(new ImagePattern(img));
-                        table.get(i).setVisible(true);
-                    }
-                    case 1->{
-                        img=new Image("images/teachers/teacher3d/yellowProf.png");
-                        table.get(i).setFill(new ImagePattern(img));
-                        table.get(i).setVisible(true);
-                    }
-                    case 2->{
-                        img=new Image("images/teachers/teacher3d/greenProf.png");
-                        table.get(i).setFill(new ImagePattern(img));
-                        table.get(i).setVisible(true);
-                    }
-                    case 3->{
-                        img=new Image("images/teachers/teacher3d/blueProf.png");
-                        table.get(i).setFill(new ImagePattern(img));
-                        table.get(i).setVisible(true);
-                    }
-                    case 4->{
-                        img=new Image("images/teachers/teacher3d/pinkProf.png");
-                        table.get(i).setFill(new ImagePattern(img));
-                        table.get(i).setVisible(true);
-                    }
+                    case 0->img=new Image("images/teachers/teacher3d/redProf.png");
+                    case 1->img=new Image("images/teachers/teacher3d/yellowProf.png");
+                    case 2->img=new Image("images/teachers/teacher3d/greenProf.png");
+                    case 3->img=new Image("images/teachers/teacher3d/blueProf.png");
+                    case 4->img=new Image("images/teachers/teacher3d/pinkProf.png");
+                    default -> {throw new RuntimeException("not a professor id");}
                 }
-
+                table.get(i).setFill(new ImagePattern(img));
+                table.get(i).setVisible(true);
             }
         }
     }
     public void setTowers(List<ImageView>towers,int player){
-        int towercolor=gui.getGame().getPlayers().get(player-1).getTowerColor();
-        int towersleft=gui.getGame().getPlayers().get(player-1).getBoard().getTowersLeft();
-        switch(towercolor){
-            case 0->{
-                //black
-                Image img=new Image("images/towers/black_tower.png");
-                for(int i=0;i<towersleft;i++){
-                    towers.get(i).setImage(img);
-                    towers.get(i).setVisible(true);
-                }
-            }
-            case 1->{
-                //white
-                Image img=new Image("images/towers/white_tower.png");
-                for(int i=0;i<towersleft;i++){
-                    towers.get(i).setImage(img);
-                    towers.get(i).setVisible(true);
-                }
-            }
-            case 2->{
-                //grey
-                Image img=new Image("images/towers/grey_tower.png");
-                for(int i=0;i<towersleft;i++){
-                    towers.get(i).setImage(img);
-                    towers.get(i).setVisible(true);
-                }
-            }
-
+        int towerColor=gui.getGame().getPlayers().get(player-1).getTowerColor();
+        int towersLeft=gui.getGame().getPlayers().get(player-1).getBoard().getTowersLeft();
+        Image img;
+        switch(towerColor){
+            case 0->img=new Image("images/towers/black_tower.png");
+            case 1->img=new Image("images/towers/white_tower.png");
+            case 2->img=new Image("images/towers/grey_tower.png");
+            default -> {throw new RuntimeException("not a towerColor");}
+        }
+        for(int i=0;i<towersLeft;i++){
+            towers.get(i).setImage(img);
+            towers.get(i).setVisible(true);
         }
     }
-    public void setPlayerName(Text textbox, int player){
+    public void setPlayerName(Text textBox, int player){
         String name=gui.getGame().getPlayers().get(player-1).getUsername();
-        textbox.setText("Player: "+name);
-    }
-    public void sendToHand(){
-        gui.showHand();
-    }
-    public void sendToMap(){
-        gui.showIslands();
+        textBox.setText("Player: "+name);
     }
     /**
      * used in initialize to set the present student Clickable based on some need
      * @param clickedColor the color of the student (id/26) */
     protected void setEntranceClickable(Circle student, int clickedColor){
-        clickedEntranceStudentsColor=new ArrayList<>();//fixme make distinctions on saved student
+        clickedEntranceStudentsColor=new ArrayList<>();
         student.setDisable(false);
         setStudentColoredShadow(student,clickedColor);
         student.setOnMouseClicked(mouseEvent -> {
@@ -241,10 +161,11 @@ public abstract class BoardSceneController extends SceneController{
             }
         });
     }
+    /** Used to add a shadow to a student on mouse over*/
     private void setStudentColoredShadow(Circle student, int color){
         Color shadowColor =switch (color){
             case 0-> Color.DARKRED;
-            case 1 -> Color.LIGHTGOLDENRODYELLOW;
+            case 1 -> Color.YELLOW;
             case 2 ->Color.DARKOLIVEGREEN;
             case 3 -> Color.DARKBLUE;
             case 4 ->Color.PURPLE;
@@ -253,10 +174,12 @@ public abstract class BoardSceneController extends SceneController{
         DropShadow islandShadow = new DropShadow(8, shadowColor);
         student.setOnMouseEntered(event -> student.setEffect(islandShadow));
         student.setOnMouseExited(event -> student.setEffect(null));
-
     }
     protected abstract void showMoveButton();
     protected abstract void hideMoveButtons();
+    public void setPlayerOwner(int owner){
+        playerOwner=owner;
+    }
     public boolean isYourBoard(){
         return playerOwner==gui.getGame().getPersonalPlayer().getId();
     }

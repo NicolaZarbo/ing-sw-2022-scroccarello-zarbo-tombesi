@@ -1,17 +1,12 @@
 package it.polimi.ingsw.client.GUI.Scenes;
 
-import it.polimi.ingsw.client.GUI.GuiInputManager;
-import javafx.animation.PauseTransition;
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
-import javafx.util.Duration;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,11 +67,14 @@ public class SingleBoardController extends BoardSceneController{
         initTowers();
         initTable();
         initDiningRoom();
+        super.setPlayerOwner(boardNumber);
         super.setEntrance(entranceList,boardNumber+1);
         super.setHall(diningRows,boardNumber+1);
         super.setTowers(towerList,boardNumber+1);
         setProfessors(teacherList,boardNumber+1);
     }
+    /** Method used to refresh the scene while already on it
+     * quite possibly stupid/useless*/
     public void refresh(){
         super.setEntrance(entranceList,boardNumber+1);
         super.setHall(diningRows,boardNumber+1);
@@ -94,15 +92,7 @@ public class SingleBoardController extends BoardSceneController{
     protected void hideMoveButtons() {
         popupPanel.setVisible(false);
         popupPanel.setMouseTransparent(true);
-
         refresh();
-        /*PauseTransition littlePause= new PauseTransition(Duration.seconds(1));//wait for the message to arrive
-        littlePause.setOnFinished( actionEvent -> refresh());
-
-
-         */
-
-
     }
 
     public void moveToBoard() {

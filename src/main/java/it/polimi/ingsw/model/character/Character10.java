@@ -1,9 +1,9 @@
 package it.polimi.ingsw.model.character;
 
 import it.polimi.ingsw.exceptions.CharacterErrorException;
-import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.util.ParameterObject;
 
 public class Character10 extends CharacterCard{
     public Character10(int id) {

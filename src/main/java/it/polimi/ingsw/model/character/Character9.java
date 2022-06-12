@@ -1,10 +1,9 @@
 package it.polimi.ingsw.model.character;
 
 import it.polimi.ingsw.exceptions.CharacterErrorException;
-import it.polimi.ingsw.messages.servermessages.CharacterTokenMessage;
-import it.polimi.ingsw.messages.servermessages.CharacterUpdateMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.enumerations.TokenColor;
+import it.polimi.ingsw.util.ParameterObject;
 
 public class Character9 extends TurnEffectCharacter{
     public Character9(int id) {

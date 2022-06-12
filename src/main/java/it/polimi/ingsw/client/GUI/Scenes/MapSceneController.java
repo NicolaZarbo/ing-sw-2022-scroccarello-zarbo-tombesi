@@ -145,7 +145,6 @@ public class MapSceneController extends SceneController {
         setContainerList(containers);
     }
     private void setTower(SimplifiedIsland island){
-        //todo check if the number on island reflect those on view
         int color=island.getTowerColor();
         int islandId=island.getIslandId()+1;
         if(color!=-1){
@@ -203,8 +202,8 @@ public class MapSceneController extends SceneController {
                 islandStudentPlaces.get(i).setVisible(true);
             }
             i++;
-        }//fixme this works only when showing less than 10 stud, add something to show the overflown ones
-       // if(overflow.size()>0)
+        }
+        //if(overflow.size()>0)
             setOverflow(overflow);
     }
 
@@ -269,8 +268,6 @@ public class MapSceneController extends SceneController {
         });
     }
     private void setClickChooseIsland(Circle island){
-        //island.setDisable(false);
-        //int id=Integer.parseInt(island.getId().substring(6));
         island.setOnMouseClicked(mouseEvent -> {
             int islandID=Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6))-1;
             if(view.getState()==GameState.actionMoveMother) {
@@ -328,9 +325,13 @@ public class MapSceneController extends SceneController {
         List<Circle> cloudStud=cloudStudentsByNumber.get(cloudNumber);
         int i=0;
         for (Integer stud:cloud) {
-            cloudStud.get(i).setFill(new ImagePattern(studentColorPath(stud,false)));
-            cloudStud.get(i).setVisible(true);
-            i++;
+            if(stud!=-1) {
+                cloudStud.get(i).setFill(new ImagePattern(studentColorPath(stud, false)));
+                cloudStud.get(i).setVisible(true);
+                cloudByNumber.get(cloudNumber).setOpacity(1);
+                i++;
+            }
+            else cloudByNumber.get(cloudNumber).setOpacity(0.5);
         }
     }
     private Image studentColorPath(int studId, boolean highContrast){

@@ -26,8 +26,9 @@ public class BoardSceneXController extends SceneController{
     public AnchorPane root;
     public Text context_text;
     public Pane context_container;
-    private GUI gui;
-    private CentralView view;
+    private final GUI gui;
+    private final CentralView view;
+    private List<Pane> containers;
     public BoardSceneXController() {
         this.gui= GuiInputManager.getGui();
         view=gui.getGame();
@@ -38,7 +39,7 @@ public class BoardSceneXController extends SceneController{
         root.setStyle("-fx-background-image:url(images/wallpapers/sky_no_title.png); -fx-background-position: center; -fx-background-size: 1280 796");
         root.setCursor(new ImageCursor(new Image("images/pointer/baseArrow.png")));
         setContextText();
-        List<Pane> containers= new ArrayList<>();
+        containers= new ArrayList<>();
         containers.add(up_left);
         containers.add(up_right);
         containers.add(down_left);
@@ -104,11 +105,11 @@ public class BoardSceneXController extends SceneController{
         up_right.setVisible(false);
     }
     private void disposition3(){
-        Pane personal=containerList.get(view.getPlayers().lastIndexOf(view.getPersonalPlayer()));
+        Pane personal=containers.get(view.getPlayers().lastIndexOf(view.getPersonalPlayer()));
         up_left.setTranslateX(280);
         up_right.setTranslateY(330);
         down_left.setTranslateY(56);
-        for (Pane container:containerList) {
+        for (Pane container:containers) {
             container.setScaleX(0.7);
             container.setScaleY(0.7);
         }

@@ -63,7 +63,7 @@ public class HandSceneController extends SceneController{
                 names.get(i).setVisible(true);
                 cardsLastPlayed.get(i).setVisible(true);
                 names.get(i).setText(player.getUsername().substring(0,Math.min(9,player.getUsername().length())));
-                cardsLastPlayed.get(i).setFill(new ImagePattern(getCardImage(view.getPlayedCardThisTurnByPlayerId(player.getId()))));
+                cardsLastPlayed.get(i).setFill(new ImagePattern(getCardImage(1+view.getPlayedCardThisTurnByPlayerId(player.getId()))));
                 i++;
             }
         }

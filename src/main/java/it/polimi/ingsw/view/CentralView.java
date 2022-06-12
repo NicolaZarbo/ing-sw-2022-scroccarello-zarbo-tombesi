@@ -6,7 +6,7 @@ import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.messages.clientmessages.*;
 import it.polimi.ingsw.messages.servermessages.*;
-import it.polimi.ingsw.model.character.ParameterObject;
+import it.polimi.ingsw.util.ParameterObject;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
@@ -253,7 +253,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         else throw new IllegalMoveException("Island not available");
     }
     public void chooseCloud(int cloudId){
-        if(cloudId<clouds.size() && clouds.get(cloudId).length==3)
+        if(cloudId<clouds.size() && clouds.get(cloudId)[0]!=-1)
             notify(new ChooseCloudMessage(cloudId, personalPlayer.getId()));
         else
             throw new RuntimeException("invalid Cloud");

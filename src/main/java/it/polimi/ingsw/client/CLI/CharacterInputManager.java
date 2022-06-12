@@ -3,18 +3,15 @@ package it.polimi.ingsw.client.CLI;
 import it.polimi.ingsw.client.CLI.printers.BoardsPrinter;
 import it.polimi.ingsw.client.CLI.printers.IslandsPrinter;
 import it.polimi.ingsw.client.CLI.printers.Printer;
-import it.polimi.ingsw.exceptions.CharacterErrorException;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
-import it.polimi.ingsw.model.character.ParameterObject;
+import it.polimi.ingsw.util.ParameterObject;
 import it.polimi.ingsw.client.CLI.printers.CharacterPrinter;
 import it.polimi.ingsw.view.CentralView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.IntFunction;
 
 public class CharacterInputManager {
     CentralView game;
