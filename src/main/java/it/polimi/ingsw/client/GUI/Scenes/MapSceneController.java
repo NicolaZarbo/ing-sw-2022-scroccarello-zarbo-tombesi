@@ -368,15 +368,20 @@ public class MapSceneController extends SceneController {
     }
     /** used to add bridges to every island and its subIslands*/
     private void setBridges(SimplifiedIsland island){
-        int mainId=island.getIslandId()+1;
+        //int mainId=island.getIslandId()+1;
         for (SimplifiedIsland subIsland:island.getSubIslands()) {
             int subId=subIsland.getIslandId()+1;
-            if(subId<mainId){
+            int beforeIsland=subId-1;
+            if(beforeIsland==0)
+                beforeIsland=12;
+            /*if(subId<mainId || subId==12){
                 bridgeByIslandBefore.get(subId).setVisible(true);
             }
             else {
                 bridgeByIslandBefore.get(mainId).setVisible(true);
             }
+            */
+            bridgeByIslandBefore.get(beforeIsland).setVisible(true);
             setBridges(subIsland);
         }
     }

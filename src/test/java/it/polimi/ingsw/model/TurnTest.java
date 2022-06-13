@@ -96,11 +96,12 @@ public class TurnTest extends TestCase {
     public void testUnifyBefore() {
         game.getIsland(1).setTower(new Tower(TowerColor.black,1));
         game.getIsland(0).setTower(new Tower(TowerColor.black,3));
+        Island target =game.getIsland(1);
         if(turn.isUnifiableBefore(1))
             turn.unifyBefore(1);
-        assertNotNull(game.getIsland(1));
-
-        assertTrue("size isl: "+game.getIsland(1).getIslandSize(),game.getIsland(1).getIslandSize()==2);
+        assertFalse(game.getIslands().contains(target));
+        assertTrue(game.getIsland(0).getSubIslands().contains(target));
+        assertEquals("size isl: " + game.getIsland(0).getIslandSize(), 2, game.getIsland(0).getIslandSize());
        // System.out.println(game.getMotherNature().getPosition()+ " size islands "+ game.getIslands().size() + " isola ");
     }
 

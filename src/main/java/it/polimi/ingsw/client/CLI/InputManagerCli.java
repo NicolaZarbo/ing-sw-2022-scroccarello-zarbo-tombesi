@@ -198,8 +198,13 @@ public class InputManagerCli  extends InputManager {
 
     public void caseActionChooseCloud() {
         if(isInteger && inputInteger<=game.getClouds().size() && inputInteger>0) {
+            try{
             game.chooseCloud(inputInteger - 1);
             showWait();
+            }catch (RuntimeException ignore){
+                System.out.println(Cli.IMP+"please select a good cloud"+ Cli.RST);
+                decodeInput();
+            }
         }
         else cli.askToRetry(Printer.PINK+"please select an available cloud id"+Printer.RST);
     }

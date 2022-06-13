@@ -75,9 +75,10 @@ public class Turn {
         islandConquest( islandId);
         if (isUnifiableNext( position)) {
             unifyNext( position);
+
         }
-        if (isUnifiableBefore( position)) {
-            unifyBefore( position);
+        if (isUnifiableBefore( mother.getPosition())) {
+            unifyBefore( mother.getPosition());
         }
         game.groupMultiMessage(new MotherPositionMessage(game));
         if(game.getIslands().size()<=3)
@@ -110,25 +111,19 @@ public class Turn {
     }
 
     public boolean isUnifiableNext(int pos){
-        boolean b=false;
         int size = game.getIslands().size();
         Island central=game.getIslands().get(pos);
         Island next=game.getIslands().get(Math.floorMod(pos+1,size));
-
         if( !central.getTowers().isEmpty() && !next.getTowers().isEmpty())
             if(central.getTowers().get(0).getColor()==next.getTowers().get(0).getColor())
-                b=true;
-        return b;
+                return true;
+        return false;
     }
     public  boolean isUnifiableBefore(int pos){
-        boolean b=false;
-        int size = game.getIslands().size();
-        Island central=game.getIslands().get(pos);
-        Island before=game.getIslands().get(Math.floorMod(pos-1,size));
-        if( !central.getTowers().isEmpty() && !before.getTowers().isEmpty())
-            if(central.getTowers().get(0).getColor()==before.getTowers().get(0).getColor())
-                b=true;
-        return b;
+        int backpos=pos-1;
+        if(pos==0)
+            backpos=game.getIslands().size()-1;
+        return isUnifiableNext(backpos);
     }
 
     public  void unifyNext(int pos) {
@@ -136,31 +131,21 @@ public class Turn {
         Island central = game.getIslands().get(pos);
         Island next = game.getIslands().get(Math.floorMod(pos + 1, islandNumber));
         if (central.getTowers().get(0).getColor() == next.getTowers().get(0).getColor()) {
-            //central.addAllStudents(next.getStudents());
             central.addSubIsland(next);
-            //central.addAllTowers(next.getTowers());
             game.getIslands().remove(next);
             central.incrementIslandSize();
-            //game.getMotherNature().changePosition(pos);
             }
 
         game.groupMultiMessage(new IslandsMessage(game));
 
     }
     public  void unifyBefore( int pos) {
-        int islandNumber = game.getIslands().size();
-        Island central = game.getIslands().get(pos);
-        Island before = game.getIslands().get(Math.floorMod(pos - 1, islandNumber));
-        if (central.getTowers().get(0).getColor() == before.getTowers().get(0).getColor()) {
-            //central.addAllStudents(before.getStudents());
-            central.addSubIsland(before);
-            //central.addAllTowers(before.getTowers());
-            game.getIslands().remove(before);
-            central.incrementIslandSize();
-           // if (game.getMotherNature().getPosition() == pos - 1)
-            game.getMotherNature().changePosition(pos-1);
-            }
-        game.groupMultiMessage(new IslandsMessage(game));
+        int backpos=pos-1;
+        if(pos==0)
+            backpos=game.getIslands().size()-1;
+        unifyNext(backpos);
+        MotherNature mother= game.getMotherNature();
+        mother.changePosition(Math.floorMod(mother.getPosition()-1,game.getIslands().size()));
     }
     /**
      @param player  the player who won the influence contest */

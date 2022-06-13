@@ -118,7 +118,7 @@ public class GuiInputManager extends InputManager {
         if(!canDoAction || game.getState()!= GameState.actionMoveStudent || !game.isYourTurn())
             return;
         if(!game.getIslands().contains(game.getIslandById(islandId)))
-            game.moveStudentToIsland(singleStudent,getFatherIsland(islandId).getIslandId());
+            game.moveStudentToIsland(singleStudent, getRootIsland(islandId).getIslandId());
         else {
             game.moveStudentToIsland(singleStudent, islandId);
         }
@@ -147,7 +147,7 @@ public class GuiInputManager extends InputManager {
     public void saveSelectedStud(int selectedStudent){this.singleStudent=selectedStudent;}
     /** Used to get the main island of the cluster
      * @param islandId a sub-island of the cluster */
-    private SimplifiedIsland getFatherIsland(int islandId){
+    private SimplifiedIsland getRootIsland(int islandId){
         SimplifiedIsland sub= game.getIslandById(islandId);
         for (SimplifiedIsland main: game.getIslands()) {
             if(game.getEverySubIsland(main).contains(sub))

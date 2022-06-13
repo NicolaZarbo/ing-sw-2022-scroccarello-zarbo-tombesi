@@ -105,7 +105,7 @@ public class WelcomeSceneController extends SceneController {
         }
         try {
             int port =Integer.parseInt( port_server.getText());
-            if(port<65535 && port>49152){
+            if(port>65535 || port<49152){
                 error_serverOptions.setVisible(true);
                 error_serverOptions.setText("bad port");
                 return false;
