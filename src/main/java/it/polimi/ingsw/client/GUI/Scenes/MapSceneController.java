@@ -281,7 +281,7 @@ public class MapSceneController extends SceneController {
                 gui.getInputManager().moveMotherTo(islandID);
                 info.setText("wait for your turn");
             }
-            if(view.getState()==GameState.actionMoveStudent && gui.getInputManager().hasSelectedStudent()) {
+            if(view.getState()==GameState.actionMoveStudent && gui.getInputManager().hasSelectedStudent() && !gui.getInputManager().isActivatingCardEffect()) {
                 gui.getInputManager().moveToIsland(islandID);
                 for (int i = 1; i < 13; i++)
                     islandByNumber.get(i).setDisable(false);

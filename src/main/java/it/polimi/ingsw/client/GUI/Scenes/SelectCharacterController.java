@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.GUI.Scenes;
 
 import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.view.CentralView;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -48,7 +49,10 @@ public class SelectCharacterController extends SceneController{
     public void initialize() {
         initCharacters();
         initStudCharacters();
-
+        if(!view.isYourTurn() || !( view.getState()== GameState.actionMoveStudent || view.getState()== GameState.actionMoveMother)) {
+            CharacterContainer.setDisable(true);
+            CharacterContainer.setOpacity(0.5);
+        }
     }
 
     private void initCharacters(){
