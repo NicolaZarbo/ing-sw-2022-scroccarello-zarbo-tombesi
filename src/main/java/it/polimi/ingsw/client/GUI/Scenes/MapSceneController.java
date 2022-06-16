@@ -84,13 +84,16 @@ public class MapSceneController extends SceneController {
     private void moveStudentContext(){
         if(gui.getInputManager().isActivatingCardEffect()) {
             //todo logic of what to show if a character is being used
-            info.setText("text of what you should do");
+
             return;
         }
             GuiInputManager inputManager= gui.getInputManager();
         if(inputManager.hasSelectedStudent())
             info.setText("Select a target island for the student");
         else info.setText("Go to bord and choose a student to move out of entrance");
+    }
+    private void character1Context(){
+        info.setText("choose a target Island for the student");
     }
     private void chooseCloudContext(){
         setOtherContainerTransparent(cloud_container);
@@ -171,9 +174,13 @@ public class MapSceneController extends SceneController {
             int islandImage=(islandID%3)+1;
             Image img = new Image("images/simple_elements/island"+islandImage+".png");
             islandByNumber.get(islandID+1).setFill(new ImagePattern(img));
-            if(view.getState()!=GameState.actionMoveMother)
-                islandByNumber.get(islandID+1).setCursor(new ImageCursor(new Image("images/pointer/lookUp.png")));
-            else islandByNumber.get(islandID+1).setCursor(new ImageCursor(new Image("images/pointer/basePointer.png")));
+            ImageCursor imgCursor;
+            if(view.getState()==GameState.actionMoveMother && !gui.getInputManager().isActivatingCardEffect())
+                imgCursor=new ImageCursor(new Image("images/pointer/basePointer.png"));
+            else if ((gui.getInputManager().isActivatingCardEffect() || view.getState()==GameState.actionMoveMother) && gui.getInputManager().hasSelectedStudent()) {
+                imgCursor= new ImageCursor(studentColorPath(gui.getInputManager().getSingleStudent(),false));
+            } else imgCursor=new ImageCursor(new Image("images/pointer/lookUp.png"));
+            islandByNumber.get(islandID+1).setCursor(imgCursor);
             islandByNumber.get(islandID+1).setDisable(false);
             islandByNumber.get(islandID+1).setOpacity(1);
             setClickChooseIsland( islandByNumber.get(islandID+1));
@@ -253,7 +260,7 @@ public class MapSceneController extends SceneController {
             hoverBackGround.setEffect(islandShadow);
             DropShadow blackShadow= new DropShadow(10,Color.BLACK);
             islandStudent_container.setEffect(blackShadow);
-            if(view.isYourTurn()&& view.getState()==GameState.actionMoveMother){
+            if(view.isYourTurn()&& view.getState()==GameState.actionMoveMother && !gui.getInputManager().isActivatingCardEffect()){
                 motherZoneOfIsland.get(isl.getIslandId()+1).setVisible(true);
                 motherZoneOfIsland.get(isl.getIslandId()+1).setOpacity(0.6);
             }
@@ -279,6 +286,8 @@ public class MapSceneController extends SceneController {
                 for (int i = 1; i < 13; i++)
                     islandByNumber.get(i).setDisable(false);
             }
+            if(gui.getInputManager().isActivatingCardEffect())
+                gui.getInputManager().useCharacter1(islandID);
         });
     }
     private void setCloud(){

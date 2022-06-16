@@ -155,6 +155,11 @@ public class GuiInputManager extends InputManager {
         }
         throw new NullPointerException();
     }
+
+    public int getSingleStudent() {
+        return singleStudent;
+    }
+
     /**
      * Used solely for character that need no additional parameters
      * IE : 2-6-8
@@ -166,12 +171,11 @@ public class GuiInputManager extends InputManager {
             game.playCharacter(characterNumber, new ParameterObject());
         cardEffectActivation=false;
     }
-    public void useCharacter1(int studId, int islandId){
+    public void useCharacter1( int islandId){
         if(!game.isYourTurn()||game.getCostOfCard().get(1)>game.getPersonalPlayer().getCoin())
             return;
         try{
-            //int stud= getStudentOnCardFromColor(studentColor, 1);
-            ParameterObject param= new ParameterObject(studId,islandId);
+            ParameterObject param= new ParameterObject(singleStudent,islandId);
             game.playCharacter(1, param);
             cardEffectActivation=false;
         }catch (NullPointerException e){
@@ -213,6 +217,10 @@ public class GuiInputManager extends InputManager {
      * IE : when the player is in the middle of selecting the target of an effect he can't move tokens */
     public void setCardEffectActivation() {
         cardEffectActivation=true;
+    }
+    /** Resets the current activation of an effect*/
+    public void resetEffectActivation(){
+        cardEffectActivation=false;
     }
 
     public static boolean isLobbyAvailable(){

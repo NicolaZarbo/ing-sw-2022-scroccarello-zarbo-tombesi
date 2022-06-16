@@ -29,7 +29,7 @@ public class Character1 extends TokensCharacter{
         if(game.getBag().isEmpty())
             game.gameOver();
         incrementCost();
-        game.groupMultiMessage(new CharacterTokenMessage(1,game));
+       // game.groupMultiMessage(new CharacterTokenMessage(1,game));fixme
     }
 
 

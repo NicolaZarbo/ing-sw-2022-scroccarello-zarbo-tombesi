@@ -107,7 +107,7 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void showCharacters() {
-        //todo have these methods call this class setScene method inside
+        setScene(SceneEnum.CharacterScene);
     }
 
     @Override
