@@ -78,7 +78,7 @@ public class Setup {
     public static List<Island> createIslands(int nIsole, Bag bag){
         List<Island> islands = new ArrayList<>();
         Island isl;
-        ArrayList<Student> students = bag.setupStudents(nIsole);
+        ArrayList<Student> students = bag.setupStudentsOnIslands(nIsole);
         int k=0;
         for(int i=0;i<nIsole;i++){
             isl =  new Island(i);

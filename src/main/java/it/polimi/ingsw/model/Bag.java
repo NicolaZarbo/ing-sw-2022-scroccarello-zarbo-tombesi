@@ -41,10 +41,10 @@ public class Bag {
         else throw new EmptyBagException("no tokens left");
     }
 
-    /**
+    /**It sets students on islands in setup phase
      * @param nIslands number of islands on game
      * @return shuffled list of students*/
-    public ArrayList<Student> setupStudents(int nIslands){
+    public ArrayList<Student> setupStudentsOnIslands(int nIslands){
         ArrayList<Student> students = new ArrayList<>();
         int molt=left/(nIslands-2);
         for (int i = 0; i < nIslands-2; i++) {
