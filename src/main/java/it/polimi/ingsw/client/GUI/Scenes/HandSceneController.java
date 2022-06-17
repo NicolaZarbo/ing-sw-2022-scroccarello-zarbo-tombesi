@@ -37,7 +37,7 @@ public class HandSceneController extends SceneController{
         this.view=gui.getGame();
     }
 
-    public void initialize(){
+    public void initialize(){ //fixme sometimes the the played and not played cards aren't shown correctly after some moves, like using a character
         root.setStyle("-fx-background-image: url(images/wallpapers/sky_no_title.png); ");
         root.setCursor(new ImageCursor(new Image("images/pointer/baseArrow.png")));
         setContext();
@@ -138,6 +138,8 @@ public class HandSceneController extends SceneController{
                 assistantCards.get(i).setOpacity(1);
                 atLeastOneFree=true;
             }
+            if(view.getCardYouPlayed()==i)
+                assistantCards.get(i).setOpacity(0.4);
             setClickChoose(assistantCards.get(i),i);
             i++;
         }

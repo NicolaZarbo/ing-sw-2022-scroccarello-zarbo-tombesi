@@ -177,10 +177,11 @@ public class GuiInputManager extends InputManager {
         try{
             ParameterObject param= new ParameterObject(singleStudent,islandId);
             game.playCharacter(1, param);
-            cardEffectActivation=false;
         }catch (NullPointerException e){
             //todo error handling in gui
         }
+        singleStudent=-1;
+        cardEffectActivation=false;
     }
     public void useCharacter7(List<Integer> studentsFromCard){
         if(!game.isYourTurn()||game.getCostOfCard().get(7)>game.getPersonalPlayer().getCoin())

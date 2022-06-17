@@ -32,6 +32,9 @@ public class InputManagerCli  extends InputManager {
             showManager();
             return;
         }
+        if(multipleInput[0].equalsIgnoreCase("close")){
+            cli.close();
+        }
         try{
             inputInteger=Integer.parseInt(multipleInput[0]);
             isInteger=true;
