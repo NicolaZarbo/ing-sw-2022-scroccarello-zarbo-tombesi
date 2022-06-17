@@ -19,7 +19,7 @@ public class IslandsMessage extends ServerMessage{
 
     public IslandsMessage(Game game) {
         super(game);
-        this.islandList= ModelToViewTranslate.translateIsland(game.getIslandList());
+        this.islandList= ModelToViewTranslate.translateIsland(game.getIslands());
         super.serialize();
     }
 

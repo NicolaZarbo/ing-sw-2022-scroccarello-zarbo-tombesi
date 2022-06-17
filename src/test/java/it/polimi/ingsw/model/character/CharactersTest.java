@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.character;
 
+import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.token.Student;
 import it.polimi.ingsw.enumerations.TokenColor;
@@ -15,7 +16,7 @@ public class CharactersTest extends TestCase {
 
     public void setUp() throws Exception {
         super.setUp();
-        this.gameTest=new Game(false,4,12);
+        this.gameTest=new GameStub(false,4,12);
     }
 
     public void testCharacter1(){

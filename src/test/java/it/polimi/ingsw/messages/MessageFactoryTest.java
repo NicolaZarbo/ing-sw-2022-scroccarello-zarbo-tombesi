@@ -1,5 +1,6 @@
 package it.polimi.ingsw.messages;
 
+import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.messages.clientmessages.*;
 import it.polimi.ingsw.messages.servermessages.*;
 import it.polimi.ingsw.model.Game;
@@ -16,7 +17,7 @@ public class MessageFactoryTest extends TestCase {
 
     public void setUp() throws Exception {
         super.setUp();
-        this.gameTest=new Game(false,4,12);
+        this.gameTest=new GameStub(false,4,12);
     }
 
     public void testGetMessageFromServer() {

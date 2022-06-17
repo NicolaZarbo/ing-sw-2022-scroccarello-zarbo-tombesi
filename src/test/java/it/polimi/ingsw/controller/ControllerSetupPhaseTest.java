@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.messages.clientmessages.PrePlayerMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.LobbyPlayer;
@@ -15,7 +16,7 @@ public class ControllerSetupPhaseTest extends TestCase {
     ControllerSetupPhase cTest;
     public void setUp() throws Exception {
         super.setUp();
-        Game gTest=new Game(false, 4, 12);
+        Game gTest=new GameStub(false, 4, 12);
         this.cTest=new ControllerSetupPhase(gTest);
     }
 
@@ -39,7 +40,7 @@ public class ControllerSetupPhaseTest extends TestCase {
         this.cTest.getSetup().setPreOrder(list);
         this.cTest.getSetup().addPrePlayer(player1);
         PrePlayerMessage message=new PrePlayerMessage(0,player1.getTowerColor().ordinal(),player1.getMage().ordinal(), player1.getNickname());
-        this.cTest.getModel().setManuallyGamePhase(GameState.setupPlayers);
+        ((GameStub)this.cTest.getModel()).setManuallyGamePhase(GameState.setupPlayers);
         try{
             this.cTest.createPlayer(message);
             assertTrue(true);

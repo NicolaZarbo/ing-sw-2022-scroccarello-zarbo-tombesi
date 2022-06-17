@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 
+import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.model.token.Student;
 import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.model.token.Tower;
@@ -18,7 +19,7 @@ public class TurnTest extends TestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        game = new Game(false,2,12);
+        game = new GameStub(false,2,12);
         turn= new Turn(game);
         Student[] stud = new Student[3];
         stud[0]=game.getBag().getToken();
@@ -74,14 +75,14 @@ public class TurnTest extends TestCase {
         pos = game.getIslands().size()-1;//works in all position
 
         game.getIsland(pos).setTower(new Tower(TowerColor.black,1));
-        game.getIsland(Math.floorMod(pos+1,game.getIslandList().size())).setTower(new Tower(TowerColor.black,3));
+        game.getIsland(Math.floorMod(pos+1,game.getIslands().size())).setTower(new Tower(TowerColor.black,3));
         assertTrue(turn.isUnifiableNext(pos));
     }
 
     public void testIsUnifiableBefore() {
         int pos = 1;
         game.getIsland(pos).setTower(new Tower(TowerColor.black,1));
-        game.getIsland(Math.floorMod(pos-1,game.getIslandList().size())).setTower(new Tower(TowerColor.black,3));
+        game.getIsland(Math.floorMod(pos-1,game.getIslands().size())).setTower(new Tower(TowerColor.black,3));
         assertTrue(turn.isUnifiableBefore(1));
     }
 
@@ -134,7 +135,7 @@ public class TurnTest extends TestCase {
 
 
     public void testIslandConquest() {
-        for (Island island: game.getIslandList()) {
+        for (Island island: game.getIslands()) {
             turn.moveMotherNature(1);
             System.out.println("id ISola : "+island.getID());
             for (Tower tower:island.getTowers()) {

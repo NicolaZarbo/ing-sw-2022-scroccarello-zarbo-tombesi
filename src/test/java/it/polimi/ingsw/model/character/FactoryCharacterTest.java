@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.character;
 
+import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.model.Game;
 import junit.framework.TestCase;
 
@@ -10,7 +11,7 @@ public class FactoryCharacterTest extends TestCase {
     Game gameTest;
     public void setUp() throws Exception {
         super.setUp();
-        this.gameTest=new Game(false,4,12);
+        this.gameTest=new GameStub(false,4,12);
     }
 
     public void testCreateCharacter() {

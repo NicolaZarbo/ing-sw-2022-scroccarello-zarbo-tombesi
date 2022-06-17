@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
@@ -15,10 +16,10 @@ import java.util.Random;
 public class ControllerActionPhaseTest extends TestCase {
 
     ControllerActionPhase controllerTest;
-    Game gameTest;
+    GameStub gameTest;
     public void setUp() throws Exception {
         super.setUp();
-        this.gameTest=new Game(false,4,12);
+        this.gameTest=new GameStub(false,4,12);
         this.controllerTest=new ControllerActionPhase(gameTest);
         this.controllerTest.getGame().getPlanningPhase().setCloud();
     }
@@ -26,7 +27,7 @@ public class ControllerActionPhaseTest extends TestCase {
         Player player=this.controllerTest.getGame().getPlayer(0);
         Board board=player.getBoard();
         ArrayList<Student> entrance=board.getEntrance();
-        this.controllerTest.getGame().setManuallyGamePhase(GameState.actionMoveStudent);
+        ((GameStub)this.controllerTest.getGame()).setManuallyGamePhase(GameState.actionMoveStudent);
         for(int i=0;i<3;i++) {
             StudentToHallMessage message=new StudentToHallMessage(0,0);
             for(Student stud:entrance){
@@ -47,7 +48,7 @@ public class ControllerActionPhaseTest extends TestCase {
     }
 
     public void testMoveWrongStudentToHall() {
-        this.controllerTest.getGame().setManuallyGamePhase(GameState.actionMoveStudent);
+        ((GameStub)this.controllerTest.getGame()).setManuallyGamePhase(GameState.actionMoveStudent);
         for (int i = 0; i < 3; i++) {
             StudentToHallMessage message = new StudentToHallMessage(0, i);
             try {
@@ -72,7 +73,7 @@ public class ControllerActionPhaseTest extends TestCase {
         assertNotSame(this.controllerTest.getGame().getActualState(),GameState.actionMoveStudent);
     }
     public void testChooseCloud(){
-        this.controllerTest.getGame().setManuallyGamePhase(GameState.actionChooseCloud);
+        ((GameStub)this.controllerTest.getGame()).setManuallyGamePhase(GameState.actionChooseCloud);
         ChooseCloudMessage message=new ChooseCloudMessage(0,0);
         Player player=this.controllerTest.getGame().getPlayer(0);
         Board board=player.getBoard();
@@ -85,7 +86,7 @@ public class ControllerActionPhaseTest extends TestCase {
         }
     }
     public void testChooseCloudFullEntrance() {
-        this.controllerTest.getGame().setManuallyGamePhase(GameState.actionChooseCloud);
+        ((GameStub)this.controllerTest.getGame()).setManuallyGamePhase(GameState.actionChooseCloud);
         ChooseCloudMessage message=new ChooseCloudMessage(0,0);
         try{
             this.controllerTest.chooseCloud(message);
@@ -99,7 +100,7 @@ public class ControllerActionPhaseTest extends TestCase {
         Player player=this.controllerTest.getGame().getPlayer(0);
         Board board=player.getBoard();
         ArrayList<Student> entrance=board.getEntrance();
-        this.controllerTest.getGame().setManuallyGamePhase(GameState.actionMoveStudent);
+        ((GameStub)this.controllerTest.getGame()).setManuallyGamePhase(GameState.actionMoveStudent);
         for(int i=0;i<3;i++) {
             StudentToIslandMessage message=new StudentToIslandMessage(0,0,0);
             for(Student stud:entrance){
@@ -120,7 +121,7 @@ public class ControllerActionPhaseTest extends TestCase {
     }
 
     public void testMoveStudentNotFound() {
-        this.controllerTest.getGame().setManuallyGamePhase(GameState.actionMoveStudent);
+        ((GameStub)this.controllerTest.getGame()).setManuallyGamePhase(GameState.actionMoveStudent);
         for(int i=0;i<3;i++) {
             StudentToIslandMessage message=new StudentToIslandMessage(0,i,i);
             try {
@@ -154,7 +155,7 @@ public class ControllerActionPhaseTest extends TestCase {
     }
 
     public void testMoveMotherNature() {
-        this.controllerTest.getGame().setManuallyGamePhase(GameState.actionMoveMother);
+        ((GameStub)this.controllerTest.getGame()).setManuallyGamePhase(GameState.actionMoveMother);
         int steps=this.controllerTest.getGame().getPlayedCard(this.controllerTest.getGame().getCurrentPlayerId()).getMoveMother();
         MoveMotherMessage message=new MoveMotherMessage(steps,0);
         try{
@@ -165,7 +166,7 @@ public class ControllerActionPhaseTest extends TestCase {
         }
     }
     public void testWrongMoveMotherNature() {
-        this.controllerTest.getGame().setManuallyGamePhase(GameState.actionMoveMother);
+        ((GameStub)this.controllerTest.getGame()).setManuallyGamePhase(GameState.actionMoveMother);
         MoveMotherMessage message=new MoveMotherMessage(800,0);
         try{
             this.controllerTest.moveMotherNature(message);

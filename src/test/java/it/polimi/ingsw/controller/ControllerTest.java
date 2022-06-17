@@ -1,9 +1,9 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.messages.clientmessages.ChooseCloudMessage;
-import it.polimi.ingsw.model.Game;
 import junit.framework.TestCase;
 
 public class ControllerTest extends TestCase {
@@ -11,7 +11,7 @@ public class ControllerTest extends TestCase {
     @Override
     public void setUp() throws Exception{
         super.setUp();
-        this.controllerTest=new Controller(new Game(false,4,12));
+        this.controllerTest=new Controller(new GameStub(false,4,12));
     }
     public void testGetControllerRound() {
         assertNotNull(controllerTest.getControllerRound());
@@ -34,7 +34,7 @@ public class ControllerTest extends TestCase {
     public void testUpdateRightMove() {
         ChooseCloudMessage cloudMessage=new ChooseCloudMessage(1,0);
         try{
-            this.controllerTest.game.setManuallyGamePhase(GameState.actionChooseCloud);
+            ((GameStub)this.controllerTest.game).setManuallyGamePhase(GameState.actionChooseCloud);
             this.controllerTest.update(cloudMessage);
             assertEquals(cloudMessage.getPlayerId(),this.controllerTest.game.getCurrentPlayerId());
         }

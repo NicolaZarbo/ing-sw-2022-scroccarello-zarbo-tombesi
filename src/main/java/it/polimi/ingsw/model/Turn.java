@@ -25,7 +25,6 @@ public class Turn {
     public void moveInHall(int idPlayer,int idStud){
         try {
             Player player = game.getPlayer(idPlayer);
-
             Board board = player.getBoard();
             Student stud = board.getStudentFromEntrance(idStud);
             board.moveToDiningRoom(stud);

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.GameStub;
 import junit.framework.TestCase;
 
 public class GameTest extends TestCase {
@@ -10,7 +11,7 @@ public class GameTest extends TestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        game = new Game(true, n, numeroIsole);
+        game = new GameStub(true, n, numeroIsole);
     }
 
     public void testGetIslands() {
@@ -26,7 +27,7 @@ public class GameTest extends TestCase {
     }
     public void testCreateGame(){
 
-        Game gamett = new Game(true, n, numeroIsole);
+        Game gamett = new GameStub(true, n, numeroIsole);
         assertNotNull(gamett);
     }
     public void testGetNPlayers() {

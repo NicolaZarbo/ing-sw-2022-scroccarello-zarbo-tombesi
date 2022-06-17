@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.exceptions.EmptyBagException;
 import junit.framework.TestCase;
 
@@ -13,7 +14,7 @@ public class RoundTest extends TestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        this.gameTest=new Game(false,4,12);
+        this.gameTest=new GameStub(false,4,12);
         this.roundTest=new Round(gameTest);
     }
 

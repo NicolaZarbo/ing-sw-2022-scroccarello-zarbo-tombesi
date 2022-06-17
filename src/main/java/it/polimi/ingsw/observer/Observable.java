@@ -6,14 +6,14 @@ public class Observable<T> {
 
     private final ArrayList<Observer<T>>  observers = new ArrayList<>();
 
-    /**adds an observer to the observable
+    /**It adds an observer to the observable.
      * @param obs the observer added to the observable*/
     public void addObserver(Observer<T> obs){
         synchronized (observers) {
             observers.add(obs);
         }
     }
-    /**removes an observer from the observable
+    /**It removes an observer from the observable.
      * @param obs the observer to remove from the observable*/
     public void removeObserver(Observer<T> obs){
         synchronized (observers) {
@@ -21,7 +21,7 @@ public class Observable<T> {
         }
     }
 
-    /**notifies all the observers attached at the observable
+    /**It notifies all the observers attached at the observable.
      * @param message message sent as notify*/
     protected void notify(T message){
         synchronized (observers) {
