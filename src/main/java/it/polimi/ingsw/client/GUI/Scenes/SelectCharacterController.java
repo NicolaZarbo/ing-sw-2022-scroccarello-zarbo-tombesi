@@ -74,41 +74,62 @@ public class SelectCharacterController extends SceneController{
                 characters.get(i).setFill(new ImagePattern(new Image("images/characters/1_monk.png")));
                 value.get(i).setText(costs.get(1)+"");
                 characters.get(i).setOnMouseClicked(event -> effect1());
+                cardVisibility(1,characters.get(i));
             }else if(i==1) {
                 characters.get(i).setFill(new ImagePattern(new Image("images/characters/7_jester.png")));
                 value.get(i).setText(costs.get(7)+"");
                 characters.get(i).setOnMouseClicked(event -> effect7());
+                cardVisibility(7,characters.get(i));
             }else if(i==2) {
                 characters.get(i).setFill(new ImagePattern(new Image("images/characters/9_mushroom.png")));
                 value.get(i).setText(costs.get(9)+"");
                 characters.get(i).setOnMouseClicked(event -> effect9());
+                cardVisibility(9,characters.get(i));
             }else if(i==3) {
                 characters.get(i).setFill(new ImagePattern(new Image("images/characters/10_singer.png")));
                 value.get(i).setText(costs.get(10)+"");
                 characters.get(i).setOnMouseClicked(event -> effect10());
+                cardVisibility(10,characters.get(i));
             }else if(i==4) {
                 characters.get(i).setFill(new ImagePattern(new Image("images/characters/11_princess.png")));
                 value.get(i).setText(costs.get(11)+"");
                 characters.get(i).setOnMouseClicked(event -> effect11());
+                cardVisibility(11,characters.get(i));
             } else if(i==5) {
                 characters.get(i).setFill(new ImagePattern(new Image("images/characters/2_farmer.png")));
                 value.get(i).setText(costs.get(2)+"");
                 characters.get(i).setOnMouseClicked(event -> noParameterEffect(2));
+                cardVisibility(2,characters.get(i));
             }else if(i==6) {
                 characters.get(i).setFill(new ImagePattern(new Image("images/characters/8_knight.png")));
                 characters.get(i).setOnMouseClicked(event -> noParameterEffect(8));
                 value.get(i).setText(costs.get(8)+"");
+                cardVisibility(8,characters.get(i));
             }else {
                 characters.get(i).setFill(new ImagePattern(new Image("images/characters/6_cent.png")));
                 characters.get(i).setOnMouseClicked(event -> noParameterEffect(6));
                 value.get(i).setText(costs.get(6)+"");
+                cardVisibility(6,characters.get(i));
             }
             coins.get(i).setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
         }
     }
+    private void cardVisibility(int cardNumber, Rectangle card){
+        if(view.getCostOfCard().get(cardNumber)>view.getPersonalPlayer().getCoin()) {
+            card.setOpacity(0.5);
+            card.setMouseTransparent(true);
+        }
+        else  {
+            card.setOpacity(1);
+            card.setMouseTransparent(false);
+        }
+    }
     private void effect1(){
         activatingCard=1;
-        character1stud.forEach(s->s.setDisable(false));
+        character1stud.forEach(s->{
+            s.setDisable(false);
+            s.setOpacity(1);
+        });
         studentCharacterContainer.setMouseTransparent(false);
         CharacterContainer.setMouseTransparent(true);
         inputManager.setCardEffectActivation();
@@ -117,7 +138,10 @@ public class SelectCharacterController extends SceneController{
         studentCharacterContainer.setMouseTransparent(false);
         CharacterContainer.setMouseTransparent(true);
         activatingCard=7;
-        character7stud.forEach(s->s.setDisable(false));
+        character7stud.forEach(s->{
+            s.setDisable(false);
+            s.setOpacity(1);
+        });
         inputManager.setCardEffectActivation();
         //todo show board to select students after choosing those here
     }
@@ -133,7 +157,10 @@ public class SelectCharacterController extends SceneController{
         studentCharacterContainer.setMouseTransparent(false);
         CharacterContainer.setMouseTransparent(true);
         activatingCard = 11;
-        character11stud.forEach(s->s.setDisable(false));
+        character11stud.forEach(s->{
+            s.setDisable(false);
+            s.setOpacity(1);
+        });
         inputManager.setCardEffectActivation();
     }
     /** Used for card 2-6-8  */
@@ -151,9 +178,12 @@ public class SelectCharacterController extends SceneController{
         Map<Integer, List<Integer>> studentsOnCard = view.getStudentsOnCard();
         for (int i = 0; i < 14; i++) {
             Circle stud =(Circle) studentCharacterContainer.getChildren().get(i);
+            stud.setStyle("-fx-stroke-width: 0");
             stud.setDisable(true);
             stud.setVisible(false);
-            stud.setStyle("-fx-stroke-width: 0");
+            stud.setOpacity(0.4);
+            stud.setOnMouseEntered(event ->  stud.setEffect(new DropShadow(3, Color.DARKRED)));
+            stud.setOnMouseExited(event ->  stud.setEffect(null));
             if(i<4)
                 character1stud.add(stud);
             else if(i<10)

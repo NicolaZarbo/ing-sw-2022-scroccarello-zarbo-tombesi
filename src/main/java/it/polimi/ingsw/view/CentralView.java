@@ -105,6 +105,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         players=message.getModelPlayers();
         mother = message.getMotherNature();
         playedCardThisTurnByPlayerId = new HashMap<>(players.size());
+        cardYouPlayed=-1;
         for (SimplifiedPlayer pl: players) {
             if(pl.getUsername().equals( name))
                 personalPlayer=pl;

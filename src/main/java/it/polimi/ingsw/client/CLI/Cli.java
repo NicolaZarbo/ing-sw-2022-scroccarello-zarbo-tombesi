@@ -26,6 +26,7 @@ public class Cli implements UserInterface {
     private final InputManagerCli inputManagerCli;
     private boolean usedCharacter;
     private final Scanner input;
+    private ServerConnection connection;
 
     public Cli(){
         this.game = new CentralView(this);
@@ -41,7 +42,7 @@ public class Cli implements UserInterface {
         PrintWriter printer= new PrintWriter(System.out,true);
         inputManagerCli.printToScreen(BKG);
         printer.println(WRD+ TitlePrinter.print()+RST);
-        ServerConnection connection = new ServerConnection(new Scanner(System.in), game, inputManagerCli);
+        connection = new ServerConnection(new Scanner(System.in), game, inputManagerCli);
         game.addObserver( connection.setMessageHandler());
         connection.run();
     }
@@ -136,5 +137,11 @@ public class Cli implements UserInterface {
     public void askToRetry(String error){
         System.out.println(Printer.RED+error+RST);
         inputManagerCli.decodeStringInput(input.nextLine());
+    }
+    public void close(){
+        System.out.println("Closing the game");
+        connection.closeConnection();
+        System.out.println("Goodbye");
+        System.exit(0);
     }
 }

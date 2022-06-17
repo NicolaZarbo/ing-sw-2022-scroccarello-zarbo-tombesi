@@ -35,13 +35,12 @@ public class GUI extends Application implements UserInterface {
         launch(args);
     }
 
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage){
         game = new CentralView(this);
         inputManager= new GuiInputManager(game,this);
         stage.setTitle("Eriantys");
         mainStage=stage;
         scenes=new HashMap<>();
-
         initScene(SceneEnum.WelcomeScene);
         mainStage.setScene(scenes.get(SceneEnum.WelcomeScene));
         mainStage.setResizable(false);
@@ -65,9 +64,6 @@ public class GUI extends Application implements UserInterface {
         }
 
 
-    }
-    private void goToWizardSelection(){
-        setScene(SceneEnum.SetupScene);
     }
     public void setLobbyRules(int numberPlayer, boolean easy){
         String e;
@@ -117,7 +113,7 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void showError(String errorMessage) {
-
+//todo important! add an alert to the stage that tells the player something went wrong, must be closable on click
     }
 
     @Override
