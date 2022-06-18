@@ -11,6 +11,7 @@ import it.polimi.ingsw.enumerations.TowerColor;
 import java.util.ArrayList;
 import java.util.List;
 
+/**The setup phase of the game. It is responsible of initializing all the components of the game.*/
 public class Setup {
     private Game game;
     private ArrayList<TowerColor> availableColor;
@@ -20,7 +21,8 @@ public class Setup {
     private String preGameTurnOf;
     private int idCreator;
 
-
+    /**It builds the setup phase of the game.
+     * @param game the game*/
     public Setup(Game game){
         this.game=game;
         availableColor= new ArrayList<>(List.of(TowerColor.values()));
@@ -30,24 +32,36 @@ public class Setup {
         prePlayers= new ArrayList<>(game.getNPlayers());
         idCreator=0;
     }
-    /** set the initial order for choosing pregame options*/
+
+    /** It sets the initial order for selecting pregame options
+     * @param names list of player's nicknames*/
     public void setPreOrder(List<String> names){
         this.preGameOrder= names;
         this.preGameTurnOf=preGameOrder.get(0);
     }
 
+    /**@return the nickname of the player currently choosing options.*/
     public String getPreGameTurnOf() {
         return preGameTurnOf;
     }
 
+    /**It starts the personalization phase for the players in the lobby.*/
     public void startPersonalisation(){
         game.notify(new PlayerSetUpMessage(game,idCreator));
         idCreator++;
     }
+
+    /**It states if the player has access to customization or not.
+     * @param nickname the nickname of the player to check
+     * @return •true: is the playe's turn to customize
+     * <p>•false: it's not the player's turn to customize</p>*/
     public boolean isPreOrderTurnOf(String nickname){
         return nickname.equalsIgnoreCase(preGameTurnOf);
     }
-    /** get prePlayer from client, if it is the last one then creates the final players in game*/
+
+    /** It adds a lobby player to the list of players joining the game.
+     * <p>Notice that if the size of <b>prePlayers</b> list has reached its maximum, the game is started.</p>
+     * @param prePlayer the customized player joining the game*/
     public void addPrePlayer(LobbyPlayer prePlayer){
         prePlayers.add(prePlayer);
         availableMages.remove(prePlayer.getMage());
@@ -66,15 +80,20 @@ public class Setup {
         }
     }
 
+    /**@return the list of available team's colors*/
     public ArrayList<TowerColor> getAvailableColor() {
         return availableColor;
     }
 
+    /**@return the list of magicians which have still not been choosed*/
     public ArrayList<Mage> getAvailableMages() {
         return availableMages;
     }
-    /** creates a set of n Islands with 2 students on top
-     * (except for the island with MN and the opposite one)*/
+
+    /**It creates a set of islands with two students on each of them, with the exception for the island with mother nature and the one opposite to it.
+     * @param nIsole number of islands to create
+     * @param bag the bag from which extract the students
+     * @return list of created islands*/
     public static List<Island> createIslands(int nIsole, Bag bag){
         List<Island> islands = new ArrayList<>();
         Island isl;
@@ -90,7 +109,11 @@ public class Setup {
         }
         return  islands;
     }
-    /** creates the list of Character Cards using a constructor*/
+
+    /**It creates the character cards of the game (for expert mode only).
+     * @param bag the bag of the game containing all the student tokens
+     * @param cardNumber number of character cards
+     * @return the list of all the character cards*/
     public static ArrayList<CharacterCard> createCharacterCards(Bag bag, int cardNumber){
             ArrayList<CharacterCard> cards = new ArrayList<>(cardNumber);
             CharacterCard cardChar;
@@ -101,7 +124,10 @@ public class Setup {
             }
             return cards;
     }
-    /** creates the professor in game with no board assigned*/
+
+    /**It creates the professor tokens of the game, without assigning them to a specific board.
+     * @param nColors number of token colors
+     * @return set of all the professors of the game*/
     public static Professor[] createProfessor(int nColors){
         Professor[] profs = new Professor[nColors];
         for (int i=0; i<nColors;i++){
@@ -109,8 +135,12 @@ public class Setup {
         }
         return profs;
     }
-    /** creates an array of player from a list of PrePlayer(a bean that
-     * contains nickname, mage and tower-color)*/
+
+    /**It creates the list of players of the game based on <b>prePlayers</b> list.
+     * @param easy difficulty of the game
+     * @param bag the bag containing the student tokens
+     * @param prePlayers the information about customization of players
+     *@return list of players of the game*/
     public static Player[] createPlayer(boolean easy , ArrayList<LobbyPlayer> prePlayers, Bag bag){
         int nPlayer=prePlayers.size();
         Player[] players =new Player[nPlayer];
@@ -123,7 +153,10 @@ public class Setup {
         }
         return players;
     }
-    /** creates an array of clouds without player on them*/
+
+    /**It creates a set of empty clouds for the game.
+     * @param nPlayer number of players of the game
+     * @return the set of the clouds of the game*/
     public static Cloud[] createClouds(int nPlayer){
         Cloud[] clouds = new Cloud[nPlayer];
         Student[] studs;
@@ -143,10 +176,16 @@ public class Setup {
         }
         return  clouds;
     }
+
+    /**It creates the hand of the player.
+     * @param playerId id of the player
+     * @param easy difficulty mode
+     * @param nCards number of available assistant cards
+     * @return the hand of the player*/
     private static Hand createHand(int playerId, boolean easy, int nCards){
         ArrayList<AssistantCard> ass ;
         int stIdCards= playerId * nCards  ;
-        ass = new ArrayList<AssistantCard>();
+        ass = new ArrayList<>();
         for(int j=0;j<nCards; j++){
             ass.add(new AssistantCard(stIdCards+j,j+1,(j/2)+1, Mage.getMage(playerId)));
         }
@@ -156,6 +195,13 @@ public class Setup {
         }
          return hand;
     }
+
+    /**It creates the board of the player.
+     * @param playerId id of the player
+     * @param bag the bag from which extract students to put on entrance
+     * @param towerColor the color of the player's team
+     * @param nPlayer the number of players of the game
+     * @return the board of the player*/
     private static Board createBoard(int playerId, int nPlayer, TowerColor towerColor, Bag bag){
         Board pla ;
         int nTower, dimEntry;

@@ -24,7 +24,7 @@ public class ControllerActionPhase  {
         if(game.getActualState()!= GameState.actionMoveStudent || studentMoved>2)
             throw new IllegalMoveException("incorrect action, or too many students moved");
         try {
-            modelTurn.moveInHall(message.getPlayerId(), message.getStudentId());
+            modelTurn.moveInDiningRoom(message.getPlayerId(), message.getStudentId());
             studentMoved++;
             if (studentMoved == 3)
                 game.moveToNextPhase();

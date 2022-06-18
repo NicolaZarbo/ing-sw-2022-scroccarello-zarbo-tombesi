@@ -12,17 +12,23 @@ import it.polimi.ingsw.model.tokens.*;
 
 import java.util.*;
 
+/**The action phase of the game. It allows players to do their actions such as move student tokens, move mother nature and conquer an island.*/
 public class Turn {
     private final Game game;
     private int movedStudent;
 
+    /**It builds the action phase of the game.
+     * @param game the game*/
     public Turn (Game game){
         this.game=game;
         movedStudent=0;
     }
 
-    /** moves a student already inside the Board of idPlayer from entrance to hall  */
-    public void moveInHall(int idPlayer,int idStud){
+    /** It moves a student token from the entrance to the dining room.
+     * @param idPlayer id of the player which is moving the token
+     * @param idStud id of the moved student token
+     * @exception NoTokenFoundException if the entrance does not contains the required token*/
+    public void moveInDiningRoom(int idPlayer, int idStud){
         try {
             Player player = game.getPlayer(idPlayer);
             Board board = player.getBoard();
@@ -31,7 +37,7 @@ public class Turn {
             if (board.foundCoin(stud))
                 player.getHand().addCoin();
             if (canHaveTeacher(stud.getColor(), idPlayer))
-                getTeacher(stud.getColor(), idPlayer);
+                setTeacher(stud.getColor(), idPlayer);
         }
         catch(NoTokenFoundException e){
             throw new NoTokenFoundException(e.getMessage());
@@ -46,7 +52,10 @@ public class Turn {
 
     }
 
-    /** moves a student already inside the Board of idPlayer from entrance to a target island*/
+    /** It moves a student from the entrance to a target island.
+     * @param idStud target id of the student token
+     * @param idPlayer id of the player which is making the action
+     * @param idIsland target id of the island*/
     public void moveToIsland(int idPlayer,int idStud, int idIsland) throws NullPointerException{
         Student stud = game.getPlayer(idPlayer).getBoard().getStudentFromEntrance(idStud);
         Island island = game.getIsland(idIsland);
@@ -63,7 +72,9 @@ public class Turn {
 
 
     }
-    /** moves motherNature for a number 'steps', then checks on the final island for tower conquest and island merge*/
+
+    /**It moves mother nature a number of steps, then checks on the final island for tower conquest and island merge.
+     * @param steps amount of steps mother mature moves*/
     public void moveMotherNature(int steps){
         List<Island> islands=game.getIslands();
         MotherNature mother=game.getMotherNature();
@@ -83,7 +94,10 @@ public class Turn {
         if(game.getIslands().size()<=3)
             game.gameOver();
     }
-    /** moves al the students on a target cloud to the board of playerId, it is also the last actin of the turn*/
+
+    /**It moves all the students from a target cloud to the board of player, it is also the last action of the player's turn.
+     * @param playerId id of the player
+     * @param cloudId id of the target cloud*/
     public void moveFromCloudToEntrance(int cloudId,int playerId){
         Board board= game.getPlayer(playerId).getBoard();
         Cloud[] clouds=game.getClouds();
@@ -109,6 +123,10 @@ public class Turn {
 
     }
 
+    /**It checks if the current island can be unified with its following based on the towers on them.
+     * @param pos id of the island to check
+     * @return •true: the islands can be merged
+     * <p>•false: the islands cannot be merged together</p>*/
     public boolean isUnifiableNext(int pos){
         int size = game.getIslands().size();
         Island central=game.getIslands().get(pos);
@@ -118,6 +136,11 @@ public class Turn {
                 return true;
         return false;
     }
+
+    /**It checks if the current island can be unified with its previous based on the towers on them.
+     * @param pos id of the island to check
+     * @return •true: the islands can be merged
+     * <p>•false: the islands cannot be merged together</p>*/
     public  boolean isUnifiableBefore(int pos){
         int backpos=pos-1;
         if(pos==0)
@@ -125,6 +148,8 @@ public class Turn {
         return isUnifiableNext(backpos);
     }
 
+    /**It merges the island with its following.
+     * @param pos id of the island which is triggering merge*/
     public  void unifyNext(int pos) {
         int islandNumber = game.getIslands().size();
         Island central = game.getIslands().get(pos);
@@ -138,6 +163,9 @@ public class Turn {
         game.groupMultiMessage(new IslandsMessage(game));
 
     }
+
+    /**It merges the island with its previous.
+     * @param pos id of the island which is triggering merge*/
     public  void unifyBefore( int pos) {
         int backpos=pos-1;
         if(pos==0)
@@ -146,8 +174,10 @@ public class Turn {
         MotherNature mother= game.getMotherNature();
         mother.changePosition(Math.floorMod(mother.getPosition()-1,game.getIslands().size()));
     }
-    /**
-     @param player  the player who won the influence contest */
+
+    /** It conquers the island by putting on them the tower corresponding to the player.
+     @param player  the player who won the influence contest
+     @param island the island to conquer*/
     public void putTowerFromBoardToIsland(Island island,Player player){
         if(island.getTowers().size()!=0)
             return;
@@ -161,50 +191,51 @@ public class Turn {
         if(board.towersLeft()==0)
             game.gameOver();
     }
-    private void changeTower(Island island , Player newOwner){
-        ArrayList<Tower> removedT=new ArrayList<>(island.getEveryTower());
-        island.removeEveryTower();
-        for (Player player: game.getPlayers()) {
-            if(player.getColorT()==removedT.get(0).getColor()){
-                player.getBoard().initTowers(removedT);
-                game.groupMultiMessage(new SingleBoardMessage(game,player.getId()));
-            }
-        }
-        this.putTowerFromBoardToIsland(island,newOwner);
-    }
-    /** used to differentiate behavior when the player isn't the owner of the team towers*/
+
+    /** It checks whether the player is the leader of the game or not (for team game only).
+     * @param player the player to check
+     * @return •true: the player owns the towers (or the game is not team game)
+     * <p>•false: the player does not own the towers</p>*/
     private boolean isSquadLeader(Player player){
         if(game.getNPlayers()!=4)
             return true;//believe in yourself, be your own leader
         return player.getId()<2;
     }
 
-    //controllo se una board ha il diritto ad avere il prof del colore scelto
+    /**It checks if the player deserves to have a professor token of a certain color on his board or not.
+     * @param playerId id of the player
+     * @param color target token color
+     * @return  •true: the board can accept professor
+     * <p>•false: the professor cannot visit the player's board</p>*/
     public  boolean canHaveTeacher(TokenColor color, int playerId){
         Player[] players=game.getPlayers();
         boolean b=true;
         Player playercheck=game.getPlayer(playerId);
         Board playerBoard=playercheck.getBoard();
 
-           int tokenplayer = 0; //count dei token del player
-        int tempcount; //count dei token degli altri players
+           int tokenplayer = 0;
+        int othercount;
         for (int i = 0; i < playerBoard.getDiningRoom()[color.ordinal()].length; i++)
             if(playerBoard.getDiningRoom()[TokenColor.getIndex(color)][i]!=null)
                 tokenplayer++;
         for (Player player : players) {
-            tempcount = 0;
+            othercount = 0;
             if (!player.equals(playercheck)) {
                 for (int i = 0; i < player.getBoard().getDiningRoom()[color.ordinal()].length; i++) {
                     if (player.getBoard().getDiningRoom()[TokenColor.getIndex(color)][i] != null)
-                        tempcount++;
+                        othercount++;
                 }//card 2 effect
-                if (tempcount >= tokenplayer && !(game.isBonusActive(2) && tempcount <= tokenplayer))
+                if (othercount >= tokenplayer && !(game.isBonusActive(2) && othercount <= tokenplayer))
                     b = false;
             }
         }
         return b;
     }
-    public  void getTeacher(TokenColor color,int playerId){
+
+    /**It sets the professor of the specific color on the player's board, if he can have it. If it is on another board it is moved away to the player's board, otherwise it is simply added to the board.
+     * @param playerId id of the player
+     * @param color color of the target professor*/
+    public  void setTeacher(TokenColor color, int playerId){
         Player[] players=game.getPlayers();
         Player playercheck=game.getPlayer(playerId);
         if(canHaveTeacher(color,  playerId)){
@@ -223,7 +254,12 @@ public class Turn {
             }
         }
     }
-    /** activates the character effect if the player has enough money or throws an exception*/
+
+    /**It activates the character's effect if the player has enough money, otherwise it throws an exception (for expert mode only).
+     * @param playerId id of the player activating the effect
+     * @param cardId id of the target character card
+     * @param parameters parameter object for the card
+     * @see ParameterObject*/
     public  void useCharacter(int cardId, ParameterObject parameters, int playerId){
         CharacterCard card = game.getCharacter(cardId);
         Player player = game.getPlayer(playerId);
@@ -242,7 +278,9 @@ public class Turn {
             {throw new IllegalMoveException("not enough money");}
     }
 
-
+    /**It calculates the influence on the island for the player when mother nature visits it.
+     * @param playerId id of the relative player
+     * @return the value of influence the player has in the island*/
     public int calculateInfluence(int playerId){
         int influence=0;
         if(game.isBonusActive(8))  //card 8 effect
@@ -268,13 +306,14 @@ public class Turn {
         }
         return influence;
     }
+
     /** if an island can be conquered based on influence, it changes towers on the island or puts another one*/
     public void islandConquest(int islandId) throws NullPointerException{
         int  maxInf;
         Island island=game.getIsland(islandId);
         Player conqueror;
         ArrayList<Integer> influence= new ArrayList<>();
-        for (Player player: game.getPlayers()) {
+        for (Player player : game.getPlayers()) {
             influence.add(calculateInfluence(player.getId()));
         }
         maxInf=influence.stream().max(Comparator.naturalOrder()).orElse(0);
@@ -286,6 +325,18 @@ public class Turn {
             } else
                 putTowerFromBoardToIsland(island, conqueror);
         }
+    }
+
+    private void changeTower(Island island , Player newOwner){
+        ArrayList<Tower> removedT=new ArrayList<>(island.getEveryTower());
+        island.removeEveryTower();
+        for (Player player: game.getPlayers()) {
+            if(player.getColorT()==removedT.get(0).getColor()){
+                player.getBoard().initTowers(removedT);
+                game.groupMultiMessage(new SingleBoardMessage(game,player.getId()));
+            }
+        }
+        this.putTowerFromBoardToIsland(island,newOwner);
     }
 
 

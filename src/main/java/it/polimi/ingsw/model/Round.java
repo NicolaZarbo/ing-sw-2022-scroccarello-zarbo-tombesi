@@ -5,12 +5,14 @@ import it.polimi.ingsw.model.tokens.Student;
 
 import java.util.*;
 
+/**The planning phase of the game. It involves the refill of the clouds with student tokens and the decision of the playing order based on assistant cards played by each player.*/
 public class Round {
     Game game;
     public Round(Game game) {
         this.game=game;
     }
 
+    /**It initializes the planning phase. The clouds are refilled with three students each.*/
     public void setCloud() {
         for(int i=0;i<game.getClouds().length;i++){
             int dim=game.getClouds()[i].getStud().length;
@@ -25,6 +27,9 @@ public class Round {
         game.groupMultiMessage(new CloudMessage(game));
     }
 
+    /**It plays the assistant card  selected by the player.
+     * @param playerId id of the playing player
+     * @param cardPlayed id of the assistant card played by the player*/
     public void playCard(int playerId, int cardPlayed){
         Hand actualHand=game.getPlayer(playerId).getHand();
         AssistantCard played=actualHand.playAssistant(cardPlayed);
@@ -32,6 +37,7 @@ public class Round {
         game.groupMultiMessage(new PlayedAssistantMessage(game));
     }
 
+    /**It ends the planning phase by calculating the playing order based on the cards played this round.*/
     public void roundOrder(){
        ArrayList<Integer> order = new ArrayList<>();
        ArrayList<Integer> values=new ArrayList<>();
@@ -55,6 +61,8 @@ public class Round {
         game.setPlayIngOrder(order);
     }
 
+    /**@return the current playing order
+     * @param game the active game*/
     public List<Integer> getRoundOrder(Game game){
         return game.getPlayIngOrder();
     }
