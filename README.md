@@ -23,7 +23,7 @@ draft
 
 #### Argument
 (portNumber) : 
-* The port used for the tcp connection, with no argument default = 50000;  
+* The port used for the TCP connection, with no argument default = 50000;  
 Accepted values are beetween 49000!!!!correct and 63000!!!!!!---------
 >If no port is selected the server will use the default port 50000.
 
@@ -77,12 +77,12 @@ Game visuals may have unexpected problems in some untested consoles.
 
 There are a few minor variation to the rules of the physical board game as a resault of the diffence of the media :
 
-* Filling the clouds : in the original game one of the players draws the new students and fills the cloud while in our application this is done automaticly since it doesn't make a real difference and it would be tedious.
+* Filling the clouds : in the original game one of the players draws the new students and fills the cloud while in our application this is done automaticly at the beginning of each round since it doesn't make a real difference and it would be tedious.
 * First turn card use order : In the original rules the cards are used by the players in anti-clockwise order, since this doesn't translate to nature of the multiplayer in our version, the users play in the order they entered the lobby.
 
-## Advanced Functionality
+## Advanced Functionalities
 
 ### Implemented functionalities
 
 1. Multiple games
-2. Four players 
+2. Four players game
