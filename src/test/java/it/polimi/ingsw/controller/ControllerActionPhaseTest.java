@@ -7,7 +7,7 @@ import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.messages.clientmessages.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.util.ParameterObject;
-import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.tokens.Student;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class ControllerActionPhaseTest extends TestCase {
         ChooseCloudMessage message=new ChooseCloudMessage(0,0);
         Player player=this.controllerTest.getGame().getPlayer(0);
         Board board=player.getBoard();
-        board.setEntrance(new ArrayList<>(board.getEntrance().size()));
+        board.initEntrance(new ArrayList<>(board.getEntrance().size()));
         try{
             this.controllerTest.chooseCloud(message);
         }

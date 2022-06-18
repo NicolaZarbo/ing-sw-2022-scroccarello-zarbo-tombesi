@@ -1,10 +1,10 @@
 package it.polimi.ingsw.model;
 import it.polimi.ingsw.enumerations.Mage;
 import it.polimi.ingsw.messages.servermessages.*;
-import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.character.FactoryCharacter;
-import it.polimi.ingsw.model.token.Professor;
-import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.characters.CharacterCard;
+import it.polimi.ingsw.model.characters.FactoryCharacter;
+import it.polimi.ingsw.model.tokens.Professor;
+import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.enumerations.TowerColor;
 

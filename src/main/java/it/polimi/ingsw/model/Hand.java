@@ -3,7 +3,7 @@ import it.polimi.ingsw.exceptions.CardNotFoundException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+/**The */
 public class Hand {
     private int coin;
     private final ArrayList<AssistantCard> assistant;

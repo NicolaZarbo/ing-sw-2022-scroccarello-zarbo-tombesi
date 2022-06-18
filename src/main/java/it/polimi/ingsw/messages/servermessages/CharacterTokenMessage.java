@@ -4,9 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.exceptions.MessageErrorException;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.character.TokensCharacter;
-import it.polimi.ingsw.model.token.Token;
+import it.polimi.ingsw.model.characters.CharacterCard;
+import it.polimi.ingsw.model.characters.TokensCharacter;
+import it.polimi.ingsw.model.tokens.Token;
 
 import java.util.List;
 

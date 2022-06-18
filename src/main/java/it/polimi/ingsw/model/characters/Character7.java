@@ -1,9 +1,9 @@
-package it.polimi.ingsw.model.character;
+package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.exceptions.CharacterErrorException;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.util.ParameterObject;
 
 import java.util.ArrayList;

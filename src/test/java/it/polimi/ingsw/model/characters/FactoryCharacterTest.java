@@ -1,11 +1,10 @@
-package it.polimi.ingsw.model.character;
+package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.model.Game;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class FactoryCharacterTest extends TestCase {
     Game gameTest;

@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.enumerations.TokenColor;
-import it.polimi.ingsw.model.token.Tower;
+import it.polimi.ingsw.model.tokens.Tower;
 import it.polimi.ingsw.enumerations.TowerColor;
 import junit.framework.TestCase;
 

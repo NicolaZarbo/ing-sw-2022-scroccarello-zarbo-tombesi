@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.NoPlaceAvailableException;
-import it.polimi.ingsw.model.token.Professor;
-import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.tokens.Professor;
+import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.enumerations.TowerColor;
 import junit.framework.TestCase;
@@ -27,7 +27,7 @@ public class BoardTest extends TestCase {
         for(int i=0;i<4;i++){
             stud.add(new Student(i,TokenColor.getColor(i)));
         }
-        boardTest.setEntrance(stud);
+        boardTest.initEntrance(stud);
         System.out.print("the entrance has the following students: ");
         for(int i=0;i<4;i++){
             System.out.print(boardTest.getEntrance().get(i).getId()+" "+boardTest.getEntrance().get(i).getColor()+" ");
@@ -42,7 +42,7 @@ public class BoardTest extends TestCase {
                 }
             }
         }
-        boardTest.setDiningRoom(dining);
+        boardTest.initDiningRoom(dining);
         System.out.println("these are the students in the dining room ");
         for(int i=0;i<TokenColor.listGetLastIndex()+1;i++){
             for(int j=0;j<10;j++){
@@ -69,7 +69,7 @@ public class BoardTest extends TestCase {
             else System.out.print("none  ");
         }
         System.out.println();
-        boardTest.setEntrance(studInit);
+        boardTest.initEntrance(studInit);
         Student studTest=new Student(4,TokenColor.getColor(4));
         try{
             boardTest.putStudentOnEntrance(studTest);
@@ -95,7 +95,7 @@ public class BoardTest extends TestCase {
                 }
             }
         }
-        boardTest.setDiningRoom(dining);
+        boardTest.initDiningRoom(dining);
         System.out.println("initial dining room ");
         for(int i=0;i<TokenColor.listGetLastIndex()+1;i++){
             for(int j=0;j<10;j++){

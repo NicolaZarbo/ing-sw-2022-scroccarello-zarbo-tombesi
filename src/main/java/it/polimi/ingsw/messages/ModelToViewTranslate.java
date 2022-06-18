@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Cloud;
 import it.polimi.ingsw.model.Island;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.token.Token;
+import it.polimi.ingsw.model.tokens.Token;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedBoard;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;

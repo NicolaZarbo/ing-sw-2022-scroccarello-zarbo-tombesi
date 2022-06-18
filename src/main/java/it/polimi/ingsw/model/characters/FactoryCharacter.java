@@ -1,8 +1,7 @@
-package it.polimi.ingsw.model.character;
+package it.polimi.ingsw.model.characters;
 
-import it.polimi.ingsw.exceptions.CharacterNotFoundException;
 import it.polimi.ingsw.model.Bag;
-import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.tokens.Student;
 
 import java.util.ArrayList;
 

@@ -7,8 +7,8 @@ import it.polimi.ingsw.exceptions.NoPlaceAvailableException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.util.ParameterObject;
 import it.polimi.ingsw.messages.servermessages.*;
-import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.token.*;
+import it.polimi.ingsw.model.characters.CharacterCard;
+import it.polimi.ingsw.model.tokens.*;
 
 import java.util.*;
 
@@ -166,7 +166,7 @@ public class Turn {
         island.removeEveryTower();
         for (Player player: game.getPlayers()) {
             if(player.getColorT()==removedT.get(0).getColor()){
-                player.getBoard().addTower(removedT);
+                player.getBoard().initTowers(removedT);
                 game.groupMultiMessage(new SingleBoardMessage(game,player.getId()));
             }
         }

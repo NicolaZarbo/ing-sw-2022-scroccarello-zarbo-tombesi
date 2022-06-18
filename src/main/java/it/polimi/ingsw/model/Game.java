@@ -3,8 +3,9 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
 import it.polimi.ingsw.messages.servermessages.*;
-import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.token.Professor;
+import it.polimi.ingsw.model.characters.CharacterCard;
+import it.polimi.ingsw.model.tokens.MotherNature;
+import it.polimi.ingsw.model.tokens.Professor;
 import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.observer.Observable;
 
@@ -228,7 +229,7 @@ public class Game extends Observable<ServerMessage> {
 
     /**It returns the color under the target of the effect of the character card number 9. For expert mode only.
      * @return the color which is nerfed by the card effect
-     * @see it.polimi.ingsw.model.character.Character9*/
+     * @see it.polimi.ingsw.model.characters.Character9*/
     public TokenColor getTargetColor() {
         return targetColor;
     }
@@ -253,7 +254,7 @@ public class Game extends Observable<ServerMessage> {
 
     /**It returns the bonus active. For expert mode only.
      @return id of the <i>turn effect character</i> which triggered the bonus
-     @see it.polimi.ingsw.model.character.TurnEffectCharacter*/
+     @see it.polimi.ingsw.model.characters.TurnEffectCharacter*/
     public int getCardBonusActive() {
         return cardBonusActive;
     }

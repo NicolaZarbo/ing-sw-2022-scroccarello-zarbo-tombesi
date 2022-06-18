@@ -3,7 +3,7 @@ package it.polimi.ingsw.messages.servermessages;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.view.CentralView;
 
 public class CharacterUpdateMessage extends ServerMessage{

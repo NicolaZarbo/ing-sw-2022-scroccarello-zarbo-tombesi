@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.tokens.Student;
 import junit.framework.TestCase;
 
 import java.util.List;

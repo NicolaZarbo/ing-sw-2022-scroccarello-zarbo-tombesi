@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
-import it.polimi.ingsw.model.token.Student;
-import it.polimi.ingsw.model.token.Tower;
+import it.polimi.ingsw.model.tokens.Student;
+import it.polimi.ingsw.model.tokens.Tower;
 
 import java.util.ArrayList;
 

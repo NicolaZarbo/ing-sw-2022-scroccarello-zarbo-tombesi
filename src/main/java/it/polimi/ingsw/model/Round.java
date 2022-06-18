@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 import it.polimi.ingsw.messages.servermessages.CloudMessage;
 import it.polimi.ingsw.messages.servermessages.PlayedAssistantMessage;
-import it.polimi.ingsw.model.token.Student;
+import it.polimi.ingsw.model.tokens.Student;
 
 import java.util.*;
 
