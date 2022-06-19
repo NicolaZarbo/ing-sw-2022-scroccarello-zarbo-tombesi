@@ -157,6 +157,26 @@ public abstract class BoardSceneController extends SceneController{// todo event
 
                         }
                     });
+                }else if(gui.getInputManager().isActivatingCardEffect() && gui.getInputManager().getNumberOfStudentSelectedFromCharacter()>0){
+                    if(gui.getInputManager().getNumberOfStudentSelectedFromCharacter()!=1){
+                        gui.getInputManager().addSavedSelectedStud(gui.getInputManager().getSingleStudent());
+                        int temp=gui.getInputManager().getNumberOfStudentSelectedFromCharacter();
+                        gui.getInputManager().setNumberOfStudentSelectedFromCharacter(temp-1);
+                    }else{
+                        gui.getInputManager().addSavedSelectedStud(gui.getInputManager().getSingleStudent());
+                        int temp=gui.getInputManager().getNumberOfStudentSelectedFromCharacter();
+                        gui.getInputManager().setNumberOfStudentSelectedFromCharacter(temp-1);
+                        student.setOnMouseClicked(new EventHandler<>() {
+                            @Override
+                            public void handle(MouseEvent mouseEvent) {
+                               // moveToEntrance();
+                               // moveTocardseven();
+                                student.removeEventHandler(MouseEvent.MOUSE_CLICKED,this);
+
+                            }
+                        });
+                    }
+
                 }
             }
         });

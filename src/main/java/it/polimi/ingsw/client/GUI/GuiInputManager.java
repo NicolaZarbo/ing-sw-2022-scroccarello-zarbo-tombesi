@@ -19,6 +19,8 @@ public class GuiInputManager extends InputManager {
     private ArrayList<Integer> selectedStudents;
     private int singleStudent;
     private List<Integer> selectedStudentFromElsewhere;
+
+    private int numberOfStudentSelectedFromCharacter;
     private boolean cardEffectActivation;
     private int selectedIsland;
     private int selectedCloud;
@@ -142,7 +144,15 @@ public class GuiInputManager extends InputManager {
     }
 
     /** used to keep track of the selected students when you need to move to a different scene*/
-    public void saveSelectedStud(ArrayList<Integer> selectedStudents){this.selectedStudents=new ArrayList<>(selectedStudents);}
+    public void saveSelectedStud(ArrayList<Integer> selectedStudents){
+        this.selectedStudents=new ArrayList<>(selectedStudents);
+        numberOfStudentSelectedFromCharacter=selectedStudents.size();
+    }
+
+    public void addSavedSelectedStud(int selectedStud){
+        this.selectedStudents.add(selectedStud);
+    }
+
     /** Save a selected student, used when the memory of the selected student must persist after changing scene*/
     public void saveSelectedStud(int selectedStudent){this.singleStudent=selectedStudent;}
     /** Used to get the main island of the cluster
@@ -227,4 +237,9 @@ public class GuiInputManager extends InputManager {
     public static boolean isLobbyAvailable(){
         return isLobbyAvailable;
     }
+
+    public int getNumberOfStudentSelectedFromCharacter(){return this.numberOfStudentSelectedFromCharacter;}
+
+    public void setNumberOfStudentSelectedFromCharacter(int c){ this.numberOfStudentSelectedFromCharacter=c;}
+
 }

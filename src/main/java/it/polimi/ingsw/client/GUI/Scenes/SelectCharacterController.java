@@ -25,6 +25,8 @@ public class SelectCharacterController extends SceneController{
     public Pane coinImageContainer;
     public Pane valueCharacterContainer;
 
+    public Pane popupPanel;
+
     private ArrayList<Rectangle> characters;
     private ArrayList<Circle> coins;
     private ArrayList<Text> value;
@@ -36,7 +38,7 @@ public class SelectCharacterController extends SceneController{
     GUI gui;
     private int activatingCard;
     private final GuiInputManager inputManager;
-    private List<Integer> selectedStudents;
+    private ArrayList<Integer> selectedStudents;
 
     private final CentralView view;
     public SelectCharacterController(){
@@ -49,9 +51,16 @@ public class SelectCharacterController extends SceneController{
     public void initialize() {
         initCharacters();
         initStudCharacters();
+        popupPanel.setVisible(false);
+        popupPanel.setMouseTransparent(true);
         if(!view.isYourTurn() || !( view.getState()== GameState.actionMoveStudent || view.getState()== GameState.actionMoveMother)) {
             CharacterContainer.setDisable(true);
+            studentCharacterContainer.setDisable(true);
             CharacterContainer.setOpacity(0.5);
+        }else{
+            CharacterContainer.setDisable(false);
+            studentCharacterContainer.setDisable(false);
+            CharacterContainer.setOpacity(0.3);
         }
     }
 
@@ -143,6 +152,8 @@ public class SelectCharacterController extends SceneController{
             s.setOpacity(1);
         });
         inputManager.setCardEffectActivation();
+
+
         //todo show board to select students after choosing those here
     }
     private void effect9(){
@@ -225,8 +236,9 @@ public class SelectCharacterController extends SceneController{
             inputManager.saveSelectedStud(selectedStudents.get(0));
             gui.showIslands();
         }
-        if(activatingCard==7){
-
+        if(activatingCard==7 && selectedStudents.size()<4){
+            inputManager.saveSelectedStud(selectedStudents);
+            gui.showBoards();
         }
         if(activatingCard==11){
             inputManager.useCharacter11(selectedStudents.get(0));
@@ -264,5 +276,18 @@ public class SelectCharacterController extends SceneController{
     public void goBack() {
         inputManager.resetEffectActivation();
         gui.showHand();
+    }
+
+
+    protected void showMoveButton() {
+        popupPanel.setVisible(true);
+        popupPanel.setMouseTransparent(false);
+    }
+
+
+    protected void hideMoveButtons() {
+        popupPanel.setVisible(false);
+        popupPanel.setMouseTransparent(true);
+        //refershings
     }
 }
