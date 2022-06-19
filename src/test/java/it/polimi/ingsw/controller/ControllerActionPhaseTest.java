@@ -6,7 +6,7 @@ import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.messages.clientmessages.*;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.characters.ParameterObject;
+import it.polimi.ingsw.util.ParameterObject;
 import it.polimi.ingsw.model.tokens.Student;
 import junit.framework.TestCase;
 

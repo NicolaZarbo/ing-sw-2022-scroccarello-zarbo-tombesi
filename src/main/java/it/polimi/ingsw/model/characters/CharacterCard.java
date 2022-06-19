@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Card;
+import it.polimi.ingsw.util.ParameterObject;
 
 /**The generic character card of the game (for expert mode only). It has a cost to pay to activate its effect which incrementally grows at every activation.*/
 public abstract class CharacterCard extends Card {
@@ -23,7 +24,7 @@ public abstract class CharacterCard extends Card {
     /**It activates the card effect. As a default operation for every character, the cost of the card is incremented.
      * @param parameters parameter object to trigger the effect
      * @param game the game
-     * @see ParameterObject*/
+     * @see ParameterObject */
     public void cardEffect(ParameterObject parameters, Game game){
         incrementCost();
     }

@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.exceptions.CharacterErrorException;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.util.ParameterObject;
 
 public class Character11 extends TokensCharacter{
 
@@ -15,7 +16,7 @@ public class Character11 extends TokensCharacter{
     /**It moves one target student from this card to the dining room of the player, then the list of students is refilled.
      * @param parameters parameter object
      * @param game the game
-     * @see ParameterObject*/
+     * @see ParameterObject */
     @Override
     public void cardEffect(ParameterObject parameters, Game game) {
         if(parameters.getnParam()!=2)

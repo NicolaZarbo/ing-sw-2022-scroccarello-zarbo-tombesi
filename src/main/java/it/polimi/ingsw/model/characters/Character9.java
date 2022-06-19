@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.exceptions.CharacterErrorException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.enumerations.TokenColor;
+import it.polimi.ingsw.util.ParameterObject;
 
 /**The character card number 9.*/
 public class Character9 extends TurnEffectCharacter{
@@ -16,7 +17,7 @@ public class Character9 extends TurnEffectCharacter{
     /**It excludes from the influence calculation the target color for the whole turn.
      * @param game the game
      * @param parameters parameter object
-     * @see ParameterObject*/
+     * @see ParameterObject */
     @Override
     public void cardEffect(ParameterObject parameters, Game game){
         //super.cardEffect(parameters,game);

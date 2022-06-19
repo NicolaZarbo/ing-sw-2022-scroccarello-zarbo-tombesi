@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.characters;
+package it.polimi.ingsw.util;
 
 
 /**The parameter object pattern used for character cards' effects-*/

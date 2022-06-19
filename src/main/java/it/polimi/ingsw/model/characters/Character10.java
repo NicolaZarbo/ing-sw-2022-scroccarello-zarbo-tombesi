@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.exceptions.CharacterErrorException;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.util.ParameterObject;
 
 /**The character card number 10.*/
 public class Character10 extends CharacterCard{
@@ -15,7 +16,7 @@ public class Character10 extends CharacterCard{
     /**It exchanges up to 2 students between entrance and dining room of the player.
      * @param parameters parameter object
      * @param game the game
-     * @see ParameterObject*/
+     * @see ParameterObject */
     @Override
     public void cardEffect(ParameterObject parameters, Game game) {
         Board board ;

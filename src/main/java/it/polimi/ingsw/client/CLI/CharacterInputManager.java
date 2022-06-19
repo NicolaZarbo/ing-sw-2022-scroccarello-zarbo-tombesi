@@ -4,7 +4,7 @@ import it.polimi.ingsw.client.CLI.printers.BoardsPrinter;
 import it.polimi.ingsw.client.CLI.printers.IslandsPrinter;
 import it.polimi.ingsw.client.CLI.printers.Printer;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
-import it.polimi.ingsw.model.characters.ParameterObject;
+import it.polimi.ingsw.util.ParameterObject;
 import it.polimi.ingsw.client.CLI.printers.CharacterPrinter;
 import it.polimi.ingsw.view.CentralView;
 
