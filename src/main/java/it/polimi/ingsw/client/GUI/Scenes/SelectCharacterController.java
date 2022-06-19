@@ -152,7 +152,7 @@ public class SelectCharacterController extends SceneController{
             s.setOpacity(1);
         });
         inputManager.setCardEffectActivation();
-
+        inputManager.setCardInActivation(7);
 
         //todo show board to select students after choosing those here
     }
@@ -162,6 +162,9 @@ public class SelectCharacterController extends SceneController{
         inputManager.useCharacter9(targetColor);
     }
     private void effect10(){
+        inputManager.setCardInActivation(10);
+        inputManager.setCardEffectActivation();
+        gui.showBoards();
         //todo show the entrance and dining and have the player choose up to 2 studs
     }
     private void effect11() {

@@ -19,6 +19,7 @@ public class GuiInputManager extends InputManager {
     private ArrayList<Integer> selectedStudents;
     private int singleStudent;
     private List<Integer> selectedStudentFromElsewhere;
+    private int cardInActivation;
 
     private int numberOfStudentSelectedFromCharacter;
     private boolean cardEffectActivation;
@@ -201,8 +202,10 @@ public class GuiInputManager extends InputManager {
             throw new NullPointerException();
         }
         //todo needs custom logic to show the entrance and save students
-
-
+        ParameterObject param= new ParameterObject();
+        game.playCharacter(7, param);
+        cardEffectActivation=false;
+        cardInActivation=0;
     }
     public void useCharacter9(int targetColor){
         if(!game.isYourTurn()||game.getCostOfCard().get(9)>game.getPersonalPlayer().getCoin())
@@ -212,10 +215,19 @@ public class GuiInputManager extends InputManager {
         game.playCharacter(9, new ParameterObject(targetColor));
         cardEffectActivation=false;
     }
-    public void useCharacter10(){
+    public void useCharacter10(List<Integer> entranceStudents, List<Integer> diningStudents){
         if(!game.isYourTurn()||game.getCostOfCard().get(10)>game.getPersonalPlayer().getCoin())
             return;
-
+        int dimension= entranceStudents.size();
+        int []  entranceTargets= new int[dimension];
+        int []  diningTargets=new int[dimension];
+        for (int i = 0; i < dimension; i++) {
+            entranceTargets[i]=entranceStudents.get(i);
+            diningTargets[i]=diningStudents.get(i);
+        }
+        game.playCharacter(10, new ParameterObject(game.getPersonalPlayer().getId(),entranceTargets,diningTargets));
+        cardEffectActivation=false;
+        cardInActivation=0;
         //todo a bit tricky must write custom logic for this effect in boardController
     }
     public void useCharacter11(int studentId){
@@ -232,6 +244,14 @@ public class GuiInputManager extends InputManager {
     /** Resets the current activation of an effect*/
     public void resetEffectActivation(){
         cardEffectActivation=false;
+    }
+
+    public int getCardInActivation() {
+        return cardInActivation;
+    }
+
+    public void setCardInActivation(int cardInActivation) {
+        this.cardInActivation = cardInActivation;
     }
 
     public static boolean isLobbyAvailable(){
