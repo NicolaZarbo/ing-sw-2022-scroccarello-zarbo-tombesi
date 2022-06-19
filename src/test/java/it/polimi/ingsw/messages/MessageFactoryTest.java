@@ -5,7 +5,7 @@ import it.polimi.ingsw.messages.clientmessages.*;
 import it.polimi.ingsw.messages.servermessages.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.enumerations.Mage;
-import it.polimi.ingsw.util.ParameterObject;
+import it.polimi.ingsw.model.characters.ParameterObject;
 import it.polimi.ingsw.enumerations.TowerColor;
 import junit.framework.TestCase;
 

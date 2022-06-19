@@ -4,17 +4,21 @@ import it.polimi.ingsw.exceptions.CharacterErrorException;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.tokens.Student;
-import it.polimi.ingsw.util.ParameterObject;
 
 import java.util.ArrayList;
 
+/**The character card number 7.*/
 public class Character7 extends TokensCharacter{
 
+    /**It builds the card number 1.
+     * @param id id of the card which will always be 7*/
     public  Character7(int id){
         super(id);
     }
 
-    /**@param parameters : first playerId, then students in entrance then on studs cards*/
+    /**It can move up to three students from this card to the player's entrance and exchange them with the same number of its.
+     * @param parameters parameter object
+     * @param game the game*/
     @Override
     public void cardEffect(ParameterObject parameters, Game game) {
         if(parameters.getnParam()!=3)

@@ -5,7 +5,7 @@ import it.polimi.ingsw.enumerations.TowerColor;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoPlaceAvailableException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
-import it.polimi.ingsw.util.ParameterObject;
+import it.polimi.ingsw.model.characters.ParameterObject;
 import it.polimi.ingsw.messages.servermessages.*;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.tokens.*;
@@ -307,7 +307,8 @@ public class Turn {
         return influence;
     }
 
-    /** if an island can be conquered based on influence, it changes towers on the island or puts another one*/
+    /**It conquers the island.
+     * @param islandId id of the conquered island*/
     public void islandConquest(int islandId) throws NullPointerException{
         int  maxInf;
         Island island=game.getIsland(islandId);
@@ -327,6 +328,9 @@ public class Turn {
         }
     }
 
+    /**It changes the towers on a conquered island from one player to one another.
+     * @param island the target island
+     * @param newOwner the conqueror player*/
     private void changeTower(Island island , Player newOwner){
         ArrayList<Tower> removedT=new ArrayList<>(island.getEveryTower());
         island.removeEveryTower();

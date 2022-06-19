@@ -4,7 +4,6 @@ import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.enumerations.TokenColor;
-import it.polimi.ingsw.util.ParameterObject;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;

@@ -2,7 +2,7 @@ package it.polimi.ingsw.client.GUI;
 
 import it.polimi.ingsw.client.InputManager;
 import it.polimi.ingsw.enumerations.GameState;
-import it.polimi.ingsw.util.ParameterObject;
+import it.polimi.ingsw.model.characters.ParameterObject;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 

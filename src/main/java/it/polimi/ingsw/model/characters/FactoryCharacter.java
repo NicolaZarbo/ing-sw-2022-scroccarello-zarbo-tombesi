@@ -5,15 +5,24 @@ import it.polimi.ingsw.model.tokens.Student;
 
 import java.util.ArrayList;
 
+/**The factory class to build each of the character cards of the game.*/
 public class FactoryCharacter {
-    /**Draws student from the bag when setting up characters */
+
+    /**It draws student from the bag when setting up characters (for characters who need students on them only).
+     * @param bag the bag containing every student token of the game
+     * @param x number of students to draw
+     * @return the list of drawn students*/
     private static ArrayList<Student> drawStudents(int x, Bag bag){
         ArrayList<Student> drawn  = new ArrayList<>();
         for(int i =0;i<x; i++)
             drawn.add(bag.getToken()) ;
         return drawn;
     }
-    /** Factory method used to create the right instance of character based on id in the parameters*/
+
+    /** Factory method used to create the right instance of character based on id in the parameters
+     * @param id the id of the character
+     * @param bag the bag of the game containing the student tokens
+     * @return the right character card*/
     public static CharacterCard createCharacter(int id, Bag bag)
     {
         CharacterCard card;

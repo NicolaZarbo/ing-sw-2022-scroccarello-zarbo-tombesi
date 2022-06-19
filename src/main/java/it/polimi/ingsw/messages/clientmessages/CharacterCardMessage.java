@@ -3,7 +3,7 @@ package it.polimi.ingsw.messages.clientmessages;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.util.ParameterObject;
+import it.polimi.ingsw.model.characters.ParameterObject;
 
 public class CharacterCardMessage extends ClientMessage{
     ParameterObject parameters;
