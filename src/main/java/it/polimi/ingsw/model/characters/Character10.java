@@ -14,8 +14,8 @@ public class Character10 extends CharacterCard{
     }
 
     /**It exchanges up to 2 students between entrance and dining room of the player.
-     * @param parameters parameter object
-     * @param game the game
+     * @param parameters parameter object with 3 parameters
+     * @param game the model
      * @see ParameterObject */
     @Override
     public void cardEffect(ParameterObject parameters, Game game) {

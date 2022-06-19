@@ -98,6 +98,8 @@ public class ServerConnection {
     }
     /** Used to close the socket connections in an orderly way*/
     public void closeConnection(){
+        socketOut.println("close_connection");
+        socketOut.flush();
         socketOut.close();
         System.out.println("Connection Closed");
     }

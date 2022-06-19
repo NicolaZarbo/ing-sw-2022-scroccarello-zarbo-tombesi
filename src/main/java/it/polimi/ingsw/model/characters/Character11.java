@@ -14,8 +14,8 @@ public class Character11 extends TokensCharacter{
     }
 
     /**It moves one target student from this card to the dining room of the player, then the list of students is refilled.
-     * @param parameters parameter object
-     * @param game the game
+     * @param parameters parameter object with 2 parameters
+     * @param game the model
      * @see ParameterObject */
     @Override
     public void cardEffect(ParameterObject parameters, Game game) {

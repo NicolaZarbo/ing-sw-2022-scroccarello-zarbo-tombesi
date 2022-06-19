@@ -15,8 +15,8 @@ public class Character9 extends TurnEffectCharacter{
     }
 
     /**It excludes from the influence calculation the target color for the whole turn.
-     * @param game the game
-     * @param parameters parameter object
+     * @param game the model
+     * @param parameters parameter object with 1 parameter
      * @see ParameterObject */
     @Override
     public void cardEffect(ParameterObject parameters, Game game){

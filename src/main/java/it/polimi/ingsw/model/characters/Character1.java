@@ -18,8 +18,8 @@ public class Character1 extends TokensCharacter{
     /**idStudent from card, id target island*/
 
     /**It draws one student from the card and puts it on a target island. Then, the students' list is refilled.
-     * @param parameters parameter object*
-     * @param game the game
+     * @param parameters parameter object with 2 parameters*
+     * @param game the model
      * @see ParameterObject */
     @Override
     public void cardEffect(ParameterObject parameters, Game game){
@@ -34,7 +34,6 @@ public class Character1 extends TokensCharacter{
         if(game.getBag().isEmpty())
             game.gameOver();
         incrementCost();
-       // game.groupMultiMessage(new CharacterTokenMessage(1,game));fixme
     }
 
 

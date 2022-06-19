@@ -18,8 +18,8 @@ public class Character7 extends TokensCharacter{
     }
 
     /**It can move up to three students from this card to the player's entrance and exchange them with the same number of its.
-     * @param parameters parameter object
-     * @param game the game*/
+     * @param parameters parameter object with 3 parameters
+     * @param game the model*/
     @Override
     public void cardEffect(ParameterObject parameters, Game game) {
         if(parameters.getnParam()!=3)

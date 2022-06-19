@@ -48,7 +48,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
             while(isActive()) {
                 if (in.hasNextLine()) {
                     read = in.nextLine();
-                    notify(read);
+                    actOnMessage(read);
                 }//fixme, this ensure correct unregistering in case of orderly disconnection, but could it bring any problem?
 
 
@@ -59,6 +59,11 @@ public class ClientConnection extends Observable<String> implements Runnable{
             close();
         }
 
+    }
+    private void actOnMessage(String read){
+        if(read.equalsIgnoreCase("close_connection"))
+            close();
+        else notify(read);
     }
     private synchronized String readFromSocket() {
         String result = "null";
@@ -86,9 +91,8 @@ public class ClientConnection extends Observable<String> implements Runnable{
 
     }
     private void close(){
-        closeConnection();
         System.out.println("Unregistering client...");
-        server.deregisterConnection(this);
+        closeConnection();
         System.out.println("Done!");
     }
     public synchronized  void closeConnection(){
