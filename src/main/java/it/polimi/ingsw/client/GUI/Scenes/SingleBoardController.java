@@ -18,6 +18,8 @@ public class SingleBoardController extends BoardSceneController{
     public Pane table;
     public Pane towers;
     public Pane popupPanel;
+
+    public Pane popupCardPanel;
     private final int boardNumber;
 
     private List<Circle> entranceList;
@@ -94,8 +96,20 @@ public class SingleBoardController extends BoardSceneController{
         popupPanel.setMouseTransparent(true);
         refresh();
     }
+    @Override
+    protected void hideCardPanel() {
+        popupCardPanel.setVisible(false);
+        popupCardPanel.setMouseTransparent(true);
+        refresh();
+    }
+    @Override
+    protected void showCardPanel() {
+        popupCardPanel.setVisible(true);
+        popupCardPanel.setMouseTransparent(false);
+        refresh();
+    }
 
-    public void moveToBoard() {
+        public void moveToBoard() {
         super.moveToDining();
     }
 

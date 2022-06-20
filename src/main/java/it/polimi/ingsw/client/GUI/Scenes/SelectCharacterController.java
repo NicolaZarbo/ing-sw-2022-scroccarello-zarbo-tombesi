@@ -168,6 +168,17 @@ public class SelectCharacterController extends SceneController{
         //todo show some color for the player to choose
         int targetColor=-1;
         inputManager.useCharacter9(targetColor);
+        showMoveButton();
+        popupPanel.getChildren().get(0).setDisable(true);
+        popupPanel.getChildren().get(1).setDisable(true);
+        for(int i=0;i<10;i++)
+            if(i<3 || i==9)
+            popupPanel.getChildren().get(i).setOpacity(0.4);
+            else if(i>3 && i<9)
+                popupPanel.getChildren().get(i).setDisable(false);
+
+
+
     }
     private void effect10(){
         inputManager.setCardInActivation(10);
@@ -304,7 +315,14 @@ public class SelectCharacterController extends SceneController{
     public void moveToBoard(){
         gui.showBoards();
     }
-    public void addToSelection(){}
+    public void addToSelection(){
+
+        if(inputManager.getNumberOfStudentSelectedFromCharacter()==3) {
+            popupPanel.getChildren().get(0).setDisable(true);
+            popupPanel.getChildren().get(0).setOpacity(0.4);
+        }
+
+    }
     public void selcetedRed(){}
     public void selcetedPink(){}
     public void selcetedYellow(){}

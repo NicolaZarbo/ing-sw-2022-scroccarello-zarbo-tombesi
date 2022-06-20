@@ -208,6 +208,9 @@ public abstract class BoardSceneController extends SceneController{// todo event
     }
     protected abstract void showMoveButton();
     protected abstract void hideMoveButtons();
+
+    protected abstract void hideCardPanel();
+    protected abstract void showCardPanel();
     public void setPlayerOwner(int owner){
         playerOwner=owner;
     }

@@ -104,8 +104,8 @@
          <children>
             <Button layoutX="96.0" layoutY="3.0" mnemonicParsing="false" onMouseClicked="#addToSelection" />
             <Button layoutX="152.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#moveToBoard" />
-            <Text layoutX="4.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a color" />
             <Text layoutX="6.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add to selection" />
+            <Text layoutX="4.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a color" />
             <Button layoutX="164.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selcetedPink" style="-fx-background-color: pink;" />
             <Button layoutX="146.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selcetedRed" style="-fx-background-color: red;" />
             <Button layoutX="128.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selcetedGreen" style="-fx-background-color: green;" />
