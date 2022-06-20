@@ -5,11 +5,14 @@ import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
+import javafx.event.EventHandler;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -33,6 +36,8 @@ public class MapSceneController extends SceneController {
     public AnchorPane root;
     public AnchorPane map_container;
     public Pane overflown_students;
+    public Button toHand;
+    public Button toBoards;
     private List<ImageView> islandStudentPlaces;
     private final GUI gui;
     private final CentralView view;
@@ -81,10 +86,15 @@ public class MapSceneController extends SceneController {
             }
         }
     }
+    private void breakActivationChangeScene(){
+        GuiInputManager manager= gui.getInputManager();
+        toBoards.setOnMouseClicked(event -> manager.resetEffectActivation());
+        toHand.setOnMouseClicked(event -> manager.resetEffectActivation());
+    }
     private void moveStudentContext(){
         if(gui.getInputManager().isActivatingCardEffect()) {
-            //todo logic of what to show if a character is being used
-
+            breakActivationChangeScene();
+            info.setText("Select where to drop the student");
             return;
         }
             GuiInputManager inputManager= gui.getInputManager();
@@ -113,7 +123,8 @@ public class MapSceneController extends SceneController {
     }
     private void moveMotherContext(){
         if(gui.getInputManager().isActivatingCardEffect()){
-            //todo logic of what to show if a character is being used
+            breakActivationChangeScene();
+            info.setText("Select where to drop the student");
             return;
         }
         setOtherContainerTransparent(island_container);

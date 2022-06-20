@@ -17,9 +17,9 @@ public class ParameterObject {
 
     /** It is used for card 7 and card 10.
      * @param otherTargetId player id
-     * @param targetStudentsForExchange list of students' ids
-     * @param targetStudentsOnEntrance  <p>•for card 10: students on hall</p>
+     * @param targetStudentsForExchange <p>•for card 10: students on hall</p>
      *                                  <p>•for card 7: students on card</p>
+     * @param targetStudentsOnEntrance  list of students on entrance
      * @exception IllegalArgumentException if the array's lengths don't respect the card's limitations
      * */
     public ParameterObject(int otherTargetId, int[] targetStudentsOnEntrance, int[] targetStudentsForExchange) {

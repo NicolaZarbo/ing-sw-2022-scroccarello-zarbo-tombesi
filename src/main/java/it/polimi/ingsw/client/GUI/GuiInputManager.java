@@ -194,15 +194,23 @@ public class GuiInputManager extends InputManager {
         singleStudent=-1;
         cardEffectActivation=false;
     }
-    public void useCharacter7(List<Integer> studentsFromCard){
+    public void useCharacter7(List<Integer> studentsFromEntrance){
         if(!game.isYourTurn()||game.getCostOfCard().get(7)>game.getPersonalPlayer().getCoin())
             return;
-        if(!game.getStudentsOnCard().get(7).containsAll(studentsFromCard))
+        List<Integer> studentsFromCard= selectedStudents;
+        //noinspection SlowListContainsAll
+        if(!game.getStudentsOnCard().get(7).containsAll(studentsFromCard) || (studentsFromCard.size() > 3) || (studentsFromCard.size() == 0))
         {
             throw new NullPointerException();
         }
-        //todo needs custom logic to show the entrance and save students
-        ParameterObject param= new ParameterObject();
+        int dimension=studentsFromEntrance.size();
+        int []  entranceStudents= new int[dimension];
+        int []  cardStudents=new int[dimension];
+        for (int i = 0; i < dimension; i++) {
+            entranceStudents[i]=studentsFromEntrance.get(i);
+            cardStudents[i]=studentsFromCard.get(i);
+        }
+        ParameterObject param= new ParameterObject(game.getPersonalPlayer().getId(),entranceStudents,cardStudents);
         game.playCharacter(7, param);
         cardEffectActivation=false;
         cardInActivation=0;
@@ -244,6 +252,7 @@ public class GuiInputManager extends InputManager {
     /** Resets the current activation of an effect*/
     public void resetEffectActivation(){
         cardEffectActivation=false;
+        cardInActivation=0;
     }
 
     public int getCardInActivation() {

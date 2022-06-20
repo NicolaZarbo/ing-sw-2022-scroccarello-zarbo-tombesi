@@ -107,9 +107,8 @@
             </Pane>
               </children>
       </AnchorPane>
-      <Button layoutX="76.0" layoutY="768.0" mnemonicParsing="false" onMouseClicked="#goToHand" prefHeight="34.0" prefWidth="81.0" text="Show Hand" />
-      <Button layoutX="214.0" layoutY="769.0" mnemonicParsing="false" onMouseClicked="#goToBoard" prefHeight="34.0" prefWidth="94.0" text="Show Boards" />
-      <Button layoutX="366.0" layoutY="769.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="94.0" text="show players" />
+      <Button fx:id="toHand" layoutX="76.0" layoutY="768.0" mnemonicParsing="false" onMouseClicked="#goToHand" prefHeight="34.0" prefWidth="81.0" text="Show Hand" />
+      <Button fx:id="toBoards" layoutX="214.0" layoutY="769.0" mnemonicParsing="false" onMouseClicked="#goToBoard" prefHeight="34.0" prefWidth="94.0" text="Show Boards" />
       <ImageView fx:id="hoverBackGround" fitHeight="600.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" translateX="270.0" translateY="100.0" />
       <Pane fx:id="islandStudent_container" layoutX="400.0" layoutY="200.0" prefHeight="269.0" prefWidth="340.0" translateZ="5">
          <children>

@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public abstract class BoardSceneController extends SceneController{// todo eventually we could merge this class with singleBoardController
 
     protected GUI gui;
@@ -175,12 +176,19 @@ public abstract class BoardSceneController extends SceneController{// todo event
     }
     private void effect7EntranceHandler(Circle student, int studentId){
         GuiInputManager inputManager = gui.getInputManager();
+        if(clickedEntranceStudentsColor.size()>3)
+            return;
+        showCardPanel();
+
+        /*
         inputManager.addSavedSelectedStud(inputManager.getSingleStudent());
         int temp=inputManager.getNumberOfStudentSelectedFromCharacter();
         inputManager.setNumberOfStudentSelectedFromCharacter(temp-1);
         if(inputManager.getNumberOfStudentSelectedFromCharacter()==1){
             //todo logic
         }
+
+         */
     }
     private void effect10EntranceHandler(Circle student, int studId){
         if(clickedEntranceStudentsColor.size()<2)
@@ -191,6 +199,8 @@ public abstract class BoardSceneController extends SceneController{// todo event
         if(clickedEntranceStudentsColor.size()==2 && clickedDiningStudentsColor.size()==2)
             gui.getInputManager().useCharacter10(clickedEntranceStudentsColor,clickedDiningStudentsColor);
         //todo add a panel with a button to accept 1 to 1 exchange
+        //panel.setVisible(true)
+        //panel.setMouseTransparent(false)
     }
     /** Used to add a shadow to a student on mouse over*/
     private void setStudentColoredShadow(Circle student, int color){

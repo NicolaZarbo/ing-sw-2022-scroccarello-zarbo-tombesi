@@ -4,6 +4,7 @@ import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.view.CentralView;
+import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -51,16 +52,12 @@ public class SelectCharacterController extends SceneController{
     public void initialize() {
         initCharacters();
         initStudCharacters();
-        popupPanel.setVisible(false);
-        popupPanel.setMouseTransparent(true);
+        popupPanel.setVisible(true);
+        popupPanel.setMouseTransparent(false);
         if(!view.isYourTurn() || !( view.getState()== GameState.actionMoveStudent || view.getState()== GameState.actionMoveMother)) {
             CharacterContainer.setDisable(true);
             studentCharacterContainer.setDisable(true);
             CharacterContainer.setOpacity(0.5);
-        }else{
-            CharacterContainer.setDisable(false);
-            studentCharacterContainer.setDisable(false);
-            CharacterContainer.setOpacity(0.3);
         }
     }
 
@@ -154,31 +151,33 @@ public class SelectCharacterController extends SceneController{
         inputManager.setCardEffectActivation();
         inputManager.setCardInActivation(7);
         showMoveButton();
-        popupPanel.getChildren().get(0).setDisable(false);
-        popupPanel.getChildren().get(1).setDisable(false);
-        for(int i=4;i<9;i++){
-            popupPanel.getChildren().get(i).setDisable(true);
-            popupPanel.getChildren().get(i).setOpacity(0.4);
-        }
-
-
+        panelGoToBoard();
         //todo show board to select students after choosing those here
     }
+    private void panelGoToBoard(){
+        popupPanel.getChildren().forEach(pane->{
+            pane.setVisible(false);
+            pane.setMouseTransparent(true);
+        });
+        Node goToBoard=popupPanel.getChildren().get(0);
+        goToBoard.setMouseTransparent(false);
+        goToBoard.setVisible(true);
+    }
+    private void panelColors(){
+        popupPanel.getChildren().forEach(pane->{
+            pane.setVisible(false);
+            pane.setMouseTransparent(true);
+        });
+        Node colors=popupPanel.getChildren().get(1);
+        colors.setVisible(true);
+        colors.setMouseTransparent(false);
+        colors.setTranslateY(-30);
+    }
     private void effect9(){
-        //todo show some color for the player to choose
         int targetColor=-1;
         inputManager.useCharacter9(targetColor);
         showMoveButton();
-        popupPanel.getChildren().get(0).setDisable(true);
-        popupPanel.getChildren().get(1).setDisable(true);
-        for(int i=0;i<10;i++)
-            if(i<3 || i==9)
-            popupPanel.getChildren().get(i).setOpacity(0.4);
-            else if(i>3 && i<9)
-                popupPanel.getChildren().get(i).setDisable(false);
-
-
-
+        panelColors();
     }
     private void effect10(){
         inputManager.setCardInActivation(10);
@@ -244,7 +243,11 @@ public class SelectCharacterController extends SceneController{
                         studOfCardList.get(j).setVisible(true);
                         studOfCardList.get(j).setDisable(false);
                         int finalId = id;
-                        studOfCardList.get(j).setOnMouseClicked(event -> clickSelectStudent(finalId));
+                        Circle stud=studOfCardList.get(j);
+                        studOfCardList.get(j).setOnMouseClicked(event -> {
+                            clickSelectStudent(finalId);
+                            stud.setOpacity(0.2);
+                        });
                     }
                 }
         }
@@ -258,9 +261,8 @@ public class SelectCharacterController extends SceneController{
             inputManager.saveSelectedStud(selectedStudents.get(0));
             gui.showIslands();
         }
-        if(activatingCard==7 && inputManager.getNumberOfStudentSelectedFromCharacter()<4){
-            inputManager.saveSelectedStud(selectedStudents);
-
+        if(activatingCard==7 && inputManager.getNumberOfStudentSelectedFromCharacter()==3){
+            moveToBoard();
         }
         if(activatingCard==11){
             inputManager.useCharacter11(selectedStudents.get(0));
@@ -272,22 +274,11 @@ public class SelectCharacterController extends SceneController{
     static Image getImage(int idStudent) {
         Image stud;
         switch(idStudent/26){
-            case 0->{
-                stud=new Image("images/students/student3d/red.png");
-            }
-            case 1 ->{
-                stud=new Image("images/students/student3d/yellow.png");
-            }
-            case 2->{
-                stud=new Image("images/students/student3d/green.png");
-
-            }
-            case 3->{
-                stud=new Image("images/students/student3d/blue.png");
-            }
-            case 4->{
-                stud=new Image("images/students/student3d/pink.png");
-            }
+            case 0->stud=new Image("images/students/student3d/red.png");
+            case 1 ->stud=new Image("images/students/student3d/yellow.png");
+            case 2->stud=new Image("images/students/student3d/green.png");
+            case 3->stud=new Image("images/students/student3d/blue.png");
+            case 4->stud=new Image("images/students/student3d/pink.png");
             default -> {
                 throw new NullPointerException("not an iD");
             }
@@ -297,6 +288,7 @@ public class SelectCharacterController extends SceneController{
 
     public void goBack() {
         inputManager.resetEffectActivation();
+        activatingCard=0;
         gui.showHand();
     }
 
@@ -313,20 +305,32 @@ public class SelectCharacterController extends SceneController{
         //refershings
     }
     public void moveToBoard(){
+        if(activatingCard==7 ){
+            if(selectedStudents.size()>0)
+                inputManager.saveSelectedStud(selectedStudents);
+            else return;
+        }
         gui.showBoards();
     }
-    public void addToSelection(){
-
-        if(inputManager.getNumberOfStudentSelectedFromCharacter()==3) {
-            popupPanel.getChildren().get(0).setDisable(true);
-            popupPanel.getChildren().get(0).setOpacity(0.4);
-        }
-
+    public void selectedRed(){
+        inputManager.useCharacter9(0);
+        hideMoveButtons();
     }
-    public void selcetedRed(){}
-    public void selcetedPink(){}
-    public void selcetedYellow(){}
-    public void selcetedBlue(){}
-    public void selcetedGreen(){}
+    public void selectedPink(){
+        inputManager.useCharacter9(5);
+        hideMoveButtons();
+    }
+    public void selectedYellow(){
+        inputManager.useCharacter9(1);
+        hideMoveButtons();
+    }
+    public void selectedBlue(){
+        inputManager.useCharacter9(3);
+        hideMoveButtons();
+    }
+    public void selectedGreen(){
+        inputManager.useCharacter9(2);
+        hideMoveButtons();
+    }
 
 }

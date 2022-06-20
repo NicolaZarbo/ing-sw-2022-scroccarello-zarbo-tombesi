@@ -65,7 +65,12 @@ public class BoardSceneXController extends SceneController{
                 case planPlayCard -> text = "Go to hand to choose a card";
                 default -> text = "this are the boards";
             }
+            if(gui.getInputManager().isActivatingCardEffect() && gui.getInputManager().getCardInActivation()==7)
+                text="Select some students to exchange to the jester";
+            if(gui.getInputManager().isActivatingCardEffect() && gui.getInputManager().getCardInActivation()==10)
+                text="Select up to 2 student from both entrance and dining room";
         }else text="this are the boards\n Wait for your turn";
+
         context_text.setText(text);
     }
     private void setDisposition(){

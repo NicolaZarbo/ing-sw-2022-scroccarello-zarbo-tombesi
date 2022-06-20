@@ -102,16 +102,18 @@
       <Text layoutX="794.0" layoutY="601.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
       <Pane fx:id="popupPanel" layoutX="555.0" layoutY="288.0" prefHeight="92.0" prefWidth="183.0" scaleX="2.0" scaleY="2.0" style="-fx-background-color: gray; -fx-border-radius: 15; -fx-background-radius: 20; -fx-border-color: gold; -fx-border-width: 2;">
          <children>
-            <Button layoutX="96.0" layoutY="3.0" mnemonicParsing="false" onMouseClicked="#addToSelection" />
-            <Button layoutX="152.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#moveToBoard" />
-            <Text layoutX="6.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add to selection" />
-            <Text layoutX="4.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a color" />
-            <Button layoutX="164.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selcetedPink" style="-fx-background-color: pink;" />
-            <Button layoutX="146.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selcetedRed" style="-fx-background-color: red;" />
-            <Button layoutX="128.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selcetedGreen" style="-fx-background-color: green;" />
-            <Button layoutX="110.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selcetedBlue" style="-fx-background-color: cyan;" />
-            <Button layoutX="92.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selcetedYellow" style="-fx-background-color: yellow;" />
-            <Text layoutX="6.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End selection, go to Board" />
+            <Pane>
+               <Button layoutX="152.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#moveToBoard" />
+               <Text layoutX="6.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End selection, go to Board" />
+            </Pane>
+            <Pane>
+               <Text layoutX="4.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a color" />
+               <Button layoutX="164.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selectedPink" style="-fx-background-color: pink;" />
+               <Button layoutX="146.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selectedRed" style="-fx-background-color: red;" />
+               <Button layoutX="128.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selectedGreen" style="-fx-background-color: green;" />
+               <Button layoutX="110.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selectedBlue" style="-fx-background-color: cyan;" />
+               <Button layoutX="92.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selectedYellow" style="-fx-background-color: yellow;" />
+            </Pane>
          </children>
       </Pane>
       <Button layoutX="857.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#goBack" scaleX="1.3" scaleY="1.3" text="Go Back" />
