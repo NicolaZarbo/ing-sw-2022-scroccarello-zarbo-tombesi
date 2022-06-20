@@ -102,10 +102,10 @@
       <Text layoutX="794.0" layoutY="601.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
       <Pane fx:id="popupPanel" layoutX="555.0" layoutY="235.0" prefHeight="92.0" prefWidth="183.0" scaleX="2.0" scaleY="2.0" style="-fx-background-color: red; -fx-border-radius: 15; -fx-background-radius: 20; -fx-border-color: gold; -fx-border-width: 2;">
          <children>
-            <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false"  />
-            <Button layoutX="14.0" layoutY="50.0" mnemonicParsing="false"  />
+            <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#moveToBoard" />
+            <Button layoutX="14.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#sendToIsland" />
             <Text layoutX="35.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a target Island" />
-            <Text layoutX="35.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Send to Dining Room" />
+            <Text layoutX="35.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Go to Board" />
          </children>
       </Pane>
       <Button layoutX="857.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#goBack" scaleX="1.3" scaleY="1.3" text="Go Back" />

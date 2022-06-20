@@ -162,5 +162,6 @@
             </Text>
          </children>
       </Pane>
+      <Button layoutX="512.0" layoutY="770.0" mnemonicParsing="false" onMouseClicked="#goToCharacters" prefHeight="34.0" prefWidth="109.0" text="show Characters" />
    </children>
 </AnchorPane>

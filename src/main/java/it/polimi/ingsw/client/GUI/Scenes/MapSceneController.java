@@ -456,4 +456,9 @@ public class MapSceneController extends SceneController {
     public void goToBoard() {
         gui.showBoards();
     }
+
+    public void goToCharacters() {
+        gui.showCharacters();
+    }
+
 }
