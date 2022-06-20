@@ -153,6 +153,14 @@ public class SelectCharacterController extends SceneController{
         });
         inputManager.setCardEffectActivation();
         inputManager.setCardInActivation(7);
+        showMoveButton();
+        popupPanel.getChildren().get(0).setDisable(false);
+        popupPanel.getChildren().get(1).setDisable(false);
+        for(int i=4;i<9;i++){
+            popupPanel.getChildren().get(i).setDisable(true);
+            popupPanel.getChildren().get(i).setOpacity(0.4);
+        }
+
 
         //todo show board to select students after choosing those here
     }
@@ -239,9 +247,9 @@ public class SelectCharacterController extends SceneController{
             inputManager.saveSelectedStud(selectedStudents.get(0));
             gui.showIslands();
         }
-        if(activatingCard==7 && selectedStudents.size()<4){
+        if(activatingCard==7 && inputManager.getNumberOfStudentSelectedFromCharacter()<4){
             inputManager.saveSelectedStud(selectedStudents);
-            gui.showBoards();
+
         }
         if(activatingCard==11){
             inputManager.useCharacter11(selectedStudents.get(0));
@@ -293,4 +301,14 @@ public class SelectCharacterController extends SceneController{
         popupPanel.setMouseTransparent(true);
         //refershings
     }
+    public void moveToBoard(){
+        gui.showBoards();
+    }
+    public void addToSelection(){}
+    public void selcetedRed(){}
+    public void selcetedPink(){}
+    public void selcetedYellow(){}
+    public void selcetedBlue(){}
+    public void selcetedGreen(){}
+
 }
