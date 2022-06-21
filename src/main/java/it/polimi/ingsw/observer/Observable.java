@@ -2,6 +2,7 @@ package it.polimi.ingsw.observer;
 
 import java.util.ArrayList;
 
+/**The class which represents the observable to observe.*/
 public class Observable<T> {
 
     private final ArrayList<Observer<T>>  observers = new ArrayList<>();

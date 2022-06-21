@@ -7,13 +7,14 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.Observer;
 
+/**The controller of the MVC pattern. It is involved in getting information from the View and invoking the relative methods of the Model. It is specialized in sub-controllers which help resolve certain tasks. */
 public class Controller extends Observable<ErrorMessageForClient> implements Observer<ClientMessage> {
     protected final Game game;
     private final ControllerPlanningPhase controllerRound;
     private final ControllerActionPhase controllerTurn;
     private final ControllerSetupPhase controllerSetup;
 
-    /** Creates an instance of controller and subControllers
+    /** It creates an instance of controller and its sub-controllers.
      * @param game the model on which this controller acts*/
     public  Controller(Game game){
         this.game=game;
@@ -22,19 +23,24 @@ public class Controller extends Observable<ErrorMessageForClient> implements Obs
         this.controllerSetup= new ControllerSetupPhase(game);
     }
 
+    /**@return the planning controller*/
     public ControllerPlanningPhase getControllerRound() {
         return controllerRound;
     }
 
+    /**@return the action controller*/
     public ControllerActionPhase getControllerTurn() {
         return controllerTurn;
     }
 
+    /**@return the setup controller*/
     public ControllerSetupPhase getControllerSetup() {
         return controllerSetup;
     }
 
-    /** Called by RemoteView.notify(), used to act on the model as effect of a user's interaction*/
+
+    /** It is called by the Remote View's <i>notify</i>, it is used to act on the model as effect of a user's interaction.
+     * @param message the message related to the user interaction*/
     @Override
     public void update(ClientMessage message) {
         if(message.getPlayerId()!=this.game.getCurrentPlayerId())
@@ -47,7 +53,9 @@ public class Controller extends Observable<ErrorMessageForClient> implements Obs
                 sendMessageError(e);
             }
     }
-    /** notifies the ErrorMessageReceiver in RemoteView, used to send to the client an error*/
+
+    /** It notifies the error occurred in the Remote View and send the client relative message.
+     * @param e the exception thrown after the error*/
     private void sendMessageError(RuntimeException e) {
         ErrorMessageForClient error =new ErrorMessageForClient(game.getCurrentPlayerId(),e);
         this.notify(error);
