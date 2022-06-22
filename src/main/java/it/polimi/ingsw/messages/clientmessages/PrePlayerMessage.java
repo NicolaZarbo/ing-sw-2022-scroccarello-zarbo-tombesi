@@ -8,10 +8,13 @@ import it.polimi.ingsw.model.LobbyPlayer;
 import it.polimi.ingsw.enumerations.Mage;
 import it.polimi.ingsw.enumerations.TowerColor;
 
+/**The message containing custom parameters of the player from lobby.*/
 public class PrePlayerMessage extends ClientMessage {
     private int towerColor, mage;
     private String name;
 
+    /**It builds the message from the json string.
+     * @param json the string message*/
     public PrePlayerMessage(String json) {
         super(json);
     }
@@ -21,6 +24,11 @@ public class PrePlayerMessage extends ClientMessage {
         controller.getControllerSetup().createPlayer(this);
     }
 
+    /**It builds the message starting from custom information of the player.
+     * @param playerId the id of the player
+     * @param towerColor the team color
+     * @param mage the selected mage
+     * @param name the unique username*/
     public PrePlayerMessage(int playerId, int towerColor,  int mage, String name) {
         super(playerId);
         this.mage=mage;
@@ -28,14 +36,20 @@ public class PrePlayerMessage extends ClientMessage {
         this.name=name;
         super.serialize();
     }
+
+    /**@return the lobby player*/
     public LobbyPlayer getPrePlayer(){return new LobbyPlayer(TowerColor.getColor(towerColor), Mage.getMage(mage),name);}
+
+    /**@return the player's nickname*/
     public String getName(){
         return name;
     }
+
+    /**@return the id of the tower color of the player(team)*/
     public int getTowerColor() {
         return towerColor;
     }
-
+    /**@return the value of the chosen magician*/
     public int getMage() {
         return mage;
     }
