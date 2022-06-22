@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**The message which contains the part of the model to save on the view.*/
 public class WholeGameMessage extends ServerMessage{
     private List<SimplifiedPlayer> players;
     private boolean easy;
@@ -26,11 +27,14 @@ public class WholeGameMessage extends ServerMessage{
     private HashMap<Integer,Integer> cardCosts;
     private int activeCharacter;
 
+    /**It builds the message starting from the json string.
+     * @param json the string message*/
     public WholeGameMessage(String json) {
         super(json);
     }
 
-    /** used to send every info about players(boards;hand), clouds, islands, MN, and CharacterCards*/
+    /**It builds the message starting from the model.
+     * @param game the model game*/
     public WholeGameMessage(Game game) {
         super(game);
         this.easy=game.isEasy();
@@ -53,6 +57,7 @@ public class WholeGameMessage extends ServerMessage{
         super.serialize();
     }
 
+    /**@return the id of the active character card*/
     public int getActiveCharacter() {
         return activeCharacter;
     }
@@ -77,34 +82,43 @@ public class WholeGameMessage extends ServerMessage{
         view.setView(this);
     }
 
+    /**@return •true: the game is in easy mode
+     * <p>•false: the game is in expert mode</p>*/
     public boolean isEasy() {
         return easy;
     }
 
+    /**@return the list of simplified players of the game*/
     public List<SimplifiedPlayer> getModelPlayers() {
         return players;
     }
 
+    /**@return the list of simplified clouds of the game*/
     public List<Integer[]> getClouds() {
         return clouds;
     }
 
+    /**@return the current position of mother nature*/
     public int getMotherNature() {
         return motherNature;
     }
 
+    /**@return the list of simplified islands of the game*/
     public List<SimplifiedIsland> getIslands() {
         return islands;
     }
 
+    /**@return the list of ids of the characters*/
     public List<Integer> getCharacters() {
         return characters;
     }
 
+    /**@return the association between character and its cost*/
     public HashMap<Integer, Integer> getCardCosts() {
         return cardCosts;
     }
 
+    /**@return the association between token character card and its tokens' ids */
     public HashMap<Integer, List<Integer>> getCardStudents() {
         return cardStudents;
     }
