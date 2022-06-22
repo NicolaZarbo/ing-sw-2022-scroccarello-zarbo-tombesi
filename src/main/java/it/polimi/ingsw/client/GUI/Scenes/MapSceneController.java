@@ -170,6 +170,7 @@ public class MapSceneController extends SceneController {
                 default -> {return;}
             }
             towerByIslandNumber.get(islandId).setFill(new ImagePattern(img));
+            towerByIslandNumber.get(islandId).setEffect(new DropShadow(5, Color.BLACK));
             towerByIslandNumber.get(islandId).setVisible(true);
         }else towerByIslandNumber.get(islandId).setVisible(false);
     }
