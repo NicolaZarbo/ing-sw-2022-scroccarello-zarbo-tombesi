@@ -201,12 +201,12 @@
          <Text layoutX="35.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Send to Dining Room" />
       </children>
    </Pane>
-   <Pane fx:id="popupCardPanel" visible="false" mouseTransparent="true" layoutX="249.0" layoutY="118.0" prefHeight="92.0" prefWidth="183.0" style="-fx-background-color: gray; -fx-border-radius: 15; -fx-background-radius: 20; -fx-border-color: gold; -fx-border-width: 2;">
+   <Pane fx:id="popupCardPanel" visible="true" mouseTransparent="true" layoutX="249.0" layoutY="118.0" prefHeight="92.0" prefWidth="183.0" style="-fx-background-color: gray; -fx-border-radius: 15; -fx-background-radius: 20; -fx-border-color: gold; -fx-border-width: 2;">
       <children>
          <Button layoutX="96.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#activateCharacter" />
-         <Button layoutX="152.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#moveToCharacter" />
+         <Button layoutX="152.0" layoutY="33.0" style="-fx-background-color: red;" mnemonicParsing="false" onMouseClicked="#moveToCharacter" />
          <Text layoutX="6.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add to selection" />
-         <Text layoutX="6.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End selection, go to Board" />
+         <Text layoutX="6.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return back to the characters" />
          <Text layoutX="10.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student to select:" />
          <Text fx:id="studToSelect" layoutX="112.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
       </children>

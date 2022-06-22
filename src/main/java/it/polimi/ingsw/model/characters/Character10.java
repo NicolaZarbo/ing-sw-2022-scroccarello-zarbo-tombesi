@@ -1,8 +1,11 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.exceptions.CharacterErrorException;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.util.ParameterObject;
 
 /**The character card number 10.*/
@@ -25,9 +28,15 @@ public class Character10 extends CharacterCard{
         int nStudent =parameters.getTargetStudentsOnEntrance().length;
         board= game.getPlayer(parameters.getOtherTargetId()).getBoard();
         for(int i=0; i<nStudent;i++){
-            board.moveToDiningRoom(board.getStudentFromEntrance(parameters.getTargetStudentsOnEntrance()[i]));
+            Student targetFromEntrance=board.getStudentFromEntrance(parameters.getTargetStudentsOnEntrance()[i]);
             board.putStudentOnEntrance(board.getFromDiningRoom(parameters.getTargetStudentsForExchange()[i]));
+            board.moveToDiningRoom(targetFromEntrance);
         }
+        for(Player player :game.getPlayers())
+            for (TokenColor color:TokenColor.values()) {
+                if(game.getActionPhase().canHaveTeacher(color,player.getId()))
+                    game.getActionPhase().setTeacher(color,player.getId());
+            }
         incrementCost();
     }
 

@@ -62,7 +62,6 @@ public class Turn {
         island.addStudent(stud);
         game.groupMultiMessage(new  IslandsMessage(game));
         game.groupMultiMessage(new SingleBoardMessage(game,idPlayer));
-        //use a multiple message to reduce the number of connection use TODO
         movedStudent++;
         if(movedStudent<3)
             game.sendMultiMessage();
@@ -132,8 +131,7 @@ public class Turn {
         Island central=game.getIslands().get(pos);
         Island next=game.getIslands().get(Math.floorMod(pos+1,size));
         if( !central.getTowers().isEmpty() && !next.getTowers().isEmpty())
-            if(central.getTowers().get(0).getColor()==next.getTowers().get(0).getColor())
-                return true;
+            return central.getTowers().get(0).getColor() == next.getTowers().get(0).getColor();
         return false;
     }
 
@@ -263,7 +261,10 @@ public class Turn {
     public  void useCharacter(int cardId, ParameterObject parameters, int playerId){
         CharacterCard card = game.getCharacter(cardId);
         Player player = game.getPlayer(playerId);
-        if(player.getHand().enoughCoin(card.getCost())){
+        if(game.getCardBonusActive()!=0){
+            throw new IllegalMoveException("an effect has already bean activated");
+        }
+        if(player.getHand().enoughCoin(card.getCost()) ){
             try {
                 player.getHand().payCoin(card.getCost());
                 card.cardEffect(parameters, game);

@@ -52,8 +52,8 @@ public class SelectCharacterController extends SceneController{
     public void initialize() {
         initCharacters();
         initStudCharacters();
-        popupPanel.setVisible(true);
-        popupPanel.setMouseTransparent(false);
+        popupPanel.setVisible(false);
+        popupPanel.setMouseTransparent(true);
         if(!view.isYourTurn() || !( view.getState()== GameState.actionMoveStudent || view.getState()== GameState.actionMoveMother)) {
             CharacterContainer.setDisable(true);
             studentCharacterContainer.setDisable(true);
