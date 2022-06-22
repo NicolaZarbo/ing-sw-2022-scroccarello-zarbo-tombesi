@@ -69,9 +69,20 @@ public class BoardSceneXController extends SceneController{
                 text="Select some students to exchange to the jester";
             if(gui.getInputManager().isActivatingCardEffect() && gui.getInputManager().getCardInActivation()==10)
                 text="Select up to 2 student from both entrance and dining room";
-        }else text="this are the boards\n Wait for your turn";
+            if(gui.getInputManager().isActivatingCardEffect())
+                setCancelActivationOnExit();
+
+            }else text="this are the boards\n Wait for your turn";
 
         context_text.setText(text);
+    }
+    private void setCancelActivationOnExit(){
+        moveToMap.setOnMouseClicked(event -> {
+            gui.getInputManager().resetEffectActivation();
+            goToMap();});
+        moveToHand.setOnMouseClicked(event -> {
+            gui.getInputManager().resetEffectActivation();
+            goToHand();});
     }
     private void setDisposition(){
         switch (view.getPlayers().size()){

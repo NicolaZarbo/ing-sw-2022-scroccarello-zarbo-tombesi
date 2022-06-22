@@ -96,17 +96,16 @@ public class Board {
      * @exception NoTokenFoundException if there is no token with the target id*/
     public Student getFromDiningRoom(int id)throws NoTokenFoundException {
         Student stud;
-        for(int i=0; i<diningRoom.length;i++){
-            for (int j=0; j<diningRoom[0].length;j++){
-                if(diningRoom[i][j]!= null)
-                    if( diningRoom[i][j].getId()==id){
-                        stud=diningRoom[i][j];
-                        diningRoom[i][j]=null;
-                        return stud;
-                    }
-            }
+        int colorValue = id/26;
+        for (int j=0; j<diningRoom[colorValue].length;j++){
+            if(diningRoom[colorValue][j]!= null)
+                if( diningRoom[colorValue][j].getId()==id){
+                    stud=diningRoom[colorValue][j];
+                    diningRoom[colorValue][j]=null;
+                    return stud;
+                }
         }
-        throw new NoTokenFoundException("no student of that color in dining room");
+        throw new NoTokenFoundException("no student of that color in dining room, id "+id);
     }
 
     /**It returns the token with the target id from entrance. If not found, it throws an exception.

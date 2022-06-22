@@ -68,7 +68,7 @@ public class SingleBoardController {//extends BoardSceneController
     private void activationContext(){
         resetActivationOnExit();
         GuiInputManager manager= gui.getInputManager();
-        if(manager.isActivatingCardEffect() && manager.getCardInActivation()==7){
+        if(manager.isActivatingCardEffect() && (manager.getCardInActivation()==7 || manager.getCardInActivation()==10) ){
             showCardPanel();
         }
         else {
@@ -186,7 +186,7 @@ public class SingleBoardController {//extends BoardSceneController
                 int id= diningroom[i][j];
                 if(id!=-1){
                     img=getStudentImage(id);
-                    setDiningRoomClickable(hall.get(i).get(j),id/26);
+                    setDiningRoomClickable(hall.get(i).get(j),id);
                     hall.get(i).get(j).setFill(new ImagePattern(img));
                     hall.get(i).get(j).setVisible(true);
                     hall.get(i).get(j).setDisable(false);
@@ -280,19 +280,19 @@ public class SingleBoardController {//extends BoardSceneController
         student.setDisable(true);
     }
     private void effect10EntranceHandler(Circle student, int studId){
-        if(clickedEntranceStudentsColor.size()<2)
+        if(clickedEntranceStudentsColor.size()>2)
             return;
         clickedEntranceStudentsColor.add(studId);
         student.setOpacity(0.5);
         student.setDisable(true);
-        if(clickedEntranceStudentsColor.size()==2 && clickedDiningStudentsColor.size()==2)
-            gui.getInputManager().useCharacter10(clickedEntranceStudentsColor,clickedDiningStudentsColor);
-        //todo add a panel with a button to accept 1 to 1 exchange
-        //panel.setVisible(true)
-        //panel.setMouseTransparent(false)
+     //   if(clickedEntranceStudentsColor.size()==2 && clickedDiningStudentsColor.size()==2)
+       //     gui.getInputManager().useCharacter10(clickedEntranceStudentsColor,clickedDiningStudentsColor);
+        showCardPanel();
     }
     /** Used to add a shadow to a student on mouse over*/
     private void setStudentColoredShadow(Circle student, int color){
+        if(this.playerOwner!=gui.getGame().getPersonalPlayer().getId())
+            return;
         Color shadowColor =switch (color){
             case 0-> Color.DARKRED;
             case 1 -> Color.YELLOW;
@@ -328,17 +328,19 @@ public class SingleBoardController {//extends BoardSceneController
         gui.setScene(SceneEnum.MapScene);
         hideMoveButtons();
     }
-    /** @param clickedColor studentID/26*/
-    protected void setDiningRoomClickable(Circle student, int clickedColor){//todo change color for id
+    /** @param studentID studentID/26*/
+    protected void setDiningRoomClickable(Circle student, int studentID){//todo change color for id
         student.setDisable(false);
         GuiInputManager inputManager = gui.getInputManager();
         student.setOnMouseClicked(mouseEvent -> {
             if(isYourBoard() && inputManager.isActivatingCardEffect() && inputManager.getCardInActivation()==10 && clickedDiningStudentsColor.size()<2) {
-                clickedDiningStudentsColor.add(clickedColor);
+                clickedDiningStudentsColor.add(studentID);
                 student.setDisable(true);
                 student.setOpacity(0.5);
+                showCardPanel();
                 if(clickedDiningStudentsColor.size()==2) {
-                    hall.setOpacity(0.3);
+                    hall.setEffect(new DropShadow(2,Color.BLACK));
+                    hall.setOpacity(0.7);
                 }
             }
         });
@@ -370,6 +372,10 @@ public class SingleBoardController {//extends BoardSceneController
             int leftToSelect = gui.getInputManager().getNumberOfStudentSelectedFromCharacter() - clickedEntranceStudentsColor.size();
             studToSelect.setText(leftToSelect + "");
         }
+        if(gui.getInputManager().getCardInActivation() == 10){
+            int leftToSelect = Math.max(clickedEntranceStudentsColor.size() , clickedDiningStudentsColor.size())-Math.min(clickedEntranceStudentsColor.size() , clickedDiningStudentsColor.size());
+            studToSelect.setText(leftToSelect + "");
+        }
     }
 
         public void moveToBoard() {
@@ -381,6 +387,8 @@ public class SingleBoardController {//extends BoardSceneController
     }
 
     public void moveToCharacter() {//todo change this to a reset activation
+        gui.getInputManager().resetEffectActivation();
+        gui.showCharacters();
     }
 
     /**
@@ -392,9 +400,20 @@ public class SingleBoardController {//extends BoardSceneController
             if(size<4 && size>0 && size==gui.getInputManager().getNumberOfStudentSelectedFromCharacter()) {
                 gui.getInputManager().useCharacter7(clickedEntranceStudentsColor);
                 clickedEntranceStudentsColor=new ArrayList<>();
+                hideCardPanel();
+                initialize();
             }
-            hideCardPanel();
-            initialize();
+        }
+        if (gui.getInputManager().getCardInActivation() == 10) {
+            int entrancePicked=clickedEntranceStudentsColor.size();
+            int diningPicked = clickedDiningStudentsColor.size();
+            if(entrancePicked == diningPicked && entrancePicked<3 && entrancePicked>0){
+                gui.getInputManager().useCharacter10(clickedEntranceStudentsColor,clickedDiningStudentsColor);
+                clickedEntranceStudentsColor=new ArrayList<>();
+                clickedDiningStudentsColor=new ArrayList<>();
+                hideCardPanel();
+                initialize();
+            }
         }
     }
 }

@@ -47,7 +47,7 @@ public class Game extends Observable<ServerMessage> {
      *                       <p>• 2 players 1vs1 game</p>
      *                       <p>• 3 players 1vs1vs1 game</p>
      *                       <p>• 4 players 2vs2 game</p>*/
-    public Game(boolean easy, int numberOfPlayer){//fixme move this stub to test class
+    public Game(boolean easy, int numberOfPlayer){
         this.nPlayers =numberOfPlayer;
         actionPhase= new Action(this);
         planningPhase= new Planning(this);

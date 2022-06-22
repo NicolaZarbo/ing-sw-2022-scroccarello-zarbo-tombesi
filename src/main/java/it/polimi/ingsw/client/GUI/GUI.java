@@ -114,6 +114,7 @@ public class GUI extends Application implements UserInterface {
     @Override
     public void showError(String errorMessage) {
 //todo important! add an alert to the stage that tells the player something went wrong, must be closable on click
+        System.out.println(errorMessage);
     }
 
     @Override
