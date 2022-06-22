@@ -10,9 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MultipleServerMessage extends ServerMessage{
-    //private ArrayList<ServerMessage> messages;
+
     private ArrayList<String> serializedMessages;
     private boolean serialized;
+
     public MultipleServerMessage(String json) {
         super(json);
     }
@@ -29,28 +30,20 @@ public class MultipleServerMessage extends ServerMessage{
         if(serialized) {
             throw new MessageErrorException("message already serialized");
         }
-       // messages.add(anotherMessage);
         serializedMessages.add(anotherMessage.getJson());
     }
+
+    @Override
     public void serialize(){
         super.serialize();
         this.serialized=true;
-    }
-
-    public boolean isSerialized() {
-        return serialized;
     }
 
     @Override
     protected void parseMessage(JsonObject gg) {
         Gson gson = new Gson();
         this.serializedMessages=gson.fromJson(gg, MultipleServerMessage.class).getSerializedMessages();
-        /*messages=new ArrayList<>();
-        for (String son :serializedMessages) {
-            messages.add(MessageFactory.getMessageFromServer(son));
-        }
 
-         */
     }
 
     @Override

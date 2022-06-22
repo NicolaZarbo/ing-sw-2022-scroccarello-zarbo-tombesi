@@ -3,7 +3,7 @@ import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.messages.clientmessages.PlayAssistantMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.enumerations.GameState;
-import it.polimi.ingsw.model.Round;
+import it.polimi.ingsw.model.Planning;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public class ControllerPlanningPhase {
 
     private final Game game;
-    private final Round modelRound;
+    private final Planning modelRound;
 
     /**It builds the planning controller.
      * @param game part of the model on which it is operating*/
@@ -41,5 +41,5 @@ public class ControllerPlanningPhase {
     public Game getGame(){return this.game;}
 
     /**@return the planning phase of the model*/
-    public Round getModelRound(){return this.modelRound;}
+    public Planning getModelRound(){return this.modelRound;}
 }

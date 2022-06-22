@@ -10,8 +10,13 @@ import it.polimi.ingsw.model.tokens.Token;
 
 import java.util.List;
 
+/**The character message which refills students on token characters after invoking their effects.*/
 public class CharacterTokenMessage extends CharacterUpdateMessage {
     private List<Integer> students;
+
+    /**It builds the message by filling it wth the students to set.
+     * @param cardId the card id
+     * @param game the model game*/
     public CharacterTokenMessage(int cardId, Game game) {
         super( game);
         CharacterCard card;
@@ -25,13 +30,17 @@ public class CharacterTokenMessage extends CharacterUpdateMessage {
         super.serialize();
     }
 
+    /**It builds the message starting from the json string
+     * @param json the string message*/
     public CharacterTokenMessage(String json) {
         super(json);
     }
 
+    /**@return the list of students to set*/
     public List<Integer> getStudents() {
         return students;
     }
+
     @Override
     protected void parseMessage(JsonObject gg) {
         Gson gson= new Gson();

@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.WelcomeSceneController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="863.0" prefWidth="1236.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.WelcomeSceneController">
    <children>
-      <Pane fx:id="mainpane" layoutX="30.0" layoutY="190.0" prefHeight="196.0" prefWidth="562.0">
+      <Pane fx:id="mainpane" layoutX="418.0" layoutY="541.0" prefHeight="144.0" prefWidth="438.0">
          <children>
-            <Button fx:id="startButton" layoutX="248.0" layoutY="66.0" mnemonicParsing="false" onAction="#startGame" prefHeight="30.0" prefWidth="65.0" text="Start" />
-            <TextField fx:id="usernameBox" alignment="CENTER" layoutX="206.0" layoutY="30.0" />
-            <Label layoutX="220.0" text="Choose your username" />
-            <Text fx:id="errorMsg" fill="RED" layoutX="81.0" layoutY="139.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="400.0" />
+            <Button fx:id="startButton" layoutX="187.0" layoutY="71.0" mnemonicParsing="false" onAction="#startGame" prefHeight="30.0" prefWidth="65.0" text="Start" />
+            <TextField fx:id="usernameBox" alignment="CENTER" layoutX="145.0" layoutY="37.0" />
+            <Text fx:id="errorMsg" fill="RED" layoutX="24.0" layoutY="126.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="400.0" />
+            <Label layoutX="117.0" layoutY="7.0" prefHeight="30.0" prefWidth="215.0" text="Choose your username">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <Pane fx:id="lobbymessage" prefHeight="200.0" prefWidth="600.0" visible="false">
+      <Pane fx:id="lobbymessage" layoutX="337.0" layoutY="259.0" prefHeight="200.0" prefWidth="600.0" visible="false">
          <children>
             <Text layoutX="44.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joining lobby.." textAlignment="CENTER" wrappingWidth="511.92578125">
                <font>
@@ -23,7 +31,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="connectionOptions" layoutX="386.0" layoutY="14.0" onMouseClicked="#openOptions" prefHeight="30.0" prefWidth="192.0" style="-fx-background-color: gray; -fx-background-radius: 5; -fx-border-color: black; -fx-border-radius: 5;">
+      <Pane fx:id="connectionOptions" layoutX="995.0" layoutY="613.0" onMouseClicked="#openOptions" prefHeight="30.0" prefWidth="192.0" style="-fx-background-color: gray; -fx-background-radius: 5; -fx-border-color: black; -fx-border-radius: 5;">
          <children>
             <Text fill="WHITE" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modify connection" textAlignment="CENTER" wrappingWidth="192.0">
                <font>
@@ -32,9 +40,9 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="optionsContainer" visible="false" layoutX="386.0" layoutY="44.0" prefHeight="130.0" prefWidth="192.0" style="-fx-background-color: gray; -fx-border-color: black; -fx-background-radius: 3; -fx-border-radius: 3;">
+      <Pane fx:id="optionsContainer" layoutX="1003.0" layoutY="671.0" prefHeight="130.0" prefWidth="192.0" style="-fx-background-color: gray; -fx-border-color: black; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
          <children>
-            <Text fx:id="error_serverOptions" visible="false" fill="RED" layoutX="50.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error :" wrappingWidth="148.5078125">
+            <Text fx:id="error_serverOptions" fill="RED" layoutX="50.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error :" visible="false" wrappingWidth="148.5078125">
                <font>
                   <Font size="14.0" />
                </font>

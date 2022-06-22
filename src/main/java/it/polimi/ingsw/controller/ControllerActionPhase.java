@@ -5,13 +5,13 @@ import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.messages.clientmessages.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.enumerations.GameState;
-import it.polimi.ingsw.model.Turn;
+import it.polimi.ingsw.model.Action;
 
 /**The sub-controller which manages action phase. It is responsible of receiving input from the client (View) during all its action phase and translating it to a model action.*/
 public class ControllerActionPhase  {
 
     private final Game game;
-    private final Turn modelTurn;
+    private final Action modelTurn;
     private int studentMoved;
 
     /**It builds the action controller.

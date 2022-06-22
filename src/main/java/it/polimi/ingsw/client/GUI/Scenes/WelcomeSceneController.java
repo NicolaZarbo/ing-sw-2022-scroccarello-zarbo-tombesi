@@ -13,6 +13,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Shadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -21,6 +22,8 @@ import java.io.ByteArrayInputStream;
 
 
 public class WelcomeSceneController extends SceneController {
+    @FXML
+    private AnchorPane root;
     public Pane connectionOptions;
     public Pane optionsContainer;
     public Text error_serverOptions;
@@ -39,6 +42,8 @@ public class WelcomeSceneController extends SceneController {
 
     public void initialize() {
         this.gui = GuiInputManager.getGui();
+        root.setStyle("-fx-background-image:url(images/wallpapers/Eriantys.jpg); -fx-background-position: center; -fx-background-size: 1280 796");
+        mainpane.setStyle("-fx-background-image:url(images/simple_elements/card_wood_background.png); -fx-background-position: center; -fx-background-size: 438 144");
         usernameBox.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().equals(KeyCode.ENTER)) {
                 startGame();

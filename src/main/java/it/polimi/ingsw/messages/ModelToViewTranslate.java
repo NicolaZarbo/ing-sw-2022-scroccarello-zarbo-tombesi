@@ -13,9 +13,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**The class used to translate model objects into simplified objects for the view.*/
 public class ModelToViewTranslate {
 
-    /**Create a simplified representation of the islands for the view */
+    /**It creates a simplified representation of the islands for the view.
+     * @param islands the model islands
+     * @return the view islands*/
     public static List<SimplifiedIsland> translateIsland(List<Island> islands){
         ArrayList<SimplifiedIsland> simplifiedIslands =new ArrayList<>();
         for (Island island: islands) {
@@ -30,8 +33,9 @@ public class ModelToViewTranslate {
         return simplifiedIslands;
     }
 
-    /**Create a simplified representation of the players for the view */
-    public static List<SimplifiedPlayer> translatePlayer(Player[] modelPlayers){
+    /**It creates a simplified representation of the players for the view.
+     * @param modelPlayers the players in the model
+     * @return the view players*/    public static List<SimplifiedPlayer> translatePlayer(Player[] modelPlayers){
         List<SimplifiedPlayer> viewPlayers=new ArrayList<>();
         for (Player modelPlayer :modelPlayers) {
             int coins = modelPlayer.getHand().getCoin();
@@ -41,7 +45,10 @@ public class ModelToViewTranslate {
         }
         return viewPlayers;
     }
-    /**Create a simplified representation of a board*/
+
+    /**It creates a simplified representation of the boards for the view.
+     * @param modelBoard the model islands
+     * @return the view boards*/
     public static SimplifiedBoard translateBoard(Board modelBoard){
         Integer[][] diningRoom= new Integer[modelBoard.getDiningRoom().length][modelBoard.getDiningRoom()[0].length];
         for (int i = 0; i < modelBoard.getDiningRoom().length; i++) {
@@ -62,8 +69,9 @@ public class ModelToViewTranslate {
         return  new SimplifiedBoard(diningRoom,profBoard,entrance,towerLeft, modelBoard.getCoinDN());
     }
 
-    /**Create a simplified representation of the clouds for the view */
-    public static ArrayList<Integer[]> translateClouds(Cloud[] modelClouds){
+    /**It creates a simplified representation of the clouds for the view.
+     * @param modelClouds the model islands
+     * @return the view clouds*/    public static ArrayList<Integer[]> translateClouds(Cloud[] modelClouds){
         ArrayList<Integer[]> viewClouds=new ArrayList<>();
 
         for (Cloud cloud:modelClouds) {

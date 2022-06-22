@@ -6,15 +6,21 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.view.CentralView;
 
+/**The message to notify the end of the game. It contains information about the winner(s).*/
 public class GameOverMessage extends ServerMessage{
     private int winnerID;
     private int winnerTeam;
     private int winningCondition;
-    //todo maybe we could add the reason that triggered the end of game
+
+   /**It builds the message starting from a json string.
+    * @param json the string message*/
     public GameOverMessage(String json) {
         super(json);
     }
 
+    /**It builds the message starting from the model.
+     * @param game the model game
+     * @param winner the id of the winner*/
     public GameOverMessage(Game game,int winner) {
         super(game);
         winningConditions(game);
@@ -27,11 +33,12 @@ public class GameOverMessage extends ServerMessage{
         }
         serialize();
     }
-    /** Checks used:
-     * 1 bag is empty
-     * 2 someone used every tower in their board
-     * 3 someone used his last card
-     * 4 there are only 3 cluster of islands left*/
+
+    /** It checks winning conditions:
+     * <p>• bag is empty</p>
+     * <p>• someone has placed every tower in his board</p>
+     * <p>• someone has played his last card</p>
+     * <p>• there are only 3 clusters of islands left</p>*/
     private void winningConditions(Game game){
         if(game.getIslands().size()==3)
             winningCondition=4;
@@ -49,14 +56,17 @@ public class GameOverMessage extends ServerMessage{
             winningCondition=1;
     }
 
+    /**@return the reason which triggered game over*/
     public int getWinningCondition() {
         return winningCondition;
     }
 
+    /**@return the id of the winner*/
     public int getWinnerID() {
         return winnerID;
     }
 
+    /**@return the winner team (team game only).*/
     public int getWinnerTeam() {
         return winnerTeam;
     }
