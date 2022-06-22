@@ -9,13 +9,13 @@ import java.util.List;
 public class RoundTest extends TestCase {
 
     private Game gameTest;
-    private Round roundTest;
+    private Planning roundTest;
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
         this.gameTest=new GameStub(false,4,12);
-        this.roundTest=new Round(gameTest);
+        this.roundTest=new Planning(gameTest);
     }
 
     public void testSetCloud(){

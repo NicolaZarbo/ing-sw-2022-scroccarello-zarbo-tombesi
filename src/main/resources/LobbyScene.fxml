@@ -4,15 +4,13 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="root" maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.LobbySceneController">
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="863.0" prefWidth="1236.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.LobbySceneController">
    <children>
-      <Pane fx:id="waitingpanel" prefHeight="153.0" prefWidth="600.0">
+      <Pane fx:id="waitingpanel" layoutX="301.0" layoutY="83.0" prefHeight="153.0" prefWidth="600.0">
          <children>
             <Text fx:id="waitingtext" layoutX="21.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="560.13671875">
                <font>
@@ -21,7 +19,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="mainpanel" layoutX="6.0" layoutY="4.0" prefHeight="392.0" prefWidth="589.0">
+      <Pane fx:id="mainpanel" layoutX="306.0" layoutY="236.0" prefHeight="392.0" prefWidth="589.0">
          <children>
             <CheckBox fx:id="easySelector" layoutX="197.0" layoutY="240.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="154.0" text="Easy Rules">
                <font>

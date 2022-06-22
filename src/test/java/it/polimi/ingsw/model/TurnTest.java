@@ -14,17 +14,17 @@ import java.util.ConcurrentModificationException;
 
 public class TurnTest extends TestCase {
     Game game;
-    Turn turn;
-    Round round;
+    Action turn;
+    Planning round;
     @Override
     public void setUp() throws Exception {
         super.setUp();
         game = new GameStub(false,2,12);
-        turn= new Turn(game);
+        turn= new Action(game);
         Student[] stud = new Student[3];
         stud[0]=game.getBag().getToken();
         game.getClouds()[1].setStud(stud);
-        round= new Round(game);
+        round= new Planning(game);
 
     }
 

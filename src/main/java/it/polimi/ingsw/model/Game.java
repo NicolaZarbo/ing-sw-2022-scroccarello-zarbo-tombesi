@@ -30,9 +30,9 @@ public class Game extends Observable<ServerMessage> {
     private final List<CharacterCard> characters;
     private int cardBonusActive;
     private TokenColor targetColor;
-    private Turn actionPhase;
+    private Action actionPhase;
     private Setup setupPhase;
-    private Round planningPhase;
+    private Planning planningPhase;
     private GameState actualState;
     private MultipleServerMessage multiMessage;
 
@@ -49,8 +49,8 @@ public class Game extends Observable<ServerMessage> {
      *                       <p>• 4 players 2vs2 game</p>*/
     public Game(boolean easy, int numberOfPlayer){
         this.nPlayers =numberOfPlayer;
-        actionPhase= new Turn(this);
-        planningPhase= new Round(this);
+        actionPhase= new Action(this);
+        planningPhase= new Planning(this);
         setupPhase = new Setup(this);
         this.easy=easy;
         this.bag=new Bag(26,5);
@@ -167,12 +167,12 @@ public class Game extends Observable<ServerMessage> {
     }
 
     /**@return planning component of the game*/
-    public Round getPlanningPhase() {
+    public Planning getPlanningPhase() {
         return planningPhase;
     }
 
     /**@return action component of the game*/
-    public Turn getActionPhase() {
+    public Action getActionPhase() {
         return actionPhase;
     }
 
@@ -214,7 +214,7 @@ public class Game extends Observable<ServerMessage> {
 
     /**It sets the playing order for this round.
      * @param playIngOrder list of player ids ordered based on the assistant card played by each of them
-     * @see Round*/
+     * @see Planning */
     public void setPlayIngOrder(List<Integer> playIngOrder) {
         this.playIngOrder = playIngOrder;
     }

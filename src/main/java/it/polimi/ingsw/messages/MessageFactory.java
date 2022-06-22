@@ -5,9 +5,13 @@ import com.google.gson.JsonParser;
 import it.polimi.ingsw.exceptions.MessageErrorException;
 import it.polimi.ingsw.messages.clientmessages.*;
 import it.polimi.ingsw.messages.servermessages.*;
-//TODO add all the missing messages
+
+/**The factory class to build each of the possible messages to exchange.*/
 public class MessageFactory {
-    /** Used to parse a message from the server with the right dynamic type*/
+
+    /**It is used to parse a message from the server received in a string format.
+     * @param json the string message
+     * @return the corresponding message from the server*/
     public static ServerMessage getMessageFromServer(String json){
         String type;
         try {
@@ -38,7 +42,10 @@ public class MessageFactory {
 
         };
     }
-    /** Used to parse a message from the client with the right dynamic type*/
+
+    /**It is used to parse a message from the client received in a string format.
+     * @param json the string message
+     * @return the corresponding message from the client*/
     public static ClientMessage getMessageFromClient(String json){
         JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
         String type= jj.get("messageType").getAsString();
