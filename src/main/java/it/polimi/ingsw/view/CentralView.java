@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**The simplified version of the game. It contains a light version of the model to manage the view of the player.*/
 public class  CentralView extends Observable<ClientMessage> implements Observer<ServerMessage> {
     private List<SimplifiedIsland> islands;
     private List<Integer[]> clouds;
@@ -48,42 +49,54 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
      * 4 there are only 3 cluster of islands left*/
     private int gameOverReason;
 
+
+    /**@return the list of simplified islands of the game*/
     public List<SimplifiedIsland> getIslands() {
         return islands;
     }
 
+    /**@return the list of simplified players of the game*/
     public List<SimplifiedPlayer> getPlayers() {
         return players;
     }
 
+    /**@return the list of simplified clouds of the game*/
     public List<Integer[]> getClouds() {
         return clouds;
     }
 
+    /**@return the current position of mother nature in the game*/
     public int getMother() {
         return mother;
     }
 
+    /**@return the nickname of the player*/
     public String getName() {
         return name;
     }
 
+    /**@return •true: the game is in easy mode
+     * <p>•false: the game is in expert mode</p>*/
     public boolean isEasy() {
         return easy;
     }
 
+    /**@return the relative simplified player*/
     public SimplifiedPlayer getPersonalPlayer() {
         return personalPlayer;
     }
 
-    public int getTurnOf() {
-        return turnOf;
-    }
-
+    /**@param id the id of the player which has played the returned card
+     * @return the id of assistant card played by the specified player*/
     public Integer getPlayedCardThisTurnByPlayerId(int id) {
         return playedCardThisTurnByPlayerId.get(id);
     }
 
+    /**It builds the central view starting from the specific user interface.
+     * <p>It can be:</p>
+     * <p>•CLI client</p>
+     * <p>•GUI client</p>
+     * <p>Notice that the typology of user interface is decided by the user according to the launch file he runs.</p>*/
     public CentralView(UserInterface userInterface){
         this.clientScreen=userInterface;
         this.state=GameState.setupPlayers;
@@ -91,12 +104,19 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         winner=-1;
         firstTurn=true;
     }
+
+    /**It shows the error received from the server.
+     * @param message the error message sent by the server*/
     public void errorFromServer(ErrorMessageForClient message){
         if(message.getTargetPlayerId()==id|| message.getTargetPlayerId()==-1) {
             clientScreen.showError(message.getErrorInfo());
             seeAction();
         }
     }
+
+    /**It builds the view starting from a whole game message.
+     * @see WholeGameMessage
+     * @param message the message containing all the information about the game*/
     public void setView(WholeGameMessage message) {
         islands=message.getIslands();
         easy= message.isEasy();
@@ -120,7 +140,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         if(state==GameState.actionMoveStudent||state==GameState.actionMoveMother)
             seeAction();
     }
-    /** used to return to the right input point*/
+
+    /**It is used to display to the player the right input scene.*/
     public void seeAction() {
         if(!isYourTurn())
             return;
@@ -131,9 +152,15 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             case actionChooseCloud -> clientScreen.showClouds();
         }
     }
+
+    /**It sets the player's nickname.
+     * @param name the player's nickname*/
     public void setName(String name){
         this.name=name;
     }
+
+    /**It updates the simplified clouds after receiving a message.
+     * @param message the message containing refilling tokens for the simplified clouds*/
     public void cloudUpdate(CloudMessage message){
         this.clouds= message.getClouds();
     }
@@ -144,13 +171,18 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     this.islands=message.getIslandList();
     }
-    /** adds to card to the list of played card in this turn, this way the players know which card he can or cannot use*/
+
+    /**It adds to card to the list of played card in this turn; in this way the players know which card they can use or not.
+     * @param message the message containing played assistant*/
     public void playedAssistantUpdate(PlayedAssistantMessage message){
         playedCardThisTurnByPlayerId.put(message.getPlayerId(),message.getPlayedCardId()%10);
         if(message.getPlayerId()==personalPlayer.getId())
             cardYouPlayed=message.getPlayedCardId()%10;
 
     }
+
+    /**It updates the player's board after getting a relative message.
+     * @param message the message containing the current board of the player*/
     public void singleBoardUpdate(SingleBoardMessage message){
         for (SimplifiedPlayer p:players){
             if (p.getId() == message.getBoardPlayerId()) {
@@ -158,15 +190,16 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
                p.setCoin(message.getCoin());
             }
         }
-       //
         if(isYourTurn() && state==GameState.actionMoveStudent) {
-            //clientScreen.showView();
             studentMoved++;
             if(studentMoved<3)
                 clientScreen.askToMoveStudent();
         }
 
     }
+
+    /**It personalizes the view of the player after getting a proper message.
+     * @param message the message containing the information about customization*/
     public void personalizePlayer(PlayerSetUpMessage message){
         turnOf=message.getNewId();
         this.teamPlay=message.isTeamPlay();
@@ -180,6 +213,9 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             clientScreen.showOptionsForPersonalization(message);
         }
     }
+
+    /**It ends the players turn and passes the game to the following player based on the planning order.
+     * @param message the message which triggers turn swapping*/
     public void changeTurn(ChangeTurnMessage message){
         this.turnOf=message.getPlayer();
         if(isYourTurn() && state==GameState.planPlayCard && winner==-1){
