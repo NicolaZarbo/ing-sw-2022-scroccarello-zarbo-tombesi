@@ -11,31 +11,31 @@
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="948.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.HandSceneController">
    <children>
       <Pane fx:id="played_container" layoutX="3.0" layoutY="419.0" prefHeight="186.0" prefWidth="511.0">
-         <Rectangle fx:id="Discarded10" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="400.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="Discarded9" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="358.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="Discarded8" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="314.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="Discarded7" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="271.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="Discarded6" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="228.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="Discarded5" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="185.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="Discarded4" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="142.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="Discarded3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="99.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="Discarded2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="60.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="Discarded1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="25.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="Discarded10" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="400.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="Discarded9" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="358.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="Discarded8" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="314.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="Discarded7" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="271.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="Discarded6" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="228.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="Discarded5" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="185.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="Discarded4" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="142.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="Discarded3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="99.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="Discarded2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="60.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="Discarded1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="25.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
       </Pane>
       <Circle fx:id="coinPlace" fill="DODGERBLUE" layoutX="69.0" layoutY="101.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="68.0" layoutY="44.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of coins:" />
       <Text layoutX="61.0" layoutY="174.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Playable Card :" />
       <Pane fx:id="assistant_container" layoutY="187.0" prefHeight="186.0" prefWidth="948.0" style="-fx-background-image: url(images/simple_elements/card_wood_background.png);-fx-background-size: 948 186; -fx-background-color: pink;">
-         <Rectangle fx:id="AssistantCard1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="22.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="AssistantCard2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="113.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="AssistantCard3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="205.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="AssistantCard4" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="297.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="AssistantCard5" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="389.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="AssistantCard6" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="480.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="AssistantCard7" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="571.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="AssistantCard8" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="662.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="AssistantCard9" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="754.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-         <Rectangle fx:id="AssistantCard10" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="846.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="AssistantCard1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="22.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="AssistantCard2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="113.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="AssistantCard3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="205.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="AssistantCard4" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="297.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="AssistantCard5" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="389.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="AssistantCard6" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="480.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="AssistantCard7" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="571.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="AssistantCard8" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="662.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="AssistantCard9" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="754.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+         <Rectangle id="AssistantCard10" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="149.0" layoutX="846.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
       </Pane>
        <Text layoutX="59.0" layoutY="393.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discarded pile:" />
       <Text layoutX="120.0" layoutY="106.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" fx:id="xSign" />

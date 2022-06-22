@@ -30,20 +30,16 @@ public class WelcomeSceneController extends SceneController {
     public TextField ip_server;
     public TextField port_server;
     private GUI gui;
-    @FXML
-    private TextField usernameBox;
-    @FXML
-    private Text errorMsg;
-    @FXML
-    private Pane mainpane;
-    @FXML
-    private Pane lobbymessage;
+    public TextField usernameBox;
+    public Text errorMsg;
+    public Pane mainpane;
+    public Pane lobbymessage;
     private boolean customConnection;
 
     public void initialize() {
         this.gui = GuiInputManager.getGui();
         root.setStyle("-fx-background-image:url(images/wallpapers/Eriantys.jpg); -fx-background-position: center; -fx-background-size: 1280 796");
-        mainpane.setStyle("-fx-background-image:url(images/simple_elements/card_wood_background.png); -fx-background-position: center; -fx-background-size: 438 144");
+        mainpane.setStyle("-fx-background-image:url(images/simple_elements/card_wood_background.png); -fx-background-position: center; -fx-background-size: 438 144; -fx-border-width: 2;-fx-border-color: black");
         usernameBox.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().equals(KeyCode.ENTER)) {
                 startGame();
