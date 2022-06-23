@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**The handler of the client connection. It exchanges string messages with the client through the socket.*/
 public class ClientConnection extends Observable<String> implements Runnable{
     private Socket clientSocket;
     private PrintWriter out;
@@ -15,12 +16,17 @@ public class ClientConnection extends Observable<String> implements Runnable{
     private boolean active ;
     private Server server;
 
+    /**It builds the handler.
+     * @param clientSocket the socket of the client
+     * @param server the reference to the central server*/
     public ClientConnection(Socket clientSocket, Server server) {
         this.clientSocket = clientSocket;
         this.server=server;
         this.active=true;
     }
 
+    /**@return •true: the connection is on
+     * <p>•false: the connection is off</p>*/
     public synchronized boolean isActive() {
         return active;
     }
@@ -58,11 +64,17 @@ public class ClientConnection extends Observable<String> implements Runnable{
         }
 
     }
+
+    /**It sends the message read. It eventually closes the connection.
+     * @param read the message arrived from the socket*/
     private void actOnMessage(String read){
         if(read.equalsIgnoreCase("close_connection"))
             close();
         else notify(read);
     }
+
+    /**It reads the string message from the socket.
+     * @return the read message*/
     private synchronized String readFromSocket() {
         String result = "null";
         String read;
@@ -75,10 +87,15 @@ public class ClientConnection extends Observable<String> implements Runnable{
         }
         return result;
     }
+
+    /**It sends an asynchronous message to the client in a dedicated thread
+     * @param message the message to send*/
     public void asyncSend(final String message){
         new Thread(() -> send(message)).start();
     }
 
+    /**It sends through the socket the string message.
+     * @param s the string message to send*/
     private synchronized void send(String s) {
         try {
             out.println(s);
@@ -88,11 +105,15 @@ public class ClientConnection extends Observable<String> implements Runnable{
         }
 
     }
+
+    /**It invokes the client connection closure.*/
     private void close(){
         System.out.println("Unregistering client...");
         closeConnection();
         System.out.println("Done!");
     }
+
+    /**It closes the connection and notifies the client.*/
     public synchronized  void closeConnection(){
         send("Connection closed from Server");
         try {
