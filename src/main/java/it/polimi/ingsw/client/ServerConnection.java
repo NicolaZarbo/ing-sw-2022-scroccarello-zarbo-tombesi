@@ -1,17 +1,20 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.GUI.GuiInputManager;
+import it.polimi.ingsw.exceptions.TimeOutConnectionException;
 import it.polimi.ingsw.messages.MessageFactory;
 import it.polimi.ingsw.messages.clientmessages.ClientMessage;
 import it.polimi.ingsw.messages.servermessages.ServerMessage;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.view.CentralView;
 
-import java.io.ByteArrayInputStream;
+import javax.naming.TimeLimitExceededException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -20,11 +23,12 @@ public class ServerConnection {
     private final PrintWriter socketOut;
     private final Scanner socketIn;
     private Scanner input;
-    private final CentralView game;
+    private final CentralView view;
     private final InputManager inputManager;
     public static String ip="127.0.0.1";
     public static int port=50000;
     private volatile boolean canWrite;
+    private final Socket socket;
 
     /**It is used to connect to the server and to manage responses through an InputManager and a MessageHandler
      *  @param input a scanner object to read some strings needed for the lobby setup
@@ -34,14 +38,15 @@ public class ServerConnection {
         if(!checkSocketOptions()){
             throw new IllegalArgumentException("bad connection arguments");
         }
-        Socket socket = new Socket(ip, port);
+        socket = new Socket(ip, port);
         inputManager.printToScreen("Connection established");
         socketIn = new Scanner(socket.getInputStream());
         socketOut = new PrintWriter(socket.getOutputStream());
         this.inputManager=inputManager;
         canWrite= !(inputManager instanceof GuiInputManager);
-        this.game=view;
+        this.view =view;
         this.input=input;
+        socket.setSoTimeout(1000*50);
     }
 
     /**It is used to control if the port and ip chosen are acceptable.*/
@@ -70,42 +75,90 @@ public class ServerConnection {
     public void run() {
         String socketLine="";
         try {
-            socketLine = socketIn.nextLine();
+            socketLine = readFromServer();
             inputManager.printToScreen(socketLine);
             String inputLine = input.nextLine();
-            game.setName(inputLine);
-            socketOut.println(inputLine);
-            socketOut.flush();
-            socketLine = socketIn.nextLine();
+            view.setName(inputLine);
+            sendToServer(inputLine);
+            socketLine = readFromServer();
             inputManager.printToScreen(socketLine);
-            while (!socketLine.equals("connected to lobby") ) {
-                while (!canWrite) {//fixme test with synchronized block
-                    Thread.onSpinWait();
-                }
-                inputLine = input.nextLine();
-                socketOut.println(inputLine);
-                socketOut.flush();
-                socketLine = socketIn.nextLine();
-                inputManager.printToScreen(socketLine);
-            }
+            if(!socketLine.equals("connected to lobby"))
+                lobbyHandler(socketLine);
             while (true) {
-                socketLine = socketIn.nextLine();
+                socketLine = readFromServer();
                 ServerMessage message = MessageFactory.getMessageFromServer(socketLine);
-                game.update(message);
-                if (game.isYourTurn())
+                view.update(message);
+                if (view.isYourTurn())
                     inputManager.decodeInput();
             }
         } catch (NoSuchElementException e) {
             inputManager.printToScreen("Connection closed from the client side" + e.getMessage());
-        } finally {
-            socketIn.close();
+        }
+    }
+    private void lobbyHandler(String sockLine){
+        String read=sockLine;
+        String inputLine;
+        while (!read.equals("connected to lobby") ) {
+            while (!canWrite) {//fixme test with synchronized block
+                Thread.onSpinWait();
+            }
+            inputLine = input.nextLine();
+            sendToServer(inputLine);
+            read = readFromServer();
+            inputManager.printToScreen(read);
+        }
+    }
+    /** Used by readFromServer()
+     * Necessary to notice disconnections through timeout*/
+    private String readSocketIn(){
+        StringBuilder builder= new StringBuilder();
+        int read=0;
+        try {
+            read=  socket.getInputStream().read();
+            while((char)read!='\n'){
+                builder.append((char)read);
+                read= socket.getInputStream().read();
+            }
+        }catch (SocketTimeoutException timeoutException){
+            throw new TimeOutConnectionException();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        String out=builder.toString();
+        if(read==0 || read==-1) {
+            closeConnection();
+            throw new TimeOutConnectionException();
+        }
+            return out.substring(0, out.length() - 1);
+    }
+    /** Used to read a string from the server*/
+    private String readFromServer(){
+        String ret;
+        ret=readSocketIn();
+        while (ret.equalsIgnoreCase("pong")) {
+            ret = readSocketIn();
+            System.out.println("pong");
+        }
+        return ret;
+    }
+    private synchronized void sendToServer(String out){
+        socketOut.println(out);
+        socketOut.flush();
+    }
+    private void ping(){
+        while (true){
+            try {
+                Thread.sleep(40*1000);
+                   sendToServer("ping");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
     /**It is used to close the socket connections.*/
     public void closeConnection(){
-        socketOut.println("close_connection");
-        socketOut.flush();
+        sendToServer("close_connection");
         socketOut.close();
         System.out.println("Connection Closed");
     }
@@ -127,7 +180,6 @@ public class ServerConnection {
     public class MessagesFromViewHandler implements Observer<ClientMessage> {
         @Override
         public void update(ClientMessage message) {
-            socketOut.println(message.getJson());
-            socketOut.flush();
+            sendToServer(message.getJson());
         }
     }}

@@ -52,6 +52,7 @@ public class GuiInputManager extends InputManager {
 
         if(string.contains("connection closed")){
             gui.showError("connection closed");
+            gui.stop();//fixme
         }
     }
     /** used to refrain the user from spamming actions before receiving the state update*/

@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.GUI;
 import it.polimi.ingsw.client.ServerConnection;
 import it.polimi.ingsw.enumerations.SceneEnum;
 import it.polimi.ingsw.exceptions.MessageErrorException;
+import it.polimi.ingsw.exceptions.TimeOutConnectionException;
 import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.UserInterface;
@@ -19,6 +20,7 @@ import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -53,10 +55,16 @@ public class GUI extends Application implements UserInterface {
       Scanner starter= new Scanner(inputString);
         try {
             connection = new ServerConnection(starter, game, inputManager);
-            Thread serverThread = new Thread(() -> connection.run());
+            Thread serverThread = new Thread(() -> {
+                try {
+                    connection.run();
+                } catch (MessageErrorException mes) {
+                    showError(mes.getMessage());
+                }catch (TimeOutConnectionException timeoutException){
+                    showError("Server Connection lost");
+                }
+            });
             serverThread.start();
-        }catch (MessageErrorException mes){
-            showError(mes.getMessage());
         }catch (IOException e){
             throw new RuntimeException("connection failed");
         }

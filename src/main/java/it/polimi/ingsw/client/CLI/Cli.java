@@ -2,6 +2,8 @@ package it.polimi.ingsw.client.CLI;
 
 import it.polimi.ingsw.client.CLI.printers.*;
 import it.polimi.ingsw.client.ServerConnection;
+import it.polimi.ingsw.exceptions.MessageErrorException;
+import it.polimi.ingsw.exceptions.TimeOutConnectionException;
 import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.UserInterface;
@@ -42,9 +44,16 @@ public class Cli implements UserInterface {
         PrintWriter printer= new PrintWriter(System.out,true);
         inputManagerCli.printToScreen(BKG);
         printer.println(WRD+ TitlePrinter.print()+RST);
+
         connection = new ServerConnection(new Scanner(System.in), game, inputManagerCli);
         game.addObserver( connection.setMessageHandler());
-        connection.run();
+        try {
+            connection.run();
+        }catch (MessageErrorException mes) {
+            showError(mes.getMessage());
+        }catch (TimeOutConnectionException timeoutException){
+            showError("Server Connection lost");
+        }
     }
 
     @Override
