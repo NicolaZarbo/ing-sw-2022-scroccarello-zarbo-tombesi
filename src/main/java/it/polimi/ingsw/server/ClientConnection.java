@@ -4,6 +4,7 @@ import it.polimi.ingsw.exceptions.TimeOutConnectionException;
 import it.polimi.ingsw.observer.Observable;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -15,8 +16,10 @@ public class ClientConnection extends Observable<String> implements Runnable{
     private final Socket clientSocket;
     private PrintWriter out;
     private Scanner in;
+    private InputStream inSocket;
     private boolean active ;
     private final Server server;
+    Thread ponger;
 
     /**It builds the handler.
      * @param clientSocket the socket of the client
@@ -35,11 +38,13 @@ public class ClientConnection extends Observable<String> implements Runnable{
 
     @Override
     public void run() {
-        new Thread(this::pong).start();
+        ponger=new Thread(this::pong);
+        ponger.start();
          try {
-           this.in =new Scanner(clientSocket.getInputStream());
-            this.out= new PrintWriter(clientSocket.getOutputStream());
-            //clientSocket.setSoTimeout(1000*60);
+             inSocket=clientSocket.getInputStream();
+             clientSocket.setSoTimeout(1000*60);
+             //this.in =new Scanner(clientSocket.getInputStream());
+             this.out= new PrintWriter(clientSocket.getOutputStream());
             send("Welcome! What is your name?");
             String read = readFromSocket();
             String name = read.toUpperCase();
@@ -54,11 +59,8 @@ public class ClientConnection extends Observable<String> implements Runnable{
             }
              send("connected to lobby");
             while(isActive()) {
-                if (in.hasNextLine()) {
-                    read = in.nextLine();
+                    read = readFromSocket();
                     actOnMessage(read);
-                }
-
             }
         } catch (IOException | NoSuchElementException e) {
            // System.err.println(e.getMessage()+ "  ai!");
@@ -69,11 +71,10 @@ public class ClientConnection extends Observable<String> implements Runnable{
 
     }
     private void pong(){
-        while (true){
+        while (active){
             try {
                 Thread.sleep(20*1000);
                  send("pong");
-                 System.out.println("pong");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -90,37 +91,36 @@ public class ClientConnection extends Observable<String> implements Runnable{
 
     /**It reads the string message from the socket.
      * @return the read message*/
-    private synchronized String readFromSocket() {
+    private  String readFromSocket() {
         String result ;
         String read = "ping";
         if (isActive()) {
-            if (in.hasNextLine()) {
-                while(read.equalsIgnoreCase("ping"))
-                    read = in.nextLine();
+                while(read.equalsIgnoreCase("ping")){
+                    read = readSocketIn();
+                    System.out.println("ping?"+read);
+                }
                 result = read;
                 return result;
-            }
         }
         throw new NoSuchElementException();
     }
     /** Used instead of the scanner for more control on timeout*/
     private String readSocketIn(){
         StringBuilder builder= new StringBuilder();
-        int read=2;
         try {
-            read=  clientSocket.getInputStream().read();
+            int read=  inSocket.read();
             while((char)read!='\n'){
                 builder.append((char)read);
-                read= clientSocket.getInputStream().read();
+                read= inSocket.read();
+            }
+            if(read==0 || read==-1) {
+                close();
+                throw new TimeOutConnectionException();
             }
         }catch (SocketTimeoutException timeoutException){
-            throw new TimeOutConnectionException();
+            close();
         } catch (IOException e) {//fixme not a good catch
             System.out.println(e.getMessage());
-        }
-        if(read==0 || read==-1) {
-            close();
-            throw new TimeOutConnectionException();
         }
         String out=builder.toString();
         return out.substring(0, out.length() - 1);
@@ -138,7 +138,6 @@ public class ClientConnection extends Observable<String> implements Runnable{
         } catch(RuntimeException e){
             System.err.println(e.getMessage() +" ugh");
         }
-
     }
 
     /**It invokes the client connection closure.*/

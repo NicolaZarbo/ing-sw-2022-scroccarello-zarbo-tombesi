@@ -112,7 +112,7 @@ public class ServerConnection {
      * Necessary to notice disconnections through timeout*/
     private String readSocketIn(){
         StringBuilder builder= new StringBuilder();
-        int read=0;
+        int read=2;
         try {
             read=  socket.getInputStream().read();
             while((char)read!='\n'){
@@ -137,7 +137,6 @@ public class ServerConnection {
         ret=readSocketIn();
         while (ret.equalsIgnoreCase("pong")) {
             ret = readSocketIn();
-            System.out.println("pong");
         }
         return ret;
     }
