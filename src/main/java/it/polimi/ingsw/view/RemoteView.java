@@ -13,8 +13,8 @@ import it.polimi.ingsw.server.ClientConnection;
 /**The handler of the client connection. It receives messages for the client and is involved in sending server messages.*/
 public class RemoteView extends Observable<ClientMessage> implements Observer<ServerMessage> {
     private LobbyPlayer player;
-    private String nickname;
-    private ClientConnection connection;
+    private final String nickname;
+    private final ClientConnection connection;
 
     /**It fills the handler with the pre-information about the player.
      * @param player the information about player in the lobby*/

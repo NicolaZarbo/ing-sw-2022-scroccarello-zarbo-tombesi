@@ -74,7 +74,7 @@ public class ServerConnection {
             socketLine = socketIn.nextLine();
             inputManager.printToScreen(socketLine);
             while (!socketLine.equals("connected to lobby") ) {
-                while (!canWrite) {
+                while (!canWrite) {//fixme test with synchronized block
                     Thread.onSpinWait();
                 }
                 inputLine = input.nextLine();

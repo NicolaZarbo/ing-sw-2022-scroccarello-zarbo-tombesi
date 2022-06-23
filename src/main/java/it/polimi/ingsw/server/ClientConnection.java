@@ -9,11 +9,11 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ClientConnection extends Observable<String> implements Runnable{
-    private Socket clientSocket;
+    private final Socket clientSocket;
     private PrintWriter out;
     private Scanner in;
     private boolean active ;
-    private Server server;
+    private final Server server;
 
     public ClientConnection(Socket clientSocket, Server server) {
         this.clientSocket = clientSocket;
@@ -37,9 +37,9 @@ public class ClientConnection extends Observable<String> implements Runnable{
                 server.lobby(this, name);
             }else {
                 send("no lobby available. Creating new lobby, number of players?");
-                String nPlayer = readFromSocket();;
+                String nPlayer = readFromSocket();
                 send("difficulty easy? y/n");
-                String difficulty = readFromSocket();;
+                String difficulty = readFromSocket();
                 server.createLobby(this,name, Integer.parseInt(nPlayer), difficulty.toLowerCase());
             }
              send("connected to lobby");

@@ -26,7 +26,7 @@ public enum SceneEnum {
     /**The last scene of the game. It alerts the players that the game is over and shows the name of the winner.*/
     GameOverScene("/GameOver.fxml");
 
-    private String path;
+    private final String path;
 
     /**It fills the scene with the relative path.
      * @param sourcePath the absolute path to the <i>.fxml</i> file*/

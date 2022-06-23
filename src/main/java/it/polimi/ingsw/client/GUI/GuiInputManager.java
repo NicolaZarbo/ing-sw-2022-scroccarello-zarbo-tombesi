@@ -18,17 +18,10 @@ public class GuiInputManager extends InputManager {
     private static GUI gui;
     private ArrayList<Integer> selectedStudents;
     private int singleStudent;
-    private List<Integer> selectedStudentFromElsewhere;
     private int cardInActivation;
 
     private int numberOfStudentSelectedFromCharacter;
     private boolean cardEffectActivation;
-    private int selectedIsland;
-    private int selectedCloud;
-    private static boolean canChooseIsland;
-    public ArrayList<Integer> getSelectedStudents() {
-        return selectedStudents;
-    }
 
     /** Creates an instance of an InputManager for the gui*/
     public GuiInputManager(CentralView game,GUI gui) {
@@ -38,7 +31,6 @@ public class GuiInputManager extends InputManager {
         this.game = game;
         GuiInputManager.gui =gui;
         selectedStudents=new ArrayList<>();
-        selectedStudentFromElsewhere=new ArrayList<>();
     }
     public static GUI getGui(){
         return gui;
@@ -59,7 +51,7 @@ public class GuiInputManager extends InputManager {
         }
 
         if(string.contains("connection closed")){
-            //TODO show a message at screen
+            gui.showError("connection closed");
         }
     }
     /** used to refrain the user from spamming actions before receiving the state update*/
@@ -67,13 +59,6 @@ public class GuiInputManager extends InputManager {
     /** used to check if the connection to the server has been established*/
     public static boolean isIsConnected() {
         return isConnected;
-    }
-
-    public static void setChooseIsland(boolean can){
-        canChooseIsland=can;
-    }
-    public static boolean canChooseIsland(){
-        return canChooseIsland;
     }
 
     /** Used to move a student from the entrance to the dining room*/
@@ -87,12 +72,6 @@ public class GuiInputManager extends InputManager {
     /** Used to check if the user is currently activating an effect and ensures he can interact with elements contextually*/
     public boolean isActivatingCardEffect(){
         return cardEffectActivation;
-    }
-    public void selectManyStudentFromEntrance(List<Integer> listOfColorsStudent){
-        selectedStudentFromElsewhere= new ArrayList<>();
-        for (Integer colorStud:listOfColorsStudent) {
-            game.getPersonalPlayer().getBoard().getStudentFromColorInEntrance(colorStud);
-        }
     }
     /** Check if a student has already been selected, for example when moving students from entrance*/
     public boolean hasSelectedStudent(){
@@ -112,7 +91,6 @@ public class GuiInputManager extends InputManager {
             steps=-steps;
         if(steps<=(game.getCardYouPlayed()+2)/2) {
             game.moveMother(steps);
-            canChooseIsland = false;
             waitForAnswer();
         }
     }
@@ -149,11 +127,6 @@ public class GuiInputManager extends InputManager {
         this.selectedStudents=new ArrayList<>(selectedStudents);
         numberOfStudentSelectedFromCharacter=selectedStudents.size();
     }
-
-    public void addSavedSelectedStud(int selectedStud){
-        this.selectedStudents.add(selectedStud);
-    }
-
     /** Save a selected student, used when the memory of the selected student must persist after changing scene*/
     public void saveSelectedStud(int selectedStudent){this.singleStudent=selectedStudent;}
     /** Used to get the main island of the cluster
@@ -181,6 +154,7 @@ public class GuiInputManager extends InputManager {
         if(characterNumber==8 || characterNumber==6 ||characterNumber==2)
             game.playCharacter(characterNumber, new ParameterObject());
         cardEffectActivation=false;
+        cardInActivation=0;
     }
     public void useCharacter1( int islandId){
         if(!game.isYourTurn()||game.getCostOfCard().get(1)>game.getPersonalPlayer().getCoin())
@@ -188,11 +162,11 @@ public class GuiInputManager extends InputManager {
         try{
             ParameterObject param= new ParameterObject(singleStudent,islandId);
             game.playCharacter(1, param);
-        }catch (NullPointerException e){
-            //todo error handling in gui
+        }catch (NullPointerException ignored){
         }
         singleStudent=-1;
         cardEffectActivation=false;
+        cardInActivation=0;
     }
     public void useCharacter7(List<Integer> studentsFromEntrance){
         if(!game.isYourTurn()||game.getCostOfCard().get(7)>game.getPersonalPlayer().getCoin())
@@ -204,12 +178,8 @@ public class GuiInputManager extends InputManager {
             throw new NullPointerException();
         }
         int dimension=studentsFromEntrance.size();
-        int []  entranceStudents= new int[dimension];
-        int []  cardStudents=new int[dimension];
-        for (int i = 0; i < dimension; i++) {
-            entranceStudents[i]=studentsFromEntrance.get(i);
-            cardStudents[i]=studentsFromCard.get(i);
-        }
+        int []  entranceStudents= listToArray(studentsFromEntrance,dimension);
+        int []  cardStudents=listToArray(studentsFromCard,dimension);
         ParameterObject param= new ParameterObject(game.getPersonalPlayer().getId(),entranceStudents,cardStudents);
         game.playCharacter(7, param);
         cardEffectActivation=false;
@@ -222,27 +192,30 @@ public class GuiInputManager extends InputManager {
             return;
         game.playCharacter(9, new ParameterObject(targetColor));
         cardEffectActivation=false;
+        cardInActivation=0;
     }
     public void useCharacter10(List<Integer> entranceStudents, List<Integer> diningStudents){
         if(!game.isYourTurn()||game.getCostOfCard().get(10)>game.getPersonalPlayer().getCoin())
             return;
         int dimension= entranceStudents.size();
-        int []  entranceTargets= new int[dimension];
-        int []  diningTargets=new int[dimension];
-        for (int i = 0; i < dimension; i++) {
-            entranceTargets[i]=entranceStudents.get(i);
-            diningTargets[i]=diningStudents.get(i);
-        }
+        int []  entranceTargets= listToArray(entranceStudents,dimension);
+        int []  diningTargets=listToArray(diningStudents,dimension);
         game.playCharacter(10, new ParameterObject(game.getPersonalPlayer().getId(),entranceTargets,diningTargets));
         cardEffectActivation=false;
         cardInActivation=0;
-        //todo a bit tricky must write custom logic for this effect in boardController
     }
     public void useCharacter11(int studentId){
         if(!game.isYourTurn()||game.getCostOfCard().get(11)>game.getPersonalPlayer().getCoin())
             return;
         game.playCharacter(11, new ParameterObject(studentId, game.getPersonalPlayer().getId()));
         cardEffectActivation=false;
+    }
+    private int[] listToArray(List<Integer> list, int dimension){
+        int []  array=new int[dimension];
+        for (int i = 0; i < dimension; i++) {
+            array[i]=list.get(i);
+        }
+        return array;
     }
     /** Sets a flag that ensures the user can only do actions that are contextually allowed
      * IE : when the player is in the middle of selecting the target of an effect he can't move tokens */
@@ -268,7 +241,4 @@ public class GuiInputManager extends InputManager {
     }
 
     public int getNumberOfStudentSelectedFromCharacter(){return this.numberOfStudentSelectedFromCharacter;}
-
-    public void setNumberOfStudentSelectedFromCharacter(int c){ this.numberOfStudentSelectedFromCharacter=c;}
-
 }
