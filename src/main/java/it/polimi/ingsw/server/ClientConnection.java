@@ -15,8 +15,6 @@ public class ClientConnection extends Observable<String> implements Runnable{
     private boolean active ;
     private Server server;
 
-   // private  int lobbyCode;
-
     public ClientConnection(Socket clientSocket, Server server) {
         this.clientSocket = clientSocket;
         this.server=server;

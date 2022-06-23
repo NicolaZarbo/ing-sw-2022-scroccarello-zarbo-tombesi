@@ -226,6 +226,9 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             clientScreen.askToMoveStudent();
         }
     }
+
+    /**It changes the current game state with its following.
+     * @param message the swap message containing the next state*/
     public void changePhase(ChangePhaseMessage message){
         this.state=message.getState();
         switch (state){
@@ -255,6 +258,9 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             }
         }
     }
+
+    /**It prepares the client screen to show the endgame message.
+     * @param message the message containing all the victory parameters (winner(s), win condition)*/
     public void gameOver(GameOverMessage message){
         if(players.size()==4)
             winner= message.getWinnerTeam();
@@ -264,10 +270,14 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     }
 
 
+    @Override
     public void update(ServerMessage message) {
         message.doAction(this);
     }
 
+    /**It activates the assistant card selected by the player.
+     * @param cardId the id of the card to play
+     * @exception CardNotFoundException if the card the player wants to play is unavailable*/
     public void useAssistantCard(int cardId){
         if(personalPlayer.getAssistantCards()[cardId]) {
             notify(new PlayAssistantMessage(id, cardId+10*id));
@@ -276,76 +286,111 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         else
             throw new CardNotFoundException("card :"+(cardId+1)+" not available");
     }
+
+    /**It moves mother nature of the specified amount of steps.
+     * @param steps the number of steps to move mother nature*/
     public void moveMother(int steps){
         notify(new MoveMotherMessage(steps,personalPlayer.getId()));
     }
+
+    /**It moves a student of a certain color from the entrance to the dining room.
+     * @param colorOfStudent the color of the moved student*/
     public void moveStudentToHall(int colorOfStudent) throws NoTokenFoundException{
             int studID=personalPlayer.getBoard().getStudentFromColorInEntrance(colorOfStudent);
             notify(new StudentToHallMessage(personalPlayer.getId(), studID));
     }
+
+    /**It moves a student of a certain color from the entrance to a target island.
+     * @param colorOfStudent color of the moved student
+     * @param islandId id of the target island
+     * @exception IllegalMoveException if the island is not available*/
     public void moveStudentToIsland(int colorOfStudent, int islandId) throws IllegalMoveException,NoTokenFoundException{
         int studID=personalPlayer.getBoard().getStudentFromColorInEntrance(colorOfStudent);
         if( islands.stream().map(SimplifiedIsland::getIslandId).toList().contains(islandId))
             notify(new StudentToIslandMessage(personalPlayer.getId(), studID, islandId));
         else throw new IllegalMoveException("Island not available");
     }
+
+    /**It chooses the cloud to refill entrance.
+     * @param cloudId the id of the chosen cloud
+     * @exception IllegalMoveException if the cloud is unavailable*/
     public void chooseCloud(int cloudId){
         if(cloudId<clouds.size() && clouds.get(cloudId)[0]!=-1)
             notify(new ChooseCloudMessage(cloudId, personalPlayer.getId()));
         else
-            throw new RuntimeException("invalid Cloud");
+            throw new IllegalMoveException("invalid Cloud");
     }
+
+    /**It activates one of the character cards (expert mode only).
+     * @param cardId the id of the chosen card
+     * @param parameters the parameters required to trigger the card effect*/
     public void playCharacter(int cardId, ParameterObject parameters){
         notify(new CharacterCardMessage(this.id, parameters,cardId));
     }
+
+    /**It sends information about player's customization.
+     * @param towerColor the color of the team
+     *@param mage the selected magician*/
     public void choosePlayerCustom(int towerColor,int mage){
        notify(new PrePlayerMessage(0,towerColor,mage,name));
     }
 
+    /**@return the list of id of character cards*/
     public List<Integer> getCharacters() {
         return characters;
     }
 
+    /**@return the association between token character card and its list of students*/
     public Map<Integer, List<Integer>> getStudentsOnCard() {
         return studentsOnCard;
     }
 
+    /**@return the association between character card and its cost*/
     public Map<Integer, Integer> getCostOfCard() {
         return costOfCard;
     }
 
+    /**@return the current game state*/
     public GameState getState() {
         return state;
     }
+
+    /**@return •true: is the player's turn to play
+     * <p>•false: is not the player's turn to play</p>*/
     public boolean isYourTurn(){
         if(state!=GameState.setupPlayers)
             return this.turnOf==personalPlayer.getId();
-        else return this.turnOf==this.id;//this check on setup is only server side
+        else return this.turnOf==this.id;
     }
 
+    /**@return the id of the assistan card played this round*/
     public int getCardYouPlayed() {
         return cardYouPlayed;
     }
 
+    /**@return the id of the active character card (expert mode only)*/
     public int getActiveCharacter() {
         return activeCharacter;
     }
 
+    /**@return the id of the number of moved tokens in the current round*/
     public int getStudentMoved() {
         return studentMoved;
     }
 
-    public UserInterface getClientScreen() {
-        return clientScreen;
-    }
-
+    /**@return the list of available tower colors*/
     public List<Integer> getAvailableColor() {
         return availableColor;
     }
 
+    /**@return •true: the game is team game
+     * <p>•false: the game is single player game</p>*/
     public boolean isTeamPlay() {
         return teamPlay;
     }
+
+    /**@return the index of the island specified by its id
+     * @param islandID the id of the searched island*/
     public int getIslandPositionByID(int islandID){
         for (SimplifiedIsland island:islands) {
             if(island.getIslandId()==islandID)
@@ -354,9 +399,13 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         return -1;
     }
 
+    /**@return the number of players awaiting into the lobby*/
     public int getPlayersWaitingInLobby() {
         return playersWaitingInLobby;
     }
+
+    /**@return the list of sub-islands of the specified island
+     * @param island the target island*/
     public ArrayList<SimplifiedIsland> getEverySubIsland(SimplifiedIsland island){
         ArrayList<SimplifiedIsland> every = new ArrayList<>(island.getSubIslands());
         for (SimplifiedIsland subIsland:island.getSubIslands()) {
@@ -364,6 +413,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         }
         return every;
     }
+
+    /**@return the simplified island based on the specific id
+     * @param id the id of the island
+     * @exception NullPointerException if the island is not found*/
     public SimplifiedIsland getIslandById(int id){
         for (SimplifiedIsland island: islands) {
             if(island.getIslandId()==id)
@@ -376,14 +429,16 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         throw new NullPointerException("no island found");
     }
 
+    /**@return the id of the winning player*/
     public int getWinner() {
         return winner;
     }
-
+    /**@return the code relative to the winning reason*/
     public int getGameOverReason() {
         return gameOverReason;
     }
 
+    /**@return the list of indexes of available magicians*/
     public List<Integer> getAvailableMages() {
         return availableMages;
     }
