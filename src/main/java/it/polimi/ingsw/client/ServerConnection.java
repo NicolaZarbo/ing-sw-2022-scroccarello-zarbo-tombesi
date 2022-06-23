@@ -15,6 +15,7 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**The handler of the connection with the server. It exchanges string messages with the server through the socket.*/
 public class ServerConnection {
     private final PrintWriter socketOut;
     private final Scanner socketIn;
@@ -25,8 +26,10 @@ public class ServerConnection {
     public static int port=50000;
     private volatile boolean canWrite;
 
-    /**Used to connect to the server and to manage responses through an InputManager and a MessageHandler
-     *  @param input a scanner object to read some string needed for the lobby setup*/
+    /**It is used to connect to the server and to manage responses through an InputManager and a MessageHandler
+     *  @param input a scanner object to read some strings needed for the lobby setup
+     *  @param view the view of the client
+     *  @param inputManager the handler of client input*/
     public ServerConnection( Scanner input, CentralView view, InputManager inputManager) throws IOException {
         if(!checkSocketOptions()){
             throw new IllegalArgumentException("bad connection arguments");
@@ -40,7 +43,8 @@ public class ServerConnection {
         this.game=view;
         this.input=input;
     }
-    /** Used to control if the port and ip chose are acceptable*/
+
+    /**It is used to control if the port and ip chosen are acceptable.*/
     private boolean checkSocketOptions() {
         if (port < 65536 && port>49152)
             return true;
@@ -59,9 +63,10 @@ public class ServerConnection {
         }
         return true;
     }
-    /** Starts using the socket connection to read and send messages,
-     *  received messages are handled by an InputManager
-     *  the sending of messages is done through the observer of ClientMessage MessageHandler*/
+
+    /** It starts using the socket connection to read and send messages,
+     *  received messages are handled by the input manager and
+     *  the sending of messages is done through the observers of ClientMessage of MessageHandler.*/
     public void run() {
         String socketLine="";
         try {
@@ -96,25 +101,29 @@ public class ServerConnection {
             socketIn.close();
         }
     }
-    /** Used to close the socket connections in an orderly way*/
+
+    /**It is used to close the socket connections.*/
     public void closeConnection(){
         socketOut.println("close_connection");
         socketOut.flush();
         socketOut.close();
         System.out.println("Connection Closed");
     }
-    /** Used to modify the scanner used at the start of the connection when creating a lobby
-     * used only for gui before the creation of the game
-     * @param rules string values containing the parameters the server needs to create a lobby*/
+
+    /**It is used to modify the scanner used at the start of the connection when creating a lobby (it is
+     * used only for GUI before the creation of the game).
+     * @param rules string values containing the parameters the server needs to create the lobby*/
     public void writeTxtForLobby(InputStream rules){
         input = new Scanner(rules);
         canWrite=true;
     }
-    /** Used when setting the messageHandler as the observer of the CentralView*/
+
+    /**It is used when setting the message handler as the observer of the central view.*/
     public MessagesFromViewHandler setMessageHandler(){
         return new MessagesFromViewHandler();
     }
-    /** The messageHandler that is notified by the CentralView when it needs to send to the server a message */
+
+    /**The handler of messages that is notified by the central view when it needs to send to the server a message.*/
     public class MessagesFromViewHandler implements Observer<ClientMessage> {
         @Override
         public void update(ClientMessage message) {
