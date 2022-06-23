@@ -23,22 +23,6 @@ public class SimplifiedIsland {
     public int getTowerColor() {
         return towerColor;
     }
-    /*
-    public ArrayList<SimplifiedIsland> getAllSubIsland(){
-        ArrayList<SimplifiedIsland> everyIsland= new ArrayList<>();
-        for (SimplifiedIsland subIsland: subIslands) {
-            everyIsland.addAll(allGetter(subIsland));
-        }
-        return everyIsland;
-    }
-    private ArrayList<SimplifiedIsland> allGetter(SimplifiedIsland subIsland){
-        ArrayList<SimplifiedIsland> recursiveCon= new ArrayList<>();
-        for (SimplifiedIsland subSub:subIsland.subIslands) {
-
-        }
-    }
-
-     */
 
     public List<SimplifiedIsland> getSubIslands() {
         return subIslands;

@@ -18,8 +18,8 @@ public class MessageFactory {
             JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
             type= jj.get("messageType").getAsString();
         }catch (RuntimeException e){
-            System.out.println(json);
-            throw new RuntimeException(json);
+            //System.out.println(json);
+            throw new MessageErrorException(json);
         }
         if(type==null)
             throw new MessageErrorException("missing message Type");

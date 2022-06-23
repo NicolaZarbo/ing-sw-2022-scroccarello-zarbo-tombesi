@@ -11,5 +11,5 @@ public enum GameState {
     /**Part two of action phase. The player has to move mother nature according to the maximum number of steps indicated on the card he played on planning phase.*/
     actionMoveMother,
     /**Part three of action phase. The player has to choose one of the clouds and refill its entrance with the students on it.*/
-    actionChooseCloud;
+    actionChooseCloud
 }

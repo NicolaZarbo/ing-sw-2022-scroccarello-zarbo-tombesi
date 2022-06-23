@@ -90,7 +90,7 @@ String yo = """
         return out.toString();
     }
     private static String reverseString(String str){
-        char ch[]=str.toCharArray();
+        char[] ch =str.toCharArray();
         StringBuilder rev= new StringBuilder();
         for(int i=ch.length-1;i>=0;i--){
             rev.append(ch[i]);

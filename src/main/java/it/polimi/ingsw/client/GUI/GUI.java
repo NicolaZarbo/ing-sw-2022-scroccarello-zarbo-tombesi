@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.GUI;
 
 import it.polimi.ingsw.client.ServerConnection;
 import it.polimi.ingsw.enumerations.SceneEnum;
+import it.polimi.ingsw.exceptions.MessageErrorException;
 import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.UserInterface;
@@ -9,6 +10,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
@@ -51,8 +53,10 @@ public class GUI extends Application implements UserInterface {
       Scanner starter= new Scanner(inputString);
         try {
             connection = new ServerConnection(starter, game, inputManager);
-            Thread serverThread= new Thread(()->connection.run());
+            Thread serverThread = new Thread(() -> connection.run());
             serverThread.start();
+        }catch (MessageErrorException mes){
+            showError(mes.getMessage());
         }catch (IOException e){
             throw new RuntimeException("connection failed");
         }
@@ -113,8 +117,11 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void showError(String errorMessage) {
-//todo important! add an alert to the stage that tells the player something went wrong, must be closable on click
         System.out.println(errorMessage);
+        Platform.runLater(()->{Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(errorMessage);
+            alert.setTitle("Error!");
+            alert.show();});
     }
 
     @Override

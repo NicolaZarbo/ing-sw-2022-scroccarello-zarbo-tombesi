@@ -57,7 +57,7 @@ public class Controller extends Observable<ErrorMessageForClient> implements Obs
     /** It notifies the error occurred in the Remote View and send the client relative message.
      * @param e the exception thrown after the error*/
     private void sendMessageError(RuntimeException e) {
-        ErrorMessageForClient error =new ErrorMessageForClient(game.getCurrentPlayerId(),e);
+        ErrorMessageForClient error =new ErrorMessageForClient(game.getPlayer(game.getCurrentPlayerId()).getNickname(),e);
         this.notify(error);
     }
 }

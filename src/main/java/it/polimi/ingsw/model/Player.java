@@ -7,8 +7,8 @@ import it.polimi.ingsw.enumerations.TowerColor;
 public class Player {
     private final TowerColor colorT;
     private final Mage mage;
-    private Hand hand;
-    private Board board;
+    private final Hand hand;
+    private final Board board;
     private final int id;
     private final String nickname;
 

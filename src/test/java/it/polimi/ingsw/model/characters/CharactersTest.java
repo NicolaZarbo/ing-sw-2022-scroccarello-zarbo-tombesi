@@ -305,7 +305,7 @@ public class CharactersTest extends TestCase {
         assertEquals(11,cardTester.getId());
         gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         int initialCost= cardTester.getCost();
-        int target=((int)Math.random())*((Character11)cardTester).getStudents().size();
+        int target=((int)Math.random())*((Character11)cardTester).getStudents().size();//fixme this is 0
         ParameterObject parameters=new ParameterObject(((Character11)cardTester).getStudents().get(target).getId(),0);
         try{
             cardTester.cardEffect(parameters,gameTest);
@@ -321,7 +321,7 @@ public class CharactersTest extends TestCase {
         cardTester=FactoryCharacter.createCharacter(11,gameTest.getBag());
         assertEquals(11,cardTester.getId());
         while(cardTester.getCost()<=gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().getCoin()){
-            int target = ((int) Math.random()) * ((Character11) cardTester).getStudents().size();
+            int target = ((int) Math.random()) * ((Character11) cardTester).getStudents().size();//fixme this is 0
             ParameterObject parameters = new ParameterObject(((Character11) cardTester).getStudents().get(target).getId(), 0);
             try {
                 cardTester.cardEffect(parameters, gameTest);
@@ -330,7 +330,7 @@ public class CharactersTest extends TestCase {
             }
         }
         try{
-            int target = ((int) Math.random()) * ((Character11) cardTester).getStudents().size();
+            int target = ((int) Math.random()) * ((Character11) cardTester).getStudents().size();//fixme this is 0
             ParameterObject parameters = new ParameterObject(((Character11) cardTester).getStudents().get(target).getId(), 0);
             cardTester.cardEffect(parameters, gameTest);
         }

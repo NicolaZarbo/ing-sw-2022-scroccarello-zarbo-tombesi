@@ -152,7 +152,6 @@ public class SelectCharacterController extends SceneController{
         inputManager.setCardInActivation(7);
         showMoveButton();
         panelGoToBoard();
-        //todo show board to select students after choosing those here
     }
     private void panelGoToBoard(){
         popupPanel.getChildren().forEach(pane->{

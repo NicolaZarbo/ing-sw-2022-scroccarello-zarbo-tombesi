@@ -105,9 +105,7 @@ public class Server {
                 System.out.println("Connection Error!");
             }
         }
-        if(connections>=128){
-            System.out.println("Too many players, the server has been stopped");
-        }
+        System.out.println("Too many players, the server has been stopped");
     }
 
 }

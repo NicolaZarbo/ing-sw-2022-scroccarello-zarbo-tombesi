@@ -6,9 +6,9 @@ import it.polimi.ingsw.enumerations.TowerColor;
 
 /**The customized player from the lobby. It is created after player chooses his custom parameters such as his team color (<b>tower color</b>), his <b>magician</b>, his <b>nickname</b>. */
 public class LobbyPlayer {
-    private TowerColor towerColor;
-    private Mage mage;
-    private String nickname;
+    private final TowerColor towerColor;
+    private final Mage mage;
+    private final String nickname;
 
     /**It creates the custom player.
      * @param mage the selected mage

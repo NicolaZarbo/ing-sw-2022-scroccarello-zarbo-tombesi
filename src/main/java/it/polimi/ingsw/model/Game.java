@@ -20,8 +20,8 @@ public class Game extends Observable<ServerMessage> {
     private final int nPlayers;
     private final List<Island> islands;
     private  Player[] players;
-    private Cloud[] clouds;
-    private MotherNature motherNature;
+    private final Cloud[] clouds;
+    private final MotherNature motherNature;
     private int currentPlayerId;
     private final HashMap<Integer, AssistantCard> cardPlayedThisRound;
     private List<Integer> playIngOrder;
@@ -30,9 +30,9 @@ public class Game extends Observable<ServerMessage> {
     private final List<CharacterCard> characters;
     private int cardBonusActive;
     private TokenColor targetColor;
-    private Action actionPhase;
-    private Setup setupPhase;
-    private Planning planningPhase;
+    private final Action actionPhase;
+    private final Setup setupPhase;
+    private final Planning planningPhase;
     private GameState actualState;
     private MultipleServerMessage multiMessage;
 

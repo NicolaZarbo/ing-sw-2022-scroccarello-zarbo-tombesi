@@ -61,7 +61,7 @@ public class Lobby {
         if(this.connections.contains(connection)){
             int indexOf= connections.indexOf(connection);
             connections.remove(connection);
-            ErrorMessageForClient disconnectMess= new ErrorMessageForClient(-1, new MessageErrorException("player :"+playersViews.remove(indexOf).getNickname()+" got disconnected"));
+            ErrorMessageForClient disconnectMess= new ErrorMessageForClient("all", new MessageErrorException("player :"+playersViews.remove(indexOf).getNickname()+" got disconnected \n close the application"));
             for (ClientConnection conn:connections) {
                 conn.asyncSend(disconnectMess.getJson());
             }

@@ -188,7 +188,7 @@ public class ControllerActionPhaseTest extends TestCase {
     public void testPlayCharacter() {
         CharacterCardMessage message=new CharacterCardMessage(gameTest.getCurrentPlayerId(), new ParameterObject(),2);
         gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
-        int rng=(int)Math.random();
+        int rng=(int)Math.random();//fixme this is always 0
         if(rng==1) {
             gameTest.setManuallyGamePhase(GameState.actionMoveMother);
             assertEquals(GameState.actionMoveMother,gameTest.getActualState());

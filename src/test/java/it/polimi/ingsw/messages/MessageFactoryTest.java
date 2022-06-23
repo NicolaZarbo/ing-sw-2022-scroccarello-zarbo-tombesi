@@ -45,7 +45,7 @@ public class MessageFactoryTest extends TestCase {
         assertTrue(msgTest instanceof SingleBoardMessage);
 
         //ErrorMessageForClient
-        msg=new ErrorMessageForClient(gameTest.getCurrentPlayerId(),new RuntimeException("test exception"));
+        msg=new ErrorMessageForClient(gameTest.getPlayer(gameTest.getCurrentPlayerId()).getNickname(),new RuntimeException("test exception"));
         msgTest=MessageFactory.getMessageFromServer(msg.getJson());
         assertTrue(msgTest instanceof ErrorMessageForClient);
 
