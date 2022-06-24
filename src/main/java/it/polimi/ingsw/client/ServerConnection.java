@@ -27,7 +27,7 @@ public class ServerConnection {
     private final InputManager inputManager;
     public static String ip="127.0.0.1";
     public static int port=50000;
-    private volatile boolean canWrite;
+    private  boolean canWrite;
     private final Socket socket;
 
     /**It is used to connect to the server and to manage responses through an InputManager and a MessageHandler
@@ -73,6 +73,8 @@ public class ServerConnection {
      *  received messages are handled by the input manager and
      *  the sending of messages is done through the observers of ClientMessage of MessageHandler.*/
     public void run() {
+        Thread pinger =new Thread(this::ping);
+        pinger.start();
         String socketLine="";
         try {
             socketLine = readFromServer();
@@ -94,12 +96,15 @@ public class ServerConnection {
         } catch (NoSuchElementException e) {
             inputManager.printToScreen("Connection closed from the client side" + e.getMessage());
         }
+        finally {
+            canWrite=false;
+        }
     }
     private void lobbyHandler(String sockLine){
         String read=sockLine;
         String inputLine;
         while (!read.equals("connected to lobby") ) {
-            while (!canWrite) {//fixme test with synchronized block
+            while (!canWrite) {
                 Thread.onSpinWait();
             }
             inputLine = input.nextLine();
@@ -123,6 +128,7 @@ public class ServerConnection {
             throw new TimeOutConnectionException();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+            return "";
         }
         String out=builder.toString();
         if(read==0 || read==-1) {
@@ -144,11 +150,11 @@ public class ServerConnection {
         socketOut.println(out);
         socketOut.flush();
     }
-    private void ping(){
+    public void ping(){
         while (true){
             try {
                 Thread.sleep(40*1000);
-                   sendToServer("ping");
+                sendToServer("ping");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

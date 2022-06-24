@@ -57,11 +57,12 @@ public class Lobby {
 
     /**It removes a client connection from the lobby.
      * @param connection the connection to remove*/
-    public void removeFromLobby(ClientConnection connection){
+    public void removeFromLobby(ClientConnection connection, String reason){
         if(this.connections.contains(connection)){
             int indexOf= connections.indexOf(connection);
             connections.remove(connection);
-            ErrorMessageForClient disconnectMess= new ErrorMessageForClient("all", new MessageErrorException("player :"+playersViews.remove(indexOf).getNickname()+" got disconnected \n close the application"));
+            String text = "player : "+playersViews.remove(indexOf).getNickname()+" got disconnected ("+reason+")\n close the application";
+            ErrorMessageForClient disconnectMess= new ErrorMessageForClient("all", new MessageErrorException(text));
             for (ClientConnection conn:connections) {
                 conn.asyncSend(disconnectMess.getJson());
             }

@@ -92,7 +92,7 @@ public class GUI extends Application implements UserInterface {
     public void initScene(SceneEnum sceneName){
         Pane pane ;
         try {
-            pane=FXMLLoader.load(getClass().getResource(sceneName.getPath()));//todo add to all fxml the fx:controller attribute to the right controller class
+            pane=FXMLLoader.load(getClass().getResource(sceneName.getPath()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

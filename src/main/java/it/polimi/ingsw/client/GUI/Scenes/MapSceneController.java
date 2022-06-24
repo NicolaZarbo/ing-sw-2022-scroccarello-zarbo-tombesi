@@ -189,7 +189,7 @@ public class MapSceneController extends SceneController {
             ImageCursor imgCursor;
             if(view.getState()==GameState.actionMoveMother && !gui.getInputManager().isActivatingCardEffect())
                 imgCursor=new ImageCursor(new Image("images/pointer/basePointer.png"));
-            else if ((gui.getInputManager().isActivatingCardEffect() || view.getState()==GameState.actionMoveMother) && gui.getInputManager().hasSelectedStudent()) {
+            else if ((gui.getInputManager().isActivatingCardEffect() || view.getState()==GameState.actionMoveStudent) && gui.getInputManager().hasSelectedStudent()  ) {
                 imgCursor= new ImageCursor(studentColorPath(gui.getInputManager().getSingleStudent(),false));
             } else imgCursor=new ImageCursor(new Image("images/pointer/lookUp.png"));
             islandByNumber.get(islandID+1).setCursor(imgCursor);
