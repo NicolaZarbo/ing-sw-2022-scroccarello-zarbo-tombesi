@@ -253,7 +253,7 @@ public class SingleBoardController {//extends BoardSceneController
                 effect10EntranceHandler(student, studentId);
             }
             if (gui.getGame().getState() == GameState.actionMoveStudent && !inputManager.isActivatingCardEffect()) {
-                inputManager.saveSelectedStud(clickedColor);
+                inputManager.saveSelectedStud(studentId);
                 showMoveButton();
                 doubleClickToDining(student);
             }

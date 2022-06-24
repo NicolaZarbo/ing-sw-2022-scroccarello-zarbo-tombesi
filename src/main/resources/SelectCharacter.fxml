@@ -1,29 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="948.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.SelectCharacterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="948.0" style="-fx-background-color: #19647E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.SelectCharacterController">
    <children>
+      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="838.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/simple_elements/coin.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="ownedMoney" fill="#cccdef" layoutX="786.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="536.0" fitWidth="948.0" layoutY="75.0" mouseTransparent="true" pickOnBounds="true">
+         <image>
+            <Image url="@images/simple_elements/card_wood_background.png" />
+         </image></ImageView>
+      <Pane layoutX="35.0" layoutY="120.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
+      <Pane layoutX="269.0" layoutY="119.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
+      <Pane layoutX="513.0" layoutY="119.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
+      <Pane layoutX="738.0" layoutY="119.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
+      <Pane layoutX="35.0" layoutY="383.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
+      <Pane layoutX="277.0" layoutY="383.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
+      <Pane layoutX="516.0" layoutY="383.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
+      <Pane layoutX="739.0" layoutY="383.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
 
-      <Text layoutX="393.0" layoutY="55.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose your character" />
-      <Text layoutX="47.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 1:" />
+      <Text fill="#a7dad7" layoutX="393.0" layoutY="55.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a character">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Text>
+      <Text fill="#cccdef" layoutX="47.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 1:">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Text>
       <Text layoutX="140.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect: In setup, draw 4 Students and place them on this card. Take 1 Student from this card and place it on an Island of your choice. Then, draw a new Student from the Bag and place it on this card." wrappingWidth="100.0" />
-      <Text layoutX="283.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 2:" />
+      <Text fill="#cccdef" layoutX="283.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 2:">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Text>
       <Text layoutX="376.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect: In setup, draw 6 Students and place them on this card. You may take up to 3 Students from this card and replace them with the same number of Students from your Entrance." wrappingWidth="100.0" />
-      <Text layoutX="520.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 3:" />
+      <Text fill="#cccdef" layoutX="520.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 3:">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Text>
       <Text layoutX="610.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:           Choose a color of Student: during the influence calculation this turn, that color adds no influence." wrappingWidth="100.0" />
-      <Text layoutX="753.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 4:" />
+      <Text fill="#cccdef" layoutX="753.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 4:">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Text>
       <Text layoutX="844.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:               You may exchange up to 2 Students between your Entrance and your Dining Room." wrappingWidth="100.0" />
-      <Text layoutX="47.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 5:" />
+      <Text fill="#cccdef" layoutX="47.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 5:">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Text>
       <Text layoutX="139.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect: In setup, draw 4 Students and place them on this card. Take 1 Student from this card and place it in your Dining Room. Then draw a new Student from the Bag and place it on this card." wrappingWidth="100.0" />
-      <Text layoutX="283.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 6:" />
+      <Text fill="#cccdef" layoutX="283.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 6:">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Text>
       <Text layoutX="374.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:               During this turn, you take control of any number of Professors even if you have the same number of Students as the player who currently controls them." wrappingWidth="100.0" />
-      <Text layoutX="520.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 7:" />
+      <Text fill="#cccdef" layoutX="520.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 7:">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Text>
       <Text layoutX="612.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:                     During the influence calculation this turn, you count as having 2 more influence." wrappingWidth="100.0" />
-      <Text layoutX="753.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 8:" />
+      <Text fill="#cccdef" layoutX="753.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 8:">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Text>
       <Text layoutX="842.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:                   When resolving a Conquering on an Island, Towers do not count towards influence." wrappingWidth="100.0" />
       <Pane fx:id="CharacterContainer" prefHeight="654.0" prefWidth="948.0">
          <children>
@@ -39,20 +89,20 @@
       </Pane>
       <Pane fx:id="studentCharacterContainer" mouseTransparent="true" prefHeight="654.0" prefWidth="948.0">
          <children>
-            <Circle id="Character1stud1" fill="DODGERBLUE" layoutX="51.0" layoutY="215.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character1stud2" fill="DODGERBLUE" layoutX="108.0" layoutY="215.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character1stud3" fill="DODGERBLUE" layoutX="51.0" layoutY="270.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character1stud4" fill="DODGERBLUE" layoutX="108.0" layoutY="270.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character7stud1" fill="DODGERBLUE" layoutX="287.0" layoutY="168.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character7stud2" fill="DODGERBLUE" layoutX="344.0" layoutY="168.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character7stud3" fill="DODGERBLUE" layoutX="287.0" layoutY="223.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character7stud4" fill="DODGERBLUE" layoutX="344.0" layoutY="223.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character7stud5" fill="DODGERBLUE" layoutX="287.0" layoutY="278.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character7stud6" fill="DODGERBLUE" layoutX="344.0" layoutY="278.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character11stud1" fill="DODGERBLUE" layoutX="51.0" layoutY="488.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character11stud2" fill="DODGERBLUE" layoutX="108.0" layoutY="488.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character11stud3" fill="DODGERBLUE" layoutX="51.0" layoutY="543.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character11stud4" fill="DODGERBLUE" layoutX="108.0" layoutY="543.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character1stud1" fill="DODGERBLUE" layoutX="51.0" layoutY="241.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character1stud2" fill="DODGERBLUE" layoutX="108.0" layoutY="241.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character1stud3" fill="DODGERBLUE" layoutX="51.0" layoutY="285.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character1stud4" fill="DODGERBLUE" layoutX="108.0" layoutY="285.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character7stud1" fill="DODGERBLUE" layoutX="349.0" layoutY="246.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character7stud2" fill="DODGERBLUE" layoutX="314.0" layoutY="246.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character7stud3" fill="DODGERBLUE" layoutX="280.0" layoutY="246.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character7stud4" fill="DODGERBLUE" layoutX="316.0" layoutY="288.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character7stud5" fill="DODGERBLUE" layoutX="282.0" layoutY="287.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character7stud6" fill="DODGERBLUE" layoutX="350.0" layoutY="287.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character11stud1" fill="DODGERBLUE" layoutX="51.0" layoutY="510.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character11stud2" fill="DODGERBLUE" layoutX="108.0" layoutY="510.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character11stud3" fill="DODGERBLUE" layoutX="51.0" layoutY="553.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character11stud4" fill="DODGERBLUE" layoutX="108.0" layoutY="553.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
 
          </children>
       </Pane>

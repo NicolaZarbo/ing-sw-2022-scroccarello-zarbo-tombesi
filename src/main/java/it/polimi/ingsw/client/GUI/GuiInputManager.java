@@ -66,7 +66,7 @@ public class GuiInputManager extends InputManager {
     public void moveToBoard(){
         if(!canDoAction)
             return;
-        game.moveStudentToHall(singleStudent);
+        game.moveStudentToHall(singleStudent/26);
         singleStudent=-1;
         waitForAnswer();
     }
@@ -100,9 +100,9 @@ public class GuiInputManager extends InputManager {
         if(!canDoAction || game.getState()!= GameState.actionMoveStudent || !game.isYourTurn())
             return;
         if(!game.getIslands().contains(game.getIslandById(islandId)))
-            game.moveStudentToIsland(singleStudent, getRootIsland(islandId).getIslandId());
+            game.moveStudentToIsland(singleStudent/26, getRootIsland(islandId).getIslandId());
         else {
-            game.moveStudentToIsland(singleStudent, islandId);
+            game.moveStudentToIsland(singleStudent/26, islandId);
         }
         singleStudent=-1;
         waitForAnswer();

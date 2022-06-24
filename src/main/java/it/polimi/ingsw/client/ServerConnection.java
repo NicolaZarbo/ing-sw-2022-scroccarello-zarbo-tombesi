@@ -128,6 +128,7 @@ public class ServerConnection {
             throw new TimeOutConnectionException();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+            return "";
         }
         String out=builder.toString();
         if(read==0 || read==-1) {

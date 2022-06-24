@@ -27,6 +27,7 @@ public class SelectCharacterController extends SceneController{
     public Pane valueCharacterContainer;
 
     public Pane popupPanel;
+    public Text ownedMoney;
 
     private ArrayList<Rectangle> characters;
     private ArrayList<Circle> coins;
@@ -52,6 +53,7 @@ public class SelectCharacterController extends SceneController{
     public void initialize() {
         initCharacters();
         initStudCharacters();
+        ownedMoney.setText(view.getPersonalPlayer().getCoin()+" :");
         popupPanel.setVisible(false);
         popupPanel.setMouseTransparent(true);
         if(!view.isYourTurn() || !( view.getState()== GameState.actionMoveStudent || view.getState()== GameState.actionMoveMother)) {
