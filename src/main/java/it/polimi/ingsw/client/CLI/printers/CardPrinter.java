@@ -2,12 +2,15 @@ package it.polimi.ingsw.client.CLI.printers;
 
 import java.util.Arrays;
 
+/**The class which prints the cards in the hand of the player.*/
 public class CardPrinter implements Printer{
     private final String chooseACard=PINK+"""
 
                 ░█▀▀░█░█░█▀█░█▀▀░█▀▀░░░█▀█░░░█▀▀░█▀█░█▀▄░█▀▄
                 ░█░░░█▀█░█░█░▀▀█░█▀▀░░░█▀█░░░█░░░█▀█░█▀▄░█░█
                 ░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀░░░▀░▀░░░▀▀▀░▀░▀░▀░▀░▀▀░"""+RST;
+
+    /***/
     public static String print(boolean[] cards){
         StringBuilder out= new StringBuilder();
         int id=0;

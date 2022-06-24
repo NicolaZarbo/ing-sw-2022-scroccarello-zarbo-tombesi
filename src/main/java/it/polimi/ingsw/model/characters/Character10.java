@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.util.ParameterObject;
 
-/**The character card number 10.*/
+/**The character card number 10. It exchanges up to 2 students between entrance and dining room of the player.*/
 public class Character10 extends CharacterCard{
     /**It builds the card number 1.
      * @param id id of the card which will always be 10*/

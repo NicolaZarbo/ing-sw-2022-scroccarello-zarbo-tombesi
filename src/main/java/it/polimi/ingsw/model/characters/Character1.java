@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.Island;
 import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.util.ParameterObject;
 
-/**The character card number 1.*/
+/**The character card number 1. It has some student tokens on it. It is used to draw one of them and put it on a target island. Then, the students' list is refilled.*/
 public class Character1 extends TokensCharacter{
 
     /**It builds the card number 1.

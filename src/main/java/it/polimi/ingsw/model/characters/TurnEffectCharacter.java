@@ -13,7 +13,7 @@ public class TurnEffectCharacter extends CharacterCard {
     }
 
 
-    /**Version used for the cards that have an influence on how the game rules
+    /**It is used for the cards that have an influence on how the game rules
      * @param game the game
      * @param parameters the parameter object to trigger the effect
      * @see ParameterObject */

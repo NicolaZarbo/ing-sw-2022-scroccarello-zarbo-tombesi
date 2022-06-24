@@ -8,7 +8,7 @@ import it.polimi.ingsw.util.ParameterObject;
 
 import java.util.ArrayList;
 
-/**The character card number 7.*/
+/**The character card number 7. It lets the player move up to three students from the card to his entrance and exchange them with the same number of its.*/
 public class Character7 extends TokensCharacter{
 
     /**It builds the card number 1.

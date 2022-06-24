@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
+/**The Command Line Interface. It shows the game in pixel art style, and lets the gamer play by sending text commands.*/
 public class Cli implements UserInterface {
     public static final String BKG= "";
     public static final String WRD= Printer.BR_PINK;
@@ -30,16 +30,21 @@ public class Cli implements UserInterface {
     private final Scanner input;
     private ServerConnection connection;
 
+    /**It builds the Command Line Interface of the client.*/
     public Cli(){
         this.game = new CentralView(this);
         this.input = new Scanner(System.in);
         this.inputManagerCli = new InputManagerCli(this);
     }
 
+    /**@return the central view of the client*/
     public CentralView getGame() {
         return game;
     }
 
+
+    /**It runs the game on the Command Line Interface.
+     * @exception IOException if some I/O errors occur*/
     public void run() throws IOException {
         PrintWriter printer= new PrintWriter(System.out,true);
         inputManagerCli.printToScreen(BKG);
@@ -142,11 +147,14 @@ public class Cli implements UserInterface {
         inputManagerCli.decodeStringInput(input.nextLine());
     }
 
-    /** shows the player an error message(client side) and waits for another input*/
+    /**It shows to the player a client side error message and waits for another input.
+     * @param error the text error to show*/
     public void askToRetry(String error){
         System.out.println(Printer.RED+error+RST);
         inputManagerCli.decodeStringInput(input.nextLine());
     }
+
+    /**It closes the connection client side and shows to the player the last messages, then it ends the application.*/
     public void close(){
         System.out.println("Closing the game");
         connection.closeConnection();

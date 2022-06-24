@@ -5,7 +5,10 @@ import org.fusesource.jansi.AnsiConsole;
 
 import java.io.IOException;
 
+/**The class to run the Command Line Interface app.*/
 public class AppCli {
+
+    /**It runs the Command Line Interface app.*/
     public static void main(String[] args){
         Cli client= new Cli();
         try{
@@ -19,7 +22,7 @@ public class AppCli {
             System.err.println(e.getMessage());
         }
         finally {
-            AnsiConsole.systemUninstall();//since jlink has some problem with this library, comment its usage in
+            AnsiConsole.systemUninstall();//since jlink has some problems with this library, comment its usage in
                                             //this class when deploying the javafx application with maven
         }
     }
