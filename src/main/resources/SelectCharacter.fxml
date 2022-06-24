@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="948.0" style="-fx-background-color: #19647E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.SelectCharacterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="948.0" style="-fx-background-color: #19647E;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.SelectCharacterController">
    <children>
       <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="838.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -22,14 +26,14 @@
          <image>
             <Image url="@images/simple_elements/card_wood_background.png" />
          </image></ImageView>
-      <Pane layoutX="35.0" layoutY="120.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
-      <Pane layoutX="269.0" layoutY="119.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
-      <Pane layoutX="513.0" layoutY="119.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
-      <Pane layoutX="738.0" layoutY="119.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
-      <Pane layoutX="35.0" layoutY="383.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
-      <Pane layoutX="277.0" layoutY="383.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
-      <Pane layoutX="516.0" layoutY="383.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
-      <Pane layoutX="739.0" layoutY="383.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee;" />
+      <Pane layoutX="35.0" layoutY="120.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee; -fx-background-radius: 4;" />
+      <Pane layoutX="269.0" layoutY="119.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee; -fx-background-radius: 4;" />
+      <Pane layoutX="513.0" layoutY="119.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee; -fx-background-radius: 4;" />
+      <Pane layoutX="738.0" layoutY="119.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee; -fx-background-radius: 4;" />
+      <Pane layoutX="35.0" layoutY="383.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee; -fx-background-radius: 4;" />
+      <Pane layoutX="277.0" layoutY="383.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee; -fx-background-radius: 4;" />
+      <Pane layoutX="516.0" layoutY="383.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee; -fx-background-radius: 4;" />
+      <Pane layoutX="739.0" layoutY="383.0" prefHeight="200.0" prefWidth="207.0" style="-fx-background-color: eee; -fx-background-radius: 4;" />
 
       <Text fill="#a7dad7" layoutX="393.0" layoutY="55.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a character">
          <font>
@@ -39,12 +43,12 @@
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font></Text>
-      <Text layoutX="140.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect: In setup, draw 4 Students and place them on this card. Take 1 Student from this card and place it on an Island of your choice. Then, draw a new Student from the Bag and place it on this card." wrappingWidth="100.0" />
+      <Text layoutX="140.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:                Take 1 Student from this card and place it on an Island of your choice. " wrappingWidth="100.0" />
       <Text fill="#cccdef" layoutX="283.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 2:">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font></Text>
-      <Text layoutX="376.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect: In setup, draw 6 Students and place them on this card. You may take up to 3 Students from this card and replace them with the same number of Students from your Entrance." wrappingWidth="100.0" />
+      <Text layoutX="376.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:                 You may take up to 3 Students from this card and replace them with the same number of Students from your Entrance." wrappingWidth="100.0" />
       <Text fill="#cccdef" layoutX="520.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 3:">
          <font>
             <Font name="System Bold Italic" size="14.0" />
@@ -59,7 +63,7 @@
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font></Text>
-      <Text layoutX="139.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect: In setup, draw 4 Students and place them on this card. Take 1 Student from this card and place it in your Dining Room. Then draw a new Student from the Bag and place it on this card." wrappingWidth="100.0" />
+      <Text layoutX="139.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effect:                    Take 1 Student from this card and place it in your Dining Room. " wrappingWidth="100.0" />
       <Text fill="#cccdef" layoutX="283.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 6:">
          <font>
             <Font name="System Bold Italic" size="14.0" />
