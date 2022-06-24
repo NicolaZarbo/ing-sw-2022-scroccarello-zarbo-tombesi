@@ -66,14 +66,14 @@ public class ClientConnection extends Observable<String> implements Runnable{
            // System.err.println(e.getMessage()+ "  ai!");
         }
          finally {
-            close();
+            close("socket exception");
         }
 
     }
     private void pong(){
         while (active){
             try {
-                Thread.sleep(20*1000);
+                Thread.sleep(30*1000);
                  send("pong");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -85,7 +85,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
      * @param read the message arrived from the socket*/
     private void actOnMessage(String read){
         if(read.equalsIgnoreCase("close_connection"))
-            close();
+            close("disconnected from client");
         else notify(read);
     }
 
@@ -114,13 +114,15 @@ public class ClientConnection extends Observable<String> implements Runnable{
                 read= inSocket.read();
             }
             if(read==0 || read==-1) {
-                close();
-                throw new TimeOutConnectionException();
+                close("lost connection");
+                return "";
             }
         }catch (SocketTimeoutException timeoutException){
-            close();
-        } catch (IOException e) {//fixme not a good catch
-            System.out.println(e.getMessage());
+            close("timed out");
+            return "";
+        } catch (IOException e) {
+            close("connection error");
+            return "";
         }
         String out=builder.toString();
         return out.substring(0, out.length() - 1);
@@ -141,24 +143,20 @@ public class ClientConnection extends Observable<String> implements Runnable{
     }
 
     /**It invokes the client connection closure.*/
-    private void close(){
+    private void close(String reason){
         if(!active)
             return;
         System.out.println("Unregistering client...");
-        closeConnection();
-        System.out.println("Done!");
-    }
-
-    /**It closes the connection and notifies the client.*/
-    public synchronized  void closeConnection(){
-        send("Connection closed from Server");
+        send("Connection closed from Server ("+reason+")");
         try {
             clientSocket.close();
-            server.deregisterConnection(this);
+            server.deregisterConnection(this,reason);
         }catch (IOException exception){
             send(exception.getMessage());
             System.err.println(exception.getMessage());
         }
         active=false;
+        System.out.println("Done!");
     }
+
 }

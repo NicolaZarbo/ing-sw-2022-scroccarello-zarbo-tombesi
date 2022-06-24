@@ -40,9 +40,9 @@ public class Server {
 
     /**It removes the specific client connection from the lobby.
      * @param connection the client connection to remove*/
-    public synchronized void deregisterConnection(ClientConnection connection){
+    public synchronized void deregisterConnection(ClientConnection connection, String reason){
         for (Lobby lob:this.lobbies) {
-            lob.removeFromLobby(connection);
+            lob.removeFromLobby(connection, reason);
             executor.remove(connection);
             connections--;
         }
