@@ -12,12 +12,12 @@
    <children>
       <Pane fx:id="mainpane" layoutX="418.0" layoutY="541.0" prefHeight="144.0" prefWidth="438.0">
          <children>
-            <Button fx:id="startButton" layoutX="187.0" layoutY="71.0" mnemonicParsing="false" onAction="#startGame" prefHeight="30.0" prefWidth="65.0" text="Start" />
-            <TextField fx:id="usernameBox" alignment="CENTER" layoutX="145.0" layoutY="37.0" />
-            <Text fx:id="errorMsg" fill="RED" layoutX="24.0" layoutY="126.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="400.0" />
-            <Label layoutX="117.0" layoutY="7.0" prefHeight="30.0" prefWidth="215.0" text="Choose your username">
+            <Button fx:id="startButton" layoutX="201.0" layoutY="78.0" mnemonicParsing="false" onAction="#startGame" prefHeight="30.0" prefWidth="65.0" text="Start" />
+            <TextField fx:id="usernameBox" alignment="CENTER" layoutX="159.0" layoutY="44.0" />
+            <Text fx:id="errorMsg" fill="RED" layoutX="19.0" layoutY="121.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="400.0" />
+            <Label layoutX="124.0" layoutY="14.0" prefHeight="30.0" prefWidth="215.0" text="Choose your username">
                <font>
-                  <Font size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
          </children>

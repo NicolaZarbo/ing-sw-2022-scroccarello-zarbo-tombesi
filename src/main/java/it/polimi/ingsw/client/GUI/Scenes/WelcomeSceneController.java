@@ -39,7 +39,7 @@ public class WelcomeSceneController extends SceneController {
     public void initialize() {
         this.gui = GuiInputManager.getGui();
         root.setStyle("-fx-background-image:url(images/wallpapers/Eriantys.jpg); -fx-background-position: center; -fx-background-size: 1280 796");
-        mainpane.setStyle("-fx-background-image:url(images/simple_elements/card_wood_background.png); -fx-background-position: center; -fx-background-size: 438 144; -fx-border-width: 2;-fx-border-color: black");
+        mainpane.setStyle("-fx-background-image:url(images/simple_elements/Username.png); -fx-background-position: center; -fx-background-size: 438 144; -fx-border-width: 2");
         usernameBox.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().equals(KeyCode.ENTER)) {
                 startGame();
