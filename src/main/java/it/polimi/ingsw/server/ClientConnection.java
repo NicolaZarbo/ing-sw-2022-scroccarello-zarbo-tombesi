@@ -1,10 +1,13 @@
 package it.polimi.ingsw.server;
 
+import it.polimi.ingsw.exceptions.TimeOutConnectionException;
 import it.polimi.ingsw.observer.Observable;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -13,8 +16,10 @@ public class ClientConnection extends Observable<String> implements Runnable{
     private final Socket clientSocket;
     private PrintWriter out;
     private Scanner in;
+    private InputStream inSocket;
     private boolean active ;
     private final Server server;
+    Thread ponger;
 
     /**It builds the handler.
      * @param clientSocket the socket of the client
@@ -33,9 +38,13 @@ public class ClientConnection extends Observable<String> implements Runnable{
 
     @Override
     public void run() {
+        ponger=new Thread(this::pong);
+        ponger.start();
          try {
-           this.in =new Scanner(clientSocket.getInputStream());
-            this.out= new PrintWriter(clientSocket.getOutputStream());
+             inSocket=clientSocket.getInputStream();
+             clientSocket.setSoTimeout(1000*60);
+             //this.in =new Scanner(clientSocket.getInputStream());
+             this.out= new PrintWriter(clientSocket.getOutputStream());
             send("Welcome! What is your name?");
             String read = readFromSocket();
             String name = read.toUpperCase();
@@ -50,19 +59,26 @@ public class ClientConnection extends Observable<String> implements Runnable{
             }
              send("connected to lobby");
             while(isActive()) {
-                if (in.hasNextLine()) {
-                    read = in.nextLine();
+                    read = readFromSocket();
                     actOnMessage(read);
-                }//fixme, this ensure correct unregistering in case of orderly disconnection, but could it bring any problem?
-
-
             }
         } catch (IOException | NoSuchElementException e) {
            // System.err.println(e.getMessage()+ "  ai!");
-        }finally {
+        }
+         finally {
             close();
         }
 
+    }
+    private void pong(){
+        while (active){
+            try {
+                Thread.sleep(20*1000);
+                 send("pong");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     /**It sends the message read. It eventually closes the connection.
@@ -75,21 +91,40 @@ public class ClientConnection extends Observable<String> implements Runnable{
 
     /**It reads the string message from the socket.
      * @return the read message*/
-    private synchronized String readFromSocket() {
-        String result = "null";
-        String read;
-        while (isActive()) {
-            if (in.hasNextLine()) {//fixme same as the other fixme
-                read = in.nextLine();
+    private  String readFromSocket() {
+        String result ;
+        String read = "ping";
+        if (isActive()) {
+                while(read.equalsIgnoreCase("ping")){
+                    read = readSocketIn();
+                    System.out.println("ping?"+read);
+                }
                 result = read;
-                break;
-            }
+                return result;
         }
-        return result;
+        throw new NoSuchElementException();
     }
-
-    /**It sends an asynchronous message to the client in a dedicated thread
-     * @param message the message to send*/
+    /** Used instead of the scanner for more control on timeout*/
+    private String readSocketIn(){
+        StringBuilder builder= new StringBuilder();
+        try {
+            int read=  inSocket.read();
+            while((char)read!='\n'){
+                builder.append((char)read);
+                read= inSocket.read();
+            }
+            if(read==0 || read==-1) {
+                close();
+                throw new TimeOutConnectionException();
+            }
+        }catch (SocketTimeoutException timeoutException){
+            close();
+        } catch (IOException e) {//fixme not a good catch
+            System.out.println(e.getMessage());
+        }
+        String out=builder.toString();
+        return out.substring(0, out.length() - 1);
+    }
     public void asyncSend(final String message){
         new Thread(() -> send(message)).start();
     }
@@ -103,11 +138,12 @@ public class ClientConnection extends Observable<String> implements Runnable{
         } catch(RuntimeException e){
             System.err.println(e.getMessage() +" ugh");
         }
-
     }
 
     /**It invokes the client connection closure.*/
     private void close(){
+        if(!active)
+            return;
         System.out.println("Unregistering client...");
         closeConnection();
         System.out.println("Done!");
