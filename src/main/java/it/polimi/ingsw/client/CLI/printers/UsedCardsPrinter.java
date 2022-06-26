@@ -5,9 +5,11 @@ import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 
 import java.util.Arrays;
 
+/**The class which prints the list of cards played in the current turn by all the players.*/
 public class UsedCardsPrinter implements Printer{
 
-
+    /**It prints the list of cards played in the current turn by all the players.
+     * @param view the central view of the player*/
     public static String printUsedAssistant(CentralView view){
         String[] rows= new String[8];
         Arrays.fill(rows,"");

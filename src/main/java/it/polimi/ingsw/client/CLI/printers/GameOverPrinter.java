@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.CLI.printers;
 
 import it.polimi.ingsw.view.CentralView;
 
+/**The class which prints the game over message of the game.*/
 public class GameOverPrinter implements Printer{
     private static final String team1= """
             ████████╗███████╗ █████╗ ███╗   ███╗     ██╗    ██╗    ██╗ ██████╗ ███╗   ██╗
@@ -31,6 +32,9 @@ public class GameOverPrinter implements Printer{
               ╚██╔╝  ██║   ██║██║   ██║    ██║     ██║   ██║╚════██║   ██║  \s
                ██║   ╚██████╔╝╚██████╔╝    ███████╗╚██████╔╝███████║   ██║  \s
                ╚═╝    ╚═════╝  ╚═════╝     ╚══════╝ ╚═════╝ ╚══════╝   ╚═╝  \s""";
+
+    /**It prints on screen the gaming team and the win/loose message based on the player's view.
+     * @param view the player's central view*/
     public static String print(CentralView view) {
         String out = PINK+"""
                  ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗\s

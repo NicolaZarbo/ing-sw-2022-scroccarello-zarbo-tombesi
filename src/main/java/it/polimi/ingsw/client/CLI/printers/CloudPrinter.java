@@ -4,6 +4,7 @@ import it.polimi.ingsw.view.CentralView;
 
 import java.util.Arrays;
 
+/**The class which prints the clouds of the game.*/
 public class CloudPrinter implements Printer{
     private static final String xx= """
               ________\s
@@ -12,6 +13,9 @@ public class CloudPrinter implements Printer{
             ( y   b     )
              (   P     )
               (_______)""";
+
+    /**It prints on the screen the clouds of the game with the number of tokens for color on them.
+     * @param view the central view of the player*/
     public static String print(CentralView view){
         StringBuilder out = new StringBuilder();
         String[] rows= new String[7];
@@ -33,6 +37,10 @@ public class CloudPrinter implements Printer{
         }
         return out.toString();
     }
+
+    /**It extracts the number of students for color given the cloud.
+     * @param cloud the list of student tokens' ids
+     * @return the number of students for color on the cloud*/
     private static int[] cloudStudentForColor(Integer[] cloud){
         int[] studForColor= new int[5];
         Arrays.fill(studForColor,0);

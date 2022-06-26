@@ -6,26 +6,29 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.List;
 
+/**The generic controller of fxml scene. It manages all the elements of the scene and the actions the user can do on them.*/
 public abstract class SceneController {
     protected Pane pane;
     protected List<Pane> containerList;
 
-    /** Starts or refresh the scene's stuff*/
+    /**It starts or refreshes the scene.*/
     public abstract void initialize();
-    /** Used when a clickable element is covered by other Panels, preventing it from being activated*/
+
+    /**It is used when a clickable element is covered by other Panels, preventing it from being activated.*/
     protected void setOthersContainerMouseTransparent(Pane containerClickable){
         for (Pane container:containerList) {
             pane.setMouseTransparent(true);
         }
         containerClickable.setMouseTransparent(false);
     }
+
+    /**It sets the container list of the scene. Containers are pane(s) and its variances.
+     * @param containers the list of containers*/
     protected void setContainerList(List<Pane> containers){
         containers=new ArrayList<>();
         containerList=containers;
     }
-    protected void addContainerToList(Pane container){
-        containerList.add(container);
-    }
+
 
 
 }

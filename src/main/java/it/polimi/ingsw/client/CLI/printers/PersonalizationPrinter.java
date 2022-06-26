@@ -2,7 +2,11 @@ package it.polimi.ingsw.client.CLI.printers;
 
 import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
 
+/**The class which prints the player's customization within the lobby.*/
 public class PersonalizationPrinter implements Printer{
+
+    /**It prints the selection of the available tower colors and mages.
+    * @param message the setup message which triggers the print*/
     public static String printForColorsAndMages(PlayerSetUpMessage message){
         StringBuilder out = new StringBuilder();
         out.append(CYAN+"\nCHOOSE FROM AVAILABLE MAGES   and  TOWER COLORS"+Printer.RED+" \n( mage number followed by the color's first letter) \n[mage_Number Color_Initial] \n"+Printer.RST);
@@ -17,6 +21,10 @@ public class PersonalizationPrinter implements Printer{
         }
         return out.toString();
     }
+
+    /**It welcomes players to team and specifies their role (leader, team member).
+     * @return the welcome to team message
+     * @param magesLeft the number of available mages*/
     private static String welcomeTeamPrint(int magesLeft){
         String out="";
         int team=(3-magesLeft);
@@ -29,6 +37,9 @@ public class PersonalizationPrinter implements Printer{
         return out;
     }
 
+    /**It translates team color from index to string format.
+     * @param i the color index
+     * @return the string color*/
     private static String translateColor(int i){
         return switch (i){
             default -> "error";
@@ -37,6 +48,10 @@ public class PersonalizationPrinter implements Printer{
             case 2 -> DR_GRAY_BKG+BR_WHITE+" GRAY "+RST;
         };
     }
+
+    /**It translates magician from index to string format.
+     * @param i the mage number
+     * @return the string mage*/
     private static String translateMage(int i){
         return switch (i){
             default -> "error";

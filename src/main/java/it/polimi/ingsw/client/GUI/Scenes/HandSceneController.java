@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.scene.image.Image;
 import java.util.ArrayList;
 
+/**The handler of player's hand scene.*/
 public class HandSceneController extends SceneController{
     public Pane assistant_container;
     public Pane played_container;
@@ -37,6 +38,7 @@ public class HandSceneController extends SceneController{
         this.view=gui.getGame();
     }
 
+    @Override
     public void initialize(){ //fixme sometimes the the played and not played cards aren't shown correctly after some moves, like using a character
         root.setStyle("-fx-background-image: url(images/wallpapers/sky_no_title.png); ");
         root.setCursor(new ImageCursor(new Image("images/pointer/baseArrow.png")));
@@ -47,6 +49,8 @@ public class HandSceneController extends SceneController{
         setCoins();
         setOthersLastPlayed();
     }
+
+    /**It sets on scene the cards played by other players.*/
     private void setOthersLastPlayed(){
         ArrayList<Text> names= new ArrayList<>();
         ArrayList<Rectangle> cardsLastPlayed= new ArrayList<>();
@@ -67,10 +71,9 @@ public class HandSceneController extends SceneController{
                 i++;
             }
         }
-
-
-
     }
+
+    /**It shows on the scene the amount of coins of the player (expert mode only).*/
     private void setCoins(){
         if(view.isEasy()){
             coinPlace.setVisible(false);
@@ -81,6 +84,8 @@ public class HandSceneController extends SceneController{
             playerCoins.setText(view.getPersonalPlayer().getCoin()+"");
         }
     }
+
+    /**It shows the discarded pile of the player.*/
     private void setDiscarded() {
         boolean[] cards = view.getPersonalPlayer().getAssistantCards();
         discardedCard= new ArrayList<>();
@@ -97,6 +102,8 @@ public class HandSceneController extends SceneController{
             i++;
         }
     }
+
+    /**It sets the text message to advise the player what he has to do based on game state.*/
     private void setContext(){
         String text;
         if(view.isYourTurn()) {
@@ -114,6 +121,8 @@ public class HandSceneController extends SceneController{
         }
        help_text.setText(text);
     }
+
+    /**It shows the list of available cards.*/
     private void setCards(){
         assistantCards= new ArrayList<>();
         for (Node card:assistant_container.getChildren()) {
@@ -157,9 +166,12 @@ public class HandSceneController extends SceneController{
 
 
     }
+
+    /**It triggers the choice of the player which clicked the element. If the player cannot choose the card (either because it's not his turn, or the card is unavailable) he is notified with an error message.
+     * @param cardAssistant the clicked scene element
+     * @param cardId the id of the selected card*/
     private void setClickChoose(Rectangle cardAssistant, int cardId){
         cardAssistant.setCursor(new ImageCursor(new Image("images/pointer/basePointer.png")));
-        //cardAssistant.setDisable(false);
         cardAssistant.setOnMouseClicked(mouseEvent -> {
             if(view.getState()== GameState.planPlayCard && view.isYourTurn()) {
                 ArrayList<Integer> played= new ArrayList<>();
@@ -178,21 +190,32 @@ public class HandSceneController extends SceneController{
             }
         });
     }
+
+    /**It sets shadow effect on the element.
+     * @param clickable the element on which add effect*/
     private void setShadow(Rectangle clickable){
         DropShadow islandShadow = new DropShadow(8, Color.DARKRED);
         clickable.setOnMouseEntered(event -> clickable.setEffect(islandShadow));
         clickable.setOnMouseExited(event -> clickable.setEffect(null));
     }
+
+    /**@param cardNumber the id of the card
+     * @return the image of the card*/
     private Image getCardImage(int cardNumber){
         return new Image("images/assistants/assistant_"+cardNumber+".png");
     }
+
+    /**It changes the scene into <i>board scene</i>>.*/
     public void showboards(){
         gui.showBoards();
     }
+
+    /**It changes the scene into <i>map scene</i>>.*/
     public void showMap(){
         gui.showIslands();
     }
 
+    /**It changes the scene into <i>character scene</i>> (expert mode only).*/
     public void goToCharacters() {
         gui.showCharacters();
     }

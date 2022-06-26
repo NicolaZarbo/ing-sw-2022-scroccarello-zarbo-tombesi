@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**The class which prints the islands of the game.*/
 public class IslandsPrinter implements Printer{
 String yo = """
          ________\s
@@ -15,7 +16,10 @@ String yo = """
         |        |
         |        |
         \\________/""";
-    public static String print(CentralView view){
+
+/**It prints the islands of the game with the students for color and towers on them, and also their sub-islands.
+ * @param view the player's central view*/
+public static String print(CentralView view){
         StringBuilder out= new StringBuilder("\n");
         String[] rows= new String[9];
         String[] preRows= new String[7];
@@ -48,11 +52,7 @@ String yo = """
                 for (int i = 0; i < 7; i++) {
                     preRows[i]=reverseString(preRows[i]);
                 }
-            /*for (int i = 0; i < 7; i++) {
-                rows[i]+=preRows[i];
-            }
 
-             */
             if(escapeCounter<=(size/2) ) {
                 if (escapeCounter == 1 || escapeCounter == (size / 2))
                     addLowerIsland(rows, preRows);
@@ -67,6 +67,10 @@ String yo = """
         out.append(reversedMerge(rows));
         return out.toString();
     }
+
+    /**It adds to the island to print its lower island.
+     * @param rows the strings to print the island
+     * @param preRows the string to print the lower island*/
     private static void addLowerIsland(String [] rows, String []preRows) {
         rows[0] += "                  ";
         rows[1] += "                  ";
@@ -74,6 +78,10 @@ String yo = """
             rows[i + 2] += preRows[i];
         }
     }
+
+    /**It adds to the island to print its higher island.
+     * @param rows the strings to print the island
+     * @param preRows the string to print the higher island*/
     private static void addHigherIsland(String [] rows, String []preRows){
         rows[8] += "                  ";
         rows[7] += "                  ";
@@ -81,6 +89,9 @@ String yo = """
             rows[i] += preRows[i];
         }
     }
+
+    /**It reverses the string to print row by row.
+     * @param rowsForOutput rows to print out reverted*/
     private static String reversedMerge(String[] rowsForOutput){
         StringBuilder out= new StringBuilder();
         for (String s:rowsForOutput) {
@@ -89,6 +100,9 @@ String yo = """
         }
         return out.toString();
     }
+
+    /**It reverses a certain string char by char.
+     * @param str the string to revert*/
     private static String reverseString(String str){
         char[] ch =str.toCharArray();
         StringBuilder rev= new StringBuilder();
@@ -98,6 +112,9 @@ String yo = """
         return rev.toString();
     }
 
+    /**It extracts the number of students for color given the island.
+     * @param island the list of student tokens' ids
+     * @return the number of students for color on the island*/
     private static int[] islandColorStudents(SimplifiedIsland island){
         int[] studForColor= new int[5];
         Arrays.fill(studForColor,0);
@@ -110,6 +127,10 @@ String yo = """
         }
         return studForColor;
     }
+
+
+    /**@param tColor index of tower color
+     * @return the string to print out related to the tower color*/
     private static String towerColor(int tColor){
         if(tColor==0)
             return BLACK+CYAN_BKG+" BLACK "+RST;

@@ -8,7 +8,7 @@ import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**The handler of client inputs for the Graphical User Interface. It translates commands from client into actions and messages for server, also into error messages for client.*/
 public class GuiInputManager extends InputManager {
 
     private final CentralView game;
@@ -23,7 +23,9 @@ public class GuiInputManager extends InputManager {
     private int numberOfStudentSelectedFromCharacter;
     private boolean cardEffectActivation;
 
-    /** Creates an instance of an InputManager for the gui*/
+    /**It creates an instance of input manager for the GUI.
+     * @param game the central view of the player
+     * @param gui the reference to the GUI to manage*/
     public GuiInputManager(CentralView game,GUI gui) {
         singleStudent=-1;
         isLobbyAvailable=false;
@@ -32,15 +34,17 @@ public class GuiInputManager extends InputManager {
         GuiInputManager.gui =gui;
         selectedStudents=new ArrayList<>();
     }
+
+    /**@return the reference to the handled GUI*/
     public static GUI getGui(){
         return gui;
     }
-    /** Allows the user to act (IE sending a message to server) on the view as a result of interaction in the gui */
+
     @Override
     public void decodeInput() {
         canDoAction=true;    //  after every time you send a message set canDoAction to false
     }
-/** prints in a label in the connection page info from server*/
+
     @Override
     public void printToScreen(String string) {
         if(string.equals("no lobby available. Creating new lobby, number of players?"))
@@ -55,14 +59,16 @@ public class GuiInputManager extends InputManager {
             gui.stop();//fixme
         }
     }
-    /** used to refrain the user from spamming actions before receiving the state update*/
+
+    /**It is used to stop the user from spamming actions before receiving the state update from the server.*/
     private void waitForAnswer(){this.canDoAction=false;}
-    /** used to check if the connection to the server has been established*/
+
+    /**It is used to check if the connection to the server has been established.*/
     public static boolean isIsConnected() {
         return isConnected;
     }
 
-    /** Used to move a student from the entrance to the dining room*/
+    /**It is used to move a student from the entrance to the dining room.*/
     public void moveToBoard(){
         if(!canDoAction)
             return;
@@ -70,15 +76,18 @@ public class GuiInputManager extends InputManager {
         singleStudent=-1;
         waitForAnswer();
     }
-    /** Used to check if the user is currently activating an effect and ensures he can interact with elements contextually*/
+
+    /**It is used to check if the user is currently activating an effect and ensures he can interact with elements contextually.*/
     public boolean isActivatingCardEffect(){
         return cardEffectActivation;
     }
-    /** Check if a student has already been selected, for example when moving students from entrance*/
+
+    /**It checks if a student has already been selected, for example when moving students from entrance.*/
     public boolean hasSelectedStudent(){
         return singleStudent!=-1;
     }
-    /** Moves the mother to the target island
+
+    /**It moves the mother to the target island.
      * @param islandID the id of the selected island, if it is too far the mother isn't moved*/
     public void moveMotherTo(int islandID){
         int islandPos=game.getIslandPositionByID(islandID);
@@ -95,7 +104,8 @@ public class GuiInputManager extends InputManager {
             waitForAnswer();
         }
     }
-    /** Used to move a student from entrance into a target island*/
+
+    /**It is used to move a student from entrance to a target island.*/
     public void moveToIsland(int islandId){
         if(!canDoAction || game.getState()!= GameState.actionMoveStudent || !game.isYourTurn())
             return;
@@ -107,7 +117,8 @@ public class GuiInputManager extends InputManager {
         singleStudent=-1;
         waitForAnswer();
     }
-    /** Used to play a card during the planning phase
+
+    /**It is used to play a card during the planning phase.
      * @param cardID the identifier of the selected card*/
     public void useAssistantCard(int cardID){
         if(!canDoAction || game.getState()!= GameState.planPlayCard || !game.isYourTurn())
@@ -115,7 +126,9 @@ public class GuiInputManager extends InputManager {
         game.useAssistantCard(cardID);
         waitForAnswer();
     }
-    /**Used to choose a target cloud from which refill the player entrance */
+
+    /**It is used to choose a target cloud from which refill the player entrance.
+     * @param cloudID the id of the selected cloud*/
     public void cloudChoose(int cloudID){
         if(!canDoAction || game.getState()!=GameState.actionChooseCloud || !game.isYourTurn())
             return;
@@ -123,15 +136,21 @@ public class GuiInputManager extends InputManager {
         waitForAnswer();
     }
 
-    /** used to keep track of the selected students when you need to move to a different scene*/
+    /** It is used to keep track of the selected students when you need to move to a different scene.
+     * @param selectedStudents the list of selected students*/
     public void saveSelectedStud(ArrayList<Integer> selectedStudents){
         this.selectedStudents=new ArrayList<>(selectedStudents);
         numberOfStudentSelectedFromCharacter=selectedStudents.size();
     }
-    /** Save a selected student, used when the memory of the selected student must persist after changing scene*/
+
+    /**It saves a selected student. It is used when the memory of the selected student has to persist after changing scene.
+     * @param selectedStudent the student to save*/
     public void saveSelectedStud(int selectedStudent){this.singleStudent=selectedStudent;}
-    /** Used to get the main island of the cluster
-     * @param islandId a sub-island of the cluster */
+
+    /**It is used to get the main island of the cluster based on an island id.
+     * @param islandId the id of a sub-island of the cluster
+     * @return the root of the cluster
+     * @exception NullPointerException if the islands is not found*/
     private SimplifiedIsland getRootIsland(int islandId){
         SimplifiedIsland sub= game.getIslandById(islandId);
         for (SimplifiedIsland main: game.getIslands()) {
@@ -141,6 +160,7 @@ public class GuiInputManager extends InputManager {
         throw new NullPointerException();
     }
 
+    /**@return the selected single student*/
     public int getSingleStudent() {
         return singleStudent;
     }
@@ -243,28 +263,33 @@ public class GuiInputManager extends InputManager {
         return array;
     }
 
-    /** Sets a flag that ensures the user can only do actions that are contextually allowed
-     * IE : when the player is in the middle of selecting the target of an effect he can't move tokens */
+    /**It sets a flag that ensures the user can only do actions that are contextually allowed.*/
     public void setCardEffectActivation() {
         cardEffectActivation=true;
     }
-    /** Resets the current activation of an effect*/
+
+    /**It resets the current activation of an effect*/
     public void resetEffectActivation(){
         cardEffectActivation=false;
         cardInActivation=0;
     }
 
+    /**@return the id of the card activated*/
     public int getCardInActivation() {
         return cardInActivation;
     }
 
+    /**It sets the card activated.
+     * @param cardInActivation the id of the card activated*/
     public void setCardInActivation(int cardInActivation) {
         this.cardInActivation = cardInActivation;
     }
 
+    /**It states if there is an available lobby or not.*/
     public static boolean isLobbyAvailable(){
         return isLobbyAvailable;
     }
 
+    /**@return the number of tokens chosen from a token character card (expert mode only)*/
     public int getNumberOfStudentSelectedFromCharacter(){return this.numberOfStudentSelectedFromCharacter;}
 }

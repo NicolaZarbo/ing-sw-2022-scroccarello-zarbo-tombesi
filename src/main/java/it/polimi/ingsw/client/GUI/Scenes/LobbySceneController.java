@@ -16,7 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-/** scene used during setup*/
+/**The handler of lobby creation scene.*/
 public class LobbySceneController extends SceneController  {
     public CheckBox easySelector;
     public ChoiceBox<Integer> nPlayers;
@@ -27,14 +27,15 @@ public class LobbySceneController extends SceneController  {
     private final GUI gui;
     public Pane root;
 
-    @FXML
+    @Override
     public void initialize() {
         root.setStyle("-fx-background-image: url(images/wallpapers/LowerQualityLobby.png); -fx-background-size: 1280 796");
         nPlayers.setItems(FXCollections.observableArrayList(1,2,3,4));//fixme 1 is here for test purposes
         playerSetter();
     }
+
+    /**It sets the number of players selection.*/
     private void playerSetter(){
-        //Platform.runLater(()-> nPlayers.requestFocus());
         mainpanel.setOnKeyPressed(keyEvent -> {
             int nPlayer;
             switch (keyEvent.getCode()){
@@ -50,14 +51,18 @@ public class LobbySceneController extends SceneController  {
         });
     }
 
+    /**It creates the instance of the lobby scene controller.*/
     public LobbySceneController() {
        this.gui= GuiInputManager.getGui();
     }
 
+    /**It triggers lobby creation based on user's inputs.*/
     public void createLobby(ActionEvent actionEvent) {
         gui.setLobbyRules(nPlayers.getValue(), easySelector.isSelected());
         setWaitingScreen();
     }
+
+    /**It sets a waiting message for the player who has created the lobby.*/
     public void setWaitingScreen(){
         mainpanel.setOpacity(0.5);
         waitingtext.setText("Waiting for players to join..");

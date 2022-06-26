@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 
 import java.util.Arrays;
 
+/**The handler of game over scene.*/
 public class GameOverSceneController extends SceneController {
     public Text txt;
     private final CentralView view;
@@ -22,6 +23,7 @@ public class GameOverSceneController extends SceneController {
     GUI gui;
 
 
+    /**It builds the instance of the game over controller.*/
     public GameOverSceneController() {
         gui = GuiInputManager.getGui();
         view = gui.getGame();
@@ -37,6 +39,8 @@ public class GameOverSceneController extends SceneController {
         text_container.setOnMouseEntered(event ->txt.setText("Click to close the game"));
         text_container.setOnMouseExited(event -> setWinner());
     }
+
+    /**It sets the background of the winning scene.*/
     private void setBackground(){
         if(view.isTeamPlay()) {
             if(winnerTeamTowerColor()==0)
@@ -75,11 +79,16 @@ public class GameOverSceneController extends SceneController {
             }
         }
     }
+
+    /**@return the tower color of the winner team.*/
     private int winnerTeamTowerColor(){
         if( view.getWinner()==view.getPlayers().get(0).getTeam())
             return view.getPlayers().get(0).getTowerColor();
         else return view.getPlayers().get(1).getTowerColor();
     }
+
+    /**@param winner the simplified winner player
+     * @return the index of the color the player has the maximum amount of tokens on board*/
     private int winnerBestAllies(SimplifiedPlayer winner){
         SimplifiedBoard winnerBoard= winner.getBoard();
         int[] colorStudents= new int[5];
@@ -103,6 +112,8 @@ public class GameOverSceneController extends SceneController {
         return index;
 
     }
+
+    /**It sets winning messages on the scene.*/
     private void setWinner() {
         String text;
         if(view.isTeamPlay()){
@@ -117,6 +128,8 @@ public class GameOverSceneController extends SceneController {
         txt.setText(text);
         reasonText.setText(gameOverReason());
     }
+
+    /**@return winning reason in string format*/
     private String gameOverReason(){
         int reason= view.getGameOverReason();
 

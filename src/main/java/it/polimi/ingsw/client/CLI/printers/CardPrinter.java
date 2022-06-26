@@ -10,7 +10,8 @@ public class CardPrinter implements Printer{
                 ░█░░░█▀█░█░█░▀▀█░█▀▀░░░█▀█░░░█░░░█▀█░█▀▄░█░█
                 ░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀░░░▀░▀░░░▀▀▀░▀░▀░▀░▀░▀▀░"""+RST;
 
-    /***/
+    /**It prints the cards in the hand of the player.
+     * @param cards the list of available and unavailable cards to print in the right place on the screen*/
     public static String print(boolean[] cards){
         StringBuilder out= new StringBuilder();
         int id=0;

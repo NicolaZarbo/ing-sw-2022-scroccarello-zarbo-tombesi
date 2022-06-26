@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client.CLI.printers;
 
+/**The generic printer interface implemented by every class involved in printing Command Line Interface of the player.
+ * It contains all the necessary colors and the methods to ensure correct visualization of information on the screen. Notice that every managed information is in string format.*/
 public interface Printer {
     String RED="\u001B[31m";
     String BLUE="\u001B[34m";
@@ -18,7 +20,9 @@ public interface Printer {
     String BR_PINK="\u001B[95m";
     String BR_WHITE_BKG="\u001B[107m";
     String BR_WHITE="\u001B[97m";
-    /** used to merge the rows that are dynamically built to show to the player some game info*/
+
+    /**It is used to merge the rows that are dynamically built to show to the player some game info.
+     * @param rowsForOutput the rows to merge together*/
     static String mergeRows(String[] rowsForOutput){
         StringBuilder out= new StringBuilder();
         for (String s:rowsForOutput) {
@@ -28,7 +32,7 @@ public interface Printer {
         return out.toString();
     }
     /** @return The color corresponding to an integer value
-     *  */
+     * @param i the color index*/
     static String getCliColor(int i){
         return switch (i){
             default -> RST;
@@ -40,7 +44,10 @@ public interface Printer {
             case -1 -> CYAN;
         };
     }
-    /** Used to add some spacing to ensure correct visuals even with player dependent text*/
+
+    /** It is used to add some space at the end of a certain string to ensure correct visualization.
+     * @param in the string to adjust
+     * @param dimensionNeeded the dimension to which extend the string*/
     static String padWithSpaces(String in, int dimensionNeeded){
         StringBuilder out = new StringBuilder(in);
         while(out.length()<dimensionNeeded)

@@ -23,6 +23,7 @@ import javafx.scene.text.Text;
 
 import java.util.*;
 
+/**The handler of map scene.*/
 public class MapSceneController extends SceneController {
     public Pane island_container;
     public Pane islandStudent_container;
@@ -48,10 +49,12 @@ public class MapSceneController extends SceneController {
     private Map<Integer, Rectangle> motherZoneOfIsland;
     private Map<Integer, Rectangle> bridgeByIslandBefore;
 
+    /**It creates the instance of map scene controller.*/
     public MapSceneController() {
         gui= GuiInputManager.getGui();
         view=gui.getGame();
     }
+
     @Override
     public void initialize() {
         root.setStyle("-fx-background-image:url(images/wallpapers/sky_no_title.png); -fx-background-position: center; -fx-background-size: 1236 863");
@@ -67,7 +70,8 @@ public class MapSceneController extends SceneController {
         setIslands();
         prepareForContext();
     }
-    /** used to modify some properties based on the state*/
+
+    /**It is used to modify the scene context (and actions possible) based on the state.*/
     private void prepareForContext(){
         switch (view.getState()){
             case actionMoveMother -> {
@@ -86,11 +90,15 @@ public class MapSceneController extends SceneController {
             }
         }
     }
+
+    /**It resets the effect activation when changing scene.*/
     private void breakActivationChangeScene(){
         GuiInputManager manager= gui.getInputManager();
         toBoards.setOnMouseClicked(event -> manager.resetEffectActivation());
         toHand.setOnMouseClicked(event -> manager.resetEffectActivation());
     }
+
+    /**It sets the move student context. It allows the player to drop a student on island.*/
     private void moveStudentContext(){
         if(gui.getInputManager().isActivatingCardEffect()) {
             breakActivationChangeScene();
@@ -105,6 +113,8 @@ public class MapSceneController extends SceneController {
     private void character1Context(){
         info.setText("choose a target Island for the student");
     }
+
+    /**It sets the choice cloud context. It allows the player to refill his entrance with the students from a target cloud.*/
     private void chooseCloudContext(){
         setOtherContainerTransparent(cloud_container);
         info.setText("Choose a cloud to refill");
@@ -121,6 +131,8 @@ public class MapSceneController extends SceneController {
 
         }
     }
+
+    /**It sets the move mother context. It allows the player to move mother nature between islands of a maximum amount of steps (decided in planning phase).*/
     private void moveMotherContext(){
         if(gui.getInputManager().isActivatingCardEffect()){
             breakActivationChangeScene();
@@ -147,6 +159,8 @@ public class MapSceneController extends SceneController {
         }
 
     }
+
+    /**It fills the containers' list with all the containers of the scene.*/
     private void saveContainers(){
         List<Pane> containers = new ArrayList<>();
         containers.add(island_container);
@@ -158,6 +172,9 @@ public class MapSceneController extends SceneController {
         containers.add(cloudStudents_container);
         setContainerList(containers);
     }
+
+    /**It sets a tower on an island.
+     * @param island the island on which to set the tower*/
     private void setTower(SimplifiedIsland island){
         int color=island.getTowerColor();
         int islandId=island.getIslandId()+1;
@@ -174,6 +191,8 @@ public class MapSceneController extends SceneController {
             towerByIslandNumber.get(islandId).setVisible(true);
         }else towerByIslandNumber.get(islandId).setVisible(false);
     }
+
+    /**It sets the island elements of the scene, with their students and their towers (also with merge bridge).*/
     private void setIslands(){
         List<SimplifiedIsland> islandsView= view.getIslands();
         List<SimplifiedIsland> fullIslandView= new ArrayList<>(islandsView);
@@ -201,6 +220,8 @@ public class MapSceneController extends SceneController {
             setMotherZone(island);
         }
     }
+
+    /**It sets */
     private void initHoverIsland(){
         islandStudent_container.setVisible(false);
         hoverBackGround.setMouseTransparent(true);
@@ -222,7 +243,6 @@ public class MapSceneController extends SceneController {
             }
             i++;
         }
-        //if(overflow.size()>0)
             setOverflow(overflow);
     }
 

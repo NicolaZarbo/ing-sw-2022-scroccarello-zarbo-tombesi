@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**The handler of board scene.*/
 public class BoardSceneXController extends SceneController{
 
     public Pane up_left;
@@ -55,6 +56,8 @@ public class BoardSceneXController extends SceneController{
             throw new RuntimeException(e);
         }
     }
+
+    /**It sets the text message to advise the player what he has to do based on game state.*/
     private void setContextText(){
         String text;
         if(view.isYourTurn()) {
@@ -76,6 +79,8 @@ public class BoardSceneXController extends SceneController{
 
         context_text.setText(text);
     }
+
+    /**It resets the effect activation when changing scene.*/
     private void setCancelActivationOnExit(){
         moveToMap.setOnMouseClicked(event -> {
             gui.getInputManager().resetEffectActivation();
@@ -84,6 +89,8 @@ public class BoardSceneXController extends SceneController{
             gui.getInputManager().resetEffectActivation();
             goToHand();});
     }
+
+    /**It sets the displacement of the board scene based on the number of players. */
     private void setDisposition(){
         switch (view.getPlayers().size()){
             case 1->disposition1();
@@ -92,6 +99,8 @@ public class BoardSceneXController extends SceneController{
             default -> disposition4();
         }
     }
+
+    /**It is the board disposition of a two players' game.*/
     private void disposition2(){
         up_left.setTranslateX(280);
         up_right.setTranslateX(-280);
@@ -108,9 +117,13 @@ public class BoardSceneXController extends SceneController{
         context_container.setTranslateY(-540);
         context_container.setTranslateX(120);
     }
-    private void disposition4(){
 
+    /**It is the default null disposition. Not really usefull.*/
+    private void disposition4(){
     }
+
+    /**It is the disposition of a one player game. For testing purpose only.*/
+    //fixme
     private void disposition1(){
         up_left.setScaleX(2);
         up_left.setScaleY(2);
@@ -120,6 +133,8 @@ public class BoardSceneXController extends SceneController{
         down_right.setVisible(false);
         up_right.setVisible(false);
     }
+
+    /**It sets the disposition of a three players' game.*/
     private void disposition3(){
         Pane personal=containers.get(view.getPlayers().lastIndexOf(view.getPersonalPlayer()));
         up_left.setTranslateX(280);
@@ -136,11 +151,12 @@ public class BoardSceneXController extends SceneController{
         down_right.setVisible(false);
     }
 
-
+    /**It changes the scene into <i>map scene</i>>.*/
     public void goToMap() {
         gui.showIslands();
     }
 
+    /**It changes the scene into <i>hand scene</i>>*/
     public void goToHand() {
         gui.showHand();
     }
