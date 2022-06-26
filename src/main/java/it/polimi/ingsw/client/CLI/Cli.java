@@ -24,7 +24,6 @@ public class Cli implements UserInterface {
     public static final String CLR="\u001B[2J";
 
     private final CentralView game;
-    private PrintWriter socketOut;
     private final InputManagerCli inputManagerCli;
     private boolean usedCharacter;
     private final Scanner input;
@@ -76,7 +75,7 @@ public class Cli implements UserInterface {
                 played.add(game.getPlayedCardThisTurnByPlayerId(playerID)+1);
         }
         if(played.size()>0)
-            System.out.println(IMP+"You can't use the cards n: "+played+RST);
+            System.out.println(IMP+"\n\nYou can't use the cards n: "+played+RST);
         System.out.println(CardPrinter.print(player.getAssistantCards())+"\n coins :"+player.getCoin());
         System.out.println(IMP+"Select the card by its number"+RST);
     }
@@ -101,7 +100,7 @@ public class Cli implements UserInterface {
         showView();
         if(!game.isEasy()) {
             if(game.getActiveCharacter()==0)
-                System.out.println(Printer.WHITE_BKG + Printer.BLACK + "write C to get character selection" + RST);
+                System.out.println(Printer.WHITE_BKG + Printer.BLACK + "\nwrite C to get character selection" + RST);
             else System.out.println(Printer.WHITE_BKG + Printer.BLACK + "Character "+game.getActiveCharacter()+" active" + RST);
         }
         System.out.println(IMP+"Choose a student in your Entrance by its color"+RST);
