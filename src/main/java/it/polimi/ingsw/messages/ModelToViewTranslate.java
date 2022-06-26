@@ -1,9 +1,6 @@
 package it.polimi.ingsw.messages;
 
-import it.polimi.ingsw.model.Board;
-import it.polimi.ingsw.model.Cloud;
-import it.polimi.ingsw.model.Island;
-import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.tokens.Token;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedBoard;
@@ -41,9 +38,20 @@ public class ModelToViewTranslate {
             int coins = modelPlayer.getHand().getCoin();
             SimplifiedBoard board=ModelToViewTranslate.translateBoard(modelPlayer.getBoard());
             SimplifiedPlayer player =new SimplifiedPlayer(modelPlayer.getNickname(), modelPlayer.getId(), modelPlayer.getColorT().ordinal(),coins,board,modelPlayer.getMage().ordinal());
+            player.setAssistantCards(getAvailableCard(modelPlayer.getHand()));
             viewPlayers.add(player);
         }
         return viewPlayers;
+    }
+
+    private static boolean[] getAvailableCard(Hand playerHand){
+        boolean[] out = new boolean[10];
+        Arrays.fill(out,false);
+        for (AssistantCard card : playerHand.getAssistant()) {
+            int x=card.getId()%10;
+            out[x]=true;
+        }
+        return out;
     }
 
     /**It creates a simplified representation of the boards for the view.

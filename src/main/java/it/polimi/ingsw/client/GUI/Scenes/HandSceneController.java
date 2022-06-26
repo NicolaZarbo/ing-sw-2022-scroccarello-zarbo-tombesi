@@ -132,14 +132,17 @@ public class HandSceneController extends SceneController{
             for (Integer playerID:view.getPlayers().stream().map(SimplifiedPlayer::getId).toList()) {
                 played.add(view.getPlayedCardThisTurnByPlayerId(playerID));
             }
-            if(played.contains(i))
+            if(played.contains(i)) {
                 assistantCards.get(i).setOpacity(0.4);
+                assistantCards.get(i).setDisable(true);
+            }
             else {
                 assistantCards.get(i).setOpacity(1);
                 atLeastOneFree=true;
             }
             if(view.getCardYouPlayed()==i)
                 assistantCards.get(i).setOpacity(0.4);
+
             setClickChoose(assistantCards.get(i),i);
             i++;
         }
@@ -147,12 +150,16 @@ public class HandSceneController extends SceneController{
             help_text.setText("You don't have a different card from the other ones played\n Choose any of them");
             for (int j=0;j<view.getPersonalPlayer().getAssistantCards().length;j++) {
                 assistantCards.get(j).setOpacity(1);
+                assistantCards.get(i).setDisable(false);
             }
         }
+
+
+
     }
     private void setClickChoose(Rectangle cardAssistant, int cardId){
         cardAssistant.setCursor(new ImageCursor(new Image("images/pointer/basePointer.png")));
-        cardAssistant.setDisable(false);
+        //cardAssistant.setDisable(false);
         cardAssistant.setOnMouseClicked(mouseEvent -> {
             if(view.getState()== GameState.planPlayCard && view.isYourTurn()) {
                 ArrayList<Integer> played= new ArrayList<>();

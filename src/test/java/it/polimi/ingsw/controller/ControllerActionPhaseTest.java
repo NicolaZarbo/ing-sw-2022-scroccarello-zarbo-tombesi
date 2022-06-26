@@ -40,9 +40,6 @@ public class ControllerActionPhaseTest extends TestCase {
             catch(IllegalMoveException e) {
                 e.printStackTrace();
             }
-            catch(NoTokenFoundException e){
-                e.printStackTrace();
-            }
         }
         assertEquals(this.controllerTest.getGame().getActualState(),GameState.actionMoveMother);
     }
@@ -66,8 +63,6 @@ public class ControllerActionPhaseTest extends TestCase {
                 this.controllerTest.moveStudentToHall(message);
             } catch (IllegalMoveException e) {
                 System.out.println(e.getMessage());
-            } catch (NoTokenFoundException e) {
-                e.printStackTrace();
             }
         }
         assertNotSame(this.controllerTest.getGame().getActualState(),GameState.actionMoveStudent);
@@ -113,9 +108,6 @@ public class ControllerActionPhaseTest extends TestCase {
             catch(IllegalMoveException e) {
                 e.printStackTrace();
             }
-            catch(NoTokenFoundException e){
-                e.printStackTrace();
-            }
         }
         assertEquals(this.controllerTest.getGame().getActualState(),GameState.actionMoveMother);
     }
@@ -130,9 +122,6 @@ public class ControllerActionPhaseTest extends TestCase {
             catch(IllegalMoveException e) {
                 e.printStackTrace();
             }
-            catch(NoTokenFoundException e){
-                System.out.println(e.getMessage());
-            }
         }
         assertNotSame(this.controllerTest.getGame().getActualState(),GameState.actionMoveMother);
     }
@@ -146,9 +135,6 @@ public class ControllerActionPhaseTest extends TestCase {
             }
             catch(IllegalMoveException e) {
                 System.out.println(e.getMessage());
-            }
-            catch(NoTokenFoundException e){
-                e.printStackTrace();
             }
         }
         assertNotSame(this.controllerTest.getGame().getActualState(),GameState.actionMoveMother);

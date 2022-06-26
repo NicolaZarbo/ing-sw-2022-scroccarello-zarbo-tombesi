@@ -101,9 +101,6 @@ public class InputManagerCli  extends InputManager {
             decodeInput();
         }catch (NumberFormatException e){
             cli.askToRetry("not a card");
-        }catch(CharacterErrorException e){
-            seeAction();
-            decodeInput();
         }
     }
     /** Used to start decoding the user text commands from keyboard*/
