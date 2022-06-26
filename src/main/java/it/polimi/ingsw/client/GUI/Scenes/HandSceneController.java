@@ -175,6 +175,7 @@ public class HandSceneController extends SceneController{
                 cardAssistant.setScaleX(1.08);
                 cardAssistant.setScaleY(1.08);
                 help_text.setText("Wait for your turn");
+                assistant_container.setMouseTransparent(true);
             }
         });
     }

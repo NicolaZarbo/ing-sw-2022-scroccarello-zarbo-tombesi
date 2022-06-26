@@ -292,6 +292,7 @@ public class MapSceneController extends SceneController {
             if(view.getState()==GameState.actionMoveMother) {
                 gui.getInputManager().moveMotherTo(islandID);
                 info.setText("wait for your turn");
+                cloud_container.setDisable(true);
             }
             if(view.getState()==GameState.actionMoveStudent && gui.getInputManager().hasSelectedStudent() && !gui.getInputManager().isActivatingCardEffect()) {
                 gui.getInputManager().moveToIsland(islandID);
