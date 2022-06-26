@@ -5,9 +5,10 @@ import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.util.ParameterObject;
 
+/**The character card number 11. It moves one target student from this card to the dining room of the player, then the list of students is refilled.*/
 public class Character11 extends TokensCharacter{
 
-    /**It builds the card number 1.
+    /**It builds the card number 11.
      * @param id id of the card which will always be 11*/
     public Character11(int id) {
         super(id);

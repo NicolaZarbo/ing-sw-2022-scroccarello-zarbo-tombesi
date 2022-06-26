@@ -7,6 +7,7 @@ import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 import java.util.Arrays;
 import java.util.List;
 
+/**The class which prints the boards of players.*/
 public class BoardsPrinter implements Printer{
     String yo = """
               _Entr___DN___Prof___T°_\s
@@ -17,6 +18,9 @@ public class BoardsPrinter implements Printer{
             B|      |     |     |
             P|      |     |     |
              |______|_____|_____|\s""".indent(1);
+
+    /**It prints on screen the board of the player.
+     * @param view the view of the player*/
     public static String printPersonal(CentralView view){
         StringBuilder out = new StringBuilder();
         SimplifiedBoard board=view.getPersonalPlayer().getBoard();
@@ -35,6 +39,9 @@ public class BoardsPrinter implements Printer{
         out.append(" |______|________________________|_____|     \n");
         return out.toString();
     }
+
+    /**It prints the board relative to the specified view.
+     * @param view the view which is to print on screen*/
     public static String print(CentralView view){
         StringBuilder out= new StringBuilder();
         List<SimplifiedPlayer> players = view.getPlayers();
@@ -69,6 +76,9 @@ public class BoardsPrinter implements Printer{
         }
         return out.toString();
     }
+
+    /**It adds background color based on team color.
+     * @param tColor number of team color*/
     private static String teamBackground(int tColor){
         if(tColor==0)
             return "";
@@ -78,6 +88,10 @@ public class BoardsPrinter implements Printer{
             return DR_GRAY_BKG+BR_WHITE;
         return "";
     }
+
+    /**It generates the professor array of symbols to print on screen.
+     * <p><b>X</b> means professor absent</p>
+     * <p><b>:)</b> means professor present</p>*/
     private static String[] getProfs(SimplifiedBoard board){
         String[] profs= new String[5];
         for (int i = 0; i < 5; i++) {
@@ -89,6 +103,12 @@ public class BoardsPrinter implements Printer{
         }
         return profs;
     }
+
+    /**It returns the string team color based on index.
+     * @param tcolor the color index
+     * @return <p><b>B</b> for black</p>
+     * <p><b>W</b> for white</p>
+     * <p><b>G</b> for gray</p>*/
     private static String towerColor(int tcolor){
         return switch (tcolor){
             default -> "nt";
@@ -97,6 +117,10 @@ public class BoardsPrinter implements Printer{
             case 2-> "G";
         };
     }
+
+    /**@param easy the difficulty of the game
+     * @param board the simplified board of the player
+     * @return the amount of students of each color in the dining room*/
     private static String[] diningRoomColor(SimplifiedBoard board, boolean easy){
         int[] colorQuantity= new int[5];
         String[] coloredStudents= new String[5];
@@ -125,6 +149,8 @@ public class BoardsPrinter implements Printer{
         return coloredStudents;
     }
 
+    /**@param board the simplified board of the player
+     * @return the amount of students of each color in the entrance*/
     private static int[] entranceForColor(SimplifiedBoard board ){
         int[] colorQuantity= new int[5];
         Arrays.fill(colorQuantity,0);
@@ -133,6 +159,10 @@ public class BoardsPrinter implements Printer{
         }
         return colorQuantity;
     }
+
+    /**@param pedForColor total amount of tokens for color
+     * @param studId the id of the token you want to extract the color
+     * @return the color number based on id*/
     private static int getColor(int studId,int pedForColor){
       return studId/pedForColor;
     }

@@ -145,10 +145,9 @@ public class GuiInputManager extends InputManager {
         return singleStudent;
     }
 
-    /**
-     * Used solely for character that need no additional parameters
-     * IE : 2-6-8
-     * */
+    /**It activates turn effect characters, which need no additional parameters (character 2, character 6, character 8).
+     * @param characterNumber id of the selected character
+     * @see it.polimi.ingsw.model.characters.TurnEffectCharacter*/
     public void usaCharacterNoParameter(int characterNumber){
         if(!game.isYourTurn()||game.getCostOfCard().get(characterNumber)>game.getPersonalPlayer().getCoin())
             return;
@@ -157,6 +156,10 @@ public class GuiInputManager extends InputManager {
         cardEffectActivation=false;
         cardInActivation=0;
     }
+
+    /**It activates character 6 effect for the whole turn. It doesn't count the towers of island(s) when calculating influence.
+     * @param islandId the target island
+     * @see it.polimi.ingsw.model.characters.TurnEffectCharacter*/
     public void useCharacter1( int islandId){
         if(!game.isYourTurn()||game.getCostOfCard().get(1)>game.getPersonalPlayer().getCoin())
             return;
@@ -169,6 +172,10 @@ public class GuiInputManager extends InputManager {
         cardEffectActivation=false;
         cardInActivation=0;
     }
+
+    /**It activates character 7 effect.
+     * @param studentsFromEntrance the list of selected students
+     *  @see it.polimi.ingsw.model.characters.Character7*/
     public void useCharacter7(List<Integer> studentsFromEntrance){
         if(!game.isYourTurn()||game.getCostOfCard().get(7)>game.getPersonalPlayer().getCoin())
             return;
@@ -186,6 +193,10 @@ public class GuiInputManager extends InputManager {
         cardEffectActivation=false;
         cardInActivation=0;
     }
+
+    /**It activates character 9 effect.
+     * @param targetColor the target color
+     * @see it.polimi.ingsw.model.characters.Character9*/
     public void useCharacter9(int targetColor){
         if(!game.isYourTurn()||game.getCostOfCard().get(9)>game.getPersonalPlayer().getCoin())
             return;
@@ -195,6 +206,11 @@ public class GuiInputManager extends InputManager {
         cardEffectActivation=false;
         cardInActivation=0;
     }
+
+    /**It activates character 10 effect.
+     * @param diningStudents the list of target students from dining room
+     * @param entranceStudents the list of target students trom entrance
+     * @see it.polimi.ingsw.model.characters.Character10*/
     public void useCharacter10(List<Integer> entranceStudents, List<Integer> diningStudents){
         if(!game.isYourTurn()||game.getCostOfCard().get(10)>game.getPersonalPlayer().getCoin())
             return;
@@ -205,12 +221,20 @@ public class GuiInputManager extends InputManager {
         cardEffectActivation=false;
         cardInActivation=0;
     }
+
+    /**It activates character 11 effect.
+     * @param studentId the id of the target student
+     * @see it.polimi.ingsw.model.characters.Character11*/
     public void useCharacter11(int studentId){
         if(!game.isYourTurn()||game.getCostOfCard().get(11)>game.getPersonalPlayer().getCoin())
             return;
         game.playCharacter(11, new ParameterObject(studentId, game.getPersonalPlayer().getId()));
         cardEffectActivation=false;
     }
+
+    /**It converts a list to an array.
+     * @param dimension the size of the list
+     * @param list the list to transform*/
     private int[] listToArray(List<Integer> list, int dimension){
         int []  array=new int[dimension];
         for (int i = 0; i < dimension; i++) {
@@ -218,6 +242,7 @@ public class GuiInputManager extends InputManager {
         }
         return array;
     }
+
     /** Sets a flag that ensures the user can only do actions that are contextually allowed
      * IE : when the player is in the middle of selecting the target of an effect he can't move tokens */
     public void setCardEffectActivation() {

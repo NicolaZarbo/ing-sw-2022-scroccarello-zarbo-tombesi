@@ -252,7 +252,7 @@ public class Game extends Observable<ServerMessage> {
         this.targetColor=null;
     }
 
-    /**It returns the bonus active. For expert mode only.
+    /**It returns the bonus active (expert mode only).
      @return id of the <i>turn effect character</i> which triggered the bonus
      @see it.polimi.ingsw.model.characters.TurnEffectCharacter*/
     public int getCardBonusActive() {

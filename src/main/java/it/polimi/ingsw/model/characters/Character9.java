@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.util.ParameterObject;
 
-/**The character card number 9.*/
+/**The character card number 9. It lets the player select a target color, then it excludes it from the influence calculation for the whole turn.*/
 public class Character9 extends TurnEffectCharacter{
 
     /**It builds the card number 1.
