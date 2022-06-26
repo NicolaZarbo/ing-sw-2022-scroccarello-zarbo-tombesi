@@ -221,7 +221,7 @@ public class MapSceneController extends SceneController {
         }
     }
 
-    /**It sets */
+    /**It initializes the mouse over event on island.*/
     private void initHoverIsland(){
         islandStudent_container.setVisible(false);
         hoverBackGround.setMouseTransparent(true);
@@ -231,6 +231,9 @@ public class MapSceneController extends SceneController {
                 islandStudentPlaces.add((ImageView) student);
         }
     }
+
+    /**It sets students on mouse over on island.
+     * @param students the list of students over the island*/
     private void setStudentsInHover(List<Integer> students){
         int i=0;
         ArrayList<Integer>overflow= new ArrayList<>();
@@ -246,6 +249,8 @@ public class MapSceneController extends SceneController {
             setOverflow(overflow);
     }
 
+    /**It sets the overflown students.
+     * @param overflown the list of students to set*/
     private void setOverflow(List<Integer> overflown){
         int[]colorNumber=new int[5];
         Arrays.fill(colorNumber,0);
@@ -266,16 +271,20 @@ public class MapSceneController extends SceneController {
             }
         }
     }
+
+    /**It resets the mouse over pop-up*/
     private void resetStudentsHover(){
         for (ImageView place:islandStudentPlaces) {
             place.setVisible(false);
         }
     }
-    /** used so that only the useful panel can receive mouseEvent, other-ways the other panels could block the event */
+    /**It is used so that only the useful panel can receive mouse event, other-ways the other panels could block the event.*/
     private void setOtherContainerTransparent(Pane container){//duplicate of method in super
         super.setOthersContainerMouseTransparent(container);
     }
 
+    /**It shows after a mouse over event the content of the island.
+     * @param island the island to show*/
     private void hoverShowInside(Circle island){
         island.setDisable(false);
         island.setOnMouseEntered(mouseEvent -> {
@@ -306,6 +315,9 @@ public class MapSceneController extends SceneController {
             setMotherZone(isl);
         });
     }
+
+    /**It selects the island after the click event.
+     * @param island the selected island*/
     private void setClickChooseIsland(Circle island){
         island.setOnMouseClicked(mouseEvent -> {
             int islandID=Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6))-1;
@@ -323,6 +335,8 @@ public class MapSceneController extends SceneController {
                 gui.getInputManager().useCharacter1(islandID);
         });
     }
+
+    /**It shows the clouds on the scene.*/
     private void setCloud(){
         Image cloudImage;
         for (Integer[] cloud:view.getClouds()) {
@@ -337,6 +351,10 @@ public class MapSceneController extends SceneController {
 
         }
     }
+
+    /**It selects the cloud after the click event.
+     * @param cloud the selected cloud
+     * @param cloudID the id of the cloud*/
     private void clickChooseCloud(Circle cloud, int cloudID){
         DropShadow cloudShadow = new DropShadow(8, Color.DARKRED);
         cloud.setOnMouseEntered(event -> {
@@ -363,6 +381,10 @@ public class MapSceneController extends SceneController {
             info.setText("wait for your turn");
         });
     }
+
+    /**It sets the students on the cloud.
+     * @param cloud the ids of the students
+     * @param cloudNumber the id of the cloud*/
     private void setCloudStudents(Integer[] cloud, int cloudNumber){
         List<Circle> cloudStud=cloudStudentsByNumber.get(cloudNumber);
         int i=0;
@@ -376,6 +398,10 @@ public class MapSceneController extends SceneController {
             else cloudByNumber.get(cloudNumber).setOpacity(0.5);
         }
     }
+
+    /**@param studId the id of the student
+     * @param highContrast it says if the resource is needed in high contrarst or not (green only)
+     * @return the path for the graphical resource about token of color*/
     private Image studentColorPath(int studId, boolean highContrast){
         if(highContrast){
             return switch (studId / 26) {
@@ -397,6 +423,9 @@ public class MapSceneController extends SceneController {
             };
         }
     }
+
+    /**It sets mother nature on the island she currently is.
+     * @param island the island currently visited by mother nature*/
     private void setMotherZone(SimplifiedIsland island){
         int motherPosition= view.getMother();
         boolean isMotherOn=false;
@@ -408,7 +437,9 @@ public class MapSceneController extends SceneController {
         mZone.setVisible(isMotherOn);
         mZone.setFill(new ImagePattern(new Image("images/simple_elements/mother_nature.png")));
     }
-    /** used to add bridges to every island and its subIslands*/
+
+    /**It is used to add bridges to an island and its sub-islands.
+     * @param island the island where to add bridges*/
     private void setBridges(SimplifiedIsland island){
         //int mainId=island.getIslandId()+1;
         for (SimplifiedIsland subIsland:island.getSubIslands()) {
@@ -416,18 +447,12 @@ public class MapSceneController extends SceneController {
             int beforeIsland=subId-1;
             if(beforeIsland==0)
                 beforeIsland=12;
-            /*if(subId<mainId || subId==12){
-                bridgeByIslandBefore.get(subId).setVisible(true);
-            }
-            else {
-                bridgeByIslandBefore.get(mainId).setVisible(true);
-            }
-            */
             bridgeByIslandBefore.get(beforeIsland).setVisible(true);
             setBridges(subIsland);
         }
     }
 
+    /**It sets the towers on the islands.*/
     private void initTowers(){
         towerByIslandNumber=new HashMap<>();
         for (Node towerPos:tower_container.getChildren()) {
@@ -436,6 +461,8 @@ public class MapSceneController extends SceneController {
         }
 
     }
+
+    /**It initializes islands tiles.*/
     private void initIslands(){
         islandByNumber= new HashMap<>();
         for (Node island:island_container.getChildren()) {
@@ -446,6 +473,7 @@ public class MapSceneController extends SceneController {
         }
     }
 
+    /**It initializes clouds tiles.*/
     private void initClouds(){
         cloudByNumber= new HashMap<>();
         cloudStudentsByNumber=new HashMap<>();
@@ -464,6 +492,8 @@ public class MapSceneController extends SceneController {
             cloudStudentsByNumber.put(cloudNumber,studs);
         }
     }
+
+    /**It initializes mother tiles.*/
     private void initMotherZones(){
         motherZoneOfIsland= new HashMap<>();
         for (Node zone:motherZones_container.getChildren()) {
@@ -471,6 +501,8 @@ public class MapSceneController extends SceneController {
             motherZoneOfIsland.put(islandNumber, (Rectangle) zone);
         }
     }
+
+    /**It initializes bridges tiles.*/
     private void initBridges() {
         bridgeByIslandBefore=new HashMap<>();
         for (Node bridge:bridge_container.getChildren()) {
@@ -482,14 +514,17 @@ public class MapSceneController extends SceneController {
 
     }
 
+    /**It changes the scene into <i>hand scene</i>>.*/
     public void goToHand() {
         gui.showHand();
     }
 
+    /**It changes the scene into <i>board scene</i>>.*/
     public void goToBoard() {
         gui.showBoards();
     }
 
+    /**It changes the scene into <i>character scene</i>>.*/
     public void goToCharacters() {
         gui.showCharacters();
     }

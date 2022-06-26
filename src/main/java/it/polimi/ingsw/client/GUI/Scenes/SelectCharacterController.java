@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**The handler of character scene (expert mode only).*/
 public class SelectCharacterController extends SceneController{
 
     public Pane CharacterContainer;
@@ -43,12 +44,15 @@ public class SelectCharacterController extends SceneController{
     private ArrayList<Integer> selectedStudents;
 
     private final CentralView view;
+
+    /**It builds the instance of character scene controller.*/
     public SelectCharacterController(){
         selectedStudents=new ArrayList<>();
         this.gui= GuiInputManager.getGui();
         this.view=gui.getGame();
         inputManager=gui.getInputManager();
     }
+
     @Override
     public void initialize() {
         initCharacters();
@@ -63,6 +67,7 @@ public class SelectCharacterController extends SceneController{
         }
     }
 
+    /**It initializes every character element of the scene. Every element is given an image resource, an effect triggered on click, a description of the cost.*/
     private void initCharacters(){
         characters=new ArrayList<>();
         coins=new ArrayList<>();
@@ -122,6 +127,10 @@ public class SelectCharacterController extends SceneController{
             coins.get(i).setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
         }
     }
+
+    /**It sets the visibility of the card according to their cost and the possibility the user has to afford it.
+     * @param cardNumber the id of the card
+     * @param card the related element on the scene*/
     private void cardVisibility(int cardNumber, Rectangle card){
         if(view.getCostOfCard().get(cardNumber)>view.getPersonalPlayer().getCoin()) {
             card.setOpacity(0.5);
@@ -132,6 +141,9 @@ public class SelectCharacterController extends SceneController{
             card.setMouseTransparent(false);
         }
     }
+
+    /**It triggers effect of the card 1 on click.
+     * @see it.polimi.ingsw.model.characters.Character1*/
     private void effect1(){
         activatingCard=1;
         character1stud.forEach(s->{
@@ -142,6 +154,9 @@ public class SelectCharacterController extends SceneController{
         CharacterContainer.setMouseTransparent(true);
         inputManager.setCardEffectActivation();
     }
+
+    /**It triggers effect of the card 7 on click.
+     * @see it.polimi.ingsw.model.characters.Character7*/
     private void effect7(){
         studentCharacterContainer.setMouseTransparent(false);
         CharacterContainer.setMouseTransparent(true);
@@ -155,6 +170,8 @@ public class SelectCharacterController extends SceneController{
         showMoveButton();
         panelGoToBoard();
     }
+
+    /**It shows the go to board on the popup panel-*/
     private void panelGoToBoard(){
         popupPanel.getChildren().forEach(pane->{
             pane.setVisible(false);
@@ -164,6 +181,8 @@ public class SelectCharacterController extends SceneController{
         goToBoard.setMouseTransparent(false);
         goToBoard.setVisible(true);
     }
+
+    /**It shows the colors on the popup panel.*/
     private void panelColors(){
         popupPanel.getChildren().forEach(pane->{
             pane.setVisible(false);
@@ -174,18 +193,27 @@ public class SelectCharacterController extends SceneController{
         colors.setMouseTransparent(false);
         colors.setTranslateY(-30);
     }
+
+    /**It triggers effect of the card 9 on click.
+     * @see it.polimi.ingsw.model.characters.Character9*/
     private void effect9(){
         int targetColor=-1;
         inputManager.useCharacter9(targetColor);
         showMoveButton();
         panelColors();
     }
+
+    /**It triggers effect of the card 10 on click.
+     * @see it.polimi.ingsw.model.characters.Character10*/
     private void effect10(){
         inputManager.setCardInActivation(10);
         inputManager.setCardEffectActivation();
         gui.showBoards();
         //todo show the entrance and dining and have the player choose up to 2 studs
     }
+
+    /**It triggers effect of the card 11 on click.
+     * @see it.polimi.ingsw.model.characters.Character11*/
     private void effect11() {
         studentCharacterContainer.setMouseTransparent(false);
         CharacterContainer.setMouseTransparent(true);
@@ -196,13 +224,15 @@ public class SelectCharacterController extends SceneController{
         });
         inputManager.setCardEffectActivation();
     }
-    /** Used for card 2-6-8  */
+
+    /**It triggers effect of the card 2, 6, 8 on click. No parameters are required.
+     * @see it.polimi.ingsw.model.characters.TurnEffectCharacter*/
     private void noParameterEffect(int number){
         inputManager.usaCharacterNoParameter(number);
     }
 
 
-
+    /**It initializes student tokens on token characters' cards.*/
     private void initStudCharacters() {
         character1stud = new ArrayList<>();
         character7stud = new ArrayList<>();
@@ -253,6 +283,9 @@ public class SelectCharacterController extends SceneController{
                 }
         }
     }
+
+    /**It triggers token selection.
+     * @param id the selected id*/
     private void clickSelectStudent(int id){
         if (activatingCard != 1 && activatingCard != 7 && activatingCard != 11) {
             return;
@@ -271,7 +304,8 @@ public class SelectCharacterController extends SceneController{
         }
     }
 
-
+    /**@param idStudent the id of the target student
+     * @return relative image of the token colored student*/
     static Image getImage(int idStudent) {
         Image stud;
         switch(idStudent/26){
@@ -287,24 +321,28 @@ public class SelectCharacterController extends SceneController{
         return stud;
     }
 
+    /**It changes the scene into <i>hand scene</i>>*/
     public void goBack() {
         inputManager.resetEffectActivation();
         activatingCard=0;
         gui.showHand();
     }
 
-
+    /**It shows the move button.*/
     protected void showMoveButton() {
         popupPanel.setVisible(true);
         popupPanel.setMouseTransparent(false);
     }
 
 
+    /**It hides the move button*/
     protected void hideMoveButtons() {
         popupPanel.setVisible(false);
         popupPanel.setMouseTransparent(true);
-        //refershings
     }
+
+    /**It moves students from the carc to the entrance.
+     * @see it.polimi.ingsw.model.characters.Character7*/
     public void moveToBoard(){
         if(activatingCard==7 ){
             if(selectedStudents.size()>0)
@@ -313,22 +351,29 @@ public class SelectCharacterController extends SceneController{
         }
         gui.showBoards();
     }
+
+    /**It sets as active nerfed color red.
+     * @see it.polimi.ingsw.model.characters.Character9*/
     public void selectedRed(){
         inputManager.useCharacter9(0);
         hideMoveButtons();
     }
+    /**It sets as active nerfed color pink.*/
     public void selectedPink(){
         inputManager.useCharacter9(5);
         hideMoveButtons();
     }
+    /**It sets as active nerfed color yellow.*/
     public void selectedYellow(){
         inputManager.useCharacter9(1);
         hideMoveButtons();
     }
+    /**It sets as active nerfed color blue.*/
     public void selectedBlue(){
         inputManager.useCharacter9(3);
         hideMoveButtons();
     }
+    /**It sets as active nerfed color green.*/
     public void selectedGreen(){
         inputManager.useCharacter9(2);
         hideMoveButtons();

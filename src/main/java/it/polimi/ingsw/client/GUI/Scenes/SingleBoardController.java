@@ -271,6 +271,11 @@ public class SingleBoardController {//extends BoardSceneController
             }
         });
     }
+
+    /**It handles resolution of character 7 effect (expert mode only).
+     * @param student the token to exclude
+     * @param studentId the student to add
+     * @see it.polimi.ingsw.model.characters.Character7*/
     private void effect7EntranceHandler(Circle student, int studentId){
         if(clickedEntranceStudentsColor.size()>gui.getInputManager().getNumberOfStudentSelectedFromCharacter())
             return;
@@ -279,17 +284,22 @@ public class SingleBoardController {//extends BoardSceneController
         student.setOpacity(0.5);
         student.setDisable(true);
     }
+
+    /**It handles resolution of character 10 effect (expert mode only).
+     * @param student the token to exclude
+     * @param studId the student to add
+     * @see it.polimi.ingsw.model.characters.Character10*/
     private void effect10EntranceHandler(Circle student, int studId){
         if(clickedEntranceStudentsColor.size()>2)
             return;
         clickedEntranceStudentsColor.add(studId);
         student.setOpacity(0.5);
         student.setDisable(true);
-     //   if(clickedEntranceStudentsColor.size()==2 && clickedDiningStudentsColor.size()==2)
-       //     gui.getInputManager().useCharacter10(clickedEntranceStudentsColor,clickedDiningStudentsColor);
         showCardPanel();
     }
-    /** Used to add a shadow to a student on mouse over*/
+    /** It is used to add a shadow around a student on mouse over. Different types of shadows are assigned according to the token color.
+     * @param student the element of the scene
+     * @param color the color of the token*/
     private void setStudentColoredShadow(Circle student, int color){
         if(this.playerOwner!=gui.getGame().getPersonalPlayer().getId())
             return;
@@ -305,14 +315,18 @@ public class SingleBoardController {//extends BoardSceneController
         student.setOnMouseEntered(event -> student.setEffect(islandShadow));
         student.setOnMouseExited(event -> student.setEffect(null));
     }
-    
+
+    /**It assigns the board to its owner.*/
     public void setPlayerOwner(int owner){
         playerOwner=owner;
     }
+
+    /**It states if the board belongs to the player or not.*/
     public boolean isYourBoard(){
         return playerOwner==gui.getGame().getPersonalPlayer().getId();
     }
-    /** used to put the selected student inside the dining room */
+
+    /**It is used to put the selected student inside the dining room.*/
     protected void moveToDining(){
         GuiInputManager inputManager=gui.getInputManager();
         inputManager.moveToBoard();
@@ -322,13 +336,16 @@ public class SingleBoardController {//extends BoardSceneController
         hideMoveButtons();
     }
 
-    /** used to show the map and prompt the user to choose an island */
+    /**It is used to show the map and prompt the user to choose an island */
     protected void chooseTargetIsland(){
         this.clickedEntranceStudentsColor=new ArrayList<>();
         gui.setScene(SceneEnum.MapScene);
         hideMoveButtons();
     }
-    /** @param studentID studentID/26*/
+    /**
+     * It sets clickble students on dining room.
+     * @param studentID the id of the color
+     * @param student the element on the scene*/
     protected void setDiningRoomClickable(Circle student, int studentID){//todo change color for id
         student.setDisable(false);
         GuiInputManager inputManager = gui.getInputManager();
@@ -347,24 +364,28 @@ public class SingleBoardController {//extends BoardSceneController
     }
 
 
-     
+
+    /**It shows the move button.*/
     protected void showMoveButton() {
         moveStudentPanel.setVisible(true);
         moveStudentPanel.setMouseTransparent(false);
     }
 
-     
+
+    /**It hides the move button.*/
     protected void hideMoveButtons() {
         moveStudentPanel.setVisible(false);
         moveStudentPanel.setMouseTransparent(true);
         refresh();
     }
-     
+
+    /**It hides the card panel.*/
     protected void hideCardPanel() {
         popupCardPanel.setVisible(false);
         popupCardPanel.setMouseTransparent(true);
     }
-     
+
+    /**It shows the card panel.*/
     protected void showCardPanel() {
         popupCardPanel.setVisible(true);
         popupCardPanel.setMouseTransparent(false);
@@ -378,21 +399,24 @@ public class SingleBoardController {//extends BoardSceneController
         }
     }
 
-        public void moveToBoard() {
+    /**It changes the scene into <i>board scene</i>>*/
+    public void moveToBoard() {
         moveToDining();
     }
 
+    /**It changes the scene into <i>island scene</i>>*/
     public void sendToIsland() {
         chooseTargetIsland();
     }
 
+    /**It changes the scene into <i>character scene</i>>*/
     public void moveToCharacter() {//todo change this to a reset activation
         gui.getInputManager().resetEffectActivation();
         gui.showCharacters();
     }
 
     /**
-     * finalizes card effect activation
+     * It triggers character card effect activation.
      */
     public void activateCharacter() {
         if (gui.getInputManager().getCardInActivation() == 7) {

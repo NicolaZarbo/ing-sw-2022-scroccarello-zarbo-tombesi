@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 
 import java.util.*;
 
+/**The handler of player customization during setup phase.*/
 public class SetupSceneController extends SceneController{
     public VBox root;
     public Text teamWelcome_text;
@@ -52,6 +53,7 @@ public class SetupSceneController extends SceneController{
     private List<ImageView> mages;
     private final DropShadow islandShadow = new DropShadow(8, Color.DARKRED);
 
+    /**It creates the base instance of setup controller.*/
     public SetupSceneController() {
     }
 
@@ -71,6 +73,8 @@ public class SetupSceneController extends SceneController{
         availableMages = view.getAvailableMages();
         setTowers();
     }
+
+    /**It initializes as clickable all the elements which can be clicked.*/
     private void initClickable(){
         mages= new ArrayList<>();
         mages.add(mage1);
@@ -90,6 +94,7 @@ public class SetupSceneController extends SceneController{
         });
     }
 
+    /**It fills the tower elements.*/
     private void setTowers(){
         Image img=new Image("images/towers/black_tower.png");
         blacktower.setImage(img);
@@ -105,10 +110,15 @@ public class SetupSceneController extends SceneController{
         }
     }
 
+    /**It sets on mouse event shadow effect on a target element.
+     * @param target the element to set the effect on*/
     private void setShadow(ImageView target){
         target.setOnMouseEntered(event -> target.setEffect(new DropShadow(4,Color.DARKRED)));
         target.setOnMouseExited(event1 -> target.setEffect(null));
     }
+
+
+    /**It shows the welcome message.*/
     private void teamWelcome(){
         teamWelcome_text.setVisible(true);
         int team=1;
@@ -117,6 +127,7 @@ public class SetupSceneController extends SceneController{
         teamWelcome_text.setText("Welcome to team "+team);
     }
 
+    /**It shows the magicians of the game.*/
     private void showMagicians(){
         errorMsg.setText("");
         choiceMsg.setText("Choose a magician");
@@ -136,6 +147,9 @@ public class SetupSceneController extends SceneController{
             mageT.setMouseTransparent(false);
         }
     }
+
+    /**It adds double click event (as confirm) to the mouse event.
+     * @param event the event to which attack the listener*/
     private void addDoubleClickConfirm(MouseEvent event){
         ((ImageView)event.getSource()).setOnMouseClicked(event1 -> {
             confirmChoice(event1);
@@ -143,6 +157,7 @@ public class SetupSceneController extends SceneController{
 
     }
     @FXML
+    /**It selects the mage 1 on click.*/
     public void setMage1(MouseEvent click){
         this.wizardchosen =1;
         restoreAllOpacities();
@@ -151,6 +166,7 @@ public class SetupSceneController extends SceneController{
         addDoubleClickConfirm(click);
     }
     @FXML
+    /**It selects the mage 2 on click.*/
     public void setMage2(MouseEvent click){
         this.wizardchosen =2;
         restoreAllOpacities();
@@ -158,6 +174,7 @@ public class SetupSceneController extends SceneController{
         addDoubleClickConfirm(click);
     }
     @FXML
+    /**It selects the mage 3 on click.*/
     public void setMage3(MouseEvent click){
         this.wizardchosen =3;
         restoreAllOpacities();
@@ -165,30 +182,39 @@ public class SetupSceneController extends SceneController{
         addDoubleClickConfirm(click);
     }
     @FXML
+    /**It selects the mage 4 on click.*/
     public void setMage4(MouseEvent click){
         this.wizardchosen =4;
         restoreAllOpacities();
         mage4.setOpacity(0.5);
         addDoubleClickConfirm(click);
     }
-    @FXML public void setBlackTower(MouseEvent click){
+    @FXML
+    /**It selects the tower choice black on click.*/
+    public void setBlackTower(MouseEvent click){
         this.towerchosen=1;
         restoreAllOpacities();
         blacktower.setOpacity(0.5);
         addDoubleClickConfirm(click);
     }
-    @FXML public void setWhiteTower(MouseEvent click){
+    @FXML
+    /**It selects the tower choice white on click.*/
+    public void setWhiteTower(MouseEvent click){
         this.towerchosen=2;
         restoreAllOpacities();
         whitetower.setOpacity(0.5);
         addDoubleClickConfirm(click);
     }
-    @FXML public void setGrayTower(MouseEvent click){
+    @FXML
+    /**It selects the tower choice gray on click.*/
+    public void setGrayTower(MouseEvent click){
         this.towerchosen=3;
         restoreAllOpacities();
         greytower.setOpacity(0.5);
         addDoubleClickConfirm(click);
     }
+
+    /**It restores all opacities to natural value of elements.*/
     private void restoreAllOpacities(){
         blacktower.setOpacity(1.0);
         whitetower.setOpacity(1.0);
@@ -198,6 +224,8 @@ public class SetupSceneController extends SceneController{
         mage3.setOpacity(1.0);
         mage4.setOpacity(1.0);
     }
+
+    /**It triggers the confirm of the selection of the custom parameters of the player (it triggers the lobby-player creation).*/
     public void confirmChoice(MouseEvent mouseEvent) {
         if(towerchosen==0){
             errorMsg.setText("Please choose your color");
