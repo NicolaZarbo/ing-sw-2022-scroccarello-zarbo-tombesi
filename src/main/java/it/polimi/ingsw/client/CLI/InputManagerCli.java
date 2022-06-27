@@ -9,6 +9,8 @@ import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.client.InputManager;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -127,14 +129,28 @@ public class InputManagerCli  extends InputManager {
 
      /**It is used to print on screen information during setup phase.*/
     public void caseSetupPlayers() {
-        if(multipleInput.length!=2){
+        boolean isTeamSecondPlayer=game.isTeamPlay() && game.getAvailableColor().size()==0;
+        if(multipleInput.length!=2 && !isTeamSecondPlayer){
             cli.askToRetry("please select a mage value followed by the initial of the color");
             return;
+        }
+        if(isTeamSecondPlayer){
+            if(isInteger) {
+                if(!game.getAvailableMages().contains(inputInteger-1)){
+                    cli.askToRetry("please select the mage by its number");
+                    return;
+                }
+                game.choosePlayerCustom(0, inputInteger - 1);
+                showWait();
+                return;
+            }else cli.askToRetry("please select the mage by its number");
         }
         switch (multipleInput[1]) {
             case "black", "gray", "white", "b", "g", "w" -> {
                 int colorInt = convertTowerColorToInteger(multipleInput[1]);
                 if(isInteger) {
+                    if(!game.getAvailableMages().contains(inputInteger))
+                        return;
                     game.choosePlayerCustom(colorInt, inputInteger - 1);
                     showWait();
                 }
@@ -148,12 +164,25 @@ public class InputManagerCli  extends InputManager {
     public void casePlanPlayCard() {
         if(isInteger)
             try {
+                if(!canUseCard(inputInteger-1))
+                    throw new CardNotFoundException("this card can't be used");
                 game.useAssistantCard(inputInteger - 1);
                 showWait();
             }catch (CardNotFoundException | ArrayIndexOutOfBoundsException e){
                 cli.askToRetry(e.getMessage() +"please select an available card");
             }
         else cli.askToRetry("please select a card");
+    }
+    private boolean canUseCard(int cardNumber){
+        List<Integer> usedCard=game.getPlayers().stream().map(s->game.getPlayedCardThisTurnByPlayerId(s.getId())).toList();
+        boolean atLeastOneAvailable =false;
+        int i=0;
+        for (Boolean card:game.getPersonalPlayer().getAssistantCards()) {
+            if(!usedCard.contains(i) && card)
+                atLeastOneAvailable=true;
+            i++;
+        }
+        return !(atLeastOneAvailable && usedCard.contains(cardNumber));
     }
 
     /**It states if a player can activate a character effect or not (expert mode only).*/

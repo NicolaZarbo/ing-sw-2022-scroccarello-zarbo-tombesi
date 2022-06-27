@@ -184,6 +184,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     /**It updates the player's board after getting a relative message.
      * @param message the message containing the current board of the player*/
     public void singleBoardUpdate(SingleBoardMessage message){
+        int movablePerTurn;
+        if(players.size()==3)
+            movablePerTurn=4;
+        else movablePerTurn=3;
         for (SimplifiedPlayer p:players){
             if (p.getId() == message.getBoardPlayerId()) {
                p.setBoard(message.getBoard());
@@ -192,7 +196,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         }
         if(isYourTurn() && state==GameState.actionMoveStudent) {
             studentMoved++;
-            if(studentMoved<3)
+            if(studentMoved<movablePerTurn)
                 clientScreen.askToMoveStudent();
         }
 

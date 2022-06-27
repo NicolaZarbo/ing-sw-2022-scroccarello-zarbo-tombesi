@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**The handler of board scene.*/
 public class BoardSceneXController extends SceneController{
 
     public Pane up_left;
@@ -29,7 +28,7 @@ public class BoardSceneXController extends SceneController{
     public Pane context_container;
     private final GUI gui;
     private final CentralView view;
-    private List<Pane> containers;
+    private List<Pane> boardsContainers;
     public BoardSceneXController() {
         this.gui= GuiInputManager.getGui();
         view=gui.getGame();
@@ -40,24 +39,22 @@ public class BoardSceneXController extends SceneController{
         root.setStyle("-fx-background-image:url(images/wallpapers/sky_no_title.png); -fx-background-position: center; -fx-background-size: 1280 796");
         root.setCursor(new ImageCursor(new Image("images/pointer/baseArrow.png")));
         setContextText();
-        containers= new ArrayList<>();
-        containers.add(up_left);
-        containers.add(up_right);
-        containers.add(down_left);
-        containers.add(down_right);
+        boardsContainers = new ArrayList<>();
+        boardsContainers.add(up_left);
+        boardsContainers.add(up_right);
+        boardsContainers.add(down_left);
+        boardsContainers.add(down_right);
         setDisposition();
         Pane setter;
         try {
             for (counterBoard=0; counterBoard < view.getPlayers().size(); counterBoard++) {
                 setter=FXMLLoader.load(getClass().getResource("/singleBoard.fxml"));
-                containers.get(counterBoard).getChildren().add(setter);
+                boardsContainers.get(counterBoard).getChildren().add(setter);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-    /**It sets the text message to advise the player what he has to do based on game state.*/
     private void setContextText(){
         String text;
         if(view.isYourTurn()) {
@@ -79,8 +76,6 @@ public class BoardSceneXController extends SceneController{
 
         context_text.setText(text);
     }
-
-    /**It resets the effect activation when changing scene.*/
     private void setCancelActivationOnExit(){
         moveToMap.setOnMouseClicked(event -> {
             gui.getInputManager().resetEffectActivation();
@@ -117,9 +112,31 @@ public class BoardSceneXController extends SceneController{
         context_container.setTranslateY(-540);
         context_container.setTranslateX(120);
     }
+    private void disposition4(){//todo for 4 player team add border, maximise your board
+        int i=0;
+        for (Pane board:boardsContainers) {
+            board.setStyle(getStringStyle(i));
+            i++;
+        }
+        for (Pane container: boardsContainers) {
+            container.setScaleX(0.7);
+            container.setScaleY(0.7);
+        }
+        int personal=view.getPersonalPlayer().getId();
+        boardsContainers.get(personal).setScaleX(1.3);
+        boardsContainers.get(personal).setScaleY(1.3);
+    }
+    private String  getStringStyle(int boardNumber){
+        int towerC=view.getPlayers().get(boardNumber).getTowerColor();
+        String style;
+        if(towerC==0)
+            style="-fx-border-color: black; -fx-border-width: 4 ";
+        else if(towerC==1)
+            style="-fx-border-color: white; -fx-border-width: 4 ";
+        else
+            style="-fx-border-color: gray; -fx-border-width: 4 ";
 
-    /**It is the default null disposition. Not really usefull.*/
-    private void disposition4(){
+        return style;
     }
 
     /**It is the disposition of a one player game. For testing purpose only.*/
@@ -136,11 +153,11 @@ public class BoardSceneXController extends SceneController{
 
     /**It sets the disposition of a three players' game.*/
     private void disposition3(){
-        Pane personal=containers.get(view.getPlayers().lastIndexOf(view.getPersonalPlayer()));
+        Pane personal= boardsContainers.get(view.getPlayers().lastIndexOf(view.getPersonalPlayer()));
         up_left.setTranslateX(280);
         up_right.setTranslateY(330);
         down_left.setTranslateY(56);
-        for (Pane container:containers) {
+        for (Pane container: boardsContainers) {
             container.setScaleX(0.7);
             container.setScaleY(0.7);
         }

@@ -16,12 +16,16 @@ import java.util.*;
 public class Action {
     private final Game game;
     private int movedStudent;
+    private final int movablePerTurn;
 
     /**It builds the action phase of the game.
      * @param game the game*/
     public Action(Game game){
         this.game=game;
         movedStudent=0;
+        if(game.getNPlayers()==3)
+            movablePerTurn=4;
+        else movablePerTurn=3;
     }
 
     /** It moves a student token from the entrance to the dining room.
@@ -43,7 +47,7 @@ public class Action {
             throw new NoTokenFoundException(e.getMessage());
         }
         movedStudent++;
-        if(movedStudent<3)
+        if(movedStudent<movablePerTurn)
             game.notify(new SingleBoardMessage(game, idPlayer));
         else {
             game.groupMultiMessage(new SingleBoardMessage(game, idPlayer));
@@ -63,7 +67,7 @@ public class Action {
         game.groupMultiMessage(new  IslandsMessage(game));
         game.groupMultiMessage(new SingleBoardMessage(game,idPlayer));
         movedStudent++;
-        if(movedStudent<3)
+        if(movedStudent<movablePerTurn)
             game.sendMultiMessage();
         else {
             movedStudent=0;
@@ -316,8 +320,12 @@ public class Action {
         Player conqueror;
         ArrayList<Integer> influence= new ArrayList<>();
         for (Player player : game.getPlayers()) {
-            influence.add(calculateInfluence(player.getId()));
-        }
+            if(game.getNPlayers()==4  && player.getId()>1){
+                int inf=influence.get(player.getId()-2)+calculateInfluence(player.getId());
+                influence.set(player.getId()-2,inf);
+            }else influence.add(calculateInfluence(player.getId()));
+        }//todo test if it works correctly, it now sums team influence
+
         maxInf=influence.stream().max(Comparator.naturalOrder()).orElse(0);
         if(Collections.frequency(influence, maxInf)==1) {
             conqueror=game.getPlayer(influence.lastIndexOf(maxInf));

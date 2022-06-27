@@ -320,6 +320,8 @@ public class MapSceneController extends SceneController {
      * @param island the selected island*/
     private void setClickChooseIsland(Circle island){
         island.setOnMouseClicked(mouseEvent -> {
+            if(!view.isYourTurn())
+                return;
             int islandID=Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6))-1;
             if(view.getState()==GameState.actionMoveMother) {
                 gui.getInputManager().moveMotherTo(islandID);
@@ -356,6 +358,8 @@ public class MapSceneController extends SceneController {
      * @param cloud the selected cloud
      * @param cloudID the id of the cloud*/
     private void clickChooseCloud(Circle cloud, int cloudID){
+        if(!view.isYourTurn())
+            return;
         DropShadow cloudShadow = new DropShadow(8, Color.DARKRED);
         cloud.setOnMouseEntered(event -> {
             cloudStudentsByNumber.get(cloudID+1).forEach(circle -> {

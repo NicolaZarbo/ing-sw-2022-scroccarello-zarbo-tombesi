@@ -56,9 +56,12 @@ public class BoardsPrinter implements Printer{
             String[] professors= BoardsPrinter.getProfs(board);
             String nameForBoard;
             int team=pl.getTeam();
+            String name;
             if(pl.getUsername().equals(view.getName()))
-                nameForBoard=(teamBackground(pl.getTowerColor())+"You"+RST+" TEAM:"+team);
-            else nameForBoard=(teamBackground(pl.getTowerColor())+"Player "+pl.getUsername()+RST+" TEAM:"+team);
+                name="YOU";
+            else name=pl.getUsername();
+
+            nameForBoard=getNameString(team, pl.getTowerColor(),name);
             nameForBoard= Printer.padWithSpaces(nameForBoard,51);
             rows[0]+=nameForBoard+"           ";
             rows[1]+="  _Entr_____________DN_____________Prof___T°_ \t";
@@ -75,6 +78,16 @@ public class BoardsPrinter implements Printer{
             out.append(s);
         }
         return out.toString();
+    }
+    private static String getNameString(int teamNumber,int teamColor, String name){
+        String team="";
+        if(teamColor==0)
+            team="TEAM BLACK";
+        if(teamColor==1)
+            team=" TEAM WHITE";
+        if(teamNumber==0)
+            team="";
+        return teamBackground(teamColor)+" "+name+" "+team+RST+"";
     }
 
     /**It adds background color based on team color.

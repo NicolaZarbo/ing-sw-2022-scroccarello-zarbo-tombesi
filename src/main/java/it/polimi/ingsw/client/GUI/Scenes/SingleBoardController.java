@@ -241,6 +241,8 @@ public class SingleBoardController {//extends BoardSceneController
      * used in initialize() to set the present student Clickable based on the context
      * @param studentId the id of the student */
     protected void setEntranceClickable(Circle student, int studentId){//fixme
+        if(!gui.getGame().isYourTurn())
+            return;
         int clickedColor = studentId/26;
         clickedEntranceStudentsColor=new ArrayList<>();
         student.setDisable(false);
