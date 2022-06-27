@@ -42,10 +42,6 @@
       <Pane fx:id="cardContainer1" prefHeight="654.0" prefWidth="948.0">
          <children>
             <Rectangle id="Character1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="26.0" layoutY="126.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
-            <Circle id="Character1stud1" fill="DODGERBLUE" layoutX="51.0" layoutY="241.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character1stud2" fill="DODGERBLUE" layoutX="108.0" layoutY="241.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character1stud3" fill="DODGERBLUE" layoutX="51.0" layoutY="285.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character1stud4" fill="DODGERBLUE" layoutX="108.0" layoutY="285.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
             <Text fill="#cccdef" layoutX="47.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 1:">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
@@ -56,17 +52,15 @@
             <Circle id="character1coin" fill="DODGERBLUE" layoutX="80.0" layoutY="334.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             <Text layoutX="94.0" layoutY="339.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
             <Text id="character1cost" layoutX="108.0" layoutY="339.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Circle id="Character1stud1" fill="DODGERBLUE" layoutX="51.0" layoutY="241.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character1stud2" fill="DODGERBLUE" layoutX="108.0" layoutY="241.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character1stud3" fill="DODGERBLUE" layoutX="51.0" layoutY="285.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character1stud4" fill="DODGERBLUE" layoutX="108.0" layoutY="285.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="cardContainer7" prefHeight="654.0" prefWidth="948.0">
          <children>
             <Rectangle id="Character7" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="262.0" layoutY="126.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
-            <Circle id="Character7stud3" fill="DODGERBLUE" layoutX="280.0" layoutY="246.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character7stud2" fill="DODGERBLUE" layoutX="314.0" layoutY="246.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character7stud1" fill="DODGERBLUE" layoutX="349.0" layoutY="246.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character7stud4" fill="DODGERBLUE" layoutX="316.0" layoutY="288.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character7stud5" fill="DODGERBLUE" layoutX="282.0" layoutY="287.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character7stud6" fill="DODGERBLUE" layoutX="350.0" layoutY="287.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
             <Text fill="#cccdef" layoutX="283.0" layoutY="104.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 2:">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
@@ -77,6 +71,12 @@
             <Circle id="character7coin" fill="DODGERBLUE" layoutX="314.0" layoutY="334.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             <Text layoutX="328.0" layoutY="338.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
             <Text id="character7cost" layoutX="345.0" layoutY="338.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Circle id="Character7stud3" fill="DODGERBLUE" layoutX="280.0" layoutY="246.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character7stud2" fill="DODGERBLUE" layoutX="314.0" layoutY="246.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character7stud1" fill="DODGERBLUE" layoutX="349.0" layoutY="246.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character7stud4" fill="DODGERBLUE" layoutX="316.0" layoutY="288.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character7stud5" fill="DODGERBLUE" layoutX="282.0" layoutY="287.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character7stud6" fill="DODGERBLUE" layoutX="350.0" layoutY="287.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="cardContainer9" prefHeight="654.0" prefWidth="948.0">
@@ -112,10 +112,6 @@
       <Pane fx:id="cardContainer11" prefHeight="654.0" prefWidth="948.0">
          <children>
             <Rectangle id="Character11" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="26.0" layoutY="393.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
-            <Circle id="Character11stud1" fill="DODGERBLUE" layoutX="51.0" layoutY="510.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character11stud2" fill="DODGERBLUE" layoutX="108.0" layoutY="510.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character11stud3" fill="DODGERBLUE" layoutX="51.0" layoutY="553.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Character11stud4" fill="DODGERBLUE" layoutX="108.0" layoutY="553.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
             <Text fill="#cccdef" layoutX="47.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 5:">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
@@ -126,6 +122,10 @@
             <Circle id="character1coin1" fill="DODGERBLUE" layoutX="77.0" layoutY="596.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             <Text layoutX="91.0" layoutY="601.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
             <Text id="character11cost" layoutX="108.0" layoutY="601.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Circle id="Character11stud1" fill="DODGERBLUE" layoutX="51.0" layoutY="510.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character11stud2" fill="DODGERBLUE" layoutX="108.0" layoutY="510.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character11stud3" fill="DODGERBLUE" layoutX="51.0" layoutY="553.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="Character11stud4" fill="DODGERBLUE" layoutX="108.0" layoutY="553.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="cardContainer2" prefHeight="654.0" prefWidth="948.0">
