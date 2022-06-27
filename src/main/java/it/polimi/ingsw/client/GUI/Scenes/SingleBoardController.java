@@ -35,6 +35,7 @@ public class SingleBoardController {//extends BoardSceneController
     public Text studToSelect;
     public Button toBoard;
     public Button toIsland;
+    public Text movedText;
     protected GUI gui;
     private int playerOwner;//the same id of view
 
@@ -372,6 +373,7 @@ public class SingleBoardController {//extends BoardSceneController
     protected void showMoveButton() {
         moveStudentPanel.setVisible(true);
         moveStudentPanel.setMouseTransparent(false);
+        movedText.setText("Student Moved : "+gui.getGame().getStudentMoved());
     }
 
 

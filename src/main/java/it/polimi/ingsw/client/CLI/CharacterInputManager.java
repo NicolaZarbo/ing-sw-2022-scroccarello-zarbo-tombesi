@@ -196,7 +196,8 @@ public class CharacterInputManager {
             throw new IllegalMoveException();
         }
         int color=InputManagerCli.convertStudentColorToInteger(input.substring(0,1));
-        ParameterObject parameter= new ParameterObject(color,game.getPersonalPlayer().getId());
+        int student=studentInListFromColor(color,studentOnTop);
+        ParameterObject parameter= new ParameterObject(student,game.getPersonalPlayer().getId());
         game.playCharacter(11,parameter);
     }
 

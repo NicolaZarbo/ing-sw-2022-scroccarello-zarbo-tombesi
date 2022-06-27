@@ -72,8 +72,7 @@ public class BoardSceneXController extends SceneController{
             if(gui.getInputManager().isActivatingCardEffect())
                 setCancelActivationOnExit();
 
-            }else text="this are the boards\n Wait for your turn";
-
+            }else text=view.getTurnPlayer()+" is now playing";
         context_text.setText(text);
     }
     private void setCancelActivationOnExit(){

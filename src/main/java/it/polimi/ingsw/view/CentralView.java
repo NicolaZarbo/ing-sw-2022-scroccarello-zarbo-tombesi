@@ -446,4 +446,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     public List<Integer> getAvailableMages() {
         return availableMages;
     }
+    public String getTurnPlayer(){
+       return players.get(turnOf).getUsername();
+    }
 }

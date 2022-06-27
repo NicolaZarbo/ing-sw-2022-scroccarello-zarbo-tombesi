@@ -73,6 +73,11 @@ public class MapSceneController extends SceneController {
 
     /**It is used to modify the scene context (and actions possible) based on the state.*/
     private void prepareForContext(){
+        if(!view.isYourTurn()){
+            info.setText(view.getTurnPlayer()+" is now playing");
+            return;
+        }
+
         switch (view.getState()){
             case actionMoveMother -> {
                 moveMotherContext();
@@ -110,10 +115,6 @@ public class MapSceneController extends SceneController {
             info.setText("Select a target island for the student");
         else info.setText("Go to bord and choose a student to move out of entrance");
     }
-    private void character1Context(){
-        info.setText("choose a target Island for the student");
-    }
-
     /**It sets the choice cloud context. It allows the player to refill his entrance with the students from a target cloud.*/
     private void chooseCloudContext(){
         setOtherContainerTransparent(cloud_container);
