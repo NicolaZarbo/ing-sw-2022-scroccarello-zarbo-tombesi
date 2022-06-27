@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**A stub class intended to create the game without player's customization. It contains a construtor to support testing and other methods intended for the same task.
+/**The stub class intended to create the game without player's customization. It contains a construtor to support testing and other methods intended for the same task.
  * @see Game*/
 public class GameStub extends Game {
 

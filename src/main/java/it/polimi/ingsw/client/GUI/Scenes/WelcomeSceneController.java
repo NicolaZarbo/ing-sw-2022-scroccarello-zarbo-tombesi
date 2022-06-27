@@ -20,7 +20,7 @@ import javafx.scene.text.Text;
 
 import java.io.ByteArrayInputStream;
 
-
+/**The handler of the opening scene of the game.*/
 public class WelcomeSceneController extends SceneController {
     @FXML
     private AnchorPane root;
@@ -36,6 +36,7 @@ public class WelcomeSceneController extends SceneController {
     public Pane lobbymessage;
     private boolean customConnection;
 
+    @Override
     public void initialize() {
         this.gui = GuiInputManager.getGui();
         root.setStyle("-fx-background-image:url(images/wallpapers/Eriantys.jpg); -fx-background-position: center; -fx-background-size: 1280 796");
@@ -59,6 +60,8 @@ public class WelcomeSceneController extends SceneController {
             usernameBox.requestFocus();
         });
     }
+
+    /**It starts the game by establishing the connection with the server. It sends first information such as the user's nickname and eventually notifies him that the connection has been failing or the username is unavailable. It contains a banner to modify connection options (IP and port).*/
     @FXML
     public void startGame(){
         if(customConnection ){
@@ -86,6 +89,8 @@ public class WelcomeSceneController extends SceneController {
             }
         }
     }
+
+    /**It verifies if connection parameters are admittible.*/
     private boolean checkConnectionOptions(){
         String[] ipv4St=ip_server.getText().split("\\.",4);
         int[] ipv4= new int[4];
@@ -120,6 +125,7 @@ public class WelcomeSceneController extends SceneController {
         return true;
     }
 
+    /**It activates the banner to insert connection options.*/
     public void openOptions() {
 
         connectionOptions.setOnMouseClicked(new EventHandler<>() {

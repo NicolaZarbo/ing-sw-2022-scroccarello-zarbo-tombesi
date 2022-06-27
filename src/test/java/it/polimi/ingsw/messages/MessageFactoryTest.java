@@ -11,15 +11,18 @@ import junit.framework.TestCase;
 
 import java.util.ArrayList;
 
+/**The test class for factory of messages. It tests the creation of the messages using the factory method.*/
 public class MessageFactoryTest extends TestCase {
 
     private Game gameTest;
 
+    @Override
     public void setUp() throws Exception {
         super.setUp();
         this.gameTest=new GameStub(false,4,12);
     }
 
+    /**It tests the creation of server messages from json string.*/
     public void testGetMessageFromServer() {
         GenericMessage msg;
         GenericMessage msgTest;
@@ -103,6 +106,7 @@ public class MessageFactoryTest extends TestCase {
         }
     }
 
+    /**It tests the creation of client messages from json string.*/
     public void testGetMessageFromClient() {
         GenericMessage msg;
         GenericMessage msgTest;
@@ -154,6 +158,8 @@ public class MessageFactoryTest extends TestCase {
         testSerialize(msgTest);
     }
 
+    /**It tests the serialization of a message object.
+     * @param message the object message with its parameters*/
     private void testSerialize(GenericMessage message) {
         message.serialize();
         assertEquals(message.getClass().getSimpleName(),message.getType());

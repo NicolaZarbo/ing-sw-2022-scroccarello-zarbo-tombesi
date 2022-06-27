@@ -10,14 +10,17 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.List;
 
+/**It tests the translation of model objects into simplified objects for the client view.*/
 public class ModelToViewTranslateTest extends TestCase {
     Game gameTest;
 
+    @Override
     public void setUp() throws Exception {
         super.setUp();
         this.gameTest=new GameStub(false,4,12);
     }
 
+    /**It tests the translation of a model island into a simplified island.*/
     public void testTranslateIsland() {
         List<SimplifiedIsland> listTest= ModelToViewTranslate.translateIsland(gameTest.getIslands());
         for(int i=0;i<listTest.size();i++){
@@ -32,6 +35,7 @@ public class ModelToViewTranslateTest extends TestCase {
         }
     }
 
+    /**It tests the translation of a model player into a simplified player.*/
     public void testTranslatePlayer() {
         List<SimplifiedPlayer> listTest= ModelToViewTranslate.translatePlayer(gameTest.getPlayers());
         for(int i=0;i<listTest.size();i++){
@@ -54,6 +58,7 @@ public class ModelToViewTranslateTest extends TestCase {
         }
     }
 
+    /**It tests the translation of a model board into a simplified board.*/
     public void testTranslateBoard() {
         SimplifiedBoard bTest=ModelToViewTranslate.translateBoard(gameTest.getPlayer(gameTest.getCurrentPlayerId()).getBoard());
         for(int i=0;i<bTest.getDiningRoom().length;i++){
@@ -69,6 +74,7 @@ public class ModelToViewTranslateTest extends TestCase {
 
     }
 
+    /**It tests the translation of the model clouds into simplified clouds.*/
     public void testTranslateClouds() {
         ArrayList<Integer[]> list=ModelToViewTranslate.translateClouds(gameTest.getClouds());
         for(int i=0;i<list.size();i++){

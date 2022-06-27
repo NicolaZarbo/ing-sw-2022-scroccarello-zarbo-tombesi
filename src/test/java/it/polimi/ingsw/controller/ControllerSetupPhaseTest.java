@@ -12,14 +12,19 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.List;
 
+/**It tests the setup sub-controller.
+ * @see ControllerSetupPhaseTest*/
 public class ControllerSetupPhaseTest extends TestCase {
     ControllerSetupPhase cTest;
+
+    @Override
     public void setUp() throws Exception {
         super.setUp();
         Game gTest=new GameStub(false, 4, 12);
         this.cTest=new ControllerSetupPhase(gTest);
     }
 
+    /**It fails the creation of the player and tests the management of the error.*/
     public void testFailCreatePlayer() {
         LobbyPlayer player= new LobbyPlayer(TowerColor.black, Mage.mage1,"pippo");
         PrePlayerMessage message=new PrePlayerMessage(0,player.getTowerColor().ordinal(),player.getMage().ordinal(), player.getNickname());
@@ -27,10 +32,12 @@ public class ControllerSetupPhaseTest extends TestCase {
             this.cTest.createPlayer(message);
         }
         catch(RuntimeException e){
-            System.out.println(e.getMessage());
+            assertNotNull(e);
         }
 
     }
+
+    /**It tests the player creation.*/
     public void testCreatePlayer(){
         LobbyPlayer player1= new LobbyPlayer(TowerColor.black, Mage.mage1,"pippo");
         LobbyPlayer player2=new LobbyPlayer(TowerColor.white,Mage.mage2,"donald");

@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+/**The handler of the single board scene of the player.*/
 public class SingleBoardController {//extends BoardSceneController
 
     public Pane entrance;
@@ -336,7 +337,7 @@ public class SingleBoardController {//extends BoardSceneController
         hideMoveButtons();
     }
 
-    /**It is used to show the map and prompt the user to choose an island */
+    /**It is used to show the map and let the user choose an island where put the selected student.*/
     protected void chooseTargetIsland(){
         this.clickedEntranceStudentsColor=new ArrayList<>();
         gui.setScene(SceneEnum.MapScene);

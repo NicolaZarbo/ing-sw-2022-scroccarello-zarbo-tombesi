@@ -71,13 +71,14 @@ public class ControllerActionPhase  {
     public void chooseCloud(ChooseCloudMessage message){
         if(game.getActualState()!= GameState.actionChooseCloud)
             throw new IllegalMoveException();
-        try{
-            modelTurn.moveFromCloudToEntrance(message.getCloudId(), message.getPlayerId());
+        else {
+            try {
+                modelTurn.moveFromCloudToEntrance(message.getCloudId(), message.getPlayerId());
+            } catch (RuntimeException e) {
+                throw new IllegalMoveException(e.getMessage());
+            }
+            changeTurn();
         }
-        catch(RuntimeException e) {
-            throw new IllegalMoveException(e.getMessage());
-        }
-        changeTurn();
     }
 
     /**It is used to change player's turn in model, also resets the students' movement counter*/

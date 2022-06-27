@@ -60,4 +60,7 @@ public class Controller extends Observable<ErrorMessageForClient> implements Obs
         ErrorMessageForClient error =new ErrorMessageForClient(game.getPlayer(game.getCurrentPlayerId()).getNickname(),e);
         this.notify(error);
     }
+
+    /**@return the model game*/
+    protected Game getGame(){return this.game;}
 }
