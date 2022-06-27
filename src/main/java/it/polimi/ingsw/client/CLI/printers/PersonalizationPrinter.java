@@ -9,15 +9,25 @@ public class PersonalizationPrinter implements Printer{
     * @param message the setup message which triggers the print*/
     public static String printForColorsAndMages(PlayerSetUpMessage message){
         StringBuilder out = new StringBuilder();
-        out.append(CYAN+"\nCHOOSE FROM AVAILABLE MAGES   and  TOWER COLORS"+Printer.RED+" \n( mage number followed by the color's first letter) \n[mage_Number Color_Initial] \n"+Printer.RST);
-        for (Integer mageInt: message.getAvailableMages()) {
-            out.append(DR_GRAY_BKG+BR_PINK).append(" "+translateMage(mageInt)+" ").append(RST).append("\s \s");
-        }
-        out.append("\n\n");
-        if( message.isTeamPlay())
+        boolean isTeamSecondPlayer= message.isTeamPlay() && message.getAvailableColor().size()==0;
+        if(isTeamSecondPlayer){
+            out.append(CYAN + "\nCHOOSE FROM AVAILABLE MAGES" + Printer.RED + "\n[mage_Number] \n");
+            for (Integer mageInt : message.getAvailableMages()) {
+                out.append(DR_GRAY_BKG + BR_PINK).append(" " + translateMage(mageInt) + " ").append(RST).append("\s \s");
+                out.append("\n\n");
+            }
             out.append(welcomeTeamPrint(message.getAvailableMages().size()));
-        for (Integer colorInt: message.getAvailableColor()) {
-            out.append(translateColor(colorInt)).append("\s \s");
+        }else {
+            out.append(CYAN + "\nCHOOSE FROM AVAILABLE MAGES   and  TOWER COLORS" + Printer.RED + " \n( mage number followed by the color's first letter) \n[mage_Number Color_Initial] \n" + Printer.RST);
+            for (Integer mageInt : message.getAvailableMages()) {
+                out.append(DR_GRAY_BKG + BR_PINK).append(" " + translateMage(mageInt) + " ").append(RST).append("\s \s");
+            }
+            out.append("\n\n");
+            if (message.isTeamPlay())
+                out.append(welcomeTeamPrint(message.getAvailableMages().size()));
+            for (Integer colorInt : message.getAvailableColor()) {
+                out.append(translateColor(colorInt)).append("\s \s");
+            }
         }
         return out.toString();
     }

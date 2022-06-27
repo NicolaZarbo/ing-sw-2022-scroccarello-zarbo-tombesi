@@ -79,10 +79,10 @@ public class CharacterPrinter implements Printer{
         StringBuilder out = new StringBuilder();
             String [] studC = studentOfColorCard(studentOnTop);
             out.append(" __________ ").append("\n");
-            out.append("| card n°"+CYAN+(cardId)+RST+" |").append("\n");
-            out.append("| R"+studC[0]+"  G"+studC[2]+"  |").append("\n");
-            out.append("| Y"+studC[1]+"  B"+studC[4]+"  |").append("\n");
-            out.append("|   P"+studC[3]+"     |").append("\n");
+            out.append("| card "+CYAN+(cardId)+RST+" |").append("\n");
+            out.append("| R:"+studC[0]+" G:"+studC[2]+"  |").append("\n");
+            out.append("| Y:"+studC[1]+" P:"+studC[4]+"  |").append("\n");
+            out.append("|   B:"+studC[3]+"    |").append("\n");
             out.append("|__________|").append("\n");
 
         return out.toString();

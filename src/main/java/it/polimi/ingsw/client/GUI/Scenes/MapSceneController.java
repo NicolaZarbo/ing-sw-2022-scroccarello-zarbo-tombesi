@@ -73,6 +73,11 @@ public class MapSceneController extends SceneController {
 
     /**It is used to modify the scene context (and actions possible) based on the state.*/
     private void prepareForContext(){
+        if(!view.isYourTurn()){
+            info.setText(view.getTurnPlayer()+" is now playing");
+            return;
+        }
+
         switch (view.getState()){
             case actionMoveMother -> {
                 moveMotherContext();
@@ -110,10 +115,6 @@ public class MapSceneController extends SceneController {
             info.setText("Select a target island for the student");
         else info.setText("Go to bord and choose a student to move out of entrance");
     }
-    private void character1Context(){
-        info.setText("choose a target Island for the student");
-    }
-
     /**It sets the choice cloud context. It allows the player to refill his entrance with the students from a target cloud.*/
     private void chooseCloudContext(){
         setOtherContainerTransparent(cloud_container);
@@ -320,6 +321,8 @@ public class MapSceneController extends SceneController {
      * @param island the selected island*/
     private void setClickChooseIsland(Circle island){
         island.setOnMouseClicked(mouseEvent -> {
+            if(!view.isYourTurn())
+                return;
             int islandID=Integer.parseInt(((Circle)mouseEvent.getSource()).getId().substring(6))-1;
             if(view.getState()==GameState.actionMoveMother) {
                 gui.getInputManager().moveMotherTo(islandID);
@@ -356,6 +359,8 @@ public class MapSceneController extends SceneController {
      * @param cloud the selected cloud
      * @param cloudID the id of the cloud*/
     private void clickChooseCloud(Circle cloud, int cloudID){
+        if(!view.isYourTurn())
+            return;
         DropShadow cloudShadow = new DropShadow(8, Color.DARKRED);
         cloud.setOnMouseEntered(event -> {
             cloudStudentsByNumber.get(cloudID+1).forEach(circle -> {

@@ -35,6 +35,7 @@ public class SingleBoardController {//extends BoardSceneController
     public Text studToSelect;
     public Button toBoard;
     public Button toIsland;
+    public Text movedText;
     protected GUI gui;
     private int playerOwner;//the same id of view
 
@@ -241,6 +242,8 @@ public class SingleBoardController {//extends BoardSceneController
      * used in initialize() to set the present student Clickable based on the context
      * @param studentId the id of the student */
     protected void setEntranceClickable(Circle student, int studentId){//fixme
+        if(!gui.getGame().isYourTurn())
+            return;
         int clickedColor = studentId/26;
         clickedEntranceStudentsColor=new ArrayList<>();
         student.setDisable(false);
@@ -370,6 +373,7 @@ public class SingleBoardController {//extends BoardSceneController
     protected void showMoveButton() {
         moveStudentPanel.setVisible(true);
         moveStudentPanel.setMouseTransparent(false);
+        movedText.setText("Student Moved : "+gui.getGame().getStudentMoved());
     }
 
 

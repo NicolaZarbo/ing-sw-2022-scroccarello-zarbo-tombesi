@@ -27,6 +27,19 @@ public class SelectCharacterController extends SceneController{
     public Pane coinImageContainer;
     public Pane valueCharacterContainer;
 
+
+    public Pane cardContainer1;
+    public Pane cardContainer7;
+    public Pane cardContainer9;
+    public Pane cardContainer10;
+    public Pane cardContainer11;
+    public Pane cardContainer2;
+    public Pane cardContainer8;
+    public Pane cardContainer6;
+
+
+    public ArrayList<Pane> cardContainer;
+
     public Pane popupPanel;
     public Text ownedMoney;
 
@@ -55,15 +68,24 @@ public class SelectCharacterController extends SceneController{
 
     @Override
     public void initialize() {
+        cardContainer=new ArrayList<Pane>();
+        cardContainer.add(cardContainer1);
+        cardContainer.add(cardContainer7);
+        cardContainer.add(cardContainer9);
+        cardContainer.add(cardContainer10);
+        cardContainer.add(cardContainer11);
+        cardContainer.add(cardContainer2);
+        cardContainer.add(cardContainer8);
+        cardContainer.add(cardContainer6);
         initCharacters();
         initStudCharacters();
         ownedMoney.setText(view.getPersonalPlayer().getCoin()+" :");
         popupPanel.setVisible(false);
         popupPanel.setMouseTransparent(true);
         if(!view.isYourTurn() || !( view.getState()== GameState.actionMoveStudent || view.getState()== GameState.actionMoveMother)) {
-            CharacterContainer.setDisable(true);
-            studentCharacterContainer.setDisable(true);
-            CharacterContainer.setOpacity(0.5);
+             for(int i=0;i<cardContainer.size();i++)
+                 cardContainer.get(i).getChildren().get(0).setDisable(true);
+
         }
     }
 
@@ -74,9 +96,9 @@ public class SelectCharacterController extends SceneController{
         value=new ArrayList<>();
         Map<Integer, Integer> costs=view.getCostOfCard();
         for(int i=0;i<8;i++){
-            characters.add((Rectangle)CharacterContainer.getChildren().get(i) );
-            coins.add((Circle)coinImageContainer.getChildren().get(i) );
-            value.add((Text)valueCharacterContainer.getChildren().get(i) );
+            characters.add((Rectangle)cardContainer.get(i).getChildren().get(0) );
+            coins.add((Circle)cardContainer.get(i).getChildren().get(4) );
+            value.add((Text)cardContainer.get(i).getChildren().get(6) );
             DropShadow cardShadow = new DropShadow(3, Color.DARKRED);
             int finalI = i;
             if(view.isYourTurn() && !inputManager.isActivatingCardEffect()) {

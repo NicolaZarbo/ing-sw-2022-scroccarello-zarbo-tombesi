@@ -7,7 +7,9 @@ import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -28,6 +30,8 @@ public class HandSceneController extends SceneController{
     public Text help_text;
     public AnchorPane root;
     public Pane card_used_by_others;
+    public ImageView activeCharacter;
+    public Button characterButton;
     private ArrayList<Integer> discardedCard;
     GUI gui;
     private ArrayList<Rectangle> assistantCards;
@@ -48,6 +52,34 @@ public class HandSceneController extends SceneController{
         setDiscarded();
         setCoins();
         setOthersLastPlayed();
+    }
+    private void initActiveCharacter(){
+        if(view.isEasy())
+        {
+            characterButton.setVisible(false);
+            characterButton.setDisable(true);
+            activeCharacter.setDisable(true);
+        }
+        if(view.getActiveCharacter()!=0)
+            activeCharacter.setImage(characterImage(view.getActiveCharacter()));
+    }
+    private Image characterImage(int character){
+        String path= switch (character){
+            case 1 ->"images/characters/1_monk.png";
+            case 2 ->"images/characters/2_farmer.png";
+            case 3 ->"images/characters/3_herald.png";
+            case 4 ->"images/characters/4_postman.png";
+            case 5 ->"images/characters/5_grandma.png";
+            case 6 ->"images/characters/6_cent.png";
+            case 7 ->"images/characters/7_jester.png";
+            case 8 ->"images/characters/8_knight.png";
+            case 9 ->"images/characters/9_mushroom.png";
+            case 10 ->"images/characters/10_singer.png";
+            case 11 ->"images/characters/11_princess.png";
+            case 12->"images/characters/12_thief.png";
+            default -> {throw new NullPointerException();}
+        };
+        return new Image(path);
     }
 
     /**It sets on scene the cards played by other players.*/
@@ -117,7 +149,7 @@ public class HandSceneController extends SceneController{
             }
         }else {
             assistant_container.setOpacity(0.4);
-            text = "this is you Hand \n wait for you turn";
+            text = "this is you Hand \n "+view.getTurnPlayer()+" is now playing";
         }
        help_text.setText(text);
     }

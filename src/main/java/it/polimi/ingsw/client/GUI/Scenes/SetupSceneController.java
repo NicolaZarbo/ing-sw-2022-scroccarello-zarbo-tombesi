@@ -65,13 +65,19 @@ public class SetupSceneController extends SceneController{
         choiceMsg.setText("Choose your color");
         towerchosen=0;
         wizardchosen=0;
-        if(gui.getGame().isTeamPlay())
-            teamWelcome();
         CentralView view = gui.getGame();
-        initClickable();
         availableTowers = view.getAvailableColor();
         availableMages = view.getAvailableMages();
-        setTowers();
+        initClickable();
+        if(view.isTeamPlay()) {
+            teamWelcome();
+            if(availableTowers.size()==0) {
+                showMagicians();
+                towerchosen=1;
+            }
+            else setTowers();
+        }else
+            setTowers();
     }
 
     /**It initializes as clickable all the elements which can be clicked.*/
@@ -152,7 +158,7 @@ public class SetupSceneController extends SceneController{
      * @param event the event to which attack the listener*/
     private void addDoubleClickConfirm(MouseEvent event){
         ((ImageView)event.getSource()).setOnMouseClicked(event1 -> {
-            confirmChoice(event1);
+            confirmChoice();
         });
 
     }
@@ -226,7 +232,7 @@ public class SetupSceneController extends SceneController{
     }
 
     /**It triggers the confirm of the selection of the custom parameters of the player (it triggers the lobby-player creation).*/
-    public void confirmChoice(MouseEvent mouseEvent) {
+    public void confirmChoice() {
         if(towerchosen==0){
             errorMsg.setText("Please choose your color");
         }

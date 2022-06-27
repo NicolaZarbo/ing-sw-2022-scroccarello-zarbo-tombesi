@@ -25,6 +25,7 @@ public class ServerConnection {
     private Scanner input;
     private final CentralView view;
     private final InputManager inputManager;
+
     public static String ip="127.0.0.1";
     public static int port=50000;
     private  boolean canWrite;

@@ -58,14 +58,16 @@ public class MessageFactoryTest extends TestCase {
         assertTrue(msgTest instanceof MotherPositionMessage);*/
 
         //CharacterTokenMessage
-        msg=new CharacterTokenMessage(1,gameTest);
-        msgTest=MessageFactory.getMessageFromServer(msg.getJson());
-        assertTrue(msgTest instanceof CharacterTokenMessage);
+        if(gameTest.getCharacters().stream().map(s->s.getId()).toList().contains(1)) {
+            msg = new CharacterTokenMessage(1, gameTest);
+            msgTest = MessageFactory.getMessageFromServer(msg.getJson());
+            assertTrue(msgTest instanceof CharacterTokenMessage);
 
-        //CharacterUpdateMessage
-        msg=new CharacterUpdateMessage(1,gameTest);
-        msgTest=MessageFactory.getMessageFromServer(msg.getJson());
-        assertTrue(msgTest instanceof CharacterUpdateMessage);
+            //CharacterUpdateMessage
+            msg = new CharacterUpdateMessage(1, gameTest);
+            msgTest = MessageFactory.getMessageFromServer(msg.getJson());
+            assertTrue(msgTest instanceof CharacterUpdateMessage);
+        }
 
         //PlayerSetUpMessage
         ArrayList<String> names=new ArrayList<String>();
