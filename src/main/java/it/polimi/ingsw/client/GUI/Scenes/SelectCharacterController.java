@@ -27,6 +27,15 @@ public class SelectCharacterController extends SceneController{
     public Pane coinImageContainer;
     public Pane valueCharacterContainer;
 
+    public Pane cardContainer1;
+    public Pane cardContainer7;
+    public Pane cardContainer9;
+    public Pane cardContainer10;
+    public Pane cardContainer11;
+    public Pane cardContainer2;
+    public Pane cardContainer8;
+    public Pane cardContainer6;
+
     public Pane popupPanel;
     public Text ownedMoney;
 
@@ -61,9 +70,15 @@ public class SelectCharacterController extends SceneController{
         popupPanel.setVisible(false);
         popupPanel.setMouseTransparent(true);
         if(!view.isYourTurn() || !( view.getState()== GameState.actionMoveStudent || view.getState()== GameState.actionMoveMother)) {
-            CharacterContainer.setDisable(true);
-            studentCharacterContainer.setDisable(true);
-            CharacterContainer.setOpacity(0.5);
+             cardContainer1.getChildren().get(0).setDisable(true);
+             cardContainer7.getChildren().get(0).setDisable(true);
+             cardContainer9.getChildren().get(0).setDisable(true);
+             cardContainer10.getChildren().get(0).setDisable(true);
+             cardContainer11.getChildren().get(0).setDisable(true);
+             cardContainer2.getChildren().get(0).setDisable(true);
+             cardContainer8.getChildren().get(0).setDisable(true);
+             cardContainer6.getChildren().get(0).setDisable(true);
+
         }
     }
 
