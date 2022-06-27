@@ -1,83 +1,121 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.GameStub;
+import it.polimi.ingsw.enumerations.GameState;
+import it.polimi.ingsw.enumerations.TokenColor;
+import it.polimi.ingsw.model.characters.CharacterCard;
 import junit.framework.TestCase;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**It tests the game and its methods. It is concerned to test the creation of game and all the main methods to make advancements in the game.
+ * @see Game*/
 public class GameTest extends TestCase {
-    int n=2;
-    int numeroIsole=12;
+
     Game game ;
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        game = new GameStub(true, n, numeroIsole);
+        game = new GameStub(false, 4, 12);
     }
 
+    /**It tests getter of islands. It is used to test the right creation of every island.*/
     public void testGetIslands() {
        assertNotNull(game.getIslands());
         for (Island island: game.getIslands()) {
             assertNotNull(island);
-            System.out.println("island id "+island.getID());
         }
     }
+
+    /**It tests get difficulty mode.*/
     public void testIsEasy() {
-        System.out.println("is easy "+ game.isEasy());
-
+        assertFalse(game.isEasy());
+        game=new GameStub(true,4,12);
+        assertTrue(game.isEasy());
     }
-    public void testCreateGame(){
 
-        Game gamett = new GameStub(true, n, numeroIsole);
-        assertNotNull(gamett);
-    }
+    /**It tests getter of number of players.*/
     public void testGetNPlayers() {
-     //   assertNotNull("errore", testG.getNPlayers());
-        assertEquals("errore",n, game.getNPlayers());
-        System.out.println(game.getNPlayers());
+        assertEquals(4, game.getNPlayers());
     }
 
+    /**It tests the getter of mother nature token.*/
     public void testGetMotherNature() {
-
+        for(int i=1;i<12;i++){
+            game.getActionPhase().moveMotherNature(1);
+            assertEquals(i,game.getMotherNature().getPosition());
+        }
     }
 
-    public void testSetMotherNature() {
-
+    /**It tests the change of phase.*/
+    public void testMoveToNextPhase() {
+        GameState gs=game.getActualState();
+        game.moveToNextPhase();
+        assertEquals(GameState.values()[gs.ordinal()+1],game.getActualState());
     }
 
+    /**It tests getter of clouds. It is used to test the right creation of every cloud.*/
     public void testGetClouds() {
-        assertNotNull("clouds are null", game.getClouds());
+        assertNotNull(game.getClouds());
         for (Cloud cloud : game.getClouds()) {
-            assertNotNull("cloud is null",cloud);
-            System.out.println(cloud.getId());
+            assertNotNull(cloud);
         }
 
     }
+
+    /**It tests the getter of players. It is used to test the right creation of every player and of every element he has to own.*/
     public void testGetPlayers(){
-        assertNotNull("Players are null", game.getPlayers());
+        assertNotNull(game.getPlayers());
         for (Player player: game.getPlayers()) {
-            System.out.println();
-            assertNotNull("a player is null",player);
+            assertNotNull(player);
             Board board=player.getBoard();
             Hand hand = player.getHand();
             assertNotNull(board);
-            assertNotNull("mano null", hand);
-            assertNotNull("missin coins", hand.getCoin());
-            System.out.println("ncoin"+hand.getCoin());
-
-
-            int j=0;
+            assertNotNull(hand);
+            assertNotNull(hand.getCoin());
 
             for (AssistantCard ass: hand.getAssistant()) {
-                assertNotNull("carta ass"+ j+ "null",ass);
-                System.out.println(ass.getMage() + " "+ ass.getId());
-
-            j++;}
+                assertNotNull(ass);
+            }
 
         }
     }
-    public void testSetClouds() {
+
+    /**It tests the change of turn.*/
+    public void testChangePlayerTurn(){
+        List<Integer> currentorder = game.getPlayIngOrder();
+        int currentplayer=game.getCurrentPlayerId();
+        int currentindex=-1;
+        for(int i=0;i<currentorder.size();i++){
+            if(currentplayer==currentorder.get(i)) {
+                currentindex = i;
+                break;
+            }
+        }
+        try{
+            game.changePlayerTurn();
+        }
+        catch(NullPointerException e){
+            assertTrue(currentindex!=-1);
+        }
     }
 
+    /**It tests character bonus activation.*/
+    public void testBonusActive(){
+        for(CharacterCard c : game.getCharacters()){
+            assertFalse(game.isBonusActive(c.getId()));
+            game.setCardBonusActive(c.getId());
+            assertTrue(game.isBonusActive(c.getId()));
+            if(c.getId()==9){
+                game.setTargetColor(TokenColor.pink);
+                assertEquals(TokenColor.pink,game.getTargetColor());
+            }
+            game.resetBonus();
+            assertTrue(game.isBonusActive(0));
+        }
+    }
 
 
 }

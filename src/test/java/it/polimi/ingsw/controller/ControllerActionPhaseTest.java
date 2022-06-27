@@ -57,7 +57,7 @@ public class ControllerActionPhaseTest extends TestCase {
             StudentToHallMessage message = new StudentToHallMessage(0, i);
             try {
                 this.controllerTest.moveStudentToHall(message);
-            } catch (IllegalMoveException e) {
+            } catch (RuntimeException e) {
                 assertNotNull(e);
             }
         }
@@ -98,8 +98,8 @@ public class ControllerActionPhaseTest extends TestCase {
         try{
             this.controllerTest.chooseCloud(message);
         }
-        catch(IllegalMoveException e){
-            System.out.println(e.getMessage());
+        catch(RuntimeException e){
+            assertNotNull(e);
         }
     }
 
@@ -133,8 +133,8 @@ public class ControllerActionPhaseTest extends TestCase {
             try {
                 this.controllerTest.moveStudentToIsland(message);
             }
-            catch(IllegalMoveException e) {
-                e.printStackTrace();
+            catch(RuntimeException e) {
+                assertNotNull(e);
             }
         }
         assertNotSame(this.controllerTest.getGame().getActualState(),GameState.actionMoveMother);

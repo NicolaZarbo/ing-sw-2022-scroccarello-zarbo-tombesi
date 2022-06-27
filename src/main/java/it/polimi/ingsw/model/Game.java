@@ -104,7 +104,7 @@ public class Game extends Observable<ServerMessage> {
         sendMultiMessage();
     }
 
-    /**It changes the current playing player based on the playingOrder*/
+    /**It changes the current playing player based on the playingOrder.*/
     public void changePlayerTurn(){
         int actualIndex=playIngOrder.indexOf(currentPlayerId);
         actualIndex+=1;

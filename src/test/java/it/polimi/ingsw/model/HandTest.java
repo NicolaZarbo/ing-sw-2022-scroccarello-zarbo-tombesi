@@ -1,10 +1,13 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.enumerations.Mage;
+import it.polimi.ingsw.exceptions.CardNotFoundException;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
 
+/**It tests the hand of the player and operations it can do.
+ * @see Hand*/
 public class HandTest extends TestCase {
 ArrayList<AssistantCard> assistants;
 Hand hand ;
@@ -26,44 +29,44 @@ Hand hand ;
             assertEquals(ass.getMage(),Mage.mage1);
 
         }
-
-
     }
 
 
-    public void testCreateHand() {
-
-    }
-
+    /**It tests the pick of a coin from the dining room (expert mode only).*/
     public void testAddCoin() {
         assertNotNull(this.hand);
         for (int i = 0; i < 8; i++) {
             hand.addCoin();
             assertTrue(hand.enoughCoin(i));
-            System.out.println("coin rimasti "+hand.getCoin());
         }
         this.tPayCoin();
     }
 
+    /**It tests coin payment.*/
     public void tPayCoin() {
         for (int i = 0; i < 8; i++) {
-            assertTrue("coin presenti"+hand.getCoin(),hand.enoughCoin(1));
-
+            int prevc=hand.getCoin();
+            assertTrue(hand.enoughCoin(1));
             hand.payCoin(1);
-            System.out.println("coin rimasti "+hand.getCoin());
-
+            assertEquals(prevc-1,hand.getCoin());
         }
     }
 
-    public void testEnoughCoin() {
-    }
-
+    /**It tests assistant cards playing.*/
     public void testPlayAssistant() {
-        for (AssistantCard ass:hand.getAssistant()) {
-            assertNotNull(ass);
-            System.out.println("id : "+ ass.getId() + " mother "+ass.getMoveMother()+" turn "+ ass.getValTurn());
-
+        assertEquals(10,hand.getAssistant().size());
+        assertEquals(0,hand.getDiscarded().size());
+        for(int i=0;i<=10;i++){
+            try{
+                AssistantCard ac=hand.playAssistant(i);
+                assertNotNull(ac);
+            }
+            catch(CardNotFoundException e){
+                break;
+            }
         }
+        assertEquals(10, hand.getDiscarded().size());
+        assertEquals(0, hand.getAssistant().size());
     }
 
 

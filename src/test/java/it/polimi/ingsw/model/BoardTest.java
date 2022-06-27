@@ -1,131 +1,74 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.exceptions.NoPlaceAvailableException;
+import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.model.tokens.Professor;
 import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.enumerations.TowerColor;
+import it.polimi.ingsw.model.tokens.Tower;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
 
+/**It tests the board of the player and the movement of tokens.*/
 public class BoardTest extends TestCase {
 
-    Board boardTest=new Board(4,4, TowerColor.black,1);
+    Game gameTest;
+    Board boardTest;
+
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+        gameTest=new GameStub(false, 4, 12);
+        boardTest=gameTest.getPlayers()[0].getBoard();
+    }
+
+    /**It tests the visit of professor in the board.*/
     public void testProfessorInsertion(){
-        if(!boardTest.hasProfessor(TokenColor.green)){
-            System.out.println("there's not a green professor, i put it");
-            boardTest.putProfessor(new Professor(1,TokenColor.green));
-        }
-        System.out.println("i just put the professor "+boardTest.getProfessor(TokenColor.green).getColor()+" and his id is "+boardTest.getProfessor(TokenColor.green).getId());
-        boardTest.removeProfessor(TokenColor.green);
-        if(!boardTest.hasProfessor(TokenColor.green))
-            System.out.println("i just removed him");
-    }
-    public void testEntranceSetting(){
-        ArrayList<Student> stud=new ArrayList<Student>(4);
-        for(int i=0;i<4;i++){
-            stud.add(new Student(i,TokenColor.getColor(i)));
-        }
-        boardTest.initEntrance(stud);
-        System.out.print("the entrance has the following students: ");
-        for(int i=0;i<4;i++){
-            System.out.print(boardTest.getEntrance().get(i).getId()+" "+boardTest.getEntrance().get(i).getColor()+" ");
+        for(int i=0;i<5;i++){
+            boardTest.putProfessor(new Professor(i,TokenColor.getColor(i)));
+            assertTrue(boardTest.hasProfessor(TokenColor.getColor(i)));
         }
     }
-    public void testDiningRoomSetting(){
-        Student[][] dining=new Student[TokenColor.listGetLastIndex()+1][10];
-        for(int i=0;i<TokenColor.listGetLastIndex()+1;i++){
-            for(int j=0;j<10;j++){
-                if(i%2==0||j%3==1){
-                    dining[i][j]=new Student(j,TokenColor.getColor(i));
+    /**It tests the movement of tokens in dining room, even the case of full dining room.*/
+    public void testMoveInDiningRoom(){
+        for(int i=0;i<5;i++){
+            for(int j=0;j<=5;j++) {
+                try{
+                    Student stud=new Student(i,TokenColor.getColor(i));
+                    boardTest.moveToDiningRoom(stud);
+                    assertNotNull(boardTest.getFromDiningRoom(i));
+                }
+                catch(NoTokenFoundException e){
+                    break;
                 }
             }
         }
-        boardTest.initDiningRoom(dining);
-        System.out.println("these are the students in the dining room ");
-        for(int i=0;i<TokenColor.listGetLastIndex()+1;i++){
-            for(int j=0;j<10;j++){
-                if(boardTest.getDiningRoom()[i][j]!=null){
-                    System.out.print(boardTest.getDiningRoom()[i][j].getId()+"-"+boardTest.getDiningRoom()[i][j].getColor()+ " ");
-                }
-                else{
-                    System.out.print("none ");
-                }
-            }
-            System.out.println();
-        }
-
-
     }
+
+    /**It tests the insertion of a student token on entrance, even in the case the entrance is full.*/
     public void testInsertionOnEntrance(){
-        ArrayList<Student> studInit=new ArrayList<Student>(4);
-        System.out.println("initial students on entrance are:");
-        for(int i=0;i<4;i++){
-            if(true){
-                studInit.add(new Student(i,TokenColor.getColor(i)));
-                System.out.print(i+"  ");
+        for(int i=0;i<=8;i++){
+            Student stud=new Student(i,TokenColor.getColor(i));
+            try{
+                boardTest.putStudentOnEntrance(stud);
             }
-            else System.out.print("none  ");
-        }
-        System.out.println();
-        boardTest.initEntrance(studInit);
-        Student studTest=new Student(4,TokenColor.getColor(4));
-        try{
-            boardTest.putStudentOnEntrance(studTest);
-            System.out.println("inserted student "+studTest.getId()+" and now we have:");
-            for(int i=0;i<4;i++){
-                if(boardTest.getEntrance().get(i)!=null)
-                    System.out.print(boardTest.getEntrance().get(i).getId()+"  ");
-                else
-                    System.out.print("none  ");
+            catch(NoPlaceAvailableException e){
+                Student destroyer = boardTest.getStudentFromEntrance(boardTest.getEntrance().get(i).getId());
+                assertNotNull(destroyer);
+                boardTest.putStudentOnEntrance(stud);
+                break;
             }
         }
-        catch(NoPlaceAvailableException e){
-            System.out.println("no space available");
-        }
-
     }
-    public void testInsertionOnDiningRoom(){
-        Student[][] dining=new Student[TokenColor.listGetLastIndex()+1][10];
-        for(int i=0;i<TokenColor.listGetLastIndex()+1;i++){
-            for(int j=0;j<10;j++){
-                if(i!=j){
-                    dining[i][j]=new Student(j,TokenColor.getColor(i));
-                }
-            }
-        }
-        boardTest.initDiningRoom(dining);
-        System.out.println("initial dining room ");
-        for(int i=0;i<TokenColor.listGetLastIndex()+1;i++){
-            for(int j=0;j<10;j++){
-                if(boardTest.getDiningRoom()[i][j]!=null){
-                    System.out.print(boardTest.getDiningRoom()[i][j].getId()+ " ");
-                }
-                else{
-                    System.out.print("  ");
-                }
-            }
-            System.out.println();
-        }
-        Student studTest=new Student(3,TokenColor.getColor(3));
-        try{
-            boardTest.moveToDiningRoom(studTest);
-            System.out.println("new dining room");
-            for(int i=0;i<TokenColor.listGetLastIndex()+1;i++){
-                for(int j=0;j<10;j++){
-                    if(boardTest.getDiningRoom()[i][j]!=null){
-                        System.out.print(boardTest.getDiningRoom()[i][j].getId()+ " ");
-                    }
-                    else{
-                        System.out.print("  ");
-                    }
-                }
-                System.out.println();
-            }
-        }
-        catch(RuntimeException e){
-            System.out.println("no places available");
-        }
+
+    /**It tests the get tower from the available towers.*/
+    public void testGetTower(){
+        int left= boardTest.towersLeft();
+        Tower tower=boardTest.getTower();
+        assertNotNull(tower);
+        assertTrue(boardTest.towersLeft()==left-1);
     }
 }

@@ -6,6 +6,7 @@ import junit.framework.TestCase;
 
 import java.util.ArrayList;
 
+/**It tests characters creations with the factory method.*/
 public class FactoryCharacterTest extends TestCase {
     Game gameTest;
     public void setUp() throws Exception {
@@ -13,6 +14,7 @@ public class FactoryCharacterTest extends TestCase {
         this.gameTest=new GameStub(false,4,12);
     }
 
+    /**It tests character creations. It tests the creation of all the available characters*/
     public void testCreateCharacter() {
         ArrayList<CharacterCard> deck=new ArrayList<>();
         for(int i=1;i<12;i++){
@@ -26,18 +28,21 @@ public class FactoryCharacterTest extends TestCase {
         }
         assertEquals(8,deck.size());
     }
+
+    /**It tests error handling of character creations the case the card is not implemented (card number does not exist).
+     */
     public void testNotDisponibleCharacter(){
         try{
             CharacterCard cardCrasher=FactoryCharacter.createCharacter(4,gameTest.getBag());
         }
         catch(RuntimeException e){
-            System.out.println(e.getMessage());
+            assertNotNull(e);
         }
         try{
             CharacterCard cardCrasher=FactoryCharacter.createCharacter(13,gameTest.getBag());
         }
-        catch(RuntimeException e){
-            System.out.println(e.getMessage());
+        catch(RuntimeException ex){
+            assertNotNull(ex);
         }
     }
 }

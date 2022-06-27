@@ -92,8 +92,8 @@ public class Board {
     }
 
     /**It returns the target student which is in the dining room. If it is not there, it throws an exception.
-     * @param id target student's id
-     * @exception NoTokenFoundException if there is no token with the target id*/
+     * @param id target student's color
+     * @exception NoTokenFoundException if there is no token of that color*/
     public Student getFromDiningRoom(int id)throws NoTokenFoundException {
         Student stud;
         int colorValue = id/26;
@@ -143,6 +143,7 @@ public class Board {
             towers.remove(towers.size()-1);
             if(towers.isEmpty())
             {//victory found
+                //TODO
             }
             return tower;
     }

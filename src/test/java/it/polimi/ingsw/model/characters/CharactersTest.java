@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.GameStub;
+import it.polimi.ingsw.model.Action;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.enumerations.TokenColor;
@@ -9,16 +10,22 @@ import junit.framework.TestCase;
 
 import java.util.ArrayList;
 
+/**It tests character cards of the game.*/
 public class CharactersTest extends TestCase {
 
     Game gameTest;
     CharacterCard cardTester;
+    Action turn;
 
+    @Override
     public void setUp() throws Exception {
         super.setUp();
         this.gameTest=new GameStub(false,4,12);
+        this.turn= gameTest.getActionPhase();
     }
 
+    /**It tests character 1 effect resolution.
+     * @see Character1*/
     public void testCharacter1(){
         cardTester=FactoryCharacter.createCharacter(1,gameTest.getBag());
         assertEquals(1,cardTester.getId());
@@ -31,6 +38,7 @@ public class CharactersTest extends TestCase {
 
     }
 
+    /**It tests activation of character 1 in the case player has not enough money.*/
     public void testNotEnoughMoneyCharacter1(){
         cardTester=FactoryCharacter.createCharacter(1,gameTest.getBag());
         ArrayList<Student> list=((Character1)cardTester).getStudents();
@@ -47,13 +55,15 @@ public class CharactersTest extends TestCase {
         }
     }
 
+    /**It tests character 2 effect resolution.
+     * @see TurnEffectCharacter*/
     public void testCharacter2(){
         cardTester=FactoryCharacter.createCharacter(2,gameTest.getBag());
         assertEquals(2,cardTester.getId());
         gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         ParameterObject noParameter=new ParameterObject();
         try {
-            cardTester.cardEffect(noParameter, this.gameTest);
+            turn.useCharacter(cardTester.getId(), noParameter,0);
             assertTrue(gameTest.isBonusActive(2));
         }
         catch(RuntimeException e){
@@ -61,11 +71,12 @@ public class CharactersTest extends TestCase {
         }
     }
 
+    /**It tests activation of character 2 in the case player has not enough money.*/
     public void testNotEnoughMoneyCharacter2(){
         cardTester=FactoryCharacter.createCharacter(2,gameTest.getBag());
         ParameterObject noParameter=new ParameterObject();
         try {
-            cardTester.cardEffect(noParameter, this.gameTest);//fixme card effect doesn't check for cost, use turn.useCharacter instead
+            turn.useCharacter(cardTester.getId(), noParameter,0);
         }
         catch(RuntimeException e){
             assertFalse(gameTest.isBonusActive(2));
@@ -73,6 +84,8 @@ public class CharactersTest extends TestCase {
 
     }
 
+    /**It tests character 6 effect resolution.
+     * @see TurnEffectCharacter*/
     public void testCharacter6(){
         cardTester=FactoryCharacter.createCharacter(6,gameTest.getBag());
         assertEquals(6,cardTester.getId());
@@ -88,17 +101,20 @@ public class CharactersTest extends TestCase {
         }
     }
 
+    /**It tests activation of character 6 in the case player has not enough money.*/
     public void testNotEnoughMoneyCharacter6(){
         cardTester=FactoryCharacter.createCharacter(6,gameTest.getBag());
         ParameterObject noParameter=new ParameterObject();
         try {
-            cardTester.cardEffect(noParameter, this.gameTest);
+            turn.useCharacter(cardTester.getId(), noParameter,0);
         }
         catch(RuntimeException e){
             assertFalse(gameTest.isBonusActive(6));
         }
     }
 
+    /**It tests character 7 effect resolution.
+     * @see Character7*/
     public void testCharacter7(){
         cardTester=FactoryCharacter.createCharacter(7,gameTest.getBag());
         assertEquals(7,cardTester.getId());
@@ -115,6 +131,7 @@ public class CharactersTest extends TestCase {
         assertEquals(initialCost+1,cardTester.getCost());
     }
 
+    /**It tests activation of character 7 in the case player has not enough money.*/
     public void testNotEnoughMoneyCharacter7(){
         cardTester=FactoryCharacter.createCharacter(7,gameTest.getBag());
         while(gameTest.getPlayer(0).getHand().getCoin()>=cardTester.getCost()){
@@ -144,13 +161,15 @@ public class CharactersTest extends TestCase {
         }
     }
 
+    /**It tests character 8 effect resolution.
+     * @see TurnEffectCharacter*/
     public void testCharacter8(){
         cardTester=FactoryCharacter.createCharacter(8,gameTest.getBag());
         assertEquals(8,cardTester.getId());
         gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         ParameterObject noParameter=new ParameterObject();
         try {
-            cardTester.cardEffect(noParameter, this.gameTest);
+            turn.useCharacter(cardTester.getId(), noParameter,0);
             assertTrue(gameTest.isBonusActive(8));
         }
         catch(RuntimeException e){
@@ -158,11 +177,12 @@ public class CharactersTest extends TestCase {
         }
     }
 
+    /**It tests activation of character 8 in the case player has not enough money.*/
     public void testNotEnoughMoneyCharacter8(){
         cardTester=FactoryCharacter.createCharacter(8,gameTest.getBag());
         ParameterObject noParameter=new ParameterObject();
         try {
-            cardTester.cardEffect(noParameter, this.gameTest);
+            turn.useCharacter(cardTester.getId(), noParameter,0);
         }
         catch(RuntimeException e){
             assertFalse(gameTest.isBonusActive(8));
@@ -170,6 +190,8 @@ public class CharactersTest extends TestCase {
 
     }
 
+    /**It tests character 9 effect resolution.
+     * @see Character9*/
     public void testCharacter9(){
         cardTester=FactoryCharacter.createCharacter(9,gameTest.getBag());
         assertEquals(9,cardTester.getId());
@@ -185,6 +207,8 @@ public class CharactersTest extends TestCase {
             e.printStackTrace();
         }
     }
+
+    /**It tests activation of character 9 in the case player has not enough money.*/
     public void testNotEnoughMoneyCharacter9(){
         cardTester=FactoryCharacter.createCharacter(9,gameTest.getBag());
         int colorIndex=(int)(Math.random()*4+1);
@@ -199,6 +223,8 @@ public class CharactersTest extends TestCase {
 
     }
 
+    /**It tests character 10 effect resolution.
+     * @see Character10*/
     public void testCharacter10(){
         cardTester=FactoryCharacter.createCharacter(10,gameTest.getBag());
         assertEquals(10,cardTester.getId());
@@ -234,6 +260,7 @@ public class CharactersTest extends TestCase {
         assertEquals(initialCost+1,cardTester.getCost());
     }
 
+    /**It tests activation of character 10 in the case player has not enough money.*/
     public void testNotEnoughMoneyCharacter10(){
         cardTester=FactoryCharacter.createCharacter(10,gameTest.getBag());
         int currentCost=cardTester.getCost();
@@ -300,6 +327,8 @@ public class CharactersTest extends TestCase {
         }
     }
 
+    /**It tests character 11 effect resolution.
+     * @see Character11*/
     public void testCharacter11(){
         cardTester=FactoryCharacter.createCharacter(11,gameTest.getBag());
         assertEquals(11,cardTester.getId());
@@ -317,6 +346,7 @@ public class CharactersTest extends TestCase {
         assertEquals(initialCost+1,cardTester.getCost());
     }
 
+    /**It tests activation of character 11 in the case player has not enough money.*/
     public void testNotEnoughMoneyCharacter11(){
         cardTester=FactoryCharacter.createCharacter(11,gameTest.getBag());
         assertEquals(11,cardTester.getId());
