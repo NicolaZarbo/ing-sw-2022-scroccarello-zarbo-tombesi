@@ -44,6 +44,8 @@ public class SelectCharacterController extends SceneController{
     public Text ownedMoney;
 
     private ArrayList<Rectangle> characters;
+
+    private ArrayList<Integer> charactersPlayable;
     private ArrayList<Circle> coins;
     private ArrayList<Text> value;
 
@@ -68,7 +70,8 @@ public class SelectCharacterController extends SceneController{
 
     @Override
     public void initialize() {
-        cardContainer=new ArrayList<Pane>();
+        cardContainer=new ArrayList<>();
+        selectedStudents=new ArrayList<>();
         cardContainer.add(cardContainer1);
         cardContainer.add(cardContainer7);
         cardContainer.add(cardContainer9);
@@ -77,6 +80,12 @@ public class SelectCharacterController extends SceneController{
         cardContainer.add(cardContainer2);
         cardContainer.add(cardContainer8);
         cardContainer.add(cardContainer6);
+        System.out.println(view.getCostOfCard().size());
+        for(int i=1;i<13;i++)
+            if(view.getCostOfCard().containsKey(i)) {
+                selectedStudents.add(i);
+                System.out.println(selectedStudents.get(selectedStudents.size()-1));
+            }
         initCharacters();
         initStudCharacters();
         ownedMoney.setText(view.getPersonalPlayer().getCoin()+" :");
@@ -96,57 +105,138 @@ public class SelectCharacterController extends SceneController{
         value=new ArrayList<>();
         Map<Integer, Integer> costs=view.getCostOfCard();
         for(int i=0;i<8;i++){
-            characters.add((Rectangle)cardContainer.get(i).getChildren().get(0) );
-            coins.add((Circle)cardContainer.get(i).getChildren().get(4) );
-            value.add((Text)cardContainer.get(i).getChildren().get(6) );
-            DropShadow cardShadow = new DropShadow(3, Color.DARKRED);
-            int finalI = i;
-            if(view.isYourTurn() && !inputManager.isActivatingCardEffect()) {
-                characters.get(i).setOnMouseEntered(event -> characters.get(finalI).setEffect(cardShadow));
-                characters.get(i).setOnMouseExited(event -> characters.get(finalI).setEffect(null));
-            }
-            if(i==0) {
-                characters.get(i).setFill(new ImagePattern(new Image("images/characters/1_monk.png")));
-                value.get(i).setText(costs.get(1)+"");
-                characters.get(i).setOnMouseClicked(event -> effect1());
+
+            if(i==0 && selectedStudents.contains(1)) {
+                characters.add((Rectangle) cardContainer.get(i).getChildren().get(0));
+                coins.add((Circle) cardContainer.get(i).getChildren().get(4));
+                value.add((Text) cardContainer.get(i).getChildren().get(6));
+                DropShadow cardShadow = new DropShadow(3, Color.DARKRED);
+                coins.get(getIndexofCharacterList(1)).setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
+                int finalI = getIndexofCharacterList(1);
+
+                if (view.isYourTurn() && !inputManager.isActivatingCardEffect()) {
+                    characters.get(getIndexofCharacterList(1)).setOnMouseEntered(event -> characters.get(finalI).setEffect(cardShadow));
+                    characters.get(getIndexofCharacterList(1)).setOnMouseExited(event -> characters.get(finalI).setEffect(null));
+                }
+                characters.get(getIndexofCharacterList(1)).setFill(new ImagePattern(new Image("images/characters/1_monk.png")));
+                value.get(getIndexofCharacterList(1)).setText(costs.get(1)+"");
+                characters.get(getIndexofCharacterList(1)).setOnMouseClicked(event -> effect1());
                 cardVisibility(1,characters.get(i));
-            }else if(i==1) {
-                characters.get(i).setFill(new ImagePattern(new Image("images/characters/7_jester.png")));
-                value.get(i).setText(costs.get(7)+"");
-                characters.get(i).setOnMouseClicked(event -> effect7());
+            }else if(i==1 && selectedStudents.contains(7)) {
+                characters.add((Rectangle) cardContainer.get(i).getChildren().get(0));
+                coins.add((Circle) cardContainer.get(i).getChildren().get(4));
+                value.add((Text) cardContainer.get(i).getChildren().get(6));
+                DropShadow cardShadow = new DropShadow(3, Color.DARKRED);
+                coins.get(getIndexofCharacterList(7)).setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
+                int finalI = getIndexofCharacterList(7);
+
+                if (view.isYourTurn() && !inputManager.isActivatingCardEffect()) {
+                    characters.get(getIndexofCharacterList(7)).setOnMouseEntered(event -> characters.get(finalI).setEffect(cardShadow));
+                    characters.get(getIndexofCharacterList(7)).setOnMouseExited(event -> characters.get(finalI).setEffect(null));
+                }
+                characters.get(getIndexofCharacterList(7)).setFill(new ImagePattern(new Image("images/characters/7_jester.png")));
+                value.get(getIndexofCharacterList(7)).setText(costs.get(7)+"");
+                characters.get(getIndexofCharacterList(7)).setOnMouseClicked(event -> effect7());
+                System.out.println(characters.get(i));
                 cardVisibility(7,characters.get(i));
-            }else if(i==2) {
-                characters.get(i).setFill(new ImagePattern(new Image("images/characters/9_mushroom.png")));
-                value.get(i).setText(costs.get(9)+"");
-                characters.get(i).setOnMouseClicked(event -> effect9());
+            }else if(i==2 && selectedStudents.contains(9)) {
+                characters.add((Rectangle) cardContainer.get(i).getChildren().get(0));
+                coins.add((Circle) cardContainer.get(i).getChildren().get(4));
+                value.add((Text) cardContainer.get(i).getChildren().get(6));
+                DropShadow cardShadow = new DropShadow(3, Color.DARKRED);
+                coins.get(getIndexofCharacterList(9)).setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
+                int finalI = getIndexofCharacterList(9);
+
+                if (view.isYourTurn() && !inputManager.isActivatingCardEffect()) {
+                    characters.get(getIndexofCharacterList(9)).setOnMouseEntered(event -> characters.get(finalI).setEffect(cardShadow));
+                    characters.get(getIndexofCharacterList(9)).setOnMouseExited(event -> characters.get(finalI).setEffect(null));
+                }
+                characters.get(getIndexofCharacterList(9)).setFill(new ImagePattern(new Image("images/characters/9_mushroom.png")));
+                value.get(getIndexofCharacterList(9)).setText(costs.get(9)+"");
+                characters.get(getIndexofCharacterList(9)).setOnMouseClicked(event -> effect9());
                 cardVisibility(9,characters.get(i));
-            }else if(i==3) {
-                characters.get(i).setFill(new ImagePattern(new Image("images/characters/10_singer.png")));
-                value.get(i).setText(costs.get(10)+"");
-                characters.get(i).setOnMouseClicked(event -> effect10());
+            }else if(i==3 && selectedStudents.contains(10)) {
+                characters.add((Rectangle) cardContainer.get(i).getChildren().get(0));
+                coins.add((Circle) cardContainer.get(i).getChildren().get(4));
+                value.add((Text) cardContainer.get(i).getChildren().get(6));
+                DropShadow cardShadow = new DropShadow(3, Color.DARKRED);
+                coins.get(getIndexofCharacterList(10)).setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
+                int finalI = getIndexofCharacterList(10);
+
+                if (view.isYourTurn() && !inputManager.isActivatingCardEffect()) {
+                    characters.get(getIndexofCharacterList(10)).setOnMouseEntered(event -> characters.get(finalI).setEffect(cardShadow));
+                    characters.get(getIndexofCharacterList(10)).setOnMouseExited(event -> characters.get(finalI).setEffect(null));
+                }
+                characters.get(getIndexofCharacterList(10)).setFill(new ImagePattern(new Image("images/characters/10_singer.png")));
+                value.get(getIndexofCharacterList(10)).setText(costs.get(10)+"");
+                characters.get(getIndexofCharacterList(10)).setOnMouseClicked(event -> effect10());
                 cardVisibility(10,characters.get(i));
-            }else if(i==4) {
-                characters.get(i).setFill(new ImagePattern(new Image("images/characters/11_princess.png")));
-                value.get(i).setText(costs.get(11)+"");
-                characters.get(i).setOnMouseClicked(event -> effect11());
+            }else if(i==4 && selectedStudents.contains(11)) {
+                characters.add((Rectangle) cardContainer.get(i).getChildren().get(0));
+                coins.add((Circle) cardContainer.get(i).getChildren().get(4));
+                value.add((Text) cardContainer.get(i).getChildren().get(6));
+                DropShadow cardShadow = new DropShadow(3, Color.DARKRED);
+                coins.get(getIndexofCharacterList(11)).setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
+                int finalI = getIndexofCharacterList(11);
+
+                if (view.isYourTurn() && !inputManager.isActivatingCardEffect()) {
+                    characters.get(getIndexofCharacterList(11)).setOnMouseEntered(event -> characters.get(finalI).setEffect(cardShadow));
+                    characters.get(getIndexofCharacterList(11)).setOnMouseExited(event -> characters.get(finalI).setEffect(null));
+                }
+                characters.get(getIndexofCharacterList(11)).setFill(new ImagePattern(new Image("images/characters/11_princess.png")));
+                value.get(getIndexofCharacterList(11)).setText(costs.get(11)+"");
+                characters.get(getIndexofCharacterList(11)).setOnMouseClicked(event -> effect11());
                 cardVisibility(11,characters.get(i));
-            } else if(i==5) {
-                characters.get(i).setFill(new ImagePattern(new Image("images/characters/2_farmer.png")));
-                value.get(i).setText(costs.get(2)+"");
-                characters.get(i).setOnMouseClicked(event -> noParameterEffect(2));
+            } else if(i==5 && selectedStudents.contains(2)) {
+                characters.add((Rectangle) cardContainer.get(i).getChildren().get(0));
+                coins.add((Circle) cardContainer.get(i).getChildren().get(4));
+                value.add((Text) cardContainer.get(i).getChildren().get(6));
+                DropShadow cardShadow = new DropShadow(3, Color.DARKRED);
+                coins.get(getIndexofCharacterList(2)).setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
+                int finalI = getIndexofCharacterList(2);
+
+                if (view.isYourTurn() && !inputManager.isActivatingCardEffect()) {
+                    characters.get(getIndexofCharacterList(2)).setOnMouseEntered(event -> characters.get(finalI).setEffect(cardShadow));
+                    characters.get(getIndexofCharacterList(2)).setOnMouseExited(event -> characters.get(finalI).setEffect(null));
+                }
+                characters.get(getIndexofCharacterList(2)).setFill(new ImagePattern(new Image("images/characters/2_farmer.png")));
+                value.get(getIndexofCharacterList(2)).setText(costs.get(2)+"");
+                characters.get(getIndexofCharacterList(2)).setOnMouseClicked(event -> noParameterEffect(2));
                 cardVisibility(2,characters.get(i));
-            }else if(i==6) {
-                characters.get(i).setFill(new ImagePattern(new Image("images/characters/8_knight.png")));
-                characters.get(i).setOnMouseClicked(event -> noParameterEffect(8));
-                value.get(i).setText(costs.get(8)+"");
+            }else if(i==6 && selectedStudents.contains(8)) {
+                characters.add((Rectangle) cardContainer.get(i).getChildren().get(0));
+                coins.add((Circle) cardContainer.get(i).getChildren().get(4));
+                value.add((Text) cardContainer.get(i).getChildren().get(6));
+                DropShadow cardShadow = new DropShadow(3, Color.DARKRED);
+                coins.get(getIndexofCharacterList(8)).setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
+                int finalI = getIndexofCharacterList(8);
+
+                if (view.isYourTurn() && !inputManager.isActivatingCardEffect()) {
+                    characters.get(getIndexofCharacterList(8)).setOnMouseEntered(event -> characters.get(finalI).setEffect(cardShadow));
+                    characters.get(getIndexofCharacterList(8)).setOnMouseExited(event -> characters.get(finalI).setEffect(null));
+                }
+                characters.get(getIndexofCharacterList(8)).setFill(new ImagePattern(new Image("images/characters/8_knight.png")));
+                characters.get(getIndexofCharacterList(8)).setOnMouseClicked(event -> noParameterEffect(8));
+                value.get(getIndexofCharacterList(8)).setText(costs.get(8)+"");
                 cardVisibility(8,characters.get(i));
-            }else {
-                characters.get(i).setFill(new ImagePattern(new Image("images/characters/6_cent.png")));
-                characters.get(i).setOnMouseClicked(event -> noParameterEffect(6));
-                value.get(i).setText(costs.get(6)+"");
+            }else if(selectedStudents.contains(6)) {
+                characters.add((Rectangle) cardContainer.get(i).getChildren().get(0));
+                coins.add((Circle) cardContainer.get(i).getChildren().get(4));
+                value.add((Text) cardContainer.get(i).getChildren().get(6));
+                DropShadow cardShadow = new DropShadow(3, Color.DARKRED);
+                coins.get(getIndexofCharacterList(6)).setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
+                int finalI = getIndexofCharacterList(6);
+
+                if (view.isYourTurn() && !inputManager.isActivatingCardEffect()) {
+                    characters.get(getIndexofCharacterList(6)).setOnMouseEntered(event -> characters.get(finalI).setEffect(cardShadow));
+                    characters.get(getIndexofCharacterList(6)).setOnMouseExited(event -> characters.get(finalI).setEffect(null));
+                }
+                characters.get(getIndexofCharacterList(6)).setFill(new ImagePattern(new Image("images/characters/6_cent.png")));
+                characters.get(getIndexofCharacterList(6)).setOnMouseClicked(event -> noParameterEffect(6));
+                value.get(getIndexofCharacterList(6)).setText(costs.get(6)+"");
                 cardVisibility(6,characters.get(i));
             }
-            coins.get(i).setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
+
         }
     }
 
@@ -261,20 +351,45 @@ public class SelectCharacterController extends SceneController{
         character11stud = new ArrayList<>();
         int id;
         Map<Integer, List<Integer>> studentsOnCard = view.getStudentsOnCard();
-        for (int i = 0; i < 14; i++) {
-            Circle stud =(Circle) studentCharacterContainer.getChildren().get(i);
+
+
+
+
+//7-10  7-12
+        if(selectedStudents.contains(1))
+        for (int i = 7; i < 11; i++) {
+            Circle stud =(Circle) cardContainer.get(getIndexofCharacterList(1)).getChildren().get(i);
             stud.setStyle("-fx-stroke-width: 0");
             stud.setDisable(true);
             stud.setVisible(false);
             stud.setOpacity(0.4);
             stud.setOnMouseEntered(event ->  stud.setEffect(new DropShadow(3, Color.DARKRED)));
             stud.setOnMouseExited(event ->  stud.setEffect(null));
-            if(i<4)
-                character1stud.add(stud);
-            else if(i<10)
-                character7stud.add(stud);
-            else character11stud.add(stud);
+            character1stud.add(stud);
         }
+        if(selectedStudents.contains(11))
+            for (int i = 7; i < 11; i++) {
+            Circle stud =(Circle) cardContainer.get(getIndexofCharacterList(11)).getChildren().get(i);
+            stud.setStyle("-fx-stroke-width: 0");
+            stud.setDisable(true);
+            stud.setVisible(false);
+            stud.setOpacity(0.4);
+            stud.setOnMouseEntered(event ->  stud.setEffect(new DropShadow(3, Color.DARKRED)));
+            stud.setOnMouseExited(event ->  stud.setEffect(null));
+            character11stud.add(stud);
+        }
+        if(selectedStudents.contains(7))
+            for (int i = 7; i < 13; i++) {
+            Circle stud =(Circle) cardContainer.get(getIndexofCharacterList(4)).getChildren().get(i);
+            stud.setStyle("-fx-stroke-width: 0");
+            stud.setDisable(true);
+            stud.setVisible(false);
+            stud.setOpacity(0.4);
+            stud.setOnMouseEntered(event ->  stud.setEffect(new DropShadow(3, Color.DARKRED)));
+            stud.setOnMouseExited(event ->  stud.setEffect(null));
+            character7stud.add(stud);
+        }
+
         for (int i = 0; i < studentsOnCard.size(); i++) {
             List<Circle> studOfCardList=character1stud;
             List<Integer> viewStudOnCard=new ArrayList<>(studentsOnCard.get(1));
@@ -399,6 +514,18 @@ public class SelectCharacterController extends SceneController{
     public void selectedGreen(){
         inputManager.useCharacter9(2);
         hideMoveButtons();
+    }
+
+    public int getIndexofCharacterList(int k){
+        int i=-1;
+
+        if(selectedStudents.contains(k))
+        for(int j=0;j<3;j++)
+            if(selectedStudents.get(j)==k)
+                i=k;
+
+
+        return i;
     }
 
 }
