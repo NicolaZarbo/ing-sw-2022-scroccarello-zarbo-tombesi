@@ -43,14 +43,12 @@ public class Server {
     public synchronized void deregisterConnection(ClientConnection connection, String reason){
         for (Lobby lob:this.lobbies) {
             lob.removeFromLobby(connection, reason);
-            executor.remove(connection);
-            connections--;
-            if(lob.getConnections().size()==0){
+            if(executor.remove(connection)) {
+                connections--;
                 lobbies.remove(lob);
                 System.out.println("Lobby closed");
-                return;//fixme possible bug
+                return;
             }
-
         }
     }
 

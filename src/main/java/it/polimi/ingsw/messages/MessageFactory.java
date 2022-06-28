@@ -52,7 +52,10 @@ public class MessageFactory {
         try {
             JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
             type = jj.get("messageType").getAsString();
-        }catch (IllegalStateException e){System.out.println(e.getMessage());}//fixme setIgnore if not needed
+        }catch (IllegalStateException e){
+            System.out.println("message : "+e.getMessage());
+            throw new MessageErrorException(json);
+        }
 
         if(type==null)
             throw new MessageErrorException("missing message Type");

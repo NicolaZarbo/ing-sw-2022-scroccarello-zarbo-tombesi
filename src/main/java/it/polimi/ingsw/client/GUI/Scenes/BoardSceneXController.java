@@ -131,11 +131,11 @@ public class BoardSceneXController extends SceneController{
         int towerC=view.getPlayers().get(boardNumber).getTowerColor();
         String style;
         if(towerC==0)
-            style="-fx-border-color: black; -fx-border-width: 4 ";
+            style="-fx-border-color: black; -fx-border-width: 9 ";
         else if(towerC==1)
-            style="-fx-border-color: white; -fx-border-width: 4 ";
+            style="-fx-border-color: white; -fx-border-width: 9 ";
         else
-            style="-fx-border-color: gray; -fx-border-width: 4 ";
+            style="-fx-border-color: gray; -fx-border-width: 9 ";
 
         return style;
     }
@@ -150,6 +150,11 @@ public class BoardSceneXController extends SceneController{
         down_left.setVisible(false);
         down_right.setVisible(false);
         up_right.setVisible(false);
+        int i=0;
+        for (Pane board:boardsContainers) {
+            board.setStyle(getStringStyle(i));
+            i++;
+        }
     }
 
     /**It sets the disposition of a three players' game.*/
@@ -167,6 +172,11 @@ public class BoardSceneXController extends SceneController{
         context_container.setTranslateY(-600);
         context_container.setTranslateX(190);
         down_right.setVisible(false);
+        int i=0;
+        for (Pane board:boardsContainers) {
+            board.setStyle(getStringStyle(i));
+            i++;
+        }
     }
 
     /**It changes the scene into <i>map scene</i>>.*/

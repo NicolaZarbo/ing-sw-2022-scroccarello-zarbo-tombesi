@@ -110,7 +110,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     /**It shows the error received from the server.
      * @param message the error message sent by the server*/
     public void errorFromServer(ErrorMessageForClient message){
-        if(message.getTargetPlayerName().equalsIgnoreCase(personalPlayer.getUsername())|| message.getTargetPlayerName().equalsIgnoreCase("all")) {
+       // String nickname=personalPlayer.getUsername();
+        if(message.getTargetPlayerName().equalsIgnoreCase(name)|| message.getTargetPlayerName().equalsIgnoreCase("all")) {
             clientScreen.showError(message.getErrorInfo());
             seeAction();
         }
