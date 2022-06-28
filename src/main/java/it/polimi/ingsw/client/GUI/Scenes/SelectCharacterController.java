@@ -80,7 +80,11 @@ public class SelectCharacterController extends SceneController{
         cardContainer.add(cardContainer2);
         cardContainer.add(cardContainer8);
         cardContainer.add(cardContainer6);
-        System.out.println(view.getCostOfCard().size());
+        for(int i=0;i<cardContainer.size();i++){
+            cardContainer.get(i).setVisible(false);
+            cardContainer.get(i).setMouseTransparent(true);
+        }
+
         for(int i=1;i<13;i++)
             if(view.getCostOfCard().containsKey(i)) {
                 selectedStudents.add(i);
@@ -107,6 +111,8 @@ public class SelectCharacterController extends SceneController{
         value=new ArrayList<>();
         Map<Integer, Integer> costs=view.getCostOfCard();
             if(selectedStudents.contains(1)) {
+                cardContainer.get(1).setVisible(true);
+                cardContainer.get(1).setMouseTransparent(false);
                 characters.add((Rectangle) cardContainer.get(0).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(0).getChildren().get(4));
                 value.add((Text) cardContainer.get(0).getChildren().get(6));
@@ -123,6 +129,8 @@ public class SelectCharacterController extends SceneController{
                 characters.get(getIndexofCharacterList(1)).setOnMouseClicked(event -> effect1());
                 cardVisibility(1,characters.get(getIndexofCharacterList(1)));
             } if(selectedStudents.contains(2)) {
+                cardContainer.get(5).setVisible(true);
+                cardContainer.get(5).setMouseTransparent(false);
                 characters.add((Rectangle) cardContainer.get(5).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(5).getChildren().get(4));
                 value.add((Text) cardContainer.get(5).getChildren().get(6));
@@ -139,6 +147,8 @@ public class SelectCharacterController extends SceneController{
                 characters.get(getIndexofCharacterList(2)).setOnMouseClicked(event -> noParameterEffect(2));
                 cardVisibility(2,characters.get(getIndexofCharacterList(2)));
             } if(selectedStudents.contains(6)) {
+                cardContainer.get(7).setVisible(true);
+                cardContainer.get(7).setMouseTransparent(false);
                 characters.add((Rectangle) cardContainer.get(7).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(7).getChildren().get(4));
                 value.add((Text) cardContainer.get(7).getChildren().get(6));
@@ -155,6 +165,8 @@ public class SelectCharacterController extends SceneController{
                 value.get(getIndexofCharacterList(6)).setText(costs.get(6)+"");
                 cardVisibility(6,characters.get(getIndexofCharacterList(6)));
             } if(selectedStudents.contains(7)) {
+                cardContainer.get(1).setVisible(true);
+                cardContainer.get(1).setMouseTransparent(false);
                 characters.add((Rectangle) cardContainer.get(1).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(1).getChildren().get(4));
                 value.add((Text) cardContainer.get(1).getChildren().get(6));
@@ -172,6 +184,8 @@ public class SelectCharacterController extends SceneController{
                 System.out.println(characters.get(getIndexofCharacterList(7)));
                 cardVisibility(7,characters.get(getIndexofCharacterList(7)));
             } if( selectedStudents.contains(8)) {
+                cardContainer.get(6).setVisible(true);
+                cardContainer.get(6).setMouseTransparent(false);
                 characters.add((Rectangle) cardContainer.get(6).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(6).getChildren().get(4));
                 value.add((Text) cardContainer.get(6).getChildren().get(6));
@@ -188,6 +202,8 @@ public class SelectCharacterController extends SceneController{
                 value.get(getIndexofCharacterList(8)).setText(costs.get(8)+"");
                 cardVisibility(8,characters.get(getIndexofCharacterList(8)));
             } if( selectedStudents.contains(9)) {
+                cardContainer.get(2).setVisible(true);
+                cardContainer.get(2).setMouseTransparent(false);
                 characters.add((Rectangle) cardContainer.get(2).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(2).getChildren().get(4));
                 value.add((Text) cardContainer.get(2).getChildren().get(6));
@@ -204,6 +220,8 @@ public class SelectCharacterController extends SceneController{
                 characters.get(getIndexofCharacterList(9)).setOnMouseClicked(event -> effect9());
                 cardVisibility(9,characters.get(getIndexofCharacterList(9)));
             } if( selectedStudents.contains(10)) {
+                cardContainer.get(3).setVisible(true);
+                cardContainer.get(3).setMouseTransparent(false);
                 characters.add((Rectangle) cardContainer.get(3).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(3).getChildren().get(4));
                 value.add((Text) cardContainer.get(3).getChildren().get(6));
@@ -220,6 +238,8 @@ public class SelectCharacterController extends SceneController{
                 characters.get(getIndexofCharacterList(10)).setOnMouseClicked(event -> effect10());
                 cardVisibility(10,characters.get(getIndexofCharacterList(10)));
             } if(selectedStudents.contains(11)) {
+                cardContainer.get(4).setVisible(true);
+                cardContainer.get(4).setMouseTransparent(false);
                 characters.add((Rectangle) cardContainer.get(4).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(4).getChildren().get(4));
                 value.add((Text) cardContainer.get(4).getChildren().get(6));
