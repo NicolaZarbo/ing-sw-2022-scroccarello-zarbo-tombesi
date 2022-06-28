@@ -1,6 +1,7 @@
 package it.polimi.ingsw.messages;
 
 import it.polimi.ingsw.GameStub;
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.messages.clientmessages.*;
 import it.polimi.ingsw.messages.servermessages.*;
 import it.polimi.ingsw.model.Game;
@@ -43,6 +44,7 @@ public class MessageFactoryTest extends TestCase {
         assertTrue(msgTest instanceof IslandsMessage);
 
         //ErrorMessageForClient
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.planPlayCard);
         msg=new ErrorMessageForClient(gameTest.getPlayer(gameTest.getCurrentPlayerId()).getNickname(),new RuntimeException("test exception"));
         msgTest=MessageFactory.getMessageFromServer(msg.getJson());
         assertTrue(msgTest instanceof ErrorMessageForClient);
@@ -124,6 +126,7 @@ public class MessageFactoryTest extends TestCase {
         assertTrue(msgTest instanceof StudentToHallMessage);
 
         //PlayAssistant
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.planPlayCard);
         msg = new PlayAssistantMessage(gameTest.getCurrentPlayerId(), gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().getAssistant().get(0).getId());
         msgTest = MessageFactory.getMessageFromClient(msg.getJson());
         assertTrue(msgTest instanceof PlayAssistantMessage);

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.messages;
 
 import it.polimi.ingsw.GameStub;
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedBoard;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
@@ -38,6 +39,7 @@ public class ModelToViewTranslateTest extends TestCase {
     /**It tests the translation of a model player into a simplified player.*/
     public void testTranslatePlayer() {
         List<SimplifiedPlayer> listTest= ModelToViewTranslate.translatePlayer(gameTest.getPlayers());
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.planPlayCard);
         for(int i=0;i<listTest.size();i++){
             assertEquals(gameTest.getPlayer(i).getNickname(),listTest.get(i).getUsername());
             assertEquals(gameTest.getPlayer(i).getId(),listTest.get(i).getId());
@@ -60,6 +62,7 @@ public class ModelToViewTranslateTest extends TestCase {
 
     /**It tests the translation of a model board into a simplified board.*/
     public void testTranslateBoard() {
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.planPlayCard);
         SimplifiedBoard bTest=ModelToViewTranslate.translateBoard(gameTest.getPlayer(gameTest.getCurrentPlayerId()).getBoard());
         for(int i=0;i<bTest.getDiningRoom().length;i++){
             for(int j=0;j<bTest.getDiningRoom()[i].length;j++){

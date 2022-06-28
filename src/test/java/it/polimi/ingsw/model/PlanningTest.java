@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.GameStub;
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.EmptyBagException;
 import junit.framework.TestCase;
 
@@ -44,6 +45,7 @@ public class PlanningTest extends TestCase {
             cardTest[i]=i*10;
             predict.add(i);
         }
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.planPlayCard);
         for(Player p : gameTest.getPlayers()){
             roundTest.playCard(p.getId(),cardTest[p.getId()]);
         }
