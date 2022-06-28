@@ -38,7 +38,7 @@ public class Action {
             Board board = player.getBoard();
             Student stud = board.getStudentFromEntrance(idStud);
             board.moveToDiningRoom(stud);
-            if (board.foundCoin(stud))
+            if (board.foundCoin(stud) && !game.isEasy())
                 player.getHand().addCoin();
             if (canHaveTeacher(stud.getColor(), idPlayer))
                 setTeacher(stud.getColor(), idPlayer);

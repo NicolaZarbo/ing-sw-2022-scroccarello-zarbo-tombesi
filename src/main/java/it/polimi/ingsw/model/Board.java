@@ -175,7 +175,7 @@ public class Board {
         int colorIndex=stud.getColor().ordinal();
         int pos = Arrays.asList(diningRoom[colorIndex]).indexOf(stud);
         int pCoin=(pos)/3;
-        return coinDN[stud.getColor().ordinal()][pCoin] && pos + 1 % 3 == 0;
+        return coinDN[stud.getColor().ordinal()][pCoin] && (pos + 1 )% 3 == 0;
     }
 
     /**@return the entrance of the player*/

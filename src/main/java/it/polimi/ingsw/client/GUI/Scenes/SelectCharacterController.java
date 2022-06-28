@@ -284,7 +284,7 @@ public class SelectCharacterController extends SceneController{
             throw new IllegalArgumentException("this is not a student character");
         ArrayList<Circle> out= new ArrayList<>();
         for (int i = 7; i < cardContainer.get(position).getChildren().size(); i++) {
-            Circle stud =(Circle) cardContainer.get(0).getChildren().get(i);
+            Circle stud =(Circle) cardContainer.get(position).getChildren().get(i);
             stud.setStyle("-fx-stroke-width: 0");
             stud.setDisable(true);
             stud.setVisible(false);
