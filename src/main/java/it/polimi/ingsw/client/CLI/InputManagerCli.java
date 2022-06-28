@@ -253,6 +253,8 @@ public class InputManagerCli  extends InputManager {
         }
         else cli.askToRetry(Printer.PINK+"please select an available cloud id"+Printer.RST);
     }
+
+    /**It accepts close message during other players turn.*/
     private void closeAble(){
         String close=new Scanner(System.in).nextLine();
         if(close.equalsIgnoreCase("close"))
@@ -271,7 +273,7 @@ public class InputManagerCli  extends InputManager {
      * @param input the user input*/
     private boolean isIsland(String input){
         try {
-            return Integer.parseInt(input) < game.getIslands().size() && Integer.parseInt(input) >= 0;
+            return game.getIslands().contains(Integer.parseInt(input));
         }catch (NumberFormatException e){
             return false;
         }
