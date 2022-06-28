@@ -98,8 +98,8 @@ public class MapSceneController extends SceneController {
     /**It resets the effect activation when changing scene.*/
     private void breakActivationChangeScene(){
         GuiInputManager manager= gui.getInputManager();
-        toBoards.setOnMouseClicked(event -> manager.resetEffectActivation());
-        toHand.setOnMouseClicked(event -> manager.resetEffectActivation());
+        toBoards.setOnMouseClicked(event -> { manager.resetEffectActivation(); goToBoard();});
+        toHand.setOnMouseClicked(event -> {manager.resetEffectActivation(); goToHand();});
     }
 
     /**It sets the move student context. It allows the player to drop a student on island.*/

@@ -203,16 +203,17 @@ public class SetupSceneController extends SceneController{
         blacktower.setOpacity(0.5);
         addDoubleClickConfirm(click);
     }
-    @FXML
     /**It selects the tower choice white on click.*/
+    @FXML
     public void setWhiteTower(MouseEvent click){
         this.towerchosen=2;
         restoreAllOpacities();
         whitetower.setOpacity(0.5);
         addDoubleClickConfirm(click);
     }
-    @FXML
+
     /**It selects the tower choice gray on click.*/
+    @FXML
     public void setGrayTower(MouseEvent click){
         this.towerchosen=3;
         restoreAllOpacities();
@@ -243,9 +244,9 @@ public class SetupSceneController extends SceneController{
             errorMsg.setText("Please choose a magician");
         }
         else{
-            System.out.println("lmao");
             gui.getGame().choosePlayerCustom(towerchosen-1,wizardchosen-1);
             mainpane.setOpacity(0.5);
+            mainpane.setDisable(true);
             waitingmsg.setVisible(true);
         }
     }

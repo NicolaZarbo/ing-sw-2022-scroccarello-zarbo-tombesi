@@ -270,6 +270,7 @@ public class GuiInputManager extends InputManager {
 
     /**It resets the current activation of an effect*/
     public void resetEffectActivation(){
+        singleStudent=-1;
         cardEffectActivation=false;
         cardInActivation=0;
     }

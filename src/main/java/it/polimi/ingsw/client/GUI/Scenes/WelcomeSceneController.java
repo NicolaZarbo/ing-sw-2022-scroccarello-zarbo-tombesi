@@ -79,6 +79,7 @@ public class WelcomeSceneController extends SceneController {
             try{
                 gui.startConnection(new ByteArrayInputStream(usr.getBytes()));
                 if(GuiInputManager.isLobbyAvailable()){
+                    mainpane.setDisable(true);
                     this.mainpane.setOpacity(0.5);
                     this.lobbymessage.setVisible(true);
                 }

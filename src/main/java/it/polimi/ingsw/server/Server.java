@@ -58,11 +58,11 @@ public class Server {
     /**It adds the player to the first available lobby,
      * @param connection the client connection to add
      * @param nickname the nickname chosen by the client
-     * @exception IOException if an I/O error occurs*/
-    public synchronized void lobby(ClientConnection connection, String nickname) throws IOException {
+     *                 */
+    public synchronized void lobby(ClientConnection connection, String nickname)  {
         Lobby last = lobbies.get(lobbies.size()-1);
         if(last.isPlayerConnected(nickname))
-            throw new IOException("User not available, try to reconnect");
+            throw new IllegalArgumentException("Username not available, try to reconnect");
         if(last.getLobbyDimension()>last.numberOfConnections()) {
             last.addConnection(connection, nickname);
         }

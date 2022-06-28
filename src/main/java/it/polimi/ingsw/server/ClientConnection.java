@@ -63,12 +63,10 @@ public class ClientConnection extends Observable<String> implements Runnable{
                     actOnMessage(read);
             }
         } catch (IOException | NoSuchElementException e) {
-           // System.err.println(e.getMessage()+ "  ai!");
+             close("socket exception");
+        }catch (IllegalArgumentException ex){
+             close(ex.getMessage());
         }
-         finally {
-            close("socket exception");
-        }
-
     }
     private void pong(){
         while (active){
