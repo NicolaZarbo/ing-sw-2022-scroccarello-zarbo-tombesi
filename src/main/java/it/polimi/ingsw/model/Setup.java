@@ -8,10 +8,8 @@ import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.enumerations.TowerColor;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**The setup phase of the game. It is responsible of initializing all the components of the game.*/
 public class Setup {
@@ -116,29 +114,29 @@ public class Setup {
      * @param bag the bag of the game containing all the student tokens
      * @param cardNumber number of character cards
      * @return the list of all the character cards*/
-    public static ArrayList<CharacterCard> createCharacterCards(Bag bag, int cardNumber){//todo check if it works as hoped, it now only creates 3 character from a random number
-            ArrayList<CharacterCard> cards = new ArrayList<>(cardNumber);
-            CharacterCard cardChar;
-            for (int i=1; i<=3; i++){
-                int randomChar= (int)(Math.random()*8)+1;
-                cardChar= FactoryCharacter.createCharacter(getCharacterId(randomChar), bag);
-                if(cardChar!=null) {
-                    cards.add(cardChar);
-                }
-            }
-            return cards;
+    public ArrayList<CharacterCard> createCharacterCards(Bag bag, int cardNumber){//todo check if it works as hoped, it now only creates 3 character from a random number
+        ArrayList<CharacterCard> cards = new ArrayList<>(cardNumber);
+        int[] randomIds = randomIndexForCharacter();
+        for (int i=0; i<3; i++){
+            cards.add(FactoryCharacter.createCharacter(randomIds[i], bag));
+        }
+        return cards;
     }
-    /** Returns a card id from a random number between 1-8
-     * @param random values: 1 to 8*/
-    private static int getCharacterId(int random){
-        HashMap<Integer, Integer> randomToId=new HashMap<>(Map.of(1,1,2,2,3,6,4,8,5,7,6,9,7,10,8,11));
-        return randomToId.get(random);
+    /** returns an array containing random values out of the available card number*/
+    private int[] randomIndexForCharacter(){
+        ArrayList<Integer> ids=new ArrayList<>(Arrays.asList(1,2,6,8,7,9,10,11));
+        Collections.shuffle(ids);
+        int[] out= new int[3];
+        for (int i = 0; i < 3; i++) {
+            out[i]=ids.get(i);
+        }
+        return out;
     }
 
     /**It creates the professor tokens of the game, without assigning them to a specific board.
      * @param nColors number of token colors
      * @return set of all the professors of the game*/
-    public static Professor[] createProfessor(int nColors){
+    public  Professor[] createProfessor(int nColors){
         Professor[] profs = new Professor[nColors];
         for (int i=0; i<nColors;i++){
             profs[i]= new Professor(i, TokenColor.getColor(i));

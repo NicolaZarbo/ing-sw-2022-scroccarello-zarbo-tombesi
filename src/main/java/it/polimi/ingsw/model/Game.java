@@ -57,10 +57,10 @@ public class Game extends Observable<ServerMessage> {
         this.islands=Setup.createIslands(12,bag);
         this.clouds= Setup.createClouds(nPlayers);
         this.players =new Player[numberOfPlayer];
-        this.teachers= Setup.createProfessor(5);
+        this.teachers= setupPhase.createProfessor(5);
         this.motherNature=new MotherNature(islands.get(0).getID());
         if(!easy){
-            this.characters= Setup.createCharacterCards(bag,8);
+            this.characters= setupPhase.createCharacterCards(bag,8);
         }
         else{characters=null;}
         this.cardBonusActive=0;

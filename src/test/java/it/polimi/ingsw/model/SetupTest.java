@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.enumerations.Mage;
 import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.enumerations.TowerColor;
@@ -40,7 +41,7 @@ public class SetupTest extends TestCase {
 
     /**It tests the creation of professors.*/
     public void testCreateProfessor() {
-        Professor[] prof=Setup.createProfessor(5);
+        Professor[] prof=new GameStub(false,2,12).getSetupPhase().createProfessor(5);
         assertTrue(prof.length==5);
         for(int i=0;i<5;i++){
             assertEquals(TokenColor.getColor(i),prof[i].getColor());
@@ -72,7 +73,7 @@ public class SetupTest extends TestCase {
     }
     /**It tests character cards creation for expert move.*/
     public void testCharacterCards(){
-        ArrayList<CharacterCard> characters=Setup.createCharacterCards(bag,12);
+        ArrayList<CharacterCard> characters=new GameStub(false,2,12).getSetupPhase().createCharacterCards(bag,12);
         for(CharacterCard c : characters){
             assertTrue(c.getId()!=3 && c.getId()!=4 && c.getId()!=5 && c.getId()!=12);
             assertTrue(c.getCost()>=1 && c.getCost()<=3);
