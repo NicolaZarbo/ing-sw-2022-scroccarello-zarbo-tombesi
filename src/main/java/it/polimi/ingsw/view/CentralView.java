@@ -293,6 +293,8 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     @Override
     public void update(ServerMessage message) {
         message.doAction(this);
+        if(!isYourTurn())
+            clientScreen.refresh();
     }
 
     /**It activates the assistant card selected by the player.
