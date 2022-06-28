@@ -61,6 +61,11 @@ public class Cli implements UserInterface {
     }
 
     @Override
+    public void refresh() {
+        showView();
+    }
+
+    @Override
     public void showView() {
         System.out.println(GamePrinter.printGameTable(game));
     }

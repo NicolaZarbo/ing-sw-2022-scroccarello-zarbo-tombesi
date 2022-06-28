@@ -31,6 +31,8 @@ public class Character10 extends CharacterCard{
             Student targetFromEntrance=board.getStudentFromEntrance(parameters.getTargetStudentsOnEntrance()[i]);
             board.putStudentOnEntrance(board.getFromDiningRoom(parameters.getTargetStudentsForExchange()[i]));
             board.moveToDiningRoom(targetFromEntrance);
+            if(board.foundCoin(targetFromEntrance))
+                game.getPlayer(parameters.getOtherTargetId()).getHand().addCoin();
         }
         for(Player player :game.getPlayers())
             for (TokenColor color:TokenColor.values()) {

@@ -245,12 +245,18 @@ public class InputManagerCli  extends InputManager {
             try{
             game.chooseCloud(inputInteger - 1);
             showWait();
+            closeAble();
             }catch (RuntimeException ignore){
                 System.out.println(Cli.IMP+"please select a good cloud"+ Cli.RST);
                 decodeInput();
             }
         }
         else cli.askToRetry(Printer.PINK+"please select an available cloud id"+Printer.RST);
+    }
+    private void closeAble(){
+        String close=new Scanner(System.in).nextLine();
+        if(close.equalsIgnoreCase("close"))
+            cli.close();
     }
 
     /** It creates the instance of the input manager with a reference to the CLI.

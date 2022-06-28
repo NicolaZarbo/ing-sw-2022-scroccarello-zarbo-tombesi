@@ -30,6 +30,7 @@ public class GUI extends Application implements UserInterface {
     private ServerConnection connection;
     private Map<SceneEnum,Scene> scenes;
     public static Stage mainStage;
+    private SceneEnum currentScene;
 
     /**It creates the base instance of the class.*/
     public GUI(){
@@ -94,6 +95,7 @@ public class GUI extends Application implements UserInterface {
      * @param sceneName the name related to the scene*/
     public void setScene(SceneEnum sceneName){
         initScene(sceneName);
+        currentScene=sceneName;
         Platform.runLater(()->mainStage.setScene(scenes.get(sceneName)));
     }
 
@@ -112,6 +114,13 @@ public class GUI extends Application implements UserInterface {
 
     public CentralView getGame() {
         return game;
+    }
+
+    @Override
+    public void refresh() {//todo
+        if(game.isYourTurn())
+           return;
+        setScene(currentScene);
     }
 
     @Override

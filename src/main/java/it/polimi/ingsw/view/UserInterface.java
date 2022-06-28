@@ -4,6 +4,7 @@ import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
 
 /**The interface implemented by user interacting classes.*/
 public interface UserInterface {
+    void refresh();
     /** It shows or updates on the screen the islands, clouds and boards.*/
     void showView();
 

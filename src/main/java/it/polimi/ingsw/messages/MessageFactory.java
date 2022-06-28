@@ -48,8 +48,12 @@ public class MessageFactory {
      * @param json the string message
      * @return the corresponding message from the client*/
     public static ClientMessage getMessageFromClient(String json){
-        JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
-        String type= jj.get("messageType").getAsString();
+        String type="";
+        try {
+            JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
+            type = jj.get("messageType").getAsString();
+        }catch (IllegalStateException e){System.out.println(e.getMessage());}//fixme setIgnore if not needed
+
         if(type==null)
             throw new MessageErrorException("missing message Type");
         return switch (type) {

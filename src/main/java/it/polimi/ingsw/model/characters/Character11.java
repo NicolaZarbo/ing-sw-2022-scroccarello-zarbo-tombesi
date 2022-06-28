@@ -24,6 +24,8 @@ public class Character11 extends TokensCharacter{
                 throw new CharacterErrorException("wrong parameters");
             Board board = game.getPlayer(parameters.getOtherTargetId()).getBoard();
             board.moveToDiningRoom(this.getStudent(parameters.getTargetStudentId()));
+            if(board.foundCoin(this.getStudent(parameters.getTargetStudentId())))
+                game.getPlayer(parameters.getOtherTargetId()).getHand().addCoin();
             this.addStudents(game.getBag().getToken());
             if(game.getBag().isEmpty())
                 game.gameOver();
