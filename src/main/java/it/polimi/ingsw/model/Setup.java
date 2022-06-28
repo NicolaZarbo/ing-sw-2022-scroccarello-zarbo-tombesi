@@ -125,7 +125,7 @@ public class Setup {
     /** returns an array containing random values out of the available card number*/
     private int[] randomIndexForCharacter(){
         ArrayList<Integer> ids=new ArrayList<>(Arrays.asList(1,2,6,8,7,9,10,11));
-        Collections.shuffle(ids);
+        Collections.shuffle(ids, new Random());
         int[] out= new int[3];
         for (int i = 0; i < 3; i++) {
             out[i]=ids.get(i);
