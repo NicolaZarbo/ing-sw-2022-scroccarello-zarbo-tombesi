@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.exceptions.MessageErrorException;
 import it.polimi.ingsw.messages.GenericMessage;
 import it.polimi.ingsw.messages.MessageFactory;
 import it.polimi.ingsw.messages.clientmessages.ClientMessage;
@@ -72,6 +73,8 @@ public class RemoteView extends Observable<ClientMessage> implements Observer<Se
                 doAction(clientMessage);
             }catch(IllegalArgumentException | ArrayIndexOutOfBoundsException e){
                 System.err.println(e.getMessage()+" "+ e.getCause());
+            }catch (MessageErrorException ignore){
+
             }
         }
     }

@@ -63,8 +63,9 @@ public class Cli implements UserInterface {
 
     @Override
     public void refresh() {
-        if(game.getState()!= GameState.setupPlayers)
-            showView();
+        if(game.getState()== GameState.setupPlayers)
+            return;
+        showView();
     }
 
     @Override

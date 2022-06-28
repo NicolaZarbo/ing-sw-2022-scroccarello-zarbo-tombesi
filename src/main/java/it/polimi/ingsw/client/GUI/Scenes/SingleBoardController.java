@@ -384,6 +384,8 @@ public class SingleBoardController {//extends BoardSceneController
 
     /**It shows the card panel.*/
     protected void showCardPanel() {
+        if(!isYourBoard())
+            return;
         popupCardPanel.setVisible(true);
         popupCardPanel.setMouseTransparent(false);
         if (gui.getInputManager().getCardInActivation() == 7) {

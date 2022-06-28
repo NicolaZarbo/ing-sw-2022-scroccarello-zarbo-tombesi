@@ -4,11 +4,13 @@ import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.enumerations.Mage;
 import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.enumerations.TowerColor;
+import it.polimi.ingsw.messages.ModelToViewTranslate;
 import it.polimi.ingsw.model.characters.Character1;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.tokens.Professor;
 import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.server.Lobby;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -60,6 +62,19 @@ public class SetupTest extends TestCase {
             assertNotNull(p.getHand());
         }
     }
+    /*public void testIno(){
+        GameStub test = new GameStub(false, 4, 12);
+        for (Player pla: test.getPlayers()) {
+            System.out.println(pla.getColorT());
+        }
+        List<SimplifiedPlayer> pp= ModelToViewTranslate.translatePlayer(test.getPlayers());
+        for (SimplifiedPlayer p:pp) {
+            System.out.println(p.getTowerColor());
+        }
+
+    }
+
+     */
 
     /**It tests clouds creations according to the number of players.*/
     public void testCreateClouds() {

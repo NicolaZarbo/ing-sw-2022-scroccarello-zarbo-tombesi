@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.GUI;
 
 import it.polimi.ingsw.client.ServerConnection;
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.enumerations.SceneEnum;
 import it.polimi.ingsw.exceptions.MessageErrorException;
 import it.polimi.ingsw.exceptions.TimeOutConnectionException;
@@ -117,8 +118,8 @@ public class GUI extends Application implements UserInterface {
     }
 
     @Override
-    public void refresh() {//todo
-        if(game.isYourTurn())
+    public void refresh() {
+        if(game.isYourTurn() || game.getState()== GameState.setupPlayers)
            return;
         setScene(currentScene);
     }

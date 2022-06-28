@@ -154,9 +154,7 @@ public class InputManagerCli  extends InputManager {
                         return;
                     game.choosePlayerCustom(colorInt, inputInteger - 1);
                     showWait();
-                }
-
-                else cli.askToRetry("please select the mage by its number");}
+                } else cli.askToRetry("please select the mage by its number");}
             default -> cli.askToRetry("please select the color by its name or initial");
         }
     }

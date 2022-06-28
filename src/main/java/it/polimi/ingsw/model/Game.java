@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
+import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.messages.servermessages.*;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.tokens.MotherNature;
@@ -308,6 +309,8 @@ public class Game extends Observable<ServerMessage> {
      * @param playerId id of the target player
      * @return target player*/
     public Player getPlayer(int playerId){
+        if(actualState==GameState.setupPlayers)
+            throw new IllegalMoveException("players aren't available yet");
         for (Player player : this.players)
             if (player.getId() == playerId)
                 return player;
@@ -318,7 +321,7 @@ public class Game extends Observable<ServerMessage> {
      * @param color color of the professor
      * @exception NullPointerException if the professor is not on the game*/
     public Professor getFromGame(TokenColor color){
-        Professor temp=null;
+        Professor temp;
         if(isProfessorOnGame(color)){
             temp=teachers[color.ordinal()];
             teachers[color.ordinal()]=null;
