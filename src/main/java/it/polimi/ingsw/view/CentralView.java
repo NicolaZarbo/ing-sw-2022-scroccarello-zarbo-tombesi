@@ -180,9 +180,10 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             cardYouPlayed=message.getPlayedCardId()%10;
 
     }
-
+    /*
+@Deprecated //fixme use all board update
     /**It updates the player's board after getting a relative message.
-     * @param message the message containing the current board of the player*/
+     * @param message the message containing the current board of the player
     public void singleBoardUpdate(SingleBoardMessage message){
         int movablePerTurn;
         if(players.size()==3)
@@ -196,10 +197,28 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         }
         if(isYourTurn() && state==GameState.actionMoveStudent) {
             studentMoved++;
-            if(studentMoved<movablePerTurn)
+            if(studentMoved<movablePerTurn && message.getBoardPlayerId()==turnOf)
                 clientScreen.askToMoveStudent();
         }
 
+    }
+
+     */
+
+    public void everyBoardUpdate(AllBoardsMessage message){
+        int movablePerTurn;
+        if(players.size()==3)
+            movablePerTurn=4;
+        else movablePerTurn=3;
+        for (SimplifiedPlayer p:players){
+            p.setBoard(message.getBoards().get(p.getId()));
+            p.setCoin(message.getBoardCoin().get(p.getId()));
+        }
+        if(isYourTurn() && state==GameState.actionMoveStudent) {
+            studentMoved++;
+            if(studentMoved<movablePerTurn )
+                clientScreen.askToMoveStudent();
+        }
     }
 
     /**It personalizes the view of the player after getting a proper message.
@@ -248,15 +267,12 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             }
             case actionMoveStudent -> {
                 activeCharacter=0;
-
             }
             case actionMoveMother -> {
-                //clientScreen.showView();
                 if(isYourTurn() && winner==-1)
                     clientScreen.askToMoveMother();
             }
             case actionChooseCloud ->{
-                //clientScreen.showView();
                 if(isYourTurn() && winner==-1)
                     clientScreen.showClouds();
             }

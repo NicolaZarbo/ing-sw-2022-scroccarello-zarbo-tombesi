@@ -3,16 +3,15 @@ package it.polimi.ingsw.client.GUI.Scenes;
 import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
 import it.polimi.ingsw.enumerations.GameState;
+import it.polimi.ingsw.enumerations.SceneEnum;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
-import javafx.event.EventHandler;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -41,7 +40,7 @@ public class MapSceneController extends SceneController {
     public Button toBoards;
     private List<ImageView> islandStudentPlaces;
     private final GUI gui;
-    private final CentralView view;
+    private CentralView view;
     private Map<Integer, Circle> islandByNumber;
     private Map<Integer, Rectangle> towerByIslandNumber;
     private Map<Integer, Circle> cloudByNumber;
@@ -52,11 +51,11 @@ public class MapSceneController extends SceneController {
     /**It creates the instance of map scene controller.*/
     public MapSceneController() {
         gui= GuiInputManager.getGui();
-        view=gui.getGame();
     }
 
     @Override
     public void initialize() {
+        view=gui.getGame();
         root.setStyle("-fx-background-image:url(images/wallpapers/sky_no_title.png); -fx-background-position: center; -fx-background-size: 1236 863");
         root.setCursor(new ImageCursor(new Image("images/pointer/baseArrow.png")));
         saveContainers();
@@ -371,6 +370,7 @@ public class MapSceneController extends SceneController {
             cloud.setEffect(cloudShadow);
             cloud.setScaleX(1.5);
             cloud.setScaleY(1.5);});
+
         cloud.setOnMouseExited(event -> {
             cloudStudentsByNumber.get(cloudID+1).forEach(circle -> {
                 circle.setScaleY(1);
@@ -380,10 +380,10 @@ public class MapSceneController extends SceneController {
             cloud.setEffect(null);
             cloud.setScaleX(1);
             cloud.setScaleY(1);});
-        cloud.setDisable(false);
         cloud.setOnMouseClicked(mouseEvent -> {
             gui.getInputManager().cloudChoose(cloudID);
             info.setText("wait for your turn");
+            gui.setScene(SceneEnum.MapScene);//fixme try works well enough
         });
     }
 

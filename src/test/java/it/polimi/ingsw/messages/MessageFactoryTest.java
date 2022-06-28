@@ -42,11 +42,6 @@ public class MessageFactoryTest extends TestCase {
         msgTest=MessageFactory.getMessageFromServer(msg.getJson());
         assertTrue(msgTest instanceof IslandsMessage);
 
-        //SingleBoardMessage
-        msg=new SingleBoardMessage(gameTest,gameTest.getCurrentPlayerId());
-        msgTest=MessageFactory.getMessageFromServer(msg.getJson());
-        assertTrue(msgTest instanceof SingleBoardMessage);
-
         //ErrorMessageForClient
         msg=new ErrorMessageForClient(gameTest.getPlayer(gameTest.getCurrentPlayerId()).getNickname(),new RuntimeException("test exception"));
         msgTest=MessageFactory.getMessageFromServer(msg.getJson());

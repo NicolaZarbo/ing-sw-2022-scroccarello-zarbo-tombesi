@@ -29,7 +29,7 @@ public class LobbySceneController extends SceneController  {
 
     @Override
     public void initialize() {
-        root.setStyle("-fx-background-image: url(images/wallpapers/LowerQualityLobby.png); -fx-background-size: 1280 796");
+        root.setStyle("-fx-background-image: url(images/wallpapers/LowerQualityLobby.png); -fx-background-size: 1236 863");
         nPlayers.setItems(FXCollections.observableArrayList(1,2,3,4));//fixme 1 is here for test purposes
         playerSetter();
     }

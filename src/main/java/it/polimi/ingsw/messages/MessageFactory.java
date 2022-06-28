@@ -27,7 +27,6 @@ public class MessageFactory {
             case "CloudMessage" -> new CloudMessage(json);
             case "MotherPositionMessage" -> new MotherPositionMessage(json);
             case "IslandsMessage" -> new IslandsMessage(json);
-            case "SingleBoardMessage" -> new SingleBoardMessage(json);
             case "ErrorMessageForClient"-> new ErrorMessageForClient(json);
             case "MultipleServerMessage" -> new MultipleServerMessage(json);
             case "CharacterTokenMessage" -> new CharacterTokenMessage(json);
@@ -38,6 +37,8 @@ public class MessageFactory {
             case "ChangePhaseMessage"-> new ChangePhaseMessage(json);
             case "ChangeTurnMessage"-> new ChangeTurnMessage(json);
             case "GameOverMessage"-> new GameOverMessage(json);
+            case "AllBoardsMessage"-> new AllBoardsMessage(json);
+
             default -> throw new MessageErrorException("no corresponding message type, found :" + type);
 
         };

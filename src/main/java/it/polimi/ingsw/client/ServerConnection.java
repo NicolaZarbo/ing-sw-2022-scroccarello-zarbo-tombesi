@@ -21,7 +21,6 @@ import java.util.Scanner;
 /**The handler of the connection with the server. It exchanges string messages with the server through the socket.*/
 public class ServerConnection {
     private final PrintWriter socketOut;
-    private final Scanner socketIn;
     private Scanner input;
     private final CentralView view;
     private final InputManager inputManager;
@@ -41,7 +40,6 @@ public class ServerConnection {
         }
         socket = new Socket(ip, port);
         inputManager.printToScreen("Connection established");
-        socketIn = new Scanner(socket.getInputStream());
         socketOut = new PrintWriter(socket.getOutputStream());
         this.inputManager=inputManager;
         canWrite= !(inputManager instanceof GuiInputManager);
