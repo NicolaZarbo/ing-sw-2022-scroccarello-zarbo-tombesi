@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.enumerations.GameState;
+import it.polimi.ingsw.enumerations.WinCondition;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
@@ -43,11 +44,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     private int playersWaitingInLobby;
     private int winner;
     private boolean firstTurn;
-    /**1 bag is empty
-     * 2 someone used every tower in their board
-     * 3 someone used his last card
-     * 4 there are only 3 cluster of islands left*/
-    private int gameOverReason;
+    private WinCondition gameOverReason;
 
 
     /**@return the list of simplified islands of the game*/
@@ -456,7 +453,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         return winner;
     }
     /**@return the code relative to the winning reason*/
-    public int getGameOverReason() {
+    public WinCondition getGameOverReason() {
         return gameOverReason;
     }
 

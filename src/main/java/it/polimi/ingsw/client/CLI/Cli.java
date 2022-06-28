@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.CLI;
 
 import it.polimi.ingsw.client.CLI.printers.*;
 import it.polimi.ingsw.client.ServerConnection;
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.MessageErrorException;
 import it.polimi.ingsw.exceptions.TimeOutConnectionException;
 import it.polimi.ingsw.messages.servermessages.PlayerSetUpMessage;
@@ -62,7 +63,8 @@ public class Cli implements UserInterface {
 
     @Override
     public void refresh() {
-        showView();
+        if(game.getState()!= GameState.setupPlayers)
+            showView();
     }
 
     @Override

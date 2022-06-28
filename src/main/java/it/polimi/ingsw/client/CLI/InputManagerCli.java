@@ -7,6 +7,7 @@ import it.polimi.ingsw.exceptions.CharacterErrorException;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.client.InputManager;
+import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 
 
 import java.util.ArrayList;
@@ -173,6 +174,9 @@ public class InputManagerCli  extends InputManager {
             }
         else cli.askToRetry("please select a card");
     }
+
+    /**It states if the player can use the specific assistant card number.
+     * @param cardNumber the id of the card*/
     private boolean canUseCard(int cardNumber){
         List<Integer> usedCard=game.getPlayers().stream().map(s->game.getPlayedCardThisTurnByPlayerId(s.getId())).toList();
         boolean atLeastOneAvailable =false;
@@ -245,20 +249,12 @@ public class InputManagerCli  extends InputManager {
             try{
             game.chooseCloud(inputInteger - 1);
             showWait();
-            closeAble();
             }catch (RuntimeException ignore){
                 System.out.println(Cli.IMP+"please select a good cloud"+ Cli.RST);
                 decodeInput();
             }
         }
         else cli.askToRetry(Printer.PINK+"please select an available cloud id"+Printer.RST);
-    }
-
-    /**It accepts close message during other players turn.*/
-    private void closeAble(){
-        String close=new Scanner(System.in).nextLine();
-        if(close.equalsIgnoreCase("close"))
-            cli.close();
     }
 
     /** It creates the instance of the input manager with a reference to the CLI.
@@ -273,7 +269,11 @@ public class InputManagerCli  extends InputManager {
      * @param input the user input*/
     private boolean isIsland(String input){
         try {
-            return game.getIslands().contains(Integer.parseInt(input));
+            for(SimplifiedIsland i : game.getIslands()){
+                if(i.getIslandId()==Integer.parseInt(input))
+                    return true;
+            }
+            return false;
         }catch (NumberFormatException e){
             return false;
         }
