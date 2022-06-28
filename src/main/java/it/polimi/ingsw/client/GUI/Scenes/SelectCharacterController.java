@@ -122,7 +122,7 @@ public class SelectCharacterController extends SceneController{
                 value.get(getIndexofCharacterList(1)).setText(costs.get(1)+"");
                 characters.get(getIndexofCharacterList(1)).setOnMouseClicked(event -> effect1());
                 cardVisibility(1,characters.get(getIndexofCharacterList(1)));
-            }else if(selectedStudents.contains(2)) {
+            } if(selectedStudents.contains(2)) {
                 characters.add((Rectangle) cardContainer.get(5).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(5).getChildren().get(4));
                 value.add((Text) cardContainer.get(5).getChildren().get(6));
@@ -138,7 +138,7 @@ public class SelectCharacterController extends SceneController{
                 value.get(getIndexofCharacterList(2)).setText(costs.get(2)+"");
                 characters.get(getIndexofCharacterList(2)).setOnMouseClicked(event -> noParameterEffect(2));
                 cardVisibility(2,characters.get(getIndexofCharacterList(2)));
-            }else if(selectedStudents.contains(6)) {
+            } if(selectedStudents.contains(6)) {
                 characters.add((Rectangle) cardContainer.get(7).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(7).getChildren().get(4));
                 value.add((Text) cardContainer.get(7).getChildren().get(6));
@@ -154,7 +154,7 @@ public class SelectCharacterController extends SceneController{
                 characters.get(getIndexofCharacterList(6)).setOnMouseClicked(event -> noParameterEffect(6));
                 value.get(getIndexofCharacterList(6)).setText(costs.get(6)+"");
                 cardVisibility(6,characters.get(getIndexofCharacterList(6)));
-            }else if(selectedStudents.contains(7)) {
+            } if(selectedStudents.contains(7)) {
                 characters.add((Rectangle) cardContainer.get(1).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(1).getChildren().get(4));
                 value.add((Text) cardContainer.get(1).getChildren().get(6));
@@ -171,7 +171,7 @@ public class SelectCharacterController extends SceneController{
                 characters.get(getIndexofCharacterList(7)).setOnMouseClicked(event -> effect7());
                 System.out.println(characters.get(getIndexofCharacterList(7)));
                 cardVisibility(7,characters.get(getIndexofCharacterList(7)));
-            }else if( selectedStudents.contains(8)) {
+            } if( selectedStudents.contains(8)) {
                 characters.add((Rectangle) cardContainer.get(6).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(6).getChildren().get(4));
                 value.add((Text) cardContainer.get(6).getChildren().get(6));
@@ -187,7 +187,7 @@ public class SelectCharacterController extends SceneController{
                 characters.get(getIndexofCharacterList(8)).setOnMouseClicked(event -> noParameterEffect(8));
                 value.get(getIndexofCharacterList(8)).setText(costs.get(8)+"");
                 cardVisibility(8,characters.get(getIndexofCharacterList(8)));
-            }else if( selectedStudents.contains(9)) {
+            } if( selectedStudents.contains(9)) {
                 characters.add((Rectangle) cardContainer.get(2).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(2).getChildren().get(4));
                 value.add((Text) cardContainer.get(2).getChildren().get(6));
@@ -203,7 +203,7 @@ public class SelectCharacterController extends SceneController{
                 value.get(getIndexofCharacterList(9)).setText(costs.get(9)+"");
                 characters.get(getIndexofCharacterList(9)).setOnMouseClicked(event -> effect9());
                 cardVisibility(9,characters.get(getIndexofCharacterList(9)));
-            }else if( selectedStudents.contains(10)) {
+            } if( selectedStudents.contains(10)) {
                 characters.add((Rectangle) cardContainer.get(3).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(3).getChildren().get(4));
                 value.add((Text) cardContainer.get(3).getChildren().get(6));
@@ -219,7 +219,7 @@ public class SelectCharacterController extends SceneController{
                 value.get(getIndexofCharacterList(10)).setText(costs.get(10)+"");
                 characters.get(getIndexofCharacterList(10)).setOnMouseClicked(event -> effect10());
                 cardVisibility(10,characters.get(getIndexofCharacterList(10)));
-            }else if(selectedStudents.contains(11)) {
+            } if(selectedStudents.contains(11)) {
                 characters.add((Rectangle) cardContainer.get(4).getChildren().get(0));
                 coins.add((Circle) cardContainer.get(4).getChildren().get(4));
                 value.add((Text) cardContainer.get(4).getChildren().get(6));
@@ -358,7 +358,7 @@ public class SelectCharacterController extends SceneController{
 //7-10  7-12
         if(selectedStudents.contains(1))
         for (int i = 7; i < 11; i++) {
-            Circle stud =(Circle) cardContainer.get(getIndexofCharacterList(1)).getChildren().get(i);
+            Circle stud =(Circle) cardContainer.get(0).getChildren().get(i);
             stud.setStyle("-fx-stroke-width: 0");
             stud.setDisable(true);
             stud.setVisible(false);
@@ -369,7 +369,7 @@ public class SelectCharacterController extends SceneController{
         }
         if(selectedStudents.contains(11))
             for (int i = 7; i < 11; i++) {
-            Circle stud =(Circle) cardContainer.get(getIndexofCharacterList(11)).getChildren().get(i);
+            Circle stud =(Circle) cardContainer.get(4).getChildren().get(i);
             stud.setStyle("-fx-stroke-width: 0");
             stud.setDisable(true);
             stud.setVisible(false);
@@ -380,7 +380,7 @@ public class SelectCharacterController extends SceneController{
         }
         if(selectedStudents.contains(7))
             for (int i = 7; i < 13; i++) {
-            Circle stud =(Circle) cardContainer.get(getIndexofCharacterList(7)).getChildren().get(i);
+            Circle stud =(Circle) cardContainer.get(1).getChildren().get(i);
             stud.setStyle("-fx-stroke-width: 0");
             stud.setDisable(true);
             stud.setVisible(false);
@@ -392,17 +392,20 @@ public class SelectCharacterController extends SceneController{
        //todo
         if(selectedStudents.contains(1) || selectedStudents.contains(7) || selectedStudents.contains(11)) {
             for (int i = 0; i < selectedStudents.size(); i++) {
-               // if(selectedStudents.get(i)==1) {
-                    List<Circle> studOfCardList = character1stud;
-                    List<Integer> viewStudOnCard = new ArrayList<>(studentsOnCard.get(1));
-              //  }else
-                    if (selectedStudents.get(i)==7) {
+                List<Circle> studOfCardList ;
+                List<Integer> viewStudOnCard;
+                if(selectedStudents.get(i)==1) {
+                    studOfCardList = character1stud;
+                    viewStudOnCard= new ArrayList<>(studentsOnCard.get(1));
+                }else if (selectedStudents.get(i)==7) {
                     studOfCardList = character7stud;
                     viewStudOnCard = new ArrayList<>(studentsOnCard.get(7));
                 }else if (selectedStudents.get(i)==11) {
                     studOfCardList = character11stud;
                     viewStudOnCard = new ArrayList<>(studentsOnCard.get(11));
+
                 }
+                else return;
                 for (int j = 0; j < studOfCardList.size(); j++)
                     if (viewStudOnCard.get(j) != null) {
                         Image img;
