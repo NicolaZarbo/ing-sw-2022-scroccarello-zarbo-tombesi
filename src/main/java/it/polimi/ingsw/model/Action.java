@@ -47,10 +47,12 @@ public class Action {
             throw new NoTokenFoundException(e.getMessage());
         }
         movedStudent++;
-        if(movedStudent<movablePerTurn)
-            game.notify(new SingleBoardMessage(game, idPlayer));
+        if(movedStudent<movablePerTurn) {
+            game.groupMultiMessage(new AllBoardsMessage(game));
+            game.sendMultiMessage();
+        }
         else {
-            game.groupMultiMessage(new SingleBoardMessage(game, idPlayer));
+            game.groupMultiMessage(new AllBoardsMessage(game));
             movedStudent=0;
         }
 
@@ -65,7 +67,7 @@ public class Action {
         Island island = game.getIsland(idIsland);
         island.addStudent(stud);
         game.groupMultiMessage(new  IslandsMessage(game));
-        game.groupMultiMessage(new SingleBoardMessage(game,idPlayer));
+        game.groupMultiMessage(new AllBoardsMessage(game));
         movedStudent++;
         if(movedStudent<movablePerTurn)
             game.sendMultiMessage();
@@ -122,7 +124,7 @@ public class Action {
 
         game.resetBonus();
         game.groupMultiMessage(new CloudMessage(game));
-        game.groupMultiMessage(new SingleBoardMessage(game,playerId));
+        game.groupMultiMessage(new AllBoardsMessage(game));
 
     }
 
@@ -189,7 +191,7 @@ public class Action {
         else board=game.getPlayer(player.getId()-2).getBoard();
         island.setTower(board.getTower());
         game.groupMultiMessage(new IslandsMessage(game));
-        game.groupMultiMessage(new SingleBoardMessage(game,player.getId()));
+        game.groupMultiMessage(new AllBoardsMessage(game));
         if(board.towersLeft()==0)
             game.gameOver();
     }
@@ -251,7 +253,7 @@ public class Action {
                             game.getPlayer(playerId).getBoard().putProfessor(temp);
                             int playerTemp = player.getId();
                             game.getPlayer(playerTemp).getBoard().removeProfessor(color);
-                            game.groupMultiMessage(new SingleBoardMessage(game, player.getId()));
+                            //game.groupMultiMessage(new SingleBoardMessage(game, player.getId()));
                         }
             }
         }
@@ -346,7 +348,7 @@ public class Action {
         for (Player player: game.getPlayers()) {
             if(player.getColorT()==removedT.get(0).getColor()){
                 player.getBoard().initTowers(removedT);
-                game.groupMultiMessage(new SingleBoardMessage(game,player.getId()));
+                game.groupMultiMessage(new AllBoardsMessage(game));
             }
         }
         this.putTowerFromBoardToIsland(island,newOwner);

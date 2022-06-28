@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.GUI.Scenes;
 
 import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
+import it.polimi.ingsw.enumerations.SceneEnum;
 import it.polimi.ingsw.view.CentralView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
@@ -48,7 +49,8 @@ public class BoardSceneXController extends SceneController{
         Pane setter;
         try {
             for (counterBoard=0; counterBoard < view.getPlayers().size(); counterBoard++) {
-                setter=FXMLLoader.load(getClass().getResource("/singleBoard.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/singleBoard.fxml"));
+                setter=loader.load();
                 boardsContainers.get(counterBoard).getChildren().add(setter);
             }
         } catch (IOException e) {

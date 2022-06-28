@@ -157,7 +157,7 @@ public class Setup {
 
         for (int id=0; id<nPlayer;id++){
             Hand man= Setup.createHand(id, easy, 10);
-            if(prePlayers.get(id).getNickname().equalsIgnoreCase("test")) {//fixme this is to test card effects in the client fixme before deployment
+            if(prePlayers.get(id).getNickname().contains("test")) {//fixme this is to test card effects in the client fixme before deployment
                 for (int i = 0; i < 40; i++) {
                     man.addCoin();
                 }

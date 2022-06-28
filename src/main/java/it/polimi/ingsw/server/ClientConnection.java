@@ -97,7 +97,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
         if (isActive()) {
                 while(read.equalsIgnoreCase("ping")){
                     read = readSocketIn();
-                    System.out.println("ping?"+read);
+                    System.out.println("ping?"+read);//fixme remove  before deploy
                 }
                 result = read;
                 return result;

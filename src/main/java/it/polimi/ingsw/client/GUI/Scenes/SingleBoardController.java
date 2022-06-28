@@ -37,7 +37,7 @@ public class SingleBoardController {//extends BoardSceneController
     public Button toIsland;
     public Text movedText;
     protected GUI gui;
-    private int playerOwner;//the same id of view
+    private int playerOwner;
 
     protected ArrayList<Integer> clickedEntranceStudentsColor;
     protected ArrayList<Integer> clickedDiningStudentsColor;
@@ -61,10 +61,10 @@ public class SingleBoardController {//extends BoardSceneController
         initTowers();
         initTable();
         initDiningRoom();
-        setEntrance(entranceList);
-        setHall(diningRows);
-        setTowers(towerList);
-        setProfessors(teacherList);
+        setProfessors();
+        setEntrance();
+        setHall();
+        setTowers();
         activationContext();
     }
     private void activationContext(){
@@ -90,14 +90,6 @@ public class SingleBoardController {//extends BoardSceneController
         }
     }
 
-    /** Method used to refresh the scene while already on it
-     * quite possibly stupid/useless*/
-    public void refresh(){
-        setEntrance(entranceList);
-        setHall(diningRows);
-        setTowers(towerList);
-        setProfessors(teacherList);
-    }
 
     private void initEntrance(){
         entranceList= new ArrayList<>();
@@ -134,8 +126,8 @@ public class SingleBoardController {//extends BoardSceneController
 
 
     /**displays the tokens in the entrance*/
-    public void setEntrance(List<Circle> entrance){
-        for (Circle stud:entrance) {
+    public void setEntrance(){
+        for (Circle stud:entranceList) {
             stud.setDisable(true);
             stud.setVisible(false);
             stud.setStyle("-fx-stroke-width: 0");
@@ -147,12 +139,12 @@ public class SingleBoardController {//extends BoardSceneController
             id= playerEntrance.get(i);
             if(id!=-1){
                 if(gui.getGame().isYourTurn()&& gui.getGame().getState()== GameState.actionMoveStudent)
-                    entrance.get(i).setCursor(new ImageCursor(new Image("images/pointer/pickUpPointer.png")));
-                setEntranceClickable(entrance.get(i),id);
+                    entranceList.get(i).setCursor(new ImageCursor(new Image("images/pointer/pickUpPointer.png")));
+                setEntranceClickable(entranceList.get(i),id);
                 img=getStudentImage(id);
-                entrance.get(i).setFill(new ImagePattern(img));
-                entrance.get(i).setVisible(true);
-                entrance.get(i).setDisable(false);
+                entranceList.get(i).setFill(new ImagePattern(img));
+                entranceList.get(i).setVisible(true);
+                entranceList.get(i).setDisable(false);
             }
         }
     }
@@ -172,7 +164,8 @@ public class SingleBoardController {//extends BoardSceneController
         return stud;
     }
 
-    public void setHall(List<ArrayList<Circle>> hall){
+    public void setHall(){
+        List<ArrayList<Circle>> hall=diningRows;
         for (ArrayList<Circle> list:hall) {
             for (Circle stud:list) {
                 stud.setVisible(false);
@@ -198,10 +191,11 @@ public class SingleBoardController {//extends BoardSceneController
     }
 
     /**displays professors if the player has*/
-    public void setProfessors(List<Polygon> table){
+    public void setProfessors(){
         Integer[] professors=gui.getGame().getPlayers().get(playerOwner).getBoard().getProfessorTable();
-        for (Polygon teach:table) {
+        for (Polygon teach:teacherList) {
             teach.setVisible(false);
+            teach.setFill(null);
         }
         for(Integer i : professors){
             if(i!=-1){
@@ -214,12 +208,12 @@ public class SingleBoardController {//extends BoardSceneController
                     case 4->img=new Image("images/teachers/teacher3d/pinkProf.png");
                     default -> {throw new RuntimeException("not a professor id");}
                 }
-                table.get(i).setFill(new ImagePattern(img));
-                table.get(i).setVisible(true);
+                teacherList.get(i).setFill(new ImagePattern(img));
+                teacherList.get(i).setVisible(true);
             }
         }
     }
-    public void setTowers(List<ImageView>towers){
+    public void setTowers(){
         int towerColor=gui.getGame().getPlayers().get(playerOwner).getTowerColor();
         int towersLeft=gui.getGame().getPlayers().get(playerOwner).getBoard().getTowersLeft();
         Image img;
@@ -230,8 +224,8 @@ public class SingleBoardController {//extends BoardSceneController
             default -> {throw new RuntimeException("not a towerColor");}
         }
         for(int i=0;i<towersLeft;i++){
-            towers.get(i).setImage(img);
-            towers.get(i).setVisible(true);
+            towerList.get(i).setImage(img);
+            towerList.get(i).setVisible(true);
         }
     }
     public void setPlayerName(Text textBox){
@@ -241,7 +235,7 @@ public class SingleBoardController {//extends BoardSceneController
     /**
      * used in initialize() to set the present student Clickable based on the context
      * @param studentId the id of the student */
-    protected void setEntranceClickable(Circle student, int studentId){//fixme
+    protected void setEntranceClickable(Circle student, int studentId){
         if(!gui.getGame().isYourTurn())
             return;
         int clickedColor = studentId/26;
@@ -335,8 +329,6 @@ public class SingleBoardController {//extends BoardSceneController
         GuiInputManager inputManager=gui.getInputManager();
         inputManager.moveToBoard();
         this.clickedEntranceStudentsColor=new ArrayList<>();
-        //fixme is the board being refreshed?
-        initialize();//does this make sense? and what about the refresh method in sub?
         hideMoveButtons();
     }
 
@@ -350,7 +342,7 @@ public class SingleBoardController {//extends BoardSceneController
      * It sets clickble students on dining room.
      * @param studentID the id of the color
      * @param student the element on the scene*/
-    protected void setDiningRoomClickable(Circle student, int studentID){//todo change color for id
+    protected void setDiningRoomClickable(Circle student, int studentID){
         student.setDisable(false);
         GuiInputManager inputManager = gui.getInputManager();
         student.setOnMouseClicked(mouseEvent -> {
@@ -381,7 +373,7 @@ public class SingleBoardController {//extends BoardSceneController
     protected void hideMoveButtons() {
         moveStudentPanel.setVisible(false);
         moveStudentPanel.setMouseTransparent(true);
-        refresh();
+        //refresh();
     }
 
     /**It hides the card panel.*/
@@ -407,6 +399,7 @@ public class SingleBoardController {//extends BoardSceneController
     /**It changes the scene into <i>board scene</i>>*/
     public void moveToBoard() {
         moveToDining();
+       /// refresh();
     }
 
     /**It changes the scene into <i>island scene</i>>*/
@@ -415,7 +408,7 @@ public class SingleBoardController {//extends BoardSceneController
     }
 
     /**It changes the scene into <i>character scene</i>>*/
-    public void moveToCharacter() {//todo change this to a reset activation
+    public void moveToCharacter() {
         gui.getInputManager().resetEffectActivation();
         gui.showCharacters();
     }

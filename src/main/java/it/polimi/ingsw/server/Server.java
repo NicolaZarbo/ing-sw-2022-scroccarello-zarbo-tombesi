@@ -45,8 +45,15 @@ public class Server {
             lob.removeFromLobby(connection, reason);
             executor.remove(connection);
             connections--;
+            if(lob.getConnections().size()==0){
+                lobbies.remove(lob);
+                System.out.println("Lobby closed");
+                return;//fixme possible bug
+            }
+
         }
     }
+
 
     /**It adds the player to the first available lobby,
      * @param connection the client connection to add

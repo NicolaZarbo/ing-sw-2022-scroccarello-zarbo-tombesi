@@ -79,6 +79,10 @@ public class Lobby {
         return connections.size();
     }
 
+    public ArrayList<ClientConnection> getConnections() {
+        return connections;
+    }
+
     /**It states if a certain player is connected to the lobby or not.
      * @param nick nickname of the player to check
      * @return •true: the player is connected to the lobby
