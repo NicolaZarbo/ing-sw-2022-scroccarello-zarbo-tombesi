@@ -42,11 +42,13 @@ public class Server {
      * @param connection the client connection to remove*/
     public synchronized void deregisterConnection(ClientConnection connection, String reason){
         for (Lobby lob:this.lobbies) {
-            lob.removeFromLobby(connection, reason);
-            if(executor.remove(connection)) {
+            System.out.println("this"+lob.numberOfConnections());
+            if(lob.getConnections().contains(connection)) {
+                lob.removeFromLobby(connection, reason);
                 connections--;
                 lobbies.remove(lob);
                 System.out.println("Lobby closed");
+                lob.getConnections().forEach(executor::remove);
                 return;
             }
         }
@@ -107,7 +109,7 @@ public class Server {
                 executor.execute(socketConnection);
                // executor.submit(socketConnection);
             } catch (IOException e) {
-                System.out.println("Connection Error!");
+                System.out.println("Connection Error!"+e.getMessage());
             }
         }
         System.out.println("Too many players, the server has been stopped");

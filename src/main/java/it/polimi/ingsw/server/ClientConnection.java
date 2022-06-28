@@ -35,6 +35,9 @@ public class ClientConnection extends Observable<String> implements Runnable{
     public synchronized boolean isActive() {
         return active;
     }
+    public synchronized void removeConnection(){
+        active=false;
+    }
 
     @Override
     public void run() {
@@ -67,6 +70,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
         }catch (IllegalArgumentException ex){
              close(ex.getMessage());
         }
+         close("closed by server");
     }
     private void pong(){
         while (active){
@@ -111,7 +115,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
                 builder.append((char)read);
                 read= inSocket.read();
             }
-            if(read==0 || read==-1) {
+            if(read==0 || read==-1 || ((char)read)==' ') {
                 close("lost connection");
                 return "";
             }

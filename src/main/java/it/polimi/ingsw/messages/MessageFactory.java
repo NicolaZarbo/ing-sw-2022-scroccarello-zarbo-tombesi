@@ -53,8 +53,8 @@ public class MessageFactory {
             JsonObject jj = JsonParser.parseString(json).getAsJsonObject();
             type = jj.get("messageType").getAsString();
         }catch (IllegalStateException e){
-            System.out.println("message : "+e.getMessage());
-            throw new MessageErrorException(json);
+           if(json.equalsIgnoreCase(" "))
+             throw new MessageErrorException("lost connection");
         }
 
         if(type==null)
