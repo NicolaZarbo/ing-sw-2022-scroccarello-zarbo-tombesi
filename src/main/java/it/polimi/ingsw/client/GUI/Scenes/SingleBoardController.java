@@ -8,10 +8,14 @@ import javafx.event.EventHandler;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -36,6 +40,8 @@ public class SingleBoardController {//extends BoardSceneController
     public Button toBoard;
     public Button toIsland;
     public Text movedText;
+    public Text nameText;
+    public AnchorPane boardPlayer;
     protected GUI gui;
     private int playerOwner;
 
@@ -66,6 +72,36 @@ public class SingleBoardController {//extends BoardSceneController
         setHall();
         setTowers();
         activationContext();
+        setPlayerName();
+        setColoredInnerShadow();
+    }
+    private void setColoredInnerShadow(){
+        int color =gui.getGame().getPlayers().get(playerOwner).getTowerColor();
+        Color shad;
+        if(color==0)
+            shad=Color.BLACK;
+        else if(color==1)
+            shad=Color.WHITE;
+        else shad=Color.DARKSLATEGRAY;
+        InnerShadow innerShadow= new InnerShadow(15,shad);
+        innerShadow.setChoke(0.3);
+        DropShadow outerShadow= new DropShadow(20 ,shad);
+        if(gui.getGame().getPersonalPlayer().getUsername().contains("fried")){
+            Blend deepFried=new Blend();
+            deepFried.setMode(BlendMode.COLOR_DODGE);
+            boardPlayer.setEffect(deepFried);
+            return;
+        }
+        if(gui.getGame().getPersonalPlayer().getUsername().contains("stranger")){
+            Blend deepFried=new Blend();
+            deepFried.setMode(BlendMode.EXCLUSION);
+            boardPlayer.setEffect(deepFried);
+            return;
+        }
+
+        boardPlayer.getParent().setEffect(outerShadow);
+        boardPlayer.setEffect(innerShadow);
+
     }
     private void activationContext(){
         resetActivationOnExit();
@@ -223,14 +259,20 @@ public class SingleBoardController {//extends BoardSceneController
             case 2->img=new Image("images/towers/grey_tower.png");
             default -> {throw new RuntimeException("not a towerColor");}
         }
+        DropShadow towerShadow=new DropShadow(1,Color.BLACK);
         for(int i=0;i<towersLeft;i++){
             towerList.get(i).setImage(img);
             towerList.get(i).setVisible(true);
+            towerList.get(i).setEffect(towerShadow);
         }
     }
-    public void setPlayerName(Text textBox){
-        String name=gui.getGame().getPlayers().get(playerOwner).getUsername();
-        textBox.setText("Player: "+name);
+    public void setPlayerName(){
+        String name;
+        if(gui.getGame().getPersonalPlayer().getId()==playerOwner)
+            name=" -- YOU --  ";
+        else
+            name=gui.getGame().getPlayers().get(playerOwner).getUsername();
+        nameText.setText("Pl: "+name);
     }
     /**
      * used in initialize() to set the present student Clickable based on the context
@@ -401,7 +443,6 @@ public class SingleBoardController {//extends BoardSceneController
     /**It changes the scene into <i>board scene</i>>*/
     public void moveToBoard() {
         moveToDining();
-       /// refresh();
     }
 
     /**It changes the scene into <i>island scene</i>>*/
@@ -412,6 +453,8 @@ public class SingleBoardController {//extends BoardSceneController
     /**It changes the scene into <i>character scene</i>>*/
     public void moveToCharacter() {
         gui.getInputManager().resetEffectActivation();
+        clickedDiningStudentsColor=new ArrayList<>();
+        clickedEntranceStudentsColor=new ArrayList<>();
         gui.showCharacters();
     }
 
@@ -426,7 +469,7 @@ public class SingleBoardController {//extends BoardSceneController
                 clickedEntranceStudentsColor=new ArrayList<>();
                 hideCardPanel();
                 initialize();
-            }
+            }else studToSelect.setFill(Color.RED);
         }
         if (gui.getInputManager().getCardInActivation() == 10) {
             int entrancePicked=clickedEntranceStudentsColor.size();

@@ -383,7 +383,6 @@ public class MapSceneController extends SceneController {
         cloud.setOnMouseClicked(mouseEvent -> {
             gui.getInputManager().cloudChoose(cloudID);
             info.setText("wait for your turn");
-            gui.setScene(SceneEnum.MapScene);//fixme try works well enough
         });
     }
 

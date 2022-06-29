@@ -50,7 +50,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
              this.out= new PrintWriter(clientSocket.getOutputStream());
             send("Welcome! What is your name?");
             String read = readFromSocket();
-            String name = read.toUpperCase();
+            String name = read;///
             if(server.availableLobby()){
                 server.lobby(this, name);
             }else {

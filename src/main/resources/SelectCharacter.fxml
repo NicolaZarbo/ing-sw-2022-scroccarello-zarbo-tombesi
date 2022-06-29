@@ -130,7 +130,7 @@
       </Pane>
       <Pane fx:id="cardContainer2" layoutX="266.0" layoutY="363.0" prefHeight="246.0" prefWidth="224.0">
          <children>
-            <Rectangle id="Character2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="262.0" layoutY="393.0" scaleZ="0.0" stroke="BLACK" strokeType="INSIDE" translateX="-261.0" translateY="-361.0" width="107.0" />
+            <Rectangle id="Character2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="183.0" layoutX="3.0" layoutY="27.0" pickOnBounds="true" smooth="false" stroke="BLACK" strokeType="INSIDE" width="107.0" />
             <Text fill="#cccdef" layoutX="283.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" scaleZ="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 6:" translateX="-261.0" translateY="-361.0">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
@@ -145,7 +145,7 @@
       </Pane>
       <Pane fx:id="cardContainer8" layoutX="508.0" layoutY="368.0" prefHeight="246.0" prefWidth="218.0">
          <children>
-            <Rectangle id="Character8" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="4.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
+            <Rectangle id="Character8" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="4.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
             <Text fill="#cccdef" layoutY="7.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 7:">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
@@ -160,7 +160,7 @@
       </Pane>
       <Pane fx:id="cardContainer6" layoutX="730.0" layoutY="366.0" prefHeight="246.0" prefWidth="218.0">
          <children>
-            <Rectangle id="Character6" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="732.0" layoutY="393.0" stroke="BLACK" strokeType="INSIDE" translateX="-730.0" translateY="-366.0" width="107.0" />
+            <Rectangle id="Character6" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="183.0" layoutX="2.0" layoutY="27.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
             <Text fill="#cccdef" layoutX="753.0" layoutY="371.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Character 8:" translateX="-730.0" translateY="-366.0">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
@@ -173,13 +173,13 @@
             <Text id="character6cost" layoutX="812.0" layoutY="601.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-730.0" translateY="-366.0" />
          </children>
       </Pane>
-      <Pane fx:id="popupPanel" layoutX="555.0" layoutY="288.0" prefHeight="92.0" prefWidth="183.0" scaleX="2.0" scaleY="2.0" style="-fx-background-color: gray; -fx-border-radius: 15; -fx-background-radius: 20; -fx-border-color: gold; -fx-border-width: 2;">
+      <Pane fx:id="popupPanel" layoutX="555.0" layoutY="288.0" prefHeight="92.0" prefWidth="183.0" scaleX="2.0" scaleY="2.0" style="-fx-background-color: gray; -fx-border-radius: 15; -fx-background-radius: 20; -fx-border-color: gold; -fx-border-width: 2;" visible="false">
          <children>
             <Pane>
                <Button layoutX="152.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#moveToBoard" />
                <Text layoutX="6.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End selection, go to Board" />
             </Pane>
-            <Pane>
+            <Pane pickOnBounds="false">
                <Text layoutX="4.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a color" />
                <Button layoutX="164.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selectedPink" style="-fx-background-color: pink;" />
                <Button layoutX="146.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#selectedRed" style="-fx-background-color: red;" />

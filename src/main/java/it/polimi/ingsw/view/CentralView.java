@@ -107,7 +107,6 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
     /**It shows the error received from the server.
      * @param message the error message sent by the server*/
     public void errorFromServer(ErrorMessageForClient message){
-       // String nickname=personalPlayer.getUsername();
         if(message.getTargetPlayerName().equalsIgnoreCase(name)|| message.getTargetPlayerName().equalsIgnoreCase("all")) {
             clientScreen.showError(message.getErrorInfo());
             seeAction();
@@ -127,14 +126,16 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
         for (SimplifiedPlayer pl: players) {
             if(pl.getUsername().equals( name))
                 personalPlayer=pl;
-            if (isTeamPlay())
-                pl.setTeam((pl.getId())%2+1);
+            if (isTeamPlay()) {
+                pl.setTeam((pl.getId()) % 2 + 1);
+                if(pl.getId()>1)
+                    pl.setTowerColor(players.get(pl.getId()-2).getTowerColor());
+            }
         }
         characters=message.getCharacters();
         studentsOnCard=message.getCardStudents();
         costOfCard=message.getCardCosts();
         activeCharacter= message.getActiveCharacter();
-        clientScreen.showView();
         if(state==GameState.actionMoveStudent||state==GameState.actionMoveMother)
             seeAction();
     }

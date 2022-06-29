@@ -79,7 +79,7 @@ public class ServerConnection {
             socketLine = readFromServer();
             inputManager.printToScreen(socketLine);
             String inputLine = input.nextLine();
-            view.setName(inputLine);
+            view.setName(inputLine.toLowerCase());
             sendToServer(inputLine);
             socketLine = readFromServer();
             inputManager.printToScreen(socketLine);
