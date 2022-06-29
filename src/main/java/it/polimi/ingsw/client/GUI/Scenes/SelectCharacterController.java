@@ -22,12 +22,6 @@ import java.util.Map;
 /**The handler of character scene (expert mode only).*/
 public class SelectCharacterController extends SceneController{
 
-    public Pane CharacterContainer;
-    public Pane studentCharacterContainer;
-    public Pane coinImageContainer;
-    public Pane valueCharacterContainer;
-
-
     public Pane cardContainer1;
     public Pane cardContainer7;
     public Pane cardContainer9;
@@ -80,27 +74,19 @@ public class SelectCharacterController extends SceneController{
         cardContainer.add(cardContainer2);
         cardContainer.add(cardContainer8);
         cardContainer.add(cardContainer6);
-        for(int i=0;i<cardContainer.size();i++){
-            cardContainer.get(i).setVisible(false);
-            cardContainer.get(i).setMouseTransparent(true);
+        for (Pane item : cardContainer) {
+            item.setVisible(false);
+            item.setMouseTransparent(true);
         }
-
-        
         charactersPlayable=view.getCharacters();
-        charactersPlayable.forEach(s->System.out.println(s+" present"));
-        System.out.println(charactersPlayable.size());
-
         initCharacters();
-
         initStudCharacters();
-        for(int i=0;i<cardContainer.size();i++)
-            System.out.println(cardContainer.get(i).isMouseTransparent());
         ownedMoney.setText(view.getPersonalPlayer().getCoin()+" :");
         popupPanel.setVisible(false);
         popupPanel.setMouseTransparent(true);
         if(!view.isYourTurn() || !( view.getState()== GameState.actionMoveStudent || view.getState()== GameState.actionMoveMother)) {
-             for(int i=0;i<cardContainer.size();i++)
-                 cardContainer.get(i).getChildren().get(1).setDisable(true);
+            for (Pane item : cardContainer)
+                item.getChildren().get(1).setDisable(true);
 
         }
     }
@@ -200,19 +186,14 @@ public class SelectCharacterController extends SceneController{
             s.setOpacity(1);
             s.setMouseTransparent(false);
         });
-       // studentCharacterContainer.setMouseTransparent(false);
         for (Pane item : cardContainer) item.getChildren().get(1).setMouseTransparent(true);
-        //CharacterContainer.setMouseTransparent(true);
         inputManager.setCardEffectActivation();
     }
 
     /**It triggers effect of the card 7 on click.
      * @see it.polimi.ingsw.model.characters.Character7*/
     private void effect7(){
-       // studentCharacterContainer.setMouseTransparent(false);
-       // CharacterContainer.setMouseTransparent(true);
         for (Pane item : cardContainer) item.getChildren().get(1).setMouseTransparent(true);
-
         activatingCard=7;
         character7stud.forEach(s->{
             s.setDisable(false);
@@ -268,7 +249,6 @@ public class SelectCharacterController extends SceneController{
     /**It triggers effect of the card 11 on click.
      * @see it.polimi.ingsw.model.characters.Character11*/
     private void effect11() {
-      //  studentCharacterContainer.setMouseTransparent(false);
         for (Pane item : cardContainer) item.getChildren().get(1).setMouseTransparent(true);
         activatingCard = 11;
         character11stud.forEach(s->{
@@ -315,48 +295,44 @@ public class SelectCharacterController extends SceneController{
         HashMap<Integer,Integer> cardNumberToPosition=new HashMap<>(Map.of(1,0,7,1,11,4));
         int id;
         Map<Integer, List<Integer>> studentsOnCard = view.getStudentsOnCard();
-
-
         for (Integer character:charactersPlayable) {
             if(character==1||character==7||character==11)
                 setStudentOfCharacter(character,cardNumberToPosition.get(character));
         }
-
-       //todo
-        if(charactersPlayable.contains(1) || charactersPlayable.contains(7) || charactersPlayable.contains(11)) {
-            for (int i = 0; i < charactersPlayable.size(); i++) {
-                if (charactersPlayable.get(i) == 1 || charactersPlayable.get(i) == 7 || charactersPlayable.get(i) == 11) {
-                    List<Circle> studOfCardList;
-                    List<Integer> viewStudOnCard;
-                    if (charactersPlayable.get(i) == 1) {
-                        studOfCardList = character1stud;
-                        viewStudOnCard = new ArrayList<>(studentsOnCard.get(1));
-                    } else if (charactersPlayable.get(i) == 7) {
-                        studOfCardList = character7stud;
-                        viewStudOnCard = new ArrayList<>(studentsOnCard.get(7));
-                    } else  {
-                        studOfCardList = character11stud;
-                        viewStudOnCard = new ArrayList<>(studentsOnCard.get(11));
-                    }
-                    for (int j = 0; j < studOfCardList.size(); j++)
-                        if (viewStudOnCard.get(j) != null) {
-                            Image img;
-                            id = viewStudOnCard.get(j);
-                            if (id != -1) {
-                                img = getImage(id);
-                                studOfCardList.get(j).setFill(new ImagePattern(img));
-                                studOfCardList.get(j).setVisible(true);
-                                studOfCardList.get(j).setDisable(false);
-                                int finalId = id;
-                                Circle stud = studOfCardList.get(j);
-                                studOfCardList.get(j).setOnMouseClicked(event -> {
-                                    clickSelectStudent(finalId);
-                                    stud.setOpacity(0.2);
-                                });
-                            }
-                        }
-                    System.out.println(studOfCardList.size());
+        if(!(charactersPlayable.contains(1) || charactersPlayable.contains(7) || charactersPlayable.contains(11))) {
+            return;
+        }
+        for (Integer character : charactersPlayable) {
+            if (character == 1 || character == 7 || character == 11) {
+                List<Circle> studOfCardList;
+                List<Integer> viewStudOnCard;
+                if (character == 1) {
+                    studOfCardList = character1stud;
+                    viewStudOnCard = new ArrayList<>(studentsOnCard.get(1));
+                } else if (character == 7) {
+                    studOfCardList = character7stud;
+                    viewStudOnCard = new ArrayList<>(studentsOnCard.get(7));
+                } else {
+                    studOfCardList = character11stud;
+                    viewStudOnCard = new ArrayList<>(studentsOnCard.get(11));
                 }
+                for (int j = 0; j < studOfCardList.size(); j++)
+                    if (viewStudOnCard.get(j) != null) {
+                        Image img;
+                        id = viewStudOnCard.get(j);
+                        if (id != -1) {
+                            img = getImage(id);
+                            Circle charStudent=studOfCardList.get(j);
+                            charStudent.setFill(new ImagePattern(img));
+                            charStudent.setVisible(true);
+                            charStudent.setDisable(true);
+                            int finalId = id;
+                            charStudent.setOnMouseClicked(event -> {
+                                clickSelectStudent(finalId);
+                                charStudent.setOpacity(0.2);
+                            });
+                        }
+                    }
             }
         }
     }
@@ -391,9 +367,7 @@ public class SelectCharacterController extends SceneController{
             case 2->stud=new Image("images/students/student3d/green.png");
             case 3->stud=new Image("images/students/student3d/blue.png");
             case 4->stud=new Image("images/students/student3d/pink.png");
-            default -> {
-                throw new NullPointerException("not an iD");
-            }
+            default -> throw new NullPointerException("not a good id");
         }
         return stud;
     }
@@ -418,7 +392,7 @@ public class SelectCharacterController extends SceneController{
         popupPanel.setMouseTransparent(true);
     }
 
-    /**It moves students from the carc to the entrance.
+    /**It moves students from the card to the entrance.
      * @see it.polimi.ingsw.model.characters.Character7*/
     public void moveToBoard(){
         if(activatingCard==7 ){
@@ -429,28 +403,28 @@ public class SelectCharacterController extends SceneController{
         gui.showBoards();
     }
 
-    /**It sets as active nerfed color red.
+    /**It selects color red for the card effect.
      * @see it.polimi.ingsw.model.characters.Character9*/
     public void selectedRed(){
         inputManager.useCharacter9(0);
         hideMoveButtons();
     }
-    /**It sets as active nerfed color pink.*/
+    /**It selects color pink for the card effect*/
     public void selectedPink(){
         inputManager.useCharacter9(4);
         hideMoveButtons();
     }
-    /**It sets as active nerfed color yellow.*/
+    /**It selects color yellow for the card effect*/
     public void selectedYellow(){
         inputManager.useCharacter9(1);
         hideMoveButtons();
     }
-    /**It sets as active nerfed color blue.*/
+    /**It selects color blue for the card effect.*/
     public void selectedBlue(){
         inputManager.useCharacter9(3);
         hideMoveButtons();
     }
-    /**It sets as active nerfed color green.*/
+    /**It selects color green for the card effect.*/
     public void selectedGreen(){
         inputManager.useCharacter9(2);
         hideMoveButtons();

@@ -44,7 +44,7 @@
          <children>
             <Text fx:id="help_text" fill="WHITE" layoutX="14.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pick a card" wrappingWidth="306.13671875">
                <font>
-                  <Font name="System Italic" size="32.0" />
+                  <Font name="Segoe UI Semibold" size="29.0" />
                </font>
             </Text>
          </children>

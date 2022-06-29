@@ -107,8 +107,6 @@ public class BoardSceneXController extends SceneController{
             up_right.setScaleX(1.5);
             up_right.setScaleY(1.5);
         }
-        up_left.setStyle(getStringStyle(0));
-        up_right.setStyle(getStringStyle(1));
 
         down_left.setVisible(false);
         down_right.setVisible(false);
@@ -117,12 +115,7 @@ public class BoardSceneXController extends SceneController{
         context_container.setTranslateX(120);
 
     }
-    private void disposition4(){//todo for 4 player team add border, maximise your board
-        int i=0;
-        for (Pane board:boardsContainers) {
-            board.setStyle(getStringStyle(i));
-            i++;
-        }
+    private void disposition4(){
         for (Pane container: boardsContainers) {
             container.setScaleX(0.7);
             container.setScaleY(0.7);
@@ -132,22 +125,10 @@ public class BoardSceneXController extends SceneController{
         boardsContainers.get(personal).setScaleY(1.3);
 
     }
-    private String  getStringStyle(int boardNumber){
-        int towerC=view.getPlayers().get(boardNumber).getTowerColor();
-        String style;
-        if(towerC==0)
-            style="-fx-border-color: black; -fx-border-width: 15 ";
-        else if(towerC==1)
-            style="-fx-border-color: white; -fx-border-width: 15 ";
-        else
-            style="-fx-border-color: gray; -fx-border-width: 15 ";
-        return style;
-    }
 
     /**It is the disposition of a one player game. For testing purpose only.*/
     //fixme
     private void disposition1(){
-        up_left.setStyle(getStringStyle(0));
         up_left.setScaleX(2);
         up_left.setScaleY(2);
         up_left.setTranslateX(280);
@@ -172,7 +153,6 @@ public class BoardSceneXController extends SceneController{
         context_container.setTranslateY(-600);
         context_container.setTranslateX(190);
         down_right.setVisible(false);
-        int i=0;
 
     }
 

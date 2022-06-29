@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" prefHeight="796.0" prefWidth="1280.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.BoardSceneXController">
+<AnchorPane fx:id="root" prefHeight="796.0" prefWidth="1280.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.BoardSceneXController">
    <children>
-      <Pane fx:id="up_left" layoutX="74.0" layoutY="56.0" prefHeight="218.0" prefWidth="508.0"  />
-      <Pane fx:id="up_right" layoutX="637.0" layoutY="56.0" prefHeight="218.0" prefWidth="508.0"  />
+      <Pane fx:id="up_left" layoutX="74.0" layoutY="56.0" prefHeight="218.0" prefWidth="508.0" />
+      <Pane fx:id="up_right" layoutX="637.0" layoutY="56.0" prefHeight="218.0" prefWidth="508.0" />
       <Pane fx:id="down_right" layoutX="637.0" layoutY="330.0" prefHeight="218.0" prefWidth="508.0" />
       <Button fx:id="moveToMap" layoutX="80.0" layoutY="698.0" mnemonicParsing="false" onMouseClicked="#goToMap" prefHeight="58.0" prefWidth="131.0" text="Map">
          <font>
@@ -21,12 +19,12 @@
             <Font size="30.0" />
          </font>
       </Button>
-      <Pane fx:id="down_left" layoutX="74.0" layoutY="330.0" prefHeight="218.0" prefWidth="508.0"  />
+      <Pane fx:id="down_left" layoutX="74.0" layoutY="330.0" prefHeight="218.0" prefWidth="508.0" />
       <Pane fx:id="context_container" layoutX="799.0" layoutY="598.0" prefHeight="135.0" prefWidth="291.0" style="-fx-background-color: brown; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 3;">
          <children>
             <Text fx:id="context_text" fill="WHITE" layoutX="11.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="268.13671875">
                <font>
-                  <Font name="System Italic" size="27.0" />
+                  <Font name="Segoe UI Semibold" size="27.0" />
                </font>
             </Text>
          </children>

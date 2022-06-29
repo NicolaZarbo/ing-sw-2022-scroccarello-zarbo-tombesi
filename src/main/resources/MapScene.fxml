@@ -153,7 +153,7 @@
          <children>
             <Text fx:id="info" fill="WHITE" layoutX="17.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Context info" wrappingWidth="306.13671875">
                <font>
-                  <Font name="System Italic" size="25.0" />
+                  <Font name="Segoe UI Semibold" size="25.0" />
                </font>
             </Text>
          </children>
