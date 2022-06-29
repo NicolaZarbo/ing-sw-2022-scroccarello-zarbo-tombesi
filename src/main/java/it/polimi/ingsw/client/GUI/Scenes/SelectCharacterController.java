@@ -430,7 +430,7 @@ public class SelectCharacterController extends SceneController{
     }
     /**It sets as active nerfed color pink.*/
     public void selectedPink(){
-        inputManager.useCharacter9(5);
+        inputManager.useCharacter9(4);
         hideMoveButtons();
     }
     /**It sets as active nerfed color yellow.*/
