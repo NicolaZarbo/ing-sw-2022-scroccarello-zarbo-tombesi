@@ -346,7 +346,6 @@ public class CharactersTest extends TestCase {
         gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         int initialCost= cardTester.getCost();
         int target=((int)(Math.random()*4))*((Character11)cardTester).getStudents().size();
-        System.out.println(target);
         ParameterObject parameters=new ParameterObject(((Character11)cardTester).getStudents().get(target).getId(),0);
         try{
             cardTester.cardEffect(parameters,gameTest);
