@@ -85,7 +85,7 @@ public class SingleBoardController {//extends BoardSceneController
         else shad=Color.DARKSLATEGRAY;
         InnerShadow innerShadow= new InnerShadow(15,shad);
         innerShadow.setChoke(0.3);
-        DropShadow outerShadow= new DropShadow(20 ,shad);
+        DropShadow outerShadow= new DropShadow(15 ,shad);
         if(gui.getGame().getPersonalPlayer().getUsername().contains("fried")){
             Blend deepFried=new Blend();
             deepFried.setMode(BlendMode.COLOR_DODGE);

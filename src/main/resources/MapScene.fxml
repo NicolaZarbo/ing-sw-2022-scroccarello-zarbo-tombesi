@@ -25,18 +25,18 @@
                <Circle id="island6" fill="DODGERBLUE" layoutX="821.0" layoutY="266.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             </Pane>
             <Pane fx:id="bridge_container" mouseTransparent="true">
-               <Rectangle id="brigde12" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="87.0" layoutY="149.0" rotate="-155.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
-               <Rectangle id="brigde6" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="763.0" layoutY="284.0" rotate="47.9" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
-               <Rectangle id="brigde5" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="765.0" layoutY="161.0" rotate="-36.6" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
-               <Rectangle id="brigde4" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="654.0" layoutY="70.0" rotate="-54.9" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
-               <Rectangle id="brigde3" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="512.0" layoutY="16.0" rotate="-75.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
-               <Rectangle id="brigde2" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="348.0" layoutY="3.0" rotate="-92.3" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
-               <Rectangle id="brigde1" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="206.0" layoutY="51.0" rotate="66.3" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
-               <Rectangle id="brigde7" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="654.0" layoutY="389.0" rotate="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
-               <Rectangle id="brigde8" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="512.0" layoutY="458.0" rotate="75.3" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
-               <Rectangle id="brigde11" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="98.0" layoutY="286.0" rotate="-40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
-               <Rectangle id="brigde10" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="206.0" layoutY="399.0" rotate="118.1" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
-               <Rectangle id="brigde9" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="347.0" layoutY="452.0" rotate="110.9" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
+               <Rectangle id="bridge12" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="87.0" layoutY="149.0" rotate="-155.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
+               <Rectangle id="bridge6" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="763.0" layoutY="284.0" rotate="47.9" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
+               <Rectangle id="bridge5" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="765.0" layoutY="161.0" rotate="-36.6" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
+               <Rectangle id="bridge4" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="654.0" layoutY="70.0" rotate="-54.9" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
+               <Rectangle id="bridge3" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="512.0" layoutY="16.0" rotate="-75.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
+               <Rectangle id="bridge2" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="348.0" layoutY="3.0" rotate="-92.3" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
+               <Rectangle id="bridge1" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="206.0" layoutY="51.0" rotate="66.3" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
+               <Rectangle id="bridge7" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="654.0" layoutY="389.0" rotate="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
+               <Rectangle id="bridge8" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="512.0" layoutY="458.0" rotate="75.3" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
+               <Rectangle id="bridge11" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="98.0" layoutY="286.0" rotate="-40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
+               <Rectangle id="bridge10" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="206.0" layoutY="399.0" rotate="118.1" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
+               <Rectangle id="bridge9" arcHeight="5.0" arcWidth="5.0" fill="#8a6213" height="80.0" layoutX="347.0" layoutY="452.0" rotate="110.9" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="22.0" />
 
             </Pane>
             <Pane fx:id="cloud_container" layoutX="217.0" layoutY="116.0" mouseTransparent="true" prefHeight="306.0" prefWidth="416.0">

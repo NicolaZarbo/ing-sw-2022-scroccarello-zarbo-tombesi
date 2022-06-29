@@ -24,7 +24,7 @@
          <children>
             <Text fx:id="context_text" fill="WHITE" layoutX="11.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="268.13671875">
                <font>
-                  <Font name="Segoe UI Semibold" size="27.0" />
+                  <Font name="Segoe UI Semibold" size="22.0" />
                </font>
             </Text>
          </children>

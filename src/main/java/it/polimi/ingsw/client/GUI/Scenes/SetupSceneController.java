@@ -23,7 +23,7 @@ public class SetupSceneController extends SceneController{
     public VBox root;
     public Text teamWelcome_text;
     private GUI gui;
-    private int wizardchosen, towerchosen;
+    private int wizardChosen, towerChosen;
     @FXML
     private ImageView mage1;
     @FXML
@@ -33,25 +33,24 @@ public class SetupSceneController extends SceneController{
     @FXML
     private ImageView mage4;
     @FXML
-    private ImageView blacktower;
+    private ImageView blackTower;
     @FXML
-    private ImageView whitetower;
+    private ImageView whiteTower;
     @FXML
-    private ImageView greytower;
+    private ImageView greyTower;
     @FXML
     private Label choiceMsg;
     @FXML
     private Text errorMsg;
     @FXML
-    private Text waitingmsg;
+    private Text waitingMsg;
     @FXML
-    private Pane mainpane;
+    private Pane mainPane;
 
     private List<Integer> availableMages;
     private List<Integer> availableTowers;
     private List<ImageView> towers;
     private List<ImageView> mages;
-    private final DropShadow islandShadow = new DropShadow(8, Color.DARKRED);
 
     /**It creates the base instance of setup controller.*/
     public SetupSceneController() {
@@ -63,8 +62,8 @@ public class SetupSceneController extends SceneController{
         root.setStyle("-fx-background-image: url(images/wallpapers/LowerQualityLobby.png); -fx-background-size: 640 400 ;-fx-background-repeat: no-repeat; ");
         root.setCursor(new ImageCursor(new Image("images/pointer/basePointer.png")));
         choiceMsg.setText("Choose your color");
-        towerchosen=0;
-        wizardchosen=0;
+        towerChosen =0;
+        wizardChosen =0;
         CentralView view = gui.getGame();
         availableTowers = view.getAvailableColor();
         availableMages = view.getAvailableMages();
@@ -73,7 +72,7 @@ public class SetupSceneController extends SceneController{
             teamWelcome();
             if(availableTowers.size()==0) {
                 showMagicians();
-                towerchosen=1;
+                towerChosen =1;
             }
             else setTowers();
         }else
@@ -91,9 +90,9 @@ public class SetupSceneController extends SceneController{
             setShadow(magus);
             magus.setMouseTransparent(true);});
         towers= new ArrayList<>();
-        towers.add(blacktower);
-        towers.add(whitetower);
-        towers.add(greytower);
+        towers.add(blackTower);
+        towers.add(whiteTower);
+        towers.add(greyTower);
         towers.forEach(pillar->{
             pillar.setVisible(false);
             pillar.setMouseTransparent(true);
@@ -103,11 +102,11 @@ public class SetupSceneController extends SceneController{
     /**It fills the tower elements.*/
     private void setTowers(){
         Image img=new Image("images/towers/black_tower.png");
-        blacktower.setImage(img);
+        blackTower.setImage(img);
         img=new Image("images/towers/white_tower.png");
-        whitetower.setImage(img);
+        whiteTower.setImage(img);
         img=new Image("images/towers/grey_tower.png");
-        greytower.setImage(img);
+        greyTower.setImage(img);
         for (Integer towerColor:availableTowers) {
             ImageView towerC= towers.get(towerColor);
             towerC.setVisible(true);
@@ -165,7 +164,7 @@ public class SetupSceneController extends SceneController{
     /**It selects the mage 1 on click.*/
     @FXML
     public void setMage1(MouseEvent click){
-        this.wizardchosen =1;
+        this.wizardChosen =1;
         restoreAllOpacities();
         mage1.setOpacity(0.5);
 
@@ -174,7 +173,7 @@ public class SetupSceneController extends SceneController{
     /**It selects the mage 2 on click.*/
     @FXML
     public void setMage2(MouseEvent click){
-        this.wizardchosen =2;
+        this.wizardChosen =2;
         restoreAllOpacities();
         mage2.setOpacity(0.5);
         addDoubleClickConfirm(click);
@@ -182,7 +181,7 @@ public class SetupSceneController extends SceneController{
     /**It selects the mage 3 on click.*/
     @FXML
     public void setMage3(MouseEvent click){
-        this.wizardchosen =3;
+        this.wizardChosen =3;
         restoreAllOpacities();
         mage3.setOpacity(0.5);
         addDoubleClickConfirm(click);
@@ -190,7 +189,7 @@ public class SetupSceneController extends SceneController{
     /**It selects the mage 4 on click.*/
     @FXML
     public void setMage4(MouseEvent click){
-        this.wizardchosen =4;
+        this.wizardChosen =4;
         restoreAllOpacities();
         mage4.setOpacity(0.5);
         addDoubleClickConfirm(click);
@@ -198,34 +197,34 @@ public class SetupSceneController extends SceneController{
     /**It selects the tower choice black on click.*/
     @FXML
     public void setBlackTower(MouseEvent click){
-        this.towerchosen=1;
+        this.towerChosen =1;
         restoreAllOpacities();
-        blacktower.setOpacity(0.5);
+        blackTower.setOpacity(0.5);
         addDoubleClickConfirm(click);
     }
     /**It selects the tower choice white on click.*/
     @FXML
     public void setWhiteTower(MouseEvent click){
-        this.towerchosen=2;
+        this.towerChosen =2;
         restoreAllOpacities();
-        whitetower.setOpacity(0.5);
+        whiteTower.setOpacity(0.5);
         addDoubleClickConfirm(click);
     }
 
     /**It selects the tower choice gray on click.*/
     @FXML
     public void setGrayTower(MouseEvent click){
-        this.towerchosen=3;
+        this.towerChosen =3;
         restoreAllOpacities();
-        greytower.setOpacity(0.5);
+        greyTower.setOpacity(0.5);
         addDoubleClickConfirm(click);
     }
 
     /**It restores all opacities to natural value of elements.*/
     private void restoreAllOpacities(){
-        blacktower.setOpacity(1.0);
-        whitetower.setOpacity(1.0);
-        greytower.setOpacity(1.0);
+        blackTower.setOpacity(1.0);
+        whiteTower.setOpacity(1.0);
+        greyTower.setOpacity(1.0);
         mage1.setOpacity(1.0);
         mage2.setOpacity(1.0);
         mage3.setOpacity(1.0);
@@ -234,20 +233,20 @@ public class SetupSceneController extends SceneController{
 
     /**It triggers the confirmation of the selection of the custom parameters of the player (it triggers the lobby-player creation).*/
     public void confirmChoice() {
-        if(towerchosen==0){
+        if(towerChosen ==0){
             errorMsg.setText("Please choose your color");
         }
         else if(mage1.getImage()==null){
             showMagicians();
         }
-        else if(wizardchosen==0){
+        else if(wizardChosen ==0){
             errorMsg.setText("Please choose a magician");
         }
         else{
-            gui.getGame().choosePlayerCustom(towerchosen-1,wizardchosen-1);
-            mainpane.setOpacity(0.5);
-            mainpane.setDisable(true);
-            waitingmsg.setVisible(true);
+            gui.getGame().choosePlayerCustom(towerChosen -1, wizardChosen -1);
+            mainPane.setOpacity(0.5);
+            mainPane.setDisable(true);
+            waitingMsg.setVisible(true);
         }
     }
 

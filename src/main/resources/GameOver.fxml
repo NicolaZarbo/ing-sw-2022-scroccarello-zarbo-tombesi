@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" prefHeight="552.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.GameOverSceneController">
+<AnchorPane fx:id="root" prefHeight="552.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.Scenes.GameOverSceneController">
    <children>
       <Pane fx:id="text_container" layoutX="288.0" layoutY="204.0" prefHeight="145.0" prefWidth="255.0" style="-fx-background-color: brown; -fx-border-radius: 20; -fx-background-radius: 30; -fx-border-color: gold; -fx-border-width: 10;">
          <children>

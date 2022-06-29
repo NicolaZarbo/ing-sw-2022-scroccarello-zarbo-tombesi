@@ -38,8 +38,8 @@
        <Text layoutX="59.0" layoutY="393.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discarded pile:" />
       <Text layoutX="120.0" layoutY="106.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" fx:id="xSign" />
       <Text fx:id="playerCoins" layoutX="157.0" layoutY="104.0" scaleX="5.0" scaleY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-      <Button fx:id="mapButton" layoutX="37.0" layoutY="611.0" mnemonicParsing="false" onMouseClicked="#showMap" scaleX="1.3" scaleY="1.3" text="Map" />
-      <Button fx:id="boardButton" layoutX="141.0" layoutY="611.0" mnemonicParsing="false" onMouseClicked="#showboards" scaleX="1.3" scaleY="1.3" text="Board" />
+      <Button  layoutX="37.0" layoutY="611.0" mnemonicParsing="false" onMouseClicked="#showMap" scaleX="1.3" scaleY="1.3" text="Map" />
+      <Button  layoutX="141.0" layoutY="611.0" mnemonicParsing="false" onMouseClicked="#showboards" scaleX="1.3" scaleY="1.3" text="Board" />
       <Pane layoutX="569.0" layoutY="404.0" prefHeight="168.0" prefWidth="346.0" style="-fx-background-color: brown; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 20; -fx-background-radius: 20;">
          <children>
             <Text fx:id="help_text" fill="WHITE" layoutX="14.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pick a card" wrappingWidth="306.13671875">

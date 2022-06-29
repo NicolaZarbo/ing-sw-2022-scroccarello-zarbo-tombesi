@@ -16,8 +16,8 @@ public class LobbySceneController extends SceneController  {
     public CheckBox easySelector;
     public ChoiceBox<Integer> nPlayers;
     public Button createLobbyButton;
-    public Pane mainpanel;
-    public Text waitingtext;
+    public Pane mainPanel;
+    public Text waitingText;
 
     private final GUI gui;
     public Pane root;
@@ -31,7 +31,7 @@ public class LobbySceneController extends SceneController  {
 
     /**It sets the number of players selection.*/
     private void playerSetter(){
-        mainpanel.setOnKeyPressed(keyEvent -> {
+        mainPanel.setOnKeyPressed(keyEvent -> {
             int nPlayer;
             switch (keyEvent.getCode()){
                 case DIGIT1 -> nPlayer=1;
@@ -59,8 +59,8 @@ public class LobbySceneController extends SceneController  {
 
     /**It sets a waiting message for the player who has created the lobby.*/
     public void setWaitingScreen(){
-        mainpanel.setOpacity(0.5);
-        waitingtext.setText("Waiting for players to join..");
+        mainPanel.setOpacity(0.5);
+        waitingText.setText("Waiting for players to join..");
     }
 }
 
