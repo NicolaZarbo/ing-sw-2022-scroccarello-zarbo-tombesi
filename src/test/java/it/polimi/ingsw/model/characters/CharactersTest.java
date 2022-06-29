@@ -345,15 +345,15 @@ public class CharactersTest extends TestCase {
         ((GameStub)gameTest).setManuallyGamePhase(GameState.actionMoveStudent);
         gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         int initialCost= cardTester.getCost();
-        int target=((int)(Math.random()*4))*((Character11)cardTester).getStudents().size();
+        int target=((int)(Math.random()*3));
         ParameterObject parameters=new ParameterObject(((Character11)cardTester).getStudents().get(target).getId(),0);
         try{
             cardTester.cardEffect(parameters,gameTest);
         }
-        catch(RuntimeException e){
+        catch(NullPointerException e){
             e.printStackTrace();
         }
-        assertEquals(3,((Character11) cardTester).getStudents().size());
+        assertEquals(4,((Character11) cardTester).getStudents().size());
         assertEquals(initialCost+1,cardTester.getCost());
     }
 
@@ -377,7 +377,7 @@ public class CharactersTest extends TestCase {
             cardTester.cardEffect(parameters, gameTest);
         }
         catch(RuntimeException e){
-            System.out.println(e.getMessage());
+            assertNotNull(e);
         }
 
     }
