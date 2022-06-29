@@ -39,7 +39,7 @@ public abstract class TokensCharacter extends CharacterCard{
         for (Student student: students) {
             if (student.getId()==id) {
                 stud = student;
-                this.students.remove(stud);
+                this.students.remove(student);
                 return stud;
             }
         }
