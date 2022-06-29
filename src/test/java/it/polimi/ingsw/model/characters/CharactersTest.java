@@ -332,11 +332,14 @@ public class CharactersTest extends TestCase {
     public void testCharacter11(){
         cardTester=FactoryCharacter.createCharacter(11,gameTest.getBag());
         assertEquals(11,cardTester.getId());
+        gameTest.moveToNextPhase();
         gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         int initialCost= cardTester.getCost();
-        int target=((int)Math.random())*((Character11)cardTester).getStudents().size();//fixme this is 0
+        int target=((int)(Math.random()*4))*((Character11)cardTester).getStudents().size();
+        System.out.println(target);
         ParameterObject parameters=new ParameterObject(((Character11)cardTester).getStudents().get(target).getId(),0);
         try{
+            ((Character11)cardTester).getStudents().forEach(s->System.out.println(s.getId()));
             cardTester.cardEffect(parameters,gameTest);
         }
         catch(RuntimeException e){
@@ -351,7 +354,7 @@ public class CharactersTest extends TestCase {
         cardTester=FactoryCharacter.createCharacter(11,gameTest.getBag());
         assertEquals(11,cardTester.getId());
         while(cardTester.getCost()<=gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().getCoin()){
-            int target = ((int) Math.random()) * ((Character11) cardTester).getStudents().size();//fixme this is 0
+            int target = ((int) (Math.random()*4)) * ((Character11) cardTester).getStudents().size();
             ParameterObject parameters = new ParameterObject(((Character11) cardTester).getStudents().get(target).getId(), 0);
             try {
                 cardTester.cardEffect(parameters, gameTest);
@@ -360,7 +363,7 @@ public class CharactersTest extends TestCase {
             }
         }
         try{
-            int target = ((int) Math.random()) * ((Character11) cardTester).getStudents().size();//fixme this is 0
+            int target = ((int) (Math.random()*4)) * ((Character11) cardTester).getStudents().size();
             ParameterObject parameters = new ParameterObject(((Character11) cardTester).getStudents().get(target).getId(), 0);
             cardTester.cardEffect(parameters, gameTest);
         }
