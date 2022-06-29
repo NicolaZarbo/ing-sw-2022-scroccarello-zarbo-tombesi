@@ -100,7 +100,7 @@ public class SelectCharacterController extends SceneController{
         popupPanel.setMouseTransparent(true);
         if(!view.isYourTurn() || !( view.getState()== GameState.actionMoveStudent || view.getState()== GameState.actionMoveMother)) {
              for(int i=0;i<cardContainer.size();i++)
-                 cardContainer.get(i).getChildren().get(0).setDisable(true);
+                 cardContainer.get(i).getChildren().get(1).setDisable(true);
 
         }
     }
@@ -135,20 +135,28 @@ public class SelectCharacterController extends SceneController{
         coins=new ArrayList<>();
         value=new ArrayList<>();
         Map<Integer, Integer> cardNumberToPositionInPane=new HashMap<>(Map.of(1,0,2,5,6,7,7,1,8,6,9,2,10,3,11,4));
-        
+        int shown=0;
         for (Integer card: charactersPlayable) {
             int positionInScene=cardNumberToPositionInPane.get(card);
             Pane cardPane=cardContainer.get(positionInScene);
             cardPane.setVisible(true);
             cardPane.setMouseTransparent(false);
+            setCharacterPosition(cardPane,shown);
             
-            Rectangle rectangleCard=(Rectangle)cardPane.getChildren().get(0);
+            Rectangle rectangleCard=(Rectangle)cardPane.getChildren().get(1);
             setRectangleOfCharacter(rectangleCard,card);
             setCoinCostOfCharacter(cardPane,card);
-            
+            shown++;
         }
 
 
+    }
+    private void setCharacterPosition(Pane cardPane,int pos){
+        cardPane.setLayoutY(200);
+        int xPosition= 75+pos*300;
+        cardPane.setLayoutX(xPosition);
+        cardPane.setScaleX(1.2);
+        cardPane.setScaleY(1.2);
     }
     private void setRectangleOfCharacter(Rectangle characterRectangle, int cardNumber){
         characterRectangle.setFill(new ImagePattern(characterImage(cardNumber)));
@@ -163,8 +171,8 @@ public class SelectCharacterController extends SceneController{
         }
     }
     private void setCoinCostOfCharacter(Pane cardContainer, int cardNumber){
-        coins.add((Circle) cardContainer.getChildren().get(4));
-        value.add((Text) cardContainer.getChildren().get(6));
+        coins.add((Circle) cardContainer.getChildren().get(5));
+        value.add((Text) cardContainer.getChildren().get(7));
         value.get(value.size()-1).setText(""+view.getCostOfCard().get(cardNumber));
         coins.get(coins.size()-1).setFill(new ImagePattern(new Image("images/simple_elements/coin.png")));
     }
@@ -193,7 +201,7 @@ public class SelectCharacterController extends SceneController{
             s.setMouseTransparent(false);
         });
        // studentCharacterContainer.setMouseTransparent(false);
-        for (Pane item : cardContainer) item.getChildren().get(0).setMouseTransparent(true);
+        for (Pane item : cardContainer) item.getChildren().get(1).setMouseTransparent(true);
         //CharacterContainer.setMouseTransparent(true);
         inputManager.setCardEffectActivation();
     }
@@ -203,7 +211,7 @@ public class SelectCharacterController extends SceneController{
     private void effect7(){
        // studentCharacterContainer.setMouseTransparent(false);
        // CharacterContainer.setMouseTransparent(true);
-        for (Pane item : cardContainer) item.getChildren().get(0).setMouseTransparent(true);
+        for (Pane item : cardContainer) item.getChildren().get(1).setMouseTransparent(true);
 
         activatingCard=7;
         character7stud.forEach(s->{
@@ -255,14 +263,13 @@ public class SelectCharacterController extends SceneController{
         inputManager.setCardInActivation(10);
         inputManager.setCardEffectActivation();
         gui.showBoards();
-        //todo show the entrance and dining and have the player choose up to 2 studs
     }
 
     /**It triggers effect of the card 11 on click.
      * @see it.polimi.ingsw.model.characters.Character11*/
     private void effect11() {
       //  studentCharacterContainer.setMouseTransparent(false);
-        for (Pane item : cardContainer) item.getChildren().get(0).setMouseTransparent(true);
+        for (Pane item : cardContainer) item.getChildren().get(1).setMouseTransparent(true);
         activatingCard = 11;
         character11stud.forEach(s->{
             s.setDisable(false);
@@ -283,7 +290,7 @@ public class SelectCharacterController extends SceneController{
         if(!(number==1||number==7||number==11))
             throw new IllegalArgumentException("this is not a student character");
         ArrayList<Circle> out= new ArrayList<>();
-        for (int i = 7; i < cardContainer.get(position).getChildren().size(); i++) {
+        for (int i = 8; i < cardContainer.get(position).getChildren().size(); i++) {
             Circle stud =(Circle) cardContainer.get(position).getChildren().get(i);
             stud.setStyle("-fx-stroke-width: 0");
             stud.setDisable(true);
