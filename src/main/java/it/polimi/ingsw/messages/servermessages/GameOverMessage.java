@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages.servermessages;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.enumerations.WinCondition;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.view.CentralView;
@@ -10,7 +11,7 @@ import it.polimi.ingsw.view.CentralView;
 public class GameOverMessage extends ServerMessage{
     private int winnerID;
     private int winnerTeam;
-    private int winningCondition;
+    private WinCondition winningCondition;
 
    /**It builds the message starting from a json string.
     * @param json the string message*/
@@ -41,23 +42,23 @@ public class GameOverMessage extends ServerMessage{
      * <p>• there are only 3 clusters of islands left</p>*/
     private void winningConditions(Game game){
         if(game.getIslands().size()==3)
-            winningCondition=4;
+            winningCondition=WinCondition.ThreeIslandsLeft;
         if(game.getPlayer(0).getHand().getAssistant().size()==0)
-            winningCondition=3;
+            winningCondition=WinCondition.TenTurnsPassed;
         int nCheck;
         if(game.getNPlayers()==4)
             nCheck=2;
         else nCheck=game.getNPlayers();
         for (int i=0; i<nCheck;i++) {
             if(game.getPlayer(i).getBoard().towersLeft()==0)
-                winningCondition=2;
+                winningCondition=WinCondition.NoTowersLeft;
         }
         if(game.getBag().isEmpty())
-            winningCondition=1;
+            winningCondition=WinCondition.BagEmpty;
     }
 
     /**@return the reason which triggered game over*/
-    public int getWinningCondition() {
+    public WinCondition getWinningCondition() {
         return winningCondition;
     }
 

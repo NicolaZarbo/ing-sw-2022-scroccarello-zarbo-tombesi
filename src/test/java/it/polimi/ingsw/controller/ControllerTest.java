@@ -53,8 +53,12 @@ public class ControllerTest extends TestCase {
     /**It tests the management of wrong message notify (no action on the model).*/
     public void testUpdateIllegalMove(){
         ChooseCloudMessage cloudMessage=new ChooseCloudMessage(2,4);
-        this.controllerTest.update(cloudMessage);
-        assertNotNull(this.controllerTest.getGame().getClouds()[2].getStud()[0]);
+        try{
+            this.controllerTest.update(cloudMessage);
+        }
+        catch(IllegalMoveException e){
+            assertNotNull(this.controllerTest.getGame().getClouds()[2].getStud()[0]);
+        }
     }
 
 }

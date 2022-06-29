@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 
 import it.polimi.ingsw.GameStub;
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.enumerations.TokenColor;
@@ -30,6 +31,7 @@ public class ActionTest extends TestCase {
 
     /**It tests movement of token from entrance to dining room.*/
     public void testMoveInHall() {
+        ((GameStub)game).setManuallyGamePhase(GameState.actionMoveStudent);
         ArrayList<Student> entrance=game.getPlayer(0).getBoard().getEntrance();
         assertNotNull(entrance);
         for(int i=0;i<=entrance.size();i++) {
@@ -46,6 +48,7 @@ public class ActionTest extends TestCase {
 
     /**It tests the movement of token from entrance to island.*/
     public void testMoveToIsland() {
+        ((GameStub)game).setManuallyGamePhase(GameState.actionMoveStudent);
         Player player= game.getPlayer(0);
         int idIsland=(int)(Math.random()*12);
         Student stud=player.getBoard().getEntrance().get((int)(Math.random()*player.getBoard().getEntrance().size()));
@@ -55,6 +58,7 @@ public class ActionTest extends TestCase {
     }
 
     public void testMoveMotherNature() {
+        ((GameStub)game).setManuallyGamePhase(GameState.actionMoveMother);
         int nSteps=45;
         int posIniz=game.getMotherNature().getPosition();
         turn.moveMotherNature(nSteps);
@@ -65,6 +69,8 @@ public class ActionTest extends TestCase {
 
     /**It tests refill of entrance after cloud selection.*/
     public void testMoveFromCloudToEntrance() {
+        ((GameStub)game).setManuallyGamePhase(GameState.actionChooseCloud);
+
         Board board=game.getPlayer(1).getBoard();
         Cloud cloud =game.getClouds()[1];
         for (int i = 0; i < 3; i++) {
@@ -123,6 +129,7 @@ public class ActionTest extends TestCase {
 
     /**It tests if a teacher can visit the board.*/
     public void testCanHaveTeacher() {
+        ((GameStub)game).setManuallyGamePhase(GameState.actionMoveStudent);
         Player player=game.getPlayer((int)(Math.random()*4));
         Student stud=player.getBoard().getEntrance().get(0);
         turn.moveInDiningRoom(player.getId(),stud.getId());
@@ -131,6 +138,7 @@ public class ActionTest extends TestCase {
 
     /**It tests visit of the professor on the player's board.*/
     public void testSetTeacher() {
+        ((GameStub)game).setManuallyGamePhase(GameState.actionMoveStudent);
         Player player=game.getPlayer((int)(Math.random()*4));
         turn.setTeacher(TokenColor.getColor(player.getId()), player.getId());
         Student stud=player.getBoard().getEntrance().get((int)(Math.random()*player.getBoard().getEntrance().size()));
@@ -144,13 +152,14 @@ public class ActionTest extends TestCase {
     public void testCalculateInfluence() {
         game.getIsland(0).setTower(new Tower(TowerColor.getColor(1),1));
         game.getIsland(0).setTower(new Tower(TowerColor.getColor(1),1));
-
+        ((GameStub)game).setManuallyGamePhase(GameState.actionMoveMother);
         int influence = turn.calculateInfluence(1);
         assertEquals(2,influence);
     }
 
     /**It tests the conquest of an island.*/
     public  void testConquerIsland() {
+        ((GameStub)game).setManuallyGamePhase(GameState.actionMoveMother);
         Student stud=game.getPlayer(1).getBoard().getEntrance().get(0);
         turn.moveInDiningRoom(1,stud.getId());
         int inf, numberOfIsland=game.getIslands().size();
@@ -173,6 +182,7 @@ public class ActionTest extends TestCase {
     /**It tests the conquest of an island from a different player than its owner.*/
     public void testChangeIslandOwner() {
         Island isl= game.getIsland(7);
+        ((GameStub)game).setManuallyGamePhase(GameState.actionMoveMother);
         turn.putTowerFromBoardToIsland(isl,game.getPlayer(1));
         ArrayList<Student> sttuddd= new ArrayList<>();
         for (int i = 0; i < 5; i++) {

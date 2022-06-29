@@ -44,6 +44,7 @@ public class GameTest extends TestCase {
     /**It tests the getter of mother nature token.*/
     public void testGetMotherNature() {
         for(int i=1;i<12;i++){
+            ((GameStub)game).setManuallyGamePhase(GameState.actionMoveMother);
             game.getActionPhase().moveMotherNature(1);
             assertEquals(i,game.getMotherNature().getPosition());
         }

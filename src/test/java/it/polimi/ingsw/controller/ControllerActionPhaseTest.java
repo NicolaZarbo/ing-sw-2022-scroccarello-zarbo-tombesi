@@ -30,10 +30,10 @@ public class ControllerActionPhaseTest extends TestCase {
 
     /**It tests the movement of a token from entrance to dining room.*/
     public void testMoveStudentToHall() {
+        ((GameStub)this.controllerTest.getGame()).setManuallyGamePhase(GameState.actionMoveStudent);
         Player player=this.controllerTest.getGame().getPlayer(0);
         Board board=player.getBoard();
         ArrayList<Student> entrance=board.getEntrance();
-        ((GameStub)this.controllerTest.getGame()).setManuallyGamePhase(GameState.actionMoveStudent);
         for(int i=0;i<3;i++) {
             StudentToHallMessage message=new StudentToHallMessage(0,0);
             for(Student stud:entrance){
@@ -105,10 +105,10 @@ public class ControllerActionPhaseTest extends TestCase {
 
     /**It tests movement of token from entrance to island.*/
     public void testMoveStudentToIsland() {
+        ((GameStub)this.controllerTest.getGame()).setManuallyGamePhase(GameState.actionMoveStudent);
         Player player=this.controllerTest.getGame().getPlayer(0);
         Board board=player.getBoard();
         ArrayList<Student> entrance=board.getEntrance();
-        ((GameStub)this.controllerTest.getGame()).setManuallyGamePhase(GameState.actionMoveStudent);
         for(int i=0;i<3;i++) {
             StudentToIslandMessage message=new StudentToIslandMessage(0,0,0);
             for(Student stud:entrance){
@@ -192,10 +192,9 @@ public class ControllerActionPhaseTest extends TestCase {
 
     /**It tests character invocation (expert mode only).*/
     public void testPlayCharacter() {
-        CharacterCardMessage message=new CharacterCardMessage(gameTest.getCurrentPlayerId(), new ParameterObject(),2);
-        gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
-        int rng=(int)Math.random();//fixme this is always 0
-        if(rng==1) {
+        CharacterCardMessage message=new CharacterCardMessage(gameTest.getCurrentPlayerId(), new ParameterObject(),gameTest.getCharacters().get(0).getId());
+        int rng=(int) Math.random();
+        if(rng==0) {
             gameTest.setManuallyGamePhase(GameState.actionMoveMother);
             assertEquals(GameState.actionMoveMother,gameTest.getActualState());
         }
@@ -203,13 +202,13 @@ public class ControllerActionPhaseTest extends TestCase {
             gameTest.setManuallyGamePhase(GameState.actionMoveStudent);
             assertEquals(GameState.actionMoveStudent, gameTest.getActualState());
         }
-
+        gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         try{
             controllerTest.playCharacter(message);
         }
         catch(RuntimeException e){
             e.printStackTrace();
         }
-        assertTrue(gameTest.isBonusActive(2));
+
     }
 }

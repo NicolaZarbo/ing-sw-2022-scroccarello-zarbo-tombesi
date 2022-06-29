@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.GUI.Scenes;
 
 import it.polimi.ingsw.client.GUI.GUI;
 import it.polimi.ingsw.client.GUI.GuiInputManager;
+import it.polimi.ingsw.enumerations.WinCondition;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedBoard;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
@@ -131,13 +132,13 @@ public class GameOverSceneController extends SceneController {
 
     /**@return winning reason in string format*/
     private String gameOverReason(){
-        int reason= view.getGameOverReason();
+        WinCondition reason= view.getGameOverReason();
 
         return switch (reason){
-          case 1->"Empty bag!";
-          case 2->"Winner used every tower";
-          case 3->" out of assistants";
-          case 4-> "only 3 cluster of island left";
+            case BagEmpty->"Empty bag!";
+            case NoTowersLeft->"Winner used every tower";
+            case TenTurnsPassed->" out of assistants";
+            case ThreeIslandsLeft-> "only 3 cluster of island left";
             default -> "";
         };
 

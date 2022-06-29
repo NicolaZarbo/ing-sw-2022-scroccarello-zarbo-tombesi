@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.GameStub;
+import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.model.Action;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.tokens.Student;
@@ -42,6 +43,7 @@ public class CharactersTest extends TestCase {
     public void testNotEnoughMoneyCharacter1(){
         cardTester=FactoryCharacter.createCharacter(1,gameTest.getBag());
         ArrayList<Student> list=((Character1)cardTester).getStudents();
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.actionMoveStudent);
         while(gameTest.getPlayer(0).getHand().getCoin()>= cardTester.getCost()){
             ParameterObject parameters=new ParameterObject(list.get(1).getId(),1);
             cardTester.cardEffect(parameters,gameTest);
@@ -60,6 +62,7 @@ public class CharactersTest extends TestCase {
     public void testCharacter2(){
         cardTester=FactoryCharacter.createCharacter(2,gameTest.getBag());
         assertEquals(2,cardTester.getId());
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.actionMoveStudent);
         gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         ParameterObject noParameter=new ParameterObject();
         try {
@@ -89,6 +92,7 @@ public class CharactersTest extends TestCase {
     public void testCharacter6(){
         cardTester=FactoryCharacter.createCharacter(6,gameTest.getBag());
         assertEquals(6,cardTester.getId());
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.actionMoveStudent);
         for(int i=0;i<2;i++)
             gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         ParameterObject noParameter=new ParameterObject();
@@ -122,6 +126,7 @@ public class CharactersTest extends TestCase {
         int dim=(int)((Math.random()*(3-1))+1); //in this way you can get a random result in a range of values
         int[] targets=new int[dim];
         int[] exchange=new int[dim];
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.actionMoveStudent);
         for(int i=0;i<dim;i++){
             targets[i]=gameTest.getPlayer(0).getBoard().getEntrance().get(i).getId();
             exchange[i]=((Character7)cardTester).getStudents().get(i).getId();
@@ -134,6 +139,7 @@ public class CharactersTest extends TestCase {
     /**It tests activation of character 7 in the case player has not enough money.*/
     public void testNotEnoughMoneyCharacter7(){
         cardTester=FactoryCharacter.createCharacter(7,gameTest.getBag());
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.actionMoveStudent);
         while(gameTest.getPlayer(0).getHand().getCoin()>=cardTester.getCost()){
             int dim=(int)((Math.random()*(3-1))+1);
             int[] targets=new int[dim];
@@ -166,6 +172,7 @@ public class CharactersTest extends TestCase {
     public void testCharacter8(){
         cardTester=FactoryCharacter.createCharacter(8,gameTest.getBag());
         assertEquals(8,cardTester.getId());
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.actionMoveStudent);
         gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         ParameterObject noParameter=new ParameterObject();
         try {
@@ -195,6 +202,7 @@ public class CharactersTest extends TestCase {
     public void testCharacter9(){
         cardTester=FactoryCharacter.createCharacter(9,gameTest.getBag());
         assertEquals(9,cardTester.getId());
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.actionMoveStudent);
         for(int i=0;i<2;i++)
                 gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         int colorIndex=(int)(Math.random()*4+1);
@@ -232,6 +240,7 @@ public class CharactersTest extends TestCase {
         int dim=(int)((Math.random()*2)); //in this way you can get a random result in a range of values
         int[] targets=new int[dim];
         int[] exchange=new int[dim];
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.actionMoveStudent);
         for(int i=0;i<dim;i++){
             gameTest.getPlayer(0).getBoard().moveToDiningRoom(gameTest.getPlayer(0).getBoard().getEntrance().get(gameTest.getPlayer(0).getBoard().getEntrance().size()-1-i));
         }
@@ -264,6 +273,7 @@ public class CharactersTest extends TestCase {
     public void testNotEnoughMoneyCharacter10(){
         cardTester=FactoryCharacter.createCharacter(10,gameTest.getBag());
         int currentCost=cardTester.getCost();
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.actionMoveStudent);
         while(cardTester.getCost()<=gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().getCoin()) {
             int dim = (int) ((Math.random() * 2)); //in this way you can get a random result in a range of values
             int[] targets = new int[dim];
@@ -332,20 +342,19 @@ public class CharactersTest extends TestCase {
     public void testCharacter11(){
         cardTester=FactoryCharacter.createCharacter(11,gameTest.getBag());
         assertEquals(11,cardTester.getId());
-        gameTest.moveToNextPhase();
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.actionMoveStudent);
         gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().addCoin();
         int initialCost= cardTester.getCost();
         int target=((int)(Math.random()*4))*((Character11)cardTester).getStudents().size();
         System.out.println(target);
         ParameterObject parameters=new ParameterObject(((Character11)cardTester).getStudents().get(target).getId(),0);
         try{
-            ((Character11)cardTester).getStudents().forEach(s->System.out.println(s.getId()));
             cardTester.cardEffect(parameters,gameTest);
         }
         catch(RuntimeException e){
             e.printStackTrace();
         }
-        assertEquals(4,((Character11) cardTester).getStudents().size());
+        assertEquals(3,((Character11) cardTester).getStudents().size());
         assertEquals(initialCost+1,cardTester.getCost());
     }
 
@@ -353,6 +362,7 @@ public class CharactersTest extends TestCase {
     public void testNotEnoughMoneyCharacter11(){
         cardTester=FactoryCharacter.createCharacter(11,gameTest.getBag());
         assertEquals(11,cardTester.getId());
+        ((GameStub)gameTest).setManuallyGamePhase(GameState.actionMoveStudent);
         while(cardTester.getCost()<=gameTest.getPlayer(gameTest.getCurrentPlayerId()).getHand().getCoin()){
             int target = ((int) (Math.random()*4)) * ((Character11) cardTester).getStudents().size();
             ParameterObject parameters = new ParameterObject(((Character11) cardTester).getStudents().get(target).getId(), 0);
