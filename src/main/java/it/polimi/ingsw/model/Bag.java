@@ -57,8 +57,7 @@ public class Bag {
     }
 
     /**It states if there are still tokens in the bag or not.
-     * @return: •true: there are no tokens left
-     * <p>•false: there is at least one token left</p>*/
+     * {@code @return} •true: there are no tokens left  <p>•false: there is at least one token left</p> */
     public boolean isEmpty() {
         return left<=0;
     }

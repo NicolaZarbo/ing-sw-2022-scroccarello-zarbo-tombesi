@@ -47,7 +47,7 @@ public interface Printer {
 
     /** It is used to add some space at the end of a certain string to ensure correct visualization.
      * @param in the string to adjust
-     * @param dimensionNeeded the dimension to which extend the string*/
+     * @param dimensionNeeded the dimension to which extends the string*/
     static String padWithSpaces(String in, int dimensionNeeded){
         StringBuilder out = new StringBuilder(in);
         while(out.length()<dimensionNeeded)

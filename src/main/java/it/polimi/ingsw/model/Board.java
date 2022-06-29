@@ -31,13 +31,13 @@ public class Board {
         int nColors = TokenColor.listGetLastIndex()+1;
         this.coinDN = new boolean[nColors][3];
         this.setCoinDN(nColors);
-        this.towers = new ArrayList<Tower>();
+        this.towers = new ArrayList<>();
         for (int i=0;i<nTower;i++) {
             towers.add(new Tower(color,i+playerID));
         }
         this.playerID=playerID;
         this.diningRoom = new Student[nColors][10];
-        this.entrance =new ArrayList<Student>();
+        this.entrance = new ArrayList<>();
         this.table = new Professor[nColors];
         this.entranceSize=dimEntrance;
     }
@@ -141,10 +141,6 @@ public class Board {
         Tower tower;
             tower = towers.get(towers.size()-1);
             towers.remove(towers.size()-1);
-            if(towers.isEmpty())
-            {//victory found
-                //TODO
-            }
             return tower;
     }
 

@@ -6,7 +6,6 @@ import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**It tests the game and its methods. It is concerned to test the creation of game and all the main methods to make advancements in the game.

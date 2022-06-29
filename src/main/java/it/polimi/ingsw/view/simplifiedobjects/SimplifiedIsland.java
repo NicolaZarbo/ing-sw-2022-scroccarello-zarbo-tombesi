@@ -1,15 +1,14 @@
 package it.polimi.ingsw.view.simplifiedobjects;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SimplifiedIsland {
     private List<Integer> students;
-    private int towers;
-    private int dimension;
-    private int islandId;
-    private int towerColor;
-    private List<SimplifiedIsland> subIslands;
+    private final int towers;
+    private final int dimension;
+    private final int islandId;
+    private final int towerColor;
+    private final List<SimplifiedIsland> subIslands;
 
     public SimplifiedIsland(List<Integer> studentsId,List<SimplifiedIsland> subIsland, int numberOfTowers, int dimension, int islandId,int towerColor) {
         this.students = studentsId;

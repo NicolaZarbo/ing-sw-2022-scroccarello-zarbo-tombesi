@@ -10,7 +10,7 @@ Scroccarello Francesco; Zarbo Nicola; Tombesi Luca.
 - [CLI](#clijar )
 - [GUI](#guijar )
 - [Rules](#game-rules )
-- [Advanced Functionality](#advanced-functionality)
+- [Advanced Functionalities](#advanced-functionalities)
 
 draft
 
@@ -46,7 +46,7 @@ If none are specified the application tries to connect to a server on the local 
 **If only one of the aruments is specified the connection will fail**.
 
 ### Commands
-Every input from the player is _**NOT**_ case sensitive.
+Every input from the player is _**NOT**_ case-sensitive.
 At the start of every phase the game will prompt the user to use one of the available commands shown at screen, their syntax is also showed.
 In addition to those commands that are dependend on context, there are some additional ones that aren't specific to a phase :
 
@@ -63,12 +63,12 @@ Game visuals may have unexpected problems in some untested consoles.
 
 ## gui.jar
 ### Running the jar
->Open from the the folder contiaining the file or run with java -jar command form console.
+>Open from the folder contiaining the file or run with java -jar command form console.
 
 ### Connecting to the game server
 
 1. Once the application is running on the first, scene click on the connection option panel and insert the ip of the server and the port used for the connection. 
-2. insert an username in the field and enter or click connect to initiate the connection.  
+2. insert a username in the field and enter or click connect to initiate the connection.  
 
 > If no port and ip are specified in the connection option the application will try to connect to a server running in the local machine using port 50000.  
 > Accepted port values are beetween 49152 and 65536.

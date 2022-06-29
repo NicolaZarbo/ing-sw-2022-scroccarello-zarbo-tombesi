@@ -4,13 +4,9 @@ import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.enumerations.Mage;
 import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.enumerations.TowerColor;
-import it.polimi.ingsw.messages.ModelToViewTranslate;
-import it.polimi.ingsw.model.characters.Character1;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.tokens.Professor;
 import it.polimi.ingsw.model.tokens.Student;
-import it.polimi.ingsw.server.Lobby;
-import it.polimi.ingsw.view.simplifiedobjects.SimplifiedPlayer;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;

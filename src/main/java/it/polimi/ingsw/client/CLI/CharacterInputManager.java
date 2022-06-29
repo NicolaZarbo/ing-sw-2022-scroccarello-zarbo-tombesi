@@ -15,12 +15,12 @@ import java.util.Scanner;
 
 /**The handler of characters invocation (expert mode only). It contains methods to handle character's invocation, which are called by reflection.*/
 public class CharacterInputManager {
-    CentralView game;
+    final CentralView game;
 
     /**It searches the first student token of a certain color in a list.
      * @param color the index related to the token color
      * @param students the list of ids of student tokens where to look for
-     * @return the first id of the token with the specified color (if present.
+     * @return the first id of the token with the specified color (if present).
      * @exception NullPointerException if the list doesn't contain any token of the specified color*/
     private int studentInListFromColor(int color, List<Integer> students) throws NullPointerException{
         for (Integer studId:students) {

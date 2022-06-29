@@ -62,26 +62,26 @@
 
             </Pane>
             <Pane fx:id="cloudStudents_container" mouseTransparent="true">
-               <Pane fx:id="cloud1Students_container">
+               <Pane id="cloud1Students_container">
                   <Circle id="cloud1_1" fill="GREEN" layoutX="259.0" layoutY="255.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <Circle id="cloud1_2" fill="GREEN" layoutX="304.0" layoutY="254.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <Circle id="cloud1_3" fill="GREEN" layoutX="259.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <Circle id="cloud1_4" fill="GREEN" layoutX="304.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                </Pane>
-               <Pane fx:id="cloud2Students_container">
+               <Pane id="cloud2Students_container">
                   <Circle id="cloud2_1" fill="GREEN" layoutX="402.0" layoutY="154.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <Circle id="cloud2_2" fill="GREEN" layoutX="448.0" layoutY="153.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <Circle id="cloud2_4" fill="GREEN" layoutX="448.0" layoutY="201.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <Circle id="cloud2_3" fill="GREEN" layoutX="402.0" layoutY="201.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                </Pane>
-               <Pane fx:id="cloud3Students_container">
+               <Pane id="cloud3Students_container">
                   <Circle id="cloud3_1" fill="GREEN" layoutX="553.0" layoutY="254.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <Circle id="cloud3_2" fill="GREEN" layoutX="601.0" layoutY="255.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <Circle id="cloud3_3" fill="GREEN" layoutX="553.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <Circle id="cloud3_4" fill="GREEN" layoutX="602.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
 
                </Pane>
-               <Pane fx:id="cloud4Students_container">
+               <Pane id="cloud4Students_container">
                   <Circle id="cloud4_1" fill="GREEN" layoutX="402.0" layoutY="346.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <Circle id="cloud4_2" fill="GREEN" layoutX="448.0" layoutY="346.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <Circle id="cloud4_3" fill="GREEN" layoutX="402.0" layoutY="387.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />

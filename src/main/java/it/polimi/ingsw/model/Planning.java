@@ -7,7 +7,7 @@ import java.util.*;
 
 /**The planning phase of the game. It involves the refill of the clouds with student tokens and the decision of the playing order based on assistant cards played by each player.*/
 public class Planning {
-    Game game;
+    final Game game;
     public Planning(Game game) {
         this.game=game;
     }

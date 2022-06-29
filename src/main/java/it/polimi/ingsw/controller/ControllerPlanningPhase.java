@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.Planning;
 
 import java.util.List;
 
-/**The sub-controller which manages the planning phase. It is responsible of receiving input from the client (View) during all its planning phase and translating it to a model plan.*/
+/**The sub-controller which manages the planning phase. It is responsible for receiving input from the client (View) during all its planning phase and translating it to a model plan.*/
 public class ControllerPlanningPhase {
 
     private final Game game;
@@ -22,7 +22,7 @@ public class ControllerPlanningPhase {
 
     /**It is used to make players playing the assistant card. As a result it invokes the model which keeps the reference to which player has played which card.
      * @param message the input of the player which contains the card played from the player
-     * @exception IllegalMoveException if the game is not in the right state or it's not the player's turn*/
+     * @exception IllegalMoveException if the game is not in the right state, or it's not the player's turn*/
     public void playAssistantCard(PlayAssistantMessage message){
         if(game.getActualState()!= GameState.planPlayCard || message.getPlayerId()!= game.getCurrentPlayerId()){
             if(game.getActualState()!=GameState.planPlayCard) throw new IllegalMoveException("not the right state");

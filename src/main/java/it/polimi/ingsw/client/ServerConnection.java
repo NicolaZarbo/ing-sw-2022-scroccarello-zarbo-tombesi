@@ -8,12 +8,10 @@ import it.polimi.ingsw.messages.servermessages.ServerMessage;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.view.CentralView;
 
-import javax.naming.TimeLimitExceededException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -74,7 +72,7 @@ public class ServerConnection {
     public void run() {
         Thread pinger =new Thread(this::ping);
         pinger.start();
-        String socketLine="";
+        String socketLine;
         try {
             socketLine = readFromServer();
             inputManager.printToScreen(socketLine);
@@ -116,7 +114,7 @@ public class ServerConnection {
      * Necessary to notice disconnections through timeout*/
     private String readSocketIn(){
         StringBuilder builder= new StringBuilder();
-        int read=2;
+        int read;
         try {
             read=  socket.getInputStream().read();
             while((char)read!='\n'){

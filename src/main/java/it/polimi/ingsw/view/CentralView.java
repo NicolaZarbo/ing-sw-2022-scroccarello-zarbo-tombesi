@@ -298,7 +298,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
 
     /**It activates the assistant card selected by the player.
      * @param cardId the id of the card to play
-     * @exception CardNotFoundException if the card the player wants to play is unavailable*/
+     * @exception CardNotFoundException if a card the player wants to play is unavailable*/
     public void useAssistantCard(int cardId){
         if(personalPlayer.getAssistantCards()[cardId]) {
             notify(new PlayAssistantMessage(id, cardId+10*id));
@@ -325,7 +325,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
      * @param colorOfStudent color of the moved student
      * @param islandId id of the target island
      * @exception IllegalMoveException if the island is not available*/
-    public void moveStudentToIsland(int colorOfStudent, int islandId) throws IllegalMoveException,NoTokenFoundException{
+    public void moveStudentToIsland(int colorOfStudent, int islandId) throws IllegalMoveException{
         int studID=personalPlayer.getBoard().getStudentFromColorInEntrance(colorOfStudent);
         if( islands.stream().map(SimplifiedIsland::getIslandId).toList().contains(islandId))
             notify(new StudentToIslandMessage(personalPlayer.getId(), studID, islandId));

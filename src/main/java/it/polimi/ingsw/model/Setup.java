@@ -8,15 +8,14 @@ import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.enumerations.TokenColor;
 import it.polimi.ingsw.enumerations.TowerColor;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
-/**The setup phase of the game. It is responsible of initializing all the components of the game.*/
+/**The setup phase of the game. It is responsible for initializing all the components of the game.*/
 public class Setup {
-    private Game game;
-    private ArrayList<TowerColor> availableColor;
-    private ArrayList<Mage> availableMages ;
-    private ArrayList<LobbyPlayer> prePlayers;
+    private final Game game;
+    private final ArrayList<TowerColor> availableColor;
+    private final ArrayList<Mage> availableMages ;
+    private final ArrayList<LobbyPlayer> prePlayers;
     private List<String> preGameOrder;
     private String preGameTurnOf;
     private int idCreator;
@@ -85,7 +84,7 @@ public class Setup {
         return availableColor;
     }
 
-    /**@return the list of magicians which have still not been choosed*/
+    /**@return the list of magicians which have still not been chosen*/
     public ArrayList<Mage> getAvailableMages() {
         return availableMages;
     }

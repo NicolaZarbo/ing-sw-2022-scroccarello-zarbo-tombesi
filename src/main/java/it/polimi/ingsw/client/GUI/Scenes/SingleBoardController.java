@@ -116,11 +116,7 @@ public class SingleBoardController {//extends BoardSceneController
     }
     private void resetActivationOnExit(){
         if(gui.getInputManager().isActivatingCardEffect()){
-            EventHandler<MouseEvent> changeSceneMidActivation= new EventHandler<MouseEvent>() {
-                public void handle(MouseEvent event) {
-                gui.getInputManager().resetEffectActivation();
-                }
-            };
+            EventHandler<MouseEvent> changeSceneMidActivation= event -> gui.getInputManager().resetEffectActivation();
             toBoard.setOnMouseClicked(changeSceneMidActivation );
             toIsland.setOnMouseClicked(changeSceneMidActivation);
         }

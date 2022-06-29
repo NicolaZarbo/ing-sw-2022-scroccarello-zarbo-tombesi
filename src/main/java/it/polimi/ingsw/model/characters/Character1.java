@@ -15,7 +15,6 @@ public class Character1 extends TokensCharacter{
         super(id);
     }
 
-    /**idStudent from card, id target island*/
 
     /**It draws one student from the card and puts it on a target island. Then, the students' list is refilled.
      * @param parameters parameter object with 2 parameters*

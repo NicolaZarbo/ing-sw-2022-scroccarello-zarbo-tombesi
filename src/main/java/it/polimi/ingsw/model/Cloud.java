@@ -5,14 +5,12 @@ import it.polimi.ingsw.model.tokens.Student;
 public class Cloud {
     private final int id;
     private Student[] stud;
-    private final int dimension;
 
     /**It builds the cloud by assigning it an id and setting the students
      * @param id id characterizing the cloud
      * @param students set of student tokens on the cloud*/
     public Cloud(Student[] students, int id){
         this.stud=new Student[students.length];
-        this.dimension=students.length;
         System.arraycopy(students, 0, stud, 0, students.length);
         this.id=id;
     }

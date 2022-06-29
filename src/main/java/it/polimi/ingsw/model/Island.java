@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.tokens.Tower;
 
 import java.util.ArrayList;
 
-/**The island tile of the game. It contains student tokens, tower tokens and it's characterized by a unique id. They can be conquered by a player if he's got the higher influence on it when mother nature visits the tile. Islands near conquered by the same player can be merged together.*/
+/**The island tile of the game. It contains student tokens, tower tokens, and it's characterized by a unique id. They can be conquered by a player if he's got the higher influence on it when mother nature visits the tile. Islands near conquered by the same player can be merged together.*/
 public class Island {
     private final int ID;
     private final ArrayList<Student> students;

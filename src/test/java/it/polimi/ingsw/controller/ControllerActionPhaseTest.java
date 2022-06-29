@@ -3,7 +3,6 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
-import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.messages.clientmessages.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.util.ParameterObject;
@@ -193,7 +192,7 @@ public class ControllerActionPhaseTest extends TestCase {
     /**It tests character invocation (expert mode only).*/
     public void testPlayCharacter() {
         CharacterCardMessage message=new CharacterCardMessage(gameTest.getCurrentPlayerId(), new ParameterObject(),gameTest.getCharacters().get(0).getId());
-        int rng=(int) Math.random();
+        int rng=(int) (Math.random()*2);
         if(rng==0) {
             gameTest.setManuallyGamePhase(GameState.actionMoveMother);
             assertEquals(GameState.actionMoveMother,gameTest.getActualState());

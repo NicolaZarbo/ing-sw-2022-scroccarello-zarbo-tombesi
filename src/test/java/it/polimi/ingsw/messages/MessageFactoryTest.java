@@ -67,7 +67,7 @@ public class MessageFactoryTest extends TestCase {
         }
 
         //PlayerSetUpMessage
-        ArrayList<String> names=new ArrayList<String>();
+        ArrayList<String> names= new ArrayList<>();
         names.add("pippo"); names.add("pluto"); names.add("paperino"); names.add("minnie");
         //System.out.println(names);
         gameTest.getSetupPhase().setPreOrder(names);

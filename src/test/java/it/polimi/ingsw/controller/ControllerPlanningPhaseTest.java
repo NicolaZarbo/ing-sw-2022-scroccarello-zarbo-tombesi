@@ -2,7 +2,6 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.GameStub;
 import it.polimi.ingsw.messages.clientmessages.PlayAssistantMessage;
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.enumerations.GameState;
 import junit.framework.TestCase;
 

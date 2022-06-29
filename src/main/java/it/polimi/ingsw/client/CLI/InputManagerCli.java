@@ -3,14 +3,12 @@ package it.polimi.ingsw.client.CLI;
 import it.polimi.ingsw.client.CLI.printers.*;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.exceptions.CardNotFoundException;
-import it.polimi.ingsw.exceptions.CharacterErrorException;
 import it.polimi.ingsw.exceptions.IllegalMoveException;
 import it.polimi.ingsw.view.CentralView;
 import it.polimi.ingsw.client.InputManager;
 import it.polimi.ingsw.view.simplifiedobjects.SimplifiedIsland;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;

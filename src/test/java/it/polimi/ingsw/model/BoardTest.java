@@ -6,11 +6,8 @@ import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import it.polimi.ingsw.model.tokens.Professor;
 import it.polimi.ingsw.model.tokens.Student;
 import it.polimi.ingsw.enumerations.TokenColor;
-import it.polimi.ingsw.enumerations.TowerColor;
 import it.polimi.ingsw.model.tokens.Tower;
 import junit.framework.TestCase;
-
-import java.util.ArrayList;
 
 /**It tests the board of the player and the movement of tokens.*/
 public class BoardTest extends TestCase {

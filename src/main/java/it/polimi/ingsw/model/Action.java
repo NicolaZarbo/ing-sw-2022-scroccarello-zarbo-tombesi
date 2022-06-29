@@ -31,7 +31,7 @@ public class Action {
     /** It moves a student token from the entrance to the dining room.
      * @param idPlayer id of the player which is moving the token
      * @param idStud id of the moved student token
-     * @exception NoTokenFoundException if the entrance does not contains the required token*/
+     * @exception NoTokenFoundException if the entrance does not contain the required token*/
     public void moveInDiningRoom(int idPlayer, int idStud){
         try {
             Player player = game.getPlayer(idPlayer);

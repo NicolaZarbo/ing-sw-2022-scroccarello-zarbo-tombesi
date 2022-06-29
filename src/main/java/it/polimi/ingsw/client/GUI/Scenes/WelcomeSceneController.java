@@ -7,10 +7,8 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.Bloom;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Shadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -32,15 +30,15 @@ public class WelcomeSceneController extends SceneController {
     private GUI gui;
     public TextField usernameBox;
     public Text errorMsg;
-    public Pane mainpane;
-    public Pane lobbymessage;
+    public Pane mainPane;
+    public Pane lobbyMessage;
     private boolean customConnection;
 
     @Override
     public void initialize() {
         this.gui = GuiInputManager.getGui();
         root.setStyle("-fx-background-image:url(images/wallpapers/Eriantys.jpg); -fx-background-position: center; -fx-background-size: 1236 863");
-        mainpane.setStyle("-fx-background-image:url(images/simple_elements/Username.png); -fx-background-position: center; -fx-background-size: 438 144; -fx-border-width: 2");
+        mainPane.setStyle("-fx-background-image:url(images/simple_elements/Username.png); -fx-background-position: center; -fx-background-size: 438 144; -fx-border-width: 2");
         usernameBox.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().equals(KeyCode.ENTER)) {
                 startGame();
@@ -51,14 +49,10 @@ public class WelcomeSceneController extends SceneController {
             test.setColor(Color.RED);
             test.setBlurType(BlurType.THREE_PASS_BOX);
             connectionOptions.setEffect(test);
-            connectionOptions.setOnMouseExited(event1 -> {
-                connectionOptions.setEffect(null);
-            });
+            connectionOptions.setOnMouseExited(event1 -> connectionOptions.setEffect(null));
 
         });
-        Platform.runLater(()->{
-            usernameBox.requestFocus();
-        });
+        Platform.runLater(()-> usernameBox.requestFocus());
     }
 
     /**It starts the game by establishing the connection with the server. It sends first information such as the user's nickname and eventually notifies him that the connection has been failing or the username is unavailable. It contains a banner to modify connection options (IP and port).*/
@@ -79,9 +73,10 @@ public class WelcomeSceneController extends SceneController {
             try{
                 gui.startConnection(new ByteArrayInputStream(usr.getBytes()));
                 if(GuiInputManager.isLobbyAvailable()){
-                    mainpane.setDisable(true);
-                    this.mainpane.setOpacity(0.5);
-                    this.lobbymessage.setVisible(true);
+                    mainPane.setDisable(true);
+                    connectionOptions.setDisable(true);
+                    this.mainPane.setOpacity(0.5);
+                    this.lobbyMessage.setVisible(true);
                 }
 
             }
@@ -91,7 +86,7 @@ public class WelcomeSceneController extends SceneController {
         }
     }
 
-    /**It verifies if connection parameters are admittible.*/
+    /**It verifies if connection parameters are acceptable.*/
     private boolean checkConnectionOptions(){
         String[] ipv4St=ip_server.getText().split("\\.",4);
         int[] ipv4= new int[4];

@@ -21,7 +21,7 @@ public class GameOverSceneController extends SceneController {
     public AnchorPane root;
     public Pane text_container;
     public Text reasonText;
-    GUI gui;
+    final GUI gui;
 
 
     /**It builds the instance of the game over controller.*/

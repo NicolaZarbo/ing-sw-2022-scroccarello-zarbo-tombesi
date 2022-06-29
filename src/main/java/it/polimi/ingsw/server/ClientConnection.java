@@ -1,6 +1,5 @@
 package it.polimi.ingsw.server;
 
-import it.polimi.ingsw.exceptions.TimeOutConnectionException;
 import it.polimi.ingsw.observer.Observable;
 
 import java.io.IOException;

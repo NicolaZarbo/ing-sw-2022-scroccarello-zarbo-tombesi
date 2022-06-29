@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.model.Setup;
 
-/**The sub-controller which manages setup phase. It is responsible of receiving input from the client (View) during all its setup phase and translating it to a model customization.*/
+/**The sub-controller which manages setup phase. It is responsible for receiving input from the client (View) during all its setup phase and translating it to a model customization.*/
 public class ControllerSetupPhase {
 private final Setup setup;
 private final Game model;
@@ -20,7 +20,7 @@ private final Game model;
 
     /** It is used to convert the custom choices of the player.
      * @param message the input received from the player which contains its custom choices such as tower color, the magician or his nickname
-     * @exception IllegalMoveException if the game is not in the right state or it's not the player's time to play*/
+     * @exception IllegalMoveException if the game is not in the right state, or it's not the player's time to play*/
     public void createPlayer(PrePlayerMessage message){
         if(model.getActualState()!= GameState.setupPlayers || !setup.isPreOrderTurnOf(message.getName()))
             throw new IllegalMoveException("curr player is "+setup.getPreGameTurnOf());

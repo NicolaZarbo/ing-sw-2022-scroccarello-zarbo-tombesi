@@ -33,7 +33,7 @@ public class HandSceneController extends SceneController{
     public ImageView activeCharacter;
     public Button characterButton;
     private ArrayList<Integer> discardedCard;
-    GUI gui;
+    final GUI gui;
     private ArrayList<Rectangle> assistantCards;
     private final CentralView view;
     private boolean atLeastOneFree;

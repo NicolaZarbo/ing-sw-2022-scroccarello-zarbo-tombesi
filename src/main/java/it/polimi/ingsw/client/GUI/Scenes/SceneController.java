@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.GUI.Scenes;
 
-import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -17,15 +16,14 @@ public abstract class SceneController {
     /**It is used when a clickable element is covered by other Panels, preventing it from being activated.*/
     protected void setOthersContainerMouseTransparent(Pane containerClickable){
         for (Pane container:containerList) {
-            pane.setMouseTransparent(true);
-        }
+            container.setMouseTransparent(true);
+        }//fixme controll
         containerClickable.setMouseTransparent(false);
     }
 
     /**It sets the container list of the scene. Containers are pane(s) and its variances.
      * @param containers the list of containers*/
     protected void setContainerList(List<Pane> containers){
-        containers=new ArrayList<>();
         containerList=containers;
     }
 

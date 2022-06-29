@@ -162,8 +162,8 @@ public class SetupSceneController extends SceneController{
         });
 
     }
-    @FXML
     /**It selects the mage 1 on click.*/
+    @FXML
     public void setMage1(MouseEvent click){
         this.wizardchosen =1;
         restoreAllOpacities();
@@ -171,32 +171,32 @@ public class SetupSceneController extends SceneController{
 
         addDoubleClickConfirm(click);
     }
-    @FXML
     /**It selects the mage 2 on click.*/
+    @FXML
     public void setMage2(MouseEvent click){
         this.wizardchosen =2;
         restoreAllOpacities();
         mage2.setOpacity(0.5);
         addDoubleClickConfirm(click);
     }
-    @FXML
     /**It selects the mage 3 on click.*/
+    @FXML
     public void setMage3(MouseEvent click){
         this.wizardchosen =3;
         restoreAllOpacities();
         mage3.setOpacity(0.5);
         addDoubleClickConfirm(click);
     }
-    @FXML
     /**It selects the mage 4 on click.*/
+    @FXML
     public void setMage4(MouseEvent click){
         this.wizardchosen =4;
         restoreAllOpacities();
         mage4.setOpacity(0.5);
         addDoubleClickConfirm(click);
     }
-    @FXML
     /**It selects the tower choice black on click.*/
+    @FXML
     public void setBlackTower(MouseEvent click){
         this.towerchosen=1;
         restoreAllOpacities();
@@ -232,7 +232,7 @@ public class SetupSceneController extends SceneController{
         mage4.setOpacity(1.0);
     }
 
-    /**It triggers the confirm of the selection of the custom parameters of the player (it triggers the lobby-player creation).*/
+    /**It triggers the confirmation of the selection of the custom parameters of the player (it triggers the lobby-player creation).*/
     public void confirmChoice() {
         if(towerchosen==0){
             errorMsg.setText("Please choose your color");

@@ -53,7 +53,7 @@ public class SelectCharacterController extends SceneController{
     private ArrayList<Circle> character7stud;
     private ArrayList<Circle> character11stud;
 
-    GUI gui;
+    final GUI gui;
     private int activatingCard;
     private final GuiInputManager inputManager;
     private ArrayList<Integer> selectedStudents;
@@ -225,7 +225,7 @@ public class SelectCharacterController extends SceneController{
         panelGoToBoard();
     }
 
-    /**It shows the go to board on the popup panel-*/
+    /**It shows the go-to board on the popup panel-*/
     private void panelGoToBoard(){
         popupPanel.getChildren().forEach(pane->{
             pane.setVisible(false);

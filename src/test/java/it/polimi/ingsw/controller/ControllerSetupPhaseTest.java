@@ -41,7 +41,7 @@ public class ControllerSetupPhaseTest extends TestCase {
     public void testCreatePlayer(){
         LobbyPlayer player1= new LobbyPlayer(TowerColor.black, Mage.mage1,"pippo");
         LobbyPlayer player2=new LobbyPlayer(TowerColor.white,Mage.mage2,"donald");
-        List<String> list=new ArrayList<String>(4);
+        List<String> list= new ArrayList<>(4);
         list.add(player1.getNickname());
         list.add(player2.getNickname());
         this.cTest.getSetup().setPreOrder(list);

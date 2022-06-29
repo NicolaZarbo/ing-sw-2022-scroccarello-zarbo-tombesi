@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.enumerations.WinCondition;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.view.CentralView;
 
 /**The message to notify the end of the game. It contains information about the winner(s).*/

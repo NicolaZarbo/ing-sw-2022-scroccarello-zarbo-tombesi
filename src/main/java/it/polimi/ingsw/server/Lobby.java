@@ -12,11 +12,9 @@ import java.util.stream.Collectors;
 /**The lobby which contains connected clients and lets them customize their player.*/
 public class Lobby {
     private final ArrayList<ClientConnection> connections = new ArrayList<>();
-    private final int lobbyCode;
+   // private final int lobbyCode;
     private final int lobbyDimension;
-    private Game model;
     private final ArrayList<RemoteView> playersViews;
-    private Controller controller;
     private final boolean easy;
 
     /**It creates the lobby with the number of players and adding the first player connection.
@@ -29,7 +27,7 @@ public class Lobby {
         connections.add(firstConnection);
         playersViews=new ArrayList<>();
         playersViews.add(new RemoteView(firstConnection,nickname));
-        this.lobbyCode = lobbyCode;
+        //this.lobbyCode = lobbyCode;
         this.easy=easy;
         this.lobbyDimension=lobbyDimension;
     }
@@ -44,8 +42,8 @@ public class Lobby {
 
     /**It starts a new game as soon as the lobby is filled with the right number of players.*/
     public void startGame(){
-        model = new Game(easy, getLobbyDimension());
-        controller = new Controller(model);
+        Game model = new Game(easy, getLobbyDimension());
+        Controller controller = new Controller(model);
         model.getSetupPhase().setPreOrder(playersViews.stream().map(RemoteView::getNickname).collect(Collectors.toList()));
         for (RemoteView view: playersViews) {
             model.addObserver(view);

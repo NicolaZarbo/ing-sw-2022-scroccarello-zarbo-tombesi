@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.enumerations.GameState;
 import it.polimi.ingsw.model.Action;
 
-/**The sub-controller which manages action phase. It is responsible of receiving input from the client (View) during all its action phase and translating it to a model action.*/
+/**The sub-controller which manages action phase. It is responsible for receiving input from the client (View) during all its action phase and translating it to a model action.*/
 public class ControllerActionPhase  {
 
     private final Game game;
