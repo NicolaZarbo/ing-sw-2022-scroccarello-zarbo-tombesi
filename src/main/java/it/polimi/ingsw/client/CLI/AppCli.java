@@ -22,6 +22,7 @@ public class AppCli {
                 System.out.println("No connection info given\n  Insert ip now "+Printer.CYAN+" OR"+Printer.RST+" just press enter to connect to localhost");
                 String input = new Scanner(System.in).nextLine();
                 if(!input.equalsIgnoreCase("")) {
+                    ServerConnection.ip=input;
                     System.out.println("insert the port");
                     ServerConnection.port = Integer.parseInt(new Scanner(System.in).nextLine());
                 }

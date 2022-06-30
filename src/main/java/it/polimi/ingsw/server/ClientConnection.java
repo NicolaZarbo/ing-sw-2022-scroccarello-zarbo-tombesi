@@ -66,7 +66,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
         } catch (IOException | NoSuchElementException e) {
              close("socket exception");
         }catch (IllegalArgumentException ex){
-             close(ex.getMessage());
+             ex.printStackTrace();
         }
          close("closed by server");
     }
@@ -97,7 +97,6 @@ public class ClientConnection extends Observable<String> implements Runnable{
         if (isActive()) {
                 while(read.equalsIgnoreCase("ping")){
                     read = readSocketIn();
-
                 }
                 result = read;
                 return result;
@@ -106,12 +105,12 @@ public class ClientConnection extends Observable<String> implements Runnable{
     }
     /** Used instead of the scanner for more control on timeout*/
     private String readSocketIn(){
-        StringBuilder builder= new StringBuilder();
+        StringBuilder build= new StringBuilder();
         try {
             int read=  inSocket.read();
-            while((char)read!='\n'){
-                builder.append((char)read);
-                read= inSocket.read();
+            while( (char)read!='\n' && read!=-1  ) {
+                build.append((char) read);
+                read = inSocket.read();
             }
             if(read==0 || read==-1 || ((char)read)==' ') {
                 close("lost connection");
@@ -124,8 +123,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
             close("connection error");
             return "";
         }
-        String out=builder.toString();
-        return out.substring(0, out.length() - 1);
+        return build.toString().replace("\r","");
     }
     public void asyncSend(final String message){
         new Thread(() -> send(message)).start();
@@ -146,7 +144,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
     private void close(String reason){
         if(!active)
             return;
-        System.out.println("Unregistering client...");
+        System.out.println("Unregistering client... "+reason);
         send("Connection closed from Server ("+reason+")");
         try {
             clientSocket.close();

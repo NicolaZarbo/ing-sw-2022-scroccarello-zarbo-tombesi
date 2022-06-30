@@ -117,10 +117,11 @@ public class ServerConnection {
         int read;
         try {
             read=  socket.getInputStream().read();
-            while((char)read!='\n'){
-                builder.append((char)read);
-                read= socket.getInputStream().read();
-            }
+            while((char)read!='\n' && read!=-1){
+                    builder.append((char) read);
+                    read = socket.getInputStream().read();
+                    System.out.println(read);
+                }
         }catch (SocketTimeoutException timeoutException){
             throw new TimeOutConnectionException();
         } catch (IOException e) {
@@ -132,7 +133,7 @@ public class ServerConnection {
             closeConnection();
             throw new TimeOutConnectionException();
         }
-            return out.substring(0, out.length() - 1);
+        return out.replace("\r","");
     }
     /** Used to read a string from the server*/
     private String readFromServer(){
