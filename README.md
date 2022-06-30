@@ -41,9 +41,9 @@ Accepted values are between 49152 and 65536.
 * port Number is the port used in the tcp connection.    
 Accepted values are between 49152 and 65536.
 
-> To connect to a server not on localMachine both arguments are mandatory,   
-If none are specified the application tries to connect to a server on the local machine with port 50000;  
-**If only one of the arguments is specified the connection will fail**.
+> **To connect to a server via jar arguments both serverIp and portNumber are mandatory**.  
+If none are specified the application will prompt the user to insert port and ip, or connect to a default connection on localhost;  
+
 
 ### Commands
 Every input from the player is _**NOT**_ case-sensitive.
