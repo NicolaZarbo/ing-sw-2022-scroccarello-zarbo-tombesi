@@ -59,7 +59,9 @@ In addition to those commands that are dependents on context, there are some add
 Game visuals may have unexpected problems in some untested consoles.
 
 #### tested Consoles
-* win10 base cmdConsole
+* Windows10 base cmd console
+* Windows11 base cmd console
+* Ubuntu 18.04 terminal
 
 ---
 
