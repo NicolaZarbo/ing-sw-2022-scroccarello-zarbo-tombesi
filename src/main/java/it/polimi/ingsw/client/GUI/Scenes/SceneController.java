@@ -17,7 +17,7 @@ public abstract class SceneController {
     protected void setOthersContainerMouseTransparent(Pane containerClickable){
         for (Pane container:containerList) {
             container.setMouseTransparent(true);
-        }//fixme controll
+        }
         containerClickable.setMouseTransparent(false);
     }
 

@@ -43,12 +43,7 @@ public class GameOverSceneController extends SceneController {
 
     /**It sets the background of the winning scene.*/
     private void setBackground(){
-        if(view.isTeamPlay()) {
-            if(winnerTeamTowerColor()==0)
-                root.setStyle("");//todo background blackTeam
-            else root.setStyle("");//todo background white team
 
-        }else {
             int studentForBack=winnerBestAllies(view.getPlayers().get(view.getWinner()));
             switch (studentForBack){
                 case 0->{
@@ -79,14 +74,9 @@ public class GameOverSceneController extends SceneController {
                 }
             }
         }
-    }
 
-    /**@return the tower color of the winner team.*/
-    private int winnerTeamTowerColor(){
-        if( view.getWinner()==view.getPlayers().get(0).getTeam())
-            return view.getPlayers().get(0).getTowerColor();
-        else return view.getPlayers().get(1).getTowerColor();
-    }
+
+
 
     /**@param winner the simplified winner player
      * @return the index of the color the player has the maximum amount of tokens on board*/
@@ -139,7 +129,7 @@ public class GameOverSceneController extends SceneController {
             case NoTowersLeft->"Winner used every tower";
             case TenTurnsPassed->" out of assistants";
             case ThreeIslandsLeft-> "only 3 cluster of island left";
-            default -> "";
+
         };
 
     }

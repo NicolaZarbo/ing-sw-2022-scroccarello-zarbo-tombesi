@@ -25,7 +25,7 @@ public class LobbySceneController extends SceneController  {
     @Override
     public void initialize() {
         root.setStyle("-fx-background-image: url(images/wallpapers/LowerQualityLobby.png); -fx-background-size: 1236 863");
-        nPlayers.setItems(FXCollections.observableArrayList(1,2,3,4));//fixme 1 is here for test purposes
+        nPlayers.setItems(FXCollections.observableArrayList(2,3,4));
         playerSetter();
     }
 
@@ -34,7 +34,6 @@ public class LobbySceneController extends SceneController  {
         mainPanel.setOnKeyPressed(keyEvent -> {
             int nPlayer;
             switch (keyEvent.getCode()){
-                case DIGIT1 -> nPlayer=1;
                 case DIGIT2 -> nPlayer=2;
                 case DIGIT3 -> nPlayer=3;
                 case DIGIT4 -> nPlayer=4;

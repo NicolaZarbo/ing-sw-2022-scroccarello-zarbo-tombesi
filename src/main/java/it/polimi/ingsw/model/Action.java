@@ -253,7 +253,7 @@ public class Action {
                             game.getPlayer(playerId).getBoard().putProfessor(temp);
                             int playerTemp = player.getId();
                             game.getPlayer(playerTemp).getBoard().removeProfessor(color);
-                            //game.groupMultiMessage(new SingleBoardMessage(game, player.getId()));
+
                         }
             }
         }
@@ -326,7 +326,7 @@ public class Action {
                 int inf=influence.get(player.getId()-2)+calculateInfluence(player.getId());
                 influence.set(player.getId()-2,inf);
             }else influence.add(calculateInfluence(player.getId()));
-        }//todo test if it works correctly, it now sums team influence
+        }
 
         maxInf=influence.stream().max(Comparator.naturalOrder()).orElse(0);
         if(Collections.frequency(influence, maxInf)==1) {

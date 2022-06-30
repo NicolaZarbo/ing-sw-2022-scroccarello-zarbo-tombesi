@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Island {
     private final int ID;
     private final ArrayList<Student> students;
-    private final ArrayList<Tower> tower;//todo this should be a single tower, fix also all methods that access
+    private final ArrayList<Tower> tower;
     private final ArrayList<Island> subIslands;
     private int islandSize;
 
@@ -102,11 +102,6 @@ public class Island {
         this.tower.add(t);
     }
 
-    /**It adds to the list of towers the set of towers from the merged island.
-     * @param t list of towers to insert*/
-    public void addAllTowers(ArrayList<Tower> t) {
-        this.tower.addAll(t);
-    }
 
 
 }

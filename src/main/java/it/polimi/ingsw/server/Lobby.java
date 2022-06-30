@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 /**The lobby which contains connected clients and lets them customize their player.*/
 public class Lobby {
     private final ArrayList<ClientConnection> connections = new ArrayList<>();
-   // private final int lobbyCode;
+
     private final int lobbyDimension;
     private final ArrayList<RemoteView> playersViews;
     private final boolean easy;
@@ -27,7 +27,6 @@ public class Lobby {
         connections.add(firstConnection);
         playersViews=new ArrayList<>();
         playersViews.add(new RemoteView(firstConnection,nickname));
-        //this.lobbyCode = lobbyCode;
         this.easy=easy;
         this.lobbyDimension=lobbyDimension;
     }

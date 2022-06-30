@@ -5,11 +5,11 @@ import it.polimi.ingsw.exceptions.NoTokenFoundException;
 import java.util.List;
 
 public class SimplifiedBoard {
-    private final Integer[][] diningRoom; //array in cui ci va l'id degli studenti presenti
-    private final Integer[] professorTable;//array in cui va l'id del professore se lo ha
+    private final Integer[][] diningRoom;
+    private final Integer[] professorTable;
     private final List<Integer> entrance;
-    private final int towersLeft; //int che rappresenta le towers presenti
-    private final boolean[][] coinDN;//se true c'è ancora il coin da prendere
+    private final int towersLeft;
+    private final boolean[][] coinDN;
 
 
     public SimplifiedBoard(Integer[][] diningRoom, Integer[] professorTable, List<Integer> entrance, int towersLeft, boolean[][] coinDN ) {

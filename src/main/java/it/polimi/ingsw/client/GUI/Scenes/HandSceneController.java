@@ -43,7 +43,7 @@ public class HandSceneController extends SceneController{
     }
 
     @Override
-    public void initialize(){ //fixme sometimes the the played and not played cards aren't shown correctly after some moves, like using a character
+    public void initialize(){
         root.setStyle("-fx-background-image: url(images/wallpapers/sky_no_title.png); ");
         root.setCursor(new ImageCursor(new Image("images/pointer/baseArrow.png")));
         setContext();

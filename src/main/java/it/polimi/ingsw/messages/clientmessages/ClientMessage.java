@@ -6,7 +6,7 @@ import it.polimi.ingsw.messages.GenericMessage;
 
 /**The generic message coming from the client.*/
 public abstract class ClientMessage extends GenericMessage {
-    protected int playerId; // ip, id, string of characters?
+    protected int playerId;
 
 
     /**@return the id of the player which sent the message*/

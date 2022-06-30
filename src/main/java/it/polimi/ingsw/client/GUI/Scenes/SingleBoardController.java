@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**The handler of the single board scene of the player.*/
-public class SingleBoardController {//extends BoardSceneController
+public class SingleBoardController {
 
     public Pane entrance;
     public Pane hall;
@@ -411,7 +411,7 @@ public class SingleBoardController {//extends BoardSceneController
     protected void hideMoveButtons() {
         moveStudentPanel.setVisible(false);
         moveStudentPanel.setMouseTransparent(true);
-        //refresh();
+
     }
 
     /**It hides the card panel.*/

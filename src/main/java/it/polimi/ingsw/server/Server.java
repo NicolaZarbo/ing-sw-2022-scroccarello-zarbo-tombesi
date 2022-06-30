@@ -40,7 +40,7 @@ public class Server {
      * @param connection the client connection to remove*/
     public synchronized void deregisterConnection(ClientConnection connection, String reason){
         for (Lobby lob:this.lobbies) {
-            System.out.println("this"+lob.numberOfConnections());
+
             if(lob.getConnections().contains(connection)) {
                 lob.removeFromLobby(connection, reason);
                 connections--;
@@ -84,7 +84,7 @@ public class Server {
      * @param nick the nickname of the creator (first) player
      * @param yesEasy the indication that the game is in easy mode or in expert mode */
     public synchronized void createLobby(ClientConnection connection, String nick,int dimension, String yesEasy) throws IOException {
-        if(dimension<1|| dimension>4)//fixme but not so fast
+        if(dimension<2|| dimension>4)
             throw new IOException("min 2 players, max 4");
         boolean easy;
         easy= yesEasy.equals("y");
@@ -105,7 +105,7 @@ public class Server {
                 System.out.println("Ready for the new connection - " + connections);
                 ClientConnection socketConnection = new ClientConnection(newSocket, this);
                 executor.execute(socketConnection);
-               // executor.submit(socketConnection);
+
             } catch (IOException e) {
                 System.out.println("Connection Error!"+e.getMessage());
             }

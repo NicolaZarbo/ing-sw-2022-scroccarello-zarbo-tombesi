@@ -179,30 +179,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             cardYouPlayed=message.getPlayedCardId()%10;
 
     }
-    /*
-@Deprecated //fixme use all board update
-    /**It updates the player's board after getting a relative message.
-     * @param message the message containing the current board of the player
-    public void singleBoardUpdate(SingleBoardMessage message){
-        int movablePerTurn;
-        if(players.size()==3)
-            movablePerTurn=4;
-        else movablePerTurn=3;
-        for (SimplifiedPlayer p:players){
-            if (p.getId() == message.getBoardPlayerId()) {
-               p.setBoard(message.getBoard());
-               p.setCoin(message.getCoin());
-            }
-        }
-        if(isYourTurn() && state==GameState.actionMoveStudent) {
-            studentMoved++;
-            if(studentMoved<movablePerTurn && message.getBoardPlayerId()==turnOf)
-                clientScreen.askToMoveStudent();
-        }
 
-    }
-
-     */
 
     public void everyBoardUpdate(AllBoardsMessage message){
         int movablePerTurn;
@@ -257,7 +234,7 @@ public class  CentralView extends Observable<ClientMessage> implements Observer<
             case setupPlayers -> {throw new RuntimeException("something went really wrong");}
             case planPlayCard -> {
                 playedCardThisTurnByPlayerId = new HashMap<>();
-                if( firstTurn) {//&&
+                if(firstTurn) {
                     if(isYourTurn())
                         clientScreen.showHand();
                     else clientScreen.showBoards();

@@ -47,7 +47,7 @@ public class Controller extends Observable<ErrorMessageForClient> implements Obs
             sendMessageError( new IllegalMoveException("not your turn, now plays " +message.getPlayerId()));
         else
             try{
-                message.doAction(this); //commandPattern
+                message.doAction(this);
             }
             catch(IllegalMoveException e){
                 sendMessageError(e);

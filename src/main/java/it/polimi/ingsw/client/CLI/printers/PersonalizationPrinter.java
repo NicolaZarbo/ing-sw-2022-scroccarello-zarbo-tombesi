@@ -68,7 +68,7 @@ public class PersonalizationPrinter implements Printer{
             case 0-> "MAGE 1";
             case 1-> "MAGE 2";
             case 2->"MAGE 3";
-            case 3->"MAGE 4";//TODO add some fun to these names
+            case 3->"MAGE 4";
         };
     }
 }

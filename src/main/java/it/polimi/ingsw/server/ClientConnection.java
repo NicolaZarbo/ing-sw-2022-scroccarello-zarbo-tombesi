@@ -45,11 +45,10 @@ public class ClientConnection extends Observable<String> implements Runnable{
          try {
              inSocket=clientSocket.getInputStream();
              clientSocket.setSoTimeout(1000*60);
-             //this.in =new Scanner(clientSocket.getInputStream());
              this.out= new PrintWriter(clientSocket.getOutputStream());
             send("Welcome! What is your name?");
             String read = readFromSocket();
-            String name = read;///
+            String name = read;
             if(server.availableLobby()){
                 server.lobby(this, name);
             }else {
@@ -98,7 +97,7 @@ public class ClientConnection extends Observable<String> implements Runnable{
         if (isActive()) {
                 while(read.equalsIgnoreCase("ping")){
                     read = readSocketIn();
-                    System.out.println("ping?"+read);//fixme remove  before deploy
+
                 }
                 result = read;
                 return result;

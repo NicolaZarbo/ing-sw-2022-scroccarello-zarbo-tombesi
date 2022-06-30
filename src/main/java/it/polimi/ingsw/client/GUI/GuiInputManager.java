@@ -40,9 +40,10 @@ public class GuiInputManager extends InputManager {
         return gui;
     }
 
+    /** after every time you send a message set canDoAction to false*/
     @Override
     public void decodeInput() {
-        canDoAction=true;    //  after every time you send a message set canDoAction to false
+        canDoAction=true;
     }
 
     @Override
@@ -56,7 +57,7 @@ public class GuiInputManager extends InputManager {
 
         if(string.contains("connection closed")){
             gui.showError("connection closed");
-            gui.stop();//fixme
+            gui.stop();
         }
     }
 

@@ -65,15 +65,11 @@ public class CharacterInputManager {
         game.playCharacter(2,par);
     }
 
-    //private void character3(){}
 
-    //fixme don't we said that we excluded character 4???
-    private  void character4(){
-        ParameterObject par = new ParameterObject();
-        game.playCharacter(4,par);
-    }
 
-    //private  void character5(){}
+
+
+
 
     /**It activates character 6 effect for the whole turn. It doesn't count the towers of island(s) when calculating influence.
      * @see it.polimi.ingsw.model.characters.TurnEffectCharacter*/
@@ -201,7 +197,7 @@ public class CharacterInputManager {
         game.playCharacter(11,parameter);
     }
 
-    //private static void character12(){}
+
 
     /**It builds the handler of the client's view.
      * @param view the specific view to work on*/
@@ -222,7 +218,7 @@ public class CharacterInputManager {
         }catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
             throw new IllegalMoveException("not available "+in+ " character method");
         }
-    //TODO check for exception trowed in the above methods
+
 
         }
 

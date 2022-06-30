@@ -88,7 +88,7 @@ public class BoardSceneXController extends SceneController{
     /**It sets the displacement of the board scene based on the number of players. */
     private void setDisposition(){
         switch (view.getPlayers().size()){
-            case 1->disposition1();
+
             case 2->disposition2();
             case 3 ->disposition3();
             default -> disposition4();
@@ -126,17 +126,7 @@ public class BoardSceneXController extends SceneController{
 
     }
 
-    /**It is the disposition of a one player game. For testing purpose only.*/
-    //fixme
-    private void disposition1(){
-        up_left.setScaleX(2);
-        up_left.setScaleY(2);
-        up_left.setTranslateX(280);
-        up_left.setTranslateY(100);
-        down_left.setVisible(false);
-        down_right.setVisible(false);
-        up_right.setVisible(false);
-    }
+
 
     /**It sets the disposition of a three players' game.*/
     private void disposition3(){

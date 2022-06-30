@@ -8,7 +8,7 @@ import it.polimi.ingsw.view.CentralView;
 import java.util.List;
 
 /**The message to set the simplified clouds.*/
-public class CloudMessage extends ServerMessage {//
+public class CloudMessage extends ServerMessage {
     private List<Integer[]> clouds;
 
     /**It builds the message starting from the model.

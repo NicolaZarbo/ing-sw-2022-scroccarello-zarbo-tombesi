@@ -8,15 +8,15 @@ public class SimplifiedPlayer {
     private String username;
     private int id;
     private SimplifiedBoard board;
-    private int team;//
-    private int towerColor;//tower-color assigned to player 1-black,2-white,3-gray
+    private int team;
+    private int towerColor;
 
 
     //player hand representation
     private int mage;
     private int coin;
     private boolean[] assistantCards;
-    private boolean[] discardedCards; //it is simply !assistnatCards, do we need this?
+    private boolean[] discardedCards;
 
 
 

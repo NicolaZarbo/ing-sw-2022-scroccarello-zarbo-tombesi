@@ -70,7 +70,7 @@ public class Game extends Observable<ServerMessage> {
         actualState=GameState.setupPlayers;
         multiMessage=null;
         currentPlayerId=0;
-        //this.playIngOrder= Arrays.stream(this.players).map(Player::getId).toList();TODO
+
     }
 
     @Override
@@ -335,7 +335,7 @@ public class Game extends Observable<ServerMessage> {
      * <p>• someone used his last card</p>
      * <p>• there are only 3 cluster of islands left</p>
      * <p>The winner is </p>*/
-    public void gameOver(){// todo test for 4 player etc
+    public void gameOver(){
         int winner;
         int min;
         if(nPlayers==4){
@@ -348,7 +348,7 @@ public class Game extends Observable<ServerMessage> {
             winner=towerForPlayer.lastIndexOf(min);
         }
         groupMultiMessage(new GameOverMessage(this,winner));
-        //sendMultiMessage();
+
     }
     /**It states if the target professor has joined one board
      *@param color color of the target professor

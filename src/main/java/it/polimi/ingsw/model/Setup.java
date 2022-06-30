@@ -113,7 +113,7 @@ public class Setup {
      * @param bag the bag of the game containing all the student tokens
      * @param cardNumber number of character cards
      * @return the list of all the character cards*/
-    public ArrayList<CharacterCard> createCharacterCards(Bag bag, int cardNumber){//todo check if it works as hoped, it now only creates 3 character from a random number
+    public ArrayList<CharacterCard> createCharacterCards(Bag bag, int cardNumber){
         ArrayList<CharacterCard> cards = new ArrayList<>(cardNumber);
         int[] randomIds = randomIndexForCharacter();
         for (int i=0; i<3; i++){
@@ -154,11 +154,6 @@ public class Setup {
 
         for (int id=0; id<nPlayer;id++){
             Hand man= Setup.createHand(id, easy, 10);
-            if(prePlayers.get(id).getNickname().contains("test")) {//fixme this is to test card effects in the client fixme before deployment
-                for (int i = 0; i < 40; i++) {
-                    man.addCoin();
-                }
-            }
             TowerColor towerColor;
             if(prePlayers.size()==4 && id>1)
                 towerColor= prePlayers.get(id-2).getTowerColor();

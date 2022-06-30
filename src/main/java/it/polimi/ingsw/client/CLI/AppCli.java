@@ -33,8 +33,7 @@ public class AppCli {
             System.out.println(Printer.RED+"no connection "+err.getMessage()+Printer.RST);
         }
         finally {
-            AnsiConsole.systemUninstall();//since jlink has some problems with this library, comment its usage in
-                                            //this class when deploying the javafx application with maven
+            AnsiConsole.systemUninstall();
         }
     }
 }

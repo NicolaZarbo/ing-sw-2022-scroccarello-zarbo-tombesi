@@ -278,7 +278,7 @@ public class MapSceneController extends SceneController {
         }
     }
     /**It is used so that only the useful panel can receive mouse event, other-ways the other panels could block the event.*/
-    private void setOtherContainerTransparent(Pane container){//duplicate of method in super
+    private void setOtherContainerTransparent(Pane container){
         super.setOthersContainerMouseTransparent(container);
     }
 
@@ -444,7 +444,7 @@ public class MapSceneController extends SceneController {
     /**It is used to add bridges to an island and its sub-islands.
      * @param island the island where to add bridges*/
     private void setBridges(SimplifiedIsland island){
-        //int mainId=island.getIslandId()+1;
+
         for (SimplifiedIsland subIsland:island.getSubIslands()) {
             int subId=subIsland.getIslandId()+1;
             int beforeIsland=subId-1;

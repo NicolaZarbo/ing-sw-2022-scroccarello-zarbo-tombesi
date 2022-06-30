@@ -44,17 +44,7 @@ public class IslandTest extends TestCase {
         assertEquals(s,island.getStudents());
     }
 
-    /**It tests insert of groups of towers on island*/
-    public void testAddAllTower() {
-    ArrayList<Tower> t= new ArrayList<>();
-    for (int i = 0; i < 7; i++) {
-            Random r = new Random();
-            Tower tower = new Tower(TowerColor.getColor(r.nextInt(3)),i);
-            t.add(tower);
-        }
-        island.addAllTowers(t);
-        assertEquals(t,island.getTowers());
-    }
+
 
     /**It tests the insert of single towers on the island.*/
     public void testSetTower() {
@@ -84,7 +74,7 @@ public class IslandTest extends TestCase {
             island.addStudent(st);
         }
         island.addSubIsland(sub);
-        assertTrue(island.getSubIslands().size()==prevsize+1);
+        assertEquals(island.getSubIslands().size(), prevsize + 1);
         assertEquals(prevt,island.getEveryTower());
         assertEquals(prevs,island.getEveryStudents());
     }
