@@ -9,10 +9,10 @@ Scroccarello Francesco; Zarbo Nicola; Tombesi Luca.
 - [Server](#serverjar )
 - [CLI](#clijar )
 - [GUI](#guijar )
-- [Rules](#game-rules )
+- [Rules variations](#game-rules-variations )
 - [Advanced Functionalities](#advanced-functionalities)
 
-draft
+
 
 ----------------
 
@@ -28,6 +28,8 @@ Accepted values are between 49152 and 65536.
 >If no port is selected the server will use the default port 50000.
 
 
+
+---
 
 ## cli.jar 
 
@@ -46,7 +48,7 @@ If none are specified the application will prompt the user to insert port and ip
 
 
 ### Commands
-Every input from the player is _**NOT**_ case-sensitive.
+Every input from the player is _**NOT**_ case-sensitive.  
 At the start of every phase the game will prompt the user to use one of the available commands shown at screen, their syntax is also showed.
 In addition to those commands that are dependents on context, there are some additional ones that aren't specific to a phase :
 
@@ -59,7 +61,7 @@ Game visuals may have unexpected problems in some untested consoles.
 #### tested Consoles
 * win10 base cmdConsole
 
-
+---
 
 ## gui.jar
 ### Running the jar
@@ -74,12 +76,14 @@ Game visuals may have unexpected problems in some untested consoles.
 > Accepted port values are between 49152 and 65536.
 
 ### other info
-  
+
+* The application has a fixed resolution, hence it may not be shown correctly on screen with low resolution.
+* The gui works on every SO.
   
 
 --------------------
 
-## Game rules
+## Game rules variations
 
 There are a few minor variation to the rules of the physical board game as a result of the difference of the media :
 
