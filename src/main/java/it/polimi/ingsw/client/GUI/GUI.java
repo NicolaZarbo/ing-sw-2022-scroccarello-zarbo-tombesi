@@ -192,7 +192,8 @@ public class GUI extends Application implements UserInterface {
      */
     public void stop(){
         System.out.println("closed the application");
-        connection.closeConnection();
+        if(this.connection!=null)
+            connection.closeConnection();//fixme catch runtime
         System.exit(0);
     }
 

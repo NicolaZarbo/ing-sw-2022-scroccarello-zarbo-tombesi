@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.exceptions.MessageErrorException;
 import it.polimi.ingsw.messages.GenericMessage;

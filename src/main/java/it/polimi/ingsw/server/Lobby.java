@@ -4,7 +4,6 @@ import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.exceptions.MessageErrorException;
 import it.polimi.ingsw.messages.servermessages.ErrorMessageForClient;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.view.RemoteView;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
