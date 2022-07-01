@@ -2,7 +2,7 @@
 
 Scroccarello Francesco; Zarbo Nicola; Tombesi Luca.
 
-
+The project consists in the implementation of the game Eriantys from Cranio Creations (all rights are reserved). It has been coded in Java language and to run the jar files is required JRE18.
 
 ## Table of content
 
@@ -59,7 +59,9 @@ In addition to those commands that are dependents on context, there are some add
 Game visuals may have unexpected problems in some untested consoles.
 
 #### tested Consoles
-* win10 base cmdConsole
+* Windows10 base cmd console
+* Windows11 base cmd console
+* Ubuntu 18.04 terminal
 
 ---
 
