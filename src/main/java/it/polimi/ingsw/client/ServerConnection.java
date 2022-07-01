@@ -120,7 +120,6 @@ public class ServerConnection {
             while((char)read!='\n' && read!=-1){
                     builder.append((char) read);
                     read = socket.getInputStream().read();
-                    System.out.println(read);
                 }
         }catch (SocketTimeoutException timeoutException){
             throw new TimeOutConnectionException();
