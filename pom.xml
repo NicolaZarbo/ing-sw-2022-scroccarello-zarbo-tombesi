@@ -133,10 +133,10 @@
         </plugin>
         <plugin>
           <groupId>org.openjfx</groupId>
-          <artifactId>javafx-maven-plugin</artifactId>
+          <artifactId>javafx-maven-plugin</artifactId> <!--used for jre deployment, not multiplatform  -->
           <version>0.0.8</version>
           <configuration>
-            <stripDebug>true</stripDebug>   <!-- you need to add the module-info file for this plugin, remove the import of jansi, since or set exclusions -->
+            <stripDebug>true</stripDebug>
             <compress>2</compress>
             <noHeaderFiles>true</noHeaderFiles>
             <noManPages>true</noManPages>
@@ -171,8 +171,7 @@
           </executions>
         </plugin>
        <plugin>
-       <artifactId>maven-assembly-plugin</artifactId><!-- make sure you don't have a module-info around when
-       calling assembly, for whatever reason it breaks the compiler in this phase-->
+       <artifactId>maven-assembly-plugin</artifactId> <!--used to deploy jars via maven-->
           <executions>
           <execution>
             <id>build-a</id>
