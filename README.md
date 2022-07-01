@@ -2,7 +2,7 @@
 
 Scroccarello Francesco; Zarbo Nicola; Tombesi Luca.
 
-
+The project consists in the implementation of the game Eriantys from Cranio Creations (all rights are reserved). It has been coded in Java language and to run the jar files is required JRE18.
 
 ## Table of content
 
