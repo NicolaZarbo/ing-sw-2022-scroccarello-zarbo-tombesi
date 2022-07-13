@@ -1,5 +1,7 @@
 # ing-sw-2022-scroccarello-zarbo-tombesi
 
+![eriantys logo](https://github.com/NicolaZarbo/ing-sw-2022-scroccarello-zarbo-tombesi/blob/main/src/main/resources/images/wallpapers/Eriantys.jpg)
+
 * [Scroccarello Francesco](https://github.com/sinnanzi)
 * [Zarbo Nicola](https://github.com/NicolaZarbo)
 * [Tombesi Luca](https://github.com/lucatombesi99)
@@ -105,3 +107,8 @@ There are a few minor variation to the rules of the physical board game as a res
 
 1. Multiple games
 2. Four players game
+
+
+------------------
+
+![ayoo](https://github.com/NicolaZarbo/ing-sw-2022-scroccarello-zarbo-tombesi/blob/main/src/main/resources/images/wallpapers/gameOver_pink.png)
