@@ -10,7 +10,8 @@
 **Scaglione Cugola**   
 **voto** : 30.
 
-The project consists in the implementation of the game Eriantys from Cranio Creations (all rights are reserved). It has been coded in Java language and to run the jar files is required JRE18.  
+The project consists in the implementation of the game Eriantys from Cranio Creations as a client-server application.   
+It has been coded in Java language and to run the jar binaries JRE18 is required .  
 The uml files must be opened as html files on a browser.
 
 ## Table of content
